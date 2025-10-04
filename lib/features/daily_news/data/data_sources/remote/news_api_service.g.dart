@@ -24,13 +24,13 @@ class _NewsApiService implements NewsApiService {
   Future<HttpResponse<List<ArticleModel>>> getNewsArticles({
     apikey,
     country,
-    ctegory,
+    category,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'apiKey': apikey,
       r'country': country,
-      r'category': ctegory,
+      r'category': category,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

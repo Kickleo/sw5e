@@ -1,12 +1,30 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sw5e_manager/core/resources/data_state.dart';
+import 'package:sw5e_manager/features/daily_news/domain/usecases/get_article.dart';
 import 'package:sw5e_manager/features/daily_news/presentation/bloc/articles/remote/remote_articles_event.dart';
 import 'package:sw5e_manager/features/daily_news/presentation/bloc/articles/remote/remote_articles_state.dart';
 
 class RemoteArticlesBloc extends Bloc<RemoteArticlesEvent, RemoteArticleState> {
 
-  RemoteArticlesBloc() : super(const RemoteArticlesLoading());
+  final GetArticleUseCase _getArticleUseCase;
 
-  void onGetArticle(GetArticles event, Emitter<RemoteArticleState> emit) {
-    
+  RemoteArticlesBloc(this._getArticleUseCase) : super(const RemoteArticlesLoading()) {
+    on <GetArticles> (onGetArticles);
+  }
+
+  void onGetArticles(GetArticles event, Emitter<RemoteArticleState> emit) async {
+    final dataState = await _getArticleUseCase();
+
+    if(dataState is DataSuccess && dataState.data!.isNotEmpty) {
+      emit(
+        RemoteArticlesDone(dataState.data!)
+      );
+    }
+
+    if(dataState is DataFailed) {
+      emit(
+        RemoteArticlesError(dataState.error!)
+      );
+    }
   }
 }
