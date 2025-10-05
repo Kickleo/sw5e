@@ -39,13 +39,12 @@ class ArticleRepositoryImpl implements ArticleRepository {
           uri: http.response.requestOptions.uri,
         ),
       );
-    } on DioException catch (_) {
-      // Fallback to cache on network error
+    } on DioException catch (e, st) {
       final cached = await _local.getAll();
       if (cached.isNotEmpty) {
         return DataSuccess(ArticleModel.toEntities(cached));
       }
-      rethrow; // will be caught by the generic catch
+      return DataFailed(e, st); // ✅ convert to failure when no cache
     } catch (e, st) {
       return DataFailed(e, st);
     }

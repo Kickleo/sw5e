@@ -22,6 +22,7 @@ class Articles extends Table {
 @DriftDatabase(tables: [Articles])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
+  AppDatabase.forTesting(super.e); // <-- add this
 
   @override
   int get schemaVersion => 1;
