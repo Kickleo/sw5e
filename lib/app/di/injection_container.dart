@@ -12,36 +12,33 @@ final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
   // HTTP
-  sl.registerLazySingleton<Dio>(() {
-    final dio = Dio(BaseOptions(
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 20),
-    ));
-    return dio;
-  });
+  sl.registerLazySingleton<Dio>(() => Dio(BaseOptions(
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 20),
+      )));
 
-  // API service
+  // API service (remote)
   sl.registerLazySingleton<NewsApiService>(() => NewsApiService(sl<Dio>()));
 
+  // Drift DB
   sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
 
-  // Repository
-  sl.registerLazySingleton<ArticleRepository>(() => ArticleRepositoryImpl(sl()));
-
-  // Usecase
-  sl.registerLazySingleton<GetArticles>(() => GetArticles(sl()));
-
-  // BLoC
-  sl.registerFactory<RemoteArticlesBloc>(() => RemoteArticlesBloc(sl()));
-
+  // Local data source (cache)
   sl.registerLazySingleton<ArticlesLocalDataSource>(
     () => ArticlesLocalDataSourceImpl(sl<AppDatabase>()),
   );
 
-  // Re-register the repo so it gets both remote + local DS
-  sl.unregister<ArticleRepository>();
+  // Repository (needs BOTH: remote + local)  ✅ only register once
   sl.registerLazySingleton<ArticleRepository>(
-    () => ArticleRepositoryImpl(sl(), sl()), // (remote, local)
+    () => ArticleRepositoryImpl(
+      sl<NewsApiService>(),
+      sl<ArticlesLocalDataSource>(),
+    ),
   );
 
+  // Use case
+  sl.registerLazySingleton<GetArticles>(() => GetArticles(sl<ArticleRepository>()));
+
+  // BLoC
+  sl.registerFactory<RemoteArticlesBloc>(() => RemoteArticlesBloc(sl<GetArticles>()));
 }
