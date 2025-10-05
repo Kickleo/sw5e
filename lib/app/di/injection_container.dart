@@ -10,7 +10,7 @@ import 'package:sw5e_manager/features/daily_news/presentation/bloc/articles/remo
 
 final sl = GetIt.instance;
 
-Future<void> initializeDependencies() async {
+Future<void> initDependencies() async {
   // HTTP
   sl.registerLazySingleton<Dio>(() => Dio(BaseOptions(
         connectTimeout: const Duration(seconds: 10),

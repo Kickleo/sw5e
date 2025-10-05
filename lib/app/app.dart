@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:sw5e_manager/features/daily_news/presentation/pages/articles_page.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AppRoot extends StatelessWidget {
+  const AppRoot({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'News',
-      theme: ThemeData(useMaterial3: true),
-      home: const ArticlesPage(),
+      title: 'RPG Manager',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        useMaterial3: true,
+      ),
+      home: const _HomePlaceholder(),
+    );
+  }
+}
+
+class _HomePlaceholder extends StatelessWidget {
+  const _HomePlaceholder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: Text('Hello, RPG Manager')),
     );
   }
 }
