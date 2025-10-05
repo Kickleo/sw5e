@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sw5e_manager/features/daily_news/data/data_sources/local/articles_local_data_source.dart';
+import 'package:sw5e_manager/features/daily_news/data/data_sources/local/db/app_database.dart';
 import 'package:sw5e_manager/features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'package:sw5e_manager/features/daily_news/data/repository/article_repository_impl.dart';
 import 'package:sw5e_manager/features/daily_news/domain/repository/article_repository.dart';
@@ -21,6 +23,8 @@ Future<void> initializeDependencies() async {
   // API service
   sl.registerLazySingleton<NewsApiService>(() => NewsApiService(sl<Dio>()));
 
+  sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
+
   // Repository
   sl.registerLazySingleton<ArticleRepository>(() => ArticleRepositoryImpl(sl()));
 
@@ -29,4 +33,15 @@ Future<void> initializeDependencies() async {
 
   // BLoC
   sl.registerFactory<RemoteArticlesBloc>(() => RemoteArticlesBloc(sl()));
+
+  sl.registerLazySingleton<ArticlesLocalDataSource>(
+    () => ArticlesLocalDataSourceImpl(sl<AppDatabase>()),
+  );
+
+  // Re-register the repo so it gets both remote + local DS
+  sl.unregister<ArticleRepository>();
+  sl.registerLazySingleton<ArticleRepository>(
+    () => ArticleRepositoryImpl(sl(), sl()), // (remote, local)
+  );
+
 }
