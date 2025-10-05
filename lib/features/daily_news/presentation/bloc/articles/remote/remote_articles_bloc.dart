@@ -1,31 +1,34 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sw5e_manager/core/resources/data_state.dart';
-import 'package:sw5e_manager/features/daily_news/domain/usecases/get_article.dart';
+import 'package:sw5e_manager/features/daily_news/domain/usecases/get_articles.dart';
 import 'package:sw5e_manager/features/daily_news/presentation/bloc/articles/remote/remote_articles_event.dart';
 import 'package:sw5e_manager/features/daily_news/presentation/bloc/articles/remote/remote_articles_state.dart';
 
-class RemoteArticlesBloc extends Bloc<RemoteArticlesEvent, RemoteArticleState> {
+class RemoteArticlesBloc extends Bloc<RemoteArticlesEvent, RemoteArticlesState> {
+  final GetArticles _getArticles;
 
-  final GetArticleUseCase _getArticleUseCase;
-
-  RemoteArticlesBloc(this._getArticleUseCase) : super(const RemoteArticlesLoading()) {
-    on <GetArticles> (onGetArticles);
+  RemoteArticlesBloc(this._getArticles) : super(const RemoteArticlesInitial()) {
+    on<RemoteArticlesRequested>(_onRequested);
   }
 
-  void onGetArticles(GetArticles event, Emitter<RemoteArticleState> emit) async {
-    final dataState = await _getArticleUseCase();
+  Future<void> _onRequested(
+    RemoteArticlesRequested event,
+    Emitter<RemoteArticlesState> emit,
+  ) async {
+    emit(const RemoteArticlesLoading());
 
-    if(dataState is DataSuccess && dataState.data!.isNotEmpty) {
-      emit(
-        RemoteArticlesDone(dataState.data!)
-      );
-    }
+    final res = await _getArticles(
+      params: GetArticlesParams(
+        country: event.country,
+        category: event.category,
+      ),
+    );
 
-    if(dataState is DataFailed) {
-      print(dataState.error!.message);
-      emit(
-        RemoteArticlesError(dataState.error!)
-      );
+    switch (res) {
+      case DataSuccess(:final data):
+        emit(RemoteArticlesSuccess(data));
+      case DataFailed(:final error):
+        emit(RemoteArticlesFailure(error.toString()));
     }
   }
 }

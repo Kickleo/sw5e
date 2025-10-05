@@ -15,7 +15,7 @@ class DailyNews extends StatelessWidget {
     );
   }
 
-  _buildAppbar() {
+  AppBar _buildAppbar() {
     return AppBar(
       title: Text(
         'Daily News',
@@ -26,29 +26,29 @@ class DailyNews extends StatelessWidget {
     );
   }
 
-  _buildBody() {
-    return BlocBuilder<RemoteArticlesBloc, RemoteArticleState>(
+  BlocBuilder<RemoteArticlesBloc, RemoteArticlesState> _buildBody() {
+    return BlocBuilder<RemoteArticlesBloc, RemoteArticlesState>(
       builder: (_,state) {
         if (state is RemoteArticlesLoading) {
           return const Center(
             child: CupertinoActivityIndicator(),
           );
         }
-        if (state is RemoteArticlesError) {
+        if (state is RemoteArticlesFailure) {
           return const Center(
             child: Icon(
               Icons.refresh,
             ),
           );
         }
-        if (state is RemoteArticlesDone) {
+        if (state is RemoteArticlesSuccess) {
           return ListView.builder(
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text('$index'),
               );
             },
-            itemCount: state.articles!.length,
+            itemCount: state.articles.length,
           );
         }
         return const SizedBox();

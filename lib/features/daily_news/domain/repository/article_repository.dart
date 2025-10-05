@@ -1,6 +1,9 @@
 import 'package:sw5e_manager/core/resources/data_state.dart';
-import 'package:sw5e_manager/features/daily_news/domain/entities/article.dart';
+import '../entities/article_entity.dart';
 
 abstract class ArticleRepository {
-  Future<DataState<List<ArticleEntity>>> getNewsArticles();
+  Future<DataState<List<ArticleEntity>>> getTopHeadlines({
+    String? country,
+    String? category,
+  });
 }
