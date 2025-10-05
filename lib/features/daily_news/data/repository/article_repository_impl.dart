@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:sw5e_manager/core/constants/constants.dart';
 import 'package:sw5e_manager/core/resources/data_state.dart';
+import 'package:sw5e_manager/features/daily_news/data/data_sources/local/articles_local_data_source.dart';
 import 'package:sw5e_manager/features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'package:sw5e_manager/features/daily_news/data/models/article_model.dart';
 import 'package:sw5e_manager/features/daily_news/domain/entities/article_entity.dart';
@@ -9,7 +10,9 @@ import 'package:sw5e_manager/features/daily_news/domain/repository/article_repos
 
 class ArticleRepositoryImpl implements ArticleRepository {
   final NewsApiService _api;
-  ArticleRepositoryImpl(this._api);
+  final ArticlesLocalDataSource _local;
+
+  ArticleRepositoryImpl(this._api, this._local);
 
   @override
   Future<DataState<List<ArticleEntity>>> getTopHeadlines({
@@ -24,21 +27,25 @@ class ArticleRepositoryImpl implements ArticleRepository {
       );
 
       if (http.response.statusCode == HttpStatus.ok) {
-        final models = http.data.articles; // List<ArticleModel>
-        final entities = ArticleModel.toEntities(models);
+        final models = http.data.articles;                // List<ArticleModel>
+        await _local.saveAll(models);                     // write-through cache
+        final entities = ArticleModel.toEntities(models); // map → domain
         return DataSuccess(entities);
       }
 
       return DataFailed(
-        DioException(
-          requestOptions: http.response.requestOptions,
-          response: http.response,
-          type: DioExceptionType.badResponse,
-          error: http.response.statusMessage,
+        HttpException(
+          'HTTP ${http.response.statusCode}: ${http.response.statusMessage}',
+          uri: http.response.requestOptions.uri,
         ),
       );
-    } on DioException catch (e, st) {
-      return DataFailed(e, st);
+    } on DioException catch (_) {
+      // Fallback to cache on network error
+      final cached = await _local.getAll();
+      if (cached.isNotEmpty) {
+        return DataSuccess(ArticleModel.toEntities(cached));
+      }
+      rethrow; // will be caught by the generic catch
     } catch (e, st) {
       return DataFailed(e, st);
     }
