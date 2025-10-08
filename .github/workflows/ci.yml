@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  # Pinne ta version Flutter pour des builds reproductibles
+  FLUTTER_VERSION: "3.24.3"
+  # Seuil de couverture minimal (%). Ajuste si besoin.
+  COVERAGE_MIN: "70"
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter ${{ env.FLUTTER_VERSION }}
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: "stable"
+          cache: true
+
+      - name: Flutter doctor (sanity)
+        run: flutter doctor -v
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Format check
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze --no-pub
+
+      - name: Build codegen (Retrofit/Drift/etc.)
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Run tests with coverage
+        run: flutter test --coverage
+
+      - name: Install lcov
+        run: sudo apt-get update && sudo apt-get install -y lcov
+
+      - name: Enforce coverage gate (${{ env.COVERAGE_MIN }}%)
+        shell: bash
+        run: |
+          PCT=$(lcov --summary coverage/lcov.info | grep -Eo 'lines\.*: +[0-9.]+%' | grep -Eo '[0-9.]+')
+          echo "Line coverage: ${PCT}%"
+          # Compare en entier (ex: 69.9 => 69)
+          PCT_INT=${PCT%.*}
+          if [ -z "$PCT_INT" ]; then
+            echo "Impossible de lire la couverture."; exit 1
+          fi
+          if [ "$PCT_INT" -lt "${COVERAGE_MIN}" ]; then
+            echo "Couverture insuffisante: ${PCT}% < ${COVERAGE_MIN}%"; exit 1
+          fi
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
+          path: coverage/lcov.info
+
+      - name: Catalog validate
+        run: dart run tool/catalog_validate.dart
