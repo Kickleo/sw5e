@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sw5e_manager/app/home_nav.dart';
 import 'package:sw5e_manager/di/character_creation_module.dart';
-import 'package:sw5e_manager/features/character_creation/presentation/pages/quick_create_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SW5e Manager',
       theme: ThemeData(useMaterial3: true),
-      home: const QuickCreatePage(),
+      home: const HomeNav(),
     );
   }
 }
