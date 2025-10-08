@@ -1,0 +1,18 @@
+[
+  {
+    "id": "human",
+    "name": { "en": "Human", "fr": "Humain" },
+    "ability_bonuses": [ { "ability": "any", "amount": 1, "count": 2 } ],
+    "traits": [
+      {
+        "id": "versatile",
+        "text": {
+          "en": "You gain one additional skill proficiency of your choice.",
+          "fr": "Vous gagnez une maîtrise de compétence supplémentaire au choix."
+        }
+      }
+    ],
+    "size": "medium",
+    "speed": 30
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "id": "blaster-pistol",
+    "name": { "en": "Blaster Pistol", "fr": "Pistolet blaster" },
+    "type": "weapon",
+    "weight_g": 800,
+    "cost": 200
+  }
+]

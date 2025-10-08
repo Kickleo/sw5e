@@ -1,0 +1,12 @@
+[
+  {
+    "id": "parry",
+    "name": { "en": "Parry", "fr": "Parade" },
+    "die": 8,
+    "type": "reaction",
+    "text": {
+      "en": "When you are hit by a melee attack, you can expend one superiority die to reduce the damage.",
+      "fr": "Quand vous êtes touché par une attaque de mêlée, dépensez un dé de supériorité pour réduire les dégâts."
+    }
+  }
+]

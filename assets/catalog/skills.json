@@ -1,0 +1,6 @@
+[
+  { "id": "perception", "ability": "wis" },
+  { "id": "athletics",  "ability": "str" },
+  { "id": "stealth",    "ability": "dex" },
+  { "id": "deception",  "ability": "cha" }
+]

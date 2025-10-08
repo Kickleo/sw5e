@@ -1,0 +1,17 @@
+[
+  {
+    "id": "guardian",
+    "name": { "en": "Guardian", "fr": "Gardien" },
+    "hit_die": 10,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": ["athletics", "perception", "stealth", "deception"]
+      },
+      "starting_credits": 150,
+      "starting_equipment": [
+        { "id": "blaster-pistol", "qty": 1 }
+      ]
+    }
+  }
+]

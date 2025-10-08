@@ -1,0 +1,14 @@
+[
+  {
+    "id": "outlaw",
+    "name": { "en": "Outlaw", "fr": "Hors-la-loi" },
+    "granted_skills": ["stealth", "deception"],
+    "feature": {
+      "id": "criminal-contact",
+      "text": {
+        "en": "You have a reliable and trustworthy contact in the criminal underworld.",
+        "fr": "Vous disposez d’un contact fiable dans le milieu criminel."
+      }
+    }
+  }
+]
