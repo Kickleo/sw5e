@@ -1,44 +1,58 @@
 // lib/features/character_creation/domain/entities/character.dart
 import 'package:meta/meta.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/background_id.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_name.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/class_id.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/credits.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/defense.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/encumbrance.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/equipment_item_id.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/hit_points.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/initiative.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/level.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/maneuvers_known.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/proficiency_bonus.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/quantity.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/skill_proficiency.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/species_id.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/superiority_dice.dart';
 
-/// Entité domaine - MVP niveau 1 (version primitive).
-/// NOTE: ces types primitifs seront remplacés par nos Value Objects
-/// (CharacterName, SpeciesId, ClassId, etc.) dans l'étape suivante.
+/// Entité domaine - Personnage niveau 1 (MVP) avec Value Objects.
 @immutable
 class Character {
   // Identité & choix structurels
-  final String name;           // TODO: CharacterName
-  final String speciesId;      // TODO: SpeciesId (slug)
-  final String classId;        // TODO: ClassId (slug)
-  final String backgroundId;   // TODO: BackgroundId (slug)
+  final CharacterName name;
+  final SpeciesId speciesId;
+  final ClassId classId;
+  final BackgroundId backgroundId;
 
   // Niveau (MVP = 1)
-  final int level;             // TODO: Level VO (bornes 1..20, MVP=1)
+  final Level level;
 
   /// Abilities finales (après bonus espèce/background)
-  /// Clés attendues: str, dex, con, int, wis, cha
-  final Map<String, int> abilities; // TODO: Map<AbilityId, AbilityScore>
+  /// Clés attendues: 'str','dex','con','int','wis','cha'
+  final Map<String, AbilityScore> abilities;
 
-  /// Compétences maîtrisées (slugs)
-  final Set<String> skills;    // TODO: Set<SkillProficiency>
+  /// Compétences maîtrisées (V.O. avec sources/état)
+  final Set<SkillProficiency> skills;
 
   // Dérivés
-  final int proficiencyBonus;  // TODO: ProficiencyBonus (MVP: +2)
-  final int hitPoints;         // TODO: HitPoints (>=1)
-  final int defense;           // TODO: Defense (garde-fou 5..35)
-  final int initiative;        // TODO: Initiative (-10..+20)
+  final ProficiencyBonus proficiencyBonus;
+  final HitPoints hitPoints;
+  final Defense defense;
+  final Initiative initiative;
 
   // Économie & inventaire
-  final int credits;           // TODO: Credits (>=0)
-  final List<InventoryLine> inventory; // TODO: use EquipmentItemId + Quantity
-  final int encumbranceG;      // en grammes // TODO: Encumbrance VO
+  final Credits credits;
+  final List<InventoryLine> inventory;
+  final Encumbrance encumbrance;
 
   // Manœuvres (si classe applicable)
-  final int maneuversKnown;    // TODO: ManeuversKnown (>=0)
-  final int superiorityDiceCount; // TODO: SuperiorityDice.count
-  final int? superiorityDie;      // faces: 4/6/8/10/12 ou null si count=0
+  final ManeuversKnown maneuversKnown;
+  final SuperiorityDice superiorityDice;
 
-  const Character({
+  Character({
     required this.name,
     required this.speciesId,
     required this.classId,
@@ -52,47 +66,30 @@ class Character {
     required this.initiative,
     required this.credits,
     required this.inventory,
-    required this.encumbranceG,
+    required this.encumbrance,
     required this.maneuversKnown,
-    required this.superiorityDiceCount,
-    required this.superiorityDie,
-  })  : assert(level == 1, 'MVP: level doit être 1'),
+    required this.superiorityDice,
+  })  : assert(level.value == 1, 'MVP: level doit être 1'),
         assert(_hasAllSixAbilities(abilities),
             'abilities doit contenir exactement {str,dex,con,int,wis,cha}'),
-        assert(proficiencyBonus >= 2 && proficiencyBonus <= 6),
-        assert(hitPoints >= 1),
-        assert(defense >= 5 && defense <= 35),
-        assert(credits >= 0),
-        assert(initiative >= -10 && initiative <= 20),
-        assert(encumbranceG >= 0),
-        assert(maneuversKnown >= 0),
-        assert(superiorityDiceCount >= 0),
-        assert(
-          (superiorityDiceCount == 0 && superiorityDie == null) ||
-              (superiorityDiceCount > 0 &&
-                  (superiorityDie == 4 ||
-                      superiorityDie == 6 ||
-                      superiorityDie == 8 ||
-                      superiorityDie == 10 ||
-                      superiorityDie == 12)),
-          'Si superiorityDiceCount>0, superiorityDie ∈ {4,6,8,10,12}; '
-          'sinon superiorityDie doit être null',
-        );
+        // Pas de lignes d’inventaire à quantité nulle dans l’état final
+        assert(inventory.every((l) => !l.quantity.isZero),
+            'inventory ne doit pas contenir de quantité nulle');
 
-  static bool _hasAllSixAbilities(Map<String, int> m) {
+  static bool _hasAllSixAbilities(Map<String, AbilityScore> m) {
     const keys = {'str', 'dex', 'con', 'int', 'wis', 'cha'};
     return m.length == 6 && m.keys.toSet().containsAll(keys);
   }
 }
 
-/// Ligne d’inventaire simplifiée (slug + quantité)
+/// Ligne d’inventaire (VO pour l'ID d’objet + VO quantité)
 @immutable
 class InventoryLine {
-  final String equipmentItemId; // TODO: EquipmentItemId VO (slug)
-  final int quantity;           // TODO: Quantity VO (>=0)
+  final EquipmentItemId itemId;
+  final Quantity quantity;
 
   const InventoryLine({
-    required this.equipmentItemId,
+    required this.itemId,
     required this.quantity,
-  }) : assert(quantity >= 0);
+  });
 }

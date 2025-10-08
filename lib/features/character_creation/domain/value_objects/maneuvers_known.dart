@@ -1,35 +1,34 @@
-// lib/features/character_creation/domain/value_objects/encumbrance.dart
+// lib/features/character_creation/domain/value_objects/maneuvers_known.dart
 import 'package:equatable/equatable.dart';
 
-/// VO Encumbrance : poids/encombrement normalisé en **grammes**
+/// VO ManeuversKnown : nombre de manœuvres connues (MVP : niveau 1)
 /// - Entier >= 0
-/// - Garde-fou haut par défaut: 1_000_000 g (1 000 kg) pour éviter les corruptions.
-/// - Les conversions (lb/kg -> g) se font **en dehors** de ce VO.
-class Encumbrance extends Equatable {
+/// - Garde-fou haut par défaut: 20 (ajustable)
+class ManeuversKnown extends Equatable {
   static const int min = 0;
-  static const int maxGuard = 1_000_000;
+  static const int maxGuard = 20;
 
-  final int grams;
+  final int value;
 
-  const Encumbrance._(this.grams);
+  const ManeuversKnown._(this.value);
 
-  factory Encumbrance(int grams) {
-    if (grams < min) {
-      throw ArgumentError('Encumbrance.invalidRange (< $min)');
+  factory ManeuversKnown(int input) {
+    if (input < min) {
+      throw ArgumentError('ManeuversKnown.invalidRange (< $min)');
     }
-    if (grams > maxGuard) {
-      throw ArgumentError('Encumbrance.invalidRange (> $maxGuard)');
+    if (input > maxGuard) {
+      throw ArgumentError('ManeuversKnown.invalidRange (> $maxGuard)');
     }
-    return Encumbrance._(grams);
+    return ManeuversKnown._(input);
   }
 
-  Encumbrance copyWith(int newGrams) => Encumbrance(newGrams);
+  ManeuversKnown copyWith(int newValue) => ManeuversKnown(newValue);
 
-  bool get isZero => grams == 0;
-
-  @override
-  List<Object?> get props => [grams];
+  bool get isZero => value == 0;
 
   @override
-  String toString() => '${grams}g';
+  List<Object?> get props => [value];
+
+  @override
+  String toString() => '$value maneuvers';
 }
