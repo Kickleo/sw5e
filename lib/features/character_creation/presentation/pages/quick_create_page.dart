@@ -284,6 +284,7 @@ class _ClassStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final classDefData = classDef;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -316,25 +317,27 @@ class _ClassStep extends StatelessWidget {
         const SizedBox(height: 16),
         if (isLoadingDetails)
           const Center(child: CircularProgressIndicator())
-        else if (classDef == null)
+        else if (classDefData == null)
           const Text('Aucune classe sélectionnée.')
         else
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                classDef.name.fr.isNotEmpty ? classDef.name.fr : classDef.name.en,
+                classDefData.name.fr.isNotEmpty
+                    ? classDefData.name.fr
+                    : classDefData.name.en,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
-              Text('Dé de vie : d${classDef.hitDie}'),
+               Text('Dé de vie : d${classDefData.hitDie}'),
               const SizedBox(height: 12),
               Text(
-                'Compétences : choisir ${classDef.level1.proficiencies.skillsChoose} parmi ${classDef.level1.proficiencies.skillsFrom.join(', ')}',
+                'Compétences : choisir ${classDefData.level1.proficiencies.skillsChoose} parmi ${classDefData.level1.proficiencies.skillsFrom.join(', ')}',
               ),
               const SizedBox(height: 12),
               Text(
-                'Équipement de départ :\n${classDef.level1.startingEquipment.map((e) => '• ${e.id} ×${e.qty}').join('\n')}',
+                'Équipement de départ :\n${classDefData.level1.startingEquipment.map((e) => '• ${e.id} ×${e.qty}').join('\n')}',
               ),
             ],
           ),

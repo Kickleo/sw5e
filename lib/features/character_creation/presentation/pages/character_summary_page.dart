@@ -160,7 +160,7 @@ class _CharacterSummaryCard extends StatelessWidget {
                       spacing: 8,
                       runSpacing: 8,
                       children: character.speciesTraits
-                          .map((t) => Chip(label: Text(t.traitId)))
+                          .map((t) => Chip(label: Text(t.id.value)))
                           .toList(),
                     ),
                   ],
