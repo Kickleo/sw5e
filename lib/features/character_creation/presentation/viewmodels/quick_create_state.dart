@@ -3,7 +3,7 @@ import 'package:sw5e_manager/core/domain/result.dart';
 import 'package:sw5e_manager/features/character_creation/domain/entities/character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/repositories/catalog_repository.dart';
 
-enum QuickCreateStep { species, classes, background }
+enum QuickCreateStep { species, classes, skills, background }
 
 @immutable
 class QuickCreateState {
@@ -18,6 +18,10 @@ class QuickCreateState {
   final String? selectedBackground;
   final ClassDef? selectedClassDef;
   final List<TraitDef> selectedSpeciesTraits;
+  final List<String> availableSkills;
+  final Map<String, SkillDef> skillDefinitions;
+  final Set<String> chosenSkills;
+  final int skillChoicesRequired;
   final int stepIndex;
   final String characterName;
   final String? statusMessage;
@@ -37,6 +41,10 @@ class QuickCreateState {
     required this.selectedBackground,
     required this.selectedClassDef,
     required this.selectedSpeciesTraits,
+    required this.availableSkills,
+    required this.skillDefinitions,
+    required this.chosenSkills,
+    required this.skillChoicesRequired,
     required this.stepIndex,
     required this.characterName,
     required this.statusMessage,
@@ -57,6 +65,10 @@ class QuickCreateState {
         selectedBackground: null,
         selectedClassDef: null,
         selectedSpeciesTraits: <TraitDef>[],
+        availableSkills: <String>[],
+        skillDefinitions: <String, SkillDef>{},
+        chosenSkills: <String>{},
+        skillChoicesRequired: 0,
         stepIndex: 0,
         characterName: 'Rey',
         statusMessage: null,
@@ -77,6 +89,10 @@ class QuickCreateState {
     String? selectedBackground,
     ClassDef? selectedClassDef,
     List<TraitDef>? selectedSpeciesTraits,
+    List<String>? availableSkills,
+    Map<String, SkillDef>? skillDefinitions,
+    Set<String>? chosenSkills,
+    int? skillChoicesRequired,
     int? stepIndex,
     String? characterName,
     Object? statusMessage = _sentinel,
@@ -96,6 +112,10 @@ class QuickCreateState {
       selectedBackground: selectedBackground ?? this.selectedBackground,
       selectedClassDef: selectedClassDef ?? this.selectedClassDef,
       selectedSpeciesTraits: selectedSpeciesTraits ?? this.selectedSpeciesTraits,
+      availableSkills: availableSkills ?? this.availableSkills,
+      skillDefinitions: skillDefinitions ?? this.skillDefinitions,
+      chosenSkills: chosenSkills ?? this.chosenSkills,
+      skillChoicesRequired: skillChoicesRequired ?? this.skillChoicesRequired,
       stepIndex: stepIndex ?? this.stepIndex,
       characterName: characterName ?? this.characterName,
       statusMessage:
@@ -116,6 +136,8 @@ class QuickCreateState {
         return selectedSpecies != null;
       case QuickCreateStep.classes:
         return selectedClass != null;
+      case QuickCreateStep.skills:
+        return hasValidSkillSelection;
       case QuickCreateStep.background:
         return canCreate;
     }
@@ -123,11 +145,15 @@ class QuickCreateState {
 
   bool get canGoPrevious => stepIndex > 0;
 
+  bool get hasValidSkillSelection =>
+      skillChoicesRequired == 0 || chosenSkills.length == skillChoicesRequired;
+
   bool get canCreate =>
       selectedSpecies != null &&
       selectedClass != null &&
       selectedBackground != null &&
-      characterName.trim().isNotEmpty;
+      characterName.trim().isNotEmpty &&
+      hasValidSkillSelection;
 }
 
 sealed class QuickCreateCompletion {
