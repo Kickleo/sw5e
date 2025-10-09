@@ -47,6 +47,9 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
         selectedSpecies: selectedSpecies,
         selectedClass: selectedClass,
         selectedBackground: selectedBackground,
+        availableSkills: const <String>[],
+        chosenSkills: const <String>{},
+        skillChoicesRequired: 0,
         isLoadingCatalog: false,
         statusMessage: null,
         errorMessage: null,
@@ -85,6 +88,9 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
       selectedClassDef: null,
       statusMessage: null,
       isLoadingClassDetails: true,
+      availableSkills: const <String>[],
+      chosenSkills: const <String>{},
+      skillChoicesRequired: 0,
     );
     await _refreshClassDef(id);
   }
@@ -129,9 +135,7 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
     );
 
     final classDef = state.selectedClassDef ?? await _catalog.getClass(selectedClass);
-    final skillsFrom = classDef?.level1.proficiencies.skillsFrom ?? const <String>[];
-    final choose = classDef?.level1.proficiencies.skillsChoose ?? 0;
-    final chosenSkills = skillsFrom.take(choose).toSet();
+    final chosenSkills = Set<String>.from(state.chosenSkills);
 
     final input = FinalizeLevel1Input(
       name: CharacterName(state.characterName.trim()),
@@ -201,15 +205,90 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
   Future<void> _refreshClassDef(String classId) async {
     try {
       final def = await _catalog.getClass(classId);
+      if (def == null) {
+        state = state.copyWith(
+          selectedClassDef: null,
+          availableSkills: const <String>[],
+          chosenSkills: const <String>{},
+          skillChoicesRequired: 0,
+          isLoadingClassDetails: false,
+        );
+        return;
+      }
+
+      final proficiencies = def.level1.proficiencies;
+      final choose = proficiencies.skillsChoose;
+      final from = proficiencies.skillsFrom;
+      final allowsAny = from.contains('any');
+      final filtered = from.where((id) => id != 'any');
+      List<String> available;
+      if (allowsAny) {
+        available = await _catalog.listSkills();
+      } else {
+        available = filtered.toList();
+      }
+      available.sort();
+
+      final availableSet = available.toSet();
+      final retainedSelection = state.chosenSkills.where(availableSet.contains).toSet();
+      if (choose == 0) {
+        retainedSelection.clear();
+      }
+
       state = state.copyWith(
         selectedClassDef: def,
         isLoadingClassDetails: false,
+        availableSkills: available,
+        chosenSkills: retainedSelection,
+        skillChoicesRequired: choose,
       );
+
+      if (available.isNotEmpty) {
+        await _ensureSkillDefs(available);
+      }
     } catch (e) {
       state = state.copyWith(
         statusMessage: 'Erreur lors du chargement de la classe: $e',
         isLoadingClassDetails: false,
       );
     }
+  }
+
+  Future<void> _ensureSkillDefs(Iterable<String> ids) async {
+    final existing = Map<String, SkillDef>.from(state.skillDefinitions);
+    var hasNew = false;
+    for (final id in ids) {
+      if (existing.containsKey(id)) continue;
+      final def = await _catalog.getSkill(id);
+      if (def != null) {
+        existing[id] = def;
+        hasNew = true;
+      }
+    }
+    if (hasNew) {
+      state = state.copyWith(skillDefinitions: existing);
+    }
+  }
+
+  void toggleSkillSelection(String id) {
+    final required = state.skillChoicesRequired;
+    if (required == 0) {
+      return;
+    }
+    if (!state.availableSkills.contains(id)) {
+      return;
+    }
+
+    final current = state.chosenSkills.toSet();
+    if (current.contains(id)) {
+      current.remove(id);
+    } else {
+      if (current.length >= required) {
+        return;
+      }
+      current.add(id);
+    }
+
+    state = state.copyWith(chosenSkills: current);
   }
 }
