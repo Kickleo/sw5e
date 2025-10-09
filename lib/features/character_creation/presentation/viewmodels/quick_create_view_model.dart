@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sw5e_manager/core/domain/result.dart';
 import 'package:sw5e_manager/di/character_creation_module.dart';
 import 'package:sw5e_manager/features/character_creation/domain/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/features/character_creation/domain/usecases/finalize_level1_character.dart';
@@ -139,7 +138,7 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
       speciesId: SpeciesId(selectedSpecies),
       classId: ClassId(selectedClass),
       backgroundId: BackgroundId(selectedBackground),
-      baseAbilities: const {
+      baseAbilities: {
         'str': AbilityScore(10),
         'dex': AbilityScore(12),
         'con': AbilityScore(14),

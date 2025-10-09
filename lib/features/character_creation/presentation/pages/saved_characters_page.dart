@@ -51,7 +51,7 @@ class SavedCharactersPage extends ConsumerWidget {
                 physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(16),
                 itemCount: state.characters.length + (state.hasError ? 1 : 0),
-                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                separatorBuilder: (_, _) => const SizedBox(height: 12),
                 itemBuilder: (context, index) {
                   if (state.hasError) {
                     if (index == 0) {

@@ -80,7 +80,7 @@ class _CharacterSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<CharacterId>(
-      value: selectedId,
+      initialValue: selectedId,
       decoration: const InputDecoration(
         labelText: 'Personnage sauvegardé',
         border: OutlineInputBorder(),

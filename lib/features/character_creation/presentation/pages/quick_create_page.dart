@@ -211,7 +211,7 @@ class _SpeciesStep extends StatelessWidget {
           children: [
             Expanded(
               child: DropdownButtonFormField<String>(
-                value: selectedSpecies,
+                initialValue: selectedSpecies,
                 decoration: const InputDecoration(
                   labelText: 'Espèce',
                   border: OutlineInputBorder(),
@@ -291,7 +291,7 @@ class _ClassStep extends StatelessWidget {
           children: [
             Expanded(
               child: DropdownButtonFormField<String>(
-                value: selectedClass,
+                initialValue: selectedClass,
                 decoration: const InputDecoration(
                   labelText: 'Classe',
                   border: OutlineInputBorder(),
@@ -375,7 +375,7 @@ class _BackgroundStep extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
-          value: selectedBackground,
+          initialValue: selectedBackground,
           decoration: const InputDecoration(
             labelText: 'Historique',
             border: OutlineInputBorder(),
