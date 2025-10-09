@@ -6,6 +6,7 @@ import 'package:sw5e_manager/features/character_creation/domain/repositories/cha
 import 'package:sw5e_manager/features/character_creation/domain/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_trait.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/credits.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/defense.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/encumbrance.dart';
@@ -169,6 +170,7 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
 
       // 9) Construire l’entité et sauvegarder
       final character = Character(
+        id: CharacterId.generate(),
         name: input.name,
         speciesId: input.speciesId,
         classId: input.classId,

@@ -2,6 +2,7 @@
 import 'package:meta/meta.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/background_id.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_name.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_trait.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/class_id.dart';
@@ -22,6 +23,7 @@ import 'package:sw5e_manager/features/character_creation/domain/value_objects/su
 /// Entité domaine - Personnage niveau 1 (MVP) avec Value Objects.
 @immutable
 class Character {
+  final CharacterId id;
   // Identité & choix structurels
   final CharacterName name;
   final SpeciesId speciesId;
@@ -57,6 +59,7 @@ class Character {
   final Set<CharacterTrait> speciesTraits;
 
   Character({
+    required this.id,
     required this.name,
     required this.speciesId,
     required this.classId,

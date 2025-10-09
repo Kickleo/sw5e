@@ -7,6 +7,7 @@ import 'package:sw5e_manager/features/character_creation/domain/repositories/cha
 import 'package:sw5e_manager/features/character_creation/domain/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/usecases/finalize_level1_character_impl.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/background_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_name.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/class_id.dart';
@@ -29,6 +30,7 @@ class MockCharacterRepository extends Mock implements CharacterRepository {}
 
 Character _dummyCharacter() {
   return Character(
+    id: CharacterId('dummy'),
     name: CharacterName('Dummy'),
     speciesId: SpeciesId('human'),
     classId: ClassId('guardian'),

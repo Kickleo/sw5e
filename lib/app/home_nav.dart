@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sw5e_manager/features/character_creation/presentation/pages/last_character_page.dart';
+import 'package:sw5e_manager/features/character_creation/presentation/pages/character_summary_page.dart';
 import 'package:sw5e_manager/features/character_creation/presentation/pages/quick_create_page.dart';
 
 class HomeNav extends StatefulWidget {
@@ -14,12 +14,12 @@ class _HomeNavState extends State<HomeNav> {
 
   static const _pages = <Widget>[
     QuickCreatePage(),
-    LastCharacterPage(),
+    CharacterSummaryPage(),
   ];
 
   static const _titles = <String>[
     'Quick Create',
-    'Dernier personnage',
+    'Résumé de personnage',
   ];
 
   @override
@@ -37,9 +37,9 @@ class _HomeNavState extends State<HomeNav> {
             label: 'Créer',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Dernier',
+            icon: Icon(Icons.fact_check_outlined),
+            selectedIcon: Icon(Icons.fact_check),
+            label: 'Résumé',
           ),
         ],
       ),
