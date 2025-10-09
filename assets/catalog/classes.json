@@ -1,16 +1,313 @@
 [
   {
-    "id": "guardian",
-    "name": { "en": "Guardian", "fr": "Gardien" },
+    "id": "berserker",
+    "name": {
+      "en": "Berserker",
+      "fr": "Berserker"
+    },
+    "hit_die": 12,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "animal-handling",
+          "athletics",
+          "intimidation",
+          "nature",
+          "perception",
+          "survival"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) a vibroweapon and a light or medium physical shield or (b) two vibroweapons",
+        "(a) two techaxes or (b) two vibrospears",
+        "(a) a dungeoneer's pack or (b) an explorer's pack"
+      ]
+    }
+  },
+  {
+    "id": "consular",
+    "name": {
+      "en": "Consular",
+      "fr": "Consular"
+    },
+    "hit_die": 6,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "deception",
+          "insight",
+          "intimidation",
+          "investigation",
+          "lore",
+          "medicine",
+          "persuasion"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) a simple lightweapon or (b) a simple vibroweapon",
+        "(a) a scholar’s pack, (b) an explorer’s pack, or (c) a diplomat’s pack"
+      ]
+    }
+  },
+  {
+    "id": "engineer",
+    "name": {
+      "en": "Engineer",
+      "fr": "Engineer"
+    },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "investigation",
+          "lore",
+          "medicine",
+          "nature",
+          "piloting",
+          "technology"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
+        "(a) a dungeoneer's pack or (b) an explorer's pack",
+        "A combat suit",
+        "a set of tinker's implements",
+        "a vibrodagger",
+        "and a wristpad"
+      ]
+    }
+  },
+  {
+    "id": "fighter",
+    "name": {
+      "en": "Fighter",
+      "fr": "Fighter"
+    },
     "hit_die": 10,
     "level1": {
       "proficiencies": {
         "skills_choose": 2,
-        "skills_from": ["athletics", "perception", "stealth", "deception"]
+        "skills_from": [
+          "acrobatics",
+          "animal-handling",
+          "athletics",
+          "lore",
+          "insight",
+          "intimidation",
+          "perception",
+          "survival"
+        ]
       },
-      "starting_credits": 150,
-      "starting_equipment": [
-        { "id": "blaster-pistol", "qty": 1 }
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "Choisir 1 parmi: m-3-predator, m-4-shuriken, m-8-avenger, m-92-mantis, m-23-katana",
+        "Choisir 1 parmi: omni-blade, omni-hamer",
+        "Proficiencies: stock-light-armor, stock-medium-armor, stock-heavy-armor",
+        "(a) mesh armor or (b) a combat suit",
+        "blaster rifle or simple blaster",
+        "and two power cells",
+        "(a) a vibroweapon or heavy pistol and a light or medium physical shield or (b) two vibroweapons",
+        "(a) a light pistol and a power cell or (b) two vibrodaggers",
+        "(a) a dungeoneer's pack or (b) an explorer's pack"
+      ]
+    }
+  },
+  {
+    "id": "guardian",
+    "name": {
+      "en": "Guardian",
+      "fr": "Guardian"
+    },
+    "hit_die": 10,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "acrobatics",
+          "athletics",
+          "deception",
+          "insight",
+          "intimidation",
+          "lore",
+          "perception",
+          "persuasion",
+          "piloting"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) mesh armor",
+        "(b) a combat suit",
+        "and a light physical shield",
+        "(a) a lightweapon or vibroweapon and a light or medium physical shield or (b) two lightweapons or vibroweapons",
+        "(a) a priest's pack or (b) an explorer's pack"
+      ]
+    }
+  },
+  {
+    "id": "monk",
+    "name": {
+      "en": "Monk",
+      "fr": "Monk"
+    },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "acrobatics",
+          "athletics",
+          "insight",
+          "lore",
+          "perception",
+          "stealth"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
+        "(a) a dungeoneer's pack or (b) an explorer's pack",
+        "10 vibrodarts"
+      ]
+    }
+  },
+  {
+    "id": "operative",
+    "name": {
+      "en": "Operative",
+      "fr": "Operative"
+    },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "any"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
+        "(a) a simple blaster and two power cells or (b) a simple vibroweapon and a light physical shield",
+        "(a) a burglar's pack",
+        "(b) a dungeoneer's pack",
+        "or (c) an explorer's pack",
+        "A tool with which you are proficient",
+        "A combat suit and a vibrodagger"
+      ]
+    }
+  },
+  {
+    "id": "scholar",
+    "name": {
+      "en": "Scholar",
+      "fr": "Scholar"
+    },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "deception",
+          "insight",
+          "intimidation",
+          "investigation",
+          "lore",
+          "medicine",
+          "nature",
+          "persuasion",
+          "survival"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
+        "(a) a entertainer's pack",
+        "(b) an explorer's pack",
+        "or (c) a scholar's pack",
+        "A tool with which you are proficient",
+        "A combat suit"
+      ]
+    }
+  },
+  {
+    "id": "scout",
+    "name": {
+      "en": "Scout",
+      "fr": "Scout"
+    },
+    "hit_die": 10,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "animal-handling",
+          "athletics",
+          "insight",
+          "investigation",
+          "perception",
+          "piloting",
+          "stealth",
+          "survival",
+          "technology"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) mesh armor or (b) a combat suit",
+        "blaster rifle or simple blaster",
+        "and two power cells",
+        "(a) a vibroweapon and a light physical shield or (b) two simple vibroweapons",
+        "(a) a holdout and a power cell or (b) two vibrodaggers",
+        "(a) a dungeoneer's pack or (b) an explorer's pack",
+        "A wristpad"
+      ]
+    }
+  },
+  {
+    "id": "sentinel",
+    "name": {
+      "en": "Sentinel",
+      "fr": "Sentinel"
+    },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "acrobatics",
+          "animal-handling",
+          "insight",
+          "intimidation",
+          "perception",
+          "persuasion",
+          "piloting",
+          "stealth",
+          "technology"
+        ]
+      },
+      "starting_credits_roll": "5d4 × 100 cr",
+      "starting_equipment": [],
+      "starting_equipment_options": [
+        "(a) two simple lightweapons or vibroweapons or (b) one lightweapon or vibroweapon with which you are proficient",
+        "(a) a dungeoneer's pack or (b) an explorer's pack",
+        "A specialist's kit with which you are proficient",
+        "A combat suit and a light physical shield"
       ]
     }
   }

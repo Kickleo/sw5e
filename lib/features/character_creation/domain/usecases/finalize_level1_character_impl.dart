@@ -159,7 +159,7 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
       final enc = Encumbrance(totalGrams);
 
       // 7) Crédits (MVP: crédits de départ de la classe; équipement de départ gratuit)
-      final credits = Credits(clazz.level1.startingCredits);
+      final credits = Credits(clazz.level1.startingCredits ?? 0);
 
       // 8) Manœuvres & dés de supériorité (MVP: depuis Formulas)
       final sdRule = formulas.superiorityDiceByClass[input.classId.value];

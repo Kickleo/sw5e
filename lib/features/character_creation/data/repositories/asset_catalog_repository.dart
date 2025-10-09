@@ -66,13 +66,18 @@ class AssetCatalogRepository implements CatalogRepository {
   ClassDef _mapClass(Map<String, dynamic> e) {
     final lvl1 = e['level1'] as Map<String, dynamic>;
     final profs = lvl1['proficiencies'] as Map<String, dynamic>;
-    final startEquip = (lvl1['starting_equipment'] as List)
-        .cast<Map>()
-        .map((m) => StartingEquipmentLine(
-              id: m['id'] as String,
-              qty: (m['qty'] as num).toInt(),
-            ))
-        .toList();
+    final startEquip = (lvl1['starting_equipment'] as List?)
+            ?.cast<Map>()
+            .map((m) => StartingEquipmentLine(
+                  id: m['id'] as String,
+                  qty: (m['qty'] as num).toInt(),
+                ))
+            .toList() ??
+        const <StartingEquipmentLine>[];
+    final startOptions = (lvl1['starting_equipment_options'] as List?)
+            ?.cast<String>()
+            .toList() ??
+        const <String>[];
 
     return ClassDef(
       id: e['id'] as String,
@@ -86,8 +91,10 @@ class AssetCatalogRepository implements CatalogRepository {
           skillsChoose: (profs['skills_choose'] as num).toInt(),
           skillsFrom: (profs['skills_from'] as List).cast<String>(),
         ),
-        startingCredits: (lvl1['starting_credits'] as num).toInt(),
+        startingCredits: (lvl1['starting_credits'] as num?)?.toInt(),
+        startingCreditsRoll: lvl1['starting_credits_roll'] as String?,
         startingEquipment: startEquip,
+        startingEquipmentOptions: startOptions,
       ),
     );
   }

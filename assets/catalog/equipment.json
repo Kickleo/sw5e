@@ -1,9 +1,132 @@
 [
   {
+    "id": "combat-suit",
+    "name": {
+      "en": "Combat suit",
+      "fr": "Combat suit"
+    },
+    "type": "armor",
+    "weight_g": 4536,
+    "cost": 100
+  },
+  {
+    "id": "heavy-physical-shield",
+    "name": {
+      "en": "Heavy physical shield",
+      "fr": "Heavy physical shield"
+    },
+    "type": "shield",
+    "weight_g": 16329,
+    "cost": 500
+  },
+  {
+    "id": "light-physical-shield",
+    "name": {
+      "en": "Light physical shield",
+      "fr": "Light physical shield"
+    },
+    "type": "shield",
+    "weight_g": 0,
+    "cost": 50
+  },
+  {
+    "id": "medium-physical-shield",
+    "name": {
+      "en": "Medium physical shield",
+      "fr": "Medium physical shield"
+    },
+    "type": "shield",
+    "weight_g": 8165,
+    "cost": 150
+  },
+  {
+    "id": "mesh-armor",
+    "name": {
+      "en": "Mesh armor",
+      "fr": "Mesh armor"
+    },
+    "type": "armor",
+    "weight_g": 9072,
+    "cost": 500
+  },
+  {
     "id": "blaster-pistol",
-    "name": { "en": "Blaster Pistol", "fr": "Pistolet blaster" },
+    "name": {
+      "en": "Blaster pistol",
+      "fr": "Blaster pistol"
+    },
     "type": "weapon",
-    "weight_g": 800,
+    "weight_g": 1134,
+    "cost": 175
+  },
+  {
+    "id": "lightbaton",
+    "name": {
+      "en": "Lightbaton",
+      "fr": "Lightbaton"
+    },
+    "type": "weapon",
+    "weight_g": 567,
+    "cost": 400
+  },
+  {
+    "id": "techaxe",
+    "name": {
+      "en": "Techaxe",
+      "fr": "Techaxe"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 75
+  },
+  {
+    "id": "vibroaxe",
+    "name": {
+      "en": "Vibroaxe",
+      "fr": "Vibroaxe"
+    },
+    "type": "weapon",
+    "weight_g": 4196,
+    "cost": 950
+  },
+  {
+    "id": "vibroblade",
+    "name": {
+      "en": "Vibroblade",
+      "fr": "Vibroblade"
+    },
+    "type": "weapon",
+    "weight_g": 2268,
     "cost": 200
+  },
+  {
+    "id": "vibrodagger",
+    "name": {
+      "en": "Vibrodagger",
+      "fr": "Vibrodagger"
+    },
+    "type": "weapon",
+    "weight_g": 227,
+    "cost": 50
+  },
+  {
+    "id": "vibrodart",
+    "name": {
+      "en": "Vibrodart",
+      "fr": "Vibrodart"
+    },
+    "type": "weapon",
+    "weight_g": 227,
+    "cost": 5
+  },
+  {
+    "id": "vibrospear",
+    "name": {
+      "en": "Vibrospear",
+      "fr": "Vibrospear"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 125
   }
 ]
