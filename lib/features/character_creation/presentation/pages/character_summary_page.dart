@@ -13,6 +13,7 @@ class CharacterSummaryPage extends StatefulWidget {
 
 class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
   late final ListSavedCharacters _listCharacters = sl<ListSavedCharacters>();
+  late final ScrollController _scrollController;
 
   bool _loading = true;
   String? _error;
@@ -22,7 +23,14 @@ class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
     _refresh();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   Future<void> _refresh() async {
@@ -81,9 +89,11 @@ class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
               : _characters.isEmpty
                   ? const _EmptyView()
                   : Scrollbar(
+                      controller: _scrollController,
                       child: RefreshIndicator(
                         onRefresh: _refresh,
                         child: ListView(
+                          controller: _scrollController,
                           padding: const EdgeInsets.all(16),
                           children: [
                             Semantics(
