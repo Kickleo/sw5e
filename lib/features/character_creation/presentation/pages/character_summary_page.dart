@@ -1,145 +1,109 @@
 import 'package:flutter/material.dart';
-import 'package:sw5e_manager/di/character_creation_module.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sw5e_manager/features/character_creation/domain/entities/character.dart';
-import 'package:sw5e_manager/features/character_creation/domain/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_id.dart';
+import 'package:sw5e_manager/features/character_creation/presentation/viewmodels/character_summary_view_model.dart';
 
-class CharacterSummaryPage extends StatefulWidget {
+class CharacterSummaryPage extends ConsumerWidget {
   const CharacterSummaryPage({super.key});
 
   @override
-  State<CharacterSummaryPage> createState() => _CharacterSummaryPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(characterSummaryViewModelProvider);
+    final viewModel = ref.read(characterSummaryViewModelProvider.notifier);
+    final charactersAsync = state.characters;
 
-class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
-  late final ListSavedCharacters _listCharacters = sl<ListSavedCharacters>();
-  late final ScrollController _scrollController;
-
-  bool _loading = true;
-  String? _error;
-  List<Character> _characters = const <Character>[];
-  CharacterId? _selectedId;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    _refresh();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _refresh() async {
-    setState(() {
-      _loading = true;
-      _error = null;
-    });
-
-    final result = await _listCharacters();
-    if (!mounted) return;
-    result.match(
-      ok: (characters) {
-        setState(() {
-          _characters = characters;
-          if (characters.isEmpty) {
-            _selectedId = null;
-          } else if (_selectedId == null ||
-              !characters.any((c) => c.id == _selectedId)) {
-            _selectedId = characters.last.id;
-          }
-          _loading = false;
-        });
-      },
-      err: (err) {
-        setState(() {
-          _error = '${err.code}${err.message != null ? ' — ${err.message}' : ''}';
-          _loading = false;
-        });
-      },
-    );
-  }
-
-  Character? get _selectedCharacter {
-    if (_characters.isEmpty || _selectedId == null) return null;
-    return _characters.firstWhere((c) => c.id == _selectedId,
-        orElse: () => _characters.last);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Résumé de personnage'),
         actions: [
           IconButton(
-            onPressed: _loading ? null : _refresh,
+            onPressed: charactersAsync.isLoading ? null : viewModel.refresh,
             tooltip: 'Rafraîchir',
             icon: const Icon(Icons.refresh),
           ),
+          IconButton(
+            onPressed: state.selectedCharacter == null || state.isSharing
+                ? null
+                : viewModel.shareSelectedCharacter,
+            tooltip: 'Partager',
+            icon: const Icon(Icons.share),
+          ),
         ],
       ),
-      body: _loading
-          ? const Center(child: CircularProgressIndicator())
-          : _error != null
-              ? _ErrorView(message: _error!, onRetry: _refresh)
-              : _characters.isEmpty
-                  ? const _EmptyView()
-                  : Scrollbar(
-                      controller: _scrollController,
-                      child: RefreshIndicator(
-                        onRefresh: _refresh,
-                        child: ListView(
-                          controller: _scrollController,
-                          padding: const EdgeInsets.all(16),
-                          children: [
-                            Semantics(
-                              container: true,
-                              label: 'Sélection du personnage sauvegardé',
-                              child: DropdownButtonFormField<CharacterId>(
-                                initialValue: _selectedCharacter?.id,
-                                decoration: const InputDecoration(
-                                  labelText: 'Personnage',
-                                  border: OutlineInputBorder(),
-                                ),
-                                items: _characters
-                                    .map(
-                                      (c) => DropdownMenuItem<CharacterId>(
-                                        value: c.id,
-                                        child: Text(c.name.value),
-                                      ),
-                                    )
-                                    .toList(),
-                                onChanged: (value) {
-                                  if (value == null) return;
-                                  setState(() => _selectedId = value);
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            if (_selectedCharacter != null)
-                              Semantics(
-                                container: true,
-                                label:
-                                    'Résumé détaillé du personnage ${_selectedCharacter!.name.value}',
-                                child: _CharacterSummaryCard(
-                                  character: _selectedCharacter!,
-                                ),
-                              ),
-                          ],
-                        ),
+      body: charactersAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, _) => _ErrorView(
+          message: error is Exception ? error.toString() : 'Erreur: $error',
+          onRetry: viewModel.refresh,
+        ),
+        data: (characters) => characters.isEmpty
+            ? const _EmptyView()
+            : RefreshIndicator(
+                onRefresh: viewModel.refresh,
+                child: Scrollbar(
+                  child: ListView(
+                    padding: const EdgeInsets.all(16),
+                    children: [
+                      _CharacterSelector(
+                        characters: characters,
+                        selectedId: state.selectedId ?? state.selectedCharacter?.id,
+                        onChanged: (id) {
+                          if (id != null) {
+                            viewModel.selectCharacter(id);
+                          }
+                        },
                       ),
-                    ),
+                      const SizedBox(height: 16),
+                      if (state.selectedCharacter != null)
+                        _CharacterSummaryCard(character: state.selectedCharacter!),
+                    ],
+                  ),
+                ),
+              ),
+      ),
+    );
+  }
+}
+
+class _CharacterSelector extends StatelessWidget {
+  const _CharacterSelector({
+    required this.characters,
+    required this.selectedId,
+    required this.onChanged,
+  });
+
+  final List<Character> characters;
+  final CharacterId? selectedId;
+  final ValueChanged<CharacterId?> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<CharacterId>(
+      initialValue: selectedId,
+      decoration: const InputDecoration(
+        labelText: 'Personnage sauvegardé',
+        border: OutlineInputBorder(),
+      ),
+      items: characters
+          .map(
+            (c) => DropdownMenuItem<CharacterId>(
+              value: c.id,
+              child: Text(c.name.value),
+            ),
+          )
+          .toList(),
+      onChanged: onChanged,
     );
   }
 }
 
 class _CharacterSummaryCard extends StatelessWidget {
-  final Character character;
   const _CharacterSummaryCard({required this.character});
+
+  final Character character;
+
+  String _fmtSigned(int v) => v >= 0 ? '+$v' : '$v';
 
   @override
   Widget build(BuildContext context) {
@@ -171,12 +135,9 @@ class _CharacterSummaryCard extends StatelessWidget {
                     value: '+${character.proficiencyBonus.value}'),
                 _ChipStat(label: 'PV', value: '${character.hitPoints.value}'),
                 _ChipStat(label: 'Défense', value: '${character.defense.value}'),
-                _ChipStat(
-                    label: 'Initiative', value: _fmtSigned(character.initiative.value)),
+                _ChipStat(label: 'Initiative', value: _fmtSigned(character.initiative.value)),
                 _ChipStat(label: 'Crédits', value: '${character.credits.value}'),
-                _ChipStat(
-                    label: 'Poids porté',
-                    value: '${character.encumbrance.grams} g'),
+                _ChipStat(label: 'Poids porté', value: '${character.encumbrance.grams} g'),
               ],
             ),
             const SizedBox(height: 16),
@@ -199,7 +160,7 @@ class _CharacterSummaryCard extends StatelessWidget {
                       spacing: 8,
                       runSpacing: 8,
                       children: character.speciesTraits
-                          .map((trait) => Chip(label: Text(trait.id.value)))
+                          .map((t) => Chip(label: Text(t.traitId)))
                           .toList(),
                     ),
                   ],
@@ -209,36 +170,20 @@ class _CharacterSummaryCard extends StatelessWidget {
             const SizedBox(height: 16),
             _Section(
               title: 'Caractéristiques',
-              child: Column(
-                children: character.abilities.entries
-                    .map(
-                      (entry) => ListTile(
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(entry.key.toUpperCase()),
-                        subtitle: Text('Modificateur ${_fmtSigned(entry.value.modifier)}'),
-                        trailing: Text('${entry.value.value}'),
-                      ),
-                    )
-                    .toList(),
-              ),
+              child: _AbilitiesTable(abilities: character.abilities),
             ),
             const SizedBox(height: 16),
             _Section(
               title: 'Compétences maîtrisées',
               child: character.skills.isEmpty
-                  ? const Text('Aucune compétence maîtrisée')
+                  ? const Text('Aucune')
                   : Wrap(
                       spacing: 8,
                       runSpacing: 8,
                       children: character.skills
-                          .map(
-                            (skill) => Chip(
-                              label: Text(
-                                '${skill.skillId} — ${skill.sources.map((e) => e.name).join('+')}',
-                              ),
-                            ),
-                          )
+                          .map((s) => Chip(
+                                label: Text('${s.skillId} (${s.sources.map((e) => e.name).join('+')})'),
+                              ))
                           .toList(),
                     ),
             ),
@@ -246,26 +191,22 @@ class _CharacterSummaryCard extends StatelessWidget {
             _Section(
               title: 'Inventaire',
               child: character.inventory.isEmpty
-                  ? const Text('Inventaire vide')
+                  ? const Text('Vide')
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: character.inventory
-                          .map((line) => Text(
-                              '• ${line.itemId.value} ×${line.quantity.value}'))
+                          .map((l) => Text('• ${l.itemId.value} ×${l.quantity.value}'))
                           .toList(),
                     ),
             ),
             const SizedBox(height: 16),
             _Section(
-              title: 'Manœuvres et dés de supériorité',
+              title: 'Manœuvres / Dés de supériorité',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Manœuvres connues : ${character.maneuversKnown.value}'),
-                  Text(
-                    'Dés de supériorité : ${character.superiorityDice.count}d'
-                    '${character.superiorityDice.die ?? '-'}',
-                  ),
+                  Text('Connues: ${character.maneuversKnown.value}'),
+                  Text('Dés: ${character.superiorityDice.count}d${character.superiorityDice.die ?? '-'}'),
                 ],
               ),
             ),
@@ -274,49 +215,74 @@ class _CharacterSummaryCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  static String _fmtSigned(int value) => value >= 0 ? '+$value' : '$value';
+class _ChipStat extends StatelessWidget {
+  const _ChipStat({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(label: Text('$label: $value'));
+  }
 }
 
 class _Section extends StatelessWidget {
+  const _Section({required this.title, required this.child});
+
   final String title;
   final Widget child;
-  const _Section({required this.title, required this.child});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Semantics(
-      container: true,
-      label: title,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style:
-                theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          child,
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: theme.textTheme.titleMedium,
+        ),
+        const SizedBox(height: 8),
+        child,
+      ],
     );
   }
 }
 
-class _ChipStat extends StatelessWidget {
-  final String label;
-  final String value;
-  const _ChipStat({required this.label, required this.value});
+class _AbilitiesTable extends StatelessWidget {
+  const _AbilitiesTable({required this.abilities});
+
+  final Map<String, dynamic> abilities;
+
+  static const _order = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+
+  static String _fmtMod(int m) => m >= 0 ? '+$m' : '$m';
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      label: '$label : $value',
-      child: Chip(
-        label: Text('$label : $value'),
-      ),
+    final rows = <DataRow>[];
+    for (final key in _order) {
+      final score = abilities[key]!;
+      rows.add(
+        DataRow(
+          cells: [
+            DataCell(Text(key.toUpperCase())),
+            DataCell(Text('${score.value}')),
+            DataCell(Text(_fmtMod(score.modifier))),
+          ],
+        ),
+      );
+    }
+    return DataTable(
+      columns: const [
+        DataColumn(label: Text('Carac')),
+        DataColumn(label: Text('Score')),
+        DataColumn(label: Text('Mod')),
+      ],
+      rows: rows,
     );
   }
 }
@@ -327,29 +293,33 @@ class _EmptyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(24),
-        child: Text('Aucun personnage sauvegardé pour le moment.'),
-      ),
+      child: Text('Aucun personnage sauvegardé.'),
     );
   }
 }
 
 class _ErrorView extends StatelessWidget {
+  const _ErrorView({required this.message, required this.onRetry});
+
   final String message;
   final VoidCallback onRetry;
-  const _ErrorView({required this.message, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text('Erreur : $message'),
-          const SizedBox(height: 12),
-          FilledButton(onPressed: onRetry, child: const Text('Réessayer')),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(message, textAlign: TextAlign.center),
+            const SizedBox(height: 12),
+            FilledButton(
+              onPressed: onRetry,
+              child: const Text('Réessayer'),
+            ),
+          ],
+        ),
       ),
     );
   }
