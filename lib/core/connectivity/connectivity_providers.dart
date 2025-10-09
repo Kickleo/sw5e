@@ -33,8 +33,14 @@ final connectivityStatusProvider = StreamProvider<ConnectivityStatus>((ref) {
   return controller.stream.distinct();
 });
 
-ConnectivityStatus _mapStatus(ConnectivityResult result) {
-  return result == ConnectivityResult.none
-      ? ConnectivityStatus.disconnected
-      : ConnectivityStatus.connected;
+ConnectivityStatus _mapStatus(Iterable<ConnectivityResult> results) {
+  if (results.isEmpty) {
+    return ConnectivityStatus.disconnected;
+  }
+
+  final hasConnection = results.any((result) => result != ConnectivityResult.none);
+
+  return hasConnection
+      ? ConnectivityStatus.connected
+      : ConnectivityStatus.disconnected;
 }

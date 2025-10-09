@@ -323,18 +323,18 @@ class _ClassStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                classDef!.name.fr.isNotEmpty ? classDef!.name.fr : classDef!.name.en,
+                classDef.name.fr.isNotEmpty ? classDef.name.fr : classDef.name.en,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
-              Text('Dé de vie : d${classDef?.hitDie}'),
+              Text('Dé de vie : d${classDef.hitDie}'),
               const SizedBox(height: 12),
               Text(
-                'Compétences : choisir ${classDef?.level1.proficiencies.skillsChoose} parmi ${classDef?.level1.proficiencies.skillsFrom.join(', ')}',
+                'Compétences : choisir ${classDef.level1.proficiencies.skillsChoose} parmi ${classDef.level1.proficiencies.skillsFrom.join(', ')}',
               ),
               const SizedBox(height: 12),
               Text(
-                'Équipement de départ :\n${classDef?.level1.startingEquipment.map((e) => '• ${e.id} ×${e.qty}').join('\n')}',
+                'Équipement de départ :\n${classDef.level1.startingEquipment.map((e) => '• ${e.id} ×${e.qty}').join('\n')}',
               ),
             ],
           ),
