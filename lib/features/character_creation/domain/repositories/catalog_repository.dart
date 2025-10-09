@@ -40,12 +40,16 @@ class ClassLevel1Proficiencies {
 @immutable
 class ClassLevel1Data {
   final ClassLevel1Proficiencies proficiencies;
-  final int startingCredits;
+  final int? startingCredits;
+  final String? startingCreditsRoll;
   final List<StartingEquipmentLine> startingEquipment;
+  final List<String> startingEquipmentOptions;
   const ClassLevel1Data({
     required this.proficiencies,
-    required this.startingCredits,
+    this.startingCredits,
+    this.startingCreditsRoll,
     required this.startingEquipment,
+    this.startingEquipmentOptions = const <String>[],
   });
 }
 

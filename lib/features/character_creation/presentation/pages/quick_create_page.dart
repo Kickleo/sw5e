@@ -374,7 +374,11 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
                         Chip(label: Text('Dé de vie: d${_selectedClassDef!.hitDie}')),
                         Chip(
                           label: Text(
-                              'Crédits initiaux: ${_selectedClassDef!.level1.startingCredits}'),
+                              _selectedClassDef!.level1.startingCredits != null
+                                  ? 'Crédits initiaux: ${_selectedClassDef!.level1.startingCredits}'
+                                  : _selectedClassDef!.level1.startingCreditsRoll != null
+                                      ? 'Crédits initiaux: ${_selectedClassDef!.level1.startingCreditsRoll}'
+                                      : 'Crédits initiaux: —'),
                         ),
                         Chip(
                           label: Text(
@@ -392,26 +396,41 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
                         spacing: 8,
                         runSpacing: 8,
                         children: _selectedClassDef!.level1.proficiencies.skillsFrom
-                            .map((id) => Chip(label: Text(_formatSlug(id))))
+                            .map((id) => Chip(label: Text(_formatSkillOption(id))))
                             .toList(),
                       ),
                     const SizedBox(height: 16),
                     Text('Équipement de départ', style: theme.textTheme.titleSmall),
                     const SizedBox(height: 8),
-                    if (_selectedClassDef!.level1.startingEquipment.isEmpty)
+                    if (_selectedClassDef!.level1.startingEquipment.isEmpty &&
+                        _selectedClassDef!.level1.startingEquipmentOptions.isEmpty)
                       const Text('Aucun équipement défini')
-                    else
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: _selectedClassDef!.level1.startingEquipment
-                            .map(
-                              (line) => Padding(
-                                padding: const EdgeInsets.only(bottom: 8),
-                                child: Text('${line.qty} × ${_formatSlug(line.id)}'),
-                              ),
-                            )
-                            .toList(),
-                      ),
+                    else ...[
+                      if (_selectedClassDef!.level1.startingEquipment.isNotEmpty)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _selectedClassDef!.level1.startingEquipment
+                              .map(
+                                (line) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: Text('${line.qty} × ${_formatSlug(line.id)}'),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      if (_selectedClassDef!.level1.startingEquipmentOptions.isNotEmpty)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _selectedClassDef!.level1.startingEquipmentOptions
+                              .map(
+                                (line) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: Text(line),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                    ],
                   ],
                 ),
               ),
@@ -514,14 +533,24 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
   }
 
   String _formatSlug(String slug) {
+    if (slug == 'any') {
+      return "n'importe quelle compétence";
+    }
     return slug
         .split(RegExp(r'[-_]'))
         .map(
           (part) => part.isEmpty
               ? part
-              : part[0].toUpperCase() + part.substring(1),
+          : part[0].toUpperCase() + part.substring(1),
         )
         .join(' ');
+  }
+
+  String _formatSkillOption(String slug) {
+    if (slug == 'any') {
+      return "N'importe quelle compétence";
+    }
+    return _formatSlug(slug);
   }
 
 

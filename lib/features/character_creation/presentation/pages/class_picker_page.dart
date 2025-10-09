@@ -69,6 +69,7 @@ class _ClassPickerPageState extends State<ClassPickerPage> {
 
   Future<void> _ensureSkillDefs(Iterable<String> ids) async {
     for (final id in ids) {
+      if (id == 'any') continue;
       if (_skillCache.containsKey(id)) continue;
       final def = await _catalog.getSkill(id);
       if (def != null) {
@@ -131,6 +132,9 @@ class _ClassPickerPageState extends State<ClassPickerPage> {
   }
 
   String _formatSkill(String id) {
+    if (id == 'any') {
+      return "N'importe quelle compétence";
+    }
     final def = _skillCache[id];
     if (def == null) return _titleCase(id);
     return '${_titleCase(id)} (${def.ability.toUpperCase()})';
@@ -205,7 +209,15 @@ class _ClassPickerPageState extends State<ClassPickerPage> {
                                         runSpacing: 8,
                                         children: [
                                           Chip(label: Text('Dé de vie: d${_selected!.hitDie}')),
-                                          Chip(label: Text('Crédits initiaux: ${_selected!.level1.startingCredits}')),
+                                          Chip(
+                                            label: Text(
+                                              _selected!.level1.startingCredits != null
+                                                  ? 'Crédits initiaux: ${_selected!.level1.startingCredits}'
+                                                  : _selected!.level1.startingCreditsRoll != null
+                                                      ? 'Crédits initiaux: ${_selected!.level1.startingCreditsRoll}'
+                                                      : 'Crédits initiaux: —',
+                                            ),
+                                          ),
                                           Chip(
                                             label: Text(
                                               'Compétences: ${_selected!.level1.proficiencies.skillsChoose}',
@@ -229,23 +241,39 @@ class _ClassPickerPageState extends State<ClassPickerPage> {
                                       const SizedBox(height: 16),
                                       Text('Équipement de départ', style: th.textTheme.titleMedium),
                                       const SizedBox(height: 8),
-                                      if (_selected!.level1.startingEquipment.isEmpty)
+                                      if (_selected!.level1.startingEquipment.isEmpty &&
+                                          _selected!.level1.startingEquipmentOptions.isEmpty)
                                         const Text('Aucun équipement défini')
-                                      else
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: _selected!.level1.startingEquipment
-                                              .map(
-                                                (line) => ListTile(
-                                                  contentPadding: EdgeInsets.zero,
-                                                  dense: true,
-                                                  leading: Text('${line.qty}×'),
-                                                  title: Text(_formatEquipment(line.id)),
-                                                  subtitle: Text(line.id),
-                                                ),
-                                              )
-                                              .toList(),
-                                        ),
+                                      else ...[
+                                        if (_selected!.level1.startingEquipment.isNotEmpty)
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: _selected!.level1.startingEquipment
+                                                .map(
+                                                  (line) => ListTile(
+                                                    contentPadding: EdgeInsets.zero,
+                                                    dense: true,
+                                                    leading: Text('${line.qty}×'),
+                                                    title: Text(_formatEquipment(line.id)),
+                                                    subtitle: Text(line.id),
+                                                  ),
+                                                )
+                                                .toList(),
+                                          ),
+                                        if (_selected!.level1.startingEquipmentOptions.isNotEmpty)
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: _selected!.level1.startingEquipmentOptions
+                                                .map(
+                                                  (option) => ListTile(
+                                                    contentPadding: EdgeInsets.zero,
+                                                    dense: true,
+                                                    title: Text(option),
+                                                  ),
+                                                )
+                                                .toList(),
+                                          ),
+                                      ],
                                     ],
                                   ),
                                 ),

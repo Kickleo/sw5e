@@ -1,219 +1,132 @@
 [
   {
-    "id": "greataxe",
-    "name": { "en": "Greataxe", "fr": "Hache à deux mains" },
-    "type": "weapon",
-    "weight_g": 3000,
-    "cost": 30
-  },
-  {
-    "id": "handaxe",
-    "name": { "en": "Handaxe", "fr": "Hachette" },
-    "type": "weapon",
-    "weight_g": 900,
-    "cost": 5
-  },
-  {
-    "id": "explorers-pack",
-    "name": { "en": "Explorer's Pack", "fr": "Pack d'explorateur" },
-    "type": "gear",
-    "weight_g": 25000,
-    "cost": 10
-  },
-  {
-    "id": "javelin",
-    "name": { "en": "Javelin", "fr": "Javelot" },
-    "type": "weapon",
-    "weight_g": 900,
-    "cost": 1
-  },
-  {
-    "id": "rapier",
-    "name": { "en": "Rapier", "fr": "Rapière" },
-    "type": "weapon",
-    "weight_g": 1100,
-    "cost": 25
-  },
-  {
-    "id": "entertainers-pack",
-    "name": { "en": "Entertainer's Pack", "fr": "Pack d'artiste" },
-    "type": "gear",
-    "weight_g": 16000,
-    "cost": 40
-  },
-  {
-    "id": "lute",
-    "name": { "en": "Lute", "fr": "Luth" },
-    "type": "gear",
-    "weight_g": 2000,
-    "cost": 35
-  },
-  {
-    "id": "leather-armor",
-    "name": { "en": "Leather Armor", "fr": "Armure de cuir" },
+    "id": "combat-suit",
+    "name": {
+      "en": "Combat suit",
+      "fr": "Combat suit"
+    },
     "type": "armor",
-    "weight_g": 5000,
-    "cost": 10
+    "weight_g": 4536,
+    "cost": 100
   },
   {
-    "id": "dagger",
-    "name": { "en": "Dagger", "fr": "Dague" },
-    "type": "weapon",
-    "weight_g": 450,
-    "cost": 2
+    "id": "heavy-physical-shield",
+    "name": {
+      "en": "Heavy physical shield",
+      "fr": "Heavy physical shield"
+    },
+    "type": "shield",
+    "weight_g": 16329,
+    "cost": 500
   },
   {
-    "id": "mace",
-    "name": { "en": "Mace", "fr": "Masse" },
-    "type": "weapon",
-    "weight_g": 2000,
-    "cost": 5
-  },
-  {
-    "id": "scale-mail",
-    "name": { "en": "Scale Mail", "fr": "Armure d'écailles" },
-    "type": "armor",
-    "weight_g": 22500,
+    "id": "light-physical-shield",
+    "name": {
+      "en": "Light physical shield",
+      "fr": "Light physical shield"
+    },
+    "type": "shield",
+    "weight_g": 0,
     "cost": 50
   },
   {
-    "id": "light-crossbow",
-    "name": { "en": "Light Crossbow", "fr": "Arbalète légère" },
-    "type": "weapon",
-    "weight_g": 2500,
-    "cost": 25
+    "id": "medium-physical-shield",
+    "name": {
+      "en": "Medium physical shield",
+      "fr": "Medium physical shield"
+    },
+    "type": "shield",
+    "weight_g": 8165,
+    "cost": 150
   },
   {
-    "id": "crossbow-bolts",
-    "name": { "en": "Crossbow Bolts (20)", "fr": "Carreaux d'arbalète (20)" },
-    "type": "ammo",
-    "weight_g": 7000,
-    "cost": 1
-  },
-  {
-    "id": "priests-pack",
-    "name": { "en": "Priest's Pack", "fr": "Pack de prêtre" },
-    "type": "gear",
-    "weight_g": 24000,
-    "cost": 19
-  },
-  {
-    "id": "shield",
-    "name": { "en": "Shield", "fr": "Bouclier" },
+    "id": "mesh-armor",
+    "name": {
+      "en": "Mesh armor",
+      "fr": "Mesh armor"
+    },
     "type": "armor",
-    "weight_g": 3000,
-    "cost": 10
+    "weight_g": 9072,
+    "cost": 500
   },
   {
-    "id": "holy-symbol",
-    "name": { "en": "Holy Symbol", "fr": "Symbole sacré" },
-    "type": "gear",
-    "weight_g": 0,
-    "cost": 5
-  },
-  {
-    "id": "scimitar",
-    "name": { "en": "Scimitar", "fr": "Cimeterre" },
+    "id": "blaster-pistol",
+    "name": {
+      "en": "Blaster pistol",
+      "fr": "Blaster pistol"
+    },
     "type": "weapon",
-    "weight_g": 1500,
-    "cost": 25
+    "weight_g": 1134,
+    "cost": 175
   },
   {
-    "id": "druidic-focus",
-    "name": { "en": "Druidic Focus", "fr": "Focus druidique" },
-    "type": "gear",
-    "weight_g": 500,
-    "cost": 10
+    "id": "lightbaton",
+    "name": {
+      "en": "Lightbaton",
+      "fr": "Lightbaton"
+    },
+    "type": "weapon",
+    "weight_g": 567,
+    "cost": 400
   },
   {
-    "id": "chain-mail",
-    "name": { "en": "Chain Mail", "fr": "Armure de mailles" },
-    "type": "armor",
-    "weight_g": 27500,
+    "id": "techaxe",
+    "name": {
+      "en": "Techaxe",
+      "fr": "Techaxe"
+    },
+    "type": "weapon",
+    "weight_g": 454,
     "cost": 75
   },
   {
-    "id": "longsword",
-    "name": { "en": "Longsword", "fr": "Épée longue" },
+    "id": "vibroaxe",
+    "name": {
+      "en": "Vibroaxe",
+      "fr": "Vibroaxe"
+    },
     "type": "weapon",
-    "weight_g": 1500,
-    "cost": 15
+    "weight_g": 4196,
+    "cost": 950
   },
   {
-    "id": "dungeoneers-pack",
-    "name": { "en": "Dungeoneer's Pack", "fr": "Pack de donjon" },
-    "type": "gear",
-    "weight_g": 27000,
-    "cost": 12
+    "id": "vibroblade",
+    "name": {
+      "en": "Vibroblade",
+      "fr": "Vibroblade"
+    },
+    "type": "weapon",
+    "weight_g": 2268,
+    "cost": 200
   },
   {
-    "id": "shortsword",
-    "name": { "en": "Shortsword", "fr": "Épée courte" },
+    "id": "vibrodagger",
+    "name": {
+      "en": "Vibrodagger",
+      "fr": "Vibrodagger"
+    },
     "type": "weapon",
-    "weight_g": 900,
-    "cost": 10
-  },
-  {
-    "id": "dart",
-    "name": { "en": "Dart", "fr": "Dard" },
-    "type": "weapon",
-    "weight_g": 250,
-    "cost": 0
-  },
-  {
-    "id": "longbow",
-    "name": { "en": "Longbow", "fr": "Arc long" },
-    "type": "weapon",
-    "weight_g": 900,
+    "weight_g": 227,
     "cost": 50
   },
   {
-    "id": "arrow",
-    "name": { "en": "Arrows (20)", "fr": "Flèches (20)" },
-    "type": "ammo",
-    "weight_g": 4500,
-    "cost": 1
-  },
-  {
-    "id": "shortbow",
-    "name": { "en": "Shortbow", "fr": "Arc court" },
+    "id": "vibrodart",
+    "name": {
+      "en": "Vibrodart",
+      "fr": "Vibrodart"
+    },
     "type": "weapon",
-    "weight_g": 1000,
-    "cost": 25
+    "weight_g": 227,
+    "cost": 5
   },
   {
-    "id": "burglars-pack",
-    "name": { "en": "Burglar's Pack", "fr": "Pack de cambrioleur" },
-    "type": "gear",
-    "weight_g": 21000,
-    "cost": 16
-  },
-  {
-    "id": "thieves-tools",
-    "name": { "en": "Thieves' Tools", "fr": "Outils de voleur" },
-    "type": "gear",
-    "weight_g": 1000,
-    "cost": 25
-  },
-  {
-    "id": "component-pouch",
-    "name": { "en": "Component Pouch", "fr": "Bourse à composants" },
-    "type": "gear",
-    "weight_g": 500,
-    "cost": 25
-  },
-  {
-    "id": "scholars-pack",
-    "name": { "en": "Scholar's Pack", "fr": "Pack de savant" },
-    "type": "gear",
-    "weight_g": 21000,
-    "cost": 40
-  },
-  {
-    "id": "spellbook",
-    "name": { "en": "Spellbook", "fr": "Grimoire" },
-    "type": "gear",
-    "weight_g": 1500,
-    "cost": 50
+    "id": "vibrospear",
+    "name": {
+      "en": "Vibrospear",
+      "fr": "Vibrospear"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 125
   }
 ]
