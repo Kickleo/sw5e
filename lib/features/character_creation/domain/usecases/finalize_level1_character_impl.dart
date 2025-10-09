@@ -5,6 +5,7 @@ import 'package:sw5e_manager/features/character_creation/domain/repositories/cat
 import 'package:sw5e_manager/features/character_creation/domain/repositories/character_repository.dart';
 import 'package:sw5e_manager/features/character_creation/domain/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_trait.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/credits.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/defense.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/encumbrance.dart';
@@ -17,6 +18,7 @@ import 'package:sw5e_manager/features/character_creation/domain/value_objects/pr
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/quantity.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/skill_proficiency.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/superiority_dice.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/trait_id.dart';
 
 class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
   final CatalogRepository catalog;
@@ -59,6 +61,21 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
       }
 
       final formulas = await catalog.getFormulas();
+
+      // Mapper les traitIds -> Set<CharacterTrait>
+      final traits = <CharacterTrait>{};
+      for (final tid in species.traitIds) {
+        try {
+          traits.add(CharacterTrait(id: TraitId(tid)));
+        } on ArgumentError {
+          // Si un ID de trait du JSON est invalide, on signale un problème de catalogue
+          return Result.err(DomainError(
+            'InvalidCatalogData',
+            message: 'TraitId invalide pour l’espèce ${species.id}',
+            details: {'traitId': tid},
+          ));
+        }
+      }
 
       // 2) Valider le choix de compétences (MVP: simple)
       final choose = clazz.level1.proficiencies.skillsChoose;
@@ -168,6 +185,7 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
         encumbrance: enc,
         maneuversKnown: maneuvers,
         superiorityDice: superiority,
+        speciesTraits: traits,
       );
 
       await characters.save(character);

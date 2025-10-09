@@ -47,6 +47,7 @@ class AssetCatalogRepository implements CatalogRepository {
           ),
           speed: (e['speed'] as num).toInt(),
           size: e['size'] as String,
+          traitIds: (e['traits'] as List?)?.cast<String>() ?? const <String>[], 
         ),
     };
   }

@@ -16,12 +16,14 @@ class SpeciesDef {
   final LocalizedText name;
   final int speed; // ex: 30
   final String size; // ex: "medium"
+  final List<String> traitIds;
   // Simplifié : on ne modèle pas encore ability_bonuses/traits au niveau du domaine.
   const SpeciesDef({
     required this.id,
     required this.name,
     required this.speed,
     required this.size,
+    this.traitIds = const <String>[],
   });
 }
 

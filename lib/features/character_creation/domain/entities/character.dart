@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/background_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_name.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_trait.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/class_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/credits.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/defense.dart';
@@ -52,6 +53,9 @@ class Character {
   final ManeuversKnown maneuversKnown;
   final SuperiorityDice superiorityDice;
 
+  // Traits natifs issus de l'espèce (ex: bothan → nimble-escape, shrewd)
+  final Set<CharacterTrait> speciesTraits;
+
   Character({
     required this.name,
     required this.speciesId,
@@ -69,6 +73,7 @@ class Character {
     required this.encumbrance,
     required this.maneuversKnown,
     required this.superiorityDice,
+    this.speciesTraits = const <CharacterTrait>{},
   })  : assert(level.value == 1, 'MVP: level doit être 1'),
         assert(_hasAllSixAbilities(abilities),
             'abilities doit contenir exactement {str,dex,con,int,wis,cha}'),
