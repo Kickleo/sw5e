@@ -215,6 +215,83 @@ void main() {
       verify(() => chars.save(any())).called(1);
     });
 
+    test("autorise n'importe quelle compétence lorsque la classe l'indique", () async {
+      when(() => catalog.getRulesVersion()).thenAnswer((_) async => '2025-10-06');
+
+      when(() => catalog.getSpecies('human')).thenAnswer((_) async => const SpeciesDef(
+            id: 'human',
+            name: LocalizedText(en: 'Human', fr: 'Humain'),
+            speed: 30,
+            size: 'medium',
+          ));
+
+      when(() => catalog.getClass('operative')).thenAnswer((_) async => const ClassDef(
+            id: 'operative',
+            name: LocalizedText(en: 'Operative', fr: 'Operative'),
+            hitDie: 8,
+            level1: ClassLevel1Data(
+              proficiencies: ClassLevel1Proficiencies(
+                skillsChoose: 2,
+                skillsFrom: ['any'],
+              ),
+              startingCredits: 120,
+              startingEquipment: [StartingEquipmentLine(id: 'blaster-pistol', qty: 1)],
+            ),
+          ));
+
+      when(() => catalog.getBackground('outlaw')).thenAnswer((_) async => const BackgroundDef(
+            id: 'outlaw',
+            name: LocalizedText(en: 'Outlaw', fr: 'Hors-la-loi'),
+            grantedSkills: ['stealth', 'deception'],
+          ));
+
+      when(() => catalog.getFormulas()).thenAnswer((_) async => const FormulasDef(
+            rulesVersion: '2025-10-06',
+            hpLevel1: 'max(hit_die) + mod(CON)',
+            defenseBase: '10 + mod(DEX)',
+            initiative: 'mod(DEX)',
+            superiorityDiceByClass: {
+              'operative': SuperiorityDiceRule(count: 0, die: null),
+            },
+          ));
+
+      when(() => catalog.getEquipment('blaster-pistol')).thenAnswer((_) async => const EquipmentDef(
+            id: 'blaster-pistol',
+            name: LocalizedText(en: 'Blaster Pistol', fr: 'Pistolet blaster'),
+            type: 'weapon',
+            weightG: 800,
+            cost: 200,
+          ));
+
+      when(() => chars.save(any())).thenAnswer((_) async {});
+
+      final input = FinalizeLevel1Input(
+        name: CharacterName('Cassian'),
+        speciesId: SpeciesId('human'),
+        classId: ClassId('operative'),
+        backgroundId: BackgroundId('outlaw'),
+        baseAbilities: {
+          'str': AbilityScore(10),
+          'dex': AbilityScore(12),
+          'con': AbilityScore(14),
+          'int': AbilityScore(13),
+          'wis': AbilityScore(10),
+          'cha': AbilityScore(11),
+        },
+        chosenSkills: {'athletics', 'arcana'},
+        chosenEquipment: const [],
+      );
+
+      final result = await usecase(input);
+
+      expect(result.isOk, isTrue);
+      result.match(
+        ok: (_) {},
+        err: (e) => fail('Ne devrait pas échouer: $e'),
+      );
+      verify(() => chars.save(any())).called(1);
+    });
+
     test('échoue si les compétences choisies ne respectent pas les règles (InvalidPrerequisite)', () async {
       // ARRANGE (réutilise les mêmes mocks que le happy path)
       when(() => catalog.getRulesVersion()).thenAnswer((_) async => '2025-10-06');
