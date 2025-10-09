@@ -1,16 +1,305 @@
 [
   {
-    "id": "guardian",
-    "name": { "en": "Guardian", "fr": "Gardien" },
+    "id": "barbarian",
+    "name": { "en": "Barbarian", "fr": "Barbare" },
+    "hit_die": 12,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "animal-handling",
+          "athletics",
+          "intimidation",
+          "nature",
+          "perception",
+          "survival"
+        ]
+      },
+      "starting_credits": 50,
+      "starting_equipment": [
+        { "id": "greataxe", "qty": 1 },
+        { "id": "handaxe", "qty": 2 },
+        { "id": "explorers-pack", "qty": 1 },
+        { "id": "javelin", "qty": 4 }
+      ]
+    }
+  },
+  {
+    "id": "bard",
+    "name": { "en": "Bard", "fr": "Barde" },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 3,
+        "skills_from": [
+          "acrobatics",
+          "animal-handling",
+          "arcana",
+          "athletics",
+          "deception",
+          "history",
+          "insight",
+          "intimidation",
+          "investigation",
+          "medicine",
+          "nature",
+          "perception",
+          "performance",
+          "persuasion",
+          "religion",
+          "sleight-of-hand",
+          "stealth",
+          "survival"
+        ]
+      },
+      "starting_credits": 125,
+      "starting_equipment": [
+        { "id": "rapier", "qty": 1 },
+        { "id": "entertainers-pack", "qty": 1 },
+        { "id": "lute", "qty": 1 },
+        { "id": "leather-armor", "qty": 1 },
+        { "id": "dagger", "qty": 1 }
+      ]
+    }
+  },
+  {
+    "id": "cleric",
+    "name": { "en": "Cleric", "fr": "Clerc" },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": ["history", "insight", "medicine", "persuasion", "religion"]
+      },
+      "starting_credits": 125,
+      "starting_equipment": [
+        { "id": "mace", "qty": 1 },
+        { "id": "scale-mail", "qty": 1 },
+        { "id": "light-crossbow", "qty": 1 },
+        { "id": "crossbow-bolts", "qty": 20 },
+        { "id": "priests-pack", "qty": 1 },
+        { "id": "shield", "qty": 1 },
+        { "id": "holy-symbol", "qty": 1 }
+      ]
+    }
+  },
+  {
+    "id": "druid",
+    "name": { "en": "Druid", "fr": "Druide" },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "arcana",
+          "animal-handling",
+          "insight",
+          "medicine",
+          "nature",
+          "perception",
+          "religion",
+          "survival"
+        ]
+      },
+      "starting_credits": 50,
+      "starting_equipment": [
+        { "id": "shield", "qty": 1 },
+        { "id": "scimitar", "qty": 1 },
+        { "id": "leather-armor", "qty": 1 },
+        { "id": "explorers-pack", "qty": 1 },
+        { "id": "druidic-focus", "qty": 1 }
+      ]
+    }
+  },
+  {
+    "id": "fighter",
+    "name": { "en": "Fighter", "fr": "Guerrier" },
     "hit_die": 10,
     "level1": {
       "proficiencies": {
         "skills_choose": 2,
-        "skills_from": ["athletics", "perception", "stealth", "deception"]
+        "skills_from": [
+          "acrobatics",
+          "animal-handling",
+          "athletics",
+          "history",
+          "insight",
+          "intimidation",
+          "perception",
+          "survival"
+        ]
       },
-      "starting_credits": 150,
+      "starting_credits": 125,
       "starting_equipment": [
-        { "id": "blaster-pistol", "qty": 1 }
+        { "id": "chain-mail", "qty": 1 },
+        { "id": "shield", "qty": 1 },
+        { "id": "longsword", "qty": 1 },
+        { "id": "light-crossbow", "qty": 1 },
+        { "id": "crossbow-bolts", "qty": 20 },
+        { "id": "dungeoneers-pack", "qty": 1 }
+      ]
+    }
+  },
+  {
+    "id": "monk",
+    "name": { "en": "Monk", "fr": "Moine" },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": [
+          "acrobatics",
+          "athletics",
+          "history",
+          "insight",
+          "religion",
+          "stealth"
+        ]
+      },
+      "starting_credits": 12,
+      "starting_equipment": [
+        { "id": "shortsword", "qty": 1 },
+        { "id": "dungeoneers-pack", "qty": 1 },
+        { "id": "dart", "qty": 10 }
+      ]
+    }
+  },
+  {
+    "id": "paladin",
+    "name": { "en": "Paladin", "fr": "Paladin" },
+    "hit_die": 10,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": ["athletics", "insight", "intimidation", "medicine", "persuasion", "religion"]
+      },
+      "starting_credits": 125,
+      "starting_equipment": [
+        { "id": "chain-mail", "qty": 1 },
+        { "id": "shield", "qty": 1 },
+        { "id": "longsword", "qty": 1 },
+        { "id": "javelin", "qty": 5 },
+        { "id": "priests-pack", "qty": 1 },
+        { "id": "holy-symbol", "qty": 1 }
+      ]
+    }
+  },
+  {
+    "id": "ranger",
+    "name": { "en": "Ranger", "fr": "Rôdeur" },
+    "hit_die": 10,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 3,
+        "skills_from": [
+          "animal-handling",
+          "athletics",
+          "insight",
+          "investigation",
+          "nature",
+          "perception",
+          "stealth",
+          "survival"
+        ]
+      },
+      "starting_credits": 125,
+      "starting_equipment": [
+        { "id": "scale-mail", "qty": 1 },
+        { "id": "shortsword", "qty": 2 },
+        { "id": "longbow", "qty": 1 },
+        { "id": "arrow", "qty": 20 },
+        { "id": "explorers-pack", "qty": 1 }
+      ]
+    }
+  },
+  {
+    "id": "rogue",
+    "name": { "en": "Rogue", "fr": "Voleur" },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 4,
+        "skills_from": [
+          "acrobatics",
+          "athletics",
+          "deception",
+          "insight",
+          "intimidation",
+          "investigation",
+          "perception",
+          "performance",
+          "persuasion",
+          "sleight-of-hand",
+          "stealth"
+        ]
+      },
+      "starting_credits": 100,
+      "starting_equipment": [
+        { "id": "rapier", "qty": 1 },
+        { "id": "shortbow", "qty": 1 },
+        { "id": "arrow", "qty": 20 },
+        { "id": "burglars-pack", "qty": 1 },
+        { "id": "leather-armor", "qty": 1 },
+        { "id": "dagger", "qty": 2 },
+        { "id": "thieves-tools", "qty": 1 }
+      ]
+    }
+  },
+  {
+    "id": "sorcerer",
+    "name": { "en": "Sorcerer", "fr": "Ensorceleur" },
+    "hit_die": 6,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": ["arcana", "deception", "insight", "intimidation", "persuasion", "religion"]
+      },
+      "starting_credits": 75,
+      "starting_equipment": [
+        { "id": "light-crossbow", "qty": 1 },
+        { "id": "crossbow-bolts", "qty": 20 },
+        { "id": "component-pouch", "qty": 1 },
+        { "id": "dungeoneers-pack", "qty": 1 },
+        { "id": "dagger", "qty": 2 }
+      ]
+    }
+  },
+  {
+    "id": "warlock",
+    "name": { "en": "Warlock", "fr": "Sorcier" },
+    "hit_die": 8,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": ["arcana", "deception", "history", "intimidation", "investigation", "nature", "religion"]
+      },
+      "starting_credits": 100,
+      "starting_equipment": [
+        { "id": "light-crossbow", "qty": 1 },
+        { "id": "crossbow-bolts", "qty": 20 },
+        { "id": "component-pouch", "qty": 1 },
+        { "id": "scholars-pack", "qty": 1 },
+        { "id": "leather-armor", "qty": 1 },
+        { "id": "mace", "qty": 1 },
+        { "id": "dagger", "qty": 2 }
+      ]
+    }
+  },
+  {
+    "id": "wizard",
+    "name": { "en": "Wizard", "fr": "Magicien" },
+    "hit_die": 6,
+    "level1": {
+      "proficiencies": {
+        "skills_choose": 2,
+        "skills_from": ["arcana", "history", "insight", "investigation", "medicine", "religion"]
+      },
+      "starting_credits": 100,
+      "starting_equipment": [
+        { "id": "quarterstaff", "qty": 1 },
+        { "id": "component-pouch", "qty": 1 },
+        { "id": "scholars-pack", "qty": 1 },
+        { "id": "spellbook", "qty": 1 }
       ]
     }
   }

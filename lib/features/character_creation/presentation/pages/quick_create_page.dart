@@ -7,6 +7,7 @@ import 'package:sw5e_manager/features/character_creation/domain/value_objects/ba
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_name.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/class_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/species_id.dart';
+import 'package:sw5e_manager/features/character_creation/presentation/pages/class_picker_page.dart';
 import 'package:sw5e_manager/features/character_creation/presentation/pages/species_picker.dart';
 
 class QuickCreatePage extends StatefulWidget {
@@ -19,6 +20,7 @@ class QuickCreatePage extends StatefulWidget {
 enum _CreationStep {
   species,
   classes,
+  background,
 }
 
 class _QuickCreatePageState extends State<QuickCreatePage> {
@@ -39,6 +41,8 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
   String? _selectedSpecies;
   String? _selectedClass;
   String? _selectedBackground;
+  ClassDef? _selectedClassDef;
+  bool _classDetailsLoading = false;
 
   // pour affichage simple
   String _status = '';
@@ -63,9 +67,11 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
         _selectedBackground = bg.isNotEmpty ? bg.first : null;
         _loading = false;
       });
-      if (mounted) {
-        await _refreshSpeciesTraits();
-      }
+      if (!mounted) return;
+      await Future.wait([
+        _refreshSpeciesTraits(),
+        _refreshClassDef(),
+      ]);
     } catch (e) {
       setState(() {
         _status = 'Erreur de chargement du catalogue: $e';
@@ -83,12 +89,20 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
       case _CreationStep.species:
         return _selectedSpecies != null;
       case _CreationStep.classes:
-        return _selectedClass != null && _selectedBackground != null;
+        return _selectedClass != null;
+      case _CreationStep.background:
+        return _selectedClass != null &&
+            _selectedBackground != null &&
+            _nameController.text.trim().isNotEmpty;
     }
   }
 
   Future<void> _createCharacter() async {
-    if (_selectedSpecies == null || _selectedClass == null || _selectedBackground == null) return;
+    final name = _nameController.text.trim();
+    if (_selectedSpecies == null ||
+        _selectedClass == null ||
+        _selectedBackground == null ||
+        name.isEmpty) return;
 
     setState(() => _status = 'Création en cours…');
 
@@ -100,7 +114,7 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
 
     // MVP: pas d’équipement additionnel (on garde le pack de départ)
     final input = FinalizeLevel1Input(
-      name: CharacterName(_nameController.text),
+      name: CharacterName(name),
       speciesId: SpeciesId(_selectedSpecies!),
       classId: ClassId(_selectedClass!),
       backgroundId: BackgroundId(_selectedBackground!),
@@ -170,6 +184,21 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
     }
   }
 
+  Future<void> _pickClass() async {
+    final chosen = await Navigator.of(context).push<String>(
+      MaterialPageRoute(
+        builder: (_) => ClassPickerPage(initialClassId: _selectedClass),
+      ),
+    );
+    if (!mounted) return;
+    if (chosen != null && chosen != _selectedClass) {
+      setState(() {
+        _selectedClass = chosen;
+      });
+      await _refreshClassDef();
+    }
+  }
+
   void _goToStep(int index) {
     if (index == _currentStepIndex) return;
     setState(() => _currentStepIndex = index);
@@ -209,7 +238,8 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
           label: Text(
             switch (step) {
               _CreationStep.species => 'Espèce',
-              _CreationStep.classes => 'Classe & background',
+              _CreationStep.classes => 'Classe',
+              _CreationStep.background => 'Nom & background',
             },
             style: theme.textTheme.labelLarge?.copyWith(
               color: isActive
@@ -289,10 +319,125 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text('Choisis ta classe', style: theme.textTheme.titleLarge),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            value: _selectedClass,
+            items: _classes
+                .map(
+                  (id) => DropdownMenuItem(
+                    value: id,
+                    child: Text(_formatSlug(id)),
+                  ),
+                )
+                .toList(),
+            onChanged: (v) {
+              if (v == _selectedClass) return;
+              setState(() => _selectedClass = v);
+              _refreshClassDef();
+            },
+          ),
+          const SizedBox(height: 16),
+          FilledButton.icon(
+            onPressed: _classes.isEmpty ? null : _pickClass,
+            icon: const Icon(Icons.travel_explore),
+            label: const Text('Explorer les classes'),
+          ),
+          const SizedBox(height: 24),
+          if (_classDetailsLoading)
+            const Center(child: CircularProgressIndicator())
+          else if (_selectedClassDef != null)
+            Card(
+              elevation: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _selectedClassDef!.name.fr.isNotEmpty
+                          ? _selectedClassDef!.name.fr
+                          : _selectedClassDef!.name.en,
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 4),
+                    if (_selectedClass != null)
+                      Text(
+                        _selectedClass!,
+                        style: theme.textTheme.labelMedium,
+                      ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 12,
+                      runSpacing: 8,
+                      children: [
+                        Chip(label: Text('Dé de vie: d${_selectedClassDef!.hitDie}')),
+                        Chip(
+                          label: Text(
+                              'Crédits initiaux: ${_selectedClassDef!.level1.startingCredits}'),
+                        ),
+                        Chip(
+                          label: Text(
+                              'Compétences à choisir: ${_selectedClassDef!.level1.proficiencies.skillsChoose}'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Text('Options de compétences', style: theme.textTheme.titleSmall),
+                    const SizedBox(height: 8),
+                    if (_selectedClassDef!.level1.proficiencies.skillsFrom.isEmpty)
+                      const Text('Aucune option définie')
+                    else
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: _selectedClassDef!.level1.proficiencies.skillsFrom
+                            .map((id) => Chip(label: Text(_formatSlug(id))))
+                            .toList(),
+                      ),
+                    const SizedBox(height: 16),
+                    Text('Équipement de départ', style: theme.textTheme.titleSmall),
+                    const SizedBox(height: 8),
+                    if (_selectedClassDef!.level1.startingEquipment.isEmpty)
+                      const Text('Aucun équipement défini')
+                    else
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: _selectedClassDef!.level1.startingEquipment
+                            .map(
+                              (line) => Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Text('${line.qty} × ${_formatSlug(line.id)}'),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                  ],
+                ),
+              ),
+            )
+          else
+            Text(
+              'Sélectionne une classe pour voir ses détails.',
+              style: theme.textTheme.bodyMedium,
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFinalizeStep(BuildContext context) {
+    final theme = Theme.of(context);
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text('Identité du personnage', style: theme.textTheme.titleLarge),
           const SizedBox(height: 8),
           TextField(
             controller: _nameController,
+            onChanged: (_) => setState(() {}),
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Ex: Rey',
@@ -300,22 +445,17 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
             ),
           ),
           const SizedBox(height: 24),
-          Text('Classe', style: theme.textTheme.titleMedium),
-          const SizedBox(height: 8),
-          DropdownButtonFormField<String>(
-            value: _selectedClass,
-            items: _classes
-                .map((id) => DropdownMenuItem(value: id, child: Text(id)))
-                .toList(),
-            onChanged: (v) => setState(() => _selectedClass = v),
-          ),
-          const SizedBox(height: 24),
           Text('Background', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
             value: _selectedBackground,
             items: _backgrounds
-                .map((id) => DropdownMenuItem(value: id, child: Text(id)))
+                .map(
+                  (id) => DropdownMenuItem(
+                    value: id,
+                    child: Text(_formatSlug(id)),
+                  ),
+                )
                 .toList(),
             onChanged: (v) => setState(() => _selectedBackground = v),
           ),
@@ -345,6 +485,45 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
     setState(() => _selectedSpeciesTraits = traits);
   }
 
+  Future<void> _refreshClassDef() async {
+    final id = _selectedClass;
+    if (id == null) {
+      setState(() {
+        _selectedClassDef = null;
+        _classDetailsLoading = false;
+      });
+      return;
+    }
+    setState(() {
+      _classDetailsLoading = true;
+    });
+    try {
+      final cls = await _catalog.getClass(id);
+      if (!mounted) return;
+      setState(() {
+        _selectedClassDef = cls;
+        _classDetailsLoading = false;
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _status = 'Erreur de chargement de la classe: $e';
+        _classDetailsLoading = false;
+      });
+    }
+  }
+
+  String _formatSlug(String slug) {
+    return slug
+        .split(RegExp(r'[-_]'))
+        .map(
+          (part) => part.isEmpty
+              ? part
+              : part[0].toUpperCase() + part.substring(1),
+        )
+        .join(' ');
+  }
+
 
 
   @override
@@ -366,6 +545,7 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
                     children: [
                       _buildSpeciesStep(context),
                       _buildClassStep(context),
+                      _buildFinalizeStep(context),
                     ],
                   ),
                 ),
