@@ -7,6 +7,7 @@ import 'package:sw5e_manager/features/character_creation/domain/value_objects/ba
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_name.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/class_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/species_id.dart';
+import 'package:sw5e_manager/features/character_creation/presentation/pages/species_picker.dart';
 
 class QuickCreatePage extends StatefulWidget {
   const QuickCreatePage({super.key});
@@ -25,6 +26,7 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
   List<String> _species = [];
   List<String> _classes = [];
   List<String> _backgrounds = [];
+  List<TraitDef> _selectedSpeciesTraits = [];
 
   String? _selectedSpecies;
   String? _selectedClass;
@@ -53,6 +55,9 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
         _selectedBackground = bg.isNotEmpty ? bg.first : null;
         _loading = false;
       });
+      if (mounted) {
+        await _refreshSpeciesTraits();
+      }
     } catch (e) {
       setState(() {
         _status = 'Erreur de chargement du catalogue: $e';
@@ -129,6 +134,39 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
     );
   }
 
+  Future<void> _pickSpecies() async {
+    final chosen = await Navigator.of(context).push<String>(
+      MaterialPageRoute(
+        builder: (_) => SpeciesPickerPage(initialSpeciesId: _selectedSpecies),
+      ),
+    );
+    if (!mounted) return;
+    if (chosen != null && chosen != _selectedSpecies) {
+      setState(() {
+        _selectedSpecies = chosen;
+      });
+      await _refreshSpeciesTraits();
+    }
+  }
+
+  Future<void> _refreshSpeciesTraits() async {
+    final id = _selectedSpecies;
+    if (id == null) {
+      setState(() => _selectedSpeciesTraits = []);
+      return;
+    }
+    final sp = await _catalog.getSpecies(id);
+    final traits = <TraitDef>[];
+    for (final tid in sp?.traitIds ?? const <String>[]) {
+      final t = await _catalog.getTrait(tid);
+      if (t != null) traits.add(t);
+    }
+    if (!mounted) return;
+    setState(() => _selectedSpeciesTraits = traits);
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -156,9 +194,41 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
                   DropdownButtonFormField<String>(
                     initialValue: _selectedSpecies,
                     items: _species.map((id) => DropdownMenuItem(value: id, child: Text(id))).toList(),
-                    onChanged: (v) => setState(() => _selectedSpecies = v),
+                    onChanged: (v) {
+                      setState(() => _selectedSpecies = v);
+                      _refreshSpeciesTraits();
+                    },
                   ),
                   const SizedBox(height: 16),
+
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: OutlinedButton.icon(
+                      onPressed: _pickSpecies,
+                      icon: const Icon(Icons.travel_explore),
+                      label: const Text('Explorer les espèces'),
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
+                  if (_selectedSpeciesTraits.isNotEmpty) ...[
+                    Text('Traits d\'espèce', style: theme.textTheme.titleMedium),
+                    const SizedBox(height: 8),
+                    ..._selectedSpeciesTraits.map((t) {
+                      final title = (t.name.fr.isNotEmpty ? t.name.fr : t.name.en);
+                      return ListTile(
+                        dense: true,
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(title, style: theme.textTheme.titleSmall),
+                        subtitle: Text(
+                          t.description,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      );
+                    }),
+                  ],
 
                   Text('Classe', style: theme.textTheme.titleMedium),
                   const SizedBox(height: 8),

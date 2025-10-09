@@ -130,6 +130,20 @@ class FormulasDef {
   });
 }
 
+/// Définition d’un trait d’espèce (affichage / compendium)
+@immutable
+class TraitDef {
+  final String id;            // ex: "nimble-escape"
+  final LocalizedText name;   // {en, fr}
+  final String description;   // texte/markdown court
+
+  const TraitDef({
+    required this.id,
+    required this.name,
+    required this.description,
+  });
+}
+
 /// ---- Port du domaine : lecture du catalogue figé (snapshot) ----
 /// Le domaine ne connaît PAS d’IO : une implémentation Data lira
 /// les JSON d'assets et mapppera vers ces types.
@@ -144,9 +158,10 @@ abstract class CatalogRepository {
   Future<BackgroundDef?> getBackground(String backgroundId);
   Future<SkillDef?> getSkill(String skillId);
   Future<EquipmentDef?> getEquipment(String equipmentId);
-
   /// Formules/tableaux divers (niveau 1 au MVP)
   Future<FormulasDef> getFormulas();
+  /// Récupère la définition d’un trait
+  Future<TraitDef?> getTrait(String traitId);
 
   /// Listes utilitaires (optionnel pour l’UI/validation)
   Future<List<String>> listSkills();     // slugs
@@ -154,4 +169,6 @@ abstract class CatalogRepository {
   Future<List<String>> listClasses();    // slugs
   Future<List<String>> listBackgrounds();// slugs
   Future<List<String>> listEquipment();  // slugs
+  /// (optionnel mais utile pour UI) — liste tous les IDs de traits
+  Future<List<String>> listTraits();
 }

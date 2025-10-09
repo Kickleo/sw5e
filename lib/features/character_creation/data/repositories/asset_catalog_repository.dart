@@ -15,6 +15,7 @@ class AssetCatalogRepository implements CatalogRepository {
   Map<String, BackgroundDef>? _backgrounds;
   Map<String, SkillDef>? _skills;
   Map<String, EquipmentDef>? _equipment;
+  Map<String, TraitDef>? _traits;
   FormulasDef? _formulas;
 
   Future<List<dynamic>> _loadArray(String path) async {
@@ -161,6 +162,24 @@ class AssetCatalogRepository implements CatalogRepository {
     );
   }
 
+  // ---------------- Traits ------------------
+  Future<void> _ensureTraits() async {
+  if (_traits != null) return;
+  final arr = await _loadArray('assets/catalog/traits.json');
+  _traits = {
+    for (final e in arr.cast<Map>())
+      (e['id'] as String): TraitDef(
+        id: e['id'] as String,
+        name: LocalizedText(
+          en: (e['name'] as Map)['en'] as String,
+          fr: (e['name'] as Map)['fr'] as String,
+        ),
+        description: e['description'] as String,
+      ),
+  };
+}
+
+
   // ------------ Impl CatalogRepository ------------
   @override
   Future<String> getRulesVersion() async {
@@ -202,6 +221,18 @@ class AssetCatalogRepository implements CatalogRepository {
   Future<FormulasDef> getFormulas() async {
     await _ensureFormulas();
     return _formulas!;
+  }
+
+  @override
+  Future<TraitDef?> getTrait(String traitId) async {
+    await _ensureTraits();
+    return _traits![traitId];
+  }
+
+  @override
+  Future<List<String>> listTraits() async {
+    await _ensureTraits();
+    return _traits!.keys.toList()..sort();
   }
 
   @override

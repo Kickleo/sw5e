@@ -1,0 +1,12 @@
+[
+  {
+    "id": "shrewd",
+    "name": { "en": "Shrewd", "fr": "Perspicace" },
+    "description": "You are proficient in the **Insight** and **Deception** skills."
+  },
+  {
+    "id": "nimble-escape",
+    "name": { "en": "Nimble Escape", "fr": "Échappée agile" },
+    "description": "You can take the **Disengage** or **Hide** action as a **bonus action** on each of your turns."
+  }
+]
