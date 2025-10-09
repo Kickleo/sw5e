@@ -17,15 +17,9 @@ class _HomeNavState extends State<HomeNav> {
     CharacterSummaryPage(),
   ];
 
-  static const _titles = <String>[
-    'Quick Create',
-    'Résumé de personnage',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_titles[_index])),
       body: _pages[_index],
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
