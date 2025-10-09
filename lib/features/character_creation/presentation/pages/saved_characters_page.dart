@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sw5e_manager/features/character_creation/domain/entities/character.dart';
 import 'package:sw5e_manager/features/character_creation/presentation/viewmodels/saved_characters_view_model.dart';
 
-class SavedCharactersPage extends ConsumerWidget {
+class SavedCharactersPage extends HookConsumerWidget {
   const SavedCharactersPage({super.key});
 
   static const routeName = 'saved-characters';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final scrollController = useScrollController();
     final state = ref.watch(savedCharactersViewModelProvider);
     final viewModel = ref.read(savedCharactersViewModelProvider.notifier);
 
@@ -47,7 +49,9 @@ class SavedCharactersPage extends ConsumerWidget {
           return RefreshIndicator(
             onRefresh: viewModel.refresh,
             child: Scrollbar(
+              controller: scrollController,
               child: ListView.separated(
+                controller: scrollController,
                 physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(16),
                 itemCount: state.characters.length + (state.hasError ? 1 : 0),
