@@ -8,6 +8,8 @@ import 'package:sw5e_manager/features/character_creation/domain/usecases/finaliz
 import 'package:sw5e_manager/features/character_creation/domain/usecases/finalize_level1_character_impl.dart';
 import 'package:sw5e_manager/features/character_creation/domain/usecases/load_last_character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/usecases/load_last_character_impl.dart';
+import 'package:sw5e_manager/features/character_creation/domain/usecases/list_saved_characters.dart';
+import 'package:sw5e_manager/features/character_creation/domain/usecases/list_saved_characters_impl.dart';
 
 final sl = GetIt.instance;
 
@@ -25,6 +27,9 @@ Future<void> registerCharacterCreationModule() async {
     ),
   );
   sl.registerLazySingleton<LoadLastCharacter>(
-  () => LoadLastCharacterImpl(sl<CharacterRepository>()),
-);
+    () => LoadLastCharacterImpl(sl<CharacterRepository>()),
+  );
+  sl.registerLazySingleton<ListSavedCharacters>(
+    () => ListSavedCharactersImpl(sl<CharacterRepository>()),
+  );
 }
