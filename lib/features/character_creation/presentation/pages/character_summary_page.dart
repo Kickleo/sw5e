@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sw5e_manager/features/character_creation/domain/entities/character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_id.dart';
 import 'package:sw5e_manager/features/character_creation/presentation/viewmodels/character_summary_view_model.dart';
 
-class CharacterSummaryPage extends ConsumerWidget {
+class CharacterSummaryPage extends HookConsumerWidget {
   const CharacterSummaryPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final scrollController = useScrollController();
     final state = ref.watch(characterSummaryViewModelProvider);
     final viewModel = ref.read(characterSummaryViewModelProvider.notifier);
     final charactersAsync = state.characters;
@@ -42,7 +44,9 @@ class CharacterSummaryPage extends ConsumerWidget {
             : RefreshIndicator(
                 onRefresh: viewModel.refresh,
                 child: Scrollbar(
+                  controller: scrollController,
                   child: ListView(
+                    controller: scrollController,
                     padding: const EdgeInsets.all(16),
                     children: [
                       _CharacterSelector(
