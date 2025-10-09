@@ -16,11 +16,19 @@ class QuickCreatePage extends StatefulWidget {
   State<QuickCreatePage> createState() => _QuickCreatePageState();
 }
 
+enum _CreationStep {
+  species,
+  classes,
+}
+
 class _QuickCreatePageState extends State<QuickCreatePage> {
   final _nameController = TextEditingController(text: 'Rey');
 
   late final CatalogRepository _catalog = sl<CatalogRepository>();
   late final FinalizeLevel1Character _finalize = sl<FinalizeLevel1Character>();
+
+  final PageController _pageController = PageController();
+  int _currentStepIndex = 0;
 
   bool _loading = true;
   List<String> _species = [];
@@ -63,6 +71,19 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
         _status = 'Erreur de chargement du catalogue: $e';
         _loading = false;
       });
+    }
+  }
+
+  List<_CreationStep> get _steps => _CreationStep.values;
+
+  bool get _isLastStep => _currentStepIndex == _steps.length - 1;
+
+  bool get _canGoNext {
+    switch (_steps[_currentStepIndex]) {
+      case _CreationStep.species:
+        return _selectedSpecies != null;
+      case _CreationStep.classes:
+        return _selectedClass != null && _selectedBackground != null;
     }
   }
 
@@ -149,6 +170,165 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
     }
   }
 
+  void _goToStep(int index) {
+    if (index == _currentStepIndex) return;
+    setState(() => _currentStepIndex = index);
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _nextStep() {
+    if (!_canGoNext) return;
+    if (_isLastStep) {
+      _createCharacter();
+      return;
+    }
+    _goToStep(_currentStepIndex + 1);
+  }
+
+  void _previousStep() {
+    if (_currentStepIndex == 0) return;
+    _goToStep(_currentStepIndex - 1);
+  }
+
+  Widget _buildStepIndicator(BuildContext context) {
+    final theme = Theme.of(context);
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      alignment: WrapAlignment.center,
+      children: List.generate(_steps.length, (index) {
+        final step = _steps[index];
+        final isActive = index == _currentStepIndex;
+        final isCompleted = index < _currentStepIndex;
+        final canOpen = index <= _currentStepIndex;
+        return ActionChip(
+          label: Text(
+            switch (step) {
+              _CreationStep.species => 'Espèce',
+              _CreationStep.classes => 'Classe & background',
+            },
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: isActive
+                  ? theme.colorScheme.onPrimary
+                  : theme.colorScheme.onSecondaryContainer,
+            ),
+          ),
+          backgroundColor: isActive
+              ? theme.colorScheme.primary
+              : isCompleted
+                  ? theme.colorScheme.secondaryContainer
+                  : theme.colorScheme.surfaceVariant,
+          onPressed: canOpen ? () => _goToStep(index) : null,
+        );
+      }),
+    );
+  }
+
+  Widget _buildSpeciesStep(BuildContext context) {
+    final theme = Theme.of(context);
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Choisis ton espèce', style: theme.textTheme.titleLarge),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            value: _selectedSpecies,
+            items: _species
+                .map((id) => DropdownMenuItem(value: id, child: Text(id)))
+                .toList(),
+            onChanged: (v) {
+              setState(() => _selectedSpecies = v);
+              _refreshSpeciesTraits();
+            },
+          ),
+          const SizedBox(height: 16),
+          OutlinedButton.icon(
+            onPressed: _pickSpecies,
+            icon: const Icon(Icons.travel_explore),
+            label: const Text('Explorer les espèces'),
+          ),
+          const SizedBox(height: 24),
+          if (_selectedSpeciesTraits.isNotEmpty) ...[
+            Text("Traits d'espèce", style: theme.textTheme.titleMedium),
+            const SizedBox(height: 8),
+            ..._selectedSpeciesTraits.map((t) {
+              final title = (t.name.fr.isNotEmpty ? t.name.fr : t.name.en);
+              return Card(
+                elevation: 0,
+                child: ListTile(
+                  dense: true,
+                  title: Text(title, style: theme.textTheme.titleSmall),
+                  subtitle: Text(
+                    t.description,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              );
+            }),
+          ] else
+            Text(
+              'Sélectionne une espèce pour voir ses traits.',
+              style: theme.textTheme.bodyMedium,
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildClassStep(BuildContext context) {
+    final theme = Theme.of(context);
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Identité du personnage', style: theme.textTheme.titleLarge),
+          const SizedBox(height: 8),
+          TextField(
+            controller: _nameController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Ex: Rey',
+              labelText: 'Nom du personnage',
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text('Classe', style: theme.textTheme.titleMedium),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            value: _selectedClass,
+            items: _classes
+                .map((id) => DropdownMenuItem(value: id, child: Text(id)))
+                .toList(),
+            onChanged: (v) => setState(() => _selectedClass = v),
+          ),
+          const SizedBox(height: 24),
+          Text('Background', style: theme.textTheme.titleMedium),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            value: _selectedBackground,
+            items: _backgrounds
+                .map((id) => DropdownMenuItem(value: id, child: Text(id)))
+                .toList(),
+            onChanged: (v) => setState(() => _selectedBackground = v),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'Clique sur "Terminer" pour finaliser le personnage.',
+            style: theme.textTheme.bodyMedium,
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _refreshSpeciesTraits() async {
     final id = _selectedSpecies;
     if (id == null) {
@@ -174,90 +354,48 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
       appBar: AppBar(title: const Text('Quick Create (MVP)')),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.all(16),
-              child: ListView(
-                children: [
-                  Text('Nom du personnage', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: _nameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Ex: Rey',
-                    ),
+          : Column(
+              children: [
+                const SizedBox(height: 16),
+                _buildStepIndicator(context),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      _buildSpeciesStep(context),
+                      _buildClassStep(context),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-
-                  Text('Espèce', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  DropdownButtonFormField<String>(
-                    initialValue: _selectedSpecies,
-                    items: _species.map((id) => DropdownMenuItem(value: id, child: Text(id))).toList(),
-                    onChanged: (v) {
-                      setState(() => _selectedSpecies = v);
-                      _refreshSpeciesTraits();
-                    },
-                  ),
-                  const SizedBox(height: 16),
-
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: OutlinedButton.icon(
-                      onPressed: _pickSpecies,
-                      icon: const Icon(Icons.travel_explore),
-                      label: const Text('Explorer les espèces'),
-                    ),
-                  ),
-
-                  const SizedBox(height: 16),
-                  if (_selectedSpeciesTraits.isNotEmpty) ...[
-                    Text('Traits d\'espèce', style: theme.textTheme.titleMedium),
-                    const SizedBox(height: 8),
-                    ..._selectedSpeciesTraits.map((t) {
-                      final title = (t.name.fr.isNotEmpty ? t.name.fr : t.name.en);
-                      return ListTile(
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(title, style: theme.textTheme.titleSmall),
-                        subtitle: Text(
-                          t.description,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    children: [
+                      if (_currentStepIndex > 0)
+                        OutlinedButton.icon(
+                          onPressed: _previousStep,
+                          icon: const Icon(Icons.chevron_left),
+                          label: const Text('Précédent'),
                         ),
-                      );
-                    }),
-                  ],
-
-                  Text('Classe', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  DropdownButtonFormField<String>(
-                    initialValue: _selectedClass,
-                    items: _classes.map((id) => DropdownMenuItem(value: id, child: Text(id))).toList(),
-                    onChanged: (v) => setState(() => _selectedClass = v),
+                      if (_currentStepIndex > 0) const SizedBox(width: 8),
+                      Expanded(
+                        child: FilledButton.icon(
+                          onPressed: _canGoNext ? _nextStep : null,
+                          icon: Icon(_isLastStep ? Icons.check : Icons.chevron_right),
+                          label: Text(_isLastStep ? 'Terminer' : 'Suivant'),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-
-                  Text('Background', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  DropdownButtonFormField<String>(
-                    initialValue: _selectedBackground,
-                    items: _backgrounds.map((id) => DropdownMenuItem(value: id, child: Text(id))).toList(),
-                    onChanged: (v) => setState(() => _selectedBackground = v),
+                ),
+                if (_status.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(_status, style: theme.textTheme.bodyMedium),
                   ),
-                  const SizedBox(height: 24),
-
-                  FilledButton.icon(
-                    onPressed: _createCharacter,
-                    icon: const Icon(Icons.check),
-                    label: const Text('Créer le personnage'),
-                  ),
-
-                  const SizedBox(height: 16),
-                  Text(_status, style: theme.textTheme.bodyMedium),
-                ],
-              ),
+              ],
             ),
     );
   }
@@ -265,6 +403,7 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
   @override
   void dispose() {
     _nameController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 }
