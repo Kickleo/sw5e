@@ -5,8 +5,8 @@ import 'package:sw5e_manager/features/character_creation/domain/repositories/cat
 import 'package:sw5e_manager/features/character_creation/domain/repositories/character_repository.dart';
 import 'package:sw5e_manager/features/character_creation/domain/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
-import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_trait.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_id.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_trait.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/credits.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/defense.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/encumbrance.dart';
