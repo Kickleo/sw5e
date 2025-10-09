@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sw5e_manager/di/character_creation_module.dart';
 import 'package:sw5e_manager/features/character_creation/domain/repositories/catalog_repository.dart';
 
-class ClassPickerPage extends StatefulWidget {
-  final String? initialClassId;
+class ClassPickerPage extends ConsumerStatefulWidget {
   const ClassPickerPage({super.key, this.initialClassId});
 
+  static const routeName = 'class-picker';
+
+  final String? initialClassId;
+
   @override
-  State<ClassPickerPage> createState() => _ClassPickerPageState();
+  ConsumerState<ClassPickerPage> createState() => _ClassPickerPageState();
 }
 
-class _ClassPickerPageState extends State<ClassPickerPage> {
-  late final CatalogRepository _catalog = sl<CatalogRepository>();
+class _ClassPickerPageState extends ConsumerState<ClassPickerPage> {
+  late final CatalogRepository _catalog = ref.read(catalogRepositoryProvider);
 
   bool _loading = true;
   bool _detailLoading = false;
@@ -198,81 +202,35 @@ class _ClassPickerPageState extends State<ClassPickerPage> {
                                             : _selected!.name.en,
                                         style: th.textTheme.headlineSmall,
                                       ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        _selectedId!,
-                                        style: th.textTheme.labelLarge,
-                                      ),
+                                      const SizedBox(height: 8),
+                                      Text('Identifiant : ${_selected!.id}'),
                                       const SizedBox(height: 12),
-                                      Wrap(
-                                        spacing: 12,
-                                        runSpacing: 8,
-                                        children: [
-                                          Chip(label: Text('Dé de vie: d${_selected!.hitDie}')),
-                                          Chip(
-                                            label: Text(
-                                              _selected!.level1.startingCredits != null
-                                                  ? 'Crédits initiaux: ${_selected!.level1.startingCredits}'
-                                                  : _selected!.level1.startingCreditsRoll != null
-                                                      ? 'Crédits initiaux: ${_selected!.level1.startingCreditsRoll}'
-                                                      : 'Crédits initiaux: —',
-                                            ),
-                                          ),
-                                          Chip(
-                                            label: Text(
-                                              'Compétences: ${_selected!.level1.proficiencies.skillsChoose}',
-                                            ),
-                                          ),
-                                        ],
+                                      Text('Dé de vie : d${_selected!.hitDie}'),
+                                      const SizedBox(height: 12),
+                                      Text(
+                                        'Compétences : choisir ${_selected!.level1.proficiencies.skillsChoose} parmi :',
+                                        style: th.textTheme.titleMedium,
                                       ),
-                                      const SizedBox(height: 16),
-                                      Text('Options de compétences', style: th.textTheme.titleMedium),
                                       const SizedBox(height: 8),
-                                      if (_selected!.level1.proficiencies.skillsFrom.isEmpty)
-                                        const Text('Aucune option définie')
-                                      else
-                                        Wrap(
-                                          spacing: 8,
-                                          runSpacing: 8,
-                                          children: _selected!.level1.proficiencies.skillsFrom
-                                              .map((id) => Chip(label: Text(_formatSkill(id))))
-                                              .toList(),
+                                      ..._selected!.level1.proficiencies.skillsFrom
+                                          .map((id) => Text('• ${_formatSkill(id)}')),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        'Équipement de départ',
+                                        style: th.textTheme.titleMedium,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      ..._selected!.level1.startingEquipment
+                                          .map((e) => Text('• ${_formatEquipment(e.id)} ×${e.qty}')),
+                                      if (_selected!.level1.startingEquipmentOptions.isNotEmpty) ...[
+                                        const SizedBox(height: 16),
+                                        Text(
+                                          'Options supplémentaires',
+                                          style: th.textTheme.titleMedium,
                                         ),
-                                      const SizedBox(height: 16),
-                                      Text('Équipement de départ', style: th.textTheme.titleMedium),
-                                      const SizedBox(height: 8),
-                                      if (_selected!.level1.startingEquipment.isEmpty &&
-                                          _selected!.level1.startingEquipmentOptions.isEmpty)
-                                        const Text('Aucun équipement défini')
-                                      else ...[
-                                        if (_selected!.level1.startingEquipment.isNotEmpty)
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: _selected!.level1.startingEquipment
-                                                .map(
-                                                  (line) => ListTile(
-                                                    contentPadding: EdgeInsets.zero,
-                                                    dense: true,
-                                                    leading: Text('${line.qty}×'),
-                                                    title: Text(_formatEquipment(line.id)),
-                                                    subtitle: Text(line.id),
-                                                  ),
-                                                )
-                                                .toList(),
-                                          ),
-                                        if (_selected!.level1.startingEquipmentOptions.isNotEmpty)
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: _selected!.level1.startingEquipmentOptions
-                                                .map(
-                                                  (option) => ListTile(
-                                                    contentPadding: EdgeInsets.zero,
-                                                    dense: true,
-                                                    title: Text(option),
-                                                  ),
-                                                )
-                                                .toList(),
-                                          ),
+                                        const SizedBox(height: 8),
+                                        ..._selected!.level1.startingEquipmentOptions
+                                            .map((opt) => Text('• $opt')),
                                       ],
                                     ],
                                   ),
