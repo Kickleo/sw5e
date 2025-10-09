@@ -81,7 +81,10 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
       // 2) Valider le choix de compétences (MVP: simple)
       final choose = clazz.level1.proficiencies.skillsChoose;
       final from = clazz.level1.proficiencies.skillsFrom.toSet();
-      if (input.chosenSkills.length != choose || !from.containsAll(input.chosenSkills)) {
+      final allowsAnySkill = from.contains('any');
+      final hasCorrectCount = input.chosenSkills.length == choose;
+      final choicesAreAllowed = allowsAnySkill || from.containsAll(input.chosenSkills);
+      if (!hasCorrectCount || !choicesAreAllowed) {
         return Result.err(DomainError('InvalidPrerequisite',
             message: 'Compétences choisies non conformes',
             details: {'expectedChoose': choose, 'from': from, 'chosen': input.chosenSkills}));
