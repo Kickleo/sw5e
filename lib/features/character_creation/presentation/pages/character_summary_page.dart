@@ -80,7 +80,7 @@ class _CharacterSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<CharacterId>(
-      value: selectedId,
+      initialValue: selectedId,
       decoration: const InputDecoration(
         labelText: 'Personnage sauvegardé',
         border: OutlineInputBorder(),
@@ -160,7 +160,7 @@ class _CharacterSummaryCard extends StatelessWidget {
                       spacing: 8,
                       runSpacing: 8,
                       children: character.speciesTraits
-                          .map((t) => Chip(label: Text(t.traitId)))
+                          .map((t) => Chip(label: Text(t.id as String)))
                           .toList(),
                     ),
                   ],
