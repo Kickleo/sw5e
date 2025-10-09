@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sw5e_manager/app/router/app_router.dart';
 
-class AppRoot extends StatelessWidget {
-  const AppRoot({super.key});
+class Sw5eApp extends ConsumerWidget {
+  const Sw5eApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'RPG Manager',
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(appRouterProvider);
+    return MaterialApp.router(
+      title: 'SW5e Manager',
+      theme: ThemeData(useMaterial3: true),
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-        useMaterial3: true,
-      ),
-      home: const _HomePlaceholder(),
-    );
-  }
-}
-
-class _HomePlaceholder extends StatelessWidget {
-  const _HomePlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Hello, RPG Manager')),
+      supportedLocales: const [
+        Locale('en'),
+        Locale('fr'),
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
     );
   }
 }
