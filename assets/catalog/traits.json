@@ -1,12 +1,810 @@
 [
   {
-    "id": "shrewd",
-    "name": { "en": "Shrewd", "fr": "Perspicace" },
-    "description": "You are proficient in the **Insight** and **Deception** skills."
+    "id": "acute-smell",
+    "name": {
+      "en": "Acute Smell",
+      "fr": "Acute Smell"
+    },
+    "description": "Whenever you make a Wisdom (Perception) check involving smell, you are considered to have expertise in the Perception skill."
+  },
+  {
+    "id": "adept-climbers",
+    "name": {
+      "en": "Adept Climbers",
+      "fr": "Adept Climbers"
+    },
+    "description": "You have a climbing speed of 30 feet."
+  },
+  {
+    "id": "aggressive",
+    "name": {
+      "en": "Aggressive",
+      "fr": "Aggressive"
+    },
+    "description": "As a bonus action, you can move up to your speed toward an enemy of your choice that you can see or hear. You must end this move closer to the enemy than you started."
+  },
+  {
+    "id": "amphibious",
+    "name": {
+      "en": "Amphibious",
+      "fr": "Amphibious"
+    },
+    "description": "You can breathe air and water."
+  },
+  {
+    "id": "animal-handler",
+    "name": {
+      "en": "Animal Handler",
+      "fr": "Animal Handler"
+    },
+    "description": "You have proficiency in the Animal Handling skill."
+  },
+  {
+    "id": "armor-integration",
+    "name": {
+      "en": "Armor Integration",
+      "fr": "Armor Integration"
+    },
+    "description": "You can not wear armor, but you can have the armor professionally integrated into your chassis over the course of a long rest. This work must be done by someone proficient with astrotech's implements. You must be proficient in armor in order to have it integrated."
+  },
+  {
+    "id": "call-for-peace",
+    "name": {
+      "en": "Call for Peace",
+      "fr": "Call for Peace"
+    },
+    "description": "As an action on your turn, you can emphatically demand that your foes embrace peace, thereby distracting them. Until the end of your next turn, enemies within 10 feet of you that can see you gain disadvantage on attack rolls against your allies. Once you use this trait, you can't use it again until you finish a short or long rest."
+  },
+  {
+    "id": "cat-s-claws",
+    "name": {
+      "en": "Cat's Claws",
+      "fr": "Cat's Claws"
+    },
+    "description": "Your unarmed strikes deal 1d6 kinetic damage and have the finesse property."
+  },
+  {
+    "id": "charismatic",
+    "name": {
+      "en": "Charismatic",
+      "fr": "Charismatic"
+    },
+    "description": "You have proficiency with Deception or Persuasion (your choice)."
+  },
+  {
+    "id": "claws",
+    "name": {
+      "en": "Claws",
+      "fr": "Claws"
+    },
+    "description": "Your claws are natural weapons, which you can use to make unarmed strikes. Additionally, your unarmed strikes deal 1d4 kinetic damage."
+  },
+  {
+    "id": "coercive",
+    "name": {
+      "en": "Coercive",
+      "fr": "Coercive"
+    },
+    "description": "You have proficiency with Persuasion or Intimidation (your choice)."
+  },
+  {
+    "id": "crafters",
+    "name": {
+      "en": "Crafters",
+      "fr": "Crafters"
+    },
+    "description": "You have proficiency with one set of artisan’s implements of your choice."
+  },
+  {
+    "id": "crude-weapon-specialists",
+    "name": {
+      "en": "Crude Weapon Specialists",
+      "fr": "Crude Weapon Specialists"
+    },
+    "description": "Ewoks are used to making do with less. You can spend 1 hour, which you can do over the course of a short rest, crafting a weapon out of loose materials. You can craft any simple kinetic weapon, but the weapon's damage suffers a -1 penalty."
+  },
+  {
+    "id": "curiosity",
+    "name": {
+      "en": "Curiosity",
+      "fr": "Curiosity"
+    },
+    "description": "You have proficiency with Survival or Investigation (your choice)."
+  },
+  {
+    "id": "darkvision",
+    "name": {
+      "en": "Darkvision",
+      "fr": "Darkvision"
+    },
+    "description": "Your vision can easily cut through darkness. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray."
+  },
+  {
+    "id": "defiant",
+    "name": {
+      "en": "Defiant",
+      "fr": "Defiant"
+    },
+    "description": "Humans are known to be stubborn and often refuse to give up, even against the worst odds. When you or a creature you can see that can see and understand you makes an ability check, attack roll, or saving throw, you can roll a d4 and add it to their roll (no action required). Once you've used this feature, you must complete a short or long rest before you can use it again."
+  },
+  {
+    "id": "desert-protection",
+    "name": {
+      "en": "Desert Protection",
+      "fr": "Desert Protection"
+    },
+    "description": "You have advantage on saving throws against being blinded."
+  },
+  {
+    "id": "detail-oriented",
+    "name": {
+      "en": "Detail Oriented",
+      "fr": "Detail Oriented"
+    },
+    "description": "You are practiced at scouring for details. You have advantage on Intelligence (Investigation) checks within 5 feet."
+  },
+  {
+    "id": "droid-resistances",
+    "name": {
+      "en": "Droid Resistances",
+      "fr": "Droid Resistances"
+    },
+    "description": "You are resistant to necrotic, poison, and psychic damage, and are immune to poison and disease."
+  },
+  {
+    "id": "droid-systems",
+    "name": {
+      "en": "Droid Systems",
+      "fr": "Droid Systems"
+    },
+    "description": "You do not need to eat, drink, or breathe. Additionally, you no longer require a tech focus to cast tech powers."
+  },
+  {
+    "id": "droid-vulnerabilities",
+    "name": {
+      "en": "Droid Vulnerabilities",
+      "fr": "Droid Vulnerabilities"
+    },
+    "description": "You are vulnerable to ion damage. Additionally, you have disadvantage on saving throws against effects that would deal ion or lightning damage."
+  },
+  {
+    "id": "elegant-dancers",
+    "name": {
+      "en": "Elegant Dancers",
+      "fr": "Elegant Dancers"
+    },
+    "description": "You have proficiency in the Performance skill."
+  },
+  {
+    "id": "fearsome-roar",
+    "name": {
+      "en": "Fearsome Roar",
+      "fr": "Fearsome Roar"
+    },
+    "description": "Once per day, you can cast the *fear* force power. Charisma is your forcecasting ability for this power."
+  },
+  {
+    "id": "flexible",
+    "name": {
+      "en": "Flexible",
+      "fr": "Flexible"
+    },
+    "description": "You have advantage on Dexterity (Acrobatics) checks that involve flexibility."
+  },
+  {
+    "id": "force-insensitive",
+    "name": {
+      "en": "Force-Insensitive",
+      "fr": "Force-Insensitive"
+    },
+    "description": "While droids can be manipulated by many force powers, they can not sense the Force. You can not use force powers or take levels in forcecasting classes."
+  },
+  {
+    "id": "force-sensitive",
+    "name": {
+      "en": "Force-Sensitive",
+      "fr": "Force-Sensitive"
+    },
+    "description": "You know the *denounce* at-will force power. When you reach 3rd level, you learn and can cast the *curse* force power once per long rest. When you reach 5th level, you learn and can cast the *bestow curse* force power once per long rest. Your forcecasting ability is Charisma for these powers."
+  },
+  {
+    "id": "foreign-biology",
+    "name": {
+      "en": "Foreign Biology",
+      "fr": "Foreign Biology"
+    },
+    "description": "You cannot breathe oxygen. The kel dors have created a breathing apparatus to negate the negative effects of living in an oxygen rich environment, but if your mask is removed while you are in such an environment, you lose consciousness."
+  },
+  {
+    "id": "galactic-traveler",
+    "name": {
+      "en": "Galactic Traveler",
+      "fr": "Galactic Traveler"
+    },
+    "description": "You have proficiency in the Piloting and Lore skills."
+  },
+  {
+    "id": "gamorrean-toughness",
+    "name": {
+      "en": "Gamorrean Toughness",
+      "fr": "Gamorrean Toughness"
+    },
+    "description": "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level. Additionally, you have advantage on Constitution saving throws."
+  },
+  {
+    "id": "gamorrean-weaponry",
+    "name": {
+      "en": "Gamorrean Weaponry",
+      "fr": "Gamorrean Weaponry"
+    },
+    "description": "You have proficiency with the vibroaxe, vibromace, and vibrosword."
+  },
+  {
+    "id": "grovel-cower-and-beg",
+    "name": {
+      "en": "Grovel, Cower, and Beg",
+      "fr": "Grovel, Cower, and Beg"
+    },
+    "description": "As an action on your turn, you can cower pathetically to distract nearby foes. Until the end of your next turn, your allies gain advantage on attack rolls against enemies within 10 feet of you that can see you. Once you use this trait, you can’t use it again until you finish a short or long rest."
+  },
+  {
+    "id": "heat-adaptation",
+    "name": {
+      "en": "Heat Adaptation",
+      "fr": "Heat Adaptation"
+    },
+    "description": "You have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat."
+  },
+  {
+    "id": "heat-sensitivity",
+    "name": {
+      "en": "Heat Sensitivity",
+      "fr": "Heat Sensitivity"
+    },
+    "description": "You have disadvantage on Constitution saving throws made to avoid exhaustion due to extreme heat."
+  },
+  {
+    "id": "hide",
+    "name": {
+      "en": "Hide",
+      "fr": "Hide"
+    },
+    "description": "You have a thick hide. While you are unarmored or wearing light armor, your AC is 12 + your Dexterity modifier."
+  },
+  {
+    "id": "hold-breath",
+    "name": {
+      "en": "Hold Breath",
+      "fr": "Hold Breath"
+    },
+    "description": "Ithorians have a great lung capacity and can hold their breath for up to 15 minutes at a time."
+  },
+  {
+    "id": "human-versatility",
+    "name": {
+      "en": "Human Versatility",
+      "fr": "Human Versatility"
+    },
+    "description": "You gain proficiency in one skill, one tool, and one weapon of your choice."
+  },
+  {
+    "id": "integrated-engineering",
+    "name": {
+      "en": "Integrated Engineering",
+      "fr": "Integrated Engineering"
+    },
+    "description": "You have proficiency in one specialist's kit of your choice. The chosen kit is integrated into your chassis, and can not be removed while you are conscious."
+  },
+  {
+    "id": "intuitive-initiative",
+    "name": {
+      "en": "Intuitive Initiative",
+      "fr": "Intuitive Initiative"
+    },
+    "description": "You can choose to reroll Initiative checks, but you must use the new roll."
+  },
+  {
+    "id": "jungle-dweller",
+    "name": {
+      "en": "Jungle Dweller",
+      "fr": "Jungle Dweller"
+    },
+    "description": "Growing up in the jungles of Devaron has left an impact. You don’t treat jungle terrain as difficult terrain."
+  },
+  {
+    "id": "keen-hearing-and-smell",
+    "name": {
+      "en": "Keen Hearing and Smell",
+      "fr": "Keen Hearing and Smell"
+    },
+    "description": "You have advantage on Wisdom (Perception) checks that involve hearing or smell."
+  },
+  {
+    "id": "keen-senses",
+    "name": {
+      "en": "Keen Senses",
+      "fr": "Keen Senses"
+    },
+    "description": "You have proficiency in the Perception skill."
+  },
+  {
+    "id": "keen-smell",
+    "name": {
+      "en": "Keen Smell",
+      "fr": "Keen Smell"
+    },
+    "description": "You have advantage on Wisdom (Perception) checks that rely on smell."
+  },
+  {
+    "id": "knowledge-protocol",
+    "name": {
+      "en": "Knowledge Protocol",
+      "fr": "Knowledge Protocol"
+    },
+    "description": "You have proficiency in two Intelligence, Wisdom, or Charisma skills of your choice."
+  },
+  {
+    "id": "law-of-life",
+    "name": {
+      "en": "Law of Life",
+      "fr": "Law of Life"
+    },
+    "description": "Ithorians have a sacred respect for the natural world, taking great care to preserve and study it. You have proficiency in the Nature skill and the bioanalysis kit."
+  },
+  {
+    "id": "leonine-agility",
+    "name": {
+      "en": "Leonine Agility",
+      "fr": "Leonine Agility"
+    },
+    "description": "Your reflexes and agility allow you to move with a burst of speed. When you move on your turn in combat, you can double your speed until the end of the turn. Once you use this trait, you can’t use it again until you move 0 feet on one of your turns."
+  },
+  {
+    "id": "life-in-the-void",
+    "name": {
+      "en": "Life in the Void",
+      "fr": "Life in the Void"
+    },
+    "description": "You have resistance to necrotic damage, and while exposed to the vacuum of space, you can survive for a number of hours equal to your Constitution modifier (minimum 1 hour), instead of a number of rounds."
+  },
+  {
+    "id": "maintenance-mode",
+    "name": {
+      "en": "Maintenance Mode",
+      "fr": "Maintenance Mode"
+    },
+    "description": "Rather than sleep, you must spend 3 hours performing routine maintenance during a long rest to gain its benefits, during which you have disadvantage on Wisdom (Perception) checks. Additionally, if your long rest would be interrupted, you only need to complete the long rest instead of restarting it."
+  },
+  {
+    "id": "manual-laborer",
+    "name": {
+      "en": "Manual Laborer",
+      "fr": "Manual Laborer"
+    },
+    "description": "You have proficiency in Athletics and one set of artisan's implements of your choice."
+  },
+  {
+    "id": "martial-proficiency",
+    "name": {
+      "en": "Martial Proficiency",
+      "fr": "Martial Proficiency"
+    },
+    "description": "You have proficiency with light and medium armor as well as the heavy pistol and sniper rifle."
+  },
+  {
+    "id": "martial-protocol",
+    "name": {
+      "en": "Martial Protocol",
+      "fr": "Martial Protocol"
+    },
+    "description": "You have proficiency with light and medium armor as well as two simple or martial blasters or vibroweapons of your choice."
+  },
+  {
+    "id": "mask-of-the-wild",
+    "name": {
+      "en": "Mask of the Wild",
+      "fr": "Mask of the Wild"
+    },
+    "description": "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena."
+  },
+  {
+    "id": "menacing",
+    "name": {
+      "en": "Menacing",
+      "fr": "Menacing"
+    },
+    "description": "You have proficiency in the Intimidation skill."
+  },
+  {
+    "id": "mon-calamari-resistance",
+    "name": {
+      "en": "Mon Calamari Resistance",
+      "fr": "Mon Calamari Resistance"
+    },
+    "description": "You have advantage on saving throws against effects that grant the slowed condition and you have resistance against cold damage (explained in chapter 9)."
+  },
+  {
+    "id": "montral-reception",
+    "name": {
+      "en": "Montral Reception",
+      "fr": "Montral Reception"
+    },
+    "description": "You have tremorsense out to 30 feet. You can detect and pinpoint the origin of vibrations within a specific radius, provided that you and the source of the vibrations are in contact with the same ground or substance. Tremorsense can’t be used to detect flying or incorporeal creatures."
+  },
+  {
+    "id": "musical",
+    "name": {
+      "en": "Musical",
+      "fr": "Musical"
+    },
+    "description": "You have proficiency in one musical instrument of your choice."
+  },
+  {
+    "id": "musical-culture",
+    "name": {
+      "en": "Musical Culture",
+      "fr": "Musical Culture"
+    },
+    "description": "Ewoks incorporate music in their celebrations and rituals. You have proficiency in an instrument of your choice."
+  },
+  {
+    "id": "musician",
+    "name": {
+      "en": "Musician",
+      "fr": "Musician"
+    },
+    "description": "You are proficient in one musical instrument of your choice."
+  },
+  {
+    "id": "natural-antitoxins",
+    "name": {
+      "en": "Natural Antitoxins",
+      "fr": "Natural Antitoxins"
+    },
+    "description": "You have advantage on saving throws against poison and disease, and you have resistance against poison damage (explained in Chapter 9)."
+  },
+  {
+    "id": "natural-empathy",
+    "name": {
+      "en": "Natural Empathy",
+      "fr": "Natural Empathy"
+    },
+    "description": "Nautolan head tentacles are adept at determining moods. You have advantage on Wisdom (Insight) checks to determine emotions against humanoids and beasts within 10 feet of you."
+  },
+  {
+    "id": "natural-instinct",
+    "name": {
+      "en": "Natural Instinct",
+      "fr": "Natural Instinct"
+    },
+    "description": "You have proficiency with Nature or Perception (your choice)."
+  },
+  {
+    "id": "natural-survivalist",
+    "name": {
+      "en": "Natural Survivalist",
+      "fr": "Natural Survivalist"
+    },
+    "description": "You have proficiency in Nature and Survival."
+  },
+  {
+    "id": "naturally-stealthy",
+    "name": {
+      "en": "Naturally Stealthy",
+      "fr": "Naturally Stealthy"
+    },
+    "description": "You can attempt to hide even when you are obscured only by a creature that is your size or larger than you."
+  },
+  {
+    "id": "navigators",
+    "name": {
+      "en": "Navigators",
+      "fr": "Navigators"
+    },
+    "description": "You have proficiency in surveyor's implements."
   },
   {
     "id": "nimble-escape",
-    "name": { "en": "Nimble Escape", "fr": "Échappée agile" },
-    "description": "You can take the **Disengage** or **Hide** action as a **bonus action** on each of your turns."
+    "name": {
+      "en": "Nimble Escape",
+      "fr": "Nimble Escape"
+    },
+    "description": "You can take the Disengage or Hide action as a bonus action on each of your turns. > While bothans are suitable for many classes, they most iconically fit as operatives. The ***Nimble Escape*** special trait heavily overlaps with the operative's ***Cunning Action*** feature, however, making this species/class combination counterintuitive. If, during the character creation part of your game, a player decides to make a bothan operative, consider letting them use the following feature instead: > > ***Versatile Expertise.*** You gain proficiency in one skill of your choice. You gain expertise in one skill of your choice in which you are proficient. &emsp;***Shrewd.*** You are proficient in the Insight and Deception skills."
+  },
+  {
+    "id": "politically-minded",
+    "name": {
+      "en": "Politically Minded",
+      "fr": "Politically Minded"
+    },
+    "description": "You have proficiency in the Insight skill."
+  },
+  {
+    "id": "powerful-build",
+    "name": {
+      "en": "Powerful Build",
+      "fr": "Powerful Build"
+    },
+    "description": "Your carrying capacity and the weight you can push, drag, or lift doubles. If it would already double, it instead triples."
+  },
+  {
+    "id": "prediction",
+    "name": {
+      "en": "Prediction",
+      "fr": "Prediction"
+    },
+    "description": "You can embrace the Force and use your advanced insight to predict likely outcomes, allowing you to turn failures into successes. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll."
+  },
+  {
+    "id": "programmer",
+    "name": {
+      "en": "Programmer",
+      "fr": "Programmer"
+    },
+    "description": "Whenever you make an Intelligence (Technology) check related to computers, you are considered to have expertise in the Technology skill."
+  },
+  {
+    "id": "rapid-reconstruction",
+    "name": {
+      "en": "Rapid Reconstruction",
+      "fr": "Rapid Reconstruction"
+    },
+    "description": "You are built with internal repair mechanisms. As a bonus action, you can choose to spend one of your Hit Dice to recover hit points."
+  },
+  {
+    "id": "regenerative",
+    "name": {
+      "en": "Regenerative",
+      "fr": "Regenerative"
+    },
+    "description": "When you take damage, you can use your reaction and expend a Hit Die to regain hit points as long as the damage would not reduce your hit points to 0."
+  },
+  {
+    "id": "savage-attacks",
+    "name": {
+      "en": "Savage Attacks",
+      "fr": "Savage Attacks"
+    },
+    "description": "When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit."
+  },
+  {
+    "id": "saving-face",
+    "name": {
+      "en": "Saving Face",
+      "fr": "Saving Face"
+    },
+    "description": "Trandoshans are careful not to show weakness in front of their allies, for fear of losing status. If you miss with an attack roll or fail an ability check or a saving throw, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can’t use it again until you finish a short or long rest."
+  },
+  {
+    "id": "second-heart",
+    "name": {
+      "en": "Second Heart",
+      "fr": "Second Heart"
+    },
+    "description": "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest."
+  },
+  {
+    "id": "silent-step",
+    "name": {
+      "en": "Silent Step",
+      "fr": "Silent Step"
+    },
+    "description": "You have proficiency in the Stealth skill."
+  },
+  {
+    "id": "silver-tongue",
+    "name": {
+      "en": "Silver Tongue",
+      "fr": "Silver Tongue"
+    },
+    "description": "You have proficiency with Deception or Persuasion (your choice)."
+  },
+  {
+    "id": "skill-protocol",
+    "name": {
+      "en": "Skill Protocol",
+      "fr": "Skill Protocol"
+    },
+    "description": "You have proficiency in two skills of your choice."
+  },
+  {
+    "id": "sonic-scream",
+    "name": {
+      "en": "Sonic Scream",
+      "fr": "Sonic Scream"
+    },
+    "description": "As an action, you can violently expel air in a 15-foot cone. When you do so, each creature in the area of the exhalation must make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Constitution modifier). A creature takes 2d6 sonic damage on a failed save, and half as much damage on a successful one. The damage increases to 4d6 at 5th level, 6d6 at 11th level, and 8d6 at 17th level. This ability has no effect on constructs. You can use this feature a number of times equal to your proficiency bonus. You regain all expended uses when you complete a long rest."
+  },
+  {
+    "id": "sonic-sensitivity",
+    "name": {
+      "en": "Sonic Sensitivity",
+      "fr": "Sonic Sensitivity"
+    },
+    "description": "Your powerful sense of hearing makes you especially vulnerable to deafening sounds. You have disadvantage on saving throws against effects that would deal sonic damage (explained in chapter 9)."
+  },
+  {
+    "id": "stalking-hunter",
+    "name": {
+      "en": "Stalking Hunter",
+      "fr": "Stalking Hunter"
+    },
+    "description": "You have proficiency in the Survival and Stealth skills."
+  },
+  {
+    "id": "strong-legged",
+    "name": {
+      "en": "Strong-Legged",
+      "fr": "Strong-Legged"
+    },
+    "description": "When you make a long jump, you can cover a number of feet up to twice your Strength score. When you make a high jump, you can leap a number of feet up into the air equal to 3 + twice your Strength modifier."
+  },
+  {
+    "id": "superior-darkvision",
+    "name": {
+      "en": "Superior Darkvision",
+      "fr": "Superior Darkvision"
+    },
+    "description": "Your vision can easily cut through darkness. You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray."
+  },
+  {
+    "id": "superior-memory",
+    "name": {
+      "en": "Superior Memory",
+      "fr": "Superior Memory"
+    },
+    "description": "You can double your proficiency bonus for it when you make an Intelligence (Lore) check to recall information you have learned, or to recall the details of your experiences."
+  },
+  {
+    "id": "survivors-of-the-sands",
+    "name": {
+      "en": "Survivors of the Sands",
+      "fr": "Survivors of the Sands"
+    },
+    "description": "You have proficiency in the Survival skill. Additionally, you don’t treat desert terrain as difficult terrain. Lastly, you have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat."
+  },
+  {
+    "id": "swim",
+    "name": {
+      "en": "Swim",
+      "fr": "Swim"
+    },
+    "description": "You have a swimming speed of 30 feet."
+  },
+  {
+    "id": "tanned",
+    "name": {
+      "en": "Tanned",
+      "fr": "Tanned"
+    },
+    "description": "You have tough, leathery skin. While you are unarmored or wearing light armor, your AC is 13 + your Dexterity modifier. Additionally, You have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat."
+  },
+  {
+    "id": "tech-dabbler",
+    "name": {
+      "en": "Tech Dabbler",
+      "fr": "Tech Dabbler"
+    },
+    "description": "You know the *ion blast* at-will tech power. When you reach 3rd level, you learn and can cast the *repair droid* tech power once per long rest. When you reach 5th level, you learn and can cast the *hold droid* tech power once per long rest. Your techcasting ability is Intelligence. You do not require use of a wristpad for these powers."
+  },
+  {
+    "id": "tech-impaired",
+    "name": {
+      "en": "Tech-Impaired",
+      "fr": "Tech-Impaired"
+    },
+    "description": "While tuskens can figure out basic technology, they experience difficulty using more complex equipment like wristpads. You can not use tech powers or take levels in techcasting classes."
+  },
+  {
+    "id": "tech-resistance",
+    "name": {
+      "en": "Tech Resistance",
+      "fr": "Tech Resistance"
+    },
+    "description": "Growing up around technology leaves an impact on chiss. You have advantage on Dexterity and Intelligence saving throws against tech powers."
+  },
+  {
+    "id": "telepathy",
+    "name": {
+      "en": "Telepathy",
+      "fr": "Telepathy"
+    },
+    "description": "You can communicate telepathically with creatures within 30 feet of you. You must share a language with the target in order to communicate in this way."
+  },
+  {
+    "id": "thieving",
+    "name": {
+      "en": "Thieving",
+      "fr": "Thieving"
+    },
+    "description": "You have proficiency in the Sleight of Hand skill."
+  },
+  {
+    "id": "tinker",
+    "name": {
+      "en": "Tinker",
+      "fr": "Tinker"
+    },
+    "description": "You have proficiency with tinker’s implements. You can use these and spend 1 hour and 100 cr worth of materials to construct a Tiny Device (AC 5, 1 hp). You can take the Use an Object action to have your device cause one of the following effects: create a small explosion, create a repeating loud noise for 1 minute, create smoke for 1 minute, cause a small electrical fire. You can maintain a number of these devices up to your proficiency bonus at once, and a device stops functioning after 24 hours away from you. You can dismantle the device to reclaim the materials used to create it."
+  },
+  {
+    "id": "toughness",
+    "name": {
+      "en": "Toughness",
+      "fr": "Toughness"
+    },
+    "description": "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level."
+  },
+  {
+    "id": "trance",
+    "name": {
+      "en": "Trance",
+      "fr": "Trance"
+    },
+    "description": "You only need 3 hours of sleep during a long rest to gain its benefits, instead of 6. Additionally, if your long rest would be interrupted, you only need to complete the long rest instead of restarting it to gain its benefits."
+  },
+  {
+    "id": "treeclimber",
+    "name": {
+      "en": "Treeclimber",
+      "fr": "Treeclimber"
+    },
+    "description": "You have a climbing speed of 30 feet. You have advantage on Strength saving throws and Strength (Athletics) checks that involve climbing."
+  },
+  {
+    "id": "tusken-weaponry",
+    "name": {
+      "en": "Tusken Weaponry",
+      "fr": "Tusken Weaponry"
+    },
+    "description": "You have proficiency with the cycler rifle and vibroaxe."
+  },
+  {
+    "id": "two-livered",
+    "name": {
+      "en": "Two Livered",
+      "fr": "Two Livered"
+    },
+    "description": "Devaronians have two livers, which makes them adept at filtering toxins. You have advantage on saving throws against poison, and you have resistance against poison damage (explained in chapter 9)."
+  },
+  {
+    "id": "type",
+    "name": {
+      "en": "Type",
+      "fr": "Type"
+    },
+    "description": "Your creature type is droid."
+  },
+  {
+    "id": "unarmed-combatant",
+    "name": {
+      "en": "Unarmed Combatant",
+      "fr": "Unarmed Combatant"
+    },
+    "description": "Your unarmed strikes deal 1d4 kinetic damage and have the finesse property."
+  },
+  {
+    "id": "undersized",
+    "name": {
+      "en": "Undersized",
+      "fr": "Undersized"
+    },
+    "description": "Your small stature makes it hard for you to wield bigger weapons. You can't use heavy shields. Additionally, you can't use martial weapons with the two-handed property unless it also has the light property, and if a martial weapon has the versatile property, you can only wield it in two hands."
+  },
+  {
+    "id": "weapon-training",
+    "name": {
+      "en": "Weapon Training",
+      "fr": "Weapon Training"
+    },
+    "description": "You have proficiency in two vibroweapons or blasters of your choice."
+  },
+  {
+    "id": "wild-hunters",
+    "name": {
+      "en": "Wild Hunters",
+      "fr": "Wild Hunters"
+    },
+    "description": "You have proficiency in the Survival skill."
   }
 ]
