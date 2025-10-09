@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:sw5e_manager/di/character_creation_module.dart';
 import 'package:sw5e_manager/core/domain/result.dart';
+import 'package:sw5e_manager/di/character_creation_module.dart';
 import 'package:sw5e_manager/features/character_creation/domain/entities/character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/usecases/load_last_character.dart';
 

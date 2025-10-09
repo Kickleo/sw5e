@@ -18,7 +18,7 @@ class AppRoot extends StatelessWidget {
 }
 
 class _HomePlaceholder extends StatelessWidget {
-  const _HomePlaceholder({super.key});
+  const _HomePlaceholder();
 
   @override
   Widget build(BuildContext context) {

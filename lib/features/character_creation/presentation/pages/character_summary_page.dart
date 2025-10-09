@@ -100,7 +100,7 @@ class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
                               container: true,
                               label: 'Sélection du personnage sauvegardé',
                               child: DropdownButtonFormField<CharacterId>(
-                                value: _selectedCharacter?.id,
+                                initialValue: _selectedCharacter?.id,
                                 decoration: const InputDecoration(
                                   labelText: 'Personnage',
                                   border: OutlineInputBorder(),

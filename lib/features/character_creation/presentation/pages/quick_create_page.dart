@@ -221,7 +221,7 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
               ? theme.colorScheme.primary
               : isCompleted
                   ? theme.colorScheme.secondaryContainer
-                  : theme.colorScheme.surfaceVariant,
+                  : theme.colorScheme.surfaceContainerHighest,
           onPressed: canOpen ? () => _goToStep(index) : null,
         );
       }),
@@ -238,7 +238,7 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
           Text('Choisis ton espèce', style: theme.textTheme.titleLarge),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            value: _selectedSpecies,
+            initialValue: _selectedSpecies,
             items: _species
                 .map((id) => DropdownMenuItem(value: id, child: Text(id)))
                 .toList(),
@@ -303,7 +303,7 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
           Text('Classe', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            value: _selectedClass,
+            initialValue: _selectedClass,
             items: _classes
                 .map((id) => DropdownMenuItem(value: id, child: Text(id)))
                 .toList(),
@@ -313,7 +313,7 @@ class _QuickCreatePageState extends State<QuickCreatePage> {
           Text('Background', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            value: _selectedBackground,
+            initialValue: _selectedBackground,
             items: _backgrounds
                 .map((id) => DropdownMenuItem(value: id, child: Text(id)))
                 .toList(),
