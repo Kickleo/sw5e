@@ -2,8 +2,11 @@ import 'package:meta/meta.dart';
 import 'package:sw5e_manager/core/domain/result.dart';
 import 'package:sw5e_manager/features/character_creation/domain/entities/character.dart';
 import 'package:sw5e_manager/features/character_creation/domain/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
 
-enum QuickCreateStep { species, classes, skills, background }
+enum QuickCreateStep { species, abilities, classes, skills, background }
+
+enum AbilityGenerationMode { standardArray, roll, manual }
 
 @immutable
 class QuickCreateState {
@@ -28,6 +31,9 @@ class QuickCreateState {
   final String? errorMessage;
   final QuickCreateCompletion? completion;
   final bool hasLoadedOnce;
+  final Map<String, int?> abilityAssignments;
+  final List<int> abilityPool;
+  final AbilityGenerationMode abilityMode;
 
   const QuickCreateState({
     required this.isLoadingCatalog,
@@ -51,6 +57,9 @@ class QuickCreateState {
     required this.errorMessage,
     required this.completion,
     required this.hasLoadedOnce,
+    required this.abilityAssignments,
+    required this.abilityPool,
+    required this.abilityMode,
   });
 
   factory QuickCreateState.initial() => const QuickCreateState(
@@ -75,6 +84,16 @@ class QuickCreateState {
         errorMessage: null,
         completion: null,
         hasLoadedOnce: false,
+        abilityAssignments: <String, int?>{
+          'str': 15,
+          'dex': 14,
+          'con': 13,
+          'int': 12,
+          'wis': 10,
+          'cha': 8,
+        },
+        abilityPool: <int>[15, 14, 13, 12, 10, 8],
+        abilityMode: AbilityGenerationMode.standardArray,
       );
 
   QuickCreateState copyWith({
@@ -99,6 +118,9 @@ class QuickCreateState {
     Object? errorMessage = _sentinel,
     Object? completion = _sentinel,
     bool? hasLoadedOnce,
+    Map<String, int?>? abilityAssignments,
+    List<int>? abilityPool,
+    AbilityGenerationMode? abilityMode,
   }) {
     return QuickCreateState(
       isLoadingCatalog: isLoadingCatalog ?? this.isLoadingCatalog,
@@ -125,6 +147,9 @@ class QuickCreateState {
       completion:
           completion == _sentinel ? this.completion : completion as QuickCreateCompletion?,
       hasLoadedOnce: hasLoadedOnce ?? this.hasLoadedOnce,
+      abilityAssignments: abilityAssignments ?? this.abilityAssignments,
+      abilityPool: abilityPool ?? this.abilityPool,
+      abilityMode: abilityMode ?? this.abilityMode,
     );
   }
 
@@ -134,6 +159,8 @@ class QuickCreateState {
     switch (currentStep) {
       case QuickCreateStep.species:
         return selectedSpecies != null;
+      case QuickCreateStep.abilities:
+        return hasValidAbilityAssignments;
       case QuickCreateStep.classes:
         return selectedClass != null;
       case QuickCreateStep.skills:
@@ -153,7 +180,56 @@ class QuickCreateState {
       selectedClass != null &&
       selectedBackground != null &&
       characterName.trim().isNotEmpty &&
-      hasValidSkillSelection;
+      hasValidSkillSelection &&
+      hasValidAbilityAssignments;
+
+  bool get hasValidAbilityAssignments {
+    for (final ability in abilityOrder) {
+      final value = abilityAssignments[ability];
+      if (value == null || value < AbilityScore.min || value > AbilityScore.max) {
+        return false;
+      }
+    }
+    if (abilityMode == AbilityGenerationMode.manual) {
+      return true;
+    }
+    final poolCounts = <int, int>{};
+    for (final value in abilityPool) {
+      poolCounts.update(value, (count) => count + 1, ifAbsent: () => 1);
+    }
+    final assignedCounts = <int, int>{};
+    for (final value in abilityAssignments.values) {
+      if (value == null) continue;
+      assignedCounts.update(value, (count) => count + 1, ifAbsent: () => 1);
+    }
+    for (final entry in assignedCounts.entries) {
+      final available = poolCounts[entry.key] ?? 0;
+      if (entry.value > available) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  static const List<String> abilityOrder = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+
+  static const Map<String, String> abilityLabels = {
+    'str': 'Force',
+    'dex': 'Dextérité',
+    'con': 'Constitution',
+    'int': 'Intelligence',
+    'wis': 'Sagesse',
+    'cha': 'Charisme',
+  };
+
+  static const Map<String, String> abilityAbbreviations = {
+    'str': 'FOR',
+    'dex': 'DEX',
+    'con': 'CON',
+    'int': 'INT',
+    'wis': 'SAG',
+    'cha': 'CHA',
+  };
 }
 
 sealed class QuickCreateCompletion {

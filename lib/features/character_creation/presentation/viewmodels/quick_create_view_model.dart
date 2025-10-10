@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sw5e_manager/di/character_creation_module.dart';
 import 'package:sw5e_manager/features/character_creation/domain/repositories/catalog_repository.dart';
@@ -21,6 +23,21 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
 
   CatalogRepository get _catalog => _ref.read(catalogRepositoryProvider);
   FinalizeLevel1Character get _finalize => _ref.read(finalizeLevel1CharacterProvider);
+
+  static const List<int> _standardArray = [15, 14, 13, 12, 10, 8];
+
+  static Map<String, int?> _emptyAbilityAssignments() => <String, int?>{
+        for (final ability in QuickCreateState.abilityOrder) ability: null,
+      };
+
+  static Map<String, int?> _defaultStandardAssignments() => <String, int?>{
+        'str': 15,
+        'dex': 14,
+        'con': 13,
+        'int': 12,
+        'wis': 10,
+        'cha': 8,
+      };
 
   Future<void> loadInitialData() async {
     if (state.hasLoadedOnce || state.isLoadingCatalog) return;
@@ -119,6 +136,77 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
     }
   }
 
+  void setAbilityGenerationMode(AbilityGenerationMode mode) {
+    if (mode == state.abilityMode) return;
+    switch (mode) {
+      case AbilityGenerationMode.standardArray:
+        state = state.copyWith(
+          abilityMode: mode,
+          abilityPool: List<int>.from(_standardArray),
+          abilityAssignments: _defaultStandardAssignments(),
+          statusMessage: null,
+        );
+        break;
+      case AbilityGenerationMode.roll:
+        state = state.copyWith(
+          abilityMode: mode,
+          abilityPool: _generateRolledAbilityScores(),
+          abilityAssignments: _emptyAbilityAssignments(),
+          statusMessage: null,
+        );
+        break;
+      case AbilityGenerationMode.manual:
+        state = state.copyWith(
+          abilityMode: mode,
+          abilityPool: const <int>[],
+          abilityAssignments: Map<String, int?>.from(state.abilityAssignments),
+          statusMessage: null,
+        );
+        break;
+    }
+  }
+
+  void rerollAbilityScores() {
+    if (state.abilityMode != AbilityGenerationMode.roll) return;
+    state = state.copyWith(
+      abilityPool: _generateRolledAbilityScores(),
+      abilityAssignments: _emptyAbilityAssignments(),
+      statusMessage: null,
+    );
+  }
+
+  void setAbilityScore(String ability, int? value) {
+    if (!QuickCreateState.abilityOrder.contains(ability)) return;
+    final current = state.abilityAssignments[ability];
+    if (current == value) return;
+
+    if (value != null) {
+      if (value < AbilityScore.min || value > AbilityScore.max) {
+        return;
+      }
+      if (state.abilityMode != AbilityGenerationMode.manual) {
+        final poolCounts = _countValues(state.abilityPool);
+        final assignedCounts = _countValues(
+          state.abilityAssignments.entries
+              .where((entry) => entry.key != ability && entry.value != null)
+              .map((entry) => entry.value!),
+        );
+        final available = poolCounts[value] ?? 0;
+        final used = assignedCounts[value] ?? 0;
+        if (used >= available) {
+          return;
+        }
+      }
+    }
+
+    final updated = Map<String, int?>.from(state.abilityAssignments);
+    updated[ability] = value;
+    state = state.copyWith(
+      abilityAssignments: updated,
+      statusMessage: null,
+    );
+  }
+
   Future<void> createCharacter() async {
     if (!state.canCreate || state.isCreating) return;
     final selectedSpecies = state.selectedSpecies;
@@ -137,19 +225,37 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
     final classDef = state.selectedClassDef ?? await _catalog.getClass(selectedClass);
     final chosenSkills = Set<String>.from(state.chosenSkills);
 
+    final abilityAssignments = state.abilityAssignments;
+    final baseAbilities = <String, AbilityScore>{};
+    for (final ability in QuickCreateState.abilityOrder) {
+      final rawValue = abilityAssignments[ability];
+      if (rawValue == null) {
+        state = state.copyWith(
+          isCreating: false,
+          statusMessage: null,
+          errorMessage: 'Veuillez attribuer une valeur à chaque caractéristique.',
+        );
+        return;
+      }
+      try {
+        baseAbilities[ability] = AbilityScore(rawValue);
+      } on ArgumentError {
+        state = state.copyWith(
+          isCreating: false,
+          statusMessage: null,
+          errorMessage:
+              'Valeur invalide pour ${QuickCreateState.abilityLabels[ability] ?? ability.toUpperCase()}.',
+        );
+        return;
+      }
+    }
+
     final input = FinalizeLevel1Input(
       name: CharacterName(state.characterName.trim()),
       speciesId: SpeciesId(selectedSpecies),
       classId: ClassId(selectedClass),
       backgroundId: BackgroundId(selectedBackground),
-      baseAbilities: {
-        'str': AbilityScore(10),
-        'dex': AbilityScore(12),
-        'con': AbilityScore(14),
-        'int': AbilityScore(10),
-        'wis': AbilityScore(10),
-        'cha': AbilityScore(10),
-      },
+      baseAbilities: baseAbilities,
       chosenSkills: chosenSkills,
       chosenEquipment: const <ChosenEquipmentLine>[],
     );
@@ -252,6 +358,26 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
         isLoadingClassDetails: false,
       );
     }
+  }
+
+  List<int> _generateRolledAbilityScores() {
+    final random = Random();
+    final scores = List<int>.generate(6, (_) => _roll4d6DropLowest(random));
+    scores.sort((a, b) => b.compareTo(a));
+    return scores;
+  }
+
+  int _roll4d6DropLowest(Random random) {
+    final rolls = List<int>.generate(4, (_) => random.nextInt(6) + 1)..sort();
+    return rolls.sublist(1).reduce((a, b) => a + b);
+  }
+
+  Map<int, int> _countValues(Iterable<int> values) {
+    final counts = <int, int>{};
+    for (final value in values) {
+      counts.update(value, (count) => count + 1, ifAbsent: () => 1);
+    }
+    return counts;
   }
 
   Future<void> _ensureSkillDefs(Iterable<String> ids) async {
