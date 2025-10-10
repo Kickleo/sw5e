@@ -32,8 +32,8 @@ class ConsoleAppLogger implements AppLogger {
       {Object? payload, Object? error, StackTrace? stackTrace}) {
     _logger.w(
       _compose(message, payload: payload),
-      error,
-      stackTrace,
+      error: error,
+      stackTrace: stackTrace,
     );
   }
 
@@ -42,8 +42,8 @@ class ConsoleAppLogger implements AppLogger {
       {Object? payload, Object? error, StackTrace? stackTrace}) {
     _logger.e(
       _compose(message, payload: payload),
-      error,
-      stackTrace,
+      error: error,
+      stackTrace: stackTrace,
     );
   }
 
