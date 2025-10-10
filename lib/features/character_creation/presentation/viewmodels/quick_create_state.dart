@@ -4,7 +4,7 @@ import 'package:sw5e_manager/features/character_creation/domain/entities/charact
 import 'package:sw5e_manager/features/character_creation/domain/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
 
-enum QuickCreateStep { species, abilities, classes, skills, background }
+enum QuickCreateStep { species, abilities, classes, skills, equipment, background }
 
 enum AbilityGenerationMode { standardArray, roll, manual }
 
@@ -12,6 +12,7 @@ enum AbilityGenerationMode { standardArray, roll, manual }
 class QuickCreateState {
   final bool isLoadingCatalog;
   final bool isLoadingClassDetails;
+  final bool isLoadingEquipment;
   final bool isCreating;
   final List<String> species;
   final List<String> classes;
@@ -25,6 +26,10 @@ class QuickCreateState {
   final Map<String, SkillDef> skillDefinitions;
   final Set<String> chosenSkills;
   final int skillChoicesRequired;
+  final Map<String, EquipmentDef> equipmentDefinitions;
+  final List<String> equipmentList;
+  final Map<String, int> chosenEquipment;
+  final bool useStartingEquipment;
   final int stepIndex;
   final String characterName;
   final String? statusMessage;
@@ -38,6 +43,7 @@ class QuickCreateState {
   const QuickCreateState({
     required this.isLoadingCatalog,
     required this.isLoadingClassDetails,
+    required this.isLoadingEquipment,
     required this.isCreating,
     required this.species,
     required this.classes,
@@ -51,6 +57,10 @@ class QuickCreateState {
     required this.skillDefinitions,
     required this.chosenSkills,
     required this.skillChoicesRequired,
+    required this.equipmentDefinitions,
+    required this.equipmentList,
+    required this.chosenEquipment,
+    required this.useStartingEquipment,
     required this.stepIndex,
     required this.characterName,
     required this.statusMessage,
@@ -65,6 +75,7 @@ class QuickCreateState {
   factory QuickCreateState.initial() => const QuickCreateState(
         isLoadingCatalog: false,
         isLoadingClassDetails: false,
+        isLoadingEquipment: false,
         isCreating: false,
         species: <String>[],
         classes: <String>[],
@@ -78,6 +89,10 @@ class QuickCreateState {
         skillDefinitions: <String, SkillDef>{},
         chosenSkills: <String>{},
         skillChoicesRequired: 0,
+        equipmentDefinitions: <String, EquipmentDef>{},
+        equipmentList: <String>[],
+        chosenEquipment: <String, int>{},
+        useStartingEquipment: true,
         stepIndex: 0,
         characterName: 'Rey',
         statusMessage: null,
@@ -99,6 +114,7 @@ class QuickCreateState {
   QuickCreateState copyWith({
     bool? isLoadingCatalog,
     bool? isLoadingClassDetails,
+    bool? isLoadingEquipment,
     bool? isCreating,
     List<String>? species,
     List<String>? classes,
@@ -112,6 +128,10 @@ class QuickCreateState {
     Map<String, SkillDef>? skillDefinitions,
     Set<String>? chosenSkills,
     int? skillChoicesRequired,
+    Map<String, EquipmentDef>? equipmentDefinitions,
+    List<String>? equipmentList,
+    Map<String, int>? chosenEquipment,
+    bool? useStartingEquipment,
     int? stepIndex,
     String? characterName,
     Object? statusMessage = _sentinel,
@@ -125,6 +145,7 @@ class QuickCreateState {
     return QuickCreateState(
       isLoadingCatalog: isLoadingCatalog ?? this.isLoadingCatalog,
       isLoadingClassDetails: isLoadingClassDetails ?? this.isLoadingClassDetails,
+      isLoadingEquipment: isLoadingEquipment ?? this.isLoadingEquipment,
       isCreating: isCreating ?? this.isCreating,
       species: species ?? this.species,
       classes: classes ?? this.classes,
@@ -138,6 +159,10 @@ class QuickCreateState {
       skillDefinitions: skillDefinitions ?? this.skillDefinitions,
       chosenSkills: chosenSkills ?? this.chosenSkills,
       skillChoicesRequired: skillChoicesRequired ?? this.skillChoicesRequired,
+      equipmentDefinitions: equipmentDefinitions ?? this.equipmentDefinitions,
+      equipmentList: equipmentList ?? this.equipmentList,
+      chosenEquipment: chosenEquipment ?? this.chosenEquipment,
+      useStartingEquipment: useStartingEquipment ?? this.useStartingEquipment,
       stepIndex: stepIndex ?? this.stepIndex,
       characterName: characterName ?? this.characterName,
       statusMessage:
@@ -165,6 +190,8 @@ class QuickCreateState {
         return selectedClass != null;
       case QuickCreateStep.skills:
         return hasValidSkillSelection;
+      case QuickCreateStep.equipment:
+        return hasValidEquipmentSelection;
       case QuickCreateStep.background:
         return canCreate;
     }
@@ -181,7 +208,82 @@ class QuickCreateState {
       selectedBackground != null &&
       characterName.trim().isNotEmpty &&
       hasValidSkillSelection &&
-      hasValidAbilityAssignments;
+      hasValidAbilityAssignments &&
+      hasValidEquipmentSelection;
+
+  bool get hasValidEquipmentSelection {
+    if (selectedClassDef == null) {
+      return false;
+    }
+    if (isLoadingEquipment) {
+      return false;
+    }
+    final totalWeight = totalInventoryWeightG;
+    if (totalWeight == null) {
+      return false;
+    }
+    final capacity = carryingCapacityLimitG;
+    if (capacity != null && totalWeight > capacity) {
+      return false;
+    }
+    final credits = availableCredits;
+    if (credits >= 0 && totalPurchasedEquipmentCost > credits) {
+      return false;
+    }
+    return true;
+  }
+
+  int get availableCredits => selectedClassDef?.level1.startingCredits ?? 0;
+
+  int get totalPurchasedEquipmentCost {
+    var total = 0;
+    for (final entry in chosenEquipment.entries) {
+      final def = equipmentDefinitions[entry.key];
+      if (def == null) {
+        return total;
+      }
+      if (entry.value <= 0) continue;
+      total += def.cost * entry.value;
+    }
+    return total;
+  }
+
+  int get remainingCredits => availableCredits - totalPurchasedEquipmentCost;
+
+  int? get carryingCapacityLimitG {
+    final strength = abilityAssignments['str'];
+    if (strength == null) {
+      return null;
+    }
+    const gramsPerPound = 453.59237;
+    return (strength * 15 * gramsPerPound).floor();
+  }
+
+  int? get totalInventoryWeightG {
+    final classDef = selectedClassDef;
+    if (classDef == null) {
+      return null;
+    }
+    var total = 0;
+    if (useStartingEquipment) {
+      for (final line in classDef.level1.startingEquipment) {
+        final def = equipmentDefinitions[line.id];
+        if (def == null) {
+          return null;
+        }
+        total += def.weightG * line.qty;
+      }
+    }
+    for (final entry in chosenEquipment.entries) {
+      final def = equipmentDefinitions[entry.key];
+      if (def == null) {
+        return null;
+      }
+      if (entry.value <= 0) continue;
+      total += def.weightG * entry.value;
+    }
+    return total;
+  }
 
   bool get hasValidAbilityAssignments {
     for (final ability in abilityOrder) {

@@ -27,6 +27,7 @@ class FinalizeLevel1Input {
 
   /// Équipement choisi (en plus/à la place du pack de départ selon règles).
   final List<ChosenEquipmentLine> chosenEquipment;
+  final bool useStartingEquipmentPackage;
 
   const FinalizeLevel1Input({
     required this.name,
@@ -36,6 +37,7 @@ class FinalizeLevel1Input {
     required this.baseAbilities,
     required this.chosenSkills,
     required this.chosenEquipment,
+    this.useStartingEquipmentPackage = true,
   });
 }
 

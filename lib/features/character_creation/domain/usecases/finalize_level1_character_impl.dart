@@ -136,16 +136,23 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
 
       // 6) Inventaire (pack de départ + choix utilisateur)
       final lines = <String, int>{}; // id -> qty
-      for (final e in clazz.level1.startingEquipment) {
-        lines.update(e.id, (v) => v + e.qty, ifAbsent: () => e.qty);
+      if (input.useStartingEquipmentPackage) {
+        for (final e in clazz.level1.startingEquipment) {
+          lines.update(e.id, (v) => v + e.qty, ifAbsent: () => e.qty);
+        }
       }
+      final chosenLines = <String, int>{};
       for (final e in input.chosenEquipment) {
-        lines.update(e.itemId.value, (v) => v + e.quantity.value, ifAbsent: () => e.quantity.value);
+        final qty = e.quantity.value;
+        if (qty <= 0) continue;
+        chosenLines.update(e.itemId.value, (v) => v + qty, ifAbsent: () => qty);
+        lines.update(e.itemId.value, (v) => v + qty, ifAbsent: () => qty);
       }
 
       // Créer InventoryLine + encumbrance (en g)
       final inventory = <InventoryLine>[];
       int totalGrams = 0;
+      int totalCost = 0;
       for (final entry in lines.entries) {
         final eq = await catalog.getEquipment(entry.key);
         if (eq == null) {
@@ -158,11 +165,44 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
           quantity: Quantity(qty),
         ));
         totalGrams += eq.weightG * qty;
+        final purchasedQty = chosenLines[entry.key] ?? 0;
+        if (purchasedQty > 0) {
+          totalCost += eq.cost * purchasedQty;
+        }
+      }
+
+      // Capacité de portance : score de Force × 15 lb (converti en grammes).
+      const gramsPerPound = 453.59237;
+      final strengthScore = abilities['str']!.value;
+      final maxCarryGrams = (strengthScore * 15 * gramsPerPound).floor();
+      if (totalGrams > maxCarryGrams) {
+        return Result.err(DomainError(
+          'CarryingCapacityExceeded',
+          message:
+              'Le poids total de l\'équipement dépasse la capacité de portance (${totalGrams}g > ${maxCarryGrams}g).',
+          details: {
+            'totalWeightG': totalGrams,
+            'maxCarryWeightG': maxCarryGrams,
+            'strengthScore': strengthScore,
+          },
+        ));
       }
       final enc = Encumbrance(totalGrams);
 
-      // 7) Crédits (MVP: crédits de départ de la classe; équipement de départ gratuit)
-      final credits = Credits(clazz.level1.startingCredits ?? 0);
+      // 7) Crédits (MVP: crédits de départ de la classe; achats soustraits)
+      final baseCredits = clazz.level1.startingCredits ?? 0;
+      if (totalCost > baseCredits) {
+        return Result.err(DomainError(
+          'StartingCreditsExceeded',
+          message:
+              'Le coût total des achats (${totalCost}cr) dépasse les crédits de départ (${baseCredits}cr).',
+          details: {
+            'totalCost': totalCost,
+            'availableCredits': baseCredits,
+          },
+        ));
+      }
+      final credits = Credits(baseCredits - totalCost);
 
       // 8) Manœuvres & dés de supériorité (MVP: depuis Formulas)
       final sdRule = formulas.superiorityDiceByClass[input.classId.value];

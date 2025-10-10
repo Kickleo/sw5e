@@ -14,6 +14,7 @@ import 'package:sw5e_manager/features/character_creation/domain/value_objects/cl
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/credits.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/defense.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/encumbrance.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/equipment_item_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/hit_points.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/initiative.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/level.dart';
@@ -22,6 +23,7 @@ import 'package:sw5e_manager/features/character_creation/domain/value_objects/pr
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/skill_proficiency.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/species_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/superiority_dice.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/quantity.dart';
 
 
 // 👇 On référencera une implémentation concrète à créer ensuite.
@@ -215,6 +217,98 @@ void main() {
       verify(() => chars.save(any())).called(1);
     });
 
+    test('permet de remplacer le pack de départ par des achats et met à jour les crédits', () async {
+      when(() => catalog.getRulesVersion()).thenAnswer((_) async => '2025-10-06');
+
+      when(() => catalog.getSpecies('human')).thenAnswer((_) async => const SpeciesDef(
+            id: 'human',
+            name: LocalizedText(en: 'Human', fr: 'Humain'),
+            speed: 30,
+            size: 'medium',
+          ));
+
+      when(() => catalog.getClass('guardian')).thenAnswer((_) async => const ClassDef(
+            id: 'guardian',
+            name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
+            hitDie: 10,
+            level1: ClassLevel1Data(
+              proficiencies: ClassLevel1Proficiencies(
+                skillsChoose: 2,
+                skillsFrom: ['athletics', 'perception', 'stealth', 'deception'],
+              ),
+              startingCredits: 150,
+              startingEquipment: [StartingEquipmentLine(id: 'blaster-pistol', qty: 1)],
+            ),
+          ));
+
+      when(() => catalog.getBackground('outlaw')).thenAnswer((_) async => const BackgroundDef(
+            id: 'outlaw',
+            name: LocalizedText(en: 'Outlaw', fr: 'Hors-la-loi'),
+            grantedSkills: ['stealth', 'deception'],
+          ));
+
+      when(() => catalog.getFormulas()).thenAnswer((_) async => const FormulasDef(
+            rulesVersion: '2025-10-06',
+            hpLevel1: 'max(hit_die) + mod(CON)',
+            defenseBase: '10 + mod(DEX)',
+            initiative: 'mod(DEX)',
+            superiorityDiceByClass: {
+              'guardian': SuperiorityDiceRule(count: 0, die: null),
+            },
+          ));
+
+      when(() => catalog.getSkill(any())).thenAnswer((invocation) async {
+        final id = invocation.positionalArguments.first as String;
+        return SkillDef(id: id, ability: 'wis');
+      });
+
+      when(() => catalog.getEquipment('energy-shield')).thenAnswer((_) async => const EquipmentDef(
+            id: 'energy-shield',
+            name: LocalizedText(en: 'Energy Shield', fr: 'Bouclier d\'énergie'),
+            type: 'shield',
+            weightG: 2500,
+            cost: 100,
+          ));
+
+      when(() => chars.save(any())).thenAnswer((_) async {});
+
+      final input = FinalizeLevel1Input(
+        name: CharacterName('Rey'),
+        speciesId: SpeciesId('human'),
+        classId: ClassId('guardian'),
+        backgroundId: BackgroundId('outlaw'),
+        baseAbilities: {
+          'str': AbilityScore(14),
+          'dex': AbilityScore(12),
+          'con': AbilityScore(14),
+          'int': AbilityScore(10),
+          'wis': AbilityScore(10),
+          'cha': AbilityScore(10),
+        },
+        chosenSkills: const {'athletics', 'perception'},
+        chosenEquipment: const [
+          ChosenEquipmentLine(itemId: EquipmentItemId('energy-shield'), quantity: Quantity(1)),
+        ],
+        useStartingEquipmentPackage: false,
+      );
+
+      final result = await usecase(input);
+
+      expect(result.isOk, isTrue);
+      final character = result.match(
+        ok: (c) => c,
+        err: (e) => fail('Unexpected error: $e'),
+      );
+
+      expect(character.inventory.length, 1);
+      expect(character.inventory.first.itemId.value, 'energy-shield');
+      expect(character.inventory.first.quantity.value, 1);
+      expect(character.encumbrance.grams, 2500);
+      expect(character.credits.value, 50); // 150 - 100
+
+      verify(() => chars.save(any())).called(1);
+    });
+
     test("autorise n'importe quelle compétence lorsque la classe l'indique", () async {
       when(() => catalog.getRulesVersion()).thenAnswer((_) async => '2025-10-06');
 
@@ -366,6 +460,183 @@ void main() {
         },
       );
       // Et on confirme qu'aucune sauvegarde n'a eu lieu
+      verifyNever(() => chars.save(any()));
+    });
+
+    test('retourne une erreur si les achats dépassent les crédits de départ', () async {
+      when(() => catalog.getRulesVersion()).thenAnswer((_) async => '2025-10-06');
+
+      when(() => catalog.getSpecies('human')).thenAnswer((_) async => const SpeciesDef(
+            id: 'human',
+            name: LocalizedText(en: 'Human', fr: 'Humain'),
+            speed: 30,
+            size: 'medium',
+          ));
+
+      when(() => catalog.getClass('guardian')).thenAnswer((_) async => const ClassDef(
+            id: 'guardian',
+            name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
+            hitDie: 10,
+            level1: ClassLevel1Data(
+              proficiencies: ClassLevel1Proficiencies(
+                skillsChoose: 2,
+                skillsFrom: ['athletics', 'perception'],
+              ),
+              startingCredits: 150,
+              startingEquipment: [StartingEquipmentLine(id: 'blaster-pistol', qty: 1)],
+            ),
+          ));
+
+      when(() => catalog.getBackground('outlaw')).thenAnswer((_) async => const BackgroundDef(
+            id: 'outlaw',
+            name: LocalizedText(en: 'Outlaw', fr: 'Hors-la-loi'),
+            grantedSkills: ['stealth', 'deception'],
+          ));
+
+      when(() => catalog.getFormulas()).thenAnswer((_) async => const FormulasDef(
+            rulesVersion: '2025-10-06',
+            hpLevel1: 'max(hit_die) + mod(CON)',
+            defenseBase: '10 + mod(DEX)',
+            initiative: 'mod(DEX)',
+            superiorityDiceByClass: {
+              'guardian': SuperiorityDiceRule(count: 0, die: null),
+            },
+          ));
+
+      when(() => catalog.getEquipment('blaster-pistol')).thenAnswer((_) async => const EquipmentDef(
+            id: 'blaster-pistol',
+            name: LocalizedText(en: 'Blaster Pistol', fr: 'Pistolet blaster'),
+            type: 'weapon',
+            weightG: 800,
+            cost: 500,
+          ));
+
+      final input = FinalizeLevel1Input(
+        name: CharacterName('Rey'),
+        speciesId: SpeciesId('human'),
+        classId: ClassId('guardian'),
+        backgroundId: BackgroundId('outlaw'),
+        baseAbilities: {
+          'str': AbilityScore(12),
+          'dex': AbilityScore(12),
+          'con': AbilityScore(12),
+          'int': AbilityScore(10),
+          'wis': AbilityScore(10),
+          'cha': AbilityScore(10),
+        },
+        chosenSkills: const {'athletics', 'perception'},
+        chosenEquipment: const [
+          ChosenEquipmentLine(itemId: EquipmentItemId('blaster-pistol'), quantity: Quantity(1)),
+        ],
+        useStartingEquipmentPackage: false,
+      );
+
+      final result = await usecase(input);
+
+      expect(result.isErr, isTrue);
+      result.match(
+        ok: (_) => fail('Devrait échouer'),
+        err: (e) {
+          expect(e.code, 'StartingCreditsExceeded');
+          expect(e.details['totalCost'], 500);
+          expect(e.details['availableCredits'], 150);
+        },
+      );
+
+      verifyNever(() => chars.save(any()));
+    });
+
+    test('échoue si la capacité de portance basée sur la Force est dépassée', () async {
+      when(() => catalog.getRulesVersion()).thenAnswer((_) async => '2025-10-06');
+
+      when(() => catalog.getSpecies('human')).thenAnswer((_) async => const SpeciesDef(
+            id: 'human',
+            name: LocalizedText(en: 'Human', fr: 'Humain'),
+            speed: 30,
+            size: 'medium',
+          ));
+
+      when(() => catalog.getClass('guardian')).thenAnswer((_) async => const ClassDef(
+            id: 'guardian',
+            name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
+            hitDie: 10,
+            level1: ClassLevel1Data(
+              proficiencies: ClassLevel1Proficiencies(
+                skillsChoose: 2,
+                skillsFrom: ['athletics', 'perception', 'stealth', 'deception'],
+              ),
+              startingCredits: 150,
+              startingEquipment: [StartingEquipmentLine(id: 'blaster-pistol', qty: 1)],
+            ),
+          ));
+
+      when(() => catalog.getBackground('outlaw')).thenAnswer((_) async => const BackgroundDef(
+            id: 'outlaw',
+            name: LocalizedText(en: 'Outlaw', fr: 'Hors-la-loi'),
+            grantedSkills: ['stealth', 'deception'],
+          ));
+
+      when(() => catalog.getFormulas()).thenAnswer((_) async => const FormulasDef(
+            rulesVersion: '2025-10-06',
+            hpLevel1: 'max(hit_die) + mod(CON)',
+            defenseBase: '10 + mod(DEX)',
+            initiative: 'mod(DEX)',
+            superiorityDiceByClass: {
+              'guardian': SuperiorityDiceRule(count: 0, die: null),
+            },
+          ));
+
+      when(() => catalog.getEquipment('blaster-pistol')).thenAnswer((_) async => const EquipmentDef(
+            id: 'blaster-pistol',
+            name: LocalizedText(en: 'Blaster Pistol', fr: 'Pistolet blaster'),
+            type: 'weapon',
+            weightG: 800,
+            cost: 200,
+          ));
+
+      when(() => catalog.getEquipment('durasteel-crate')).thenAnswer((_) async => const EquipmentDef(
+            id: 'durasteel-crate',
+            name: LocalizedText(en: 'Durasteel Crate', fr: 'Caisse en duracier'),
+            type: 'adventuring-gear',
+            weightG: 6000,
+            cost: 50,
+          ));
+
+      final input = FinalizeLevel1Input(
+        name: CharacterName('Rey'),
+        speciesId: SpeciesId('human'),
+        classId: ClassId('guardian'),
+        backgroundId: BackgroundId('outlaw'),
+        baseAbilities: {
+          'str': AbilityScore(6), // Capacité de portance max ≈ 4080g
+          'dex': AbilityScore(12),
+          'con': AbilityScore(14),
+          'int': AbilityScore(10),
+          'wis': AbilityScore(10),
+          'cha': AbilityScore(10),
+        },
+        chosenSkills: const {'athletics', 'perception'},
+        chosenEquipment: const [
+          ChosenEquipmentLine(
+            itemId: EquipmentItemId('durasteel-crate'),
+            quantity: Quantity(1),
+          ),
+        ],
+      );
+
+      final result = await usecase(input);
+
+      expect(result.isErr, isTrue);
+      result.match(
+        ok: (_) => fail('Devrait échouer'),
+        err: (e) {
+          expect(e.code, 'CarryingCapacityExceeded');
+          final total = e.details['totalWeightG'] as int;
+          final max = e.details['maxCarryWeightG'] as int;
+          expect(total, greaterThan(max));
+        },
+      );
+
       verifyNever(() => chars.save(any()));
     });
 
