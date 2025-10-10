@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sw5e_manager/core/connectivity/connectivity_providers.dart';
 import 'package:sw5e_manager/features/character_creation/domain/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/ability_score.dart';
 import 'package:sw5e_manager/features/character_creation/presentation/pages/class_picker_page.dart';
 import 'package:sw5e_manager/features/character_creation/presentation/pages/species_picker.dart';
 import 'package:sw5e_manager/features/character_creation/presentation/viewmodels/quick_create_state.dart';
@@ -145,6 +146,14 @@ class QuickCreatePage extends HookConsumerWidget {
                           }
                         },
                       ),
+                      _AbilitiesStep(
+                        mode: state.abilityMode,
+                        assignments: state.abilityAssignments,
+                        pool: state.abilityPool,
+                        onModeChanged: viewModel.setAbilityGenerationMode,
+                        onReroll: viewModel.rerollAbilityScores,
+                        onAssign: viewModel.setAbilityScore,
+                      ),
                       _ClassStep(
                         classes: state.classes,
                         selectedClass: state.selectedClass,
@@ -263,6 +272,287 @@ class _SpeciesStep extends StatelessWidget {
             ],
           ),
       ],
+    );
+  }
+}
+
+class _AbilitiesStep extends HookWidget {
+  const _AbilitiesStep({
+    required this.mode,
+    required this.assignments,
+    required this.pool,
+    required this.onModeChanged,
+    required this.onReroll,
+    required this.onAssign,
+  });
+
+  final AbilityGenerationMode mode;
+  final Map<String, int?> assignments;
+  final List<int> pool;
+  final ValueChanged<AbilityGenerationMode> onModeChanged;
+  final VoidCallback onReroll;
+  final void Function(String ability, int? value) onAssign;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final abilityOrder = QuickCreateState.abilityOrder;
+    final abilityLabels = QuickCreateState.abilityLabels;
+    final abilityAbbreviations = QuickCreateState.abilityAbbreviations;
+
+    final poolCounts = <int, int>{};
+    for (final value in pool) {
+      poolCounts.update(value, (count) => count + 1, ifAbsent: () => 1);
+    }
+    final sortedPoolEntries = poolCounts.entries.toList()
+      ..sort((a, b) => b.key.compareTo(a.key));
+
+    final assignedCounts = <int, int>{};
+    for (final entry in assignments.entries) {
+      final value = entry.value;
+      if (value == null) continue;
+      assignedCounts.update(value, (count) => count + 1, ifAbsent: () => 1);
+    }
+
+    Widget buildControl(String ability) {
+      final currentValue = assignments[ability];
+      if (mode == AbilityGenerationMode.manual) {
+        return _ManualAbilityField(
+          key: ValueKey('manual-$ability'),
+          initialValue: currentValue,
+          onChanged: (value) => onAssign(ability, value),
+        );
+      }
+
+      final optionValues = <int>{};
+      for (final entry in poolCounts.entries) {
+        final value = entry.key;
+        final available = entry.value;
+        var used = assignedCounts[value] ?? 0;
+        if (currentValue == value && used > 0) {
+          used -= 1;
+        }
+        if (used < available) {
+          optionValues.add(value);
+        }
+      }
+      if (currentValue != null) {
+        optionValues.add(currentValue);
+      }
+      final sortedOptions = optionValues.toList()
+        ..sort((a, b) => b.compareTo(a));
+
+      return DropdownButtonFormField<int?>(
+        key: ValueKey('dropdown-$ability-${mode.name}'),
+        value: currentValue,
+        decoration: const InputDecoration(
+          labelText: 'Score',
+          border: OutlineInputBorder(),
+        ),
+        items: [
+          const DropdownMenuItem<int?>(
+            value: null,
+            child: Text('—'),
+          ),
+          ...sortedOptions.map(
+            (value) => DropdownMenuItem<int?>(
+              value: value,
+              child: Text(value.toString()),
+            ),
+          ),
+        ],
+        onChanged: (value) => onAssign(ability, value),
+      );
+    }
+
+    String modifierText(int? score) {
+      if (score == null) return 'Mod —';
+      final modifier = AbilityScore(score).modifier;
+      final sign = modifier >= 0 ? '+' : '';
+      return 'Mod $sign$modifier';
+    }
+
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        Text(
+          'Attribuez vos caractéristiques',
+          style: theme.textTheme.titleMedium,
+        ),
+        const SizedBox(height: 8),
+        Card(
+          child: Column(
+            children: [
+              RadioListTile<AbilityGenerationMode>(
+                value: AbilityGenerationMode.standardArray,
+                groupValue: mode,
+                title: const Text('Tableau standard'),
+                subtitle: const Text('Utiliser les scores fixes 15, 14, 13, 12, 10 et 8.'),
+                onChanged: (value) {
+                  if (value != null) onModeChanged(value);
+                },
+              ),
+              const Divider(height: 0),
+              RadioListTile<AbilityGenerationMode>(
+                value: AbilityGenerationMode.roll,
+                groupValue: mode,
+                title: const Text('Lancer les dés'),
+                subtitle: const Text('Lancez 4d6, conservez les 3 meilleurs et assignez les 6 scores obtenus.'),
+                onChanged: (value) {
+                  if (value != null) onModeChanged(value);
+                },
+              ),
+              if (mode == AbilityGenerationMode.roll)
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: FilledButton.icon(
+                      onPressed: onReroll,
+                      icon: const Icon(Icons.casino),
+                      label: const Text('Lancer les dés'),
+                    ),
+                  ),
+                ),
+              const Divider(height: 0),
+              RadioListTile<AbilityGenerationMode>(
+                value: AbilityGenerationMode.manual,
+                groupValue: mode,
+                title: const Text('Saisie manuelle'),
+                subtitle: const Text('Entrez vous-même les scores obtenus ailleurs et assignez-les.'),
+                onChanged: (value) {
+                  if (value != null) onModeChanged(value);
+                },
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        if (mode != AbilityGenerationMode.manual) ...[
+          Text(
+            'Scores disponibles',
+            style: theme.textTheme.titleSmall,
+          ),
+          const SizedBox(height: 8),
+          if (sortedPoolEntries.isEmpty)
+            const Text('Aucun score généré pour le moment.')
+          else
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final entry in sortedPoolEntries)
+                  Chip(
+                    label: Text(entry.value > 1
+                        ? '${entry.key} ×${entry.value}'
+                        : entry.key.toString()),
+                  ),
+              ],
+            ),
+          const SizedBox(height: 16),
+        ] else ...[
+          const Text('Chaque champ accepte une valeur entre 1 et 20.'),
+          const SizedBox(height: 16),
+        ],
+        ...abilityOrder.map((ability) {
+          final label = abilityLabels[ability] ?? ability.toUpperCase();
+          final abbr = abilityAbbreviations[ability] ?? ability.toUpperCase();
+          final currentValue = assignments[ability];
+          return Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '$label ($abbr)',
+                        style: theme.textTheme.titleMedium,
+                      ),
+                      Text(
+                        modifierText(currentValue),
+                        style: theme.textTheme.titleMedium,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  buildControl(ability),
+                ],
+              ),
+            ),
+          );
+        }),
+        const SizedBox(height: 12),
+        const Text(
+          'Astuce : pour calculer le modificateur, soustrayez 10 du score et divisez par 2 (arrondi à l’inférieur).',
+        ),
+      ],
+    );
+  }
+}
+
+class _ManualAbilityField extends HookWidget {
+  const _ManualAbilityField({
+    super.key,
+    required this.initialValue,
+    required this.onChanged,
+  });
+
+  final int? initialValue;
+  final ValueChanged<int?> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = useTextEditingController(
+      text: initialValue?.toString() ?? '',
+    );
+    final errorText = useState<String?>(null);
+
+    useEffect(() {
+      final newText = initialValue?.toString() ?? '';
+      if (controller.text != newText) {
+        controller.value = controller.value.copyWith(text: newText);
+      }
+      if (newText.isNotEmpty) {
+        final value = int.tryParse(newText);
+        if (value != null && value >= AbilityScore.min && value <= AbilityScore.max) {
+          errorText.value = null;
+        }
+      }
+      return null;
+    }, [initialValue]);
+
+    return TextField(
+      controller: controller,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        labelText: 'Score',
+        border: const OutlineInputBorder(),
+        errorText: errorText.value,
+      ),
+      onChanged: (text) {
+        final trimmed = text.trim();
+        if (trimmed.isEmpty) {
+          errorText.value = 'Requis';
+          onChanged(null);
+          return;
+        }
+        final value = int.tryParse(trimmed);
+        if (value == null) {
+          errorText.value = 'Entrez un nombre';
+          onChanged(null);
+          return;
+        }
+        if (value < AbilityScore.min || value > AbilityScore.max) {
+          errorText.value = 'Doit être entre ${AbilityScore.min} et ${AbilityScore.max}';
+          onChanged(null);
+          return;
+        }
+        errorText.value = null;
+        onChanged(value);
+      },
     );
   }
 }
