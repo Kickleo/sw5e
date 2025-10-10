@@ -1,0 +1,24 @@
+# -----------------------------------------------------------------------------
+# Fichier : .pre-commit-config.yaml
+# Rôle : Configurer les hooks pre-commit pour formater, analyser et tester.
+# Dépendances : pre-commit, Flutter SDK, Makefile.
+# Exemple d'usage : `pre-commit install` puis hooks automatiques à chaque commit.
+# -----------------------------------------------------------------------------
+repos:
+  - repo: local
+    hooks:
+      - id: flutter-format
+        name: flutter format
+        entry: make format
+        language: system
+        types: [dart]
+      - id: flutter-lint
+        name: flutter analyze
+        entry: make lint
+        language: system
+        pass_filenames: false
+      - id: flutter-test
+        name: flutter test --coverage
+        entry: make test
+        language: system
+        pass_filenames: false
