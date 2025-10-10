@@ -193,7 +193,11 @@ class ClassPickerBloc extends Bloc<ClassPickerEvent, ClassPickerState> {
         ),
       );
     } catch (error, stackTrace) {
-      _logger.error('ClassPickerBloc.start failed', error, stackTrace);
+      _logger.error(
+        'ClassPickerBloc.start failed',
+        error: error,
+        stackTrace: stackTrace,
+      );
       emit(
         state.copyWith(
           isLoadingList: false,
@@ -242,7 +246,11 @@ class ClassPickerBloc extends Bloc<ClassPickerEvent, ClassPickerState> {
         ),
       );
     } catch (error, stackTrace) {
-      _logger.error('ClassPickerBloc.select failed', error, stackTrace);
+      _logger.error(
+        'ClassPickerBloc.select failed',
+        error: error,
+        stackTrace: stackTrace,
+      );
       emit(
         state.copyWith(
           isLoadingDetails: false,
