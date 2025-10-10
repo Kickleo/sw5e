@@ -1,53 +1,423 @@
 [
   {
-    "id": "combat-suit",
+    "id": "affixed-rifle",
     "name": {
-      "en": "Combat suit",
-      "fr": "Combat suit"
+      "en": "Affixed Rifle",
+      "fr": "Affixed Rifle"
     },
-    "type": "armor",
-    "weight_g": 4536,
+    "type": "weapon",
+    "weight_g": 3629,
+    "cost": 700
+  },
+  {
+    "id": "alchemist-s-kit",
+    "name": {
+      "en": "Alchemist's kit",
+      "fr": "Alchemist's kit"
+    },
+    "type": "kit",
+    "weight_g": 907,
+    "cost": 500
+  },
+  {
+    "id": "ammo-pouch",
+    "name": {
+      "en": "Ammo Pouch",
+      "fr": "Ammo Pouch"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 0,
+    "cost": 15
+  },
+  {
+    "id": "ammo-feed-belt",
+    "name": {
+      "en": "Ammo-feed belt",
+      "fr": "Ammo-feed belt"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 454,
+    "cost": 450
+  },
+  {
+    "id": "andris",
+    "name": {
+      "en": "Andris",
+      "fr": "Andris"
+    },
+    "type": "spice",
+    "weight_g": 0,
+    "cost": 75
+  },
+  {
+    "id": "anti-materiel-blaster",
+    "name": {
+      "en": "Anti-materiel blaster",
+      "fr": "Anti-materiel blaster"
+    },
+    "type": "weapon",
+    "weight_g": 8391,
+    "cost": 2500
+  },
+  {
+    "id": "anti-materiel-rifle",
+    "name": {
+      "en": "Anti-materiel rifle",
+      "fr": "Anti-materiel rifle"
+    },
+    "type": "weapon",
+    "weight_g": 7711,
+    "cost": 1900
+  },
+  {
+    "id": "antitoxkit",
+    "name": {
+      "en": "Antitoxkit",
+      "fr": "Antitoxkit"
+    },
+    "type": "medical",
+    "weight_g": 1814,
+    "cost": 600
+  },
+  {
+    "id": "arc-caster",
+    "name": {
+      "en": "ARC caster",
+      "fr": "ARC caster"
+    },
+    "type": "weapon",
+    "weight_g": 4082,
+    "cost": 2125
+  },
+  {
+    "id": "archaeologist-kit",
+    "name": {
+      "en": "Archaeologist kit",
+      "fr": "Archaeologist kit"
+    },
+    "type": "kit",
+    "weight_g": 1814,
+    "cost": 125
+  },
+  {
+    "id": "arm-prosthesis",
+    "name": {
+      "en": "Arm prosthesis",
+      "fr": "Arm prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 450
+  },
+  {
+    "id": "armormech-s-implements",
+    "name": {
+      "en": "Armormech's implements",
+      "fr": "Armormech's implements"
+    },
+    "type": "tool",
+    "weight_g": 3629,
+    "cost": 200
+  },
+  {
+    "id": "armstech-s-implements",
+    "name": {
+      "en": "Armstech's implements",
+      "fr": "Armstech's implements"
+    },
+    "type": "tool",
+    "weight_g": 4082,
+    "cost": 250
+  },
+  {
+    "id": "arrow",
+    "name": {
+      "en": "Arrow",
+      "fr": "Arrow"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 1
+  },
+  {
+    "id": "arrow-combustive",
+    "name": {
+      "en": "Arrow, Combustive",
+      "fr": "Arrow, Combustive"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
     "cost": 100
   },
   {
-    "id": "heavy-physical-shield",
+    "id": "arrow-electroshock",
     "name": {
-      "en": "Heavy physical shield",
-      "fr": "Heavy physical shield"
+      "en": "Arrow, Electroshock",
+      "fr": "Arrow, Electroshock"
     },
-    "type": "shield",
-    "weight_g": 16329,
-    "cost": 500
-  },
-  {
-    "id": "light-physical-shield",
-    "name": {
-      "en": "Light physical shield",
-      "fr": "Light physical shield"
-    },
-    "type": "shield",
+    "type": "ammunition",
     "weight_g": 0,
-    "cost": 50
-  },
-  {
-    "id": "medium-physical-shield",
-    "name": {
-      "en": "Medium physical shield",
-      "fr": "Medium physical shield"
-    },
-    "type": "shield",
-    "weight_g": 8165,
     "cost": 150
   },
   {
-    "id": "mesh-armor",
+    "id": "arrow-noisemaker",
     "name": {
-      "en": "Mesh armor",
-      "fr": "Mesh armor"
+      "en": "Arrow, Noisemaker",
+      "fr": "Arrow, Noisemaker"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 125
+  },
+  {
+    "id": "artificer-s-implements",
+    "name": {
+      "en": "Artificer's implements",
+      "fr": "Artificer's implements"
+    },
+    "type": "tool",
+    "weight_g": 2268,
+    "cost": 300
+  },
+  {
+    "id": "artillerist-s-kit",
+    "name": {
+      "en": "Artillerist's kit",
+      "fr": "Artillerist's kit"
+    },
+    "type": "kit",
+    "weight_g": 0,
+    "cost": 275
+  },
+  {
+    "id": "artist-s-implements",
+    "name": {
+      "en": "Artist's implements",
+      "fr": "Artist's implements"
+    },
+    "type": "tool",
+    "weight_g": 2268,
+    "cost": 100
+  },
+  {
+    "id": "assault-armor",
+    "name": {
+      "en": "Assault armor",
+      "fr": "Assault armor"
     },
     "type": "armor",
-    "weight_g": 9072,
+    "weight_g": 27216,
+    "cost": 2000
+  },
+  {
+    "id": "assault-cannon",
+    "name": {
+      "en": "Assault cannon",
+      "fr": "Assault cannon"
+    },
+    "type": "weapon",
+    "weight_g": 6804,
+    "cost": 1550
+  },
+  {
+    "id": "astrotech-s-implements",
+    "name": {
+      "en": "Astrotech's implements",
+      "fr": "Astrotech's implements"
+    },
+    "type": "tool",
+    "weight_g": 0,
+    "cost": 400
+  },
+  {
+    "id": "atlatl",
+    "name": {
+      "en": "Atlatl",
+      "fr": "Atlatl"
+    },
+    "type": "weapon",
+    "weight_g": 567,
+    "cost": 375
+  },
+  {
+    "id": "audiotech-s-implements",
+    "name": {
+      "en": "Audiotech's implements",
+      "fr": "Audiotech's implements"
+    },
+    "type": "tool",
+    "weight_g": 0,
+    "cost": 550
+  },
+  {
+    "id": "backpack",
+    "name": {
+      "en": "Backpack",
+      "fr": "Backpack"
+    },
+    "type": "storage",
+    "weight_g": 2268,
+    "cost": 50
+  },
+  {
+    "id": "bandfill",
+    "name": {
+      "en": "Bandfill",
+      "fr": "Bandfill"
+    },
+    "type": "musical instrument",
+    "weight_g": 907,
+    "cost": 300
+  },
+  {
+    "id": "bandolier",
+    "name": {
+      "en": "Bandolier",
+      "fr": "Bandolier"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 907,
+    "cost": 100
+  },
+  {
+    "id": "battle-armor",
+    "name": {
+      "en": "Battle armor",
+      "fr": "Battle armor"
+    },
+    "type": "armor",
+    "weight_g": 24948,
+    "cost": 750
+  },
+  {
+    "id": "beam-rifle",
+    "name": {
+      "en": "Beam rifle",
+      "fr": "Beam rifle"
+    },
+    "type": "weapon",
+    "weight_g": 7257,
+    "cost": 1850
+  },
+  {
+    "id": "bedroll",
+    "name": {
+      "en": "Bedroll",
+      "fr": "Bedroll"
+    },
+    "type": "utility",
+    "weight_g": 3175,
+    "cost": 10
+  },
+  {
+    "id": "beskar-weave-armor",
+    "name": {
+      "en": "Beskar weave armor",
+      "fr": "Beskar weave armor"
+    },
+    "type": "armor",
+    "weight_g": 11340,
+    "cost": 3000
+  },
+  {
+    "id": "binders",
+    "name": {
+      "en": "Binders",
+      "fr": "Binders"
+    },
+    "type": "utility",
+    "weight_g": 2722,
+    "cost": 50
+  },
+  {
+    "id": "bioanalysis-kit",
+    "name": {
+      "en": "Bioanalysis kit",
+      "fr": "Bioanalysis kit"
+    },
+    "type": "kit",
+    "weight_g": 1361,
+    "cost": 50
+  },
+  {
+    "id": "biochemist-s-kit",
+    "name": {
+      "en": "Biochemist's kit",
+      "fr": "Biochemist's kit"
+    },
+    "type": "kit",
+    "weight_g": 3629,
     "cost": 500
+  },
+  {
+    "id": "biotech-s-implements",
+    "name": {
+      "en": "Biotech's implements",
+      "fr": "Biotech's implements"
+    },
+    "type": "tool",
+    "weight_g": 2722,
+    "cost": 450
+  },
+  {
+    "id": "bipod",
+    "name": {
+      "en": "Bipod",
+      "fr": "Bipod"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 907,
+    "cost": 200
+  },
+  {
+    "id": "bitesaber",
+    "name": {
+      "en": "Bitesaber",
+      "fr": "Bitesaber"
+    },
+    "type": "weapon",
+    "weight_g": 1134,
+    "cost": 1800
+  },
+  {
+    "id": "bkg",
+    "name": {
+      "en": "BKG",
+      "fr": "BKG"
+    },
+    "type": "weapon",
+    "weight_g": 8618,
+    "cost": 2750
+  },
+  {
+    "id": "blanket",
+    "name": {
+      "en": "Blanket",
+      "fr": "Blanket"
+    },
+    "type": "utility",
+    "weight_g": 1361,
+    "cost": 5
+  },
+  {
+    "id": "blaster-cannon",
+    "name": {
+      "en": "Blaster cannon",
+      "fr": "Blaster cannon"
+    },
+    "type": "weapon",
+    "weight_g": 8391,
+    "cost": 5500
+  },
+  {
+    "id": "blaster-carbine",
+    "name": {
+      "en": "Blaster carbine",
+      "fr": "Blaster carbine"
+    },
+    "type": "weapon",
+    "weight_g": 2495,
+    "cost": 425
   },
   {
     "id": "blaster-pistol",
@@ -60,6 +430,2176 @@
     "cost": 175
   },
   {
+    "id": "blaster-rifle",
+    "name": {
+      "en": "Blaster rifle",
+      "fr": "Blaster rifle"
+    },
+    "type": "weapon",
+    "weight_g": 3402,
+    "cost": 525
+  },
+  {
+    "id": "blightsaber",
+    "name": {
+      "en": "Blightsaber",
+      "fr": "Blightsaber"
+    },
+    "type": "weapon",
+    "weight_g": 1134,
+    "cost": 1800
+  },
+  {
+    "id": "bo-rifle",
+    "name": {
+      "en": "Bo-rifle",
+      "fr": "Bo-rifle"
+    },
+    "type": "weapon",
+    "weight_g": 0,
+    "cost": 1075
+  },
+  {
+    "id": "bolas",
+    "name": {
+      "en": "Bolas",
+      "fr": "Bolas"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 100
+  },
+  {
+    "id": "bolt",
+    "name": {
+      "en": "Bolt",
+      "fr": "Bolt"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 10
+  },
+  {
+    "id": "bolt-deafening",
+    "name": {
+      "en": "Bolt, Deafening",
+      "fr": "Bolt, Deafening"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 140
+  },
+  {
+    "id": "bolt-electrifying",
+    "name": {
+      "en": "Bolt, Electrifying",
+      "fr": "Bolt, Electrifying"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 170
+  },
+  {
+    "id": "bolt-panic",
+    "name": {
+      "en": "Bolt, Panic",
+      "fr": "Bolt, Panic"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 200
+  },
+  {
+    "id": "bolt-thrower",
+    "name": {
+      "en": "Bolt-thrower",
+      "fr": "Bolt-thrower"
+    },
+    "type": "weapon",
+    "weight_g": 6123,
+    "cost": 1825
+  },
+  {
+    "id": "bone-light-shield",
+    "name": {
+      "en": "Bone light shield",
+      "fr": "Bone light shield"
+    },
+    "type": "armor",
+    "weight_g": 0,
+    "cost": 300
+  },
+  {
+    "id": "bottle",
+    "name": {
+      "en": "Bottle",
+      "fr": "Bottle"
+    },
+    "type": "storage",
+    "weight_g": 454,
+    "cost": 20
+  },
+  {
+    "id": "bowcaster",
+    "name": {
+      "en": "Bowcaster",
+      "fr": "Bowcaster"
+    },
+    "type": "weapon",
+    "weight_g": 4990,
+    "cost": 1150
+  },
+  {
+    "id": "brewer-s-kit",
+    "name": {
+      "en": "Brewer's kit",
+      "fr": "Brewer's kit"
+    },
+    "type": "kit",
+    "weight_g": 4082,
+    "cost": 200
+  },
+  {
+    "id": "brightsaber",
+    "name": {
+      "en": "Brightsaber",
+      "fr": "Brightsaber"
+    },
+    "type": "weapon",
+    "weight_g": 1134,
+    "cost": 1800
+  },
+  {
+    "id": "broadsaber",
+    "name": {
+      "en": "Broadsaber",
+      "fr": "Broadsaber"
+    },
+    "type": "weapon",
+    "weight_g": 1247,
+    "cost": 1000
+  },
+  {
+    "id": "bucket",
+    "name": {
+      "en": "Bucket",
+      "fr": "Bucket"
+    },
+    "type": "storage",
+    "weight_g": 907,
+    "cost": 2
+  },
+  {
+    "id": "bustersaber",
+    "name": {
+      "en": "Bustersaber",
+      "fr": "Bustersaber"
+    },
+    "type": "weapon",
+    "weight_g": 3289,
+    "cost": 2900
+  },
+  {
+    "id": "camtono",
+    "name": {
+      "en": "Camtono",
+      "fr": "Camtono"
+    },
+    "type": "storage",
+    "weight_g": 0,
+    "cost": 750
+  },
+  {
+    "id": "canteen",
+    "name": {
+      "en": "Canteen",
+      "fr": "Canteen"
+    },
+    "type": "storage",
+    "weight_g": 1361,
+    "cost": 10
+  },
+  {
+    "id": "carbine-rifle",
+    "name": {
+      "en": "Carbine rifle",
+      "fr": "Carbine rifle"
+    },
+    "type": "weapon",
+    "weight_g": 3856,
+    "cost": 925
+  },
+  {
+    "id": "cesta",
+    "name": {
+      "en": "Cesta",
+      "fr": "Cesta"
+    },
+    "type": "weapon",
+    "weight_g": 2608,
+    "cost": 975
+  },
+  {
+    "id": "chained-dagger",
+    "name": {
+      "en": "Chained dagger",
+      "fr": "Chained dagger"
+    },
+    "type": "weapon",
+    "weight_g": 1701,
+    "cost": 350
+  },
+  {
+    "id": "chained-lightdagger",
+    "name": {
+      "en": "Chained lightdagger",
+      "fr": "Chained lightdagger"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 800
+  },
+  {
+    "id": "chaingun",
+    "name": {
+      "en": "Chaingun",
+      "fr": "Chaingun"
+    },
+    "type": "weapon",
+    "weight_g": 4763,
+    "cost": 1325
+  },
+  {
+    "id": "chakram",
+    "name": {
+      "en": "Chakram",
+      "fr": "Chakram"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 175
+  },
+  {
+    "id": "chance-cubes",
+    "name": {
+      "en": "Chance cubes",
+      "fr": "Chance cubes"
+    },
+    "type": "gaming set",
+    "weight_g": 0,
+    "cost": 1
+  },
+  {
+    "id": "charge-fragmentation",
+    "name": {
+      "en": "Charge, fragmentation",
+      "fr": "Charge, fragmentation"
+    },
+    "type": "explosive",
+    "weight_g": 1814,
+    "cost": 750
+  },
+  {
+    "id": "charge-plasma",
+    "name": {
+      "en": "Charge, plasma",
+      "fr": "Charge, plasma"
+    },
+    "type": "explosive",
+    "weight_g": 1814,
+    "cost": 775
+  },
+  {
+    "id": "chatta-ragul-set",
+    "name": {
+      "en": "Chatta-ragul set",
+      "fr": "Chatta-ragul set"
+    },
+    "type": "gaming set",
+    "weight_g": 0,
+    "cost": 450
+  },
+  {
+    "id": "chef-s-kit",
+    "name": {
+      "en": "Chef's kit",
+      "fr": "Chef's kit"
+    },
+    "type": "kit",
+    "weight_g": 3629,
+    "cost": 70
+  },
+  {
+    "id": "chemical-suit",
+    "name": {
+      "en": "Chemical suit",
+      "fr": "Chemical suit"
+    },
+    "type": "life support",
+    "weight_g": 6804,
+    "cost": 3000
+  },
+  {
+    "id": "chest",
+    "name": {
+      "en": "Chest",
+      "fr": "Chest"
+    },
+    "type": "storage",
+    "weight_g": 11340,
+    "cost": 50
+  },
+  {
+    "id": "chindinkalu-horn",
+    "name": {
+      "en": "Chindinkalu horn",
+      "fr": "Chindinkalu horn"
+    },
+    "type": "musical instrument",
+    "weight_g": 3175,
+    "cost": 120
+  },
+  {
+    "id": "chronometer",
+    "name": {
+      "en": "Chronometer",
+      "fr": "Chronometer"
+    },
+    "type": "utility",
+    "weight_g": 454,
+    "cost": 100
+  },
+  {
+    "id": "cilona",
+    "name": {
+      "en": "Cilona",
+      "fr": "Cilona"
+    },
+    "type": "spice",
+    "weight_g": 0,
+    "cost": 60
+  },
+  {
+    "id": "claymoresaber",
+    "name": {
+      "en": "Claymoresaber",
+      "fr": "Claymoresaber"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 2300
+  },
+  {
+    "id": "clothes-clandestine",
+    "name": {
+      "en": "Clothes, clandestine",
+      "fr": "Clothes, clandestine"
+    },
+    "type": "clothing",
+    "weight_g": 3175,
+    "cost": 300
+  },
+  {
+    "id": "clothes-common",
+    "name": {
+      "en": "Clothes, common",
+      "fr": "Clothes, common"
+    },
+    "type": "clothing",
+    "weight_g": 1361,
+    "cost": 5
+  },
+  {
+    "id": "clothes-costume",
+    "name": {
+      "en": "Clothes, costume",
+      "fr": "Clothes, costume"
+    },
+    "type": "clothing",
+    "weight_g": 1814,
+    "cost": 50
+  },
+  {
+    "id": "clothes-dress-uniform",
+    "name": {
+      "en": "Clothes, dress uniform",
+      "fr": "Clothes, dress uniform"
+    },
+    "type": "clothing",
+    "weight_g": 3629,
+    "cost": 100
+  },
+  {
+    "id": "clothes-fine",
+    "name": {
+      "en": "Clothes, fine",
+      "fr": "Clothes, fine"
+    },
+    "type": "clothing",
+    "weight_g": 2722,
+    "cost": 150
+  },
+  {
+    "id": "clothes-traveler-s",
+    "name": {
+      "en": "Clothes, traveler's",
+      "fr": "Clothes, traveler's"
+    },
+    "type": "clothing",
+    "weight_g": 1814,
+    "cost": 20
+  },
+  {
+    "id": "code-cylinder",
+    "name": {
+      "en": "Code cylinder",
+      "fr": "Code cylinder"
+    },
+    "type": "data recording and storage",
+    "weight_g": 227,
+    "cost": 20
+  },
+  {
+    "id": "combat-suit",
+    "name": {
+      "en": "Combat suit",
+      "fr": "Combat suit"
+    },
+    "type": "armor",
+    "weight_g": 4536,
+    "cost": 100
+  },
+  {
+    "id": "comm-jammer",
+    "name": {
+      "en": "Comm jammer",
+      "fr": "Comm jammer"
+    },
+    "type": "communications",
+    "weight_g": 1361,
+    "cost": 450
+  },
+  {
+    "id": "commlink",
+    "name": {
+      "en": "Commlink",
+      "fr": "Commlink"
+    },
+    "type": "communications",
+    "weight_g": 227,
+    "cost": 50
+  },
+  {
+    "id": "commlink-hands-free",
+    "name": {
+      "en": "Commlink, hands-free",
+      "fr": "Commlink, hands-free"
+    },
+    "type": "communications",
+    "weight_g": 454,
+    "cost": 200
+  },
+  {
+    "id": "composite-armor",
+    "name": {
+      "en": "Composite armor",
+      "fr": "Composite armor"
+    },
+    "type": "armor",
+    "weight_g": 20412,
+    "cost": 2500
+  },
+  {
+    "id": "compound-bow",
+    "name": {
+      "en": "Compound bow",
+      "fr": "Compound bow"
+    },
+    "type": "weapon",
+    "weight_g": 2948,
+    "cost": 600
+  },
+  {
+    "id": "computer-spike",
+    "name": {
+      "en": "Computer spike",
+      "fr": "Computer spike"
+    },
+    "type": "utility",
+    "weight_g": 227,
+    "cost": 145
+  },
+  {
+    "id": "conductive-suit",
+    "name": {
+      "en": "Conductive suit",
+      "fr": "Conductive suit"
+    },
+    "type": "life support",
+    "weight_g": 5670,
+    "cost": 3600
+  },
+  {
+    "id": "constructor-s-implements",
+    "name": {
+      "en": "Constructor's implements",
+      "fr": "Constructor's implements"
+    },
+    "type": "tool",
+    "weight_g": 3175,
+    "cost": 100
+  },
+  {
+    "id": "corrosive-cartridge",
+    "name": {
+      "en": "Corrosive cartridge",
+      "fr": "Corrosive cartridge"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 42
+  },
+  {
+    "id": "crate",
+    "name": {
+      "en": "Crate",
+      "fr": "Crate"
+    },
+    "type": "storage",
+    "weight_g": 31751,
+    "cost": 20
+  },
+  {
+    "id": "credit-chip",
+    "name": {
+      "en": "Credit chip",
+      "fr": "Credit chip"
+    },
+    "type": "data recording and storage",
+    "weight_g": 0,
+    "cost": 100
+  },
+  {
+    "id": "crossguard-saber",
+    "name": {
+      "en": "Crossguard saber",
+      "fr": "Crossguard saber"
+    },
+    "type": "weapon",
+    "weight_g": 1474,
+    "cost": 725
+  },
+  {
+    "id": "crosssaber",
+    "name": {
+      "en": "Crosssaber",
+      "fr": "Crosssaber"
+    },
+    "type": "weapon",
+    "weight_g": 2381,
+    "cost": 1650
+  },
+  {
+    "id": "cryo-cannon",
+    "name": {
+      "en": "Cryo cannon",
+      "fr": "Cryo cannon"
+    },
+    "type": "weapon",
+    "weight_g": 5670,
+    "cost": 3300
+  },
+  {
+    "id": "cryo-carbine",
+    "name": {
+      "en": "Cryo carbine",
+      "fr": "Cryo carbine"
+    },
+    "type": "weapon",
+    "weight_g": 2722,
+    "cost": 1250
+  },
+  {
+    "id": "cryo-cell",
+    "name": {
+      "en": "Cryo cell",
+      "fr": "Cryo cell"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 350
+  },
+  {
+    "id": "cryo-pistol",
+    "name": {
+      "en": "Cryo pistol",
+      "fr": "Cryo pistol"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 750
+  },
+  {
+    "id": "cryo-rifle",
+    "name": {
+      "en": "Cryo rifle",
+      "fr": "Cryo rifle"
+    },
+    "type": "weapon",
+    "weight_g": 4763,
+    "cost": 2400
+  },
+  {
+    "id": "crystadium-medium-shield",
+    "name": {
+      "en": "Crystadium medium shield",
+      "fr": "Crystadium medium shield"
+    },
+    "type": "armor",
+    "weight_g": 8165,
+    "cost": 900
+  },
+  {
+    "id": "cybertech-s-implements",
+    "name": {
+      "en": "Cybertech's implements",
+      "fr": "Cybertech's implements"
+    },
+    "type": "tool",
+    "weight_g": 0,
+    "cost": 500
+  },
+  {
+    "id": "cycler-rifle",
+    "name": {
+      "en": "Cycler rifle",
+      "fr": "Cycler rifle"
+    },
+    "type": "weapon",
+    "weight_g": 3402,
+    "cost": 825
+  },
+  {
+    "id": "dampening-suit",
+    "name": {
+      "en": "Dampening suit",
+      "fr": "Dampening suit"
+    },
+    "type": "life support",
+    "weight_g": 8165,
+    "cost": 2500
+  },
+  {
+    "id": "dart",
+    "name": {
+      "en": "Dart",
+      "fr": "Dart"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 5
+  },
+  {
+    "id": "datacard",
+    "name": {
+      "en": "Datacard",
+      "fr": "Datacard"
+    },
+    "type": "data recording and storage",
+    "weight_g": 0,
+    "cost": 5
+  },
+  {
+    "id": "datacron",
+    "name": {
+      "en": "Datacron",
+      "fr": "Datacron"
+    },
+    "type": "data recording and storage",
+    "weight_g": 907,
+    "cost": 1000
+  },
+  {
+    "id": "datapad",
+    "name": {
+      "en": "Datapad",
+      "fr": "Datapad"
+    },
+    "type": "data recording and storage",
+    "weight_g": 227,
+    "cost": 100
+  },
+  {
+    "id": "deafening-calibrator",
+    "name": {
+      "en": "Deafening calibrator",
+      "fr": "Deafening calibrator"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 550
+  },
+  {
+    "id": "deafening-cell",
+    "name": {
+      "en": "Deafening cell",
+      "fr": "Deafening cell"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 425
+  },
+  {
+    "id": "deafening-collimator",
+    "name": {
+      "en": "Deafening collimator",
+      "fr": "Deafening collimator"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 575
+  },
+  {
+    "id": "deafening-dart",
+    "name": {
+      "en": "Deafening dart",
+      "fr": "Deafening dart"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 70
+  },
+  {
+    "id": "dejarik-set",
+    "name": {
+      "en": "Dejarik set",
+      "fr": "Dejarik set"
+    },
+    "type": "gaming set",
+    "weight_g": 3629,
+    "cost": 300
+  },
+  {
+    "id": "demolitions-kit",
+    "name": {
+      "en": "Demolitions kit",
+      "fr": "Demolitions kit"
+    },
+    "type": "kit",
+    "weight_g": 1814,
+    "cost": 400
+  },
+  {
+    "id": "deuterium-pyro",
+    "name": {
+      "en": "Deuterium-pyro",
+      "fr": "Deuterium-pyro"
+    },
+    "type": "alcoholic beverage",
+    "weight_g": 0,
+    "cost": 80
+  },
+  {
+    "id": "dire-vibroblade",
+    "name": {
+      "en": "Dire vibroblade",
+      "fr": "Dire vibroblade"
+    },
+    "type": "weapon",
+    "weight_g": 3175,
+    "cost": 550
+  },
+  {
+    "id": "diresword",
+    "name": {
+      "en": "Diresword",
+      "fr": "Diresword"
+    },
+    "type": "weapon",
+    "weight_g": 1701,
+    "cost": 300
+  },
+  {
+    "id": "disguise-kit",
+    "name": {
+      "en": "Disguise kit",
+      "fr": "Disguise kit"
+    },
+    "type": "kit",
+    "weight_g": 1361,
+    "cost": 250
+  },
+  {
+    "id": "disguised-blade",
+    "name": {
+      "en": "Disguised blade",
+      "fr": "Disguised blade"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 125
+  },
+  {
+    "id": "disruptor-carbine",
+    "name": {
+      "en": "Disruptor carbine",
+      "fr": "Disruptor carbine"
+    },
+    "type": "weapon",
+    "weight_g": 3856,
+    "cost": 1450
+  },
+  {
+    "id": "disruptor-pistol",
+    "name": {
+      "en": "Disruptor pistol",
+      "fr": "Disruptor pistol"
+    },
+    "type": "weapon",
+    "weight_g": 2041,
+    "cost": 750
+  },
+  {
+    "id": "disruptor-rifle",
+    "name": {
+      "en": "Disruptor rifle",
+      "fr": "Disruptor rifle"
+    },
+    "type": "weapon",
+    "weight_g": 6123,
+    "cost": 2900
+  },
+  {
+    "id": "disruptor-sniper",
+    "name": {
+      "en": "Disruptor sniper",
+      "fr": "Disruptor sniper"
+    },
+    "type": "weapon",
+    "weight_g": 6804,
+    "cost": 3300
+  },
+  {
+    "id": "disruptorshiv",
+    "name": {
+      "en": "Disruptorshiv",
+      "fr": "Disruptorshiv"
+    },
+    "type": "weapon",
+    "weight_g": 1134,
+    "cost": 425
+  },
+  {
+    "id": "diving-suit",
+    "name": {
+      "en": "Diving suit",
+      "fr": "Diving suit"
+    },
+    "type": "life support",
+    "weight_g": 10206,
+    "cost": 2000
+  },
+  {
+    "id": "doubleblade",
+    "name": {
+      "en": "Doubleblade",
+      "fr": "Doubleblade"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 400
+  },
+  {
+    "id": "doublesaber",
+    "name": {
+      "en": "Doublesaber",
+      "fr": "Doublesaber"
+    },
+    "type": "weapon",
+    "weight_g": 1021,
+    "cost": 725
+  },
+  {
+    "id": "doubleshoto",
+    "name": {
+      "en": "Doubleshoto",
+      "fr": "Doubleshoto"
+    },
+    "type": "weapon",
+    "weight_g": 794,
+    "cost": 700
+  },
+  {
+    "id": "doublesword",
+    "name": {
+      "en": "Doublesword",
+      "fr": "Doublesword"
+    },
+    "type": "weapon",
+    "weight_g": 2495,
+    "cost": 450
+  },
+  {
+    "id": "drum",
+    "name": {
+      "en": "Drum",
+      "fr": "Drum"
+    },
+    "type": "musical instrument",
+    "weight_g": 1361,
+    "cost": 60
+  },
+  {
+    "id": "dual-phase-saber",
+    "name": {
+      "en": "Dual-phase saber",
+      "fr": "Dual-phase saber"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 1250
+  },
+  {
+    "id": "durafiber-battle-armor",
+    "name": {
+      "en": "Durafiber battle armor",
+      "fr": "Durafiber battle armor"
+    },
+    "type": "armor",
+    "weight_g": 24948,
+    "cost": 6750
+  },
+  {
+    "id": "duranium-combat-suit",
+    "name": {
+      "en": "Duranium combat suit",
+      "fr": "Duranium combat suit"
+    },
+    "type": "armor",
+    "weight_g": 4536,
+    "cost": 1100
+  },
+  {
+    "id": "durasteel-exoskeleton",
+    "name": {
+      "en": "Durasteel exoskeleton",
+      "fr": "Durasteel exoskeleton"
+    },
+    "type": "armor",
+    "weight_g": 29484,
+    "cost": 15000
+  },
+  {
+    "id": "duravlex-fiber-armor",
+    "name": {
+      "en": "Duravlex fiber armor",
+      "fr": "Duravlex fiber armor"
+    },
+    "type": "armor",
+    "weight_g": 5897,
+    "cost": 1450
+  },
+  {
+    "id": "ear-prosthesis",
+    "name": {
+      "en": "Ear prosthesis",
+      "fr": "Ear prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 227,
+    "cost": 100
+  },
+  {
+    "id": "echostaff",
+    "name": {
+      "en": "Echostaff",
+      "fr": "Echostaff"
+    },
+    "type": "weapon",
+    "weight_g": 2268,
+    "cost": 600
+  },
+  {
+    "id": "electrifying-calibrator",
+    "name": {
+      "en": "Electrifying calibrator",
+      "fr": "Electrifying calibrator"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 700
+  },
+  {
+    "id": "electrifying-cartridge",
+    "name": {
+      "en": "Electrifying cartridge",
+      "fr": "Electrifying cartridge"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 28
+  },
+  {
+    "id": "electrifying-collimator",
+    "name": {
+      "en": "Electrifying collimator",
+      "fr": "Electrifying collimator"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 725
+  },
+  {
+    "id": "electrifying-dart",
+    "name": {
+      "en": "Electrifying dart",
+      "fr": "Electrifying dart"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 85
+  },
+  {
+    "id": "electrobaton",
+    "name": {
+      "en": "Electrobaton",
+      "fr": "Electrobaton"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 275
+  },
+  {
+    "id": "electrohammer",
+    "name": {
+      "en": "Electrohammer",
+      "fr": "Electrohammer"
+    },
+    "type": "weapon",
+    "weight_g": 3969,
+    "cost": 950
+  },
+  {
+    "id": "electroprod",
+    "name": {
+      "en": "Electroprod",
+      "fr": "Electroprod"
+    },
+    "type": "weapon",
+    "weight_g": 2722,
+    "cost": 650
+  },
+  {
+    "id": "electrostaff",
+    "name": {
+      "en": "Electrostaff",
+      "fr": "Electrostaff"
+    },
+    "type": "weapon",
+    "weight_g": 2268,
+    "cost": 600
+  },
+  {
+    "id": "electrovoulge",
+    "name": {
+      "en": "Electrovoulge",
+      "fr": "Electrovoulge"
+    },
+    "type": "weapon",
+    "weight_g": 4536,
+    "cost": 1250
+  },
+  {
+    "id": "electrowhip",
+    "name": {
+      "en": "Electrowhip",
+      "fr": "Electrowhip"
+    },
+    "type": "weapon",
+    "weight_g": 1928,
+    "cost": 725
+  },
+  {
+    "id": "emergency-battery",
+    "name": {
+      "en": "Emergency battery",
+      "fr": "Emergency battery"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 70
+  },
+  {
+    "id": "emergency-raft",
+    "name": {
+      "en": "Emergency raft",
+      "fr": "Emergency raft"
+    },
+    "type": "life support",
+    "weight_g": 4536,
+    "cost": 250
+  },
+  {
+    "id": "emergency-rations-one-day-s",
+    "name": {
+      "en": "Emergency rations (one day's)",
+      "fr": "Emergency rations (one day's)"
+    },
+    "type": "life support",
+    "weight_g": 0,
+    "cost": 25
+  },
+  {
+    "id": "emergency-shelter",
+    "name": {
+      "en": "Emergency shelter",
+      "fr": "Emergency shelter"
+    },
+    "type": "life support",
+    "weight_g": 6804,
+    "cost": 600
+  },
+  {
+    "id": "energy-bow",
+    "name": {
+      "en": "Energy bow",
+      "fr": "Energy bow"
+    },
+    "type": "weapon",
+    "weight_g": 2041,
+    "cost": 475
+  },
+  {
+    "id": "energy-slingshot",
+    "name": {
+      "en": "Energy slingshot",
+      "fr": "Energy slingshot"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 425
+  },
+  {
+    "id": "eye-prosthesis",
+    "name": {
+      "en": "Eye prosthesis",
+      "fr": "Eye prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 227,
+    "cost": 250
+  },
+  {
+    "id": "facial-prosthesis",
+    "name": {
+      "en": "Facial prosthesis",
+      "fr": "Facial prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 300
+  },
+  {
+    "id": "fanfar",
+    "name": {
+      "en": "Fanfar",
+      "fr": "Fanfar"
+    },
+    "type": "musical instrument",
+    "weight_g": 1814,
+    "cost": 220
+  },
+  {
+    "id": "fiber-armor",
+    "name": {
+      "en": "Fiber armor",
+      "fr": "Fiber armor"
+    },
+    "type": "armor",
+    "weight_g": 5897,
+    "cost": 450
+  },
+  {
+    "id": "fibercord-cable-50-ft-rolled",
+    "name": {
+      "en": "Fibercord cable, 50 ft (rolled)",
+      "fr": "Fibercord cable, 50 ft (rolled)"
+    },
+    "type": "utility",
+    "weight_g": 907,
+    "cost": 20
+  },
+  {
+    "id": "field-rations-one-day-s",
+    "name": {
+      "en": "Field rations (one day's)",
+      "fr": "Field rations (one day's)"
+    },
+    "type": "utility",
+    "weight_g": 454,
+    "cost": 5
+  },
+  {
+    "id": "fire-extinguisher",
+    "name": {
+      "en": "Fire extinguisher",
+      "fr": "Fire extinguisher"
+    },
+    "type": "utility",
+    "weight_g": 2722,
+    "cost": 170
+  },
+  {
+    "id": "fizzz",
+    "name": {
+      "en": "Fizzz",
+      "fr": "Fizzz"
+    },
+    "type": "musical instrument",
+    "weight_g": 1361,
+    "cost": 160
+  },
+  {
+    "id": "flame-proof-suit",
+    "name": {
+      "en": "Flame-proof suit",
+      "fr": "Flame-proof suit"
+    },
+    "type": "life support",
+    "weight_g": 9072,
+    "cost": 2250
+  },
+  {
+    "id": "flask",
+    "name": {
+      "en": "Flask",
+      "fr": "Flask"
+    },
+    "type": "storage",
+    "weight_g": 454,
+    "cost": 10
+  },
+  {
+    "id": "flechette-cannon",
+    "name": {
+      "en": "Flechette cannon",
+      "fr": "Flechette cannon"
+    },
+    "type": "weapon",
+    "weight_g": 5897,
+    "cost": 2300
+  },
+  {
+    "id": "flechette-clip-fragmentation",
+    "name": {
+      "en": "Flechette clip, fragmentation",
+      "fr": "Flechette clip, fragmentation"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 250
+  },
+  {
+    "id": "flechette-clip-ion",
+    "name": {
+      "en": "Flechette clip, ion",
+      "fr": "Flechette clip, ion"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 300
+  },
+  {
+    "id": "flechette-clip-plasma",
+    "name": {
+      "en": "Flechette clip, plasma",
+      "fr": "Flechette clip, plasma"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 275
+  },
+  {
+    "id": "flechette-mag-fragmentation",
+    "name": {
+      "en": "Flechette mag, fragmentation",
+      "fr": "Flechette mag, fragmentation"
+    },
+    "type": "ammunition",
+    "weight_g": 1814,
+    "cost": 550
+  },
+  {
+    "id": "flechette-mag-ion",
+    "name": {
+      "en": "Flechette mag, ion",
+      "fr": "Flechette mag, ion"
+    },
+    "type": "ammunition",
+    "weight_g": 1814,
+    "cost": 600
+  },
+  {
+    "id": "flechette-mag-plasma",
+    "name": {
+      "en": "Flechette mag, plasma",
+      "fr": "Flechette mag, plasma"
+    },
+    "type": "ammunition",
+    "weight_g": 1814,
+    "cost": 575
+  },
+  {
+    "id": "fleximetal-fiber-armor",
+    "name": {
+      "en": "Fleximetal fiber armor",
+      "fr": "Fleximetal fiber armor"
+    },
+    "type": "armor",
+    "weight_g": 5897,
+    "cost": 1450
+  },
+  {
+    "id": "flute",
+    "name": {
+      "en": "Flute",
+      "fr": "Flute"
+    },
+    "type": "musical instrument",
+    "weight_g": 454,
+    "cost": 20
+  },
+  {
+    "id": "flux-collimator",
+    "name": {
+      "en": "Flux collimator",
+      "fr": "Flux collimator"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 180
+  },
+  {
+    "id": "focus-generator",
+    "name": {
+      "en": "Focus generator",
+      "fr": "Focus generator"
+    },
+    "type": "data recording and storage",
+    "weight_g": 454,
+    "cost": 200
+  },
+  {
+    "id": "foot-prosthesis",
+    "name": {
+      "en": "Foot prosthesis",
+      "fr": "Foot prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 150
+  },
+  {
+    "id": "forearm-prosthesis",
+    "name": {
+      "en": "Forearm prosthesis",
+      "fr": "Forearm prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 300
+  },
+  {
+    "id": "forgery-kit",
+    "name": {
+      "en": "Forgery kit",
+      "fr": "Forgery kit"
+    },
+    "type": "kit",
+    "weight_g": 2268,
+    "cost": 150
+  },
+  {
+    "id": "friction-grip-gear",
+    "name": {
+      "en": "Friction-grip gear",
+      "fr": "Friction-grip gear"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 5443,
+    "cost": 2000
+  },
+  {
+    "id": "fusion-cutter",
+    "name": {
+      "en": "Fusion cutter",
+      "fr": "Fusion cutter"
+    },
+    "type": "utility",
+    "weight_g": 907,
+    "cost": 25
+  },
+  {
+    "id": "gadgeteer-s-implements",
+    "name": {
+      "en": "Gadgeteer's implements",
+      "fr": "Gadgeteer's implements"
+    },
+    "type": "tool",
+    "weight_g": 3175,
+    "cost": 350
+  },
+  {
+    "id": "gas-cartridge",
+    "name": {
+      "en": "Gas cartridge",
+      "fr": "Gas cartridge"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 36
+  },
+  {
+    "id": "geneticist-s-implements",
+    "name": {
+      "en": "Geneticist's implements",
+      "fr": "Geneticist's implements"
+    },
+    "type": "tool",
+    "weight_g": 0,
+    "cost": 900
+  },
+  {
+    "id": "giggledust",
+    "name": {
+      "en": "Giggledust",
+      "fr": "Giggledust"
+    },
+    "type": "spice",
+    "weight_g": 0,
+    "cost": 80
+  },
+  {
+    "id": "glitterstim",
+    "name": {
+      "en": "Glitterstim",
+      "fr": "Glitterstim"
+    },
+    "type": "spice",
+    "weight_g": 0,
+    "cost": 95
+  },
+  {
+    "id": "glowrod",
+    "name": {
+      "en": "Glowrod",
+      "fr": "Glowrod"
+    },
+    "type": "utility",
+    "weight_g": 907,
+    "cost": 10
+  },
+  {
+    "id": "grappling-hook",
+    "name": {
+      "en": "Grappling hook",
+      "fr": "Grappling hook"
+    },
+    "type": "utility",
+    "weight_g": 1814,
+    "cost": 50
+  },
+  {
+    "id": "gravity-generator",
+    "name": {
+      "en": "Gravity generator",
+      "fr": "Gravity generator"
+    },
+    "type": "utility",
+    "weight_g": 1361,
+    "cost": 500
+  },
+  {
+    "id": "great-saber",
+    "name": {
+      "en": "Great-saber",
+      "fr": "Great-saber"
+    },
+    "type": "weapon",
+    "weight_g": 1474,
+    "cost": 1725
+  },
+  {
+    "id": "grenade-launcher",
+    "name": {
+      "en": "Grenade launcher",
+      "fr": "Grenade launcher"
+    },
+    "type": "weapon",
+    "weight_g": 5216,
+    "cost": 1800
+  },
+  {
+    "id": "grenade-corrosive",
+    "name": {
+      "en": "Grenade, corrosive",
+      "fr": "Grenade, corrosive"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 200
+  },
+  {
+    "id": "grenade-cryo",
+    "name": {
+      "en": "Grenade, cryo",
+      "fr": "Grenade, cryo"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 325
+  },
+  {
+    "id": "grenade-deafening",
+    "name": {
+      "en": "Grenade, deafening",
+      "fr": "Grenade, deafening"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 225
+  },
+  {
+    "id": "grenade-electrifying",
+    "name": {
+      "en": "Grenade, electrifying",
+      "fr": "Grenade, electrifying"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 300
+  },
+  {
+    "id": "grenade-flash",
+    "name": {
+      "en": "Grenade, flash",
+      "fr": "Grenade, flash"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 350
+  },
+  {
+    "id": "grenade-fragmentation",
+    "name": {
+      "en": "Grenade, fragmentation",
+      "fr": "Grenade, fragmentation"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 100
+  },
+  {
+    "id": "grenade-gas",
+    "name": {
+      "en": "Grenade, gas",
+      "fr": "Grenade, gas"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 300
+  },
+  {
+    "id": "grenade-incendiary",
+    "name": {
+      "en": "Grenade, incendiary",
+      "fr": "Grenade, incendiary"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 275
+  },
+  {
+    "id": "grenade-ion",
+    "name": {
+      "en": "Grenade, ion",
+      "fr": "Grenade, ion"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 250
+  },
+  {
+    "id": "grenade-panic",
+    "name": {
+      "en": "Grenade, panic",
+      "fr": "Grenade, panic"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 375
+  },
+  {
+    "id": "grenade-plasma",
+    "name": {
+      "en": "Grenade, plasma",
+      "fr": "Grenade, plasma"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 125
+  },
+  {
+    "id": "grenade-stun",
+    "name": {
+      "en": "Grenade, stun",
+      "fr": "Grenade, stun"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 250
+  },
+  {
+    "id": "guard-shoto",
+    "name": {
+      "en": "Guard shoto",
+      "fr": "Guard shoto"
+    },
+    "type": "weapon",
+    "weight_g": 567,
+    "cost": 375
+  },
+  {
+    "id": "hand-bkg",
+    "name": {
+      "en": "Hand BKG",
+      "fr": "Hand BKG"
+    },
+    "type": "weapon",
+    "weight_g": 4536,
+    "cost": 1550
+  },
+  {
+    "id": "hand-blaster",
+    "name": {
+      "en": "Hand blaster",
+      "fr": "Hand blaster"
+    },
+    "type": "weapon",
+    "weight_g": 227,
+    "cost": 500
+  },
+  {
+    "id": "hand-cannon",
+    "name": {
+      "en": "Hand cannon",
+      "fr": "Hand cannon"
+    },
+    "type": "weapon",
+    "weight_g": 4763,
+    "cost": 1300
+  },
+  {
+    "id": "hand-prosthesis",
+    "name": {
+      "en": "Hand prosthesis",
+      "fr": "Hand prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 225
+  },
+  {
+    "id": "hazard-suit",
+    "name": {
+      "en": "Hazard suit",
+      "fr": "Hazard suit"
+    },
+    "type": "life support",
+    "weight_g": 10886,
+    "cost": 1875
+  },
+  {
+    "id": "heat-generator",
+    "name": {
+      "en": "Heat generator",
+      "fr": "Heat generator"
+    },
+    "type": "utility",
+    "weight_g": 1814,
+    "cost": 400
+  },
+  {
+    "id": "heavy-blaster-rifle",
+    "name": {
+      "en": "Heavy blaster rifle",
+      "fr": "Heavy blaster rifle"
+    },
+    "type": "weapon",
+    "weight_g": 4536,
+    "cost": 1025
+  },
+  {
+    "id": "heavy-bowcaster",
+    "name": {
+      "en": "Heavy bowcaster",
+      "fr": "Heavy bowcaster"
+    },
+    "type": "weapon",
+    "weight_g": 7031,
+    "cost": 1750
+  },
+  {
+    "id": "heavy-carbine",
+    "name": {
+      "en": "Heavy carbine",
+      "fr": "Heavy carbine"
+    },
+    "type": "weapon",
+    "weight_g": 3402,
+    "cost": 775
+  },
+  {
+    "id": "heavy-exoskeleton",
+    "name": {
+      "en": "Heavy exoskeleton",
+      "fr": "Heavy exoskeleton"
+    },
+    "type": "armor",
+    "weight_g": 29484,
+    "cost": 9000
+  },
+  {
+    "id": "heavy-physical-shield",
+    "name": {
+      "en": "Heavy physical shield",
+      "fr": "Heavy physical shield"
+    },
+    "type": "armor",
+    "weight_g": 16329,
+    "cost": 500
+  },
+  {
+    "id": "heavy-pistol",
+    "name": {
+      "en": "Heavy pistol",
+      "fr": "Heavy pistol"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 300
+  },
+  {
+    "id": "heavy-repeater",
+    "name": {
+      "en": "Heavy repeater",
+      "fr": "Heavy repeater"
+    },
+    "type": "weapon",
+    "weight_g": 4990,
+    "cost": 1225
+  },
+  {
+    "id": "heavy-shield-generator",
+    "name": {
+      "en": "Heavy shield generator",
+      "fr": "Heavy shield generator"
+    },
+    "type": "armor",
+    "weight_g": 5443,
+    "cost": 1250
+  },
+  {
+    "id": "heavy-shotgun",
+    "name": {
+      "en": "Heavy shotgun",
+      "fr": "Heavy shotgun"
+    },
+    "type": "weapon",
+    "weight_g": 4309,
+    "cost": 1125
+  },
+  {
+    "id": "heavy-slugpistol",
+    "name": {
+      "en": "Heavy slugpistol",
+      "fr": "Heavy slugpistol"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 375
+  },
+  {
+    "id": "hidden-blade",
+    "name": {
+      "en": "Hidden blade",
+      "fr": "Hidden blade"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 75
+  },
+  {
+    "id": "hold-out",
+    "name": {
+      "en": "Hold-out",
+      "fr": "Hold-out"
+    },
+    "type": "weapon",
+    "weight_g": 227,
+    "cost": 225
+  },
+  {
+    "id": "holocomm",
+    "name": {
+      "en": "Holocomm",
+      "fr": "Holocomm"
+    },
+    "type": "communications",
+    "weight_g": 907,
+    "cost": 300
+  },
+  {
+    "id": "holocron",
+    "name": {
+      "en": "Holocron",
+      "fr": "Holocron"
+    },
+    "type": "data recording and storage",
+    "weight_g": 907,
+    "cost": 1000
+  },
+  {
+    "id": "holorecorder",
+    "name": {
+      "en": "Holorecorder",
+      "fr": "Holorecorder"
+    },
+    "type": "data recording and storage",
+    "weight_g": 454,
+    "cost": 100
+  },
+  {
+    "id": "holotrace-device",
+    "name": {
+      "en": "Holotrace device",
+      "fr": "Holotrace device"
+    },
+    "type": "communications",
+    "weight_g": 2268,
+    "cost": 1000
+  },
+  {
+    "id": "holster",
+    "name": {
+      "en": "Holster",
+      "fr": "Holster"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 907,
+    "cost": 75
+  },
+  {
+    "id": "homing-beacon",
+    "name": {
+      "en": "Homing beacon",
+      "fr": "Homing beacon"
+    },
+    "type": "utility",
+    "weight_g": 454,
+    "cost": 450
+  },
+  {
+    "id": "hooked-vibroblade",
+    "name": {
+      "en": "Hooked vibroblade",
+      "fr": "Hooked vibroblade"
+    },
+    "type": "weapon",
+    "weight_g": 1701,
+    "cost": 225
+  },
+  {
+    "id": "hovercart",
+    "name": {
+      "en": "Hovercart",
+      "fr": "Hovercart"
+    },
+    "type": "storage",
+    "weight_g": 68039,
+    "cost": 2000
+  },
+  {
+    "id": "hunting-rifle",
+    "name": {
+      "en": "Hunting rifle",
+      "fr": "Hunting rifle"
+    },
+    "type": "weapon",
+    "weight_g": 4990,
+    "cost": 1000
+  },
+  {
+    "id": "hydrospanner",
+    "name": {
+      "en": "Hydrospanner",
+      "fr": "Hydrospanner"
+    },
+    "type": "utility",
+    "weight_g": 907,
+    "cost": 10
+  },
+  {
+    "id": "incendiary-cell",
+    "name": {
+      "en": "Incendiary cell",
+      "fr": "Incendiary cell"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 275
+  },
+  {
+    "id": "incinerator-carbine",
+    "name": {
+      "en": "Incinerator carbine",
+      "fr": "Incinerator carbine"
+    },
+    "type": "weapon",
+    "weight_g": 3402,
+    "cost": 1650
+  },
+  {
+    "id": "incinerator-pistol",
+    "name": {
+      "en": "Incinerator pistol",
+      "fr": "Incinerator pistol"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 1250
+  },
+  {
+    "id": "incinerator-rifle",
+    "name": {
+      "en": "Incinerator rifle",
+      "fr": "Incinerator rifle"
+    },
+    "type": "weapon",
+    "weight_g": 4309,
+    "cost": 1950
+  },
+  {
+    "id": "incinerator-sniper",
+    "name": {
+      "en": "Incinerator sniper",
+      "fr": "Incinerator sniper"
+    },
+    "type": "weapon",
+    "weight_g": 6577,
+    "cost": 3300
+  },
+  {
+    "id": "ion-cannon",
+    "name": {
+      "en": "Ion cannon",
+      "fr": "Ion cannon"
+    },
+    "type": "weapon",
+    "weight_g": 7484,
+    "cost": 3800
+  },
+  {
+    "id": "ion-carbine",
+    "name": {
+      "en": "Ion carbine",
+      "fr": "Ion carbine"
+    },
+    "type": "weapon",
+    "weight_g": 2722,
+    "cost": 600
+  },
+  {
+    "id": "ion-pistol",
+    "name": {
+      "en": "Ion pistol",
+      "fr": "Ion pistol"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 250
+  },
+  {
+    "id": "ion-rifle",
+    "name": {
+      "en": "Ion rifle",
+      "fr": "Ion rifle"
+    },
+    "type": "weapon",
+    "weight_g": 3629,
+    "cost": 1150
+  },
+  {
+    "id": "iws",
+    "name": {
+      "en": "IWS",
+      "fr": "IWS"
+    },
+    "type": "weapon",
+    "weight_g": 10433,
+    "cost": 3625
+  },
+  {
+    "id": "jagged-vibroblade",
+    "name": {
+      "en": "Jagged vibroblade",
+      "fr": "Jagged vibroblade"
+    },
+    "type": "weapon",
+    "weight_g": 3175,
+    "cost": 650
+  },
+  {
+    "id": "jetpack",
+    "name": {
+      "en": "Jetpack",
+      "fr": "Jetpack"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 9072,
+    "cost": 4500
+  },
+  {
+    "id": "jeweler-s-implements",
+    "name": {
+      "en": "Jeweler's implements",
+      "fr": "Jeweler's implements"
+    },
+    "type": "tool",
+    "weight_g": 0,
+    "cost": 250
+  },
+  {
+    "id": "jug",
+    "name": {
+      "en": "Jug",
+      "fr": "Jug"
+    },
+    "type": "storage",
+    "weight_g": 1361,
+    "cost": 5
+  },
+  {
+    "id": "karrak",
+    "name": {
+      "en": "Karrak",
+      "fr": "Karrak"
+    },
+    "type": "spice",
+    "weight_g": 0,
+    "cost": 90
+  },
+  {
+    "id": "kirgatz-set",
+    "name": {
+      "en": "Kirgatz set",
+      "fr": "Kirgatz set"
+    },
+    "type": "gaming set",
+    "weight_g": 0,
+    "cost": 250
+  },
+  {
+    "id": "kloo-horn",
+    "name": {
+      "en": "Kloo horn",
+      "fr": "Kloo horn"
+    },
+    "type": "musical instrument",
+    "weight_g": 907,
+    "cost": 330
+  },
+  {
+    "id": "laminanium-assault",
+    "name": {
+      "en": "Laminanium assault",
+      "fr": "Laminanium assault"
+    },
+    "type": "armor",
+    "weight_g": 27216,
+    "cost": 8000
+  },
+  {
+    "id": "leg-prosthesis",
+    "name": {
+      "en": "Leg prosthesis",
+      "fr": "Leg prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 450
+  },
+  {
+    "id": "light-physical-shield",
+    "name": {
+      "en": "Light physical shield",
+      "fr": "Light physical shield"
+    },
+    "type": "armor",
+    "weight_g": 0,
+    "cost": 50
+  },
+  {
+    "id": "light-pistol",
+    "name": {
+      "en": "Light pistol",
+      "fr": "Light pistol"
+    },
+    "type": "weapon",
+    "weight_g": 227,
+    "cost": 250
+  },
+  {
+    "id": "light-repeater",
+    "name": {
+      "en": "Light repeater",
+      "fr": "Light repeater"
+    },
+    "type": "weapon",
+    "weight_g": 2722,
+    "cost": 625
+  },
+  {
+    "id": "light-shield-generator",
+    "name": {
+      "en": "Light shield generator",
+      "fr": "Light shield generator"
+    },
+    "type": "armor",
+    "weight_g": 0,
+    "cost": 125
+  },
+  {
+    "id": "light-slugpistol",
+    "name": {
+      "en": "Light slugpistol",
+      "fr": "Light slugpistol"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 250
+  },
+  {
+    "id": "lightaxe",
+    "name": {
+      "en": "Lightaxe",
+      "fr": "Lightaxe"
+    },
+    "type": "weapon",
+    "weight_g": 1701,
+    "cost": 1550
+  },
+  {
     "id": "lightbaton",
     "name": {
       "en": "Lightbaton",
@@ -68,6 +2608,1746 @@
     "type": "weapon",
     "weight_g": 567,
     "cost": 400
+  },
+  {
+    "id": "lightblade",
+    "name": {
+      "en": "Lightblade",
+      "fr": "Lightblade"
+    },
+    "type": "weapon",
+    "weight_g": 680,
+    "cost": 375
+  },
+  {
+    "id": "lightbow",
+    "name": {
+      "en": "Lightbow",
+      "fr": "Lightbow"
+    },
+    "type": "weapon",
+    "weight_g": 6350,
+    "cost": 1800
+  },
+  {
+    "id": "lightclub",
+    "name": {
+      "en": "Lightclub",
+      "fr": "Lightclub"
+    },
+    "type": "weapon",
+    "weight_g": 1701,
+    "cost": 1300
+  },
+  {
+    "id": "lightcutlass",
+    "name": {
+      "en": "Lightcutlass",
+      "fr": "Lightcutlass"
+    },
+    "type": "weapon",
+    "weight_g": 680,
+    "cost": 725
+  },
+  {
+    "id": "lightdagger",
+    "name": {
+      "en": "Lightdagger",
+      "fr": "Lightdagger"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 425
+  },
+  {
+    "id": "lightfist",
+    "name": {
+      "en": "Lightfist",
+      "fr": "Lightfist"
+    },
+    "type": "weapon",
+    "weight_g": 680,
+    "cost": 650
+  },
+  {
+    "id": "lightfoil",
+    "name": {
+      "en": "Lightfoil",
+      "fr": "Lightfoil"
+    },
+    "type": "weapon",
+    "weight_g": 680,
+    "cost": 475
+  },
+  {
+    "id": "lightglaive",
+    "name": {
+      "en": "Lightglaive",
+      "fr": "Lightglaive"
+    },
+    "type": "weapon",
+    "weight_g": 2608,
+    "cost": 2050
+  },
+  {
+    "id": "lightkatana",
+    "name": {
+      "en": "Lightkatana",
+      "fr": "Lightkatana"
+    },
+    "type": "weapon",
+    "weight_g": 1247,
+    "cost": 925
+  },
+  {
+    "id": "lightning-cannon",
+    "name": {
+      "en": "Lightning cannon",
+      "fr": "Lightning cannon"
+    },
+    "type": "weapon",
+    "weight_g": 7257,
+    "cost": 4400
+  },
+  {
+    "id": "lightning-carbine",
+    "name": {
+      "en": "Lightning carbine",
+      "fr": "Lightning carbine"
+    },
+    "type": "weapon",
+    "weight_g": 3175,
+    "cost": 1150
+  },
+  {
+    "id": "lightning-pistol",
+    "name": {
+      "en": "Lightning pistol",
+      "fr": "Lightning pistol"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 550
+  },
+  {
+    "id": "lightning-rifle",
+    "name": {
+      "en": "Lightning rifle",
+      "fr": "Lightning rifle"
+    },
+    "type": "weapon",
+    "weight_g": 3856,
+    "cost": 2125
+  },
+  {
+    "id": "lightnodachi",
+    "name": {
+      "en": "Lightnodachi",
+      "fr": "Lightnodachi"
+    },
+    "type": "weapon",
+    "weight_g": 2041,
+    "cost": 3050
+  },
+  {
+    "id": "lightring",
+    "name": {
+      "en": "Lightring",
+      "fr": "Lightring"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 575
+  },
+  {
+    "id": "lightsaber",
+    "name": {
+      "en": "Lightsaber",
+      "fr": "Lightsaber"
+    },
+    "type": "weapon",
+    "weight_g": 1021,
+    "cost": 450
+  },
+  {
+    "id": "lightsaber-pike",
+    "name": {
+      "en": "Lightsaber pike",
+      "fr": "Lightsaber pike"
+    },
+    "type": "weapon",
+    "weight_g": 1928,
+    "cost": 1175
+  },
+  {
+    "id": "lightstaff",
+    "name": {
+      "en": "Lightstaff",
+      "fr": "Lightstaff"
+    },
+    "type": "weapon",
+    "weight_g": 1928,
+    "cost": 1275
+  },
+  {
+    "id": "lute",
+    "name": {
+      "en": "Lute",
+      "fr": "Lute"
+    },
+    "type": "musical instrument",
+    "weight_g": 907,
+    "cost": 350
+  },
+  {
+    "id": "macrobinoculars",
+    "name": {
+      "en": "Macrobinoculars",
+      "fr": "Macrobinoculars"
+    },
+    "type": "utility",
+    "weight_g": 454,
+    "cost": 750
+  },
+  {
+    "id": "mancatcher",
+    "name": {
+      "en": "Mancatcher",
+      "fr": "Mancatcher"
+    },
+    "type": "weapon",
+    "weight_g": 3175,
+    "cost": 800
+  },
+  {
+    "id": "mandoviol",
+    "name": {
+      "en": "Mandoviol",
+      "fr": "Mandoviol"
+    },
+    "type": "musical instrument",
+    "weight_g": 0,
+    "cost": 425
+  },
+  {
+    "id": "marksman-blaster",
+    "name": {
+      "en": "Marksman blaster",
+      "fr": "Marksman blaster"
+    },
+    "type": "weapon",
+    "weight_g": 5443,
+    "cost": 1100
+  },
+  {
+    "id": "martial-lightsaber",
+    "name": {
+      "en": "Martial lightsaber",
+      "fr": "Martial lightsaber"
+    },
+    "type": "weapon",
+    "weight_g": 1021,
+    "cost": 550
+  },
+  {
+    "id": "mechanic-s-kit",
+    "name": {
+      "en": "Mechanic's kit",
+      "fr": "Mechanic's kit"
+    },
+    "type": "kit",
+    "weight_g": 0,
+    "cost": 650
+  },
+  {
+    "id": "medium-physical-shield",
+    "name": {
+      "en": "Medium physical shield",
+      "fr": "Medium physical shield"
+    },
+    "type": "armor",
+    "weight_g": 8165,
+    "cost": 150
+  },
+  {
+    "id": "medium-shield-generator",
+    "name": {
+      "en": "Medium shield generator",
+      "fr": "Medium shield generator"
+    },
+    "type": "armor",
+    "weight_g": 0,
+    "cost": 375
+  },
+  {
+    "id": "medpac",
+    "name": {
+      "en": "Medpac",
+      "fr": "Medpac"
+    },
+    "type": "medical",
+    "weight_g": 227,
+    "cost": 300
+  },
+  {
+    "id": "mesh-armor",
+    "name": {
+      "en": "Mesh armor",
+      "fr": "Mesh armor"
+    },
+    "type": "armor",
+    "weight_g": 9072,
+    "cost": 500
+  },
+  {
+    "id": "mess-kit",
+    "name": {
+      "en": "Mess kit",
+      "fr": "Mess kit"
+    },
+    "type": "utility",
+    "weight_g": 454,
+    "cost": 20
+  },
+  {
+    "id": "mind-shielding-suit",
+    "name": {
+      "en": "Mind-shielding suit",
+      "fr": "Mind-shielding suit"
+    },
+    "type": "life support",
+    "weight_g": 4536,
+    "cost": 4500
+  },
+  {
+    "id": "mine-corrosive",
+    "name": {
+      "en": "Mine, corrosive",
+      "fr": "Mine, corrosive"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 425
+  },
+  {
+    "id": "mine-cryo",
+    "name": {
+      "en": "Mine, cryo",
+      "fr": "Mine, cryo"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 625
+  },
+  {
+    "id": "mine-deafening",
+    "name": {
+      "en": "Mine, deafening",
+      "fr": "Mine, deafening"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 450
+  },
+  {
+    "id": "mine-electrifying",
+    "name": {
+      "en": "Mine, electrifying",
+      "fr": "Mine, electrifying"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 550
+  },
+  {
+    "id": "mine-flash",
+    "name": {
+      "en": "Mine, flash",
+      "fr": "Mine, flash"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 600
+  },
+  {
+    "id": "mine-fragmentation",
+    "name": {
+      "en": "Mine, fragmentation",
+      "fr": "Mine, fragmentation"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 200
+  },
+  {
+    "id": "mine-gas",
+    "name": {
+      "en": "Mine, gas",
+      "fr": "Mine, gas"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 625
+  },
+  {
+    "id": "mine-incendiary",
+    "name": {
+      "en": "Mine, incendiary",
+      "fr": "Mine, incendiary"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 550
+  },
+  {
+    "id": "mine-ion",
+    "name": {
+      "en": "Mine, ion",
+      "fr": "Mine, ion"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 525
+  },
+  {
+    "id": "mine-panic",
+    "name": {
+      "en": "Mine, panic",
+      "fr": "Mine, panic"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 700
+  },
+  {
+    "id": "mine-plasma",
+    "name": {
+      "en": "Mine, plasma",
+      "fr": "Mine, plasma"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 250
+  },
+  {
+    "id": "mine-stun",
+    "name": {
+      "en": "Mine, stun",
+      "fr": "Mine, stun"
+    },
+    "type": "explosive",
+    "weight_g": 907,
+    "cost": 475
+  },
+  {
+    "id": "mirror",
+    "name": {
+      "en": "Mirror",
+      "fr": "Mirror"
+    },
+    "type": "utility",
+    "weight_g": 227,
+    "cost": 50
+  },
+  {
+    "id": "missile-fragmentation",
+    "name": {
+      "en": "Missile, fragmentation",
+      "fr": "Missile, fragmentation"
+    },
+    "type": "ammunition",
+    "weight_g": 227,
+    "cost": 100
+  },
+  {
+    "id": "missile-incendiary",
+    "name": {
+      "en": "Missile, incendiary",
+      "fr": "Missile, incendiary"
+    },
+    "type": "ammunition",
+    "weight_g": 227,
+    "cost": 160
+  },
+  {
+    "id": "missile-ion",
+    "name": {
+      "en": "Missile, ion",
+      "fr": "Missile, ion"
+    },
+    "type": "ammunition",
+    "weight_g": 227,
+    "cost": 140
+  },
+  {
+    "id": "mortar-launcher",
+    "name": {
+      "en": "Mortar launcher",
+      "fr": "Mortar launcher"
+    },
+    "type": "weapon",
+    "weight_g": 11340,
+    "cost": 3500
+  },
+  {
+    "id": "mummergy",
+    "name": {
+      "en": "Mummergy",
+      "fr": "Mummergy"
+    },
+    "type": "alcoholic beverage",
+    "weight_g": 0,
+    "cost": 65
+  },
+  {
+    "id": "munitions-kit",
+    "name": {
+      "en": "Munitions kit",
+      "fr": "Munitions kit"
+    },
+    "type": "kit",
+    "weight_g": 0,
+    "cost": 425
+  },
+  {
+    "id": "muon-gold",
+    "name": {
+      "en": "Muon gold",
+      "fr": "Muon gold"
+    },
+    "type": "spice",
+    "weight_g": 0,
+    "cost": 65
+  },
+  {
+    "id": "needler",
+    "name": {
+      "en": "Needler",
+      "fr": "Needler"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 475
+  },
+  {
+    "id": "nervebaton",
+    "name": {
+      "en": "Nervebaton",
+      "fr": "Nervebaton"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 375
+  },
+  {
+    "id": "net",
+    "name": {
+      "en": "Net",
+      "fr": "Net"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 300
+  },
+  {
+    "id": "neuronic-whip",
+    "name": {
+      "en": "Neuronic whip",
+      "fr": "Neuronic whip"
+    },
+    "type": "weapon",
+    "weight_g": 0,
+    "cost": 725
+  },
+  {
+    "id": "neutronium-mesh",
+    "name": {
+      "en": "Neutronium mesh",
+      "fr": "Neutronium mesh"
+    },
+    "type": "armor",
+    "weight_g": 9072,
+    "cost": 2500
+  },
+  {
+    "id": "nightstinger-rifle",
+    "name": {
+      "en": "Nightstinger rifle",
+      "fr": "Nightstinger rifle"
+    },
+    "type": "weapon",
+    "weight_g": 4990,
+    "cost": 1075
+  },
+  {
+    "id": "novanian-grog",
+    "name": {
+      "en": "Novanian grog",
+      "fr": "Novanian grog"
+    },
+    "type": "alcoholic beverage",
+    "weight_g": 0,
+    "cost": 70
+  },
+  {
+    "id": "ommni-box",
+    "name": {
+      "en": "Ommni box",
+      "fr": "Ommni box"
+    },
+    "type": "musical instrument",
+    "weight_g": 0,
+    "cost": 250
+  },
+  {
+    "id": "oscillation-calibrator",
+    "name": {
+      "en": "Oscillation calibrator",
+      "fr": "Oscillation calibrator"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 170
+  },
+  {
+    "id": "oxygen-tank",
+    "name": {
+      "en": "Oxygen tank",
+      "fr": "Oxygen tank"
+    },
+    "type": "life support",
+    "weight_g": 9072,
+    "cost": 100
+  },
+  {
+    "id": "panic-calibrator",
+    "name": {
+      "en": "Panic calibrator",
+      "fr": "Panic calibrator"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 850
+  },
+  {
+    "id": "panic-collimator",
+    "name": {
+      "en": "Panic collimator",
+      "fr": "Panic collimator"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 875
+  },
+  {
+    "id": "panic-dart",
+    "name": {
+      "en": "Panic dart",
+      "fr": "Panic dart"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 100
+  },
+  {
+    "id": "pazaak-deck",
+    "name": {
+      "en": "Pazaak deck",
+      "fr": "Pazaak deck"
+    },
+    "type": "gaming set",
+    "weight_g": 0,
+    "cost": 100
+  },
+  {
+    "id": "personal-translator",
+    "name": {
+      "en": "Personal translator",
+      "fr": "Personal translator"
+    },
+    "type": "communications",
+    "weight_g": 227,
+    "cost": 150
+  },
+  {
+    "id": "phase-knife",
+    "name": {
+      "en": "Phase knife",
+      "fr": "Phase knife"
+    },
+    "type": "weapon",
+    "weight_g": 794,
+    "cost": 1025
+  },
+  {
+    "id": "pikesaber",
+    "name": {
+      "en": "Pikesaber",
+      "fr": "Pikesaber"
+    },
+    "type": "weapon",
+    "weight_g": 2381,
+    "cost": 1675
+  },
+  {
+    "id": "pitcher",
+    "name": {
+      "en": "Pitcher",
+      "fr": "Pitcher"
+    },
+    "type": "storage",
+    "weight_g": 907,
+    "cost": 8
+  },
+  {
+    "id": "plastoid-composite",
+    "name": {
+      "en": "Plastoid composite",
+      "fr": "Plastoid composite"
+    },
+    "type": "armor",
+    "weight_g": 20412,
+    "cost": 4500
+  },
+  {
+    "id": "pocket-scrambler",
+    "name": {
+      "en": "Pocket scrambler",
+      "fr": "Pocket scrambler"
+    },
+    "type": "communications",
+    "weight_g": 454,
+    "cost": 800
+  },
+  {
+    "id": "poison",
+    "name": {
+      "en": "Poison",
+      "fr": "Poison"
+    },
+    "type": "medical",
+    "weight_g": 227,
+    "cost": 125
+  },
+  {
+    "id": "poisoner-s-kit",
+    "name": {
+      "en": "Poisoner's kit",
+      "fr": "Poisoner's kit"
+    },
+    "type": "kit",
+    "weight_g": 907,
+    "cost": 500
+  },
+  {
+    "id": "pot",
+    "name": {
+      "en": "Pot",
+      "fr": "Pot"
+    },
+    "type": "storage",
+    "weight_g": 4536,
+    "cost": 15
+  },
+  {
+    "id": "pouch",
+    "name": {
+      "en": "Pouch",
+      "fr": "Pouch"
+    },
+    "type": "storage",
+    "weight_g": 454,
+    "cost": 5
+  },
+  {
+    "id": "power-belt",
+    "name": {
+      "en": "Power belt",
+      "fr": "Power belt"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 454,
+    "cost": 400
+  },
+  {
+    "id": "power-cell",
+    "name": {
+      "en": "Power cell",
+      "fr": "Power cell"
+    },
+    "type": "ammunition",
+    "weight_g": 454,
+    "cost": 10
+  },
+  {
+    "id": "power-generator",
+    "name": {
+      "en": "Power generator",
+      "fr": "Power generator"
+    },
+    "type": "ammunition",
+    "weight_g": 2268,
+    "cost": 1250
+  },
+  {
+    "id": "projector-canister-corrosive",
+    "name": {
+      "en": "Projector canister, corrosive",
+      "fr": "Projector canister, corrosive"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 300
+  },
+  {
+    "id": "projector-canister-cryo",
+    "name": {
+      "en": "Projector canister, cryo",
+      "fr": "Projector canister, cryo"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 350
+  },
+  {
+    "id": "projector-canister-incendiary",
+    "name": {
+      "en": "Projector canister, incendiary",
+      "fr": "Projector canister, incendiary"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 325
+  },
+  {
+    "id": "projector-tank-corrosive",
+    "name": {
+      "en": "Projector tank, corrosive",
+      "fr": "Projector tank, corrosive"
+    },
+    "type": "ammunition",
+    "weight_g": 1361,
+    "cost": 625
+  },
+  {
+    "id": "projector-tank-cryo",
+    "name": {
+      "en": "Projector tank, cryo",
+      "fr": "Projector tank, cryo"
+    },
+    "type": "ammunition",
+    "weight_g": 1361,
+    "cost": 675
+  },
+  {
+    "id": "projector-tank-incendiary",
+    "name": {
+      "en": "Projector tank, incendiary",
+      "fr": "Projector tank, incendiary"
+    },
+    "type": "ammunition",
+    "weight_g": 1361,
+    "cost": 650
+  },
+  {
+    "id": "propulsion-pack",
+    "name": {
+      "en": "Propulsion pack",
+      "fr": "Propulsion pack"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 9072,
+    "cost": 400
+  },
+  {
+    "id": "quadanium-heavy-shield",
+    "name": {
+      "en": "Quadanium heavy shield",
+      "fr": "Quadanium heavy shield"
+    },
+    "type": "armor",
+    "weight_g": 16329,
+    "cost": 2000
+  },
+  {
+    "id": "quiver",
+    "name": {
+      "en": "Quiver",
+      "fr": "Quiver"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 0,
+    "cost": 10
+  },
+  {
+    "id": "raava",
+    "name": {
+      "en": "Raava",
+      "fr": "Raava"
+    },
+    "type": "alcoholic beverage",
+    "weight_g": 0,
+    "cost": 95
+  },
+  {
+    "id": "radiation-cannon",
+    "name": {
+      "en": "Radiation cannon",
+      "fr": "Radiation cannon"
+    },
+    "type": "weapon",
+    "weight_g": 6123,
+    "cost": 3900
+  },
+  {
+    "id": "radrifle",
+    "name": {
+      "en": "Radrifle",
+      "fr": "Radrifle"
+    },
+    "type": "weapon",
+    "weight_g": 6350,
+    "cost": 1575
+  },
+  {
+    "id": "railgun",
+    "name": {
+      "en": "Railgun",
+      "fr": "Railgun"
+    },
+    "type": "weapon",
+    "weight_g": 7257,
+    "cost": 1900
+  },
+  {
+    "id": "ram-portable",
+    "name": {
+      "en": "Ram, portable",
+      "fr": "Ram, portable"
+    },
+    "type": "utility",
+    "weight_g": 15876,
+    "cost": 40
+  },
+  {
+    "id": "remote-detonator",
+    "name": {
+      "en": "Remote detonator",
+      "fr": "Remote detonator"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 454,
+    "cost": 150
+  },
+  {
+    "id": "repair-kit",
+    "name": {
+      "en": "Repair kit",
+      "fr": "Repair kit"
+    },
+    "type": "medical",
+    "weight_g": 1361,
+    "cost": 750
+  },
+  {
+    "id": "repeating-blaster",
+    "name": {
+      "en": "Repeating blaster",
+      "fr": "Repeating blaster"
+    },
+    "type": "weapon",
+    "weight_g": 4082,
+    "cost": 1025
+  },
+  {
+    "id": "repelling-wristpad",
+    "name": {
+      "en": "Repelling wristpad",
+      "fr": "Repelling wristpad"
+    },
+    "type": "data recording and storage",
+    "weight_g": 907,
+    "cost": 1600
+  },
+  {
+    "id": "repulsor-pack",
+    "name": {
+      "en": "Repulsor pack",
+      "fr": "Repulsor pack"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 4536,
+    "cost": 300
+  },
+  {
+    "id": "respirator",
+    "name": {
+      "en": "Respirator",
+      "fr": "Respirator"
+    },
+    "type": "life support",
+    "weight_g": 454,
+    "cost": 200
+  },
+  {
+    "id": "restraining-bolt",
+    "name": {
+      "en": "Restraining bolt",
+      "fr": "Restraining bolt"
+    },
+    "type": "utility",
+    "weight_g": 454,
+    "cost": 350
+  },
+  {
+    "id": "retrosaber",
+    "name": {
+      "en": "Retrosaber",
+      "fr": "Retrosaber"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 950
+  },
+  {
+    "id": "revolver",
+    "name": {
+      "en": "Revolver",
+      "fr": "Revolver"
+    },
+    "type": "weapon",
+    "weight_g": 2948,
+    "cost": 625
+  },
+  {
+    "id": "riot-baton",
+    "name": {
+      "en": "Riot baton",
+      "fr": "Riot baton"
+    },
+    "type": "weapon",
+    "weight_g": 680,
+    "cost": 250
+  },
+  {
+    "id": "riot-shocker",
+    "name": {
+      "en": "Riot shocker",
+      "fr": "Riot shocker"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 425
+  },
+  {
+    "id": "rocket-boots",
+    "name": {
+      "en": "Rocket boots",
+      "fr": "Rocket boots"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 1361,
+    "cost": 2500
+  },
+  {
+    "id": "rocket-launcher",
+    "name": {
+      "en": "Rocket launcher",
+      "fr": "Rocket launcher"
+    },
+    "type": "weapon",
+    "weight_g": 6350,
+    "cost": 2250
+  },
+  {
+    "id": "rocket-rifle",
+    "name": {
+      "en": "Rocket rifle",
+      "fr": "Rocket rifle"
+    },
+    "type": "weapon",
+    "weight_g": 5443,
+    "cost": 2250
+  },
+  {
+    "id": "rocket-fragmentation",
+    "name": {
+      "en": "Rocket, fragmentation",
+      "fr": "Rocket, fragmentation"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 350
+  },
+  {
+    "id": "rocket-incendiary",
+    "name": {
+      "en": "Rocket, incendiary",
+      "fr": "Rocket, incendiary"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 535
+  },
+  {
+    "id": "rocket-ion",
+    "name": {
+      "en": "Rocket, ion",
+      "fr": "Rocket, ion"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 475
+  },
+  {
+    "id": "rocketpack",
+    "name": {
+      "en": "Rocketpack",
+      "fr": "Rocketpack"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 15876,
+    "cost": 10000
+  },
+  {
+    "id": "rotary-cannon",
+    "name": {
+      "en": "Rotary cannon",
+      "fr": "Rotary cannon"
+    },
+    "type": "weapon",
+    "weight_g": 5670,
+    "cost": 1500
+  },
+  {
+    "id": "sabacc-deck",
+    "name": {
+      "en": "Sabacc deck",
+      "fr": "Sabacc deck"
+    },
+    "type": "gaming set",
+    "weight_g": 0,
+    "cost": 150
+  },
+  {
+    "id": "saberaxe",
+    "name": {
+      "en": "Saberaxe",
+      "fr": "Saberaxe"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 600
+  },
+  {
+    "id": "sabergauntlet",
+    "name": {
+      "en": "Sabergauntlet",
+      "fr": "Sabergauntlet"
+    },
+    "type": "weapon",
+    "weight_g": 680,
+    "cost": 475
+  },
+  {
+    "id": "sabermace",
+    "name": {
+      "en": "Sabermace",
+      "fr": "Sabermace"
+    },
+    "type": "weapon",
+    "weight_g": 1247,
+    "cost": 950
+  },
+  {
+    "id": "saberspear",
+    "name": {
+      "en": "Saberspear",
+      "fr": "Saberspear"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 450
+  },
+  {
+    "id": "saberstaff",
+    "name": {
+      "en": "Saberstaff",
+      "fr": "Saberstaff"
+    },
+    "type": "weapon",
+    "weight_g": 0,
+    "cost": 1375
+  },
+  {
+    "id": "saberwhip",
+    "name": {
+      "en": "Saberwhip",
+      "fr": "Saberwhip"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 750
+  },
+  {
+    "id": "sack",
+    "name": {
+      "en": "Sack",
+      "fr": "Sack"
+    },
+    "type": "storage",
+    "weight_g": 227,
+    "cost": 5
+  },
+  {
+    "id": "scatter-blaster",
+    "name": {
+      "en": "Scatter blaster",
+      "fr": "Scatter blaster"
+    },
+    "type": "weapon",
+    "weight_g": 4309,
+    "cost": 1175
+  },
+  {
+    "id": "scattergun",
+    "name": {
+      "en": "Scattergun",
+      "fr": "Scattergun"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 625
+  },
+  {
+    "id": "scavenging-kit",
+    "name": {
+      "en": "Scavenging kit",
+      "fr": "Scavenging kit"
+    },
+    "type": "kit",
+    "weight_g": 1814,
+    "cost": 75
+  },
+  {
+    "id": "security-kit",
+    "name": {
+      "en": "Security kit",
+      "fr": "Security kit"
+    },
+    "type": "kit",
+    "weight_g": 1361,
+    "cost": 650
+  },
+  {
+    "id": "security-spike",
+    "name": {
+      "en": "Security spike",
+      "fr": "Security spike"
+    },
+    "type": "utility",
+    "weight_g": 227,
+    "cost": 150
+  },
+  {
+    "id": "sentry-gun",
+    "name": {
+      "en": "Sentry gun",
+      "fr": "Sentry gun"
+    },
+    "type": "weapon",
+    "weight_g": 7484,
+    "cost": 3250
+  },
+  {
+    "id": "shatter-cannon",
+    "name": {
+      "en": "Shatter cannon",
+      "fr": "Shatter cannon"
+    },
+    "type": "weapon",
+    "weight_g": 6350,
+    "cost": 1625
+  },
+  {
+    "id": "shatter-pistol",
+    "name": {
+      "en": "Shatter pistol",
+      "fr": "Shatter pistol"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 375
+  },
+  {
+    "id": "shatter-rifle",
+    "name": {
+      "en": "Shatter rifle",
+      "fr": "Shatter rifle"
+    },
+    "type": "weapon",
+    "weight_g": 4309,
+    "cost": 750
+  },
+  {
+    "id": "shawm",
+    "name": {
+      "en": "Shawm",
+      "fr": "Shawm"
+    },
+    "type": "musical instrument",
+    "weight_g": 454,
+    "cost": 20
+  },
+  {
+    "id": "shock-gloves",
+    "name": {
+      "en": "Shock gloves",
+      "fr": "Shock gloves"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 454,
+    "cost": 500
+  },
+  {
+    "id": "shock-whip",
+    "name": {
+      "en": "Shock whip",
+      "fr": "Shock whip"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 475
+  },
+  {
+    "id": "shortbow",
+    "name": {
+      "en": "Shortbow",
+      "fr": "Shortbow"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 550
+  },
+  {
+    "id": "shotgun",
+    "name": {
+      "en": "Shotgun",
+      "fr": "Shotgun"
+    },
+    "type": "weapon",
+    "weight_g": 2948,
+    "cost": 725
+  },
+  {
+    "id": "shotosaber",
+    "name": {
+      "en": "Shotosaber",
+      "fr": "Shotosaber"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 450
+  },
+  {
+    "id": "shoulder-blaster",
+    "name": {
+      "en": "Shoulder blaster",
+      "fr": "Shoulder blaster"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 1275
+  },
+  {
+    "id": "shoulder-cannon",
+    "name": {
+      "en": "Shoulder cannon",
+      "fr": "Shoulder cannon"
+    },
+    "type": "weapon",
+    "weight_g": 3856,
+    "cost": 1625
+  },
+  {
+    "id": "shovel",
+    "name": {
+      "en": "Shovel",
+      "fr": "Shovel"
+    },
+    "type": "utility",
+    "weight_g": 2268,
+    "cost": 7
+  },
+  {
+    "id": "sicklesaber",
+    "name": {
+      "en": "Sicklesaber",
+      "fr": "Sicklesaber"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 700
+  },
+  {
+    "id": "sith-saber",
+    "name": {
+      "en": "Sith saber",
+      "fr": "Sith saber"
+    },
+    "type": "weapon",
+    "weight_g": 1247,
+    "cost": 925
+  },
+  {
+    "id": "slicer-s-kit",
+    "name": {
+      "en": "Slicer's kit",
+      "fr": "Slicer's kit"
+    },
+    "type": "kit",
+    "weight_g": 2722,
+    "cost": 800
+  },
+  {
+    "id": "slitherhorn",
+    "name": {
+      "en": "Slitherhorn",
+      "fr": "Slitherhorn"
+    },
+    "type": "musical instrument",
+    "weight_g": 907,
+    "cost": 120
+  },
+  {
+    "id": "slug-cartridge",
+    "name": {
+      "en": "Slug cartridge",
+      "fr": "Slug cartridge"
+    },
+    "type": "ammunition",
+    "weight_g": 0,
+    "cost": 2
+  },
+  {
+    "id": "slugpistol",
+    "name": {
+      "en": "Slugpistol",
+      "fr": "Slugpistol"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 325
+  },
+  {
+    "id": "slugthrower",
+    "name": {
+      "en": "Slugthrower",
+      "fr": "Slugthrower"
+    },
+    "type": "weapon",
+    "weight_g": 3402,
+    "cost": 525
+  },
+  {
+    "id": "smart-cannon",
+    "name": {
+      "en": "Smart cannon",
+      "fr": "Smart cannon"
+    },
+    "type": "weapon",
+    "weight_g": 6123,
+    "cost": 2250
+  },
+  {
+    "id": "smart-pistol",
+    "name": {
+      "en": "Smart pistol",
+      "fr": "Smart pistol"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 1075
+  },
+  {
+    "id": "smugglepack",
+    "name": {
+      "en": "Smugglepack",
+      "fr": "Smugglepack"
+    },
+    "type": "storage",
+    "weight_g": 0,
+    "cost": 400
+  },
+  {
+    "id": "snare",
+    "name": {
+      "en": "Snare",
+      "fr": "Snare"
+    },
+    "type": "ammunition",
+    "weight_g": 907,
+    "cost": 300
+  },
+  {
+    "id": "sniper-rifle",
+    "name": {
+      "en": "Sniper rifle",
+      "fr": "Sniper rifle"
+    },
+    "type": "weapon",
+    "weight_g": 6123,
+    "cost": 1300
+  },
+  {
+    "id": "sonic-cannon",
+    "name": {
+      "en": "Sonic cannon",
+      "fr": "Sonic cannon"
+    },
+    "type": "weapon",
+    "weight_g": 7484,
+    "cost": 2100
+  },
+  {
+    "id": "sonic-carbine",
+    "name": {
+      "en": "Sonic carbine",
+      "fr": "Sonic carbine"
+    },
+    "type": "weapon",
+    "weight_g": 3175,
+    "cost": 675
+  },
+  {
+    "id": "sonic-pistol",
+    "name": {
+      "en": "Sonic pistol",
+      "fr": "Sonic pistol"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 375
+  },
+  {
+    "id": "sonic-rifle",
+    "name": {
+      "en": "Sonic rifle",
+      "fr": "Sonic rifle"
+    },
+    "type": "weapon",
+    "weight_g": 4082,
+    "cost": 875
+  },
+  {
+    "id": "space-suit",
+    "name": {
+      "en": "Space suit",
+      "fr": "Space suit"
+    },
+    "type": "life support",
+    "weight_g": 13608,
+    "cost": 1500
+  },
+  {
+    "id": "spicebrew",
+    "name": {
+      "en": "Spicebrew",
+      "fr": "Spicebrew"
+    },
+    "type": "alcoholic beverage",
+    "weight_g": 0,
+    "cost": 90
+  },
+  {
+    "id": "spicer-s-kit",
+    "name": {
+      "en": "Spicer's kit",
+      "fr": "Spicer's kit"
+    },
+    "type": "kit",
+    "weight_g": 1814,
+    "cost": 700
+  },
+  {
+    "id": "splitsaber",
+    "name": {
+      "en": "Splitsaber",
+      "fr": "Splitsaber"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 1500
+  },
+  {
+    "id": "splitshoto",
+    "name": {
+      "en": "Splitshoto",
+      "fr": "Splitshoto"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 1150
+  },
+  {
+    "id": "stabilizer-suit",
+    "name": {
+      "en": "Stabilizer suit",
+      "fr": "Stabilizer suit"
+    },
+    "type": "life support",
+    "weight_g": 11340,
+    "cost": 1800
+  },
+  {
+    "id": "stealth-carbine",
+    "name": {
+      "en": "Stealth carbine",
+      "fr": "Stealth carbine"
+    },
+    "type": "weapon",
+    "weight_g": 2722,
+    "cost": 500
+  },
+  {
+    "id": "stealth-field-generator",
+    "name": {
+      "en": "Stealth field generator",
+      "fr": "Stealth field generator"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 1361,
+    "cost": 8000
+  },
+  {
+    "id": "stun-gauntlet",
+    "name": {
+      "en": "Stun gauntlet",
+      "fr": "Stun gauntlet"
+    },
+    "type": "weapon",
+    "weight_g": 1021,
+    "cost": 400
+  },
+  {
+    "id": "stylus-pen",
+    "name": {
+      "en": "Stylus pen",
+      "fr": "Stylus pen"
+    },
+    "type": "data recording and storage",
+    "weight_g": 227,
+    "cost": 10
+  },
+  {
+    "id": "subrepeater",
+    "name": {
+      "en": "Subrepeater",
+      "fr": "Subrepeater"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 625
+  },
+  {
+    "id": "sunsaber",
+    "name": {
+      "en": "Sunsaber",
+      "fr": "Sunsaber"
+    },
+    "type": "weapon",
+    "weight_g": 0,
+    "cost": 1875
+  },
+  {
+    "id": "sunshades",
+    "name": {
+      "en": "Sunshades",
+      "fr": "Sunshades"
+    },
+    "type": "clothing",
+    "weight_g": 0,
+    "cost": 20
+  },
+  {
+    "id": "surveyor-s-implements",
+    "name": {
+      "en": "Surveyor's implements",
+      "fr": "Surveyor's implements"
+    },
+    "type": "tool",
+    "weight_g": 2722,
+    "cost": 500
+  },
+  {
+    "id": "switch-cannon",
+    "name": {
+      "en": "Switch cannon",
+      "fr": "Switch cannon"
+    },
+    "type": "weapon",
+    "weight_g": 5670,
+    "cost": 3350
+  },
+  {
+    "id": "switch-carbine",
+    "name": {
+      "en": "Switch carbine",
+      "fr": "Switch carbine"
+    },
+    "type": "weapon",
+    "weight_g": 3402,
+    "cost": 925
+  },
+  {
+    "id": "switch-pistol",
+    "name": {
+      "en": "Switch pistol",
+      "fr": "Switch pistol"
+    },
+    "type": "weapon",
+    "weight_g": 2041,
+    "cost": 675
+  },
+  {
+    "id": "switch-rifle",
+    "name": {
+      "en": "Switch rifle",
+      "fr": "Switch rifle"
+    },
+    "type": "weapon",
+    "weight_g": 4309,
+    "cost": 1025
+  },
+  {
+    "id": "switch-sniper",
+    "name": {
+      "en": "Switch sniper",
+      "fr": "Switch sniper"
+    },
+    "type": "weapon",
+    "weight_g": 7031,
+    "cost": 1800
+  },
+  {
+    "id": "synthweaver-s-implements",
+    "name": {
+      "en": "Synthweaver's implements",
+      "fr": "Synthweaver's implements"
+    },
+    "type": "tool",
+    "weight_g": 907,
+    "cost": 250
+  },
+  {
+    "id": "tankard",
+    "name": {
+      "en": "Tankard",
+      "fr": "Tankard"
+    },
+    "type": "storage",
+    "weight_g": 454,
+    "cost": 3
   },
   {
     "id": "techaxe",
@@ -80,6 +4360,236 @@
     "cost": 75
   },
   {
+    "id": "techblade",
+    "name": {
+      "en": "Techblade",
+      "fr": "Techblade"
+    },
+    "type": "weapon",
+    "weight_g": 680,
+    "cost": 100
+  },
+  {
+    "id": "techstaff",
+    "name": {
+      "en": "Techstaff",
+      "fr": "Techstaff"
+    },
+    "type": "weapon",
+    "weight_g": 2381,
+    "cost": 650
+  },
+  {
+    "id": "tent-two-person",
+    "name": {
+      "en": "Tent, two-person",
+      "fr": "Tent, two-person"
+    },
+    "type": "utility",
+    "weight_g": 2268,
+    "cost": 20
+  },
+  {
+    "id": "thermal-detonator",
+    "name": {
+      "en": "Thermal detonator",
+      "fr": "Thermal detonator"
+    },
+    "type": "explosive",
+    "weight_g": 454,
+    "cost": 2000
+  },
+  {
+    "id": "throat-prosthesis",
+    "name": {
+      "en": "Throat prosthesis",
+      "fr": "Throat prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 325
+  },
+  {
+    "id": "tihaar",
+    "name": {
+      "en": "Tihaar",
+      "fr": "Tihaar"
+    },
+    "type": "alcoholic beverage",
+    "weight_g": 0,
+    "cost": 85
+  },
+  {
+    "id": "tinker-s-implements",
+    "name": {
+      "en": "Tinker's implements",
+      "fr": "Tinker's implements"
+    },
+    "type": "tool",
+    "weight_g": 0,
+    "cost": 500
+  },
+  {
+    "id": "torpedo-launcher",
+    "name": {
+      "en": "Torpedo launcher",
+      "fr": "Torpedo launcher"
+    },
+    "type": "weapon",
+    "weight_g": 13608,
+    "cost": 15000
+  },
+  {
+    "id": "torpedo-fragmentation",
+    "name": {
+      "en": "Torpedo, fragmentation",
+      "fr": "Torpedo, fragmentation"
+    },
+    "type": "ammunition",
+    "weight_g": 9072,
+    "cost": 700
+  },
+  {
+    "id": "torpedo-plasma",
+    "name": {
+      "en": "Torpedo, plasma",
+      "fr": "Torpedo, plasma"
+    },
+    "type": "ammunition",
+    "weight_g": 9072,
+    "cost": 725
+  },
+  {
+    "id": "torso-prosthesis",
+    "name": {
+      "en": "Torso prosthesis",
+      "fr": "Torso prosthesis"
+    },
+    "type": "medical",
+    "weight_g": 0,
+    "cost": 600
+  },
+  {
+    "id": "tracker-utility-vest",
+    "name": {
+      "en": "Tracker utility vest",
+      "fr": "Tracker utility vest"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 1361,
+    "cost": 150
+  },
+  {
+    "id": "tranquilizer-rifle",
+    "name": {
+      "en": "Tranquilizer rifle",
+      "fr": "Tranquilizer rifle"
+    },
+    "type": "weapon",
+    "weight_g": 1134,
+    "cost": 275
+  },
+  {
+    "id": "trapper-s-kit",
+    "name": {
+      "en": "Trapper's kit",
+      "fr": "Trapper's kit"
+    },
+    "type": "kit",
+    "weight_g": 0,
+    "cost": 300
+  },
+  {
+    "id": "traumakit",
+    "name": {
+      "en": "Traumakit",
+      "fr": "Traumakit"
+    },
+    "type": "medical",
+    "weight_g": 1361,
+    "cost": 50
+  },
+  {
+    "id": "traz",
+    "name": {
+      "en": "Traz",
+      "fr": "Traz"
+    },
+    "type": "musical instrument",
+    "weight_g": 2722,
+    "cost": 300
+  },
+  {
+    "id": "tripod",
+    "name": {
+      "en": "Tripod",
+      "fr": "Tripod"
+    },
+    "type": "weapon or armor accessory",
+    "weight_g": 7257,
+    "cost": 450
+  },
+  {
+    "id": "tsiraki",
+    "name": {
+      "en": "Tsiraki",
+      "fr": "Tsiraki"
+    },
+    "type": "alcoholic beverage",
+    "weight_g": 0,
+    "cost": 60
+  },
+  {
+    "id": "underwater-respirator",
+    "name": {
+      "en": "Underwater respirator",
+      "fr": "Underwater respirator"
+    },
+    "type": "life support",
+    "weight_g": 227,
+    "cost": 300
+  },
+  {
+    "id": "valahorn",
+    "name": {
+      "en": "Valahorn",
+      "fr": "Valahorn"
+    },
+    "type": "musical instrument",
+    "weight_g": 1814,
+    "cost": 340
+  },
+  {
+    "id": "vapor-projector",
+    "name": {
+      "en": "Vapor projector",
+      "fr": "Vapor projector"
+    },
+    "type": "weapon",
+    "weight_g": 5897,
+    "cost": 2300
+  },
+  {
+    "id": "vayerbok",
+    "name": {
+      "en": "Vayerbok",
+      "fr": "Vayerbok"
+    },
+    "type": "alcoholic beverage",
+    "weight_g": 0,
+    "cost": 75
+  },
+  {
+    "id": "vial",
+    "name": {
+      "en": "Vial",
+      "fr": "Vial"
+    },
+    "type": "storage",
+    "weight_g": 454,
+    "cost": 10
+  },
+  {
     "id": "vibroaxe",
     "name": {
       "en": "Vibroaxe",
@@ -90,6 +4600,26 @@
     "cost": 950
   },
   {
+    "id": "vibrobaton",
+    "name": {
+      "en": "Vibrobaton",
+      "fr": "Vibrobaton"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 250
+  },
+  {
+    "id": "vibrobattleaxe",
+    "name": {
+      "en": "Vibrobattleaxe",
+      "fr": "Vibrobattleaxe"
+    },
+    "type": "weapon",
+    "weight_g": 4536,
+    "cost": 1200
+  },
+  {
     "id": "vibroblade",
     "name": {
       "en": "Vibroblade",
@@ -98,6 +4628,56 @@
     "type": "weapon",
     "weight_g": 2268,
     "cost": 200
+  },
+  {
+    "id": "vibrobuster",
+    "name": {
+      "en": "Vibrobuster",
+      "fr": "Vibrobuster"
+    },
+    "type": "weapon",
+    "weight_g": 6010,
+    "cost": 1850
+  },
+  {
+    "id": "vibroclaw",
+    "name": {
+      "en": "Vibroclaw",
+      "fr": "Vibroclaw"
+    },
+    "type": "weapon",
+    "weight_g": 340,
+    "cost": 50
+  },
+  {
+    "id": "vibroclaymore",
+    "name": {
+      "en": "Vibroclaymore",
+      "fr": "Vibroclaymore"
+    },
+    "type": "weapon",
+    "weight_g": 4763,
+    "cost": 1700
+  },
+  {
+    "id": "vibrocutlass",
+    "name": {
+      "en": "Vibrocutlass",
+      "fr": "Vibrocutlass"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 600
+  },
+  {
+    "id": "vibrocutter",
+    "name": {
+      "en": "Vibrocutter",
+      "fr": "Vibrocutter"
+    },
+    "type": "weapon",
+    "weight_g": 1361,
+    "cost": 50
   },
   {
     "id": "vibrodagger",
@@ -120,6 +4700,136 @@
     "cost": 5
   },
   {
+    "id": "vibroflail",
+    "name": {
+      "en": "Vibroflail",
+      "fr": "Vibroflail"
+    },
+    "type": "weapon",
+    "weight_g": 2155,
+    "cost": 500
+  },
+  {
+    "id": "vibroglaive",
+    "name": {
+      "en": "Vibroglaive",
+      "fr": "Vibroglaive"
+    },
+    "type": "weapon",
+    "weight_g": 4536,
+    "cost": 1200
+  },
+  {
+    "id": "vibrohammer",
+    "name": {
+      "en": "Vibrohammer",
+      "fr": "Vibrohammer"
+    },
+    "type": "weapon",
+    "weight_g": 3402,
+    "cost": 600
+  },
+  {
+    "id": "vibrokatana",
+    "name": {
+      "en": "Vibrokatana",
+      "fr": "Vibrokatana"
+    },
+    "type": "weapon",
+    "weight_g": 2608,
+    "cost": 450
+  },
+  {
+    "id": "vibroknife",
+    "name": {
+      "en": "Vibroknife",
+      "fr": "Vibroknife"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 225
+  },
+  {
+    "id": "vibroknuckler",
+    "name": {
+      "en": "Vibroknuckler",
+      "fr": "Vibroknuckler"
+    },
+    "type": "weapon",
+    "weight_g": 567,
+    "cost": 75
+  },
+  {
+    "id": "vibrolance",
+    "name": {
+      "en": "Vibrolance",
+      "fr": "Vibrolance"
+    },
+    "type": "weapon",
+    "weight_g": 3856,
+    "cost": 1500
+  },
+  {
+    "id": "vibromace",
+    "name": {
+      "en": "Vibromace",
+      "fr": "Vibromace"
+    },
+    "type": "weapon",
+    "weight_g": 3175,
+    "cost": 700
+  },
+  {
+    "id": "vibronodachi",
+    "name": {
+      "en": "Vibronodachi",
+      "fr": "Vibronodachi"
+    },
+    "type": "weapon",
+    "weight_g": 5443,
+    "cost": 2200
+  },
+  {
+    "id": "vibropike",
+    "name": {
+      "en": "Vibropike",
+      "fr": "Vibropike"
+    },
+    "type": "weapon",
+    "weight_g": 4196,
+    "cost": 950
+  },
+  {
+    "id": "vibrorapier",
+    "name": {
+      "en": "Vibrorapier",
+      "fr": "Vibrorapier"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 150
+  },
+  {
+    "id": "vibrosabre",
+    "name": {
+      "en": "Vibrosabre",
+      "fr": "Vibrosabre"
+    },
+    "type": "weapon",
+    "weight_g": 794,
+    "cost": 300
+  },
+  {
+    "id": "vibroshield",
+    "name": {
+      "en": "Vibroshield",
+      "fr": "Vibroshield"
+    },
+    "type": "weapon",
+    "weight_g": 1701,
+    "cost": 325
+  },
+  {
     "id": "vibrospear",
     "name": {
       "en": "Vibrospear",
@@ -128,5 +4838,215 @@
     "type": "weapon",
     "weight_g": 1814,
     "cost": 125
+  },
+  {
+    "id": "vibrostaff",
+    "name": {
+      "en": "Vibrostaff",
+      "fr": "Vibrostaff"
+    },
+    "type": "weapon",
+    "weight_g": 1814,
+    "cost": 100
+  },
+  {
+    "id": "vibrostiletto",
+    "name": {
+      "en": "Vibrostiletto",
+      "fr": "Vibrostiletto"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 250
+  },
+  {
+    "id": "vibrosword",
+    "name": {
+      "en": "Vibrosword",
+      "fr": "Vibrosword"
+    },
+    "type": "weapon",
+    "weight_g": 4196,
+    "cost": 1150
+  },
+  {
+    "id": "vibrotonfa",
+    "name": {
+      "en": "Vibrotonfa",
+      "fr": "Vibrotonfa"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 225
+  },
+  {
+    "id": "vibrowhip",
+    "name": {
+      "en": "Vibrowhip",
+      "fr": "Vibrowhip"
+    },
+    "type": "weapon",
+    "weight_g": 1588,
+    "cost": 275
+  },
+  {
+    "id": "vocoder-mask",
+    "name": {
+      "en": "Vocoder mask",
+      "fr": "Vocoder mask"
+    },
+    "type": "communications",
+    "weight_g": 227,
+    "cost": 450
+  },
+  {
+    "id": "war-hat",
+    "name": {
+      "en": "War hat",
+      "fr": "War hat"
+    },
+    "type": "weapon",
+    "weight_g": 1474,
+    "cost": 350
+  },
+  {
+    "id": "warsaber",
+    "name": {
+      "en": "Warsaber",
+      "fr": "Warsaber"
+    },
+    "type": "weapon",
+    "weight_g": 1928,
+    "cost": 2175
+  },
+  {
+    "id": "warsword",
+    "name": {
+      "en": "Warsword",
+      "fr": "Warsword"
+    },
+    "type": "weapon",
+    "weight_g": 4876,
+    "cost": 1650
+  },
+  {
+    "id": "water-suit",
+    "name": {
+      "en": "Water suit",
+      "fr": "Water suit"
+    },
+    "type": "life support",
+    "weight_g": 9072,
+    "cost": 1500
+  },
+  {
+    "id": "weave-armor",
+    "name": {
+      "en": "Weave armor",
+      "fr": "Weave armor"
+    },
+    "type": "armor",
+    "weight_g": 11340,
+    "cost": 1000
+  },
+  {
+    "id": "wrist-launcher",
+    "name": {
+      "en": "Wrist launcher",
+      "fr": "Wrist launcher"
+    },
+    "type": "weapon",
+    "weight_g": 907,
+    "cost": 400
+  },
+  {
+    "id": "wristblade",
+    "name": {
+      "en": "Wristblade",
+      "fr": "Wristblade"
+    },
+    "type": "weapon",
+    "weight_g": 794,
+    "cost": 275
+  },
+  {
+    "id": "wristblaster",
+    "name": {
+      "en": "Wristblaster",
+      "fr": "Wristblaster"
+    },
+    "type": "weapon",
+    "weight_g": 227,
+    "cost": 200
+  },
+  {
+    "id": "wristpad",
+    "name": {
+      "en": "Wristpad",
+      "fr": "Wristpad"
+    },
+    "type": "data recording and storage",
+    "weight_g": 907,
+    "cost": 600
+  },
+  {
+    "id": "wristrifle",
+    "name": {
+      "en": "Wristrifle",
+      "fr": "Wristrifle"
+    },
+    "type": "weapon",
+    "weight_g": 2041,
+    "cost": 250
+  },
+  {
+    "id": "wristsaber",
+    "name": {
+      "en": "Wristsaber",
+      "fr": "Wristsaber"
+    },
+    "type": "weapon",
+    "weight_g": 454,
+    "cost": 375
+  },
+  {
+    "id": "writer-s-implements",
+    "name": {
+      "en": "Writer's implements",
+      "fr": "Writer's implements"
+    },
+    "type": "tool",
+    "weight_g": 1361,
+    "cost": 200
+  },
+  {
+    "id": "xantha",
+    "name": {
+      "en": "Xantha",
+      "fr": "Xantha"
+    },
+    "type": "musical instrument",
+    "weight_g": 3175,
+    "cost": 170
+  },
+  {
+    "id": "yaladai",
+    "name": {
+      "en": "Yaladai",
+      "fr": "Yaladai"
+    },
+    "type": "spice",
+    "weight_g": 0,
+    "cost": 70
+  },
+  {
+    "id": "yarrock",
+    "name": {
+      "en": "Yarrock",
+      "fr": "Yarrock"
+    },
+    "type": "spice",
+    "weight_g": 0,
+    "cost": 85
   }
 ]

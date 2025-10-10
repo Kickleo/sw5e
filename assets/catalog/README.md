@@ -108,17 +108,19 @@
 ```
 
 ### `equipment.json` (array)
+
+> 🛠️ Génération : exécuter `python tool/update_equipment.py` pour récupérer et normaliser l’intégralité des équipements disponibles dans le compendium SW5e.
 ```json
 [
-    { 
-        "id": "blaster-pistol", 
+    {
+        "id": "blaster-pistol",
         "name": { 
             "en": "Blaster Pistol", 
             "fr": "Pistolet Blaster" 
         },
         "type": "weapon",
-        "weight_g": 800,
-        "cost": 200 
+        "weight_g": 1134,
+        "cost": 175
     }
 ]
 ```

@@ -28,7 +28,7 @@ void main() {
     // Equipment
     final blaster = await repo.getEquipment('blaster-pistol');
     expect(blaster, isNotNull);
-    expect(blaster!.weightG, 800);
+    expect(blaster!.weightG, 1134);
 
     // Background
     final outlaw = await repo.getBackground('outlaw');
