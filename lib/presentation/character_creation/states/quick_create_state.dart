@@ -135,10 +135,10 @@ class QuickCreateState {
     List<String>? species,
     List<String>? classes,
     List<String>? backgrounds,
-    String? selectedSpecies,
-    String? selectedClass,
-    String? selectedBackground,
-    ClassDef? selectedClassDef,
+    Object? selectedSpecies = _sentinel,
+    Object? selectedClass = _sentinel,
+    Object? selectedBackground = _sentinel,
+    Object? selectedClassDef = _sentinel,
     List<TraitDef>? selectedSpeciesTraits,
     List<String>? availableSkills,
     Map<String, SkillDef>? skillDefinitions,
@@ -166,10 +166,17 @@ class QuickCreateState {
       species: species ?? this.species,
       classes: classes ?? this.classes,
       backgrounds: backgrounds ?? this.backgrounds,
-      selectedSpecies: selectedSpecies ?? this.selectedSpecies,
-      selectedClass: selectedClass ?? this.selectedClass,
-      selectedBackground: selectedBackground ?? this.selectedBackground,
-      selectedClassDef: selectedClassDef ?? this.selectedClassDef,
+      selectedSpecies: selectedSpecies == _sentinel
+          ? this.selectedSpecies
+          : selectedSpecies as String?,
+      selectedClass:
+          selectedClass == _sentinel ? this.selectedClass : selectedClass as String?,
+      selectedBackground: selectedBackground == _sentinel
+          ? this.selectedBackground
+          : selectedBackground as String?,
+      selectedClassDef: selectedClassDef == _sentinel
+          ? this.selectedClassDef
+          : selectedClassDef as ClassDef?,
       selectedSpeciesTraits: selectedSpeciesTraits ?? this.selectedSpeciesTraits,
       availableSkills: availableSkills ?? this.availableSkills,
       skillDefinitions: skillDefinitions ?? this.skillDefinitions,

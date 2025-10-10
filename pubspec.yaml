@@ -59,7 +59,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  bloc_test: ^10.0.0
+  bloc_test: ^9.1.7
   mocktail: ^1.0.3
 
   # ⇩ slight downgrade so source_gen 3.x can be selected
