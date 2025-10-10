@@ -8,6 +8,7 @@
 ///   final dto = SpeciesDto.fromJson(jsonMap);
 ///   final species = dto.toDomain();
 /// ---------------------------------------------------------------------------
+library;
 import 'package:meta/meta.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 

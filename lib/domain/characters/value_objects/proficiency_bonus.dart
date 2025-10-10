@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final prof = ProficiencyBonus.fromLevel(Level(1));
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/level.dart';
 

@@ -5,13 +5,15 @@
 ///        d'erreur, entités de catalogue.
 /// Exemple d'usage :
 ///   final useCase = LoadQuickCreateCatalogImpl(repository);
+// ignore: unintended_html_in_doc_comment
 ///   final AppResult<QuickCreateCatalogSnapshot> result = await useCase();
 /// ---------------------------------------------------------------------------
+library;
 import 'package:collection/collection.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 
-import 'load_quick_create_catalog.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 
 /// Implémentation par défaut utilisant le catalogue hors-ligne.
 class LoadQuickCreateCatalogImpl implements LoadQuickCreateCatalog {

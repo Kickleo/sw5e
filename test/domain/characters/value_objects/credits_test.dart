@@ -2,6 +2,7 @@
 /// Fichier test : credits_test.dart
 /// Rôle : Tester les validations de [Credits].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/credits.dart';
 

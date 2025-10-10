@@ -5,6 +5,7 @@
 /// Dépendances : Flutter, flutter_riverpod, AppConfig, ServiceLocator, AppLogger.
 /// Exemple d'usage : Exécuté automatiquement par `flutter run`.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sw5e_manager/app/app.dart';

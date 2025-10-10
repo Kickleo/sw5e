@@ -9,6 +9,7 @@
 ///   await config.load();
 ///   final apiBaseUrl = config.getRequired('API_BASE_URL');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// AppConfig = wrapper centralisant le chargement des variables d'environnement.

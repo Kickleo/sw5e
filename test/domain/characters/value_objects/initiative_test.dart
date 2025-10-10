@@ -2,6 +2,7 @@
 /// Fichier test : initiative_test.dart
 /// Rôle : Vérifier les bornes du Value Object [Initiative].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/initiative.dart';
 

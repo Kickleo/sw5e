@@ -3,12 +3,14 @@
 /// Rôle : Vérifier les transitions principales du QuickCreateBloc (chargement
 ///        du catalogue et finalisation d'un personnage).
 /// ---------------------------------------------------------------------------
+library;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
@@ -52,7 +54,7 @@ Character _dummyCharacter() {
     classId: ClassId('guardian'),
     backgroundId: BackgroundId('outlaw'),
     level: Level.one,
-    abilities: const <String, AbilityScore>{
+    abilities: <String, AbilityScore>{
       'str': AbilityScore(15),
       'dex': AbilityScore(14),
       'con': AbilityScore(13),
@@ -69,7 +71,7 @@ Character _dummyCharacter() {
     inventory: const <InventoryLine>[],
     encumbrance: Encumbrance(0),
     maneuversKnown: ManeuversKnown(0),
-    superiorityDice: const SuperiorityDice(count: 0, die: null),
+    superiorityDice: SuperiorityDice(count: 0, die: null),
   );
 }
 
@@ -87,7 +89,7 @@ void main() {
         speciesId: SpeciesId('human'),
         classId: ClassId('guardian'),
         backgroundId: BackgroundId('outlaw'),
-        baseAbilities: const <String, AbilityScore>{
+        baseAbilities: <String, AbilityScore>{
           'str': AbilityScore(10),
           'dex': AbilityScore(10),
           'con': AbilityScore(10),
@@ -122,7 +124,7 @@ void main() {
         .thenAnswer((_) {});
   });
 
-  QuickCreateBloc _buildBloc() {
+  QuickCreateBloc buildBloc() {
     return QuickCreateBloc(
       loadQuickCreateCatalog: loadCatalog,
       loadSpeciesDetails: loadSpeciesDetails,
@@ -132,10 +134,10 @@ void main() {
     );
   }
 
-  void _arrangeCatalogSuccess() {
-    final EquipmentDef equipment = EquipmentDef(
+  void arrangeCatalogSuccess() {
+    final EquipmentDef equipment = const EquipmentDef(
       id: 'comlink',
-      name: const LocalizedText(en: 'Comlink', fr: 'Comlink'),
+      name: LocalizedText(en: 'Comlink', fr: 'Comlink'),
       type: 'gear',
       weightG: 100,
       cost: 25,
@@ -178,22 +180,22 @@ void main() {
 
     when(() => loadClassDetails('guardian')).thenAnswer(
       (_) async => appOk(
-        QuickCreateClassDetails(
+        const QuickCreateClassDetails(
           classDef: ClassDef(
             id: 'guardian',
-            name: const LocalizedText(en: 'Guardian', fr: 'Gardien'),
+            name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
             hitDie: 10,
             level1: ClassLevel1Data(
-              proficiencies: const ClassLevel1Proficiencies(
+              proficiencies: ClassLevel1Proficiencies(
                 skillsChoose: 0,
                 skillsFrom: <String>[],
               ),
               startingCredits: 100,
-              startingEquipment: const <StartingEquipmentLine>[],
+              startingEquipment: <StartingEquipmentLine>[],
             ),
           ),
-          availableSkillIds: const <String>[],
-          skillDefinitions: const <String, SkillDef>{},
+          availableSkillIds: <String>[],
+          skillDefinitions: <String, SkillDef>{},
           skillChoicesRequired: 0,
         ),
       ),
@@ -201,7 +203,7 @@ void main() {
   }
 
   test('l’état initial est QuickCreateState.initial()', () {
-    final bloc = _buildBloc();
+    final bloc = buildBloc();
     expect(bloc.state.stepIndex, QuickCreateState.initial().stepIndex);
     expect(bloc.state.selectedSpecies, QuickCreateState.initial().selectedSpecies);
     bloc.close();
@@ -210,8 +212,8 @@ void main() {
   blocTest<QuickCreateBloc, QuickCreateState>(
     'charge le catalogue et sélectionne les premières entrées',
     build: () {
-      _arrangeCatalogSuccess();
-      return _buildBloc();
+      arrangeCatalogSuccess();
+      return buildBloc();
     },
     act: (bloc) => bloc.add(const QuickCreateStarted()),
     wait: const Duration(milliseconds: 20),
@@ -231,11 +233,11 @@ void main() {
   blocTest<QuickCreateBloc, QuickCreateState>(
     'finalise un personnage avec succès',
     build: () {
-      _arrangeCatalogSuccess();
+      arrangeCatalogSuccess();
       when(() => finalize.call(any())).thenAnswer(
         (_) async => appOk(_dummyCharacter()),
       );
-      return _buildBloc();
+      return buildBloc();
     },
     act: (bloc) async {
       bloc.add(const QuickCreateStarted());

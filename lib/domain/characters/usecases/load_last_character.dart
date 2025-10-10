@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final character = (await useCase()).unwrapOr(null);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 

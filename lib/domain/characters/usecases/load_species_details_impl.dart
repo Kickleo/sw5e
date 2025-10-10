@@ -6,10 +6,11 @@
 ///   final useCase = LoadSpeciesDetailsImpl(repository);
 ///   final result = await useCase('human');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 
-import 'load_species_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 
 /// Implémentation standard.
 class LoadSpeciesDetailsImpl implements LoadSpeciesDetails {

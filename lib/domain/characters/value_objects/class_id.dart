@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final id = ClassId(' Guardian ');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// ClassId = Value Object garantissant un identifiant de classe valide.

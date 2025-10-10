@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final hp = HitPoints(12);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// HitPoints = Value Object pour un total de points de vie.

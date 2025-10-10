@@ -2,6 +2,7 @@
 /// Fichier test : saved_characters_bloc_test.dart
 /// Rôle : Garantir le comportement du SavedCharactersBloc (charge/erreur).
 /// ---------------------------------------------------------------------------
+library;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -36,7 +37,7 @@ Character _dummyCharacter(String id) {
     classId: ClassId('guardian'),
     backgroundId: BackgroundId('outlaw'),
     level: Level.one,
-    abilities: const <String, AbilityScore>{
+    abilities: <String, AbilityScore>{
       'str': AbilityScore(10),
       'dex': AbilityScore(10),
       'con': AbilityScore(10),
@@ -53,7 +54,7 @@ Character _dummyCharacter(String id) {
     inventory: const <InventoryLine>[],
     encumbrance: Encumbrance(0),
     maneuversKnown: ManeuversKnown(0),
-    superiorityDice: const SuperiorityDice(count: 0, die: null),
+    superiorityDice: SuperiorityDice(count: 0, die: null),
   );
 }
 

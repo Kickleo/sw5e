@@ -4,6 +4,7 @@
 /// Dépendances : entités/value objects domaine pour construire des personnages.
 /// Exemple d'usage : exécuter `flutter test test/data/characters/...`.
 /// -----------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/data/characters/repositories/in_memory_character_repository.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';

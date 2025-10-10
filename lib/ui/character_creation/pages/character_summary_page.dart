@@ -6,6 +6,7 @@
 ///        ServiceLocator pour l'injection.
 /// Exemple d'usage : routage GoRouter -> const CharacterSummaryPage().
 /// ---------------------------------------------------------------------------
+library;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -203,7 +204,7 @@ class _CharacterSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<CharacterId>(
-      value: selectedId,
+      initialValue: selectedId,
       decoration: const InputDecoration(
         labelText: 'Personnage sauvegardé',
         border: OutlineInputBorder(),

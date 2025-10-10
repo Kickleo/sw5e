@@ -6,11 +6,12 @@
 ///   final source = AssetBundleCatalogDataSource();
 ///   final classes = await source.loadClasses();
 /// ---------------------------------------------------------------------------
+library;
 import 'dart:convert';
 
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
-import '../dtos/catalog_dtos.dart';
+import 'package:sw5e_manager/data/catalog/dtos/catalog_dtos.dart';
 
 /// AssetBundleCatalogDataSource = source de données hors-ligne basée sur les assets.
 class AssetBundleCatalogDataSource {
@@ -71,6 +72,6 @@ class AssetBundleCatalogDataSource {
     if (json is! Map) {
       throw StateError('$path must decode to a JSON object');
     }
-    return Map<String, dynamic>.from(json as Map);
+    return Map<String, dynamic>.from(json);
   }
 }

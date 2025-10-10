@@ -3,6 +3,7 @@
 /// Rôle : Vérifier les invariants du Value Object [AbilityScore] (bornes et
 ///        calcul du modificateur).
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 

@@ -6,12 +6,14 @@
 /// Dépendances : package `get_it`, configuration [AppConfig], logger [AppLogger].
 /// Exemple d'usage :
 ///   ServiceLocator.configure(config: config, logger: logger);
+// ignore: unintended_html_in_doc_comment
 ///   final AppLogger log = ServiceLocator.resolve<AppLogger>();
 /// ---------------------------------------------------------------------------
+library;
 import 'package:get_it/get_it.dart';
 
-import '../config/app_config.dart';
-import '../logging/app_logger.dart';
+import 'package:sw5e_manager/common/config/app_config.dart';
+import 'package:sw5e_manager/common/logging/app_logger.dart';
 
 /// ServiceLocator = façade statique autour de l'instance `GetIt` partagée.
 class ServiceLocator {

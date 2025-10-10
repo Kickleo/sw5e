@@ -6,6 +6,7 @@
 ///   final repo = InMemoryCharacterRepository();
 ///   await repo.save(character);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_repository.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';

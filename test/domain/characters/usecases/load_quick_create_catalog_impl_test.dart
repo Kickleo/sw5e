@@ -3,6 +3,7 @@
 /// Rôle : Vérifier que LoadQuickCreateCatalogImpl agrège et trie les données
 ///        issues du CatalogRepository et gère les erreurs.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
@@ -27,18 +28,18 @@ void main() {
     when(() => catalog.listBackgrounds()).thenAnswer((_) async => <String>['scoundrel']);
     when(() => catalog.listEquipment()).thenAnswer((_) async => <String>['blaster', 'armor']);
     when(() => catalog.getEquipment('blaster')).thenAnswer(
-      (_) async => EquipmentDef(
+      (_) async => const EquipmentDef(
         id: 'blaster',
-        name: const LocalizedText(en: 'Blaster', fr: 'Blaster'),
+        name: LocalizedText(en: 'Blaster', fr: 'Blaster'),
         type: 'weapon',
         weightG: 900,
         cost: 400,
       ),
     );
     when(() => catalog.getEquipment('armor')).thenAnswer(
-      (_) async => EquipmentDef(
+      (_) async => const EquipmentDef(
         id: 'armor',
-        name: const LocalizedText(en: 'Armor', fr: 'Armure'),
+        name: LocalizedText(en: 'Armor', fr: 'Armure'),
         type: 'armor',
         weightG: 8000,
         cost: 500,

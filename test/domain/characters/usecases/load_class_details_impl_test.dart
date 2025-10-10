@@ -3,6 +3,7 @@
 /// Rôle : Vérifier que LoadClassDetailsImpl trie les compétences et gère les
 ///        erreurs de catalogue.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
@@ -23,16 +24,16 @@ void main() {
 
   test('retourne les compétences triées et les définitions disponibles', () async {
     when(() => catalog.getClass('guardian')).thenAnswer(
-      (_) async => ClassDef(
+      (_) async => const ClassDef(
         id: 'guardian',
-        name: const LocalizedText(en: 'Guardian', fr: 'Gardien'),
+        name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
         hitDie: 10,
         level1: ClassLevel1Data(
-          proficiencies: const ClassLevel1Proficiencies(
+          proficiencies: ClassLevel1Proficiencies(
             skillsChoose: 2,
             skillsFrom: <String>['athletics', 'acrobatics'],
           ),
-          startingEquipment: const <StartingEquipmentLine>[],
+          startingEquipment: <StartingEquipmentLine>[],
         ),
       ),
     );

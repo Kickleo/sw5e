@@ -7,6 +7,7 @@
 ///   final logger = ServiceLocator.resolve<AppLogger>();
 ///   logger.info('Character created');
 /// ---------------------------------------------------------------------------
+library;
 
 /// AppLogger = contrat de journalisation uniforme (info/warn/error).
 abstract class AppLogger {

@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final species = await catalogRepository.getSpecies('bothan');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:meta/meta.dart';
 
 /// ---- Types "catalogue" (lecture seule) ----

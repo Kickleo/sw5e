@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final id = SpeciesId('bothan');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// SpeciesId = Value Object contrôlant l'identifiant d'espèce.

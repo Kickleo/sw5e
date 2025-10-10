@@ -4,6 +4,7 @@
 /// Dépendances : `flutter_test` + definitions domaine pour valider les types.
 /// Exemple d'usage : `flutter test test/data/catalog/asset_catalog_repository_traits_test.dart`.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/data/catalog/repositories/asset_catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';

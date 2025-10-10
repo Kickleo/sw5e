@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final name = CharacterName("  Obi-Wan Kenobi " );
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// CharacterName = Value Object encapsulant les contraintes de nommage.

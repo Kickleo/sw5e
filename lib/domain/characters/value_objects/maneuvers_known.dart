@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final maneuvers = ManeuversKnown(2);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// ManeuversKnown = Value Object du nombre de manoeuvres apprises.

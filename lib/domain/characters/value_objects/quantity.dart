@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final qty = Quantity(3);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// Quantity = Value Object pour des quantités entières (>= 0).

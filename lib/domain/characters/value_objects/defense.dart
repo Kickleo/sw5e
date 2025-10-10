@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final defense = Defense(14);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// Defense = Value Object représentant la classe d'armure finale.

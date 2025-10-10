@@ -6,11 +6,13 @@
 ///        entités métier Character.
 /// Exemple d'usage : routage GoRouter -> const SavedCharactersPage().
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/saved_characters_bloc.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/character_section_divider.dart';
 
@@ -109,7 +111,7 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
                   padding: const EdgeInsets.all(16),
                   itemCount:
                       state.characters.length + (state.hasError ? 1 : 0),
-                  separatorBuilder: (_, __) => const CharacterSectionDivider(),
+                  separatorBuilder: (_, _) => const CharacterSectionDivider(),
                   itemBuilder: (context, index) {
                     if (state.hasError) {
                       if (index == 0) {
@@ -369,7 +371,7 @@ class _ChipStat extends StatelessWidget {
 class _AbilitiesTable extends StatelessWidget {
   const _AbilitiesTable({required this.abilities});
 
-  final Map<String, int> abilities;
+  final Map<String, AbilityScore> abilities;
 
   @override
   Widget build(BuildContext context) {

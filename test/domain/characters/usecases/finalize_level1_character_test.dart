@@ -4,6 +4,7 @@
 ///        implémenté et la persistance du personnage créé.
 /// Dépendances : mocktail, repositories Catalog/Character, Value Objects.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
@@ -25,10 +26,10 @@ import 'package:sw5e_manager/domain/characters/value_objects/initiative.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/level.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/maneuvers_known.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/proficiency_bonus.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/quantity.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/superiority_dice.dart';
-import 'package:sw5e_manager/domain/characters/value_objects/quantity.dart';
 
 
 // 👇 On référencera une implémentation concrète à créer ensuite.
@@ -291,7 +292,7 @@ void main() {
           'cha': AbilityScore(10),
         },
         chosenSkills: const {'athletics', 'perception'},
-        chosenEquipment: const [
+        chosenEquipment: [
           ChosenEquipmentLine(itemId: EquipmentItemId('energy-shield'), quantity: Quantity(1)),
         ],
         useStartingEquipmentPackage: false,
@@ -530,7 +531,7 @@ void main() {
           'cha': AbilityScore(10),
         },
         chosenSkills: const {'athletics', 'perception'},
-        chosenEquipment: const [
+        chosenEquipment: [
           ChosenEquipmentLine(itemId: EquipmentItemId('blaster-pistol'), quantity: Quantity(1)),
         ],
         useStartingEquipmentPackage: false,
@@ -621,7 +622,7 @@ void main() {
           'cha': AbilityScore(10),
         },
         chosenSkills: const {'athletics', 'perception'},
-        chosenEquipment: const [
+        chosenEquipment: [
           ChosenEquipmentLine(
             itemId: EquipmentItemId('durasteel-crate'),
             quantity: Quantity(1),

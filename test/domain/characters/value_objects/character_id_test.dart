@@ -2,6 +2,7 @@
 /// Fichier test : character_id_test.dart
 /// Rôle : Vérifier la validation et la génération de [CharacterId].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
 

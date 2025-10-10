@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final result = await ListSavedCharactersImpl(repo)();
 /// ---------------------------------------------------------------------------
+library;
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_repository.dart';

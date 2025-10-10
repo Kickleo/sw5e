@@ -4,6 +4,7 @@
 /// Dépendances : Widgets Flutter, vues UI du module de création de personnage.
 /// Exemple d'usage : embarqué dans Sw5eApp comme scaffold principal.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter/material.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/character_summary_page.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/quick_create_page.dart';

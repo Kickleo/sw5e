@@ -5,6 +5,7 @@
 /// Dépendances : Flutter Material.
 /// Exemple d'usage : `CharacterSectionDivider()` dans un `ListView.separated`.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter/material.dart';
 
 /// Séparateur horizontal standardisé pour les sections du module création.

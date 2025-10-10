@@ -7,10 +7,9 @@
 ///   final repo = AssetCatalogRepository();
 ///   final species = await repo.getSpecies('human');
 /// ---------------------------------------------------------------------------
+library;
+import 'package:sw5e_manager/data/catalog/data_sources/asset_bundle_catalog_data_source.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
-
-import '../data_sources/asset_bundle_catalog_data_source.dart';
-import '../dtos/catalog_dtos.dart';
 
 /// AssetCatalogRepository = adapter hors-ligne basé sur les assets JSON embarqués.
 class AssetCatalogRepository implements CatalogRepository {

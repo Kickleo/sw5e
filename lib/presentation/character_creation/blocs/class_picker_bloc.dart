@@ -10,6 +10,7 @@
 ///     logger: logger,
 ///   )..add(const ClassPickerStarted());
 /// ---------------------------------------------------------------------------
+library;
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';

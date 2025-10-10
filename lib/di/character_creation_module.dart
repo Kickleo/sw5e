@@ -6,8 +6,10 @@
 ///        data/domain correspondantes.
 /// Exemple d'usage :
 ///   registerCharacterCreationModule();
+// ignore: unintended_html_in_doc_comment
 ///   final useCase = ServiceLocator.resolve<FinalizeLevel1Character>();
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/data/catalog/repositories/asset_catalog_repository.dart';

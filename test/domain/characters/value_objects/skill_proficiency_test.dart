@@ -2,6 +2,7 @@
 /// Fichier test : skill_proficiency_test.dart
 /// Rôle : Vérifier les règles du Value Object [SkillProficiency].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';
 

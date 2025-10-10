@@ -6,6 +6,7 @@
 /// Exemple d'usage :
 ///   final context = await loadClassDetails('guardian');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 

@@ -3,6 +3,7 @@
 /// Rôle : Couvrir la normalisation et la validation du Value Object
 ///        [CharacterName].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_name.dart';
 

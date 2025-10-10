@@ -2,6 +2,7 @@
 /// Fichier test : superiority_dice_test.dart
 /// Rôle : Vérifier les règles du Value Object [SuperiorityDice].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/superiority_dice.dart';
 

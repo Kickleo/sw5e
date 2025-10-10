@@ -3,6 +3,7 @@
 /// Rôle : Vérifier le comportement du SpeciesPickerBloc (chargement initial,
 ///        changement de sélection, gestion des erreurs).
 /// ---------------------------------------------------------------------------
+library;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -47,7 +48,7 @@ void main() {
     ).thenReturn(null);
   });
 
-  SpeciesDef _buildSpecies({required String id, List<String> traitIds = const <String>[]}) {
+  SpeciesDef buildSpecies({required String id, List<String> traitIds = const <String>[]}) {
     return SpeciesDef(
       id: id,
       name: const LocalizedText(en: 'Human', fr: 'Humain'),
@@ -57,7 +58,7 @@ void main() {
     );
   }
 
-  TraitDef _buildTrait(String id) {
+  TraitDef buildTrait(String id) {
     return TraitDef(
       id: id,
       name: const LocalizedText(en: 'Trait', fr: 'Trait'),
@@ -76,10 +77,10 @@ void main() {
     build: () {
       when(() => catalog.listSpecies()).thenAnswer((_) async => <String>['human']);
       when(() => catalog.getSpecies('human')).thenAnswer(
-        (_) async => _buildSpecies(id: 'human', traitIds: <String>['trait-1']),
+        (_) async => buildSpecies(id: 'human', traitIds: <String>['trait-1']),
       );
       when(() => catalog.getTrait('trait-1')).thenAnswer(
-        (_) async => _buildTrait('trait-1'),
+        (_) async => buildTrait('trait-1'),
       );
       return SpeciesPickerBloc(catalog: catalog, logger: logger);
     },
@@ -112,13 +113,13 @@ void main() {
         (_) async => <String>['human', 'bothan'],
       );
       when(() => catalog.getSpecies('human')).thenAnswer(
-        (_) async => _buildSpecies(id: 'human'),
+        (_) async => buildSpecies(id: 'human'),
       );
       when(() => catalog.getSpecies('bothan')).thenAnswer(
-        (_) async => _buildSpecies(id: 'bothan', traitIds: <String>['trait-1']),
+        (_) async => buildSpecies(id: 'bothan', traitIds: <String>['trait-1']),
       );
       when(() => catalog.getTrait('trait-1')).thenAnswer(
-        (_) async => _buildTrait('trait-1'),
+        (_) async => buildTrait('trait-1'),
       );
       return SpeciesPickerBloc(catalog: catalog, logger: logger);
     },

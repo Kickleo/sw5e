@@ -7,9 +7,10 @@
 ///   final logger = ConsoleAppLogger();
 ///   logger.warn('Offline mode enabled', payload: {'source': 'asset'});
 /// ---------------------------------------------------------------------------
+library;
 import 'package:logger/logger.dart' as logger_package;
 
-import 'app_logger.dart';
+import 'package:sw5e_manager/common/logging/app_logger.dart';
 
 /// ConsoleAppLogger = implémentation console simple basée sur `logger`.
 class ConsoleAppLogger implements AppLogger {

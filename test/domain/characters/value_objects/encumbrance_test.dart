@@ -2,6 +2,7 @@
 /// Fichier test : encumbrance_test.dart
 /// Rôle : Vérifier les contraintes du Value Object [Encumbrance].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/encumbrance.dart';
 

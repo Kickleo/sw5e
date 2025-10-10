@@ -2,6 +2,7 @@
 /// Fichier test : quantity_test.dart
 /// Rôle : Valider les bornes et helpers du Value Object [Quantity].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/quantity.dart';
 

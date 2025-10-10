@@ -3,6 +3,7 @@
 /// Rôle : Vérifier le use case ListSavedCharacters (liste et erreurs).
 /// Dépendances : mocktail, CharacterRepository, AppResult.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';

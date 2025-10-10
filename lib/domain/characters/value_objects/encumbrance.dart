@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final encumbrance = Encumbrance(current: 20, max: 60);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// Encumbrance = Value Object décrivant le poids porté par rapport au maximum.

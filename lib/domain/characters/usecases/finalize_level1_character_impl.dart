@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final result = await FinalizeLevel1CharacterImpl(catalog: c, characters: repo)(input);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';

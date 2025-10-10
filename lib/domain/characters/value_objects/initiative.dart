@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final init = Initiative(3);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// Initiative = Value Object portant le modificateur d'initiative final.

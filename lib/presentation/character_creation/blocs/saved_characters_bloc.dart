@@ -11,6 +11,7 @@
 ///   );
 ///   bloc.stream.listen((state) => print(state.characters.length));
 /// ---------------------------------------------------------------------------
+library;
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';

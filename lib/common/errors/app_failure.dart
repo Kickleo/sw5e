@@ -9,6 +9,7 @@
 ///   logger.warn(failure.toLogMessage());
 ///   view.showError(failure.toDisplayMessage(includeCode: true));
 /// ---------------------------------------------------------------------------
+library;
 import 'package:meta/meta.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
 

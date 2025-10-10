@@ -9,6 +9,7 @@
 ///     ..add(const QuickCreateStarted());
 ///   bloc.stream.listen((state) => debugPrint(state.stepIndex.toString()));
 /// ---------------------------------------------------------------------------
+library;
 import 'dart:async';
 import 'dart:math';
 

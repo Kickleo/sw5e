@@ -2,6 +2,7 @@
 /// Fichier test : defense_test.dart
 /// Rôle : Tester les validations du Value Object [Defense].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/defense.dart';
 

@@ -5,6 +5,7 @@
 /// Dépendances : `flutter_test` pour l'environnement widget/AssetBundle.
 /// Exemple d'usage : lancer `flutter test` pour garantir le comportement.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/data/catalog/repositories/asset_catalog_repository.dart';
 

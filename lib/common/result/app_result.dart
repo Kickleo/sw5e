@@ -6,6 +6,7 @@
 /// Exemple d'usage :
 ///   final outcome = appOk<int>(1);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:sw5e_manager/core/domain/result.dart' as core;
 
 /// AppResult = alias permettant de référencer le type de résultat commun.

@@ -2,6 +2,7 @@
 /// Fichier test : trait_id_test.dart
 /// Rôle : Vérifier la normalisation du Value Object [TraitId].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/trait_id.dart';
 

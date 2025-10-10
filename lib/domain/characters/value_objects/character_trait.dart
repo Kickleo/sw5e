@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final trait = CharacterTrait(id: TraitId('nimble-escape'), source: 'species');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/trait_id.dart';
 

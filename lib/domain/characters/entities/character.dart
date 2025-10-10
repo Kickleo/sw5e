@@ -8,6 +8,7 @@
 ///   final character = Character(...);
 /// ---------------------------------------------------------------------------
 /// ---------------------------------------------------------------------------
+library;
 import 'package:meta/meta.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';

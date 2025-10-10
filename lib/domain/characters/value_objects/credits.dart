@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final credits = Credits(150);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// Credits = Value Object pour un montant monétaire positif ou nul.

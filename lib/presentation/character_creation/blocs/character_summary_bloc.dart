@@ -10,6 +10,7 @@
 ///     logger: logger,
 ///   )..add(const CharacterSummaryStarted());
 /// ---------------------------------------------------------------------------
+library;
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';

@@ -3,6 +3,7 @@
 /// Rôle : Vérifier le comportement du CharacterSummaryBloc (chargement,
 ///        sélection, partage).
 /// ---------------------------------------------------------------------------
+library;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -23,7 +24,6 @@ import 'package:sw5e_manager/domain/characters/value_objects/initiative.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/level.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/maneuvers_known.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/proficiency_bonus.dart';
-import 'package:sw5e_manager/domain/characters/value_objects/quantity.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/superiority_dice.dart';
@@ -50,7 +50,7 @@ Character _dummyCharacter(String id) {
     classId: ClassId('guardian'),
     backgroundId: BackgroundId('outlaw'),
     level: Level.one,
-    abilities: const <String, AbilityScore>{
+    abilities: <String, AbilityScore>{
       'str': AbilityScore(10),
       'dex': AbilityScore(10),
       'con': AbilityScore(10),
@@ -67,7 +67,7 @@ Character _dummyCharacter(String id) {
     inventory: const <InventoryLine>[],
     encumbrance: Encumbrance(0),
     maneuversKnown: ManeuversKnown(0),
-    superiorityDice: const SuperiorityDice(count: 0, die: null),
+    superiorityDice: SuperiorityDice(count: 0, die: null),
   );
 }
 

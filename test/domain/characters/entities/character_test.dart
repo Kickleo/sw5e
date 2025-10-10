@@ -2,6 +2,7 @@
 /// Fichier test : character_test.dart
 /// Rôle : Vérifier les invariants d'instanciation de l'entité [Character].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';

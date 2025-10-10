@@ -6,6 +6,7 @@
 /// Exemple d'usage :
 ///   final id = BackgroundId(' Outlaw '); // => "outlaw"
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// BackgroundId = Value Object pour un identifiant de background valide.

@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   await repository.save(character);
 /// ---------------------------------------------------------------------------
+library;
 
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';

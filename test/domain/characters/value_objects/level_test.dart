@@ -2,6 +2,7 @@
 /// Fichier test : level_test.dart
 /// Rôle : Vérifier les bornes et helpers du Value Object [Level].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/level.dart';
 

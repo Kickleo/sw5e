@@ -6,6 +6,7 @@
 /// Exemple d'usage :
 ///   Navigator.pushNamed(context, SpeciesPickerPage.routeName);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';

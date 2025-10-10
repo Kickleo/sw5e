@@ -6,10 +6,11 @@
 ///   final useCase = LoadClassDetailsImpl(repository);
 ///   final result = await useCase('guardian');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 
-import 'load_class_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 
 /// Implémentation par défaut basée sur l'adapter catalogue offline.
 class LoadClassDetailsImpl implements LoadClassDetails {

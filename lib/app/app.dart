@@ -4,6 +4,7 @@
 /// Dépendances : Flutter Material, flutter_riverpod, configuration GoRouter.
 /// Exemple d'usage : instancié depuis `main.dart` via `runApp(const Sw5eApp())`.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

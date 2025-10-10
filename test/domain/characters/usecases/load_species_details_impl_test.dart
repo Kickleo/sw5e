@@ -3,6 +3,7 @@
 /// Rôle : Vérifier la résolution des traits et la gestion des erreurs pour
 ///        LoadSpeciesDetailsImpl.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';

@@ -2,6 +2,7 @@
 /// Fichier test : background_id_test.dart
 /// Rôle : Couvrir les invariants du Value Object [BackgroundId].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 

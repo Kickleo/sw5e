@@ -2,6 +2,7 @@
 /// Fichier test : maneuvers_known_test.dart
 /// Rôle : Couvrir les validations du Value Object [ManeuversKnown].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/maneuvers_known.dart';
 

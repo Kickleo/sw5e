@@ -2,6 +2,7 @@
 /// Fichier test : proficiency_bonus_test.dart
 /// Rôle : Vérifier la table de calcul et les bornes de [ProficiencyBonus].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/level.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/proficiency_bonus.dart';

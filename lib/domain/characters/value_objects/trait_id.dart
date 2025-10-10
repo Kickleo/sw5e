@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final id = TraitId('shrewd');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// TraitId = Value Object pour un identifiant de trait.

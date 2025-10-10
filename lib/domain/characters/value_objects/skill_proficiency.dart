@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final skill = SkillProficiency(code: 'stealth', source: 'species');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// État de maîtrise (MVP : binaire)

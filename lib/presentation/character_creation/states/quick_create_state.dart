@@ -8,6 +8,7 @@
 ///   final state = QuickCreateState.initial();
 ///   final canCreate = state.canCreate; // booléen.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:meta/meta.dart';
 import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';

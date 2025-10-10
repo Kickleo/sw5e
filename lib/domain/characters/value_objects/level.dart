@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final level = Level(1);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// Level = Value Object contrôlant le niveau d'un personnage.

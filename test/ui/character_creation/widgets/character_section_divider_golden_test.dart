@@ -4,6 +4,7 @@
 /// Dépendances : flutter_test, MaterialApp, CharacterSectionDivider.
 /// Exemple d'usage : `flutter test test/ui/character_creation/widgets/character_section_divider_golden_test.dart`.
 /// ---------------------------------------------------------------------------
+library;
 import 'dart:convert';
 import 'dart:io';
 

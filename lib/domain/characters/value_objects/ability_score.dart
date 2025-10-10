@@ -7,6 +7,7 @@
 /// Exemple d'usage :
 ///   final score = AbilityScore(15); // modificateur = +2
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// AbilityScore = Value Object garantissant qu'un score est compris entre 1 et

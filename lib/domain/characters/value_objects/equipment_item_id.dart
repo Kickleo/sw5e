@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final id = EquipmentItemId('blaster-pistol');
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// EquipmentItemId = Value Object garantissant un slug d'objet valide.

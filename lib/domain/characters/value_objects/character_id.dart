@@ -7,6 +7,7 @@
 /// Exemple d'usage :
 ///   final id = CharacterId.generate();
 /// ---------------------------------------------------------------------------
+library;
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';

@@ -5,6 +5,7 @@
 /// Exemple d'usage :
 ///   final dice = SuperiorityDice(count: 2, die: 6);
 /// ---------------------------------------------------------------------------
+library;
 import 'package:equatable/equatable.dart';
 
 /// SuperiorityDice = Value Object pour les dés de supériorité du guerrier.

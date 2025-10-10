@@ -3,6 +3,7 @@
 /// Rôle : Vérifier le comportement du ClassPickerBloc (chargement initial,
 ///        changement de sélection, erreurs).
 /// ---------------------------------------------------------------------------
+library;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -47,17 +48,17 @@ void main() {
     ).thenReturn(null);
   });
 
-  ClassDef _buildClass({required String id}) {
+  ClassDef buildClass({required String id}) {
     return ClassDef(
       id: id,
       name: const LocalizedText(en: 'Guardian', fr: 'Gardien'),
       hitDie: 10,
-      level1: ClassLevel1Data(
-        proficiencies: const ClassLevel1Proficiencies(
+      level1: const ClassLevel1Data(
+        proficiencies: ClassLevel1Proficiencies(
           skillsChoose: 2,
           skillsFrom: <String>['athletics', 'any'],
         ),
-        startingEquipment: const <StartingEquipmentLine>[
+        startingEquipment: <StartingEquipmentLine>[
           StartingEquipmentLine(id: 'blaster-pistol', qty: 1),
         ],
       ),
@@ -65,9 +66,9 @@ void main() {
   }
 
   const SkillDef skillAthletics = SkillDef(id: 'athletics', ability: 'str');
-  final EquipmentDef equipmentBlaster = EquipmentDef(
+  final EquipmentDef equipmentBlaster = const EquipmentDef(
     id: 'blaster-pistol',
-    name: const LocalizedText(en: 'Blaster pistol', fr: 'Pistolet blaster'),
+    name: LocalizedText(en: 'Blaster pistol', fr: 'Pistolet blaster'),
     type: 'weapon',
     weightG: 1000,
     cost: 500,
@@ -86,7 +87,7 @@ void main() {
         (_) async => <String>['guardian'],
       );
       when(() => catalog.getClass('guardian')).thenAnswer(
-        (_) async => _buildClass(id: 'guardian'),
+        (_) async => buildClass(id: 'guardian'),
       );
       when(() => catalog.getSkill('athletics')).thenAnswer(
         (_) async => skillAthletics,
@@ -140,10 +141,10 @@ void main() {
         (_) async => <String>['guardian', 'scoundrel'],
       );
       when(() => catalog.getClass('guardian')).thenAnswer(
-        (_) async => _buildClass(id: 'guardian'),
+        (_) async => buildClass(id: 'guardian'),
       );
       when(() => catalog.getClass('scoundrel')).thenAnswer(
-        (_) async => _buildClass(id: 'scoundrel'),
+        (_) async => buildClass(id: 'scoundrel'),
       );
       when(() => catalog.getSkill('athletics')).thenAnswer(
         (_) async => skillAthletics,

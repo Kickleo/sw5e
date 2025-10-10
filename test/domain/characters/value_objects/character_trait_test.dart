@@ -2,6 +2,7 @@
 /// Fichier test : character_trait_test.dart
 /// Rôle : Vérifier l'égalité par valeur de [CharacterTrait].
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_trait.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/trait_id.dart';
