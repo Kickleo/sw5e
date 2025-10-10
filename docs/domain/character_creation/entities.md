@@ -3,6 +3,10 @@
 ## Agrégat racine : `Character`
 **But** : représenter un personnage **niveau 1 prêt à jouer** (MVP).
 
+> Tests automatisés : `test/domain/characters/entities/character_test.dart`
+> vérifie les invariants critiques (niveau, caractéristiques complètes,
+> inventaire sans quantité nulle).
+
 ### Champs (tous immuables)
 - `name: CharacterName`
 - `speciesId: SpeciesId`

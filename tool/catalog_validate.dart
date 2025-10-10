@@ -1,8 +1,17 @@
-// tool/catalog_validate.dart
+// -----------------------------------------------------------------------------
+// Fichier : tool/catalog_validate.dart
+// Rôle : Script de validation des assets catalogue (structure JSON et unicité).
+// Dépendances : dart:io pour accéder aux fichiers, dart:convert pour lire le JSON.
+// Exemple d'usage : `dart run tool/catalog_validate.dart` lancé par `make test`/CI.
+// -----------------------------------------------------------------------------
 import 'dart:convert';
 import 'dart:io';
 
-void main(List<String> args) {
+/// main = point d'entrée du script de validation des catalogues JSON.
+///
+/// Pré-conditions : exécuter depuis la racine du projet pour que `assets/catalog`
+/// soit accessible. Post-condition : exit code 0 si tout est valide, 1 sinon.
+Future<void> main(List<String> args) async {
   const baseDir = 'assets/catalog';
   final expected = <String>[
     'species.json',
@@ -29,9 +38,13 @@ void main(List<String> args) {
   final slug = RegExp(r'^[a-z0-9-]{3,60}$');
   final errors = <String>[];
 
+  /// addError = ajoute un message d'échec (mutatif mais local au script).
   void addError(String msg) => errors.add(msg);
 
-  // Valide les fichiers "array" avec id/slug unique
+  /// validateArrayFile = vérifie qu'un fichier catalogue type tableau respecte
+  /// la structure (objet JSON par entrée, champ `id` unique respectant la regex).
+  ///
+  /// Lance [addError] pour chaque anomalie détectée. Ne lance pas d'exception.
   Future<void> validateArrayFile(String name) async {
     final path = '$baseDir/$name';
     final raw = await File(path).readAsString();
@@ -67,7 +80,9 @@ void main(List<String> args) {
     }
   }
 
-  // Valide le fichier "formulas.json" (objet)
+  /// validateFormulas = contrôle basique du fichier `formulas.json` (objet).
+  ///
+  /// TODO futur : renforcer les clés obligatoires/structure métier.
   Future<void> validateFormulas() async {
     const name = 'formulas.json';
     final path = '$baseDir/$name';
@@ -90,9 +105,9 @@ void main(List<String> args) {
   // Exécute les validations pour chaque fichier présent
   for (final name in existing) {
     if (name == 'formulas.json') {
-      validateFormulas();
+      await validateFormulas();
     } else {
-      validateArrayFile(name);
+      await validateArrayFile(name);
     }
   }
 
