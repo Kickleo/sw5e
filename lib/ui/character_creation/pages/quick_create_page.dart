@@ -17,6 +17,7 @@ import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/core/connectivity/connectivity_providers.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
