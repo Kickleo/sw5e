@@ -772,11 +772,11 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
           );
         },
       );
-    } catch (Object error, StackTrace stack) {
+    } catch (error, stackTrace) {
       _logger.error(
         'Erreur inattendue lors de la finalisation',
         error: error,
-        stackTrace: stack,
+        stackTrace: stackTrace,
         payload: {
           'species': selectedSpecies,
           'class': selectedClass,
