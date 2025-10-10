@@ -513,7 +513,7 @@ class _AbilitiesStep extends HookWidget {
 
       return DropdownButtonFormField<int?>(
         key: ValueKey('dropdown-$ability-${mode.name}'),
-        value: currentValue,
+        initialValue: currentValue,
         decoration: const InputDecoration(
           labelText: 'Score',
           border: OutlineInputBorder(),
@@ -547,31 +547,28 @@ class _AbilitiesStep extends HookWidget {
         ),
         const SizedBox(height: 8),
         Card(
-          child: Column(
-            children: [
-              RadioListTile<AbilityGenerationMode>(
-                value: AbilityGenerationMode.standardArray,
-                groupValue: mode,
-                title: const Text('Tableau standard'),
-                subtitle: const Text(
-                  'Utiliser les scores fixes 15, 14, 13, 12, 10 et 8.',
+          child: RadioGroup<AbilityGenerationMode>(
+            groupValue: mode,
+            onChanged: (value) {
+              if (value != null) onModeChanged(value);
+            },
+            child: Column(
+              children: [
+                RadioListTile<AbilityGenerationMode>(
+                  value: AbilityGenerationMode.standardArray,
+                  title: const Text('Tableau standard'),
+                  subtitle: const Text(
+                    'Utiliser les scores fixes 15, 14, 13, 12, 10 et 8.',
+                  ),
                 ),
-                onChanged: (value) {
-                  if (value != null) onModeChanged(value);
-                },
-              ),
-              const Divider(height: 0),
-              RadioListTile<AbilityGenerationMode>(
-                value: AbilityGenerationMode.roll,
-                groupValue: mode,
-                title: const Text('Lancer les dés'),
-                subtitle: const Text(
-                  'Lancez 4d6, conservez les 3 meilleurs et assignez les 6 scores obtenus.',
+                const Divider(height: 0),
+                RadioListTile<AbilityGenerationMode>(
+                  value: AbilityGenerationMode.roll,
+                  title: const Text('Lancer les dés'),
+                  subtitle: const Text(
+                    'Lancez 4d6, conservez les 3 meilleurs et assignez les 6 scores obtenus.',
+                  ),
                 ),
-                onChanged: (value) {
-                  if (value != null) onModeChanged(value);
-                },
-              ),
               if (mode == AbilityGenerationMode.roll)
                 Padding(
                   padding: const EdgeInsets.only(
@@ -588,19 +585,16 @@ class _AbilitiesStep extends HookWidget {
                     ),
                   ),
                 ),
-              const Divider(height: 0),
-              RadioListTile<AbilityGenerationMode>(
-                value: AbilityGenerationMode.manual,
-                groupValue: mode,
-                title: const Text('Saisie manuelle'),
-                subtitle: const Text(
-                  'Entrez vous-même les scores obtenus ailleurs et assignez-les.',
+                const Divider(height: 0),
+                RadioListTile<AbilityGenerationMode>(
+                  value: AbilityGenerationMode.manual,
+                  title: const Text('Saisie manuelle'),
+                  subtitle: const Text(
+                    'Entrez vous-même les scores obtenus ailleurs et assignez-les.',
+                  ),
                 ),
-                onChanged: (value) {
-                  if (value != null) onModeChanged(value);
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 16),
@@ -1160,7 +1154,7 @@ class _EquipmentStep extends HookWidget {
                   )
                 : ListView.separated(
                     itemCount: filteredIds.length,
-                    separatorBuilder: (_, __) =>
+                    separatorBuilder: (_, _index) =>
                         const CharacterSectionDivider(spacing: 8, thickness: 1),
                     itemBuilder: (context, index) {
                       final id = filteredIds[index];
