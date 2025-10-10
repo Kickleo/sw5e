@@ -8,6 +8,8 @@ import 'package:sw5e_manager/features/character_creation/domain/value_objects/ab
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/background_id.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/character_name.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/class_id.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/equipment_item_id.dart';
+import 'package:sw5e_manager/features/character_creation/domain/value_objects/quantity.dart';
 import 'package:sw5e_manager/features/character_creation/domain/value_objects/species_id.dart';
 import 'package:sw5e_manager/features/character_creation/presentation/viewmodels/quick_create_state.dart';
 
@@ -46,12 +48,17 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
       errorMessage: null,
       statusMessage: 'Chargement du catalogue…',
       hasLoadedOnce: true,
+      isLoadingEquipment: true,
     );
 
     try {
       final species = await _catalog.listSpecies();
       final classes = await _catalog.listClasses();
       final backgrounds = await _catalog.listBackgrounds();
+      final equipmentDefs = await _fetchAllEquipmentDefinitions();
+      final sortedEquipment = equipmentDefs.values.toList()
+        ..sort(_compareEquipment);
+      final equipmentList = sortedEquipment.map((e) => e.id).toList(growable: false);
 
       final selectedSpecies = species.isNotEmpty ? species.first : null;
       final selectedClass = classes.isNotEmpty ? classes.first : null;
@@ -70,6 +77,11 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
         isLoadingCatalog: false,
         statusMessage: null,
         errorMessage: null,
+        equipmentDefinitions: equipmentDefs,
+        equipmentList: equipmentList,
+        chosenEquipment: const <String, int>{},
+        useStartingEquipment: true,
+        isLoadingEquipment: false,
       );
 
       if (selectedSpecies != null) {
@@ -81,6 +93,7 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
     } catch (error) {
       state = state.copyWith(
         isLoadingCatalog: false,
+        isLoadingEquipment: false,
         errorMessage: 'Erreur de chargement du catalogue: $error',
         statusMessage: null,
       );
@@ -108,6 +121,8 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
       availableSkills: const <String>[],
       chosenSkills: const <String>{},
       skillChoicesRequired: 0,
+      chosenEquipment: const <String, int>{},
+      useStartingEquipment: true,
     );
     await _refreshClassDef(id);
   }
@@ -215,6 +230,13 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
     if (selectedSpecies == null || selectedClass == null || selectedBackground == null) {
       return;
     }
+    if (!state.hasValidEquipmentSelection) {
+      state = state.copyWith(
+        statusMessage: null,
+        errorMessage: 'Veuillez vérifier vos choix d\'équipement (poids ou crédits).',
+      );
+      return;
+    }
 
     state = state.copyWith(
       isCreating: true,
@@ -250,6 +272,27 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
       }
     }
 
+    final chosenEquipment = <ChosenEquipmentLine>[];
+    for (final entry in state.chosenEquipment.entries) {
+      final qty = entry.value;
+      if (qty <= 0) {
+        continue;
+      }
+      try {
+        chosenEquipment.add(ChosenEquipmentLine(
+          itemId: EquipmentItemId(entry.key),
+          quantity: Quantity(qty),
+        ));
+      } on ArgumentError {
+        state = state.copyWith(
+          isCreating: false,
+          statusMessage: null,
+          errorMessage: 'Équipement sélectionné invalide (${entry.key}).',
+        );
+        return;
+      }
+    }
+
     final input = FinalizeLevel1Input(
       name: CharacterName(state.characterName.trim()),
       speciesId: SpeciesId(selectedSpecies),
@@ -257,7 +300,8 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
       backgroundId: BackgroundId(selectedBackground),
       baseAbilities: baseAbilities,
       chosenSkills: chosenSkills,
-      chosenEquipment: const <ChosenEquipmentLine>[],
+      chosenEquipment: chosenEquipment,
+      useStartingEquipmentPackage: state.useStartingEquipment,
     );
 
     final result = await _finalize(input);
@@ -416,5 +460,54 @@ class QuickCreateViewModel extends StateNotifier<QuickCreateState> {
     }
 
     state = state.copyWith(chosenSkills: current);
+  }
+
+  void setUseStartingEquipment(bool value) {
+    if (value == state.useStartingEquipment) {
+      return;
+    }
+    state = state.copyWith(useStartingEquipment: value, statusMessage: null);
+  }
+
+  void setEquipmentQuantity(String id, int quantity) {
+    if (!state.equipmentDefinitions.containsKey(id)) {
+      return;
+    }
+    var sanitized = quantity;
+    if (sanitized < 0) {
+      sanitized = 0;
+    }
+    if (sanitized > 99) {
+      sanitized = 99;
+    }
+    final updated = Map<String, int>.from(state.chosenEquipment);
+    if (sanitized == 0) {
+      updated.remove(id);
+    } else {
+      updated[id] = sanitized;
+    }
+    state = state.copyWith(chosenEquipment: updated, statusMessage: null);
+  }
+
+  Future<Map<String, EquipmentDef>> _fetchAllEquipmentDefinitions() async {
+    final ids = await _catalog.listEquipment();
+    final defs = <String, EquipmentDef>{};
+    for (final id in ids) {
+      final def = await _catalog.getEquipment(id);
+      if (def != null) {
+        defs[id] = def;
+      }
+    }
+    return defs;
+  }
+
+  int _compareEquipment(EquipmentDef a, EquipmentDef b) {
+    final nameA = a.name.fr.toLowerCase();
+    final nameB = b.name.fr.toLowerCase();
+    final cmp = nameA.compareTo(nameB);
+    if (cmp != 0) {
+      return cmp;
+    }
+    return a.id.compareTo(b.id);
   }
 }
