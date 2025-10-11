@@ -14,6 +14,7 @@ import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 
 /// QuickCreateStep = progression du wizard (vue -> BLoC).
 enum QuickCreateStep { species, abilities, classes, skills, equipment, background }
@@ -36,6 +37,7 @@ class QuickCreateState {
   final String? selectedBackground;
   final ClassDef? selectedClassDef;
   final List<TraitDef> selectedSpeciesTraits;
+  final List<CharacterEffect> selectedSpeciesEffects;
   final List<String> availableSkills;
   final Map<String, SkillDef> skillDefinitions;
   final Set<String> chosenSkills;
@@ -67,6 +69,7 @@ class QuickCreateState {
     required this.selectedBackground,
     required this.selectedClassDef,
     required this.selectedSpeciesTraits,
+    required this.selectedSpeciesEffects,
     required this.availableSkills,
     required this.skillDefinitions,
     required this.chosenSkills,
@@ -99,6 +102,7 @@ class QuickCreateState {
         selectedBackground: null,
         selectedClassDef: null,
         selectedSpeciesTraits: <TraitDef>[],
+        selectedSpeciesEffects: <CharacterEffect>[],
         availableSkills: <String>[],
         skillDefinitions: <String, SkillDef>{},
         chosenSkills: <String>{},
@@ -141,6 +145,7 @@ class QuickCreateState {
     Object? selectedBackground = _sentinel,
     Object? selectedClassDef = _sentinel,
     List<TraitDef>? selectedSpeciesTraits,
+    List<CharacterEffect>? selectedSpeciesEffects,
     List<String>? availableSkills,
     Map<String, SkillDef>? skillDefinitions,
     Set<String>? chosenSkills,
@@ -179,6 +184,8 @@ class QuickCreateState {
           ? this.selectedClassDef
           : selectedClassDef as ClassDef?,
       selectedSpeciesTraits: selectedSpeciesTraits ?? this.selectedSpeciesTraits,
+      selectedSpeciesEffects:
+          selectedSpeciesEffects ?? this.selectedSpeciesEffects,
       availableSkills: availableSkills ?? this.availableSkills,
       skillDefinitions: skillDefinitions ?? this.skillDefinitions,
       chosenSkills: chosenSkills ?? this.chosenSkills,

@@ -14,22 +14,45 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/data/catalog/repositories/asset_catalog_repository.dart';
+import 'package:sw5e_manager/data/characters/repositories/in_memory_character_draft_repository.dart';
 import 'package:sw5e_manager/data/characters/repositories/in_memory_character_repository.dart';
+import 'package:sw5e_manager/data/characters/repositories/persistent_character_draft_repository.dart';
 import 'package:sw5e_manager/data/characters/repositories/persistent_character_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/repositories/character_draft_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/assemble_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/assemble_level1_character_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_character_draft_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_background.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_background_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_class.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_class_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context.dart';
 import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context_impl.dart';
 
@@ -57,6 +80,11 @@ void registerCharacterCreationModule() {
     () => kReleaseMode
         ? PersistentCharacterRepository()
         : InMemoryCharacterRepository(),
+  );
+  ServiceLocator.registerLazySingleton<CharacterDraftRepository>(
+    () => kReleaseMode
+        ? PersistentCharacterDraftRepository()
+        : InMemoryCharacterDraftRepository(),
   );
   // -------------------------------------------------------------------------
   // Use cases
@@ -112,6 +140,56 @@ void registerCharacterCreationModule() {
   ServiceLocator.registerLazySingleton<LoadSpeciesDetails>(
     () => LoadSpeciesDetailsImpl(
       ServiceLocator.resolve<CatalogRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<LoadCharacterDraft>(
+    () => LoadCharacterDraftImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftName>(
+    () => PersistCharacterDraftNameImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftSpecies>(
+    () => PersistCharacterDraftSpeciesImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftClass>(
+    () => PersistCharacterDraftClassImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftBackground>(
+    () => PersistCharacterDraftBackgroundImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftAbilityScores>(
+    () => PersistCharacterDraftAbilityScoresImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftSkills>(
+    () => PersistCharacterDraftSkillsImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftEquipment>(
+    () => PersistCharacterDraftEquipmentImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftStep>(
+    () => PersistCharacterDraftStepImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<ClearCharacterDraft>(
+    () => ClearCharacterDraftImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
     ),
   );
   // Use case responsable de la lecture des informations d'une classe (niveaux,

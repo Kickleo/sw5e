@@ -4,6 +4,7 @@
 ///        manipulation des succès/erreurs dans la nouvelle architecture.
 /// Dépendances : `Result` historique situé dans `core/domain/result.dart`.
 /// Exemple d'usage :
+// ignore: unintended_html_in_doc_comment
 ///   final outcome = appOk<int>(1);
 /// ---------------------------------------------------------------------------
 library;

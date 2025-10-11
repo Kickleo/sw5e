@@ -4,6 +4,7 @@
 ///        standardiser les niveaux et formats de logs.
 /// Dépendances : Aucune (interface pure, implémentations ailleurs).
 /// Exemple d'usage :
+// ignore: unintended_html_in_doc_comment
 ///   final logger = ServiceLocator.resolve<AppLogger>();
 ///   logger.info('Character created');
 /// ---------------------------------------------------------------------------

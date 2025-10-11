@@ -18,19 +18,50 @@ class LocalizedText {
 }
 
 @immutable
+class SpeciesAbilityBonus {
+  final String? ability; // slug ex: "int" ou null pour un choix libre.
+  final int amount; // valeur positive/négative appliquée.
+  final int? choose; // nombre d'aptitudes à choisir.
+  final List<String> options; // aptitudes possibles lorsque [choose] est défini.
+  final bool isAlternative; // indique une variante alternative.
+
+  const SpeciesAbilityBonus({
+    this.ability,
+    required this.amount,
+    this.choose,
+    this.options = const <String>[],
+    this.isAlternative = false,
+  });
+
+  bool get isChoice => choose != null && options.isNotEmpty;
+}
+
+@immutable
 class SpeciesDef {
   final String id; // slug (ex: "human")
   final LocalizedText name; // Nom affichable localisé.
   final int speed; // ex: 30
   final String size; // ex: "medium"
   final List<String> traitIds; // Traits référencés dans [TraitDef].
-  // Simplifié : on ne modèle pas encore ability_bonuses/traits au niveau du domaine.
+  final List<SpeciesAbilityBonus> abilityBonuses; // bonus de caractéristique.
+  final String? age; // Texte descriptif de l'âge.
+  final String? alignment; // Inclinaison morale typique.
+  final String? sizeText; // Description détaillée de la taille.
+  final String? speedText; // Description détaillée de la vitesse.
+  final String? languages; // Langues parlées par défaut.
+
   const SpeciesDef({
     required this.id,
     required this.name,
     required this.speed,
     required this.size,
     this.traitIds = const <String>[],
+    this.abilityBonuses = const <SpeciesAbilityBonus>[],
+    this.age,
+    this.alignment,
+    this.sizeText,
+    this.speedText,
+    this.languages,
   });
 }
 
