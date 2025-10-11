@@ -12,6 +12,8 @@ import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_draft_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft_impl.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/class_id.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 
 void main() {
@@ -26,6 +28,25 @@ void main() {
           displayName: 'Bith',
           effects: const <CharacterEffect>[],
         ),
+        classId: ClassId('consular'),
+        backgroundId: BackgroundId('scholar'),
+        abilityScores: DraftAbilityScores(
+          mode: DraftAbilityGenerationMode.standardArray,
+          assignments: const <String, int?>{
+            'str': 15,
+            'dex': 14,
+            'con': 13,
+            'int': 12,
+            'wis': 10,
+            'cha': 8,
+          },
+          pool: const <int>[15, 14, 13, 12, 10, 8],
+        ),
+        chosenSkills: const <String>{'lore'},
+        equipment: DraftEquipmentSelection(
+          useStartingEquipment: false,
+          quantities: const <String, int>{'holocron': 1},
+        ),
       );
       await repository.save(expectedDraft);
 
@@ -38,6 +59,12 @@ void main() {
           expect(draft, isNotNull);
           expect(draft!.name, 'Lando');
           expect(draft.species!.speciesId.value, 'bith');
+          expect(draft.classId?.value, 'consular');
+          expect(draft.backgroundId?.value, 'scholar');
+          expect(draft.abilityScores?.mode,
+              DraftAbilityGenerationMode.standardArray);
+          expect(draft.chosenSkills, contains('lore'));
+          expect(draft.equipment?.quantities['holocron'], 1);
         },
         err: (DomainError error) => fail('Unexpected error: $error'),
       );

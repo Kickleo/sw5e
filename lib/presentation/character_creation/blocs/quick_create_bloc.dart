@@ -27,7 +27,13 @@ import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dar
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_background.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_class.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_name.dart';
@@ -228,7 +234,13 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     required LoadCharacterDraft loadCharacterDraft,
     required FinalizeLevel1Character finalizeLevel1Character,
     required AppLogger logger,
+    required PersistCharacterDraftName persistCharacterDraftName,
     required PersistCharacterDraftSpecies persistCharacterDraftSpecies,
+    required PersistCharacterDraftClass persistCharacterDraftClass,
+    required PersistCharacterDraftBackground persistCharacterDraftBackground,
+    required PersistCharacterDraftAbilityScores persistCharacterDraftAbilityScores,
+    required PersistCharacterDraftSkills persistCharacterDraftSkills,
+    required PersistCharacterDraftEquipment persistCharacterDraftEquipment,
     Random? random,
   })  : _loadQuickCreateCatalog = loadQuickCreateCatalog,
         _loadSpeciesDetails = loadSpeciesDetails,
@@ -236,7 +248,13 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         _loadCharacterDraft = loadCharacterDraft,
         _finalizeLevel1Character = finalizeLevel1Character,
         _logger = logger,
+        _persistCharacterDraftName = persistCharacterDraftName,
         _persistCharacterDraftSpecies = persistCharacterDraftSpecies,
+        _persistCharacterDraftClass = persistCharacterDraftClass,
+        _persistCharacterDraftBackground = persistCharacterDraftBackground,
+        _persistCharacterDraftAbilityScores = persistCharacterDraftAbilityScores,
+        _persistCharacterDraftSkills = persistCharacterDraftSkills,
+        _persistCharacterDraftEquipment = persistCharacterDraftEquipment,
         _random = random ?? Random(),
         super(QuickCreateState.initial()) {
     on<QuickCreateStarted>(_onStarted);
@@ -263,7 +281,13 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   final LoadCharacterDraft _loadCharacterDraft;
   final FinalizeLevel1Character _finalizeLevel1Character;
   final AppLogger _logger;
+  final PersistCharacterDraftName _persistCharacterDraftName;
   final PersistCharacterDraftSpecies _persistCharacterDraftSpecies;
+  final PersistCharacterDraftClass _persistCharacterDraftClass;
+  final PersistCharacterDraftBackground _persistCharacterDraftBackground;
+  final PersistCharacterDraftAbilityScores _persistCharacterDraftAbilityScores;
+  final PersistCharacterDraftSkills _persistCharacterDraftSkills;
+  final PersistCharacterDraftEquipment _persistCharacterDraftEquipment;
   final Random _random;
 
   static const List<int> _standardArray = <int>[15, 14, 13, 12, 10, 8];
@@ -280,6 +304,47 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         'wis': 10,
         'cha': 8,
       };
+
+  DraftAbilityGenerationMode _mapToDraftMode(AbilityGenerationMode mode) {
+    switch (mode) {
+      case AbilityGenerationMode.standardArray:
+        return DraftAbilityGenerationMode.standardArray;
+      case AbilityGenerationMode.roll:
+        return DraftAbilityGenerationMode.roll;
+      case AbilityGenerationMode.manual:
+        return DraftAbilityGenerationMode.manual;
+    }
+  }
+
+  AbilityGenerationMode _mapFromDraftMode(DraftAbilityGenerationMode mode) {
+    switch (mode) {
+      case DraftAbilityGenerationMode.standardArray:
+        return AbilityGenerationMode.standardArray;
+      case DraftAbilityGenerationMode.roll:
+        return AbilityGenerationMode.roll;
+      case DraftAbilityGenerationMode.manual:
+        return AbilityGenerationMode.manual;
+    }
+  }
+
+  DraftAbilityScores _buildDraftAbilityScoresSnapshot(
+    QuickCreateState current,
+  ) {
+    return DraftAbilityScores(
+      mode: _mapToDraftMode(current.abilityMode),
+      assignments: Map<String, int?>.from(current.abilityAssignments),
+      pool: List<int>.from(current.abilityPool),
+    );
+  }
+
+  DraftEquipmentSelection _buildDraftEquipmentSelectionSnapshot(
+    QuickCreateState current,
+  ) {
+    return DraftEquipmentSelection(
+      useStartingEquipment: current.useStartingEquipment,
+      quantities: Map<String, int>.from(current.chosenEquipment),
+    );
+  }
 
   Future<void> _onStarted(
     QuickCreateStarted event,
@@ -325,34 +390,76 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
           resolvedSpeciesId = draftSpeciesId;
         }
 
+        String? resolvedClassId = snapshot.defaultClassId;
+        final String? draftClassId = existingDraft?.classId?.value;
+        if (draftClassId != null && snapshot.classIds.contains(draftClassId)) {
+          resolvedClassId = draftClassId;
+        }
+
+        String? resolvedBackgroundId = snapshot.defaultBackgroundId;
+        final String? draftBackgroundId = existingDraft?.backgroundId?.value;
+        if (draftBackgroundId != null &&
+            snapshot.backgroundIds.contains(draftBackgroundId)) {
+          resolvedBackgroundId = draftBackgroundId;
+        }
+
+        AbilityGenerationMode resolvedAbilityMode =
+            AbilityGenerationMode.standardArray;
+        Map<String, int?> resolvedAssignments = _defaultStandardAssignments();
+        List<int> resolvedPool = List<int>.from(_standardArray);
+        final DraftAbilityScores? draftAbilityScores = existingDraft?.abilityScores;
+        if (draftAbilityScores != null) {
+          resolvedAbilityMode = _mapFromDraftMode(draftAbilityScores.mode);
+          final Map<String, int?> normalized = _emptyAbilityAssignments();
+          normalized.addAll(draftAbilityScores.assignments);
+          resolvedAssignments = normalized;
+          resolvedPool = List<int>.from(draftAbilityScores.pool);
+          if (resolvedAbilityMode == AbilityGenerationMode.standardArray &&
+              resolvedPool.length != _standardArray.length) {
+            resolvedPool = List<int>.from(_standardArray);
+          }
+        }
+
+        final Set<String> resolvedSkills =
+            existingDraft?.chosenSkills ?? const <String>{};
+        final DraftEquipmentSelection? draftEquipment = existingDraft?.equipment;
+        final bool resolvedUseStartingEquipment =
+            draftEquipment?.useStartingEquipment ?? true;
+        final Map<String, int> resolvedEquipment = draftEquipment == null
+            ? <String, int>{}
+            : Map<String, int>.from(draftEquipment.quantities);
+
         emit(
           state.copyWith(
             species: snapshot.speciesIds,
             classes: snapshot.classIds,
             backgrounds: snapshot.backgroundIds,
             selectedSpecies: resolvedSpeciesId,
-            selectedClass: snapshot.defaultClassId,
-            selectedBackground: snapshot.defaultBackgroundId,
+            selectedClass: resolvedClassId,
+            selectedBackground: resolvedBackgroundId,
             availableSkills: const <String>[],
-            chosenSkills: const <String>{},
+            chosenSkills: resolvedSkills,
             skillChoicesRequired: 0,
             isLoadingCatalog: false,
             statusMessage: null,
             failure: null,
             equipmentDefinitions: snapshot.equipmentById,
             equipmentList: snapshot.sortedEquipmentIds,
-            chosenEquipment: const <String, int>{},
-            useStartingEquipment: true,
+            chosenEquipment: resolvedEquipment,
+            useStartingEquipment: resolvedUseStartingEquipment,
             isLoadingEquipment: false,
             characterName: existingDraft?.name ?? state.characterName,
+            abilityAssignments: resolvedAssignments,
+            abilityPool: resolvedPool,
+            abilityMode: resolvedAbilityMode,
           ),
         );
 
         if (resolvedSpeciesId != null) {
           await _refreshSpeciesTraits(resolvedSpeciesId, emit);
         }
-        if (snapshot.defaultClassId != null) {
-          await _refreshClassDef(snapshot.defaultClassId!, emit);
+        if (resolvedClassId != null) {
+          await _refreshClassDef(resolvedClassId, emit);
         }
       },
       err: (DomainError error) async {
@@ -373,14 +480,28 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     );
   }
 
-  void _onNameChanged(
+  Future<void> _onNameChanged(
     QuickCreateNameChanged event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     if (event.name == state.characterName) {
       return;
     }
-    emit(state.copyWith(characterName: event.name));
+    final QuickCreateState updated =
+        state.copyWith(characterName: event.name, statusMessage: null);
+    emit(updated);
+    final AppResult<CharacterDraft> result =
+        await _persistCharacterDraftName(event.name);
+    result.match(
+      ok: (_) {},
+      err: (DomainError error) {
+        _logger.warn(
+          'Échec de la sauvegarde du nom',
+          error: error,
+          payload: {'name': event.name},
+        );
+      },
+    );
   }
 
   Future<void> _onSpeciesSelected(
@@ -401,8 +522,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     if (event.classId == state.selectedClass) {
       return;
     }
-    emit(
-      state.copyWith(
+    final QuickCreateState updated = state.copyWith(
         selectedClass: event.classId,
         selectedClassDef: null,
         statusMessage: null,
@@ -414,17 +534,48 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         useStartingEquipment: true,
       ),
     );
+    emit(updated);
+    final AppResult<CharacterDraft> persistClassResult =
+        await _persistCharacterDraftClass(event.classId);
+    persistClassResult.match(
+      ok: (_) {},
+      err: (DomainError error) {
+        _logger.warn(
+          'Échec de la sauvegarde de la classe',
+          error: error,
+          payload: {'classId': event.classId},
+        );
+      },
+    );
+    await _persistSkillsSnapshot(updated);
+    await _persistEquipmentSnapshot(updated);
     await _refreshClassDef(event.classId, emit);
   }
 
-  void _onBackgroundSelected(
+  Future<void> _onBackgroundSelected(
     QuickCreateBackgroundSelected event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     if (event.backgroundId == state.selectedBackground) {
       return;
     }
-    emit(state.copyWith(selectedBackground: event.backgroundId, statusMessage: null));
+    final QuickCreateState updated = state.copyWith(
+      selectedBackground: event.backgroundId,
+      statusMessage: null,
+    );
+    emit(updated);
+    final AppResult<CharacterDraft> result =
+        await _persistCharacterDraftBackground(event.backgroundId);
+    result.match(
+      ok: (_) {},
+      err: (DomainError error) {
+        _logger.warn(
+          'Échec de la sauvegarde du background',
+          error: error,
+          payload: {'backgroundId': event.backgroundId},
+        );
+      },
+    );
   }
 
   void _onStepChanged(
@@ -457,68 +608,64 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     }
   }
 
-  void _onAbilityModeChanged(
+  Future<void> _onAbilityModeChanged(
     QuickCreateAbilityModeChanged event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     if (event.mode == state.abilityMode) {
       return;
     }
+    QuickCreateState updated;
     switch (event.mode) {
       case AbilityGenerationMode.standardArray:
-        emit(
-          state.copyWith(
-            abilityMode: event.mode,
-            abilityPool: List<int>.from(_standardArray),
-            abilityAssignments: _defaultStandardAssignments(),
-            statusMessage: null,
-          ),
+        updated = state.copyWith(
+          abilityMode: event.mode,
+          abilityPool: List<int>.from(_standardArray),
+          abilityAssignments: _defaultStandardAssignments(),
+          statusMessage: null,
         );
         break;
       case AbilityGenerationMode.roll:
-        emit(
-          state.copyWith(
-            abilityMode: event.mode,
-            abilityPool: _generateRolledAbilityScores(),
-            abilityAssignments: _emptyAbilityAssignments(),
-            statusMessage: null,
-          ),
+        updated = state.copyWith(
+          abilityMode: event.mode,
+          abilityPool: _generateRolledAbilityScores(),
+          abilityAssignments: _emptyAbilityAssignments(),
+          statusMessage: null,
         );
         break;
       case AbilityGenerationMode.manual:
-        emit(
-          state.copyWith(
-            abilityMode: event.mode,
-            abilityPool: const <int>[],
-            abilityAssignments:
-                Map<String, int?>.from(state.abilityAssignments),
-            statusMessage: null,
-          ),
+        updated = state.copyWith(
+          abilityMode: event.mode,
+          abilityPool: const <int>[],
+          abilityAssignments: Map<String, int?>.from(state.abilityAssignments),
+          statusMessage: null,
         );
         break;
     }
+    emit(updated);
+    await _persistAbilityScoresSnapshot(updated);
   }
 
-  void _onAbilityScoresRerolled(
+  Future<void> _onAbilityScoresRerolled(
     QuickCreateAbilityScoresRerolled event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     if (state.abilityMode != AbilityGenerationMode.roll) {
       return;
     }
-    emit(
-      state.copyWith(
-        abilityPool: _generateRolledAbilityScores(),
-        abilityAssignments: _emptyAbilityAssignments(),
-        statusMessage: null,
-      ),
+    final QuickCreateState updated = state.copyWith(
+      abilityPool: _generateRolledAbilityScores(),
+      abilityAssignments: _emptyAbilityAssignments(),
+      statusMessage: null,
     );
+    emit(updated);
+    await _persistAbilityScoresSnapshot(updated);
   }
 
-  void _onAbilityAssigned(
+  Future<void> _onAbilityAssigned(
     QuickCreateAbilityAssigned event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     if (!QuickCreateState.abilityOrder.contains(event.ability)) {
       return;
     }
@@ -550,12 +697,12 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     final Map<String, int?> updated =
         Map<String, int?>.from(state.abilityAssignments);
     updated[event.ability] = event.value;
-    emit(
-      state.copyWith(
-        abilityAssignments: updated,
-        statusMessage: null,
-      ),
+    final QuickCreateState newState = state.copyWith(
+      abilityAssignments: updated,
+      statusMessage: null,
     );
+    emit(newState);
+    await _persistAbilityScoresSnapshot(newState);
   }
 
   Future<void> _onSkillToggled(
@@ -586,28 +733,30 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
       }
     }
 
-    emit(state.copyWith(chosenSkills: current));
+    final QuickCreateState updated = state.copyWith(chosenSkills: current);
+    emit(updated);
+    await _persistSkillsSnapshot(updated);
   }
 
-  void _onUseStartingEquipmentChanged(
+  Future<void> _onUseStartingEquipmentChanged(
     QuickCreateUseStartingEquipmentChanged event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     if (event.useStartingEquipment == state.useStartingEquipment) {
       return;
     }
-    emit(
-      state.copyWith(
-        useStartingEquipment: event.useStartingEquipment,
-        statusMessage: null,
-      ),
+    final QuickCreateState updated = state.copyWith(
+      useStartingEquipment: event.useStartingEquipment,
+      statusMessage: null,
     );
+    emit(updated);
+    await _persistEquipmentSnapshot(updated);
   }
 
-  void _onEquipmentQuantityChanged(
+  Future<void> _onEquipmentQuantityChanged(
     QuickCreateEquipmentQuantityChanged event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     if (!state.equipmentDefinitions.containsKey(event.equipmentId)) {
       return;
     }
@@ -625,12 +774,12 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     } else {
       updated[event.equipmentId] = sanitized;
     }
-    emit(
-      state.copyWith(
-        chosenEquipment: updated,
-        statusMessage: null,
-      ),
+    final QuickCreateState newState = state.copyWith(
+      chosenEquipment: updated,
+      statusMessage: null,
     );
+    emit(newState);
+    await _persistEquipmentSnapshot(newState);
   }
 
   Future<void> _onSubmitted(
@@ -893,6 +1042,52 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             statusMessage:
                 'Erreur lors du chargement des traits: ${error.message ?? error.code}',
           ),
+        );
+      },
+    );
+  }
+
+  Future<void> _persistAbilityScoresSnapshot(QuickCreateState snapshot) async {
+    final AppResult<CharacterDraft> result =
+        await _persistCharacterDraftAbilityScores(
+      _buildDraftAbilityScoresSnapshot(snapshot),
+    );
+    result.match(
+      ok: (_) {},
+      err: (DomainError error) {
+        _logger.warn(
+          'Échec de la sauvegarde des caractéristiques',
+          error: error,
+        );
+      },
+    );
+  }
+
+  Future<void> _persistSkillsSnapshot(QuickCreateState snapshot) async {
+    final AppResult<CharacterDraft> result =
+        await _persistCharacterDraftSkills(Set<String>.from(snapshot.chosenSkills));
+    result.match(
+      ok: (_) {},
+      err: (DomainError error) {
+        _logger.warn(
+          'Échec de la sauvegarde des compétences',
+          error: error,
+        );
+      },
+    );
+  }
+
+  Future<void> _persistEquipmentSnapshot(QuickCreateState snapshot) async {
+    final AppResult<CharacterDraft> result =
+        await _persistCharacterDraftEquipment(
+      _buildDraftEquipmentSelectionSnapshot(snapshot),
+    );
+    result.match(
+      ok: (_) {},
+      err: (DomainError error) {
+        _logger.warn(
+          'Échec de la sauvegarde de l\'équipement',
+          error: error,
         );
       },
     );

@@ -17,7 +17,13 @@ import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dar
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_background.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_class.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
@@ -54,6 +60,24 @@ class _MockAppLogger extends Mock implements AppLogger {}
 
 class _MockPersistCharacterDraftSpecies extends Mock
     implements PersistCharacterDraftSpecies {}
+
+class _MockPersistCharacterDraftName extends Mock
+    implements PersistCharacterDraftName {}
+
+class _MockPersistCharacterDraftClass extends Mock
+    implements PersistCharacterDraftClass {}
+
+class _MockPersistCharacterDraftBackground extends Mock
+    implements PersistCharacterDraftBackground {}
+
+class _MockPersistCharacterDraftAbilityScores extends Mock
+    implements PersistCharacterDraftAbilityScores {}
+
+class _MockPersistCharacterDraftSkills extends Mock
+    implements PersistCharacterDraftSkills {}
+
+class _MockPersistCharacterDraftEquipment extends Mock
+    implements PersistCharacterDraftEquipment {}
 
 Character _dummyCharacter() {
   return Character(
@@ -92,6 +116,12 @@ void main() {
   late _MockFinalizeLevel1Character finalize;
   late _MockAppLogger logger;
   late _MockPersistCharacterDraftSpecies persistDraftSpecies;
+  late _MockPersistCharacterDraftName persistDraftName;
+  late _MockPersistCharacterDraftClass persistDraftClass;
+  late _MockPersistCharacterDraftBackground persistDraftBackground;
+  late _MockPersistCharacterDraftAbilityScores persistDraftAbilityScores;
+  late _MockPersistCharacterDraftSkills persistDraftSkills;
+  late _MockPersistCharacterDraftEquipment persistDraftEquipment;
 
   setUpAll(() {
     registerFallbackValue(
@@ -112,6 +142,20 @@ void main() {
         chosenEquipment: const <ChosenEquipmentLine>[],
       ),
     );
+    registerFallbackValue(
+      DraftAbilityScores(
+        mode: DraftAbilityGenerationMode.standardArray,
+        assignments: const <String, int?>{},
+        pool: const <int>[],
+      ),
+    );
+    registerFallbackValue(
+      DraftEquipmentSelection(
+        useStartingEquipment: true,
+        quantities: const <String, int>{},
+      ),
+    );
+    registerFallbackValue(<String>{});
   });
 
   setUp(() {
@@ -122,6 +166,12 @@ void main() {
     finalize = _MockFinalizeLevel1Character();
     logger = _MockAppLogger();
     persistDraftSpecies = _MockPersistCharacterDraftSpecies();
+    persistDraftName = _MockPersistCharacterDraftName();
+    persistDraftClass = _MockPersistCharacterDraftClass();
+    persistDraftBackground = _MockPersistCharacterDraftBackground();
+    persistDraftAbilityScores = _MockPersistCharacterDraftAbilityScores();
+    persistDraftSkills = _MockPersistCharacterDraftSkills();
+    persistDraftEquipment = _MockPersistCharacterDraftEquipment();
 
     when(() => logger.info(any(), payload: any(named: 'payload')))
         .thenAnswer((_) {});
@@ -137,6 +187,18 @@ void main() {
         .thenAnswer((_) {});
     when(() => persistDraftSpecies.call(any()))
         .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => persistDraftName.call(any()))
+        .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => persistDraftClass.call(any()))
+        .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => persistDraftBackground.call(any()))
+        .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => persistDraftAbilityScores.call(any()))
+        .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => persistDraftSkills.call(any()))
+        .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => persistDraftEquipment.call(any()))
+        .thenAnswer((_) async => appOk(const CharacterDraft()));
     when(() => loadCharacterDraft()).thenAnswer((_) async => appOk(null));
   });
 
@@ -148,7 +210,13 @@ void main() {
       loadCharacterDraft: loadCharacterDraft,
       finalizeLevel1Character: finalize,
       logger: logger,
+      persistCharacterDraftName: persistDraftName,
       persistCharacterDraftSpecies: persistDraftSpecies,
+      persistCharacterDraftClass: persistDraftClass,
+      persistCharacterDraftBackground: persistDraftBackground,
+      persistCharacterDraftAbilityScores: persistDraftAbilityScores,
+      persistCharacterDraftSkills: persistDraftSkills,
+      persistCharacterDraftEquipment: persistDraftEquipment,
     );
   }
 
@@ -338,6 +406,131 @@ void main() {
     verify: (bloc) {
       expect(bloc.state.selectedSpecies, 'bith');
       expect(bloc.state.selectedSpeciesTraits, isNotEmpty);
+    },
+  );
+
+  blocTest<QuickCreateBloc, QuickCreateState>(
+    'réhydrate la classe, le background, les aptitudes et l\'équipement depuis le brouillon',
+    build: () {
+      final EquipmentDef equipment = const EquipmentDef(
+        id: 'comlink',
+        name: LocalizedText(en: 'Comlink', fr: 'Comlink'),
+        type: 'gear',
+        weightG: 100,
+        cost: 25,
+      );
+
+      when(() => loadCatalog()).thenAnswer(
+        (_) async => appOk(
+          QuickCreateCatalogSnapshot(
+            speciesIds: const <String>['human'],
+            classIds: const <String>['guardian'],
+            backgroundIds: const <String>['outlaw'],
+            equipmentById: <String, EquipmentDef>{'comlink': equipment},
+            sortedEquipmentIds: const <String>['comlink'],
+            defaultSpeciesId: 'human',
+            defaultClassId: 'guardian',
+            defaultBackgroundId: 'outlaw',
+          ),
+        ),
+      );
+
+      when(() => loadSpeciesDetails('human')).thenAnswer(
+        (_) async => appOk(
+          const QuickCreateSpeciesDetails(
+            species: SpeciesDef(
+              id: 'human',
+              name: LocalizedText(en: 'Human', fr: 'Humain'),
+              speed: 30,
+              size: 'medium',
+              traitIds: <String>['adaptive'],
+            ),
+            traits: <TraitDef>[],
+          ),
+        ),
+      );
+
+      when(() => loadClassDetails('guardian')).thenAnswer(
+        (_) async => appOk(
+          QuickCreateClassDetails(
+            classDef: const ClassDef(
+              id: 'guardian',
+              name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
+              hitDie: 10,
+              level1: ClassLevel1Data(
+                proficiencies: ClassLevel1Proficiencies(
+                  skillsChoose: 2,
+                  skillsFrom: <String>['acrobatics', 'athletics'],
+                ),
+                startingCredits: 100,
+                startingEquipment: <StartingEquipmentLine>[],
+              ),
+            ),
+            availableSkillIds: const <String>['acrobatics', 'athletics'],
+            skillDefinitions: const <String, SkillDef>{
+              'acrobatics': SkillDef(
+                id: 'acrobatics',
+                name: LocalizedText(en: 'Acrobatics', fr: 'Acrobaties'),
+              ),
+              'athletics': SkillDef(
+                id: 'athletics',
+                name: LocalizedText(en: 'Athletics', fr: 'Athlétisme'),
+              ),
+            },
+            skillChoicesRequired: 2,
+          ),
+        ),
+      );
+
+      when(() => loadCharacterDraft()).thenAnswer(
+        (_) async => appOk(
+          CharacterDraft(
+            name: 'Drafty',
+            species: DraftSpeciesSelection(
+              speciesId: SpeciesId('human'),
+              displayName: 'Human',
+              effects: const <CharacterEffect>[],
+            ),
+            classId: ClassId('guardian'),
+            backgroundId: BackgroundId('outlaw'),
+            abilityScores: DraftAbilityScores(
+              mode: DraftAbilityGenerationMode.manual,
+              assignments: const <String, int?>{
+                'str': 13,
+                'dex': 12,
+                'con': 11,
+                'int': 10,
+                'wis': 9,
+                'cha': 8,
+              },
+              pool: const <int>[],
+            ),
+            chosenSkills: const <String>{'acrobatics'},
+            equipment: DraftEquipmentSelection(
+              useStartingEquipment: false,
+              quantities: const <String, int>{'comlink': 2},
+            ),
+          ),
+        ),
+      );
+
+      return buildBloc();
+    },
+    act: (bloc) => bloc.add(const QuickCreateStarted()),
+    wait: const Duration(milliseconds: 20),
+    expect: () => <Matcher>[],
+    verify: (bloc) {
+      final state = bloc.state;
+      expect(state.characterName, 'Drafty');
+      expect(state.selectedSpecies, 'human');
+      expect(state.selectedClass, 'guardian');
+      expect(state.selectedBackground, 'outlaw');
+      expect(state.abilityMode, AbilityGenerationMode.manual);
+      expect(state.abilityAssignments['str'], 13);
+      expect(state.abilityPool, isEmpty);
+      expect(state.chosenSkills, contains('acrobatics'));
+      expect(state.useStartingEquipment, isFalse);
+      expect(state.chosenEquipment['comlink'], 2);
     },
   );
 

@@ -23,7 +23,13 @@ import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dar
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_background.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_class.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_bloc.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
@@ -60,8 +66,20 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
     final FinalizeLevel1Character finalize =
         ServiceLocator.resolve<FinalizeLevel1Character>();
     final AppLogger logger = ServiceLocator.resolve<AppLogger>();
+    final PersistCharacterDraftName persistDraftName =
+        ServiceLocator.resolve<PersistCharacterDraftName>();
     final PersistCharacterDraftSpecies persistDraftSpecies =
         ServiceLocator.resolve<PersistCharacterDraftSpecies>();
+    final PersistCharacterDraftClass persistDraftClass =
+        ServiceLocator.resolve<PersistCharacterDraftClass>();
+    final PersistCharacterDraftBackground persistDraftBackground =
+        ServiceLocator.resolve<PersistCharacterDraftBackground>();
+    final PersistCharacterDraftAbilityScores persistDraftAbilities =
+        ServiceLocator.resolve<PersistCharacterDraftAbilityScores>();
+    final PersistCharacterDraftSkills persistDraftSkills =
+        ServiceLocator.resolve<PersistCharacterDraftSkills>();
+    final PersistCharacterDraftEquipment persistDraftEquipment =
+        ServiceLocator.resolve<PersistCharacterDraftEquipment>();
 
     _bloc = QuickCreateBloc(
       loadQuickCreateCatalog: loadCatalog,
@@ -70,7 +88,13 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       loadCharacterDraft: loadCharacterDraft,
       finalizeLevel1Character: finalize,
       logger: logger,
+      persistCharacterDraftName: persistDraftName,
       persistCharacterDraftSpecies: persistDraftSpecies,
+      persistCharacterDraftClass: persistDraftClass,
+      persistCharacterDraftBackground: persistDraftBackground,
+      persistCharacterDraftAbilityScores: persistDraftAbilities,
+      persistCharacterDraftSkills: persistDraftSkills,
+      persistCharacterDraftEquipment: persistDraftEquipment,
     )..add(const QuickCreateStarted());
 
     final String initialName = _bloc.state.characterName;

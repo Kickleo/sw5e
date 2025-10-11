@@ -11,7 +11,9 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_draft_repository.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/class_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 
 typedef DirectoryProvider = Future<Directory> Function();
@@ -100,6 +102,23 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
                       })
                   .toList(growable: false),
             },
+      'class': draft.classId?.value,
+      'background': draft.backgroundId?.value,
+      'abilityScores': draft.abilityScores == null
+          ? null
+          : <String, dynamic>{
+              'mode': draft.abilityScores!.mode.name,
+              'assignments': draft.abilityScores!.assignments,
+              'pool': draft.abilityScores!.pool,
+            },
+      'skills': draft.chosenSkills.toList(growable: false),
+      'equipment': draft.equipment == null
+          ? null
+          : <String, dynamic>{
+              'useStartingEquipment':
+                  draft.equipment!.useStartingEquipment,
+              'quantities': draft.equipment!.quantities,
+            },
     };
   }
 
@@ -136,9 +155,97 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
         effects: List<CharacterEffect>.unmodifiable(effects),
       );
     }
+    ClassId? classId;
+    final String? classIdRaw = raw['class'] as String?;
+    if (classIdRaw != null && classIdRaw.isNotEmpty) {
+      try {
+        classId = ClassId(classIdRaw);
+      } catch (_) {
+        classId = null;
+      }
+    }
+    BackgroundId? backgroundId;
+    final String? backgroundIdRaw = raw['background'] as String?;
+    if (backgroundIdRaw != null && backgroundIdRaw.isNotEmpty) {
+      try {
+        backgroundId = BackgroundId(backgroundIdRaw);
+      } catch (_) {
+        backgroundId = null;
+      }
+    }
+
+    DraftAbilityScores? abilityScores;
+    final dynamic abilityRaw = raw['abilityScores'];
+    if (abilityRaw is Map<String, dynamic>) {
+      final String? modeName = abilityRaw['mode'] as String?;
+      final DraftAbilityGenerationMode mode = DraftAbilityGenerationMode.values
+          .firstWhere(
+            (DraftAbilityGenerationMode value) => value.name == modeName,
+            orElse: () => DraftAbilityGenerationMode.standardArray,
+          );
+      final Map<String, int?> assignments = <String, int?>{};
+      final dynamic assignmentsRaw = abilityRaw['assignments'];
+      if (assignmentsRaw is Map) {
+        assignmentsRaw.forEach((dynamic key, dynamic value) {
+          if (key is String) {
+            assignments[key] = value is num ? value.toInt() : null;
+          }
+        });
+      }
+      final List<int> pool = <int>[];
+      final dynamic poolRaw = abilityRaw['pool'];
+      if (poolRaw is List) {
+        for (final dynamic entry in poolRaw) {
+          if (entry is num) {
+            pool.add(entry.toInt());
+          }
+        }
+      }
+      abilityScores = DraftAbilityScores(
+        mode: mode,
+        assignments: assignments,
+        pool: pool,
+      );
+    }
+
+    final Set<String> skills = <String>{};
+    final dynamic skillsRaw = raw['skills'];
+    if (skillsRaw is List) {
+      for (final dynamic entry in skillsRaw) {
+        if (entry is String) {
+          skills.add(entry);
+        }
+      }
+    }
+
+    DraftEquipmentSelection? equipment;
+    final dynamic equipmentRaw = raw['equipment'];
+    if (equipmentRaw is Map<String, dynamic>) {
+      final bool useStartingEquipment =
+          equipmentRaw['useStartingEquipment'] as bool? ?? true;
+      final Map<String, int> quantities = <String, int>{};
+      final dynamic rawQuantities = equipmentRaw['quantities'];
+      if (rawQuantities is Map) {
+        rawQuantities.forEach((dynamic key, dynamic value) {
+          if (key is String && value is num) {
+            quantities[key] = value.toInt();
+          }
+        });
+      }
+      equipment = DraftEquipmentSelection(
+        useStartingEquipment: useStartingEquipment,
+        quantities: quantities,
+      );
+    }
+
     return CharacterDraft(
       name: raw['name'] as String?,
       species: species,
+      classId: classId,
+      backgroundId: backgroundId,
+      abilityScores: abilityScores,
+      chosenSkills: skills,
+      equipment: equipment,
     );
   }
 }
