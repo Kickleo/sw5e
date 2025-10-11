@@ -22,5 +22,6 @@ lib/data/characters
 
 ## Tests
 - Unitaires : scénarios in-memory.
-- Intégration : à ajouter pour les persistance locales/futures API.
+- Persistance fichier : `PersistentCharacterRepository` couvert par des tests
+  écrivant dans un répertoire temporaire.
 
