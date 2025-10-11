@@ -37,6 +37,9 @@
 ## 1) CharacterName
 **Rôle** : Nom du personnage
 
+> Tests automatisés : `test/domain/characters/value_objects/character_name_test.dart`
+> couvre normalisation, cas valides et erreurs.
+
 **Invariants**
 - Longueur **1 à 50** caractères après **trim** (pas d’espaces en tête/fin).
 - Autorisés : **lettres Unicode**, **chiffres** (pour des noms type *R2-D2*), **espace**, **tiret (-)**, **apostrophe (')** ou **apostrophe typographique (’)**, **point (.)**.
@@ -61,10 +64,10 @@
 - `"O’Malley"` (apostrophe typographique) ⇒ **autorisé**.
 - Emojis (`"Jedi🔥"`) ⇒ **invalid** (char non autorisé).
 
-**Tests à prévoir**
-- [ ] Accepte : `Luke`, `R2-D2`, `O’Malley`, `Obi-Wan Kenobi`.
-- [ ] Rejette : chaîne vide / espaces seuls / >50 chars / emoji / saut de ligne.
-- [ ] Normalise : trim, espaces multiples → un espace, NFC.
+**Tests automatisés**
+- [x] Accepte : `Luke`, `R2-D2`, `O’Malley`, `Obi-Wan Kenobi`.
+- [x] Rejette : chaîne vide / espaces seuls / >50 chars / emoji / saut de ligne.
+- [x] Normalise : trim, espaces multiples → un espace, NFC.
 
 ---
 
@@ -100,11 +103,12 @@
 - Contribue aux **prérequis** (classes, feats), **caractéristiques de base**, et choix d’**équipement de départ**.
 - Lié aux **règles de calcul** (PV/def/traits) via le catalogue (pas dans le VO).
 
-**Tests à prévoir**
-- [ ] Accepte un slug valide présent dans le catalogue (ex. `human`).
-- [ ] Rejette format invalide (`"Human"`, `"to gru ta"`, `"togrutá"`, `""`).
+**Tests automatisés**
+- [x] Accepte un slug valide présent dans le catalogue (ex. `human`).
+- [x] Rejette format invalide (`"Human"`, `"to gru ta"`, `"togrutá"`, `""`).
 - [ ] Rejette `unknown` (slug valide mais absent du catalogue).
 - [ ] Round-trip JSON/DB conserve `"human"` en minuscules.
+- Couverture : `test/domain/characters/value_objects/species_id_test.dart`.
 
 ---
 
@@ -139,11 +143,12 @@
 - Impacte **dés de vie/HP niveau 1**, **proficiencies de base**, compétences au choix, équipement de départ, et futurs calculs (hors MVP).
 - Interagit avec `Level` et le moteur de règles pour les dérivés.
 
-**Tests à prévoir**
-- [ ] Accepte un slug valide présent (`guardian`).
-- [ ] Rejette format invalide (`"Guardian"`, `"gu ar dian"`, `"guárdian"`, `""`).
+**Tests automatisés**
+- [x] Accepte un slug valide présent (`guardian`).
+- [x] Rejette format invalide (`"Guardian"`, `"gu ar dian"`, `"guárdian"`, `""`).
 - [ ] Rejette `unknown` (slug valide mais absent du catalogue).
 - [ ] Round-trip JSON/DB conserve `"guardian"` en minuscules.
+- Couverture : `test/domain/characters/value_objects/class_id_test.dart`.
 
 ---
 
@@ -177,10 +182,11 @@
 - Peut octroyer des **proficiencies** (compétences/outils/langues), **équipement de départ**, voire un **feat** selon SW5e.  
 - Le **moteur de règles** résout ces effets à partir du **catalogue**, pas dans le VO.
 
-**Tests à prévoir**
-- [ ] Accepte un slug valide présent (`outlaw`).
-- [ ] Rejette format invalide / vide / inconnu.
+**Tests automatisés**
+- [x] Accepte un slug valide présent (`outlaw`).
+- [x] Rejette format invalide / vide / inconnu.
 - [ ] Round-trip JSON/DB conserve `"outlaw"` en minuscules.
+- Couverture : `test/domain/characters/value_objects/background_id_test.dart`.
 
 ---
 
@@ -211,15 +217,19 @@
 - **ProficiencyBonus** dérive de `Level` (MVP : +2 pour `Level=1`).  
 - D’éventuels caps de manœuvres/pouvoirs/slots évolueront avec `Level` (hors MVP).
 
-**Tests à prévoir**
-- [ ] Accepte 1 ; rejette 0 et 21.  
-- [ ] Rejette non-entiers (`1.5`, `"1"` si non parsé).  
+**Tests automatisés**
+- [x] Accepte 1 ; rejette 0 et 21.
+- [ ] Rejette non-entiers (`1.5`, `"1"` si non parsé).
 - [ ] Sérialisation/DB : round-trip `1` ↔ `1`.
+- Couverture : `test/domain/characters/value_objects/level_test.dart`.
 
 ---
 
 ## 6) AbilityScore
 **Rôle** : Valeur chiffrée d’une caractéristique (ex. Force, Dextérité, Constitution, Intelligence, Sagesse, Charisme)
+
+> Tests automatisés : `test/domain/characters/value_objects/ability_score_test.dart`
+> couvre bornes et modificateurs dérivés.
 
 **Invariants**
 - Entier **compris entre 1 et 20** (inclus).  
@@ -246,11 +256,11 @@
 - Impacte les jets, la Défense, l’Initiative et d’autres calculs via le moteur de règles.  
 - Se combine à un **identifiant d’aptitude** (ex. `AbilityId.STR`) pour former une paire (id, score).
 
-**Tests à prévoir**
-- [ ] Accepte 1 et 20 ; rejette 0 et 21.  
-- [ ] Rejette non-entiers (`12.3`, `"12"` si non parsé).  
-- [ ] Vérifie les modificateurs dérivés : 8→−1, 10→0, 12→+1, 20→+5.  
-- [ ] Round-trip JSON/DB conserve la valeur entière.
+**Tests automatisés**
+- [x] Accepte 1 et 20 ; rejette 0 et 21.
+- [ ] Rejette non-entiers (`12.3`, `"12"` si non parsé).
+- [x] Vérifie les modificateurs dérivés : 8→−1, 10→0, 12→+1, 20→+5.
+- [ ] Round-trip JSON/DB conserve la valeur entière (à faire côté mapper JSON/DB).
 
 ---
 
@@ -290,10 +300,11 @@
 - Le **ProficiencyBonus** s’applique aux jets des compétences maîtrisées.
 - Les sources proviennent de `speciesId`, `classId`, `backgroundId`, `feat` (résolus via le catalogue).
 
-**Tests à prévoir**
-- [ ] Accepte : (`perception`, `proficient`, `["background"]`).
-- [ ] Rejette : skill inexistant/slug invalide ; état invalide ; `proficient` sans source ; sources dupliquées.
+**Tests automatisés**
+- [x] Accepte : (`perception`, `proficient`, `["background"]`).
+- [x] Rejette : skill inexistant/slug invalide ; état invalide ; `proficient` sans source ; sources dupliquées.
 - [ ] Round-trip JSON/DB conserve `skillId`, `state` et l’ensemble `sources` (ordre non significatif).
+- Couverture : `test/domain/characters/value_objects/skill_proficiency_test.dart`.
 
 ---
 
@@ -332,11 +343,12 @@
 - Dérive de `Level`.
 - Utilisé par `SkillProficiency` (jets maîtrisés), jets d’armes/outils maîtrisés, DD de certaines capacités.
 
-**Tests à prévoir**
-- [ ] Fabrique `fromLevel(1)` retourne **+2**.
-- [ ] Valide la table 1–20 → {2,3,4,5,6} selon les paliers.
-- [ ] Rejette 1 et 7 (invalidRange).
+**Tests automatisés**
+- [x] Fabrique `fromLevel(1)` retourne **+2**.
+- [x] Valide la table 1–20 → {2,3,4,5,6} selon les paliers.
+- [x] Rejette 1 et 7 (invalidRange).
 - [ ] (Si persistance) détecte et corrige une incohérence avec `Level`.
+- Couverture : `test/domain/characters/value_objects/proficiency_bonus_test.dart`.
 
 ---
 
@@ -367,11 +379,12 @@
 - **Dérive** de : `ClassId` (dé de vie), modificateur de **Constitution**, et éventuels traits/équipement/feats applicables au **niveau 1**.
 - Ne dépend **pas directement** de `Level` au MVP (figé à 1), mais sera recalculé par la progression plus tard.
 
-**Tests à prévoir**
-- [ ] Accepte une valeur valide ≥ 1 (ex. 10, 12).
-- [ ] Rejette 0 et négatifs (invalidRange).
+**Tests automatisés**
+- [x] Accepte une valeur valide ≥ 1 (ex. 10, 12).
+- [x] Rejette 0 et négatifs (invalidRange).
 - [ ] Rejette non-entiers (`"12"`, `12.5` si non parsé).
 - [ ] Round-trip JSON/DB conserve l’entier attendu.
+- Couverture : `test/domain/characters/value_objects/hit_points_test.dart`.
 
 ---
 
@@ -400,11 +413,12 @@
 **Dépendances / dérivés**
 - Dépend de l’**armure/équipement**, du **modificateur d’aptitude** pertinent, d’un **bouclier**, et de traits/feats/classe **applicables au niveau 1** (calculés par le moteur).
 
-**Tests à prévoir**
-- [ ] Accepte des valeurs plausibles (ex. 10, 12, 15).
-- [ ] Rejette 0, 4, et 36 (invalidRange).
+**Tests automatisés**
+- [x] Accepte des valeurs plausibles (ex. 10, 12, 15).
+- [x] Rejette 0, 4, et 36 (invalidRange).
 - [ ] Rejette non-entiers (`"15"`, `15.5` si non parsé).
 - [ ] Round-trip JSON/DB conserve l’entier attendu.
+- Couverture : `test/domain/characters/value_objects/defense_test.dart`.
 
 ---
 
@@ -433,11 +447,12 @@
 **Dépendances / dérivés**
 - Dépend du **modificateur de Dextérité** (AbilityScore→modifier) + éventuels traits/feats/équipement applicables **au niveau 1** (calcul côté moteur).
 
-**Tests à prévoir**
-- [ ] Accepte des valeurs plausibles : −1, 0, +2, +5.
-- [ ] Rejette hors bornes (ex. −11, +21) → `invalidRange`.
+**Tests automatisés**
+- [x] Accepte des valeurs plausibles : −1, 0, +2, +5.
+- [x] Rejette hors bornes (ex. −11, +21) → `invalidRange`.
 - [ ] Rejette non-entiers (`"2"`, `1.5`) → `notAnInteger`.
 - [ ] Round-trip JSON/DB conserve l’entier (y compris négatif).
+- Couverture : `test/domain/characters/value_objects/initiative_test.dart`.
 
 ---
 
@@ -468,11 +483,12 @@
 - Contrôle des **achats** d’équipement de départ (budget), **rendu** ou **reste** après achats.
 - Le moteur de règles et l’assistant gèrent les prix, remises, échanges.
 
-**Tests à prévoir**
-- [ ] Accepte `0`, `1`, `150`.
-- [ ] Rejette `-1` (invalidRange).
+**Tests automatisés**
+- [x] Accepte `0`, `1`, `150`.
+- [x] Rejette `-1` (invalidRange).
 - [ ] Rejette non-entiers (`"150"`, `12.5`) → `notAnInteger`.
 - [ ] Round-trip JSON/DB conserve l’entier attendu.
+- Couverture : `test/domain/characters/value_objects/credits_test.dart`.
 
 ---
 
@@ -500,12 +516,22 @@
 
 **Cas limites**
 - Majuscules/espaces/diacritiques (`"VibroBlade"`, `" vibro blade "`, `"vibróblade"`) → **invalidFormat** (exiger ASCII + `-`).
-- ID renommé/supprimé entre versions de règles → **unknown** pour ce snapshot (le build devient invalide tant que n
+- ID renommé/supprimé entre versions de règles → **unknown** pour ce snapshot (le build devient invalide tant que non migré).
+
+**Tests automatisés**
+- [x] Normalise une entrée valide (`" Vibro-Ax "` → `"vibro-ax"`).
+- [x] Rejette les formats invalides (espaces, diacritiques, vide).
+- [ ] Vérifie la présence dans le catalogue (adapter côté data).
+- [ ] Round-trip JSON/DB conserve le slug en minuscules.
+- Couverture : `test/domain/characters/value_objects/equipment_item_id_test.dart`.
 
 ---
 
 ## 14) Quantity
 **Rôle** : Quantité d’un objet d’équipement (ligne d’inventaire ou sélection dans l’assistant)
+
+> Tests automatisés : `test/domain/characters/value_objects/quantity_test.dart`
+> vérifie bornes et helpers `isZero`/`isPositive`.
 
 **Invariants**
 - Entier **≥ 0** (zéro autorisé pour représenter un choix non retenu en cours d’assistant).
@@ -529,11 +555,11 @@
 - S’emploie avec `EquipmentItemId` pour former une ligne d’inventaire.
 - Contribue aux calculs d’**encumbrance** et de **coût total** (faits par le moteur/catalogue).
 
-**Tests à prévoir**
-- [ ] Accepte `0`, `1`, `7`.
-- [ ] Rejette `-1` et `10 000` (invalidRange).
-- [ ] Rejette non-entiers (`"2"`, `1.5`) → `notAnInteger`.
-- [ ] Round-trip JSON/DB conserve l’entier attendu.
+**Tests automatisés**
+- [x] Accepte `0`, `1`, `7`.
+- [x] Rejette `-1` et `10 000` (invalidRange).
+- [ ] Rejette non-entiers (`"2"`, `1.5`) → `notAnInteger` (non couvert car filtré par le typage avant le VO).
+- [ ] Round-trip JSON/DB conserve l’entier attendu (à ajouter côté mapper).
 
 ---
 
@@ -569,12 +595,13 @@
 - Utilisé par le moteur pour valider **capacité de port**, **malus d’encombrement**, et certains choix d’équipement.
 - Dérive de la somme `Σ (poids_unitaire_g × quantity)` des items équipés/portés (calcul **hors VO**).
 
-**Tests à prévoir**
-- [ ] Accepte `0`, `500`, `3250`.
-- [ ] Rejette `-1` et `1_000_001` → `invalidRange`.
+**Tests automatisés**
+- [x] Accepte `0`, `500`, `3250`.
+- [x] Rejette `-1` et `1_000_001` → `invalidRange`.
 - [ ] Rejette non-entiers (`12.5`) → `notAnInteger`.
 - [ ] Conversions : `1 lb` → `454 g` (arrondi), `2.5 kg` → `2500 g`.
 - [ ] Addition de plusieurs items : somme exacte en grammes.
+- Couverture : `test/domain/characters/value_objects/encumbrance_test.dart`.
 
 ---
 
@@ -602,11 +629,12 @@
 - Dépend de `ClassId` (+ archetype) et du **tableau de progression** des manœuvres.
 - Distinct de la **liste** des manœuvres apprises (qui serait une collection de `ManeuverId` — **hors MVP** si on ne gère que le **nombre**).
 
-**Tests à prévoir**
-- [ ] Accepte `0` et petites valeurs plausibles (ex. `3` si règles l’accordent au niveau 1).
-- [ ] Rejette `-1` et valeurs > 20 → `invalidRange`.
+**Tests automatisés**
+- [x] Accepte `0` et petites valeurs plausibles (ex. `3` si règles l’accordent au niveau 1).
+- [x] Rejette `-1` et valeurs > 20 → `invalidRange`.
 - [ ] Rejette non-entiers (`"2"`, `1.5`) → `notAnInteger`.
-- [ ] Round-trip JSON/DB cons
+- [ ] Round-trip JSON/DB conserve la valeur entière attendue.
+- Couverture : `test/domain/characters/value_objects/maneuvers_known_test.dart`.
 
 ---
 
@@ -647,23 +675,12 @@
 - Dépend de `ClassId` (+ archetype) et du tableau de progression des **manœuvres**.  
 - Distinct de `ManeuversKnown` (nombre de manœuvres apprises).
 
-**Tests à prévoir**
-- [ ] Accepte `{count: 0}` et `{count: 3, die: 8}`.  
-- [ ] Rejette `count < 0`, `count > 12`.  
-- [ ] Rejette `die` hors {4,6,8,10,12}.  
-- [ ] Rejette `count > 0` avec `die` manquant.  
+**Tests automatisés**
+- [x] Accepte `{count: 0}` et `{count: 3, die: 8}`.
+- [x] Rejette `count < 0`, `count > 12`.
+- [x] Rejette `die` hors {4,6,8,10,12}.
+- [x] Rejette `count > 0` avec `die` manquant.
 - [ ] Round-trip JSON/DB conserve `{count, die}` (avec `die = null` quand `count = 0`).
+- Couverture : `test/domain/characters/value_objects/superiority_dice_test.dart`.
 
 ---
-
-
-
-
-
-Vieil exemple
-## 13) HitPoints (PV)
-**Rôle** : Points de vie  
-**Invariants** :  
-**Erreurs à lever** :  
-**Mapping data (JSON/DB)** :  
-**Cas limites** :
