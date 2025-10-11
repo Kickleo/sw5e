@@ -92,6 +92,8 @@ class AppFailure {
 
   /// Convertit un [DomainError] en [AppFailure] normalisée.
   factory AppFailure.fromDomain(DomainError error) {
+    // L'erreur du domaine est catégorisée selon son code pour fournir une
+    // traduction claire à la couche présentation.
     switch (error.code) {
       case 'InvalidPrerequisite':
       case 'InvalidAbilities':
@@ -118,6 +120,7 @@ class AppFailure {
         );
       case 'Unexpected':
       default:
+        // Par défaut, toute erreur non mappée est considérée comme inattendue.
         return AppFailure.unexpected(
           code: error.code,
           message: error.message,
@@ -172,10 +175,13 @@ class AppFailure {
 
   /// Message prêt pour l'affichage utilisateur.
   String toDisplayMessage({bool includeCode = false}) {
+    // Sélectionne d'abord le message explicite, sinon la valeur par défaut
+    // associée au code, puis un fallback basé sur la catégorie.
     final String base = (message != null && message!.trim().isNotEmpty)
         ? message!.trim()
         : (_defaultMessages[code] ?? _categoryFallback[category]!);
     if (includeCode) {
+      // Optionnellement, préfixe le message par le code pour faciliter le support.
       return '$code — $base';
     }
     return base;
@@ -188,6 +194,7 @@ class AppFailure {
     if (details.isEmpty) {
       return '[$code] $label';
     }
+    // Ajoute la map de détails afin de conserver un maximum d'informations.
     return '[$code] $label | détails=$details';
   }
 

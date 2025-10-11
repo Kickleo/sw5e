@@ -29,18 +29,22 @@ import 'package:sw5e_manager/domain/characters/usecases/load_species_details_imp
 
 /// Enregistre les dépendances du module si nécessaire (idempotent).
 void registerCharacterCreationModule() {
+  // Repository catalogue basé sur les assets (instancié une seule fois).
   ServiceLocator.registerLazySingleton<CatalogRepository>(
     () => AssetCatalogRepository(),
   );
+  // Repository personnages en mémoire pour les sauvegardes locales.
   ServiceLocator.registerLazySingleton<CharacterRepository>(
     () => InMemoryCharacterRepository(),
   );
+  // Use case de finalisation niveau 1, nécessite catalogue + repository persistant.
   ServiceLocator.registerLazySingleton<FinalizeLevel1Character>(
     () => FinalizeLevel1CharacterImpl(
       catalog: ServiceLocator.resolve<CatalogRepository>(),
       characters: ServiceLocator.resolve<CharacterRepository>(),
     ),
   );
+  // Use case listant les personnages sauvegardés.
   ServiceLocator.registerLazySingleton<ListSavedCharacters>(
     () => ListSavedCharactersImpl(
       ServiceLocator.resolve<CharacterRepository>(),
@@ -64,7 +68,7 @@ void registerCharacterCreationModule() {
 }
 
 final catalogRepositoryProvider = Provider<CatalogRepository>((ref) {
-  registerCharacterCreationModule();
+  registerCharacterCreationModule(); // S'assure que le module est enregistré.
   return ServiceLocator.resolve<CatalogRepository>();
 });
 

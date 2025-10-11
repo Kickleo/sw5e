@@ -16,14 +16,14 @@ import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
 ///   ou lever des exceptions de domaine (converties en `AppResult` par les use cases).
 abstract class CharacterRepository {
   /// Sauvegarde (ou remplace) le personnage courant.
-  Future<void> save(Character character);
+  Future<void> save(Character character); // Upsert en fonction de l'id.
 
   /// Charge le dernier personnage sauvegardé (ou null si aucun).
-  Future<Character?> loadLast();
+  Future<Character?> loadLast(); // Permet de pré-remplir l'UI avec la dernière saisie.
 
   /// Liste tous les personnages sauvegardés, du plus ancien au plus récent.
-  Future<List<Character>> listAll();
+  Future<List<Character>> listAll(); // Vue immuable des personnages enregistrés.
 
   /// Charge un personnage par identifiant.
-  Future<Character?> loadById(CharacterId id);
+  Future<Character?> loadById(CharacterId id); // Null si l'id n'est pas connu.
 }
