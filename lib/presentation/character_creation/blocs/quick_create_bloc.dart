@@ -548,16 +548,15 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
       return;
     }
     final QuickCreateState updated = state.copyWith(
-        selectedClass: event.classId,
-        selectedClassDef: null,
-        statusMessage: null,
-        isLoadingClassDetails: true,
-        availableSkills: const <String>[],
-        chosenSkills: const <String>{},
-        skillChoicesRequired: 0,
-        chosenEquipment: const <String, int>{},
-        useStartingEquipment: true,
-      ),
+      selectedClass: event.classId,
+      selectedClassDef: null,
+      statusMessage: null,
+      isLoadingClassDetails: true,
+      availableSkills: const <String>[],
+      chosenSkills: const <String>{},
+      skillChoicesRequired: 0,
+      chosenEquipment: const <String, int>{},
+      useStartingEquipment: true,
     );
     emit(updated);
     final AppResult<CharacterDraft> persistClassResult =
