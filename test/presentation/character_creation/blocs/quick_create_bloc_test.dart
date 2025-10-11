@@ -583,11 +583,11 @@ void main() {
             skillDefinitions: const <String, SkillDef>{
               'acrobatics': SkillDef(
                 id: 'acrobatics',
-                name: LocalizedText(en: 'Acrobatics', fr: 'Acrobaties'),
+                ability: 'dex',
               ),
               'athletics': SkillDef(
                 id: 'athletics',
-                name: LocalizedText(en: 'Athletics', fr: 'Athlétisme'),
+                ability: 'str',
               ),
             },
             skillChoicesRequired: 2,
