@@ -20,7 +20,7 @@ class PersistCharacterDraftClassImpl implements PersistCharacterDraftClass {
     try {
       // On repart du brouillon actuel pour ne pas perdre les autres choix
       // effectués dans l'assistant.
-      final CharacterDraft existing = await _repository.load() ?? const CharacterDraft();
+      final CharacterDraft existing = await _repository.load() ?? CharacterDraft();
       // La valeur reçue est transformée en value object `ClassId` avant
       // d'alimenter la copie immuable du brouillon.
       final CharacterDraft updated = existing.copyWith(classId: ClassId(classId));

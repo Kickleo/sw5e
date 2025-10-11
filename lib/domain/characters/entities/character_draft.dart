@@ -17,7 +17,7 @@ enum DraftAbilityGenerationMode { standardArray, roll, manual }
 /// Photographie des scores de caractéristiques (mode + affectations + pool).
 @immutable
 class DraftAbilityScores {
-  const DraftAbilityScores({
+  DraftAbilityScores({
     required this.mode,
     required Map<String, int?> assignments,
     required List<int> pool,
@@ -44,7 +44,7 @@ class DraftAbilityScores {
 /// Sélection d'équipement conservée dans le brouillon (pack + quantités).
 @immutable
 class DraftEquipmentSelection {
-  const DraftEquipmentSelection({
+  DraftEquipmentSelection({
     required this.useStartingEquipment,
     required Map<String, int> quantities,
   }) : quantities = Map<String, int>.unmodifiable(quantities);
@@ -79,7 +79,7 @@ class DraftSpeciesSelection {
 /// Brouillon de personnage : informations partielles sauvegardées.
 @immutable
 class CharacterDraft {
-  const CharacterDraft({
+  CharacterDraft({
     this.name,
     this.species,
     this.classId,

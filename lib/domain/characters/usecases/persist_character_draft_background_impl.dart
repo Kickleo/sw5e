@@ -21,7 +21,7 @@ class PersistCharacterDraftBackgroundImpl
     try {
       // On charge l'état actuel du brouillon pour préserver les sélections
       // précédentes de l'utilisateur.
-      final CharacterDraft existing = await _repository.load() ?? const CharacterDraft();
+      final CharacterDraft existing = await _repository.load() ?? CharacterDraft();
       // Le background est encapsulé dans son value object dédié avant copie.
       final CharacterDraft updated =
           existing.copyWith(backgroundId: BackgroundId(backgroundId));

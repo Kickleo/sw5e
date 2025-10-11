@@ -19,7 +19,7 @@ class PersistCharacterDraftNameImpl implements PersistCharacterDraftName {
     try {
       // On récupère le brouillon existant (ou un brouillon vide) pour conserver
       // les autres informations déjà saisies par l'utilisateur.
-      final CharacterDraft existing = await _repository.load() ?? const CharacterDraft();
+      final CharacterDraft existing = await _repository.load() ?? CharacterDraft();
       // Seul le nom est modifié : la copie immuable protège les autres champs.
       final CharacterDraft updated = existing.copyWith(name: name);
       await _repository.save(updated);

@@ -7,6 +7,7 @@
 ///        routes UI.
 /// Exemple d'usage : routage GoRouter -> const QuickCreatePage().
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,6 +19,7 @@ import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/core/connectivity/connectivity_providers.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
@@ -28,12 +30,11 @@ import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_class.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step.dart';
-import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
-import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_bloc.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/class_picker_page.dart';
@@ -683,18 +684,18 @@ class _AbilitiesStep extends HookWidget {
             },
             child: Column(
               children: [
-                RadioListTile<AbilityGenerationMode>(
+                const RadioListTile<AbilityGenerationMode>(
                   value: AbilityGenerationMode.standardArray,
-                  title: const Text('Tableau standard'),
-                  subtitle: const Text(
+                  title: Text('Tableau standard'),
+                  subtitle: Text(
                     'Utiliser les scores fixes 15, 14, 13, 12, 10 et 8.',
                   ),
                 ),
                 const Divider(height: 0),
-                RadioListTile<AbilityGenerationMode>(
+                const RadioListTile<AbilityGenerationMode>(
                   value: AbilityGenerationMode.roll,
-                  title: const Text('Lancer les dés'),
-                  subtitle: const Text(
+                  title: Text('Lancer les dés'),
+                  subtitle: Text(
                     'Lancez 4d6, conservez les 3 meilleurs et assignez les 6 scores obtenus.',
                   ),
                 ),
@@ -715,10 +716,10 @@ class _AbilitiesStep extends HookWidget {
                   ),
                 ),
                 const Divider(height: 0),
-                RadioListTile<AbilityGenerationMode>(
+                const RadioListTile<AbilityGenerationMode>(
                   value: AbilityGenerationMode.manual,
-                  title: const Text('Saisie manuelle'),
-                  subtitle: const Text(
+                  title: Text('Saisie manuelle'),
+                  subtitle: Text(
                     'Entrez vous-même les scores obtenus ailleurs et assignez-les.',
                   ),
                 ),

@@ -13,8 +13,8 @@ import 'package:meta/meta.dart';
 import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
-import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 
 /// QuickCreateStep = progression du wizard (vue -> BLoC).
 enum QuickCreateStep { species, abilities, classes, skills, equipment, background }

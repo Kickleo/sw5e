@@ -4,6 +4,7 @@
 /// Dépendances : Flutter, GoRouter, vues UI (HomeNav, pages création personnage).
 /// Exemple d'usage : consommé via `appRouterProvider` dans `Sw5eApp`.
 /// ---------------------------------------------------------------------------
+library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

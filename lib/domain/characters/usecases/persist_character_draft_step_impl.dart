@@ -18,7 +18,7 @@ class PersistCharacterDraftStepImpl implements PersistCharacterDraftStep {
   Future<AppResult<CharacterDraft>> call(int stepIndex) async {
     try {
       // Charger le brouillon existant permet de conserver toutes les saisies.
-      final CharacterDraft existing = await _repository.load() ?? const CharacterDraft();
+      final CharacterDraft existing = await _repository.load() ?? CharacterDraft();
       // Seul l'indice d'étape est mis à jour dans la copie immuable.
       final CharacterDraft updated = existing.copyWith(stepIndex: stepIndex);
       await _repository.save(updated);
