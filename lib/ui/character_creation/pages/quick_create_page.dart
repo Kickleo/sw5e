@@ -56,7 +56,6 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
     _nameController = TextEditingController();
     final LoadQuickCreateCatalog loadCatalog =
         ServiceLocator.resolve<LoadQuickCreateCatalog>();
@@ -105,6 +104,8 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       persistCharacterDraftStep: persistDraftStep,
       clearCharacterDraft: clearDraft,
     )..add(const QuickCreateStarted());
+
+    _pageController = PageController(initialPage: _bloc.state.stepIndex);
 
     final String initialName = _bloc.state.characterName;
     if (initialName.isNotEmpty) {
@@ -218,6 +219,11 @@ class _QuickCreateView extends StatelessWidget {
           listenWhen: (prev, curr) => prev.stepIndex != curr.stepIndex,
           listener: (context, state) {
             if (!pageController.hasClients) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (pageController.hasClients) {
+                  pageController.jumpToPage(state.stepIndex);
+                }
+              });
               return;
             }
             if (pageController.page?.round() == state.stepIndex) {
