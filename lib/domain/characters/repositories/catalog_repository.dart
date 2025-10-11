@@ -19,13 +19,21 @@ class LocalizedText {
 
 @immutable
 class SpeciesAbilityBonus {
-  final String ability; // slug ex: "int"
+  final String? ability; // slug ex: "int" ou null pour un choix libre.
   final int amount; // valeur positive/négative appliquée.
+  final int? choose; // nombre d'aptitudes à choisir.
+  final List<String> options; // aptitudes possibles lorsque [choose] est défini.
+  final bool isAlternative; // indique une variante alternative.
 
   const SpeciesAbilityBonus({
-    required this.ability,
+    this.ability,
     required this.amount,
+    this.choose,
+    this.options = const <String>[],
+    this.isAlternative = false,
   });
+
+  bool get isChoice => choose != null && options.isNotEmpty;
 }
 
 @immutable

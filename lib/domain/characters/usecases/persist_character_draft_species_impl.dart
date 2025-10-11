@@ -45,8 +45,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
 
     if (species.abilityBonuses.isNotEmpty) {
       final String bonuses = species.abilityBonuses
-          .map((SpeciesAbilityBonus bonus) =>
-              '${bonus.amount >= 0 ? '+' : ''}${bonus.amount} ${_abilityName(bonus.ability)}')
+          .map(_formatAbilityBonus)
           .join(', ');
       effects.add(
         CharacterEffect(
@@ -155,6 +154,40 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     return CharacterEffectCategory.passive;
   }
 
+  String _formatAbilityBonus(SpeciesAbilityBonus bonus) {
+    final String sign = bonus.amount >= 0 ? '+' : '';
+    final String amount = '$sign${bonus.amount}';
+    final String alternativePrefix = bonus.isAlternative ? '[Alternative] ' : '';
+
+    if (bonus.isChoice) {
+      final int choose = bonus.choose ?? 1;
+      final String options = _formatAbilityOptions(bonus.options);
+      return '$alternativePrefix$amount to $options (choose $choose)';
+    }
+
+    final String ability = _abilityName(bonus.ability ?? 'any');
+    return '$alternativePrefix$amount $ability';
+  }
+
+  String _formatAbilityOptions(List<String> options) {
+    if (options.isEmpty) {
+      return 'abilities of your choice';
+    }
+
+    final List<String> labels =
+        options.map((String option) => _abilityName(option)).toList();
+
+    if (labels.length == 1) {
+      return labels.first;
+    }
+
+    if (labels.length == 2) {
+      return '${labels[0]} or ${labels[1]}';
+    }
+
+    return '${labels.sublist(0, labels.length - 1).join(', ')}, or ${labels.last}';
+  }
+
   String _abilityName(String ability) {
     switch (ability.toLowerCase()) {
       case 'str':
@@ -169,6 +202,8 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
         return 'Wisdom';
       case 'cha':
         return 'Charisma';
+      case 'any':
+        return 'any ability';
       default:
         return ability.toUpperCase();
     }

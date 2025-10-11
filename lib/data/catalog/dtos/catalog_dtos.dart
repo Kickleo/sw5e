@@ -35,23 +35,37 @@ class LocalizedTextDto {
 /// SpeciesDto = structure JSON des espèces (assets/catalog/species.json).
 @immutable
 class SpeciesAbilityBonusDto {
-  final String ability; // Identifiant de caractéristique (str, dex...).
+  final String? ability; // Identifiant fixe de caractéristique.
   final int amount; // Bonus/malus appliqué par l'espèce.
+  final int? choose; // Nombre d'aptitudes à sélectionner.
+  final List<String> options; // Liste des options possibles lorsqu'il y a un choix.
+  final bool alternative; // Indique si ce bloc est une alternative.
 
   const SpeciesAbilityBonusDto({
     required this.ability,
     required this.amount,
+    required this.choose,
+    required this.options,
+    required this.alternative,
   });
 
   factory SpeciesAbilityBonusDto.fromJson(Map<String, dynamic> json) {
     return SpeciesAbilityBonusDto(
-      ability: json['ability'] as String,
+      ability: json['ability'] as String?,
       amount: (json['amount'] as num).toInt(),
+      choose: (json['choose'] as num?)?.toInt(),
+      options: List<String>.from(json['options'] as List? ?? const <String>[]),
+      alternative: json['alternative'] as bool? ?? false,
     );
   }
 
-  SpeciesAbilityBonus toDomain() =>
-      SpeciesAbilityBonus(ability: ability, amount: amount);
+  SpeciesAbilityBonus toDomain() => SpeciesAbilityBonus(
+        ability: ability,
+        amount: amount,
+        choose: choose,
+        options: List<String>.unmodifiable(options),
+        isAlternative: alternative,
+      );
 }
 
 class SpeciesDto {

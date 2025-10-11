@@ -80,4 +80,60 @@ void main() {
     expect(sonicSensitivity.category, CharacterEffectCategory.passive);
     expect(sonicSensitivity.description, contains('sonic damage'));
   });
+
+  test('formate les bonus de caractéristique avec choix multiples', () async {
+    const SpeciesDef species = SpeciesDef(
+      id: 'human',
+      name: LocalizedText(en: 'Human', fr: 'Humain'),
+      speed: 30,
+      size: 'medium',
+      abilityBonuses: <SpeciesAbilityBonus>[
+        SpeciesAbilityBonus(
+          amount: 2,
+          choose: 1,
+          options: const <String>['wis', 'cha'],
+        ),
+        SpeciesAbilityBonus(
+          amount: 1,
+          choose: 2,
+          options: const <String>['any'],
+        ),
+        SpeciesAbilityBonus(
+          amount: 1,
+          choose: 4,
+          options: const <String>['any'],
+          isAlternative: true,
+        ),
+      ],
+    );
+
+    const QuickCreateSpeciesDetails details =
+        QuickCreateSpeciesDetails(species: species, traits: <TraitDef>[]);
+
+    final InMemoryCharacterDraftRepository repository =
+        InMemoryCharacterDraftRepository();
+    final PersistCharacterDraftSpeciesImpl useCase =
+        PersistCharacterDraftSpeciesImpl(repository);
+
+    final AppResult<CharacterDraft> result = await useCase(details);
+    expect(result.isOk, isTrue);
+
+    final CharacterDraft? saved = await repository.load();
+    final CharacterEffect abilityEffect = saved!.species!.effects.firstWhere(
+      (CharacterEffect effect) => effect.source == 'species:human:ability_bonuses',
+    );
+
+    expect(
+      abilityEffect.description,
+      contains('+2 to Wisdom or Charisma (choose 1)'),
+    );
+    expect(
+      abilityEffect.description,
+      contains('+1 to any ability (choose 2)'),
+    );
+    expect(
+      abilityEffect.description,
+      contains('[Alternative] +1 to any ability (choose 4)'),
+    );
+  });
 }
