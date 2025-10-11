@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/character_summary_page.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/quick_create_page.dart';
 
+/// HomeNav = widget principal affichant un [NavigationBar] pour basculer
+/// entre les différentes pages de création de personnage.
 class HomeNav extends StatefulWidget {
   const HomeNav({super.key});
 
@@ -17,8 +19,10 @@ class HomeNav extends StatefulWidget {
 }
 
 class _HomeNavState extends State<HomeNav> {
+  // Index de l'onglet actuellement sélectionné dans la barre inférieure.
   int _index = 0;
 
+  // Tableau immuable des pages affichées dans les différents onglets.
   static const _pages = <Widget>[
     QuickCreatePage(),
     CharacterSummaryPage(),
@@ -26,11 +30,14 @@ class _HomeNavState extends State<HomeNav> {
 
   @override
   Widget build(BuildContext context) {
+    // Le Scaffold fournit une structure de base avec un corps dynamique et
+    // une barre de navigation inférieure pilotant le changement de page.
     return Scaffold(
-      body: _pages[_index],
+      body: _pages[_index], // Affiche la page correspondant à l'index actif.
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _index,
-        onDestinationSelected: (i) => setState(() => _index = i),
+        selectedIndex: _index, // Synchronise l'état sélectionné visuellement.
+        onDestinationSelected: (i) =>
+            setState(() => _index = i), // Met à jour l'index et rafraîchit l'UI.
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.bolt_outlined),

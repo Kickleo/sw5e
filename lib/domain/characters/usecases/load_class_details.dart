@@ -26,16 +26,18 @@ class QuickCreateClassDetails {
   final ClassDef classDef;
 
   /// Compétences proposées (déjà triées).
-  final List<String> availableSkillIds;
+  final List<String> availableSkillIds; // Slugs utilisables pour l'UI.
 
   /// Définitions associées aux compétences proposées.
-  final Map<String, SkillDef> skillDefinitions;
+  final Map<String, SkillDef>
+      skillDefinitions; // Permet d'afficher le nom + capacité.
 
   /// Nombre de compétences à choisir.
-  final int skillChoicesRequired;
+  final int skillChoicesRequired; // Ex: 2 compétences à sélectionner.
 
   /// Compétences introuvables dans le catalogue.
-  final List<String> missingSkillIds;
+  final List<String>
+      missingSkillIds; // Signale un souci de données au front pour fallback.
 }
 
 /// Contrat du use case.

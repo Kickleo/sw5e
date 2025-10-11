@@ -27,11 +27,16 @@ class AppConfig {
   /// Préconditions : le fichier doit exister dans les assets configurés.
   /// Postconditions : les paires clé/valeur sont disponibles via [getOptional].
   Future<void> load({String fileName = '.env'}) async {
+    // Évite de recharger plusieurs fois le même fichier .env ; un second appel
+    // devient un no-op pour empêcher des lectures redondantes.
     if (_loaded) {
       return;
     }
 
+    // Demande à flutter_dotenv de parser le fichier et de remplir les valeurs
+    // accessibles globalement via `dotenv`.
     await dotenv.load(fileName: fileName);
+    // Marque l'état comme chargé afin de bloquer les futurs rechargements.
     _loaded = true;
   }
 
@@ -43,10 +48,15 @@ class AppConfig {
   /// Récupère une valeur obligatoire et lève [AppConfigMissingKeyException] si
   /// la clé est absente.
   String getRequired(String key) {
+    // Commence par lire la valeur via l'API optionnelle afin de mutualiser la
+    // logique d'accès au store interne de flutter_dotenv.
     final String? value = getOptional(key);
     if (value == null || value.isEmpty) {
+      // Déclenche une exception explicite permettant aux appelants de savoir
+      // qu'une variable critique n'est pas fournie.
       throw AppConfigMissingKeyException(key);
     }
+    // À ce stade, la chaîne est non vide et peut être renvoyée directement.
     return value;
   }
 }

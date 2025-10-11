@@ -13,29 +13,32 @@ import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.d
 
 /// AssetCatalogRepository = adapter hors-ligne basé sur les assets JSON embarqués.
 class AssetCatalogRepository implements CatalogRepository {
-  final AssetBundleCatalogDataSource _dataSource;
+  final AssetBundleCatalogDataSource
+      _dataSource; // Source brute pour charger les assets JSON.
 
-  Map<String, SpeciesDef>? _species;
-  Map<String, ClassDef>? _classes;
-  Map<String, BackgroundDef>? _backgrounds;
-  Map<String, SkillDef>? _skills;
-  Map<String, EquipmentDef>? _equipment;
-  Map<String, TraitDef>? _traits;
-  FormulasDef? _formulas;
+  Map<String, SpeciesDef>? _species; // Cache lazy des espèces indexées par id.
+  Map<String, ClassDef>? _classes; // Cache des classes niveau 1.
+  Map<String, BackgroundDef>? _backgrounds; // Cache des backgrounds disponibles.
+  Map<String, SkillDef>? _skills; // Cache des compétences.
+  Map<String, EquipmentDef>?
+      _equipment; // Cache de l'équipement indexé par identifiant.
+  Map<String, TraitDef>? _traits; // Cache des traits d'espèce/background.
+  FormulasDef? _formulas; // Formules métier (singleton).
 
   AssetCatalogRepository({AssetBundleCatalogDataSource? dataSource})
-      : _dataSource = dataSource ?? AssetBundleCatalogDataSource();
+      : _dataSource = dataSource ??
+            AssetBundleCatalogDataSource(); // Permet le remplacement en tests.
 
   @override
   Future<String> getRulesVersion() async {
-    await _ensureFormulas();
-    return _formulas!.rulesVersion;
+    await _ensureFormulas(); // Charge les formules si nécessaire.
+    return _formulas!.rulesVersion; // Retourne la version des règles embarquées.
   }
 
   @override
   Future<SpeciesDef?> getSpecies(String speciesId) async {
-    await _ensureSpecies();
-    return _species![speciesId];
+    await _ensureSpecies(); // Charge et met en cache les espèces au premier appel.
+    return _species![speciesId]; // Lecture dans la map immuable.
   }
 
   @override
@@ -65,7 +68,7 @@ class AssetCatalogRepository implements CatalogRepository {
   @override
   Future<FormulasDef> getFormulas() async {
     await _ensureFormulas();
-    return _formulas!;
+    return _formulas!; // Non nullable une fois chargé (assertion via bang).
   }
 
   @override
@@ -77,7 +80,7 @@ class AssetCatalogRepository implements CatalogRepository {
   @override
   Future<List<String>> listSkills() async {
     await _ensureSkills();
-    return _skills!.keys.toList()..sort();
+    return _skills!.keys.toList()..sort(); // Retourne les identifiants triés.
   }
 
   @override
@@ -111,11 +114,11 @@ class AssetCatalogRepository implements CatalogRepository {
   }
 
   Future<void> _ensureSpecies() async {
-    if (_species != null) return;
+    if (_species != null) return; // Cache déjà rempli.
     final dtos = await _dataSource.loadSpecies();
     _species = <String, SpeciesDef>{
       for (final dto in dtos) dto.id: dto.toDomain(),
-    };
+    }; // Conversion en map indexée par identifiant.
   }
 
   Future<void> _ensureClasses() async {

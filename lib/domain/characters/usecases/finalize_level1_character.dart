@@ -20,21 +20,22 @@ import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 /// Input DTO pour finaliser un personnage niveau 1 (MVP).
 @immutable
 class FinalizeLevel1Input {
-  final CharacterName name;
-  final SpeciesId speciesId;
-  final ClassId classId;
-  final BackgroundId backgroundId;
+  final CharacterName name; // Nom validé via VO.
+  final SpeciesId speciesId; // Référence à l'espèce sélectionnée.
+  final ClassId classId; // Classe de départ.
+  final BackgroundId backgroundId; // Historique choisi.
 
   /// Scores de base AVANT application des bonus espèce/background.
   /// Clés attendues: 'str','dex','con','int','wis','cha'
-  final Map<String, AbilityScore> baseAbilities;
+  final Map<String, AbilityScore> baseAbilities; // Scores saisis par le joueur.
 
   /// Compétences choisies (slugs) parmi les listes autorisées.
-  final Set<String> chosenSkills;
+  final Set<String> chosenSkills; // Compétences sélectionnées.
 
   /// Équipement choisi (en plus/à la place du pack de départ selon règles).
-  final List<ChosenEquipmentLine> chosenEquipment;
-  final bool useStartingEquipmentPackage;
+  final List<ChosenEquipmentLine>
+      chosenEquipment; // Options d'équipement alternatives.
+  final bool useStartingEquipmentPackage; // true => pack par défaut, sinon crédits.
 
   const FinalizeLevel1Input({
     required this.name,

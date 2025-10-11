@@ -5,12 +5,12 @@
 sealed class Result<T> {
   const Result();
 
-  bool get isOk => this is Ok<T>;
-  bool get isErr => this is Err<T>;
+  bool get isOk => this is Ok<T>; // Indique si le résultat représente un succès.
+  bool get isErr => this is Err<T>; // Symétrique pour un échec.
 
   T unwrapOr(T fallback) => switch (this) {
-        Ok<T>(:final value) => value,
-        Err<T>() => fallback,
+        Ok<T>(:final value) => value, // Retourne la valeur si succès.
+        Err<T>() => fallback, // Sinon on renvoie la valeur de repli.
       };
 
   R match<R>({
@@ -18,21 +18,21 @@ sealed class Result<T> {
     required R Function(DomainError error) err,
   }) =>
       switch (this) {
-        Ok<T>(:final value) => ok(value),
-        Err<T>(:final error) => err(error),
+        Ok<T>(:final value) => ok(value), // Applique la branche succès.
+        Err<T>(:final error) => err(error), // Applique la branche échec.
       };
 
-  static Ok<T> ok<T>(T value) => Ok<T>(value);
-  static Err<T> err<T>(DomainError error) => Err<T>(error);
+  static Ok<T> ok<T>(T value) => Ok<T>(value); // Helper de création succès.
+  static Err<T> err<T>(DomainError error) => Err<T>(error); // Helper échec.
 }
 
 final class Ok<T> extends Result<T> {
-  final T value;
+  final T value; // Valeur du succès.
   const Ok(this.value);
 }
 
 final class Err<T> extends Result<T> {
-  final DomainError error;
+  final DomainError error; // Erreur transportée lors d'un échec.
   const Err(this.error);
 }
 

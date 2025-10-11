@@ -10,13 +10,15 @@ library;
 import 'package:sw5e_manager/core/domain/result.dart' as core;
 
 /// AppResult = alias permettant de référencer le type de résultat commun.
-typedef AppResult<T> = core.Result<T>;
+typedef AppResult<T> = core.Result<T>; // Importe les helpers existants sans copier.
 
 /// DomainError = alias pour uniformiser les erreurs domaine dans la doc.
 typedef DomainError = core.DomainError;
 
 /// appOk = helper pour retourner un [AppResult] réussi.
-AppResult<T> appOk<T>(T value) => core.Ok<T>(value);
+AppResult<T> appOk<T>(T value) =>
+    core.Ok<T>(value); // Wrappe une valeur réussie dans le type partagé.
 
 /// appErr = helper pour retourner un [AppResult] en échec.
-AppResult<T> appErr<T>(DomainError error) => core.Err<T>(error);
+AppResult<T> appErr<T>(DomainError error) =>
+    core.Err<T>(error); // Propagation standardisée d'une erreur métier.

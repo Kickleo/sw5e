@@ -22,11 +22,11 @@ class BackgroundId extends Equatable {
 
   /// Fabrique validant et normalisant la chaîne reçue.
   factory BackgroundId(String input) {
-    final String raw = input.trim();
+    final String raw = input.trim(); // Supprime les espaces accidentels.
     if (raw.isEmpty) {
       throw ArgumentError('BackgroundId.nullOrEmpty');
     }
-    final String normalized = raw.toLowerCase();
+    final String normalized = raw.toLowerCase(); // Uniformise en minuscules.
     if (!_slug.hasMatch(normalized)) {
       throw ArgumentError('BackgroundId.invalidFormat');
     }
@@ -34,7 +34,8 @@ class BackgroundId extends Equatable {
   }
 
   /// Pattern slug autorisant lettres, chiffres et tirets (3..50 caractères).
-  static final RegExp _slug = RegExp(r'^[a-z0-9-]{3,50}$');
+  static final RegExp _slug =
+      RegExp(r'^[a-z0-9-]{3,50}$'); // Empêche les caractères spéciaux inattendus.
 
   @override
   List<Object?> get props => <Object?>[value];

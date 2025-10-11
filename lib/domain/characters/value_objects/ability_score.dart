@@ -39,10 +39,11 @@ class AbilityScore extends Equatable {
   }
 
   /// Modificateur dérivé : ⌊(score - 10) / 2⌋.
-  int get modifier => ((value - 10) / 2).floor();
+  int get modifier => ((value - 10) / 2).floor(); // Formule officielle D20.
 
   /// Permet de dériver un nouvel [AbilityScore] avec une autre valeur valide.
-  AbilityScore copyWith(int newValue) => AbilityScore(newValue);
+  AbilityScore copyWith(int newValue) =>
+      AbilityScore(newValue); // Revalide la plage à chaque changement.
 
   @override
   List<Object?> get props => <Object?>[value];

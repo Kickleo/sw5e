@@ -17,7 +17,7 @@ class LoadClassDetailsImpl implements LoadClassDetails {
   /// Crée l'instance.
   const LoadClassDetailsImpl(this._catalog);
 
-  final CatalogRepository _catalog;
+  final CatalogRepository _catalog; // Source de données catalogue.
 
   @override
   Future<AppResult<QuickCreateClassDetails>> call(String classId) async {
@@ -33,14 +33,15 @@ class LoadClassDetailsImpl implements LoadClassDetails {
       }
 
       final ClassLevel1Proficiencies prof = classDef.level1.proficiencies;
-      final bool allowsAny = prof.skillsFrom.contains('any');
+      final bool allowsAny =
+          prof.skillsFrom.contains('any'); // Certaines classes autorisent "any".
       final Iterable<String> filtered =
           prof.skillsFrom.where((String id) => id != 'any');
       List<String> available;
       if (allowsAny) {
-        available = await _catalog.listSkills();
+        available = await _catalog.listSkills(); // Liste complète si "any".
       } else {
-        available = filtered.toList();
+        available = filtered.toList(); // Sinon on se limite aux IDs déclarés.
       }
       available.sort();
 
@@ -49,10 +50,10 @@ class LoadClassDetailsImpl implements LoadClassDetails {
       for (final String skillId in available) {
         final SkillDef? def = await _catalog.getSkill(skillId);
         if (def == null) {
-          missing.add(skillId);
+          missing.add(skillId); // Trace les compétences qui n'existent pas.
           continue;
         }
-        defs[skillId] = def;
+        defs[skillId] = def; // Ajoute la définition pour l'UI.
       }
 
       return appOk(
@@ -69,7 +70,7 @@ class LoadClassDetailsImpl implements LoadClassDetails {
         DomainError(
           'ClassLoadFailed',
           message: error.toString(),
-          details: {'classId': classId},
+          details: {'classId': classId}, // Ajoute le contexte de classe en erreur.
         ),
       );
     }

@@ -14,5 +14,5 @@ import 'package:sw5e_manager/domain/characters/entities/character.dart';
 /// * Post-condition : retourne un [AppResult] immuable (liste non modifiable).
 /// * Erreurs : mappées vers [DomainError] par l'implémentation.
 abstract class ListSavedCharacters {
-  Future<AppResult<List<Character>>> call();
+  Future<AppResult<List<Character>>> call(); // Sans paramètre : retourne tout le catalogue persistant.
 }

@@ -33,8 +33,9 @@ import 'package:sw5e_manager/domain/characters/value_objects/trait_id.dart';
 /// * Pré-condition : le catalogue doit être cohérent avec les Value Objects.
 /// * Erreurs : renvoie des `DomainError` contextualisés (catalogue, crédits, capacité, etc.).
 class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
-  final CatalogRepository catalog;
-  final CharacterRepository characters;
+  final CatalogRepository catalog; // Fournit les définitions nécessaires.
+  final CharacterRepository
+      characters; // Persiste le personnage finalisé en sortie.
 
   FinalizeLevel1CharacterImpl({
     required this.catalog,
@@ -72,7 +73,7 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
         ));
       }
 
-      final formulas = await catalog.getFormulas();
+      final formulas = await catalog.getFormulas(); // Récupère les formules métiers.
 
       // Mapper les traitIds -> Set<CharacterTrait>
       final traits = <CharacterTrait>{};
@@ -108,13 +109,13 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
       }
 
       // 4) Dérivés
-      final level = Level.one;
-      final pb = ProficiencyBonus.fromLevel(level);
+      final level = Level.one; // MVP : seul le niveau 1 est supporté.
+      final pb = ProficiencyBonus.fromLevel(level); // Bonus de maîtrise standard.
       final conMod = abilities['con']!.modifier;
       final dexMod = abilities['dex']!.modifier;
 
-      final hp = HitPoints(clazz.hitDie + conMod);
-      final init = Initiative(dexMod);
+      final hp = HitPoints(clazz.hitDie + conMod); // PV = max du dé + mod CON.
+      final init = Initiative(dexMod); // Initiative = mod DEX.
       // MVP: interprétation simple de "10 + mod(DEX)" si pas d’armure/bouclier
       final def = Defense(10 + dexMod);
 
@@ -137,11 +138,11 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
 
       // De la classe (choix)
       for (final id in input.chosenSkills) {
-        addProf(id, ProficiencySource.classSource);
+        addProf(id, ProficiencySource.classSource); // Tagge l'origine "classe".
       }
       // Du background (granted)
       for (final id in background.grantedSkills) {
-        addProf(id, ProficiencySource.background);
+        addProf(id, ProficiencySource.background); // Ajoute la source "background".
       }
       final skills = skillsMap.values.toSet();
 
@@ -149,15 +150,18 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
       final lines = <String, int>{}; // id -> qty
       if (input.useStartingEquipmentPackage) {
         for (final e in clazz.level1.startingEquipment) {
-          lines.update(e.id, (v) => v + e.qty, ifAbsent: () => e.qty);
+          lines.update(e.id, (v) => v + e.qty,
+              ifAbsent: () => e.qty); // Ajoute le pack de départ.
         }
       }
       final chosenLines = <String, int>{};
       for (final e in input.chosenEquipment) {
         final qty = e.quantity.value;
         if (qty <= 0) continue;
-        chosenLines.update(e.itemId.value, (v) => v + qty, ifAbsent: () => qty);
-        lines.update(e.itemId.value, (v) => v + qty, ifAbsent: () => qty);
+        chosenLines.update(e.itemId.value, (v) => v + qty,
+            ifAbsent: () => qty); // Suivi séparé pour calculer le coût.
+        lines.update(e.itemId.value, (v) => v + qty,
+            ifAbsent: () => qty); // Fusionne avec le pack de départ.
       }
 
       // Créer InventoryLine + encumbrance (en g)
@@ -175,10 +179,11 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
           itemId: EquipmentItemId(entry.key),
           quantity: Quantity(qty),
         ));
-        totalGrams += eq.weightG * qty;
+        totalGrams += eq.weightG * qty; // Accumule le poids total.
         final purchasedQty = chosenLines[entry.key] ?? 0;
         if (purchasedQty > 0) {
-          totalCost += eq.cost * purchasedQty;
+          totalCost +=
+              eq.cost * purchasedQty; // Additionne uniquement les achats payants.
         }
       }
 
@@ -198,7 +203,7 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
           },
         ));
       }
-      final enc = Encumbrance(totalGrams);
+      final enc = Encumbrance(totalGrams); // Encumbrance exprime le poids transporté.
 
       // 7) Crédits (MVP: crédits de départ de la classe; achats soustraits)
       final baseCredits = clazz.level1.startingCredits ?? 0;
@@ -213,14 +218,14 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
           },
         ));
       }
-      final credits = Credits(baseCredits - totalCost);
+      final credits = Credits(baseCredits - totalCost); // Restant après les achats.
 
       // 8) Manœuvres & dés de supériorité (MVP: depuis Formulas)
       final sdRule = formulas.superiorityDiceByClass[input.classId.value];
       final superiority = sdRule == null
           ? SuperiorityDice(count: 0, die: null)
           : SuperiorityDice(count: sdRule.count, die: sdRule.die);
-      final maneuvers = ManeuversKnown(0);
+      final maneuvers = ManeuversKnown(0); // MVP: aucune manoeuvre connue.
 
       // 9) Construire l’entité et sauvegarder
       final character = Character(
@@ -253,6 +258,7 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
 
   static bool _hasAllSixAbilities(Map<String, AbilityScore> m) {
     const keys = {'str', 'dex', 'con', 'int', 'wis', 'cha'};
-    return m.length == 6 && m.keys.toSet().containsAll(keys);
+    return m.length == 6 &&
+        m.keys.toSet().containsAll(keys); // Vérifie la présence des 6 abréviations.
   }
 }
