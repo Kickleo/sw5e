@@ -39,7 +39,7 @@ import 'package:sw5e_manager/domain/characters/value_objects/superiority_dice.da
 import 'package:sw5e_manager/domain/characters/value_objects/trait_id.dart';
 
 /// Type alias afin de faciliter l'injection d'un fournisseur de répertoire.
-typedef _DirectoryProvider = Future<Directory> Function();
+typedef DirectoryProvider = Future<Directory> Function();
 
 /// PersistentCharacterRepository = implémentation durable via fichier JSON.
 ///
@@ -49,13 +49,13 @@ typedef _DirectoryProvider = Future<Directory> Function();
 /// dynamic> permettant une sérialisation/désérialisation simple.
 class PersistentCharacterRepository implements CharacterRepository {
   PersistentCharacterRepository({
-    _DirectoryProvider? directoryProvider,
+    DirectoryProvider? directoryProvider,
     String? fileName,
   })  : _directoryProvider =
             directoryProvider ?? getApplicationDocumentsDirectory,
         _fileName = fileName ?? 'characters.json';
 
-  final _DirectoryProvider _directoryProvider;
+  final DirectoryProvider _directoryProvider;
   final String _fileName;
   File? _cachedFile;
 
