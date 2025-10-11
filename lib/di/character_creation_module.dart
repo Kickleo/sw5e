@@ -39,6 +39,10 @@ void registerCharacterCreationModule() {
   // -------------------------------------------------------------------------
   // Repositories
   // -------------------------------------------------------------------------
+  // Dans notre architecture, un repository encapsule l'accès à une source de
+  // données (fichiers, mémoire, base distante) et expose au domaine un contrat
+  // simple, sans fuite de détails techniques. Il représente donc la frontière
+  // entre la logique métier (use cases, entités) et l'infrastructure.
   // Repository catalogue basé sur les assets (instancié une seule fois).
   ServiceLocator.registerLazySingleton<CatalogRepository>(
     () => AssetCatalogRepository(),
@@ -53,29 +57,47 @@ void registerCharacterCreationModule() {
   // -------------------------------------------------------------------------
   // Use cases
   // -------------------------------------------------------------------------
-  // Use case de finalisation niveau 1, nécessite catalogue + repository persistant.
+  // Un use case représente une action métier complète (scénario utilisateur)
+  // orchestrant différents repositories/services pour accomplir une finalité
+  // observable par l'utilisateur. Il définit l'API de la couche domaine, ce
+  // qui permet à l'UI de déclencher des comportements de haut niveau sans
+  // connaître les détails d'exécution.
+  // Use case de finalisation niveau 1, nécessite catalogue + repository
+  // persistant. Il agrège les choix de l'utilisateur, récupère les données
+  // d'espèce/classe nécessaires, puis délègue la sauvegarde du personnage.
   ServiceLocator.registerLazySingleton<FinalizeLevel1Character>(
     () => FinalizeLevel1CharacterImpl(
       catalog: ServiceLocator.resolve<CatalogRepository>(),
       characters: ServiceLocator.resolve<CharacterRepository>(),
     ),
   );
-  // Use case listant les personnages sauvegardés.
+  // Use case listant les personnages sauvegardés : il interroge le repository
+  // de personnages pour restituer la collection complète aux écrans de
+  // sélection/gestion.
   ServiceLocator.registerLazySingleton<ListSavedCharacters>(
     () => ListSavedCharactersImpl(
       ServiceLocator.resolve<CharacterRepository>(),
     ),
   );
+  // Use case chargeant le catalogue de création rapide : il compose les
+  // différentes entrées (espèces, classes, historiques…) nécessaires pour la
+  // vue simplifiée, en s'appuyant uniquement sur le repository de catalogue.
   ServiceLocator.registerLazySingleton<LoadQuickCreateCatalog>(
     () => LoadQuickCreateCatalogImpl(
       ServiceLocator.resolve<CatalogRepository>(),
     ),
   );
+  // Use case centralisant le chargement des détails d'une espèce. Il étend les
+  // informations de base (nom, vitesse) avec les traits et autres métadonnées
+  // requises par les écrans de personnalisation.
   ServiceLocator.registerLazySingleton<LoadSpeciesDetails>(
     () => LoadSpeciesDetailsImpl(
       ServiceLocator.resolve<CatalogRepository>(),
     ),
   );
+  // Use case responsable de la lecture des informations d'une classe (niveaux,
+  // archétypes, capacités). Il isole la logique d'agrégation pour ne présenter
+  // que les données pertinentes au domaine/UI.
   ServiceLocator.registerLazySingleton<LoadClassDetails>(
     () => LoadClassDetailsImpl(
       ServiceLocator.resolve<CatalogRepository>(),
