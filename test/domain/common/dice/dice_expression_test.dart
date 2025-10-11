@@ -70,7 +70,7 @@ void main() {
   });
 }
 
-class FixedRandom extends Random {
+class FixedRandom implements Random {
   FixedRandom(this.values)
       : assert(values.every((value) => value >= 0), 'values must be non-negative');
 
@@ -88,4 +88,10 @@ class FixedRandom extends Random {
     }
     return value;
   }
+
+  @override
+  double nextDouble() => throw UnimplementedError('nextDouble is not supported');
+
+  @override
+  bool nextBool() => throw UnimplementedError('nextBool is not supported');
 }

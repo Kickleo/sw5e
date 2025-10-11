@@ -2,7 +2,7 @@ import 'dart:math';
 
 /// Represents a dice expression such as `4d4 + 2` or `2d6 - 1`.
 class DiceExpression {
-  const DiceExpression._({
+  DiceExpression._({
     required List<DiceTerm> terms,
     required this.modifier,
   }) : terms = List.unmodifiable(terms);
@@ -156,7 +156,7 @@ class DiceTerm {
 class DiceRollResult {
   DiceRollResult({
     required this.total,
-    required this.details,
+    required List<DiceRollDetail> details,
     required this.modifier,
   }) : details = List.unmodifiable(details);
 
