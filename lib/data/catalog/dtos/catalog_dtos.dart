@@ -34,12 +34,38 @@ class LocalizedTextDto {
 
 /// SpeciesDto = structure JSON des espèces (assets/catalog/species.json).
 @immutable
+class SpeciesAbilityBonusDto {
+  final String ability; // Identifiant de caractéristique (str, dex...).
+  final int amount; // Bonus/malus appliqué par l'espèce.
+
+  const SpeciesAbilityBonusDto({
+    required this.ability,
+    required this.amount,
+  });
+
+  factory SpeciesAbilityBonusDto.fromJson(Map<String, dynamic> json) {
+    return SpeciesAbilityBonusDto(
+      ability: json['ability'] as String,
+      amount: (json['amount'] as num).toInt(),
+    );
+  }
+
+  SpeciesAbilityBonus toDomain() =>
+      SpeciesAbilityBonus(ability: ability, amount: amount);
+}
+
 class SpeciesDto {
   final String id; // Identifiant unique de l'espèce.
   final LocalizedTextDto name; // Nom localisé de l'espèce.
   final int speed; // Vitesse de déplacement en pieds.
   final String size; // Catégorie de taille (small, medium...).
   final List<String> traitIds; // Traits conférés par l'espèce.
+  final List<SpeciesAbilityBonusDto> abilityBonuses; // Bonus aux caractéristiques.
+  final String? age; // Description d'âge.
+  final String? alignment; // Alignement typique.
+  final String? sizeText; // Texte détaillant la taille.
+  final String? speedText; // Texte détaillant la vitesse.
+  final String? languages; // Langues connues.
 
   const SpeciesDto({
     required this.id,
@@ -47,6 +73,12 @@ class SpeciesDto {
     required this.speed,
     required this.size,
     required this.traitIds,
+    required this.abilityBonuses,
+    required this.age,
+    required this.alignment,
+    required this.sizeText,
+    required this.speedText,
+    required this.languages,
   });
 
   factory SpeciesDto.fromJson(Map<String, dynamic> json) {
@@ -59,6 +91,16 @@ class SpeciesDto {
       speed: (json['speed'] as num).toInt(),
       size: json['size'] as String,
       traitIds: List<String>.from(json['traits'] as List? ?? const <String>[]),
+      abilityBonuses: List<Map<String, dynamic>>.from(
+        json['ability_bonuses'] as List? ?? const <Map<String, dynamic>>[],
+      )
+          .map(SpeciesAbilityBonusDto.fromJson)
+          .toList(growable: false),
+      age: json['age'] as String?,
+      alignment: json['alignment'] as String?,
+      sizeText: json['size_text'] as String?,
+      speedText: json['speed_text'] as String?,
+      languages: json['languages'] as String?,
     );
   }
 
@@ -68,6 +110,13 @@ class SpeciesDto {
         speed: speed,
         size: size,
         traitIds: List<String>.unmodifiable(traitIds),
+        abilityBonuses:
+            abilityBonuses.map((bonus) => bonus.toDomain()).toList(growable: false),
+        age: age,
+        alignment: alignment,
+        sizeText: sizeText,
+        speedText: speedText,
+        languages: languages,
       ); // Crée l'entité de domaine immuable correspondante.
 }
 

@@ -19,10 +19,21 @@ import 'package:sw5e_manager/core/connectivity/connectivity_providers.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_background.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_class.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_bloc.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/class_picker_page.dart';
@@ -42,10 +53,11 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
   late final TextEditingController _nameController;
   late final QuickCreateBloc _bloc;
 
+  /// Prépare les contrôleurs et instancie le BLoC avec les dépendances
+  /// résolues via le service locator.
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
     _nameController = TextEditingController();
     final LoadQuickCreateCatalog loadCatalog =
         ServiceLocator.resolve<LoadQuickCreateCatalog>();
@@ -53,17 +65,54 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
         ServiceLocator.resolve<LoadSpeciesDetails>();
     final LoadClassDetails loadClassDetails =
         ServiceLocator.resolve<LoadClassDetails>();
+    final LoadCharacterDraft loadCharacterDraft =
+        ServiceLocator.resolve<LoadCharacterDraft>();
     final FinalizeLevel1Character finalize =
         ServiceLocator.resolve<FinalizeLevel1Character>();
     final AppLogger logger = ServiceLocator.resolve<AppLogger>();
+    final PersistCharacterDraftName persistDraftName =
+        ServiceLocator.resolve<PersistCharacterDraftName>();
+    final PersistCharacterDraftSpecies persistDraftSpecies =
+        ServiceLocator.resolve<PersistCharacterDraftSpecies>();
+    final PersistCharacterDraftClass persistDraftClass =
+        ServiceLocator.resolve<PersistCharacterDraftClass>();
+    final PersistCharacterDraftBackground persistDraftBackground =
+        ServiceLocator.resolve<PersistCharacterDraftBackground>();
+    final PersistCharacterDraftAbilityScores persistDraftAbilities =
+        ServiceLocator.resolve<PersistCharacterDraftAbilityScores>();
+    final PersistCharacterDraftSkills persistDraftSkills =
+        ServiceLocator.resolve<PersistCharacterDraftSkills>();
+    final PersistCharacterDraftEquipment persistDraftEquipment =
+        ServiceLocator.resolve<PersistCharacterDraftEquipment>();
+    final PersistCharacterDraftStep persistDraftStep =
+        ServiceLocator.resolve<PersistCharacterDraftStep>();
+    final ClearCharacterDraft clearDraft =
+        ServiceLocator.resolve<ClearCharacterDraft>();
 
     _bloc = QuickCreateBloc(
       loadQuickCreateCatalog: loadCatalog,
       loadSpeciesDetails: loadSpeciesDetails,
       loadClassDetails: loadClassDetails,
+      loadCharacterDraft: loadCharacterDraft,
       finalizeLevel1Character: finalize,
       logger: logger,
+      persistCharacterDraftName: persistDraftName,
+      persistCharacterDraftSpecies: persistDraftSpecies,
+      persistCharacterDraftClass: persistDraftClass,
+      persistCharacterDraftBackground: persistDraftBackground,
+      persistCharacterDraftAbilityScores: persistDraftAbilities,
+      persistCharacterDraftSkills: persistDraftSkills,
+      persistCharacterDraftEquipment: persistDraftEquipment,
+      persistCharacterDraftStep: persistDraftStep,
+      clearCharacterDraft: clearDraft,
     )..add(const QuickCreateStarted());
+
+    // On instancie le PageController avec l'indice d'étape restauré afin que la
+    // PageView s'ouvre directement sur la diapositive correspondant à la
+    // progression sauvegardée dans le brouillon. Sans cette valeur initiale,
+    // l'utilisateur retomberait systématiquement sur la première page à
+    // l'ouverture de l'assistant.
+    _pageController = PageController(initialPage: _bloc.state.stepIndex);
 
     final String initialName = _bloc.state.characterName;
     if (initialName.isNotEmpty) {
@@ -72,6 +121,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
     _nameController.addListener(_onNameChanged);
   }
 
+  /// Libère les contrôleurs et ferme le BLoC lorsque la page est détruite.
   @override
   void dispose() {
     _nameController.removeListener(_onNameChanged);
@@ -81,10 +131,13 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
     super.dispose();
   }
 
+  /// Répercute les modifications du champ texte vers le BLoC pour persistance.
   void _onNameChanged() {
     _bloc.add(QuickCreateNameChanged(_nameController.text));
   }
 
+  /// Construit l'arbre de widgets principal de la page, en injectant le BLoC
+  /// et les contrôleurs nécessaires aux sous-vues.
   @override
   Widget build(BuildContext context) {
     final connectivityStatus = ref
@@ -105,6 +158,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
   }
 }
 
+/// Vue principale contenant les listeners BLoC et le `PageView` d'étapes.
 class _QuickCreateView extends StatelessWidget {
   const _QuickCreateView({
     required this.pageController,
@@ -116,7 +170,12 @@ class _QuickCreateView extends StatelessWidget {
   final TextEditingController nameController;
   final ConnectivityStatus connectivityStatus;
 
+  /// Affiche les dialogues/snackbars de fin de création en réponse au BLoC.
   void _handleCompletion(BuildContext context, QuickCreateState state) {
+    // Les écrans de fin (dialogue de succès ou snackbar d'erreur) sont gérés
+    // ici plutôt que dans le BLoC afin de conserver une logique "dumb" côté
+    // présentation : le BLoC expose simplement un objet `completion` et la vue
+    // décide de la réaction UI appropriée.
     final completion = state.completion;
     if (completion == null) {
       return;
@@ -157,6 +216,8 @@ class _QuickCreateView extends StatelessWidget {
     context.read<QuickCreateBloc>().add(const QuickCreateCompletionCleared());
   }
 
+  /// Construit le layout de l'assistant et configure les écouteurs nécessaires
+  /// pour synchroniser la navigation et les champs contrôlés.
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
@@ -176,12 +237,33 @@ class _QuickCreateView extends StatelessWidget {
         BlocListener<QuickCreateBloc, QuickCreateState>(
           listenWhen: (prev, curr) => prev.stepIndex != curr.stepIndex,
           listener: (context, state) {
+            // La première émission du BLoC survient avant que la PageView ne
+            // s'attache réellement au contrôleur. Dans ce cas `hasClients`
+            // vaut false et un appel direct à `jumpToPage` provoquerait une
+            // exception. On repousse donc la navigation à la frame suivante en
+            // utilisant `addPostFrameCallback` et on vérifie à nouveau que le
+            // contrôleur possède bien des clients au moment d'appliquer le
+            // saut.
             if (!pageController.hasClients) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (pageController.hasClients) {
+                  pageController.jumpToPage(state.stepIndex);
+                }
+              });
               return;
             }
+
+            // Si l'index de la page courante correspond déjà à la valeur
+            // demandée (par exemple suite à un hot-reload), inutile de lancer
+            // une animation : on évite un mouvement superflu et des appels
+            // redondants.
             if (pageController.page?.round() == state.stepIndex) {
               return;
             }
+
+            // Dans tous les autres cas, on anime la transition pour conserver
+            // l'expérience utilisateur attendue lors des navigations via les
+            // boutons « Suivant » / « Précédent ».
             pageController.animateToPage(
               state.stepIndex,
               duration: const Duration(milliseconds: 250),
@@ -248,6 +330,7 @@ class _QuickCreateView extends StatelessWidget {
                               species: state.species,
                               selectedSpecies: state.selectedSpecies,
                               traits: state.selectedSpeciesTraits,
+                              effects: state.selectedSpeciesEffects,
                               onSelect: (value) {
                                 if (value != null) {
                                   bloc.add(QuickCreateSpeciesSelected(value));
@@ -365,6 +448,7 @@ class _SpeciesStep extends StatelessWidget {
     required this.species,
     required this.selectedSpecies,
     required this.traits,
+    required this.effects,
     required this.onSelect,
     required this.onOpenPicker,
   });
@@ -372,6 +456,7 @@ class _SpeciesStep extends StatelessWidget {
   final List<String> species;
   final String? selectedSpecies;
   final List<TraitDef> traits;
+  final List<CharacterEffect> effects;
   final ValueChanged<String?> onSelect;
   final VoidCallback onOpenPicker;
 
@@ -417,9 +502,19 @@ class _SpeciesStep extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        if (traits.isEmpty)
-          const Text('Aucun trait spécifique pour cette espèce.')
-        else
+        if (effects.isNotEmpty)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Effets d’espèce',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              ...effects.map(_buildEffectCard),
+            ],
+          )
+        else if (traits.isNotEmpty)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -439,9 +534,43 @@ class _SpeciesStep extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          )
+        else
+          const Text('Aucun trait spécifique pour cette espèce.'),
       ],
     );
+  }
+
+  Widget _buildEffectCard(CharacterEffect effect) {
+    final String title = effect.title.isNotEmpty ? effect.title : effect.source;
+    return Card(
+      child: ListTile(
+        title: Text(title),
+        subtitle: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(effect.description),
+            const SizedBox(height: 8),
+            Text(
+              _categoryLabel(effect.category),
+              style: const TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _categoryLabel(CharacterEffectCategory category) {
+    switch (category) {
+      case CharacterEffectCategory.passive:
+        return 'Effet passif';
+      case CharacterEffectCategory.action:
+        return 'Action';
+      case CharacterEffectCategory.bonusAction:
+        return 'Action bonus';
+    }
   }
 }
 
