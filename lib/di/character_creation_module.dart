@@ -18,6 +18,8 @@ import 'package:sw5e_manager/data/characters/repositories/in_memory_character_re
 import 'package:sw5e_manager/data/characters/repositories/persistent_character_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_repository.dart';
+import 'package:sw5e_manager/domain/characters/usecases/assemble_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/assemble_level1_character_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
@@ -28,6 +30,8 @@ import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalo
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context.dart';
+import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context_impl.dart';
 
 /// Enregistre toutes les dépendances nécessaires à la création de personnage.
 ///
@@ -62,12 +66,27 @@ void registerCharacterCreationModule() {
   // observable par l'utilisateur. Il définit l'API de la couche domaine, ce
   // qui permet à l'UI de déclencher des comportements de haut niveau sans
   // connaître les détails d'exécution.
-  // Use case de finalisation niveau 1, nécessite catalogue + repository
-  // persistant. Il agrège les choix de l'utilisateur, récupère les données
-  // d'espèce/classe nécessaires, puis délègue la sauvegarde du personnage.
+  // Use case préparant les données catalogue indispensables à la finalisation
+  // (espèce, classe, background, tables de formules). Isolé pour pouvoir être
+  // réutilisé dans d'autres orchestrations futures.
+  ServiceLocator.registerLazySingleton<PrepareLevel1CharacterContext>(
+    () => PrepareLevel1CharacterContextImpl(
+      catalog: ServiceLocator.resolve<CatalogRepository>(),
+    ),
+  );
+  // Use case d'assemblage : transforme le contexte + les choix du joueur en un
+  // objet [Character] cohérent en appliquant toutes les validations métiers.
+  ServiceLocator.registerLazySingleton<AssembleLevel1Character>(
+    () => AssembleLevel1CharacterImpl(
+      catalog: ServiceLocator.resolve<CatalogRepository>(),
+    ),
+  );
+  // Use case de finalisation niveau 1 : il orchestre les étapes précédentes
+  // (préparation + assemblage) avant de déléguer la persistance au repository.
   ServiceLocator.registerLazySingleton<FinalizeLevel1Character>(
     () => FinalizeLevel1CharacterImpl(
-      catalog: ServiceLocator.resolve<CatalogRepository>(),
+      prepareContext: ServiceLocator.resolve<PrepareLevel1CharacterContext>(),
+      assembleCharacter: ServiceLocator.resolve<AssembleLevel1Character>(),
       characters: ServiceLocator.resolve<CharacterRepository>(),
     ),
   );
