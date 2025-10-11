@@ -21,7 +21,7 @@ class PersistCharacterDraftEquipmentImpl
   ) async {
     try {
       // On récupère le brouillon existant afin de préserver les autres choix.
-      final CharacterDraft existing = await _repository.load() ?? const CharacterDraft();
+      final CharacterDraft existing = await _repository.load() ?? CharacterDraft();
       // L'instantané d'équipement est immuable et peut être stocké directement.
       final CharacterDraft updated = existing.copyWith(equipment: selection);
       await _repository.save(updated);

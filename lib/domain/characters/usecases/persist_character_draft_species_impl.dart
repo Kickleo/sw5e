@@ -7,8 +7,9 @@ library;
 
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
-import 'package:sw5e_manager/domain/characters/repositories/character_draft_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/repositories/character_draft_repository.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
@@ -22,7 +23,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
   Future<AppResult<CharacterDraft>> call(QuickCreateSpeciesDetails details) async {
     try {
       // On repart du brouillon sauvegardé pour conserver les autres champs.
-      final CharacterDraft existing = await _drafts.load() ?? const CharacterDraft();
+      final CharacterDraft existing = await _drafts.load() ?? CharacterDraft();
       // Les détails du catalogue sont transformés en une structure persistable.
       final DraftSpeciesSelection selection = _buildSpeciesSelection(details);
       final CharacterDraft updated = existing.copyWith(species: selection);

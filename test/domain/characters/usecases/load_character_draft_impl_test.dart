@@ -5,16 +5,16 @@
 /// ---------------------------------------------------------------------------
 library;
 
-import 'package:test/test.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/data/characters/repositories/in_memory_character_draft_repository.dart';
 import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_draft_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft_impl.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/class_id.dart';
-import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('LoadCharacterDraftImpl', () {

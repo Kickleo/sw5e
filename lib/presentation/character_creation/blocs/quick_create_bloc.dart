@@ -33,17 +33,17 @@ import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_class.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step.dart';
-import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_name.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/class_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/equipment_item_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/quantity.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
-import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 
 /// ---- Events ----------------------------------------------------------------
