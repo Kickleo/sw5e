@@ -105,6 +105,11 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       clearCharacterDraft: clearDraft,
     )..add(const QuickCreateStarted());
 
+    // On instancie le PageController avec l'indice d'étape restauré afin que la
+    // PageView s'ouvre directement sur la diapositive correspondant à la
+    // progression sauvegardée dans le brouillon. Sans cette valeur initiale,
+    // l'utilisateur retomberait systématiquement sur la première page à
+    // l'ouverture de l'assistant.
     _pageController = PageController(initialPage: _bloc.state.stepIndex);
 
     final String initialName = _bloc.state.characterName;
@@ -159,6 +164,10 @@ class _QuickCreateView extends StatelessWidget {
   final ConnectivityStatus connectivityStatus;
 
   void _handleCompletion(BuildContext context, QuickCreateState state) {
+    // Les écrans de fin (dialogue de succès ou snackbar d'erreur) sont gérés
+    // ici plutôt que dans le BLoC afin de conserver une logique "dumb" côté
+    // présentation : le BLoC expose simplement un objet `completion` et la vue
+    // décide de la réaction UI appropriée.
     final completion = state.completion;
     if (completion == null) {
       return;
@@ -218,6 +227,13 @@ class _QuickCreateView extends StatelessWidget {
         BlocListener<QuickCreateBloc, QuickCreateState>(
           listenWhen: (prev, curr) => prev.stepIndex != curr.stepIndex,
           listener: (context, state) {
+            // La première émission du BLoC survient avant que la PageView ne
+            // s'attache réellement au contrôleur. Dans ce cas `hasClients`
+            // vaut false et un appel direct à `jumpToPage` provoquerait une
+            // exception. On repousse donc la navigation à la frame suivante en
+            // utilisant `addPostFrameCallback` et on vérifie à nouveau que le
+            // contrôleur possède bien des clients au moment d'appliquer le
+            // saut.
             if (!pageController.hasClients) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (pageController.hasClients) {
@@ -226,9 +242,18 @@ class _QuickCreateView extends StatelessWidget {
               });
               return;
             }
+
+            // Si l'index de la page courante correspond déjà à la valeur
+            // demandée (par exemple suite à un hot-reload), inutile de lancer
+            // une animation : on évite un mouvement superflu et des appels
+            // redondants.
             if (pageController.page?.round() == state.stepIndex) {
               return;
             }
+
+            // Dans tous les autres cas, on anime la transition pour conserver
+            // l'expérience utilisateur attendue lors des navigations via les
+            // boutons « Suivant » / « Précédent ».
             pageController.animateToPage(
               state.stepIndex,
               duration: const Duration(milliseconds: 250),
