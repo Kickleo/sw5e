@@ -10,8 +10,12 @@ import 'package:mocktail/mocktail.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_repository.dart';
+import 'package:sw5e_manager/domain/characters/usecases/assemble_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/assemble_level1_character_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context.dart';
+import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context_impl.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
@@ -73,6 +77,8 @@ void main() {
   group('FinalizeLevel1Character (happy path)', () {
     late MockCatalogRepository catalog;
     late MockCharacterRepository chars;
+    late PrepareLevel1CharacterContext prepare;
+    late AssembleLevel1Character assemble;
 
     // ⚠️ On utilisera "FinalizeLevel1CharacterImpl" à l’étape suivante.
     late FinalizeLevel1Character usecase;
@@ -80,10 +86,15 @@ void main() {
     setUp(() {
       catalog = MockCatalogRepository();
       chars = MockCharacterRepository();
-      usecase = FinalizeLevel1CharacterImpl(catalog: catalog, characters: chars);
-
-      // 👉 À l’étape suivante, on créera cette classe concrète :
-      // usecase = FinalizeLevel1CharacterImpl(catalog: catalog, characters: chars);
+      // Les dépendances sont instanciées explicitement pour refléter le nouveau
+      // pipeline en deux étapes : préparation du contexte puis assemblage.
+      prepare = PrepareLevel1CharacterContextImpl(catalog: catalog);
+      assemble = AssembleLevel1CharacterImpl(catalog: catalog);
+      usecase = FinalizeLevel1CharacterImpl(
+        prepareContext: prepare,
+        assembleCharacter: assemble,
+        characters: chars,
+      );
     });
 
     test('produit un Character prêt à jouer (level 1, Guardian, Outlaw)', () async {
