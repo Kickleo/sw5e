@@ -55,7 +55,7 @@ class LoadQuickCreateCatalogImpl implements LoadQuickCreateCatalog {
           defaultBackgroundId: backgrounds.firstOrNull,
         ),
       );
-    } catch (Object error) {
+    } catch (error, _) {
       return appErr(
         DomainError(
           'CatalogLoadFailed',

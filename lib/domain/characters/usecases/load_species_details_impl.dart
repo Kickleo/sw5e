@@ -50,7 +50,7 @@ class LoadSpeciesDetailsImpl implements LoadSpeciesDetails {
           missingTraitIds: List<String>.unmodifiable(missingTraits),
         ),
       );
-    } catch (Object error) {
+    } catch (error, _) {
       return appErr(
         DomainError(
           'SpeciesLoadFailed',

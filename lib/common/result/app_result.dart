@@ -16,7 +16,7 @@ typedef AppResult<T> = core.Result<T>;
 typedef DomainError = core.DomainError;
 
 /// appOk = helper pour retourner un [AppResult] réussi.
-AppResult<T> appOk<T>(T value) => core.Result<T>.ok(value);
+AppResult<T> appOk<T>(T value) => core.Ok<T>(value);
 
 /// appErr = helper pour retourner un [AppResult] en échec.
-AppResult<T> appErr<T>(DomainError error) => core.Result<T>.err(error);
+AppResult<T> appErr<T>(DomainError error) => core.Err<T>(error);

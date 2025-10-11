@@ -64,7 +64,7 @@ class LoadClassDetailsImpl implements LoadClassDetails {
           missingSkillIds: List<String>.unmodifiable(missing),
         ),
       );
-    } catch (Object error) {
+    } catch (error, _) {
       return appErr(
         DomainError(
           'ClassLoadFailed',

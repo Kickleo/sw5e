@@ -17,6 +17,7 @@ import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/core/connectivity/connectivity_providers.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
@@ -27,6 +28,7 @@ import 'package:sw5e_manager/presentation/character_creation/states/quick_create
 import 'package:sw5e_manager/ui/character_creation/pages/class_picker_page.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/species_picker.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/character_section_divider.dart';
+
 class QuickCreatePage extends ConsumerStatefulWidget {
   /// Constructeur standard.
   const QuickCreatePage({super.key});
@@ -85,7 +87,9 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
 
   @override
   Widget build(BuildContext context) {
-    final connectivityStatus = ref.watch(connectivityStatusProvider).maybeWhen(
+    final connectivityStatus = ref
+        .watch(connectivityStatusProvider)
+        .maybeWhen(
           data: (status) => status,
           orElse: () => ConnectivityStatus.connected,
         );
@@ -146,11 +150,7 @@ class _QuickCreateView extends StatelessWidget {
         break;
       case QuickCreateFailure(:final AppFailure failure):
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              failure.toDisplayMessage(includeCode: true),
-            ),
-          ),
+          SnackBar(content: Text(failure.toDisplayMessage(includeCode: true))),
         );
         break;
     }
@@ -200,138 +200,161 @@ class _QuickCreateView extends StatelessWidget {
               ),
             ),
             body: Column(
-        children: [
-          if (connectivityStatus == ConnectivityStatus.disconnected)
-            MaterialBanner(
-              backgroundColor: Colors.orange.shade100,
-              content: const Text('Mode hors ligne : certaines fonctionnalités réseau sont indisponibles.'),
-              actions: const [SizedBox.shrink()],
-            ),
-          if (state.statusMessage != null)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                children: [
-                  const Icon(Icons.info_outline),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text(state.statusMessage!)),
-                ],
-              ),
-            ),
-          if (state.errorMessage != null)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                children: [
-                  const Icon(Icons.error_outline, color: Colors.red),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text(state.errorMessage!)),
-                ],
-              ),
-            ),
-          Expanded(
-            child: state.isLoadingCatalog
-                ? const Center(child: CircularProgressIndicator())
-                : PageView(
-                    controller: pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      _SpeciesStep(
-                        species: state.species,
-                        selectedSpecies: state.selectedSpecies,
-                        traits: state.selectedSpeciesTraits,
-                        onSelect: (value) {
-                          if (value != null) {
-                            bloc.add(QuickCreateSpeciesSelected(value));
-                          }
-                        },
-                        onOpenPicker: () async {
-                          final chosen = await context.pushNamed<String>(
-                            SpeciesPickerPage.routeName,
-                            extra: state.selectedSpecies,
-                          );
-                          if (chosen != null) {
-                            bloc.add(QuickCreateSpeciesSelected(chosen));
-                          }
-                        },
-                      ),
-                      _AbilitiesStep(
-                        mode: state.abilityMode,
-                        assignments: state.abilityAssignments,
-                        pool: state.abilityPool,
-                        onModeChanged: (mode) =>
-                            bloc.add(QuickCreateAbilityModeChanged(mode)),
-                        onReroll: () =>
-                            bloc.add(const QuickCreateAbilityScoresRerolled()),
-                        onAssign: (ability, value) =>
-                            bloc.add(QuickCreateAbilityAssigned(ability, value)),
-                      ),
-                      _ClassStep(
-                        classes: state.classes,
-                        selectedClass: state.selectedClass,
-                        classDef: state.selectedClassDef,
-                        isLoadingDetails: state.isLoadingClassDetails,
-                        onSelect: (value) {
-                          if (value != null) {
-                            bloc.add(QuickCreateClassSelected(value));
-                          }
-                        },
-                        onOpenPicker: () async {
-                          final chosen = await context.pushNamed<String>(
-                            ClassPickerPage.routeName,
-                            extra: state.selectedClass,
-                          );
-                          if (chosen != null) {
-                            bloc.add(QuickCreateClassSelected(chosen));
-                          }
-                        },
-                      ),
-                      _SkillStep(
-                        availableSkills: state.availableSkills,
-                        skillDefinitions: state.skillDefinitions,
-                        chosenSkills: state.chosenSkills,
-                        requiredCount: state.skillChoicesRequired,
-                        onToggle: (skillId) =>
-                            bloc.add(QuickCreateSkillToggled(skillId)),
-                      ),
-                      _EquipmentStep(
-                        isLoading: state.isLoadingEquipment,
-                        classDef: state.selectedClassDef,
-                        equipmentDefinitions: state.equipmentDefinitions,
-                        equipmentIds: state.equipmentList,
-                        chosenEquipment: state.chosenEquipment,
-                        useStartingEquipment: state.useStartingEquipment,
-                        totalWeightG: state.totalInventoryWeightG,
-                        capacityG: state.carryingCapacityLimitG,
-                        totalCost: state.totalPurchasedEquipmentCost,
-                        remainingCredits: state.remainingCredits,
-                        availableCredits: state.availableCredits,
-                        onToggleStartingEquipment: (usePackage) => bloc.add(
-                            QuickCreateUseStartingEquipmentChanged(usePackage)),
-                        onQuantityChanged: (id, quantity) => bloc.add(
-                            QuickCreateEquipmentQuantityChanged(id, quantity)),
-                      ),
-                      _BackgroundStep(
-                        backgrounds: state.backgrounds,
-                        selectedBackground: state.selectedBackground,
-                        nameController: nameController,
-                        onBackgroundChanged: (value) {
-                          if (value != null) {
-                            bloc.add(QuickCreateBackgroundSelected(value));
-                          }
-                        },
-                      ),
-                    ],
+              children: [
+                if (connectivityStatus == ConnectivityStatus.disconnected)
+                  MaterialBanner(
+                    backgroundColor: Colors.orange.shade100,
+                    content: const Text(
+                      'Mode hors ligne : certaines fonctionnalités réseau sont indisponibles.',
+                    ),
+                    actions: const [SizedBox.shrink()],
                   ),
-          ),
-          _QuickCreateControls(
-            state: state,
-            onPrevious: () =>
-                bloc.add(const QuickCreatePreviousStepRequested()),
-            onNext: () => bloc.add(const QuickCreateNextStepRequested()),
-            onCreate: () => bloc.add(const QuickCreateSubmitted()),
-          ),
-        ],
+                if (state.statusMessage != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.info_outline),
+                        const SizedBox(width: 8),
+                        Expanded(child: Text(state.statusMessage!)),
+                      ],
+                    ),
+                  ),
+                if (state.errorMessage != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.error_outline, color: Colors.red),
+                        const SizedBox(width: 8),
+                        Expanded(child: Text(state.errorMessage!)),
+                      ],
+                    ),
+                  ),
+                Expanded(
+                  child: state.isLoadingCatalog
+                      ? const Center(child: CircularProgressIndicator())
+                      : PageView(
+                          controller: pageController,
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: [
+                            _SpeciesStep(
+                              species: state.species,
+                              selectedSpecies: state.selectedSpecies,
+                              traits: state.selectedSpeciesTraits,
+                              onSelect: (value) {
+                                if (value != null) {
+                                  bloc.add(QuickCreateSpeciesSelected(value));
+                                }
+                              },
+                              onOpenPicker: () async {
+                                final chosen = await context.pushNamed<String>(
+                                  SpeciesPickerPage.routeName,
+                                  extra: state.selectedSpecies,
+                                );
+                                if (chosen != null) {
+                                  bloc.add(QuickCreateSpeciesSelected(chosen));
+                                }
+                              },
+                            ),
+                            _AbilitiesStep(
+                              mode: state.abilityMode,
+                              assignments: state.abilityAssignments,
+                              pool: state.abilityPool,
+                              onModeChanged: (mode) =>
+                                  bloc.add(QuickCreateAbilityModeChanged(mode)),
+                              onReroll: () => bloc.add(
+                                const QuickCreateAbilityScoresRerolled(),
+                              ),
+                              onAssign: (ability, value) => bloc.add(
+                                QuickCreateAbilityAssigned(ability, value),
+                              ),
+                            ),
+                            _ClassStep(
+                              classes: state.classes,
+                              selectedClass: state.selectedClass,
+                              classDef: state.selectedClassDef,
+                              isLoadingDetails: state.isLoadingClassDetails,
+                              onSelect: (value) {
+                                if (value != null) {
+                                  bloc.add(QuickCreateClassSelected(value));
+                                }
+                              },
+                              onOpenPicker: () async {
+                                final chosen = await context.pushNamed<String>(
+                                  ClassPickerPage.routeName,
+                                  extra: state.selectedClass,
+                                );
+                                if (chosen != null) {
+                                  bloc.add(QuickCreateClassSelected(chosen));
+                                }
+                              },
+                            ),
+                            _SkillStep(
+                              availableSkills: state.availableSkills,
+                              skillDefinitions: state.skillDefinitions,
+                              chosenSkills: state.chosenSkills,
+                              requiredCount: state.skillChoicesRequired,
+                              onToggle: (skillId) =>
+                                  bloc.add(QuickCreateSkillToggled(skillId)),
+                            ),
+                            _EquipmentStep(
+                              isLoading: state.isLoadingEquipment,
+                              classDef: state.selectedClassDef,
+                              equipmentDefinitions: state.equipmentDefinitions,
+                              equipmentIds: state.equipmentList,
+                              chosenEquipment: state.chosenEquipment,
+                              useStartingEquipment: state.useStartingEquipment,
+                              totalWeightG: state.totalInventoryWeightG,
+                              capacityG: state.carryingCapacityLimitG,
+                              totalCost: state.totalPurchasedEquipmentCost,
+                              remainingCredits: state.remainingCredits,
+                              availableCredits: state.availableCredits,
+                              onToggleStartingEquipment: (usePackage) =>
+                                  bloc.add(
+                                    QuickCreateUseStartingEquipmentChanged(
+                                      usePackage,
+                                    ),
+                                  ),
+                              onQuantityChanged: (id, quantity) => bloc.add(
+                                QuickCreateEquipmentQuantityChanged(
+                                  id,
+                                  quantity,
+                                ),
+                              ),
+                            ),
+                            _BackgroundStep(
+                              backgrounds: state.backgrounds,
+                              selectedBackground: state.selectedBackground,
+                              nameController: nameController,
+                              onBackgroundChanged: (value) {
+                                if (value != null) {
+                                  bloc.add(
+                                    QuickCreateBackgroundSelected(value),
+                                  );
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                ),
+                _QuickCreateControls(
+                  state: state,
+                  onPrevious: () =>
+                      bloc.add(const QuickCreatePreviousStepRequested()),
+                  onNext: () => bloc.add(const QuickCreateNextStepRequested()),
+                  onCreate: () => bloc.add(const QuickCreateSubmitted()),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -354,7 +377,10 @@ class _SpeciesStep extends StatelessWidget {
 
   String _titleCase(String slug) => slug
       .split(RegExp(r'[-_]'))
-      .map((part) => part.isEmpty ? part : part[0].toUpperCase() + part.substring(1))
+      .map(
+        (part) =>
+            part.isEmpty ? part : part[0].toUpperCase() + part.substring(1),
+      )
       .join(' ');
 
   @override
@@ -372,10 +398,12 @@ class _SpeciesStep extends StatelessWidget {
                   border: OutlineInputBorder(),
                 ),
                 items: species
-                    .map((id) => DropdownMenuItem(
-                          value: id,
-                          child: Text(_titleCase(id)),
-                        ))
+                    .map(
+                      (id) => DropdownMenuItem(
+                        value: id,
+                        child: Text(_titleCase(id)),
+                      ),
+                    )
                     .toList(),
                 onChanged: onSelect,
               ),
@@ -403,7 +431,9 @@ class _SpeciesStep extends StatelessWidget {
               ...traits.map(
                 (trait) => Card(
                   child: ListTile(
-                    title: Text(trait.name.fr.isNotEmpty ? trait.name.fr : trait.name.en),
+                    title: Text(
+                      trait.name.fr.isNotEmpty ? trait.name.fr : trait.name.en,
+                    ),
                     subtitle: Text(trait.description),
                   ),
                 ),
@@ -483,16 +513,13 @@ class _AbilitiesStep extends HookWidget {
 
       return DropdownButtonFormField<int?>(
         key: ValueKey('dropdown-$ability-${mode.name}'),
-        value: currentValue,
+        initialValue: currentValue,
         decoration: const InputDecoration(
           labelText: 'Score',
           border: OutlineInputBorder(),
         ),
         items: [
-          const DropdownMenuItem<int?>(
-            value: null,
-            child: Text('—'),
-          ),
+          const DropdownMenuItem<int?>(value: null, child: Text('—')),
           ...sortedOptions.map(
             (value) => DropdownMenuItem<int?>(
               value: value,
@@ -520,30 +547,35 @@ class _AbilitiesStep extends HookWidget {
         ),
         const SizedBox(height: 8),
         Card(
-          child: Column(
-            children: [
-              RadioListTile<AbilityGenerationMode>(
-                value: AbilityGenerationMode.standardArray,
-                groupValue: mode,
-                title: const Text('Tableau standard'),
-                subtitle: const Text('Utiliser les scores fixes 15, 14, 13, 12, 10 et 8.'),
-                onChanged: (value) {
-                  if (value != null) onModeChanged(value);
-                },
-              ),
-              const Divider(height: 0),
-              RadioListTile<AbilityGenerationMode>(
-                value: AbilityGenerationMode.roll,
-                groupValue: mode,
-                title: const Text('Lancer les dés'),
-                subtitle: const Text('Lancez 4d6, conservez les 3 meilleurs et assignez les 6 scores obtenus.'),
-                onChanged: (value) {
-                  if (value != null) onModeChanged(value);
-                },
-              ),
+          child: RadioGroup<AbilityGenerationMode>(
+            groupValue: mode,
+            onChanged: (value) {
+              if (value != null) onModeChanged(value);
+            },
+            child: Column(
+              children: [
+                RadioListTile<AbilityGenerationMode>(
+                  value: AbilityGenerationMode.standardArray,
+                  title: const Text('Tableau standard'),
+                  subtitle: const Text(
+                    'Utiliser les scores fixes 15, 14, 13, 12, 10 et 8.',
+                  ),
+                ),
+                const Divider(height: 0),
+                RadioListTile<AbilityGenerationMode>(
+                  value: AbilityGenerationMode.roll,
+                  title: const Text('Lancer les dés'),
+                  subtitle: const Text(
+                    'Lancez 4d6, conservez les 3 meilleurs et assignez les 6 scores obtenus.',
+                  ),
+                ),
               if (mode == AbilityGenerationMode.roll)
                 Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    bottom: 12,
+                  ),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: FilledButton.icon(
@@ -553,25 +585,21 @@ class _AbilitiesStep extends HookWidget {
                     ),
                   ),
                 ),
-              const Divider(height: 0),
-              RadioListTile<AbilityGenerationMode>(
-                value: AbilityGenerationMode.manual,
-                groupValue: mode,
-                title: const Text('Saisie manuelle'),
-                subtitle: const Text('Entrez vous-même les scores obtenus ailleurs et assignez-les.'),
-                onChanged: (value) {
-                  if (value != null) onModeChanged(value);
-                },
-              ),
-            ],
+                const Divider(height: 0),
+                RadioListTile<AbilityGenerationMode>(
+                  value: AbilityGenerationMode.manual,
+                  title: const Text('Saisie manuelle'),
+                  subtitle: const Text(
+                    'Entrez vous-même les scores obtenus ailleurs et assignez-les.',
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 16),
         if (mode != AbilityGenerationMode.manual) ...[
-          Text(
-            'Scores disponibles',
-            style: theme.textTheme.titleSmall,
-          ),
+          Text('Scores disponibles', style: theme.textTheme.titleSmall),
           const SizedBox(height: 8),
           if (sortedPoolEntries.isEmpty)
             const Text('Aucun score généré pour le moment.')
@@ -582,9 +610,11 @@ class _AbilitiesStep extends HookWidget {
               children: [
                 for (final entry in sortedPoolEntries)
                   Chip(
-                    label: Text(entry.value > 1
-                        ? '${entry.key} ×${entry.value}'
-                        : entry.key.toString()),
+                    label: Text(
+                      entry.value > 1
+                          ? '${entry.key} ×${entry.value}'
+                          : entry.key.toString(),
+                    ),
                   ),
               ],
             ),
@@ -656,7 +686,9 @@ class _ManualAbilityField extends HookWidget {
       }
       if (newText.isNotEmpty) {
         final value = int.tryParse(newText);
-        if (value != null && value >= AbilityScore.min && value <= AbilityScore.max) {
+        if (value != null &&
+            value >= AbilityScore.min &&
+            value <= AbilityScore.max) {
           errorText.value = null;
         }
       }
@@ -685,7 +717,8 @@ class _ManualAbilityField extends HookWidget {
           return;
         }
         if (value < AbilityScore.min || value > AbilityScore.max) {
-          errorText.value = 'Doit être entre ${AbilityScore.min} et ${AbilityScore.max}';
+          errorText.value =
+              'Doit être entre ${AbilityScore.min} et ${AbilityScore.max}';
           onChanged(null);
           return;
         }
@@ -715,7 +748,10 @@ class _ClassStep extends StatelessWidget {
 
   String _titleCase(String slug) => slug
       .split(RegExp(r'[-_]'))
-      .map((part) => part.isEmpty ? part : part[0].toUpperCase() + part.substring(1))
+      .map(
+        (part) =>
+            part.isEmpty ? part : part[0].toUpperCase() + part.substring(1),
+      )
       .join(' ');
 
   @override
@@ -734,10 +770,12 @@ class _ClassStep extends StatelessWidget {
                   border: OutlineInputBorder(),
                 ),
                 items: classes
-                    .map((id) => DropdownMenuItem(
-                          value: id,
-                          child: Text(_titleCase(id)),
-                        ))
+                    .map(
+                      (id) => DropdownMenuItem(
+                        value: id,
+                        child: Text(_titleCase(id)),
+                      ),
+                    )
                     .toList(),
                 onChanged: onSelect,
               ),
@@ -766,7 +804,7 @@ class _ClassStep extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
-               Text('Dé de vie : d${classDefData.hitDie}'),
+              Text('Dé de vie : d${classDefData.hitDie}'),
               const SizedBox(height: 12),
               Text(
                 'Compétences : choisir ${classDefData.level1.proficiencies.skillsChoose} (étape suivante)',
@@ -799,7 +837,10 @@ class _SkillStep extends StatelessWidget {
 
   String _titleCase(String slug) => slug
       .split(RegExp(r'[-_]'))
-      .map((part) => part.isEmpty ? part : part[0].toUpperCase() + part.substring(1))
+      .map(
+        (part) =>
+            part.isEmpty ? part : part[0].toUpperCase() + part.substring(1),
+      )
       .join(' ');
 
   String _abilityLabel(String ability) {
@@ -929,7 +970,9 @@ class _EquipmentStep extends HookWidget {
     }
     final classData = classDef;
     if (classData == null) {
-      return const Center(child: Text('Choisissez une classe pour configurer votre équipement.'));
+      return const Center(
+        child: Text('Choisissez une classe pour configurer votre équipement.'),
+      );
     }
     if (equipmentDefinitions.isEmpty) {
       return const Center(child: Text('Catalogue d\'équipement indisponible.'));
@@ -949,170 +992,213 @@ class _EquipmentStep extends HookWidget {
       if (lower.isEmpty) {
         return List<String>.from(equipmentIds);
       }
-      return equipmentIds.where((id) {
-        final def = equipmentDefinitions[id];
-        if (def == null) return false;
-        final fr = def.name.fr.toLowerCase();
-        final en = def.name.en.toLowerCase();
-        return fr.contains(lower) || en.contains(lower) || id.contains(lower);
-      }).toList(growable: false);
+      return equipmentIds
+          .where((id) {
+            final def = equipmentDefinitions[id];
+            if (def == null) return false;
+            final fr = def.name.fr.toLowerCase();
+            final en = def.name.en.toLowerCase();
+            return fr.contains(lower) ||
+                en.contains(lower) ||
+                id.contains(lower);
+          })
+          .toList(growable: false);
     }, [equipmentIds, equipmentDefinitions, query.value]);
 
     final startingWeightG = _computeStartingWeight(classData);
     final purchasesWeightG = _computePurchasesWeight();
-    final displayTotalWeight = totalWeightG != null ? _formatWeight(totalWeightG!) : '—';
+    final displayTotalWeight = totalWeightG != null
+        ? _formatWeight(totalWeightG!)
+        : '—';
     final displayCapacity = capacityG != null ? _formatWeight(capacityG!) : '—';
-    final overCapacity = capacityG != null && totalWeightG != null && totalWeightG! > capacityG!;
+    final overCapacity =
+        capacityG != null && totalWeightG != null && totalWeightG! > capacityG!;
     final overCredits = availableCredits >= 0 && totalCost > availableCredits;
 
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Crédits de départ : ${availableCredits}cr',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          if (classData.level1.startingCreditsRoll != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: Text('Jet alternatif : ${classData.level1.startingCreditsRoll}'),
+    final header = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Crédits de départ : ${availableCredits}cr',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        if (classData.level1.startingCreditsRoll != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              'Jet alternatif : ${classData.level1.startingCreditsRoll}',
             ),
-          const SizedBox(height: 16),
-          SwitchListTile.adaptive(
-            value: useStartingEquipment,
-            contentPadding: EdgeInsets.zero,
-            onChanged: onToggleStartingEquipment,
-            title: const Text('Prendre l\'équipement de départ de la classe'),
-            subtitle: classData.level1.startingEquipment.isEmpty
-                ? const Text('Cette classe ne fournit pas d\'équipement spécifique par défaut.')
-                : Text(
-                    classData.level1.startingEquipment
-                        .map((line) => '• ${_equipmentLabel(line.id)} ×${line.qty}')
-                        .join('\n'),
-                  ),
           ),
-          if (classData.level1.startingEquipmentOptions.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Card(
-                margin: EdgeInsets.zero,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Options d\'équipement de départ',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+        const SizedBox(height: 16),
+        SwitchListTile.adaptive(
+          value: useStartingEquipment,
+          contentPadding: EdgeInsets.zero,
+          onChanged: onToggleStartingEquipment,
+          title: const Text('Prendre l\'équipement de départ de la classe'),
+          subtitle: classData.level1.startingEquipment.isEmpty
+              ? const Text(
+                  'Cette classe ne fournit pas d\'équipement spécifique par défaut.',
+                )
+              : Text(
+                  classData.level1.startingEquipment
+                      .map(
+                        (line) => '• ${_equipmentLabel(line.id)} ×${line.qty}',
+                      )
+                      .join('\n'),
+                ),
+        ),
+        if (classData.level1.startingEquipmentOptions.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Card(
+              margin: EdgeInsets.zero,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Options d\'équipement de départ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    ...classData.level1.startingEquipmentOptions.map(
+                      (option) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: Text(option),
                       ),
-                      const SizedBox(height: 8),
-                      ...classData.level1.startingEquipmentOptions
-                          .map((option) => Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 2),
-                                child: Text(option),
-                              )),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          if (chosenEquipment.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Achats en cours',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 4),
-                  ...chosenEquipment.entries.map((entry) {
-                    final def = equipmentDefinitions[entry.key];
-                    final label = def != null ? def.name.fr : entry.key;
-                    final cost = def?.cost ?? 0;
-                    return Text('• $label ×${entry.value} (${cost * entry.value}cr)');
-                  }),
-                ],
+          ),
+        if (chosenEquipment.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Achats en cours',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4),
+                ...chosenEquipment.entries.map((entry) {
+                  final def = equipmentDefinitions[entry.key];
+                  final label = def != null ? def.name.fr : entry.key;
+                  final cost = def?.cost ?? 0;
+                  return Text(
+                    '• $label ×${entry.value} (${cost * entry.value}cr)',
+                  );
+                }),
+              ],
+            ),
+          ),
+        Wrap(
+          spacing: 16,
+          runSpacing: 8,
+          children: [
+            Text('Coût des achats : ${totalCost}cr'),
+            Text(
+              'Crédits restants : ${remainingCredits}cr',
+              style: TextStyle(
+                color: remainingCredits < 0 ? Colors.red : null,
               ),
             ),
-          Wrap(
-            spacing: 16,
-            runSpacing: 8,
-            children: [
-              Text('Coût des achats : ${totalCost}cr'),
+            Text('Poids total : $displayTotalWeight'),
+            Text('Capacité : $displayCapacity'),
+            if (useStartingEquipment && startingWeightG != null)
               Text(
-                'Crédits restants : ${remainingCredits}cr',
-                style: TextStyle(color: remainingCredits < 0 ? Colors.red : null),
+                'Équipement de départ : ${_formatWeight(startingWeightG)}',
               ),
-              Text('Poids total : $displayTotalWeight'),
-              Text('Capacité : $displayCapacity'),
-              if (useStartingEquipment && startingWeightG != null)
-                Text('Équipement de départ : ${_formatWeight(startingWeightG)}'),
-              if (chosenEquipment.isNotEmpty && purchasesWeightG != null)
-                Text('Achats : ${_formatWeight(purchasesWeightG)}'),
-            ],
-          ),
-          if (overCredits)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Text(
-                'Vous dépassez vos crédits de départ.',
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
-              ),
-            ),
-          if (overCapacity)
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: Text(
-                'Le poids total dépasse votre capacité de portance.',
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
-              ),
-            ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: queryController,
-            decoration: const InputDecoration(
-              labelText: 'Rechercher un objet…',
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(),
+            if (chosenEquipment.isNotEmpty && purchasesWeightG != null)
+              Text('Achats : ${_formatWeight(purchasesWeightG)}'),
+          ],
+        ),
+        if (overCredits)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              'Vous dépassez vos crédits de départ.',
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),
-          const SizedBox(height: 12),
-          Expanded(
-            child: filteredIds.isEmpty
-                ? const Center(child: Text('Aucun équipement ne correspond à votre recherche.'))
-                : ListView.separated(
-                    itemCount: filteredIds.length,
-                    separatorBuilder: (_, __) => const CharacterSectionDivider(
-                      spacing: 8,
-                      thickness: 1,
-                    ),
-                    itemBuilder: (context, index) {
-                      final id = filteredIds[index];
-                      final def = equipmentDefinitions[id];
-                      if (def == null) {
-                        return ListTile(title: Text(id));
-                      }
-                      final qty = chosenEquipment[id] ?? 0;
-                      return ListTile(
+        if (overCapacity)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              'Le poids total dépasse votre capacité de portance.',
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          ),
+        const SizedBox(height: 16),
+        TextField(
+          controller: queryController,
+          decoration: const InputDecoration(
+            labelText: 'Rechercher un objet…',
+            prefixIcon: Icon(Icons.search),
+            border: OutlineInputBorder(),
+          ),
+        ),
+        const SizedBox(height: 12),
+      ],
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(child: header),
+          if (filteredIds.isEmpty)
+            const SliverFillRemaining(
+              hasScrollBody: false,
+              child: Center(
+                child: Text(
+                  'Aucun équipement ne correspond à votre recherche.',
+                ),
+              ),
+            )
+          else
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final id = filteredIds[index];
+                  final def = equipmentDefinitions[id];
+                  if (def == null) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ListTile(title: Text(id)),
+                        if (index < filteredIds.length - 1)
+                          const CharacterSectionDivider(
+                            spacing: 8,
+                            thickness: 1,
+                          ),
+                      ],
+                    );
+                  }
+                  final qty = chosenEquipment[id] ?? 0;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ListTile(
                         title: Text(def.name.fr),
-                        subtitle: Text('${def.cost}cr · ${_formatWeight(def.weightG)} · ${def.type}'),
+                        subtitle: Text(
+                          '${def.cost}cr · ${_formatWeight(def.weightG)} · ${def.type}',
+                        ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
                               icon: const Icon(Icons.remove_circle_outline),
-                              onPressed: qty > 0 ? () => onQuantityChanged(id, qty - 1) : null,
+                              onPressed: qty > 0
+                                  ? () => onQuantityChanged(id, qty - 1)
+                                  : null,
                             ),
                             SizedBox(
                               width: 32,
-                              child: Text(
-                                '$qty',
-                                textAlign: TextAlign.center,
-                              ),
+                              child: Text('$qty', textAlign: TextAlign.center),
                             ),
                             IconButton(
                               icon: const Icon(Icons.add_circle_outline),
@@ -1120,10 +1206,18 @@ class _EquipmentStep extends HookWidget {
                             ),
                           ],
                         ),
-                      );
-                    },
-                  ),
-          ),
+                      ),
+                      if (index < filteredIds.length - 1)
+                        const CharacterSectionDivider(
+                          spacing: 8,
+                          thickness: 1,
+                        ),
+                    ],
+                  );
+                },
+                childCount: filteredIds.length,
+              ),
+            ),
         ],
       ),
     );
@@ -1185,7 +1279,10 @@ class _BackgroundStep extends StatelessWidget {
 
   String _titleCase(String slug) => slug
       .split(RegExp(r'[-_]'))
-      .map((part) => part.isEmpty ? part : part[0].toUpperCase() + part.substring(1))
+      .map(
+        (part) =>
+            part.isEmpty ? part : part[0].toUpperCase() + part.substring(1),
+      )
       .join(' ');
 
   @override
@@ -1208,15 +1305,17 @@ class _BackgroundStep extends StatelessWidget {
             border: OutlineInputBorder(),
           ),
           items: backgrounds
-              .map((id) => DropdownMenuItem(
-                    value: id,
-                    child: Text(_titleCase(id)),
-                  ))
+              .map(
+                (id) =>
+                    DropdownMenuItem(value: id, child: Text(_titleCase(id))),
+              )
               .toList(),
           onChanged: onBackgroundChanged,
         ),
         const SizedBox(height: 24),
-        const Text('Pensez à vérifier votre équipement avant de finaliser la création.'),
+        const Text(
+          'Pensez à vérifier votre équipement avant de finaliser la création.',
+        ),
       ],
     );
   }
@@ -1253,12 +1352,17 @@ class _QuickCreateControls extends StatelessWidget {
             Expanded(
               child: state.currentStep == QuickCreateStep.background
                   ? FilledButton.icon(
-                      onPressed: state.canCreate && !state.isCreating ? onCreate : null,
+                      onPressed: state.canCreate && !state.isCreating
+                          ? onCreate
+                          : null,
                       icon: state.isCreating
                           ? const SizedBox(
                               width: 16,
                               height: 16,
-                              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
                             )
                           : const Icon(Icons.check),
                       label: const Text('Créer'),
