@@ -22,6 +22,7 @@ import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart'
     show ClassDef;
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
@@ -33,6 +34,7 @@ import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
@@ -41,6 +43,7 @@ import 'package:sw5e_manager/domain/characters/value_objects/class_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/equipment_item_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/quantity.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 
 /// ---- Events ----------------------------------------------------------------
@@ -241,6 +244,8 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     required PersistCharacterDraftAbilityScores persistCharacterDraftAbilityScores,
     required PersistCharacterDraftSkills persistCharacterDraftSkills,
     required PersistCharacterDraftEquipment persistCharacterDraftEquipment,
+    required PersistCharacterDraftStep persistCharacterDraftStep,
+    required ClearCharacterDraft clearCharacterDraft,
     Random? random,
   })  : _loadQuickCreateCatalog = loadQuickCreateCatalog,
         _loadSpeciesDetails = loadSpeciesDetails,
@@ -255,6 +260,8 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         _persistCharacterDraftAbilityScores = persistCharacterDraftAbilityScores,
         _persistCharacterDraftSkills = persistCharacterDraftSkills,
         _persistCharacterDraftEquipment = persistCharacterDraftEquipment,
+        _persistCharacterDraftStep = persistCharacterDraftStep,
+        _clearCharacterDraft = clearCharacterDraft,
         _random = random ?? Random(),
         super(QuickCreateState.initial()) {
     on<QuickCreateStarted>(_onStarted);
@@ -288,6 +295,8 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   final PersistCharacterDraftAbilityScores _persistCharacterDraftAbilityScores;
   final PersistCharacterDraftSkills _persistCharacterDraftSkills;
   final PersistCharacterDraftEquipment _persistCharacterDraftEquipment;
+  final PersistCharacterDraftStep _persistCharacterDraftStep;
+  final ClearCharacterDraft _clearCharacterDraft;
   final Random _random;
 
   static const List<int> _standardArray = <int>[15, 14, 13, 12, 10, 8];
@@ -429,6 +438,8 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             ? <String, int>{}
             : Map<String, int>.from(draftEquipment.quantities);
 
+        final int resolvedStepIndex = _sanitizeStepIndex(existingDraft?.stepIndex);
+
         emit(
           state.copyWith(
             species: snapshot.speciesIds,
@@ -452,6 +463,9 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             abilityAssignments: resolvedAssignments,
             abilityPool: resolvedPool,
             abilityMode: resolvedAbilityMode,
+            stepIndex: resolvedStepIndex,
+            selectedSpeciesEffects:
+                existingDraft?.species?.effects ?? const <CharacterEffect>[],
           ),
         );
 
@@ -578,33 +592,36 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     );
   }
 
-  void _onStepChanged(
+  Future<void> _onStepChanged(
     QuickCreateStepChanged event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     if (event.index < 0 || event.index >= QuickCreateStep.values.length) {
       return;
     }
     emit(state.copyWith(stepIndex: event.index));
+    await _persistStepIndex(event.index);
   }
 
-  void _onNextStepRequested(
+  Future<void> _onNextStepRequested(
     QuickCreateNextStepRequested event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     final int nextIndex = state.stepIndex + 1;
     if (nextIndex < QuickCreateStep.values.length) {
       emit(state.copyWith(stepIndex: nextIndex));
+      await _persistStepIndex(nextIndex);
     }
   }
 
-  void _onPreviousStepRequested(
+  Future<void> _onPreviousStepRequested(
     QuickCreatePreviousStepRequested event,
     Emitter<QuickCreateState> emit,
-  ) {
+  ) async {
     final int previousIndex = state.stepIndex - 1;
     if (previousIndex >= 0) {
       emit(state.copyWith(stepIndex: previousIndex));
+      await _persistStepIndex(previousIndex);
     }
   }
 
@@ -929,8 +946,8 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     try {
       final AppResult<Character> result =
           await _finalizeLevel1Character(input);
-      result.match(
-        ok: (Character character) {
+      await result.match<Future<void>>(
+        ok: (Character character) async {
           emit(
             state.copyWith(
               isCreating: false,
@@ -939,8 +956,19 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
               failure: null,
             ),
           );
+          final AppResult<void> clearResult = await _clearCharacterDraft();
+          clearResult.match(
+            ok: (_) => null,
+            err: (DomainError error) {
+              _logger.warn(
+                'Impossible d\'effacer le brouillon après création',
+                error: error,
+              );
+              return null;
+            },
+          );
         },
-        err: (DomainError error) {
+        err: (DomainError error) async {
           final AppFailure failure = AppFailure.fromDomain(error);
           emit(
             state.copyWith(
@@ -1019,7 +1047,14 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         final AppResult<CharacterDraft> draftResult =
             await _persistCharacterDraftSpecies(details);
         draftResult.match(
-          ok: (_) {},
+          ok: (CharacterDraft draft) {
+            emit(
+              state.copyWith(
+                selectedSpeciesEffects:
+                    draft.species?.effects ?? const <CharacterEffect>[],
+              ),
+            );
+          },
           err: (DomainError error) {
             _logger.warn(
               'Échec de la sauvegarde du brouillon d\'espèce',
@@ -1043,6 +1078,33 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
                 'Erreur lors du chargement des traits: ${error.message ?? error.code}',
           ),
         );
+      },
+    );
+  }
+
+  int _sanitizeStepIndex(int? raw) {
+    if (raw == null || raw.isNegative) {
+      return 0;
+    }
+    final int maxIndex = QuickCreateStep.values.length - 1;
+    if (raw > maxIndex) {
+      return maxIndex;
+    }
+    return raw;
+  }
+
+  Future<void> _persistStepIndex(int index) async {
+    final AppResult<CharacterDraft> result =
+        await _persistCharacterDraftStep(index);
+    result.match(
+      ok: (_) => null,
+      err: (DomainError error) {
+        _logger.warn(
+          'Échec de la sauvegarde de l\'étape courante',
+          error: error,
+          payload: {'stepIndex': index},
+        );
+        return null;
       },
     );
   }

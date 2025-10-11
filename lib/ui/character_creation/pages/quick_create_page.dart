@@ -29,8 +29,11 @@ import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_bloc.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/class_picker_page.dart';
@@ -80,6 +83,10 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
         ServiceLocator.resolve<PersistCharacterDraftSkills>();
     final PersistCharacterDraftEquipment persistDraftEquipment =
         ServiceLocator.resolve<PersistCharacterDraftEquipment>();
+    final PersistCharacterDraftStep persistDraftStep =
+        ServiceLocator.resolve<PersistCharacterDraftStep>();
+    final ClearCharacterDraft clearDraft =
+        ServiceLocator.resolve<ClearCharacterDraft>();
 
     _bloc = QuickCreateBloc(
       loadQuickCreateCatalog: loadCatalog,
@@ -95,6 +102,8 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       persistCharacterDraftAbilityScores: persistDraftAbilities,
       persistCharacterDraftSkills: persistDraftSkills,
       persistCharacterDraftEquipment: persistDraftEquipment,
+      persistCharacterDraftStep: persistDraftStep,
+      clearCharacterDraft: clearDraft,
     )..add(const QuickCreateStarted());
 
     final String initialName = _bloc.state.characterName;
@@ -280,6 +289,7 @@ class _QuickCreateView extends StatelessWidget {
                               species: state.species,
                               selectedSpecies: state.selectedSpecies,
                               traits: state.selectedSpeciesTraits,
+                              effects: state.selectedSpeciesEffects,
                               onSelect: (value) {
                                 if (value != null) {
                                   bloc.add(QuickCreateSpeciesSelected(value));
@@ -397,6 +407,7 @@ class _SpeciesStep extends StatelessWidget {
     required this.species,
     required this.selectedSpecies,
     required this.traits,
+    required this.effects,
     required this.onSelect,
     required this.onOpenPicker,
   });
@@ -404,6 +415,7 @@ class _SpeciesStep extends StatelessWidget {
   final List<String> species;
   final String? selectedSpecies;
   final List<TraitDef> traits;
+  final List<CharacterEffect> effects;
   final ValueChanged<String?> onSelect;
   final VoidCallback onOpenPicker;
 
@@ -449,9 +461,19 @@ class _SpeciesStep extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        if (traits.isEmpty)
-          const Text('Aucun trait spécifique pour cette espèce.')
-        else
+        if (effects.isNotEmpty)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Effets d’espèce',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              ...effects.map(_buildEffectCard),
+            ],
+          )
+        else if (traits.isNotEmpty)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -471,9 +493,43 @@ class _SpeciesStep extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          )
+        else
+          const Text('Aucun trait spécifique pour cette espèce.'),
       ],
     );
+  }
+
+  Widget _buildEffectCard(CharacterEffect effect) {
+    final String title = effect.title.isNotEmpty ? effect.title : effect.source;
+    return Card(
+      child: ListTile(
+        title: Text(title),
+        subtitle: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(effect.description),
+            const SizedBox(height: 8),
+            Text(
+              _categoryLabel(effect.category),
+              style: const TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _categoryLabel(CharacterEffectCategory category) {
+    switch (category) {
+      case CharacterEffectCategory.passive:
+        return 'Effet passif';
+      case CharacterEffectCategory.action:
+        return 'Action';
+      case CharacterEffectCategory.bonusAction:
+        return 'Action bonus';
+    }
   }
 }
 

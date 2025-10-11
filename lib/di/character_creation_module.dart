@@ -27,6 +27,8 @@ import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_characte
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
@@ -47,6 +49,8 @@ import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context.dart';
@@ -175,6 +179,16 @@ void registerCharacterCreationModule() {
   );
   ServiceLocator.registerLazySingleton<PersistCharacterDraftEquipment>(
     () => PersistCharacterDraftEquipmentImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftStep>(
+    () => PersistCharacterDraftStepImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<ClearCharacterDraft>(
+    () => ClearCharacterDraftImpl(
       ServiceLocator.resolve<CharacterDraftRepository>(),
     ),
   );

@@ -23,6 +23,7 @@ import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_equipment.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_name.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_step.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_skills.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
@@ -41,6 +42,7 @@ import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.d
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/superiority_dice.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
+import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_bloc.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 
@@ -78,6 +80,11 @@ class _MockPersistCharacterDraftSkills extends Mock
 
 class _MockPersistCharacterDraftEquipment extends Mock
     implements PersistCharacterDraftEquipment {}
+
+class _MockPersistCharacterDraftStep extends Mock
+    implements PersistCharacterDraftStep {}
+
+class _MockClearCharacterDraft extends Mock implements ClearCharacterDraft {}
 
 Character _dummyCharacter() {
   return Character(
@@ -122,6 +129,8 @@ void main() {
   late _MockPersistCharacterDraftAbilityScores persistDraftAbilityScores;
   late _MockPersistCharacterDraftSkills persistDraftSkills;
   late _MockPersistCharacterDraftEquipment persistDraftEquipment;
+  late _MockPersistCharacterDraftStep persistDraftStep;
+  late _MockClearCharacterDraft clearDraft;
 
   setUpAll(() {
     registerFallbackValue(
@@ -172,6 +181,8 @@ void main() {
     persistDraftAbilityScores = _MockPersistCharacterDraftAbilityScores();
     persistDraftSkills = _MockPersistCharacterDraftSkills();
     persistDraftEquipment = _MockPersistCharacterDraftEquipment();
+    persistDraftStep = _MockPersistCharacterDraftStep();
+    clearDraft = _MockClearCharacterDraft();
 
     when(() => logger.info(any(), payload: any(named: 'payload')))
         .thenAnswer((_) {});
@@ -199,6 +210,10 @@ void main() {
         .thenAnswer((_) async => appOk(const CharacterDraft()));
     when(() => persistDraftEquipment.call(any()))
         .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => persistDraftStep.call(any()))
+        .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => clearDraft())
+        .thenAnswer((_) async => appOk<void>(null));
     when(() => loadCharacterDraft()).thenAnswer((_) async => appOk(null));
   });
 
@@ -217,6 +232,8 @@ void main() {
       persistCharacterDraftAbilityScores: persistDraftAbilityScores,
       persistCharacterDraftSkills: persistDraftSkills,
       persistCharacterDraftEquipment: persistDraftEquipment,
+      persistCharacterDraftStep: persistDraftStep,
+      clearCharacterDraft: clearDraft,
     );
   }
 
@@ -260,6 +277,25 @@ void main() {
               description: 'Polyvalent.',
             ),
           ],
+        ),
+      ),
+    );
+
+    when(() => persistDraftSpecies.call(any())).thenAnswer(
+      (_) async => appOk(
+        CharacterDraft(
+          species: DraftSpeciesSelection(
+            speciesId: SpeciesId('human'),
+            displayName: 'Human',
+            effects: const <CharacterEffect>[
+              CharacterEffect(
+                source: 'test:adaptive',
+                title: 'Adaptive',
+                description: 'Versatile ability boost.',
+                category: CharacterEffectCategory.passive,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -313,6 +349,7 @@ void main() {
       expect(state.selectedBackground, 'outlaw');
       expect(state.equipmentList, contains('comlink'));
       expect(state.selectedSpeciesTraits, isNotEmpty);
+      expect(state.selectedSpeciesEffects, isNotEmpty);
     },
   );
 
@@ -386,13 +423,39 @@ void main() {
         ),
       );
 
+      when(() => persistDraftSpecies.call(any())).thenAnswer(
+        (_) async => appOk(
+          CharacterDraft(
+            species: DraftSpeciesSelection(
+              speciesId: SpeciesId('bith'),
+              displayName: 'Bith',
+              effects: const <CharacterEffect>[
+                CharacterEffect(
+                  source: 'trait:detail-oriented',
+                  title: 'Detail Oriented',
+                  description: 'Focus on minutiae.',
+                  category: CharacterEffectCategory.passive,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
       when(() => loadCharacterDraft()).thenAnswer(
         (_) async => appOk(
           CharacterDraft(
             species: DraftSpeciesSelection(
               speciesId: SpeciesId('bith'),
               displayName: 'Bith',
-              effects: const <CharacterEffect>[],
+              effects: const <CharacterEffect>[
+                CharacterEffect(
+                  source: 'persisted:memory',
+                  title: 'Stored Effect',
+                  description: 'Loaded from draft.',
+                  category: CharacterEffectCategory.action,
+                ),
+              ],
             ),
           ),
         ),
@@ -406,6 +469,56 @@ void main() {
     verify: (bloc) {
       expect(bloc.state.selectedSpecies, 'bith');
       expect(bloc.state.selectedSpeciesTraits, isNotEmpty);
+      expect(bloc.state.selectedSpeciesEffects, isNotEmpty);
+      expect(
+        bloc.state.selectedSpeciesEffects.first.title,
+        anyOf('Detail Oriented', 'Stored Effect'),
+      );
+    },
+  );
+
+  blocTest<QuickCreateBloc, QuickCreateState>(
+    'ré-ouvre l\'assistant à l\'étape sauvegardée',
+    build: () {
+      arrangeCatalogSuccess();
+      when(() => loadCharacterDraft()).thenAnswer(
+        (_) async => appOk(
+          CharacterDraft(
+            species: DraftSpeciesSelection(
+              speciesId: SpeciesId('human'),
+              displayName: 'Human',
+              effects: const <CharacterEffect>[],
+            ),
+            stepIndex: 3,
+          ),
+        ),
+      );
+      return buildBloc();
+    },
+    act: (bloc) => bloc.add(const QuickCreateStarted()),
+    wait: const Duration(milliseconds: 20),
+    expect: () => <Matcher>[],
+    verify: (bloc) {
+      expect(bloc.state.stepIndex, 3);
+    },
+  );
+
+  blocTest<QuickCreateBloc, QuickCreateState>(
+    'persiste l\'étape lors de la navigation',
+    build: () {
+      arrangeCatalogSuccess();
+      return buildBloc();
+    },
+    act: (bloc) async {
+      bloc.add(const QuickCreateStarted());
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      bloc.add(const QuickCreateNextStepRequested());
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+    },
+    wait: const Duration(milliseconds: 40),
+    expect: () => <Matcher>[],
+    verify: (_) {
+      verify(() => persistDraftStep.call(1)).called(1);
     },
   );
 
@@ -555,6 +668,7 @@ void main() {
       expect(state.completion, isA<QuickCreateSuccess>());
       expect(state.isCreating, isFalse);
       verify(() => finalize.call(any())).called(1);
+      verify(() => clearDraft()).called(1);
     },
   );
 }

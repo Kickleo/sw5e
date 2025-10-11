@@ -87,6 +87,7 @@ class CharacterDraft {
     this.abilityScores,
     Set<String>? chosenSkills,
     this.equipment,
+    this.stepIndex,
   }) : chosenSkills = chosenSkills == null
             ? const <String>{}
             : Set<String>.unmodifiable(chosenSkills);
@@ -98,6 +99,7 @@ class CharacterDraft {
   final DraftAbilityScores? abilityScores;
   final Set<String> chosenSkills;
   final DraftEquipmentSelection? equipment;
+  final int? stepIndex;
 
   CharacterDraft copyWith({
     Object? name = _sentinel,
@@ -107,6 +109,7 @@ class CharacterDraft {
     Object? abilityScores = _sentinel,
     Object? chosenSkills = _sentinel,
     Object? equipment = _sentinel,
+    Object? stepIndex = _sentinel,
   }) {
     return CharacterDraft(
       name: name == _sentinel ? this.name : name as String?,
@@ -125,6 +128,8 @@ class CharacterDraft {
       equipment: equipment == _sentinel
           ? this.equipment
           : equipment as DraftEquipmentSelection?,
+      stepIndex:
+          stepIndex == _sentinel ? this.stepIndex : stepIndex as int?,
     );
   }
 

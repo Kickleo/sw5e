@@ -119,6 +119,7 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
                   draft.equipment!.useStartingEquipment,
               'quantities': draft.equipment!.quantities,
             },
+      'stepIndex': draft.stepIndex,
     };
   }
 
@@ -246,6 +247,17 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
       abilityScores: abilityScores,
       chosenSkills: skills,
       equipment: equipment,
+      stepIndex: _parseStepIndex(raw['stepIndex']),
     );
+  }
+
+  int? _parseStepIndex(dynamic value) {
+    if (value is int) {
+      return value;
+    }
+    if (value is num) {
+      return value.toInt();
+    }
+    return null;
   }
 }
