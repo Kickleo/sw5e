@@ -20,6 +20,8 @@ class LoadCharacterDraftImpl implements LoadCharacterDraft {
   @override
   Future<AppResult<CharacterDraft?>> call() async {
     try {
+      // On récupère le brouillon persistant ; `null` signifie qu'aucune reprise
+      // n'est disponible pour l'utilisateur.
       final CharacterDraft? draft = await _repository.load();
       return appOk(draft);
     } catch (error, stackTrace) {

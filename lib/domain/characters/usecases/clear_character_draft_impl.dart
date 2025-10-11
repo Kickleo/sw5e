@@ -16,6 +16,7 @@ class ClearCharacterDraftImpl implements ClearCharacterDraft {
   @override
   Future<AppResult<void>> call() async {
     try {
+      // On délègue l'effacement au repository, qu'il soit mémoire ou disque.
       await _repository.clear();
       return appOk(null);
     } catch (error) {

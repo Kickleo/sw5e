@@ -301,10 +301,13 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
 
   static const List<int> _standardArray = <int>[15, 14, 13, 12, 10, 8];
 
+  /// Construit une map vide (toutes valeurs nulles) pour suivre les attributions
+  /// de caractéristiques dans le mode manuel/jet.
   Map<String, int?> _emptyAbilityAssignments() => <String, int?>{
         for (final String ability in QuickCreateState.abilityOrder) ability: null,
       };
 
+  /// Affectations par défaut correspondant au standard array classique.
   Map<String, int?> _defaultStandardAssignments() => const <String, int?>{
         'str': 15,
         'dex': 14,
@@ -314,6 +317,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         'cha': 8,
       };
 
+  /// Conversion du mode UI vers le mode persisté dans le brouillon.
   DraftAbilityGenerationMode _mapToDraftMode(AbilityGenerationMode mode) {
     switch (mode) {
       case AbilityGenerationMode.standardArray:
@@ -325,6 +329,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     }
   }
 
+  /// Conversion inverse : du brouillon vers le mode présenté dans l'UI.
   AbilityGenerationMode _mapFromDraftMode(DraftAbilityGenerationMode mode) {
     switch (mode) {
       case DraftAbilityGenerationMode.standardArray:
@@ -336,6 +341,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     }
   }
 
+  /// Prépare un instantané des caractéristiques à sauvegarder.
   DraftAbilityScores _buildDraftAbilityScoresSnapshot(
     QuickCreateState current,
   ) {
@@ -346,6 +352,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     );
   }
 
+  /// Prépare un instantané de l'équipement sélectionné.
   DraftEquipmentSelection _buildDraftEquipmentSelectionSnapshot(
     QuickCreateState current,
   ) {
@@ -355,6 +362,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     );
   }
 
+  /// Charge le catalogue et tente de restaurer un brouillon existant.
   Future<void> _onStarted(
     QuickCreateStarted event,
     Emitter<QuickCreateState> emit,
@@ -494,6 +502,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     );
   }
 
+  /// Persiste les modifications de nom et met à jour l'état local.
   Future<void> _onNameChanged(
     QuickCreateNameChanged event,
     Emitter<QuickCreateState> emit,
@@ -518,6 +527,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     );
   }
 
+  /// Charge les détails de l'espèce puis enregistre le brouillon enrichi.
   Future<void> _onSpeciesSelected(
     QuickCreateSpeciesSelected event,
     Emitter<QuickCreateState> emit,
@@ -529,6 +539,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _refreshSpeciesTraits(event.speciesId, emit);
   }
 
+  /// Met à jour la classe choisie et déclenche la persistance.
   Future<void> _onClassSelected(
     QuickCreateClassSelected event,
     Emitter<QuickCreateState> emit,
@@ -566,6 +577,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _refreshClassDef(event.classId, emit);
   }
 
+  /// Met à jour le background sélectionné et le sauvegarde.
   Future<void> _onBackgroundSelected(
     QuickCreateBackgroundSelected event,
     Emitter<QuickCreateState> emit,
@@ -592,6 +604,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     );
   }
 
+  /// Synchronise l'étape courante avec la navigation manuelle de l'UI.
   Future<void> _onStepChanged(
     QuickCreateStepChanged event,
     Emitter<QuickCreateState> emit,
@@ -603,6 +616,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _persistStepIndex(event.index);
   }
 
+  /// Passe à l'étape suivante (si possible) et enregistre l'indice.
   Future<void> _onNextStepRequested(
     QuickCreateNextStepRequested event,
     Emitter<QuickCreateState> emit,
@@ -614,6 +628,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     }
   }
 
+  /// Reculer d'une étape et enregistrer l'indice persistant.
   Future<void> _onPreviousStepRequested(
     QuickCreatePreviousStepRequested event,
     Emitter<QuickCreateState> emit,
@@ -625,6 +640,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     }
   }
 
+  /// Met à jour le mode de génération (standard/jet/manual) et persiste.
   Future<void> _onAbilityModeChanged(
     QuickCreateAbilityModeChanged event,
     Emitter<QuickCreateState> emit,
@@ -663,6 +679,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _persistAbilityScoresSnapshot(updated);
   }
 
+  /// Relance de nouveaux jets de caractéristiques et sauvegarde du résultat.
   Future<void> _onAbilityScoresRerolled(
     QuickCreateAbilityScoresRerolled event,
     Emitter<QuickCreateState> emit,
@@ -679,6 +696,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _persistAbilityScoresSnapshot(updated);
   }
 
+  /// Affectation d'un score à une caractéristique particulière.
   Future<void> _onAbilityAssigned(
     QuickCreateAbilityAssigned event,
     Emitter<QuickCreateState> emit,
@@ -722,6 +740,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _persistAbilityScoresSnapshot(newState);
   }
 
+  /// Ajout ou suppression d'une compétence choisie.
   Future<void> _onSkillToggled(
     QuickCreateSkillToggled event,
     Emitter<QuickCreateState> emit,
@@ -755,6 +774,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _persistSkillsSnapshot(updated);
   }
 
+  /// Basculer entre l'équipement de départ et la prise d'or initial.
   Future<void> _onUseStartingEquipmentChanged(
     QuickCreateUseStartingEquipmentChanged event,
     Emitter<QuickCreateState> emit,
@@ -770,6 +790,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _persistEquipmentSnapshot(updated);
   }
 
+  /// Ajuste la quantité d'un élément d'équipement choisi.
   Future<void> _onEquipmentQuantityChanged(
     QuickCreateEquipmentQuantityChanged event,
     Emitter<QuickCreateState> emit,
@@ -799,6 +820,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     await _persistEquipmentSnapshot(newState);
   }
 
+  /// Finalise le personnage et purge le brouillon persisté.
   Future<void> _onSubmitted(
     QuickCreateSubmitted event,
     Emitter<QuickCreateState> emit,
@@ -1010,6 +1032,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     }
   }
 
+  /// Réinitialise l'objet de complétion après affichage en UI.
   void _onCompletionCleared(
     QuickCreateCompletionCleared event,
     Emitter<QuickCreateState> emit,

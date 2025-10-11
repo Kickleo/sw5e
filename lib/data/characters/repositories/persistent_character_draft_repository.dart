@@ -16,6 +16,8 @@ import 'package:sw5e_manager/domain/characters/value_objects/character_effect.da
 import 'package:sw5e_manager/domain/characters/value_objects/class_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 
+/// Signature d'une fonction asynchrone renvoyant le répertoire cible pour la
+/// persistance (permet l'injection lors des tests).
 typedef DirectoryProvider = Future<Directory> Function();
 
 class PersistentCharacterDraftRepository implements CharacterDraftRepository {
@@ -29,6 +31,8 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
   final String _fileName;
   File? _cachedFile;
 
+  /// Garantit la présence du fichier cible sur le disque et le met en cache
+  /// pour les lectures/écritures ultérieures.
   Future<File> _ensureFile() async {
     if (_cachedFile != null) {
       return _cachedFile!;
@@ -43,6 +47,8 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
     return file;
   }
 
+  /// Lit le JSON brut depuis le fichier persistant et effectue les conversions
+  /// de type bas niveau (String -> Map) nécessaires avant désérialisation.
   Future<Map<String, dynamic>?> _readRaw() async {
     final File file = await _ensureFile();
     final String raw = await file.readAsString();
@@ -61,6 +67,7 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
     );
   }
 
+  /// Sérialise les données fournies en JSON et les écrit dans le fichier associé.
   Future<void> _writeRaw(Map<String, dynamic> data) async {
     final File file = await _ensureFile();
     await file.writeAsString(jsonEncode(data), flush: true);
@@ -85,6 +92,7 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
     await _writeRaw(<String, dynamic>{});
   }
 
+  /// Transforme l'entité métier en structure JSON (Map) prête à être persistée.
   Map<String, dynamic> _serializeDraft(CharacterDraft draft) {
     return <String, dynamic>{
       'name': draft.name,
@@ -123,6 +131,7 @@ class PersistentCharacterDraftRepository implements CharacterDraftRepository {
     };
   }
 
+  /// Reconstruit une entité métier à partir du JSON stocké sur disque.
   CharacterDraft _deserializeDraft(Map<String, dynamic> raw) {
     final dynamic speciesRaw = raw['species'];
     DraftSpeciesSelection? species;

@@ -53,6 +53,8 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
   late final TextEditingController _nameController;
   late final QuickCreateBloc _bloc;
 
+  /// Prépare les contrôleurs et instancie le BLoC avec les dépendances
+  /// résolues via le service locator.
   @override
   void initState() {
     super.initState();
@@ -119,6 +121,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
     _nameController.addListener(_onNameChanged);
   }
 
+  /// Libère les contrôleurs et ferme le BLoC lorsque la page est détruite.
   @override
   void dispose() {
     _nameController.removeListener(_onNameChanged);
@@ -128,10 +131,13 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
     super.dispose();
   }
 
+  /// Répercute les modifications du champ texte vers le BLoC pour persistance.
   void _onNameChanged() {
     _bloc.add(QuickCreateNameChanged(_nameController.text));
   }
 
+  /// Construit l'arbre de widgets principal de la page, en injectant le BLoC
+  /// et les contrôleurs nécessaires aux sous-vues.
   @override
   Widget build(BuildContext context) {
     final connectivityStatus = ref
@@ -152,6 +158,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
   }
 }
 
+/// Vue principale contenant les listeners BLoC et le `PageView` d'étapes.
 class _QuickCreateView extends StatelessWidget {
   const _QuickCreateView({
     required this.pageController,
@@ -163,6 +170,7 @@ class _QuickCreateView extends StatelessWidget {
   final TextEditingController nameController;
   final ConnectivityStatus connectivityStatus;
 
+  /// Affiche les dialogues/snackbars de fin de création en réponse au BLoC.
   void _handleCompletion(BuildContext context, QuickCreateState state) {
     // Les écrans de fin (dialogue de succès ou snackbar d'erreur) sont gérés
     // ici plutôt que dans le BLoC afin de conserver une logique "dumb" côté
@@ -208,6 +216,8 @@ class _QuickCreateView extends StatelessWidget {
     context.read<QuickCreateBloc>().add(const QuickCreateCompletionCleared());
   }
 
+  /// Construit le layout de l'assistant et configure les écouteurs nécessaires
+  /// pour synchroniser la navigation et les champs contrôlés.
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(

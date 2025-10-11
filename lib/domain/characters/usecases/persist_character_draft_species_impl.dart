@@ -21,7 +21,9 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
   @override
   Future<AppResult<CharacterDraft>> call(QuickCreateSpeciesDetails details) async {
     try {
+      // On repart du brouillon sauvegardé pour conserver les autres champs.
       final CharacterDraft existing = await _drafts.load() ?? const CharacterDraft();
+      // Les détails du catalogue sont transformés en une structure persistable.
       final DraftSpeciesSelection selection = _buildSpeciesSelection(details);
       final CharacterDraft updated = existing.copyWith(species: selection);
       await _drafts.save(updated);

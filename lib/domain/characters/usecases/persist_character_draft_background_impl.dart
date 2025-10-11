@@ -19,7 +19,10 @@ class PersistCharacterDraftBackgroundImpl
   @override
   Future<AppResult<CharacterDraft>> call(String backgroundId) async {
     try {
+      // On charge l'état actuel du brouillon pour préserver les sélections
+      // précédentes de l'utilisateur.
       final CharacterDraft existing = await _repository.load() ?? const CharacterDraft();
+      // Le background est encapsulé dans son value object dédié avant copie.
       final CharacterDraft updated =
           existing.copyWith(backgroundId: BackgroundId(backgroundId));
       await _repository.save(updated);

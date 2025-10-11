@@ -17,7 +17,11 @@ class PersistCharacterDraftSkillsImpl implements PersistCharacterDraftSkills {
   @override
   Future<AppResult<CharacterDraft>> call(Set<String> skillIds) async {
     try {
+      // On repart du brouillon existant afin de ne pas perdre les autres
+      // décisions prises dans l'assistant.
       final CharacterDraft existing = await _repository.load() ?? const CharacterDraft();
+      // Une nouvelle collection est créée pour garantir l'immuabilité interne
+      // avant d'alimenter `copyWith`.
       final CharacterDraft updated =
           existing.copyWith(chosenSkills: Set<String>.from(skillIds));
       await _repository.save(updated);

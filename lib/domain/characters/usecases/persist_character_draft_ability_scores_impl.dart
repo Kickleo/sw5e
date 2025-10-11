@@ -18,7 +18,10 @@ class PersistCharacterDraftAbilityScoresImpl
   @override
   Future<AppResult<CharacterDraft>> call(DraftAbilityScores scores) async {
     try {
+      // L'état existant sert de base afin de conserver espèce, classe, etc.
       final CharacterDraft existing = await _repository.load() ?? const CharacterDraft();
+      // Les caractéristiques étant déjà immuables, on peut réutiliser l'instance
+      // fournie directement dans la copie du brouillon.
       final CharacterDraft updated = existing.copyWith(abilityScores: scores);
       await _repository.save(updated);
       return appOk(updated);
