@@ -12,18 +12,18 @@ import 'package:meta/meta.dart';
 
 @immutable
 class LocalizedText {
-  final String en;
-  final String fr;
+  final String en; // Libellé anglais.
+  final String fr; // Libellé français.
   const LocalizedText({required this.en, required this.fr});
 }
 
 @immutable
 class SpeciesDef {
   final String id; // slug (ex: "human")
-  final LocalizedText name;
+  final LocalizedText name; // Nom affichable localisé.
   final int speed; // ex: 30
   final String size; // ex: "medium"
-  final List<String> traitIds;
+  final List<String> traitIds; // Traits référencés dans [TraitDef].
   // Simplifié : on ne modèle pas encore ability_bonuses/traits au niveau du domaine.
   const SpeciesDef({
     required this.id,
@@ -36,8 +36,8 @@ class SpeciesDef {
 
 @immutable
 class ClassLevel1Proficiencies {
-  final int skillsChoose;
-  final List<String> skillsFrom; // slugs de skills
+  final int skillsChoose; // Nombre de compétences que le joueur peut choisir.
+  final List<String> skillsFrom; // slugs de skills éligibles.
   const ClassLevel1Proficiencies({
     required this.skillsChoose,
     required this.skillsFrom,
@@ -47,10 +47,12 @@ class ClassLevel1Proficiencies {
 @immutable
 class ClassLevel1Data {
   final ClassLevel1Proficiencies proficiencies;
-  final int? startingCredits;
-  final String? startingCreditsRoll;
-  final List<StartingEquipmentLine> startingEquipment;
-  final List<String> startingEquipmentOptions;
+  final int? startingCredits; // Valeur fixe de crédits.
+  final String? startingCreditsRoll; // Formule alternative (ex: "4d4 * 100").
+  final List<StartingEquipmentLine>
+      startingEquipment; // Pack d'équipement par défaut.
+  final List<String>
+      startingEquipmentOptions; // Identifiants d'options à choisir.
   const ClassLevel1Data({
     required this.proficiencies,
     this.startingCredits,
@@ -63,16 +65,16 @@ class ClassLevel1Data {
 @immutable
 class StartingEquipmentLine {
   final String id; // EquipmentItemId (slug)
-  final int qty;
+  final int qty; // Quantité fournie.
   const StartingEquipmentLine({required this.id, required this.qty});
 }
 
 @immutable
 class ClassDef {
   final String id; // slug (ex: "guardian")
-  final LocalizedText name;
+  final LocalizedText name; // Titre localisé.
   final int hitDie; // ex: 10
-  final ClassLevel1Data level1;
+  final ClassLevel1Data level1; // Informations spécifiques au niveau 1.
   const ClassDef({
     required this.id,
     required this.name,
@@ -84,7 +86,7 @@ class ClassDef {
 @immutable
 class BackgroundDef {
   final String id; // slug (ex: "outlaw")
-  final LocalizedText name;
+  final LocalizedText name; // Nom localisé.
   final List<String> grantedSkills; // slugs de skills
   const BackgroundDef({
     required this.id,
@@ -97,14 +99,14 @@ class BackgroundDef {
 class SkillDef {
   final String id; // slug (ex: "perception")
   /// one of: str, dex, con, int, wis, cha
-  final String ability;
+  final String ability; // Caractéristique associée.
   const SkillDef({required this.id, required this.ability});
 }
 
 @immutable
 class EquipmentDef {
   final String id; // slug (ex: "blaster-pistol")
-  final LocalizedText name;
+  final LocalizedText name; // Nom lisible.
   final String type; // ex: "weapon"
   final int weightG; // grammes
   final int cost; // crédits
@@ -131,7 +133,8 @@ class FormulasDef {
   final String defenseBase;  // ex: "armor_base + mod(DEX) + shield + misc"
   final String initiative;   // ex: "mod(DEX) + misc"
   /// Règle par classe (slug) pour les dés de supériorité au niveau 1
-  final Map<String, SuperiorityDiceRule> superiorityDiceByClass;
+  final Map<String, SuperiorityDiceRule>
+      superiorityDiceByClass; // Map immuable slug -> règle.
   const FormulasDef({
     required this.rulesVersion,
     required this.hpLevel1,
@@ -146,7 +149,7 @@ class FormulasDef {
 class TraitDef {
   final String id;            // ex: "nimble-escape"
   final LocalizedText name;   // {en, fr}
-  final String description;   // texte/markdown court
+  final String description;   // texte/markdown court décrivant le trait.
 
   const TraitDef({
     required this.id,
@@ -167,13 +170,13 @@ abstract class CatalogRepository {
   Future<String> getRulesVersion(); // doit matcher ADR
 
   /// Référentiels
-  Future<SpeciesDef?> getSpecies(String speciesId);
+  Future<SpeciesDef?> getSpecies(String speciesId); // Null si introuvable.
   Future<ClassDef?> getClass(String classId);
   Future<BackgroundDef?> getBackground(String backgroundId);
   Future<SkillDef?> getSkill(String skillId);
   Future<EquipmentDef?> getEquipment(String equipmentId);
   /// Formules/tableaux divers (niveau 1 au MVP)
-  Future<FormulasDef> getFormulas();
+  Future<FormulasDef> getFormulas(); // Toujours défini : nécessaire pour calculs.
   /// Récupère la définition d’un trait
   Future<TraitDef?> getTrait(String traitId);
 
@@ -184,5 +187,5 @@ abstract class CatalogRepository {
   Future<List<String>> listBackgrounds();// slugs
   Future<List<String>> listEquipment();  // slugs
   /// (optionnel mais utile pour UI) — liste tous les IDs de traits
-  Future<List<String>> listTraits();
+  Future<List<String>> listTraits(); // Slugs triés pour affichage/validation.
 }

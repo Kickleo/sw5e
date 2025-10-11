@@ -26,7 +26,7 @@ class CharacterId extends Equatable {
 
   /// Crée un [CharacterId] à partir d'une chaîne existante.
   factory CharacterId(String raw) {
-    final String normalized = raw.trim();
+    final String normalized = raw.trim(); // Supprime espaces lors de lectures persistantes.
     if (normalized.isEmpty) {
       throw ArgumentError('CharacterId.empty');
     }
@@ -39,16 +39,19 @@ class CharacterId extends Equatable {
   /// Génère un identifiant unique basé sur le temps + une composante aléatoire.
   factory CharacterId.generate() {
     final String timestamp =
-        DateTime.now().microsecondsSinceEpoch.toRadixString(16);
-    final String random =
-        _random.nextInt(1 << 20).toRadixString(16).padLeft(5, '0');
+        DateTime.now().microsecondsSinceEpoch.toRadixString(16); // Horodatage hex.
+    final String random = _random
+        .nextInt(1 << 20)
+        .toRadixString(16)
+        .padLeft(5, '0'); // Ajoute de l'entropie.
     return CharacterId._('c_${timestamp}_$random');
   }
 
   /// Autorise lettres/chiffres ASCII, tirets bas et tirets classiques.
-  static final RegExp _allowedChars = RegExp(r'^[A-Za-z0-9_-]+$');
+  static final RegExp _allowedChars =
+      RegExp(r'^[A-Za-z0-9_-]+$'); // Alphanumérique + underscore/tiret uniquement.
 
-  static final Random _random = Random();
+  static final Random _random = Random(); // Générateur partagé pour éviter recréations.
 
   @override
   List<Object?> get props => <Object?>[value];

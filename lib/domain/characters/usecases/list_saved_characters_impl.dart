@@ -16,7 +16,8 @@ import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.da
 /// * Pré-condition : le repository ne doit pas retourner de liste mutable.
 /// * Erreurs : toute exception est convertie en [DomainError] générique.
 class ListSavedCharactersImpl implements ListSavedCharacters {
-  final CharacterRepository _repository;
+  final CharacterRepository
+      _repository; // Source de vérité pour les personnages persistés.
 
   ListSavedCharactersImpl(this._repository);
 
@@ -24,9 +25,10 @@ class ListSavedCharactersImpl implements ListSavedCharacters {
   Future<AppResult<List<Character>>> call() async {
     try {
       final characters = await _repository.listAll();
-      return appOk(characters);
+      return appOk(characters); // Propage la liste telle quelle (déjà immuable).
     } catch (e) {
-      return appErr(DomainError('Unexpected', message: e.toString()));
+      return appErr(
+          DomainError('Unexpected', message: e.toString())); // Wrappe toute erreur inattendue.
     }
   }
 }

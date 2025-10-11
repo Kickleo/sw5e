@@ -17,6 +17,7 @@ class ConsoleAppLogger implements AppLogger {
   /// Construit le logger avec un formateur concis par défaut.
   ConsoleAppLogger()
       : _logger = logger_package.Logger(
+          // `PrettyPrinter` fournit une sortie lisible en console (sans stack).
           printer: logger_package.PrettyPrinter(methodCount: 0),
         );
 
@@ -24,12 +25,14 @@ class ConsoleAppLogger implements AppLogger {
 
   @override
   void info(String message, {Object? payload}) {
+    // `_compose` concatène éventuellement la payload à la fin du message.
     _logger.i(_compose(message, payload: payload));
   }
 
   @override
   void warn(String message,
       {Object? payload, Object? error, StackTrace? stackTrace}) {
+    // `logger.w` permet de passer une erreur + stack trace pour inspection.
     _logger.w(
       _compose(message, payload: payload),
       error: error,
@@ -40,6 +43,7 @@ class ConsoleAppLogger implements AppLogger {
   @override
   void error(String message,
       {Object? payload, Object? error, StackTrace? stackTrace}) {
+    // Les erreurs sont élevées au niveau `error` et supportent aussi les stack traces.
     _logger.e(
       _compose(message, payload: payload),
       error: error,
@@ -51,6 +55,7 @@ class ConsoleAppLogger implements AppLogger {
     if (payload == null) {
       return message;
     }
+    // Lorsque des métadonnées sont disponibles, on les ajoute dans une section dédiée.
     return '$message | payload=$payload';
   }
 }

@@ -115,10 +115,12 @@ class Character {
     required this.superiorityDice,
     this.speciesTraits = const <CharacterTrait>{},
   })  : assert(level.value == 1, 'MVP: level doit être 1'),
+        // Vérifie que les six caractéristiques de base sont bien présentes.
         assert(
           _hasAllSixAbilities(abilities),
           'abilities doit contenir exactement {str,dex,con,int,wis,cha}',
         ),
+        // Empêche la persistance d'objets ayant une quantité nulle.
         assert(
           inventory.every((InventoryLine l) => !l.quantity.isZero),
           'inventory ne doit pas contenir de quantité nulle',
@@ -126,6 +128,7 @@ class Character {
 
   static bool _hasAllSixAbilities(Map<String, AbilityScore> abilities) {
     const Set<String> keys = <String>{'str', 'dex', 'con', 'int', 'wis', 'cha'};
+    // Utilise un set pour vérifier rapidement la présence des six abréviations.
     return abilities.length == 6 && abilities.keys.toSet().containsAll(keys);
   }
 }
@@ -142,5 +145,5 @@ class InventoryLine {
   const InventoryLine({
     required this.itemId,
     required this.quantity,
-  });
+  }); // Pas d'assert ici : `Quantity` garantit déjà l'invariant > 0.
 }
