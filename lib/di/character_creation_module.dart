@@ -129,6 +129,9 @@ void registerCharacterCreationModule() {
 /// le `ServiceLocator`. L'appel à `registerCharacterCreationModule` garantit
 /// que l'enregistrement de la dépendance est idempotent avant de résoudre
 /// l'instance.
+///
+/// Ce provider est volontairement simple (aucun cache custom) car Riverpod se
+/// charge déjà de mémoriser la valeur tant qu'un `ProviderScope` reste actif.
 final catalogRepositoryProvider = Provider<CatalogRepository>((ref) {
   registerCharacterCreationModule(); // S'assure que le module est enregistré.
   return ServiceLocator.resolve<CatalogRepository>();
@@ -137,6 +140,9 @@ final catalogRepositoryProvider = Provider<CatalogRepository>((ref) {
 /// Retourne l'implémentation du repository de personnages : en mode release,
 /// on s'appuie sur la persistance, sinon on reste en mémoire pour accélérer les
 /// itérations. Le provider permet aux couches UI de rester déclaratives.
+///
+/// Noter que l'implémentation retournée dépend du flag `kReleaseMode` défini
+/// par Flutter : aucune configuration additionnelle n'est nécessaire côté UI.
 final characterRepositoryProvider = Provider<CharacterRepository>((ref) {
   registerCharacterCreationModule();
   return ServiceLocator.resolve<CharacterRepository>();
@@ -160,6 +166,9 @@ final listSavedCharactersProvider = Provider<ListSavedCharacters>((ref) {
 /// Charge le catalogue utilisé pour la "création rapide" (une vue simplifiée
 /// présentant les options principales). Centralisé ici pour mutualiser les
 /// dépendances entre écrans.
+///
+/// Ce use case se limite au catalogue ; il n'accède pas au repository de
+/// personnages car la création rapide se contente de préparer des choix.
 final loadQuickCreateCatalogProvider = Provider<LoadQuickCreateCatalog>((ref) {
   registerCharacterCreationModule();
   return ServiceLocator.resolve<LoadQuickCreateCatalog>();
@@ -167,6 +176,9 @@ final loadQuickCreateCatalogProvider = Provider<LoadQuickCreateCatalog>((ref) {
 
 /// Fournit l'accès aux détails complets d'une espèce (trait, vitesse, etc.)
 /// pour alimenter les écrans ou formulaires de création.
+///
+/// L'UI peut l'utiliser en `ref.watch` pour réagir automatiquement aux
+/// changements de la couche data (par exemple si le catalogue est rechargé).
 final loadSpeciesDetailsProvider = Provider<LoadSpeciesDetails>((ref) {
   registerCharacterCreationModule();
   return ServiceLocator.resolve<LoadSpeciesDetails>();
@@ -174,6 +186,10 @@ final loadSpeciesDetailsProvider = Provider<LoadSpeciesDetails>((ref) {
 
 /// Fournit l'use case de lecture des détails d'une classe : compétences,
 /// archétypes, etc. (selon ce qui est disponible dans le catalogue).
+///
+/// Comme pour l'espèce, Riverpod se charge de fournir la même instance tant que
+/// le provider reste dans l'arbre ; il n'est donc pas nécessaire de conserver
+/// manuellement la référence côté widget.
 final loadClassDetailsProvider = Provider<LoadClassDetails>((ref) {
   registerCharacterCreationModule();
   return ServiceLocator.resolve<LoadClassDetails>();

@@ -46,7 +46,11 @@ class AssembleLevel1CharacterImpl implements AssembleLevel1Character {
       final background = context.background;
       final formulas = context.formulas;
 
-      // Mapper les traitIds -> Set<CharacterTrait>
+      // ---------------------------------------------------------------------
+      // Étape 1 : convertir les identifiants de traits catalogue en Value
+      // Objects du domaine. On renvoie une erreur si l'identifiant n'est pas
+      // conforme pour éviter de créer un personnage incohérent.
+      // ---------------------------------------------------------------------
       final traits = <CharacterTrait>{};
       for (final tid in species.traitIds) {
         try {
@@ -60,7 +64,11 @@ class AssembleLevel1CharacterImpl implements AssembleLevel1Character {
         }
       }
 
-      // 1) Valider le choix de compétences (MVP: simple)
+      // ---------------------------------------------------------------------
+      // Étape 2 : valider les compétences choisies (règle MVP).
+      // On vérifie que le joueur respecte le nombre de choix permis et qu'il
+      // sélectionne uniquement des compétences autorisées par la classe.
+      // ---------------------------------------------------------------------
       final choose = clazz.level1.proficiencies.skillsChoose;
       final from = clazz.level1.proficiencies.skillsFrom.toSet();
       final allowsAnySkill = from.contains('any');
@@ -76,14 +84,23 @@ class AssembleLevel1CharacterImpl implements AssembleLevel1Character {
             }));
       }
 
-      // 2) Abilities finales (MVP: identiques aux baseAbilities; bonus à ajouter plus tard)
+      // ---------------------------------------------------------------------
+      // Étape 3 : consolider les caractéristiques. Pour le MVP, elles sont
+      // identiques aux entrées utilisateur mais on s'assure que les six scores
+      // sont présents. Les bonus raciaux seront ajoutés plus tard au même
+      // endroit.
+      // ---------------------------------------------------------------------
       final abilities = Map<String, AbilityScore>.from(input.baseAbilities);
       if (!_hasAllSixAbilities(abilities)) {
         return appErr(const DomainError(
             'InvalidAbilities', message: 'Les 6 caractéristiques doivent être présentes.'));
       }
 
-      // 3) Dérivés
+      // ---------------------------------------------------------------------
+      // Étape 4 : calcul des dérivés standards de niveau 1 (PV, initiative,
+      // défense). Ces règles restent centralisées ici pour qu'elles évoluent en
+      // un seul endroit lors des itérations futures.
+      // ---------------------------------------------------------------------
       final level = Level.one; // MVP : seul le niveau 1 est supporté.
       final pb = ProficiencyBonus.fromLevel(level); // Bonus de maîtrise standard.
       final conMod = abilities['con']!.modifier;
@@ -93,7 +110,11 @@ class AssembleLevel1CharacterImpl implements AssembleLevel1Character {
       final init = Initiative(dexMod); // Initiative = mod DEX.
       final def = Defense(10 + dexMod); // MVP: défense simple sans armure.
 
-      // 4) Compétences (fusion classe + background)
+      // ---------------------------------------------------------------------
+      // Étape 5 : fusionner les compétences issues de la classe et du
+      // background. On conserve la provenance dans `sources` pour expliquer à
+      // l'utilisateur pourquoi il dispose d'une maîtrise donnée.
+      // ---------------------------------------------------------------------
       final skillsMap = <String, SkillProficiency>{};
       void addProf(String id, ProficiencySource source) {
         final existing = skillsMap[id];
@@ -117,7 +138,11 @@ class AssembleLevel1CharacterImpl implements AssembleLevel1Character {
       }
       final skills = skillsMap.values.toSet();
 
-      // 5) Inventaire (pack de départ + choix utilisateur)
+      // ---------------------------------------------------------------------
+      // Étape 6 : construire l'inventaire initial. On additionne les équipements
+      // fournis par la classe et ceux achetés manuellement puis on contrôle la
+      // capacité de portance.
+      // ---------------------------------------------------------------------
       final lines = <String, int>{}; // id -> qty
       if (input.useStartingEquipmentPackage) {
         for (final e in clazz.level1.startingEquipment) {
@@ -172,7 +197,10 @@ class AssembleLevel1CharacterImpl implements AssembleLevel1Character {
       }
       final enc = Encumbrance(totalGrams);
 
-      // Crédits (MVP: crédits de départ de la classe; achats soustraits)
+      // ---------------------------------------------------------------------
+      // Étape 7 : calculer les crédits restants. L'implémentation reste simple
+      // pour le MVP (crédits de départ de la classe moins les achats).
+      // ---------------------------------------------------------------------
       final baseCredits = clazz.level1.startingCredits ?? 0;
       if (totalCost > baseCredits) {
         return appErr(DomainError(
@@ -187,13 +215,20 @@ class AssembleLevel1CharacterImpl implements AssembleLevel1Character {
       }
       final credits = Credits(baseCredits - totalCost);
 
-      // Manœuvres & dés de supériorité (MVP: depuis Formulas)
+      // ---------------------------------------------------------------------
+      // Étape 8 : appliquer les règles issues des formules (dés de supériorité
+      // par classe, manœuvres connues, etc.).
+      // ---------------------------------------------------------------------
       final sdRule = formulas.superiorityDiceByClass[input.classId.value];
       final superiority = sdRule == null
           ? SuperiorityDice(count: 0, die: null)
           : SuperiorityDice(count: sdRule.count, die: sdRule.die);
       final maneuvers = ManeuversKnown(0); // MVP: aucune manoeuvre connue.
 
+      // ---------------------------------------------------------------------
+      // Étape 9 : instancier l'entité domaine finale. Toutes les validations
+      // étant passées, on peut générer l'identifiant et retourner un `Ok`.
+      // ---------------------------------------------------------------------
       final character = Character(
         id: CharacterId.generate(),
         name: input.name,
@@ -221,6 +256,11 @@ class AssembleLevel1CharacterImpl implements AssembleLevel1Character {
     }
   }
 
+  /// Vérifie que la map contient bien une entrée pour chacune des six
+  /// caractéristiques attendues par le système (str, dex, con, int, wis, cha).
+  ///
+  /// Cette méthode utilitaire reste privée à l'implémentation car elle est
+  /// spécifique au workflow de création de personnage niveau 1.
   static bool _hasAllSixAbilities(Map<String, AbilityScore> m) {
     const keys = {'str', 'dex', 'con', 'int', 'wis', 'cha'};
     return m.length == 6 && m.keys.toSet().containsAll(keys);

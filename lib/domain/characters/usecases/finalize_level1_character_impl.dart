@@ -46,23 +46,30 @@ class FinalizeLevel1CharacterImpl implements FinalizeLevel1Character {
   @override
   Future<AppResult<Character>> call(FinalizeLevel1Input input) async {
     try {
+      // 1) Préparer le contexte (chargement catalogue + validations d'existence).
       final contextResult = await prepareContext(input);
       switch (contextResult) {
         case core.Err<Level1CharacterContext>(:final error):
+          // On propage immédiatement l'erreur de contexte pour que l'UI sache
+          // quel identifiant est invalide.
           return appErr(error);
         case core.Ok<Level1CharacterContext>(value: final context):
+          // 2) Construire le personnage final à partir des données validées.
           final characterResult = await assembleCharacter(
             AssembleLevel1CharacterParams(input: input, context: context),
           );
           switch (characterResult) {
             case core.Err<Character>(:final error):
+              // Erreurs métiers (capacité de portance, crédits insuffisants...).
               return appErr(error);
             case core.Ok<Character>(value: final character):
+              // 3) Persister l'entité afin de matérialiser le personnage.
               await characters.save(character);
               return appOk(character);
           }
       }
     } catch (e) {
+      // Toute exception inattendue est normalisée en DomainError générique.
       return appErr(DomainError('Unexpected', message: e.toString()));
     }
   }
