@@ -13,6 +13,7 @@ import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
@@ -33,6 +34,7 @@ import 'package:sw5e_manager/domain/characters/value_objects/proficiency_bonus.d
 import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/superiority_dice.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_effect.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_bloc.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 
@@ -42,6 +44,8 @@ class _MockLoadQuickCreateCatalog extends Mock
 class _MockLoadSpeciesDetails extends Mock implements LoadSpeciesDetails {}
 
 class _MockLoadClassDetails extends Mock implements LoadClassDetails {}
+
+class _MockLoadCharacterDraft extends Mock implements LoadCharacterDraft {}
 
 class _MockFinalizeLevel1Character extends Mock
     implements FinalizeLevel1Character {}
@@ -84,6 +88,7 @@ void main() {
   late _MockLoadQuickCreateCatalog loadCatalog;
   late _MockLoadSpeciesDetails loadSpeciesDetails;
   late _MockLoadClassDetails loadClassDetails;
+  late _MockLoadCharacterDraft loadCharacterDraft;
   late _MockFinalizeLevel1Character finalize;
   late _MockAppLogger logger;
   late _MockPersistCharacterDraftSpecies persistDraftSpecies;
@@ -113,6 +118,7 @@ void main() {
     loadCatalog = _MockLoadQuickCreateCatalog();
     loadSpeciesDetails = _MockLoadSpeciesDetails();
     loadClassDetails = _MockLoadClassDetails();
+    loadCharacterDraft = _MockLoadCharacterDraft();
     finalize = _MockFinalizeLevel1Character();
     logger = _MockAppLogger();
     persistDraftSpecies = _MockPersistCharacterDraftSpecies();
@@ -131,6 +137,7 @@ void main() {
         .thenAnswer((_) {});
     when(() => persistDraftSpecies.call(any()))
         .thenAnswer((_) async => appOk(const CharacterDraft()));
+    when(() => loadCharacterDraft()).thenAnswer((_) async => appOk(null));
   });
 
   QuickCreateBloc buildBloc() {
@@ -138,6 +145,7 @@ void main() {
       loadQuickCreateCatalog: loadCatalog,
       loadSpeciesDetails: loadSpeciesDetails,
       loadClassDetails: loadClassDetails,
+      loadCharacterDraft: loadCharacterDraft,
       finalizeLevel1Character: finalize,
       logger: logger,
       persistCharacterDraftSpecies: persistDraftSpecies,
@@ -237,6 +245,99 @@ void main() {
       expect(state.selectedBackground, 'outlaw');
       expect(state.equipmentList, contains('comlink'));
       expect(state.selectedSpeciesTraits, isNotEmpty);
+    },
+  );
+
+  blocTest<QuickCreateBloc, QuickCreateState>(
+    'réutilise l\'espèce sauvegardée si elle est disponible',
+    build: () {
+      final EquipmentDef equipment = const EquipmentDef(
+        id: 'comlink',
+        name: LocalizedText(en: 'Comlink', fr: 'Comlink'),
+        type: 'gear',
+        weightG: 100,
+        cost: 25,
+      );
+
+      when(() => loadCatalog()).thenAnswer(
+        (_) async => appOk(
+          QuickCreateCatalogSnapshot(
+            speciesIds: const <String>['human', 'bith'],
+            classIds: const <String>['guardian'],
+            backgroundIds: const <String>['outlaw'],
+            equipmentById: <String, EquipmentDef>{'comlink': equipment},
+            sortedEquipmentIds: const <String>['comlink'],
+            defaultSpeciesId: 'human',
+            defaultClassId: 'guardian',
+            defaultBackgroundId: 'outlaw',
+          ),
+        ),
+      );
+
+      when(() => loadSpeciesDetails('bith')).thenAnswer(
+        (_) async => appOk(
+          const QuickCreateSpeciesDetails(
+            species: SpeciesDef(
+              id: 'bith',
+              name: LocalizedText(en: 'Bith', fr: 'Bith'),
+              speed: 30,
+              size: 'medium',
+              traitIds: <String>['detail-oriented'],
+            ),
+            traits: <TraitDef>[
+              TraitDef(
+                id: 'detail-oriented',
+                name: LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
+                description: 'You have advantage on Investigation checks within 5 feet.',
+              ),
+            ],
+          ),
+        ),
+      );
+
+      when(() => loadClassDetails('guardian')).thenAnswer(
+        (_) async => appOk(
+          const QuickCreateClassDetails(
+            classDef: ClassDef(
+              id: 'guardian',
+              name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
+              hitDie: 10,
+              level1: ClassLevel1Data(
+                proficiencies: ClassLevel1Proficiencies(
+                  skillsChoose: 0,
+                  skillsFrom: <String>[],
+                ),
+                startingCredits: 100,
+                startingEquipment: <StartingEquipmentLine>[],
+              ),
+            ),
+            availableSkillIds: <String>[],
+            skillDefinitions: <String, SkillDef>{},
+            skillChoicesRequired: 0,
+          ),
+        ),
+      );
+
+      when(() => loadCharacterDraft()).thenAnswer(
+        (_) async => appOk(
+          CharacterDraft(
+            species: DraftSpeciesSelection(
+              speciesId: SpeciesId('bith'),
+              displayName: 'Bith',
+              effects: const <CharacterEffect>[],
+            ),
+          ),
+        ),
+      );
+
+      return buildBloc();
+    },
+    act: (bloc) => bloc.add(const QuickCreateStarted()),
+    wait: const Duration(milliseconds: 20),
+    expect: () => <Matcher>[],
+    verify: (bloc) {
+      expect(bloc.state.selectedSpecies, 'bith');
+      expect(bloc.state.selectedSpeciesTraits, isNotEmpty);
     },
   );
 

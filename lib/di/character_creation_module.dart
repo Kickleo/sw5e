@@ -27,6 +27,8 @@ import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_characte
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_character_draft_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
@@ -122,6 +124,11 @@ void registerCharacterCreationModule() {
   ServiceLocator.registerLazySingleton<LoadSpeciesDetails>(
     () => LoadSpeciesDetailsImpl(
       ServiceLocator.resolve<CatalogRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<LoadCharacterDraft>(
+    () => LoadCharacterDraftImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
     ),
   );
   ServiceLocator.registerLazySingleton<PersistCharacterDraftSpecies>(

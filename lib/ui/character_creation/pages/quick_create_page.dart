@@ -19,6 +19,7 @@ import 'package:sw5e_manager/core/connectivity/connectivity_providers.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
@@ -54,6 +55,8 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
         ServiceLocator.resolve<LoadSpeciesDetails>();
     final LoadClassDetails loadClassDetails =
         ServiceLocator.resolve<LoadClassDetails>();
+    final LoadCharacterDraft loadCharacterDraft =
+        ServiceLocator.resolve<LoadCharacterDraft>();
     final FinalizeLevel1Character finalize =
         ServiceLocator.resolve<FinalizeLevel1Character>();
     final AppLogger logger = ServiceLocator.resolve<AppLogger>();
@@ -64,6 +67,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       loadQuickCreateCatalog: loadCatalog,
       loadSpeciesDetails: loadSpeciesDetails,
       loadClassDetails: loadClassDetails,
+      loadCharacterDraft: loadCharacterDraft,
       finalizeLevel1Character: finalize,
       logger: logger,
       persistCharacterDraftSpecies: persistDraftSpecies,

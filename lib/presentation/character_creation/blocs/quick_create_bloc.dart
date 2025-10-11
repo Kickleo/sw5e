@@ -23,6 +23,7 @@ import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart'
     show ClassDef;
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
@@ -224,6 +225,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     required LoadQuickCreateCatalog loadQuickCreateCatalog,
     required LoadSpeciesDetails loadSpeciesDetails,
     required LoadClassDetails loadClassDetails,
+    required LoadCharacterDraft loadCharacterDraft,
     required FinalizeLevel1Character finalizeLevel1Character,
     required AppLogger logger,
     required PersistCharacterDraftSpecies persistCharacterDraftSpecies,
@@ -231,6 +233,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   })  : _loadQuickCreateCatalog = loadQuickCreateCatalog,
         _loadSpeciesDetails = loadSpeciesDetails,
         _loadClassDetails = loadClassDetails,
+        _loadCharacterDraft = loadCharacterDraft,
         _finalizeLevel1Character = finalizeLevel1Character,
         _logger = logger,
         _persistCharacterDraftSpecies = persistCharacterDraftSpecies,
@@ -257,6 +260,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   final LoadQuickCreateCatalog _loadQuickCreateCatalog;
   final LoadSpeciesDetails _loadSpeciesDetails;
   final LoadClassDetails _loadClassDetails;
+  final LoadCharacterDraft _loadCharacterDraft;
   final FinalizeLevel1Character _finalizeLevel1Character;
   final AppLogger _logger;
   final PersistCharacterDraftSpecies _persistCharacterDraftSpecies;
@@ -300,12 +304,33 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
 
     await result.match(
       ok: (QuickCreateCatalogSnapshot snapshot) async {
+        CharacterDraft? existingDraft;
+        final AppResult<CharacterDraft?> draftResult =
+            await _loadCharacterDraft();
+        draftResult.match(
+          ok: (CharacterDraft? draft) {
+            existingDraft = draft;
+          },
+          err: (DomainError error) {
+            _logger.warn(
+              'Échec du chargement du brouillon en reprise',
+              error: error,
+            );
+          },
+        );
+
+        String? resolvedSpeciesId = snapshot.defaultSpeciesId;
+        final String? draftSpeciesId = existingDraft?.species?.speciesId.value;
+        if (draftSpeciesId != null && snapshot.speciesIds.contains(draftSpeciesId)) {
+          resolvedSpeciesId = draftSpeciesId;
+        }
+
         emit(
           state.copyWith(
             species: snapshot.speciesIds,
             classes: snapshot.classIds,
             backgrounds: snapshot.backgroundIds,
-            selectedSpecies: snapshot.defaultSpeciesId,
+            selectedSpecies: resolvedSpeciesId,
             selectedClass: snapshot.defaultClassId,
             selectedBackground: snapshot.defaultBackgroundId,
             availableSkills: const <String>[],
@@ -319,11 +344,12 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             chosenEquipment: const <String, int>{},
             useStartingEquipment: true,
             isLoadingEquipment: false,
+            characterName: existingDraft?.name ?? state.characterName,
           ),
         );
 
-        if (snapshot.defaultSpeciesId != null) {
-          await _refreshSpeciesTraits(snapshot.defaultSpeciesId!, emit);
+        if (resolvedSpeciesId != null) {
+          await _refreshSpeciesTraits(resolvedSpeciesId, emit);
         }
         if (snapshot.defaultClassId != null) {
           await _refreshClassDef(snapshot.defaultClassId!, emit);
