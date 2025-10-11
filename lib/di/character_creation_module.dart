@@ -10,10 +10,12 @@
 ///   final useCase = ServiceLocator.resolve<FinalizeLevel1Character>();
 /// ---------------------------------------------------------------------------
 library;
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/data/catalog/repositories/asset_catalog_repository.dart';
 import 'package:sw5e_manager/data/characters/repositories/in_memory_character_repository.dart';
+import 'package:sw5e_manager/data/characters/repositories/persistent_character_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
@@ -35,7 +37,9 @@ void registerCharacterCreationModule() {
   );
   // Repository personnages en mémoire pour les sauvegardes locales.
   ServiceLocator.registerLazySingleton<CharacterRepository>(
-    () => InMemoryCharacterRepository(),
+    () => kReleaseMode
+        ? PersistentCharacterRepository()
+        : InMemoryCharacterRepository(),
   );
   // Use case de finalisation niveau 1, nécessite catalogue + repository persistant.
   ServiceLocator.registerLazySingleton<FinalizeLevel1Character>(
