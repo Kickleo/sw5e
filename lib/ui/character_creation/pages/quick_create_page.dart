@@ -22,6 +22,7 @@ import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_characte
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_bloc.dart';
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
@@ -56,6 +57,8 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
     final FinalizeLevel1Character finalize =
         ServiceLocator.resolve<FinalizeLevel1Character>();
     final AppLogger logger = ServiceLocator.resolve<AppLogger>();
+    final PersistCharacterDraftSpecies persistDraftSpecies =
+        ServiceLocator.resolve<PersistCharacterDraftSpecies>();
 
     _bloc = QuickCreateBloc(
       loadQuickCreateCatalog: loadCatalog,
@@ -63,6 +66,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       loadClassDetails: loadClassDetails,
       finalizeLevel1Character: finalize,
       logger: logger,
+      persistCharacterDraftSpecies: persistDraftSpecies,
     )..add(const QuickCreateStarted());
 
     final String initialName = _bloc.state.characterName;

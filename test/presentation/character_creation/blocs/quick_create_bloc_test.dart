@@ -10,11 +10,13 @@ import 'package:mocktail/mocktail.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
@@ -45,6 +47,9 @@ class _MockFinalizeLevel1Character extends Mock
     implements FinalizeLevel1Character {}
 
 class _MockAppLogger extends Mock implements AppLogger {}
+
+class _MockPersistCharacterDraftSpecies extends Mock
+    implements PersistCharacterDraftSpecies {}
 
 Character _dummyCharacter() {
   return Character(
@@ -81,6 +86,7 @@ void main() {
   late _MockLoadClassDetails loadClassDetails;
   late _MockFinalizeLevel1Character finalize;
   late _MockAppLogger logger;
+  late _MockPersistCharacterDraftSpecies persistDraftSpecies;
 
   setUpAll(() {
     registerFallbackValue(
@@ -109,6 +115,7 @@ void main() {
     loadClassDetails = _MockLoadClassDetails();
     finalize = _MockFinalizeLevel1Character();
     logger = _MockAppLogger();
+    persistDraftSpecies = _MockPersistCharacterDraftSpecies();
 
     when(() => logger.info(any(), payload: any(named: 'payload')))
         .thenAnswer((_) {});
@@ -122,6 +129,8 @@ void main() {
             error: any(named: 'error'),
             stackTrace: any(named: 'stackTrace')))
         .thenAnswer((_) {});
+    when(() => persistDraftSpecies.call(any()))
+        .thenAnswer((_) async => appOk(const CharacterDraft()));
   });
 
   QuickCreateBloc buildBloc() {
@@ -131,6 +140,7 @@ void main() {
       loadClassDetails: loadClassDetails,
       finalizeLevel1Character: finalize,
       logger: logger,
+      persistCharacterDraftSpecies: persistDraftSpecies,
     );
   }
 

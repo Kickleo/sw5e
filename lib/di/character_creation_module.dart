@@ -14,9 +14,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/data/catalog/repositories/asset_catalog_repository.dart';
+import 'package:sw5e_manager/data/characters/repositories/in_memory_character_draft_repository.dart';
 import 'package:sw5e_manager/data/characters/repositories/in_memory_character_repository.dart';
+import 'package:sw5e_manager/data/characters/repositories/persistent_character_draft_repository.dart';
 import 'package:sw5e_manager/data/characters/repositories/persistent_character_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/repositories/character_draft_repository.dart';
 import 'package:sw5e_manager/domain/characters/repositories/character_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/assemble_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/assemble_level1_character_impl.dart';
@@ -30,6 +33,8 @@ import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalo
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context.dart';
 import 'package:sw5e_manager/domain/characters/usecases/prepare_level1_character_context_impl.dart';
 
@@ -57,6 +62,11 @@ void registerCharacterCreationModule() {
     () => kReleaseMode
         ? PersistentCharacterRepository()
         : InMemoryCharacterRepository(),
+  );
+  ServiceLocator.registerLazySingleton<CharacterDraftRepository>(
+    () => kReleaseMode
+        ? PersistentCharacterDraftRepository()
+        : InMemoryCharacterDraftRepository(),
   );
   // -------------------------------------------------------------------------
   // Use cases
@@ -112,6 +122,11 @@ void registerCharacterCreationModule() {
   ServiceLocator.registerLazySingleton<LoadSpeciesDetails>(
     () => LoadSpeciesDetailsImpl(
       ServiceLocator.resolve<CatalogRepository>(),
+    ),
+  );
+  ServiceLocator.registerLazySingleton<PersistCharacterDraftSpecies>(
+    () => PersistCharacterDraftSpeciesImpl(
+      ServiceLocator.resolve<CharacterDraftRepository>(),
     ),
   );
   // Use case responsable de la lecture des informations d'une classe (niveaux,

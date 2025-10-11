@@ -19,12 +19,14 @@ import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart'
     show ClassDef;
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_name.dart';
@@ -224,12 +226,14 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     required LoadClassDetails loadClassDetails,
     required FinalizeLevel1Character finalizeLevel1Character,
     required AppLogger logger,
+    required PersistCharacterDraftSpecies persistCharacterDraftSpecies,
     Random? random,
   })  : _loadQuickCreateCatalog = loadQuickCreateCatalog,
         _loadSpeciesDetails = loadSpeciesDetails,
         _loadClassDetails = loadClassDetails,
         _finalizeLevel1Character = finalizeLevel1Character,
         _logger = logger,
+        _persistCharacterDraftSpecies = persistCharacterDraftSpecies,
         _random = random ?? Random(),
         super(QuickCreateState.initial()) {
     on<QuickCreateStarted>(_onStarted);
@@ -255,6 +259,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   final LoadClassDetails _loadClassDetails;
   final FinalizeLevel1Character _finalizeLevel1Character;
   final AppLogger _logger;
+  final PersistCharacterDraftSpecies _persistCharacterDraftSpecies;
   final Random _random;
 
   static const List<int> _standardArray = <int>[15, 14, 13, 12, 10, 8];
@@ -835,6 +840,20 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             statusMessage: null,
             failure: null,
           ),
+        );
+        final AppResult<CharacterDraft> draftResult =
+            await _persistCharacterDraftSpecies(details);
+        draftResult.match(
+          ok: (_) {},
+          err: (DomainError error) {
+            _logger.warn(
+              'Échec de la sauvegarde du brouillon d\'espèce',
+              error: error,
+              payload: {
+                'speciesId': speciesId,
+              },
+            );
+          },
         );
       },
       err: (DomainError error) async {
