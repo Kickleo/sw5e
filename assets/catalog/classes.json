@@ -25,6 +25,10 @@
         "(a) two techaxes or (b) two vibrospears",
         "(a) a dungeoneer's pack or (b) an explorer's pack"
       ]
+    },
+    "description": {
+      "en": "A furious frontline warrior who channels rage into devastating melee strikes.",
+      "fr": "Un guerrier de première ligne qui canalise sa rage en frappes dévastatrices."
     }
   },
   {
@@ -53,6 +57,10 @@
         "(a) a simple lightweapon or (b) a simple vibroweapon",
         "(a) a scholar’s pack, (b) an explorer’s pack, or (c) a diplomat’s pack"
       ]
+    },
+    "description": {
+      "en": "A wise Force user focused on diplomacy, healing, and guiding allies.",
+      "fr": "Un utilisateur de la Force porté sur la diplomatie, les soins et le soutien des alliés."
     }
   },
   {
@@ -84,6 +92,10 @@
         "a vibrodagger",
         "and a wristpad"
       ]
+    },
+    "description": {
+      "en": "A resourceful tinkerer who deploys gadgets, drones, and battlefield solutions.",
+      "fr": "Un bricoleur ingénieux qui déploie gadgets, droïdes et solutions de terrain."
     }
   },
   {
@@ -120,6 +132,10 @@
         "(a) a light pistol and a power cell or (b) two vibrodaggers",
         "(a) a dungeoneer's pack or (b) an explorer's pack"
       ]
+    },
+    "description": {
+      "en": "A versatile combatant trained with a wide array of weapons and tactics.",
+      "fr": "Un combattant polyvalent formé à un large éventail d'armes et de tactiques."
     }
   },
   {
@@ -153,6 +169,10 @@
         "(a) a lightweapon or vibroweapon and a light or medium physical shield or (b) two lightweapons or vibroweapons",
         "(a) a priest's pack or (b) an explorer's pack"
       ]
+    },
+    "description": {
+      "en": "A disciplined defender who protects allies with the Force and martial prowess.",
+      "fr": "Un défenseur discipliné qui protège ses alliés grâce à la Force et à sa maîtrise martiale."
     }
   },
   {
@@ -181,6 +201,10 @@
         "(a) a dungeoneer's pack or (b) an explorer's pack",
         "10 vibrodarts"
       ]
+    },
+    "description": {
+      "en": "A swift ascetic who turns focus and agility into precise, unarmed techniques.",
+      "fr": "Un ascète rapide qui transforme sa concentration et son agilité en techniques précises à mains nues."
     }
   },
   {
@@ -208,6 +232,10 @@
         "A tool with which you are proficient",
         "A combat suit and a vibrodagger"
       ]
+    },
+    "description": {
+      "en": "A stealthy infiltrator specializing in sabotage, espionage, and precise strikes.",
+      "fr": "Un infiltré furtif spécialisé dans le sabotage, l'espionnage et les frappes ciblées."
     }
   },
   {
@@ -242,6 +270,10 @@
         "A tool with which you are proficient",
         "A combat suit"
       ]
+    },
+    "description": {
+      "en": "A learned expert who supports the team with knowledge, analysis, and battlefield insight.",
+      "fr": "Un érudit qui soutient l'équipe grâce à ses connaissances, ses analyses et sa vision du champ de bataille."
     }
   },
   {
@@ -277,6 +309,10 @@
         "(a) a dungeoneer's pack or (b) an explorer's pack",
         "A wristpad"
       ]
+    },
+    "description": {
+      "en": "A nimble explorer skilled at tracking foes and thriving in hostile environments.",
+      "fr": "Un éclaireur agile, expert pour traquer ses ennemis et survivre dans les environnements hostiles."
     }
   },
   {
@@ -309,6 +345,10 @@
         "A specialist's kit with which you are proficient",
         "A combat suit and a light physical shield"
       ]
+    },
+    "description": {
+      "en": "A balanced guardian of the Force who blends investigation, defense, and decisive action.",
+      "fr": "Un gardien équilibré de la Force qui mêle investigation, défense et interventions décisives."
     }
   }
 ]

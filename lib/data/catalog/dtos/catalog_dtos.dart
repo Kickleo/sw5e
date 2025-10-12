@@ -237,12 +237,14 @@ class ClassLevel1Dto {
 class ClassDto {
   final String id; // Identifiant unique de la classe.
   final LocalizedTextDto name; // Nom localisé affiché à l'utilisateur.
+  final LocalizedTextDto? description; // Résumé localisé de la classe.
   final int hitDie; // Taille du dé de vie (ex: d8, d10).
   final ClassLevel1Dto level1; // Données spécifiques au niveau 1.
 
   const ClassDto({
     required this.id,
     required this.name,
+    this.description,
     required this.hitDie,
     required this.level1,
   });
@@ -254,6 +256,11 @@ class ClassDto {
       name: LocalizedTextDto.fromJson(
         Map<String, dynamic>.from(json['name'] as Map),
       ),
+      description: json['description'] == null
+          ? null
+          : LocalizedTextDto.fromJson(
+              Map<String, dynamic>.from(json['description'] as Map),
+            ),
       hitDie: (json['hit_die'] as num).toInt(),
       level1: ClassLevel1Dto.fromJson(
         Map<String, dynamic>.from(json['level1'] as Map),
@@ -264,6 +271,7 @@ class ClassDto {
   ClassDef toDomain() => ClassDef(
         id: id,
         name: name.toDomain(),
+        description: description?.toDomain(),
         hitDie: hitDie,
         level1: level1.toDomain(),
       ); // Produit la représentation métier utilisée dans les use cases.

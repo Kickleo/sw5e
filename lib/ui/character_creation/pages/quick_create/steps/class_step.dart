@@ -27,6 +27,9 @@ class _ClassStep extends StatelessWidget {
       )
       .join(' ');
 
+  String _localizedText(LocalizedText text) =>
+      text.fr.isNotEmpty ? text.fr : text.en;
+
   @override
   Widget build(BuildContext context) {
     final classDefData = classDef;
@@ -71,11 +74,16 @@ class _ClassStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                classDefData.name.fr.isNotEmpty
-                    ? classDefData.name.fr
-                    : classDefData.name.en,
+                _localizedText(classDefData.name),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
+              if (classDefData.description != null) ...[
+                const SizedBox(height: 8),
+                Text(
+                  _localizedText(classDefData.description!),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
               const SizedBox(height: 8),
               Text('Dé de vie : d${classDefData.hitDie}'),
               const SizedBox(height: 12),

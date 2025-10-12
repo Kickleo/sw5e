@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sw5e_manager/app/locale/app_locale_controller.dart';
 import 'package:sw5e_manager/app/router/app_router.dart';
 
 /// Widget racine de l'application.
@@ -31,12 +32,14 @@ class Sw5eApp extends ConsumerWidget {
     // réagir automatiquement aux mises à jour (ex. deep-links, rechargement de
     // configuration).
     final router = ref.watch(appRouterProvider);
+    final locale = ref.watch(appLocaleProvider);
 
     return MaterialApp.router(
       // Identité de l'application affichée par l'OS.
       title: 'SW5e Manager',
       // Palette Material 3 partagée par l'ensemble des écrans.
       theme: ThemeData(useMaterial3: true),
+      locale: locale,
       // Router centralisé responsable de l'arbre de navigation, des guards et
       // des redirections conditionnelles.
       routerConfig: router,
