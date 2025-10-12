@@ -323,107 +323,125 @@ class _QuickCreateView extends StatelessWidget {
                 Expanded(
                   child: state.isLoadingCatalog
                       ? const Center(child: CircularProgressIndicator())
-                      : PageView(
-                          controller: pageController,
-                          physics: const NeverScrollableScrollPhysics(),
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            _SpeciesStep(
-                              species: state.species,
-                              selectedSpecies: state.selectedSpecies,
-                              traits: state.selectedSpeciesTraits,
-                              effects: state.selectedSpeciesEffects,
-                              onSelect: (value) {
-                                if (value != null) {
-                                  bloc.add(QuickCreateSpeciesSelected(value));
-                                }
-                              },
-                              onOpenPicker: () async {
-                                final chosen = await context.pushNamed<String>(
-                                  SpeciesPickerPage.routeName,
-                                  extra: state.selectedSpecies,
-                                );
-                                if (chosen != null) {
-                                  bloc.add(QuickCreateSpeciesSelected(chosen));
-                                }
-                              },
-                            ),
-                            _AbilitiesStep(
-                              mode: state.abilityMode,
-                              assignments: state.abilityAssignments,
-                              pool: state.abilityPool,
-                              onModeChanged: (mode) =>
-                                  bloc.add(QuickCreateAbilityModeChanged(mode)),
-                              onReroll: () => bloc.add(
-                                const QuickCreateAbilityScoresRerolled(),
-                              ),
-                              onAssign: (ability, value) => bloc.add(
-                                QuickCreateAbilityAssigned(ability, value),
-                              ),
-                            ),
-                            _ClassStep(
-                              classes: state.classes,
-                              selectedClass: state.selectedClass,
-                              classDef: state.selectedClassDef,
-                              isLoadingDetails: state.isLoadingClassDetails,
-                              onSelect: (value) {
-                                if (value != null) {
-                                  bloc.add(QuickCreateClassSelected(value));
-                                }
-                              },
-                              onOpenPicker: () async {
-                                final chosen = await context.pushNamed<String>(
-                                  ClassPickerPage.routeName,
-                                  extra: state.selectedClass,
-                                );
-                                if (chosen != null) {
-                                  bloc.add(QuickCreateClassSelected(chosen));
-                                }
-                              },
-                            ),
-                            _SkillStep(
-                              availableSkills: state.availableSkills,
-                              skillDefinitions: state.skillDefinitions,
-                              chosenSkills: state.chosenSkills,
-                              requiredCount: state.skillChoicesRequired,
-                              onToggle: (skillId) =>
-                                  bloc.add(QuickCreateSkillToggled(skillId)),
-                            ),
-                            _EquipmentStep(
-                              isLoading: state.isLoadingEquipment,
-                              classDef: state.selectedClassDef,
-                              equipmentDefinitions: state.equipmentDefinitions,
-                              equipmentIds: state.equipmentList,
-                              chosenEquipment: state.chosenEquipment,
-                              useStartingEquipment: state.useStartingEquipment,
-                              totalWeightG: state.totalInventoryWeightG,
-                              capacityG: state.carryingCapacityLimitG,
-                              totalCost: state.totalPurchasedEquipmentCost,
-                              remainingCredits: state.remainingCredits,
-                              availableCredits: state.availableCredits,
-                              onToggleStartingEquipment: (usePackage) =>
-                                  bloc.add(
-                                    QuickCreateUseStartingEquipmentChanged(
-                                      usePackage,
+                            Expanded(
+                              child: PageView(
+                                controller: pageController,
+                                physics: const NeverScrollableScrollPhysics(),
+                                children: [
+                                  _SpeciesStep(
+                                    species: state.species,
+                                    selectedSpecies: state.selectedSpecies,
+                                    traits: state.selectedSpeciesTraits,
+                                    effects: state.selectedSpeciesEffects,
+                                    onSelect: (value) {
+                                      if (value != null) {
+                                        bloc.add(QuickCreateSpeciesSelected(value));
+                                      }
+                                    },
+                                    onOpenPicker: () async {
+                                      final chosen =
+                                          await context.pushNamed<String>(
+                                        SpeciesPickerPage.routeName,
+                                        extra: state.selectedSpecies,
+                                      );
+                                      if (chosen != null) {
+                                        bloc.add(QuickCreateSpeciesSelected(chosen));
+                                      }
+                                    },
+                                  ),
+                                  _AbilitiesStep(
+                                    mode: state.abilityMode,
+                                    assignments: state.abilityAssignments,
+                                    pool: state.abilityPool,
+                                    onModeChanged: (mode) => bloc.add(
+                                      QuickCreateAbilityModeChanged(mode),
+                                    ),
+                                    onReroll: () => bloc.add(
+                                      const QuickCreateAbilityScoresRerolled(),
+                                    ),
+                                    onAssign: (ability, value) => bloc.add(
+                                      QuickCreateAbilityAssigned(ability, value),
                                     ),
                                   ),
-                              onQuantityChanged: (id, quantity) => bloc.add(
-                                QuickCreateEquipmentQuantityChanged(
-                                  id,
-                                  quantity,
-                                ),
+                                  _ClassStep(
+                                    classes: state.classes,
+                                    selectedClass: state.selectedClass,
+                                    classDef: state.selectedClassDef,
+                                    isLoadingDetails: state.isLoadingClassDetails,
+                                    onSelect: (value) {
+                                      if (value != null) {
+                                        bloc.add(QuickCreateClassSelected(value));
+                                      }
+                                    },
+                                    onOpenPicker: () async {
+                                      final chosen =
+                                          await context.pushNamed<String>(
+                                        ClassPickerPage.routeName,
+                                        extra: state.selectedClass,
+                                      );
+                                      if (chosen != null) {
+                                        bloc.add(QuickCreateClassSelected(chosen));
+                                      }
+                                    },
+                                  ),
+                                  _SkillStep(
+                                    availableSkills: state.availableSkills,
+                                    skillDefinitions: state.skillDefinitions,
+                                    chosenSkills: state.chosenSkills,
+                                    requiredCount: state.skillChoicesRequired,
+                                    onToggle: (skillId) => bloc.add(
+                                      QuickCreateSkillToggled(skillId),
+                                    ),
+                                  ),
+                                  _EquipmentStep(
+                                    isLoading: state.isLoadingEquipment,
+                                    classDef: state.selectedClassDef,
+                                    equipmentDefinitions: state.equipmentDefinitions,
+                                    equipmentIds: state.equipmentList,
+                                    chosenEquipment: state.chosenEquipment,
+                                    useStartingEquipment: state.useStartingEquipment,
+                                    totalWeightG: state.totalInventoryWeightG,
+                                    capacityG: state.carryingCapacityLimitG,
+                                    totalCost: state.totalPurchasedEquipmentCost,
+                                    remainingCredits: state.remainingCredits,
+                                    availableCredits: state.availableCredits,
+                                    onToggleStartingEquipment: (usePackage) =>
+                                        bloc.add(
+                                      QuickCreateUseStartingEquipmentChanged(
+                                        usePackage,
+                                      ),
+                                    ),
+                                    onQuantityChanged: (id, quantity) => bloc.add(
+                                      QuickCreateEquipmentQuantityChanged(
+                                        id,
+                                        quantity,
+                                      ),
+                                    ),
+                                  ),
+                                  _BackgroundStep(
+                                    backgrounds: state.backgrounds,
+                                    selectedBackground: state.selectedBackground,
+                                    nameController: nameController,
+                                    onBackgroundChanged: (value) {
+                                      if (value != null) {
+                                        bloc.add(
+                                          QuickCreateBackgroundSelected(value),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
-                            _BackgroundStep(
-                              backgrounds: state.backgrounds,
-                              selectedBackground: state.selectedBackground,
-                              nameController: nameController,
-                              onBackgroundChanged: (value) {
-                                if (value != null) {
-                                  bloc.add(
-                                    QuickCreateBackgroundSelected(value),
-                                  );
-                                }
-                              },
+                            Container(
+                              width: 1,
+                              color: Theme.of(context).dividerColor,
+                            ),
+                            Expanded(
+                              child: _CharacterSummaryPanel(state: state),
                             ),
                           ],
                         ),
@@ -439,6 +457,388 @@ class _QuickCreateView extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _CharacterSummaryPanel extends StatelessWidget {
+  const _CharacterSummaryPanel({required this.state});
+
+  final QuickCreateState state;
+
+  String _titleCase(String slug) => slug
+      .split(RegExp(r'[-_]'))
+      .map(
+        (part) =>
+            part.isEmpty ? part : part[0].toUpperCase() + part.substring(1),
+      )
+      .join(' ');
+
+  String _localized(LocalizedText? text) {
+    if (text == null) {
+      return 'Inconnu';
+    }
+    if (text.fr.isNotEmpty) {
+      return text.fr;
+    }
+    if (text.en.isNotEmpty) {
+      return text.en;
+    }
+    return 'Inconnu';
+  }
+
+  String _stepLabel(QuickCreateStep step) {
+    switch (step) {
+      case QuickCreateStep.species:
+        return 'Espèce';
+      case QuickCreateStep.abilities:
+        return 'Caractéristiques';
+      case QuickCreateStep.classes:
+        return 'Classe';
+      case QuickCreateStep.skills:
+        return 'Compétences';
+      case QuickCreateStep.equipment:
+        return 'Équipement';
+      case QuickCreateStep.background:
+        return 'Historique';
+    }
+  }
+
+  String _formatWeight(int grams) {
+    if (grams.abs() >= 1000) {
+      return '${(grams / 1000).toStringAsFixed(1)} kg';
+    }
+    return '$grams g';
+  }
+
+  String _abilityAbbreviation(String ability) {
+    return QuickCreateState.abilityAbbreviations[ability] ?? ability.toUpperCase();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final classDef = state.selectedClassDef;
+    final abilityCards = QuickCreateState.abilityOrder.map((ability) {
+      final score = state.abilityAssignments[ability];
+      final modifier = score != null ? AbilityScore(score).modifier : null;
+      final label = QuickCreateState.abilityLabels[ability] ?? ability.toUpperCase();
+      final abbreviation = _abilityAbbreviation(ability);
+      final modifierLabel = modifier == null
+          ? 'Mod —'
+          : 'Mod ${modifier >= 0 ? '+' : ''}$modifier';
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('$label ($abbreviation)',
+                  style: theme.textTheme.bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.w600)),
+              const SizedBox(height: 8),
+              Text(score?.toString() ?? '—',
+                  style: theme.textTheme.headlineSmall),
+              const SizedBox(height: 4),
+              Text(modifierLabel),
+            ],
+          ),
+        ),
+      );
+    }).toList();
+
+    final chosenSkills = state.chosenSkills.toList()..sort();
+    final purchasedEquipment = state.chosenEquipment.entries
+        .where((entry) => entry.value > 0)
+        .toList()
+      ..sort((a, b) => a.key.compareTo(b.key));
+
+    final startingEquipment = <Widget>[];
+    if (state.useStartingEquipment && classDef != null) {
+      startingEquipment
+        ..add(Text('Équipement de départ',
+            style: theme.textTheme.bodyMedium
+                ?.copyWith(fontWeight: FontWeight.w600)))
+        ..add(const SizedBox(height: 4));
+      for (final line in classDef.level1.startingEquipment) {
+        final equipmentDef = state.equipmentDefinitions[line.id];
+        final label = equipmentDef != null
+            ? _localized(equipmentDef.name)
+            : _titleCase(line.id);
+        startingEquipment.add(
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Text('• $label ×${line.qty}'),
+          ),
+        );
+      }
+      if (startingEquipment.isNotEmpty) {
+        startingEquipment.add(const SizedBox(height: 8));
+      }
+    }
+
+    final purchasedEquipmentWidgets = <Widget>[];
+    if (purchasedEquipment.isNotEmpty) {
+      purchasedEquipmentWidgets
+        ..add(Text('Achats supplémentaires',
+            style: theme.textTheme.bodyMedium
+                ?.copyWith(fontWeight: FontWeight.w600)))
+        ..add(const SizedBox(height: 4));
+      for (final entry in purchasedEquipment) {
+        final equipmentDef = state.equipmentDefinitions[entry.key];
+        final label = equipmentDef != null
+            ? _localized(equipmentDef.name)
+            : _titleCase(entry.key);
+        purchasedEquipmentWidgets.add(
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Text('• $label ×${entry.value}'),
+          ),
+        );
+      }
+    }
+
+    final totalWeight = state.totalInventoryWeightG;
+    final capacity = state.carryingCapacityLimitG;
+
+    return ColoredBox(
+      color: theme.colorScheme.surfaceVariant.withOpacity(0.35),
+      child: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Text(
+            'Résumé du personnage',
+            style: theme.textTheme.titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 12),
+          _SummarySection(
+            title: 'Identité',
+            children: [
+              _SummaryRow(
+                label: 'Nom',
+                value: state.characterName.isEmpty
+                    ? 'Non défini'
+                    : state.characterName,
+              ),
+              _SummaryRow(
+                label: 'Étape',
+                value:
+                    '${state.stepIndex + 1}/${QuickCreateStep.values.length} · ${_stepLabel(state.currentStep)}',
+              ),
+              _SummaryRow(
+                label: 'Espèce',
+                value: state.selectedSpecies != null
+                    ? _titleCase(state.selectedSpecies!)
+                    : 'Non choisie',
+              ),
+              _SummaryRow(
+                label: 'Classe',
+                value: classDef != null
+                    ? _localized(classDef.name)
+                    : state.selectedClass != null
+                        ? _titleCase(state.selectedClass!)
+                        : 'Non choisie',
+              ),
+              _SummaryRow(
+                label: 'Historique',
+                value: state.selectedBackground != null
+                    ? _titleCase(state.selectedBackground!)
+                    : 'Non choisi',
+              ),
+            ],
+          ),
+          _SummarySection(
+            title: 'Traits & effets',
+            children: [
+              if (state.selectedSpeciesTraits.isNotEmpty)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Traits d’espèce',
+                        style: theme.textTheme.bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 4),
+                    ...state.selectedSpeciesTraits.map(
+                      (trait) => Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: Text('• ${_localized(trait.name)}'),
+                      ),
+                    ),
+                  ],
+                )
+              else
+                const Text('Aucun trait sélectionné.'),
+              const SizedBox(height: 8),
+              if (state.selectedSpeciesEffects.isNotEmpty)
+                ...state.selectedSpeciesEffects.map(
+                  (effect) => Card(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(effect.title,
+                              style: theme.textTheme.bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w600)),
+                          const SizedBox(height: 4),
+                          Text(effect.description),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              else
+                const Text('Aucun effet sélectionné.'),
+            ],
+          ),
+          _SummarySection(
+            title: 'Caractéristiques',
+            children: [
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: abilityCards,
+              ),
+            ],
+          ),
+          _SummarySection(
+            title: 'Compétences',
+            children: [
+              if (chosenSkills.isEmpty)
+                const Text('Aucune compétence choisie pour le moment.')
+              else
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Sélection (${chosenSkills.length}/${state.skillChoicesRequired})',
+                      style: theme.textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(height: 4),
+                    ...chosenSkills.map((skillId) {
+                      final def = state.skillDefinitions[skillId];
+                      final ability =
+                          def != null ? _abilityAbbreviation(def.ability) : '—';
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: Text('• ${_titleCase(skillId)} ($ability)'),
+                      );
+                    }),
+                  ],
+                ),
+            ],
+          ),
+          _SummarySection(
+            title: 'Équipement',
+            children: [
+              if (startingEquipment.isEmpty && purchasedEquipmentWidgets.isEmpty)
+                const Text('Aucun équipement sélectionné.')
+              else
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...startingEquipment,
+                    ...purchasedEquipmentWidgets,
+                  ],
+                ),
+            ],
+          ),
+          _SummarySection(
+            title: 'Capacité de charge & finances',
+            children: [
+              _SummaryRow(
+                label: 'Crédits de départ',
+                value: '${state.availableCredits}',
+              ),
+              _SummaryRow(
+                label: 'Coût actuel',
+                value: '${state.totalPurchasedEquipmentCost}',
+              ),
+              _SummaryRow(
+                label: 'Crédits restants',
+                value: '${state.remainingCredits}',
+              ),
+              _SummaryRow(
+                label: 'Poids total',
+                value: totalWeight != null
+                    ? _formatWeight(totalWeight)
+                    : 'Indéterminé',
+              ),
+              _SummaryRow(
+                label: 'Charge maximale',
+                value: capacity != null
+                    ? _formatWeight(capacity)
+                    : 'Indéterminée',
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SummarySection extends StatelessWidget {
+  const _SummarySection({required this.title, required this.children});
+
+  final String title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: theme.textTheme.titleMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          ...children,
+        ],
+      ),
+    );
+  }
+}
+
+class _SummaryRow extends StatelessWidget {
+  const _SummaryRow({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 130,
+            child: Text(
+              label,
+              style: theme.textTheme.bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              value,
+              style: theme.textTheme.bodyMedium,
+            ),
+          ),
+        ],
       ),
     );
   }
