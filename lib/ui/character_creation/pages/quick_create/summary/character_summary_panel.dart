@@ -190,28 +190,36 @@ class _CharacterSummaryPanel extends StatelessWidget {
             children: [
               if (classDef == null)
                 const Text('Aucune classe sélectionnée pour l’instant.')
-              else if (classDef.features.isEmpty)
-                const Text('Cette classe ne fournit pas de capacités au niveau 1.')
-              else
-                ...classDef.features
-                    .where((feature) => feature.level.value == 1)
-                    .map(
-                      (feature) => Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              _localized(feature.name),
-                              style: theme.textTheme.bodyMedium
-                                  ?.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(feature.description),
-                          ],
-                        ),
-                      ),
+              else ...[
+                _SummaryRow(
+                  label: 'Dé de vie',
+                  value: 'd${classDef.hitDie}',
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Compétences à choisir : '
+                  '${classDef.level1.proficiencies.skillsChoose} parmi '
+                  '${classDef.level1.proficiencies.skillsFrom.length}',
+                  style: theme.textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 8),
+                if (classDef.level1.startingEquipmentOptions.isEmpty)
+                  const Text('Cette classe ne propose pas d’options d’équipement.')
+                else ...[
+                  Text(
+                    'Options d’équipement de départ :',
+                    style: theme.textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 4),
+                  ...classDef.level1.startingEquipmentOptions.map(
+                    (optionId) => Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Text('• ${_titleCase(optionId)}'),
                     ),
+                  ),
+                ],
+              ],
             ],
           ),
           _SummarySection(
