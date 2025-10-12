@@ -199,6 +199,8 @@ class _QuickCreateView extends StatelessWidget {
                                     selectedClass: state.selectedClass,
                                     classDef: state.selectedClassDef,
                                     isLoadingDetails: state.isLoadingClassDetails,
+                                    equipmentDefinitions:
+                                        state.equipmentDefinitions,
                                     onSelect: (value) {
                                       if (value != null) {
                                         bloc.add(QuickCreateClassSelected(value));

@@ -6,6 +6,7 @@ class _ClassStep extends StatelessWidget {
     required this.selectedClass,
     required this.classDef,
     required this.isLoadingDetails,
+    required this.equipmentDefinitions,
     required this.onSelect,
     required this.onOpenPicker,
   });
@@ -14,6 +15,7 @@ class _ClassStep extends StatelessWidget {
   final String? selectedClass;
   final ClassDef? classDef;
   final bool isLoadingDetails;
+  final Map<String, EquipmentDef> equipmentDefinitions;
   final ValueChanged<String?> onSelect;
   final VoidCallback onOpenPicker;
 
@@ -81,11 +83,73 @@ class _ClassStep extends StatelessWidget {
                 'Compétences : choisir ${classDefData.level1.proficiencies.skillsChoose} (étape suivante)',
               ),
               const SizedBox(height: 12),
-              Text(
-                'Équipement de départ :\n${classDefData.level1.startingEquipment.map((e) => '• ${e.id} ×${e.qty}').join('\n')}',
+              _ClassStartingEquipment(
+                classDef: classDefData,
+                equipmentDefinitions: equipmentDefinitions,
               ),
             ],
           ),
+      ],
+    );
+  }
+}
+
+class _ClassStartingEquipment extends StatelessWidget {
+  const _ClassStartingEquipment({
+    required this.classDef,
+    required this.equipmentDefinitions,
+  });
+
+  final ClassDef classDef;
+  final Map<String, EquipmentDef> equipmentDefinitions;
+
+  String _formatLine(StartingEquipmentLine line) {
+    final EquipmentDef? def = equipmentDefinitions[line.id];
+    final String label;
+    if (def == null) {
+      label = line.id;
+    } else if (def.name.fr.isNotEmpty) {
+      label = def.name.fr;
+    } else {
+      label = def.name.en;
+    }
+    return '• $label ×${line.qty}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final List<StartingEquipmentLine> fixed =
+        classDef.level1.startingEquipment;
+    final List<String> options = classDef.level1.startingEquipmentOptions;
+    final bool hasFixed = fixed.isNotEmpty;
+    final bool hasOptions = options.isNotEmpty;
+
+    if (!hasFixed && !hasOptions) {
+      return const Text(
+        'Équipement de départ : cette classe ne propose pas de pack pré-défini.',
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Équipement de départ :',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        if (hasFixed) ...[
+          const SizedBox(height: 4),
+          Text(fixed.map(_formatLine).join('\n')),
+        ],
+        if (hasOptions) ...[
+          if (hasFixed) const SizedBox(height: 8),
+          const Text(
+            'Options :',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 4),
+          Text(options.map((option) => '• $option').join('\n')),
+        ],
       ],
     );
   }
