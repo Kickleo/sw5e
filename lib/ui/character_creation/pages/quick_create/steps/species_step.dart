@@ -1,4 +1,4 @@
-part of 'quick_create_page.dart';
+part of '../quick_create_page.dart';
 
 class _SpeciesStep extends StatelessWidget {
   const _SpeciesStep({
