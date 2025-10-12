@@ -1,14 +1,8 @@
-/// ---------------------------------------------------------------------------
-/// Fichier : lib/common/di/service_locator.dart
-/// Rôle : Fournir un point centralisé d'injection de dépendances basé sur
-///        `get_it` afin de séparer l'enregistrement des dépendances de leur
-///        consommation.
-/// Dépendances : package `get_it`, configuration [AppConfig], logger [AppLogger].
-/// Exemple d'usage :
-///   ServiceLocator.configure(config: config, logger: logger);
-// ignore: unintended_html_in_doc_comment
-///   final AppLogger log = ServiceLocator.resolve<AppLogger>();
-/// ---------------------------------------------------------------------------
+/// Façade d'injection de dépendances basée sur `get_it`.
+///
+/// Ce wrapper expose une API statique avec un vocabulaire métier (configure,
+/// resolve, registerX) pour éviter de manipuler directement l'instance `GetIt`
+/// dans le reste du code et faciliter les tests.
 library;
 import 'package:get_it/get_it.dart';
 
@@ -24,7 +18,8 @@ class ServiceLocator {
   /// Configure les dépendances globales de l'application.
   ///
   /// Préconditions : doit être appelée une fois au démarrage (ex. `main`).
-  /// Postconditions : [AppConfig] et [AppLogger] sont enregistrés.
+  /// Postconditions : [AppConfig] et [AppLogger] sont enregistrés. La méthode
+  /// est idempotente pour éviter les collisions lors des hot reloads.
   static void configure({required AppConfig config, required AppLogger logger}) {
     // Enregistre la configuration applicative si elle n'est pas déjà présente
     // afin d'éviter les collisions lors de tests ou reconfigurations.

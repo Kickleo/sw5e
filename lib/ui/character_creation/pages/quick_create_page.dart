@@ -1,12 +1,4 @@
-/// ---------------------------------------------------------------------------
-/// Fichier : lib/ui/character_creation/pages/quick_create_page.dart
-/// Rôle : Vue Flutter de l'assistant de création rapide, liée au QuickCreateBloc.
-/// Dépendances : flutter_bloc, Riverpod (connectivité), QuickCreateBloc,
-///        ServiceLocator (résolution des use cases),
-///        use cases loadQuickCreateCatalog/loadSpeciesDetails/loadClassDetails,
-///        routes UI.
-/// Exemple d'usage : routage GoRouter -> const QuickCreatePage().
-/// ---------------------------------------------------------------------------
+/// Interface utilisateur principale de l'assistant de création rapide.
 library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

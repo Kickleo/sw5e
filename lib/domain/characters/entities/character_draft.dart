@@ -1,8 +1,9 @@
-/// ---------------------------------------------------------------------------
-/// Fichier : lib/domain/characters/entities/character_draft.dart
-/// Rôle : Représenter l'état incomplet d'un personnage en cours de création.
-///        Permet de persister la progression (espèce, effets, etc.).
-/// ---------------------------------------------------------------------------
+/// Structures décrivant un personnage en cours de création.
+///
+/// Le brouillon capture les choix intermédiaires réalisés par l'utilisateur
+/// avant la finalisation en [Character]. Chaque structure reste immutable afin
+/// de simplifier l'utilisation dans des architectures réactives (BLoC,
+/// Riverpod, etc.).
 library;
 
 import 'package:meta/meta.dart';
@@ -15,6 +16,12 @@ import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 enum DraftAbilityGenerationMode { standardArray, roll, manual }
 
 /// Photographie des scores de caractéristiques (mode + affectations + pool).
+///
+/// - [mode] indique la méthode sélectionnée (table standard, tirage, manuel) ;
+/// - [assignments] conserve, par abréviation, la valeur assignée ou `null` si
+///   l'emplacement est libre ;
+/// - [pool] mémorise les valeurs encore disponibles lors d'un tirage/standard
+///   afin de pouvoir réinitialiser la distribution.
 @immutable
 class DraftAbilityScores {
   DraftAbilityScores({
@@ -28,6 +35,7 @@ class DraftAbilityScores {
   final Map<String, int?> assignments;
   final List<int> pool;
 
+  /// Crée une nouvelle instance en ne remplaçant que les champs fournis.
   DraftAbilityScores copyWith({
     DraftAbilityGenerationMode? mode,
     Map<String, int?>? assignments,
@@ -42,6 +50,9 @@ class DraftAbilityScores {
 }
 
 /// Sélection d'équipement conservée dans le brouillon (pack + quantités).
+///
+/// Le booléen [useStartingEquipment] reflète la case à cocher « pack de départ »
+/// tandis que [quantities] stocke les achats additionnels saisis manuellement.
 @immutable
 class DraftEquipmentSelection {
   DraftEquipmentSelection({
@@ -52,6 +63,7 @@ class DraftEquipmentSelection {
   final bool useStartingEquipment;
   final Map<String, int> quantities;
 
+  /// Crée une nouvelle instance en ne remplaçant que les champs fournis.
   DraftEquipmentSelection copyWith({
     bool? useStartingEquipment,
     Map<String, int>? quantities,
@@ -76,7 +88,18 @@ class DraftSpeciesSelection {
   final List<CharacterEffect> effects;
 }
 
-/// Brouillon de personnage : informations partielles sauvegardées.
+/// Conteneur principal du brouillon : chaque champ peut être nul tant que la
+/// progression n'est pas terminée. Les setters immuables facilitent
+/// l'utilisation avec des BLoC/StateNotifier.
+///
+/// Les propriétés couvrent l'intégralité du wizard :
+///
+/// - [name] = saisie libre ;
+/// - [species]/[classId]/[backgroundId] = choix dans les catalogues ;
+/// - [abilityScores] = configuration des caractéristiques ;
+/// - [chosenSkills] = compétences retenues ;
+/// - [equipment] = sélection d'équipement ;
+/// - [stepIndex] = dernière étape visitée pour restaurer la progression.
 @immutable
 class CharacterDraft {
   CharacterDraft({
@@ -101,6 +124,9 @@ class CharacterDraft {
   final DraftEquipmentSelection? equipment;
   final int? stepIndex;
 
+  /// Permet de cloner le brouillon en remplaçant uniquement certains champs.
+  /// L'usage d'un _sentinel interne différencie « ne pas toucher » de
+  /// « remplacer par null », indispensable pour gérer les retours en arrière.
   CharacterDraft copyWith({
     Object? name = _sentinel,
     Object? species = _sentinel,

@@ -1,14 +1,4 @@
-/// ---------------------------------------------------------------------------
-/// Fichier : lib/presentation/character_creation/blocs/quick_create_bloc.dart
-/// Rôle : ViewModel MVVM basé sur BLoC pour l'assistant de création rapide.
-/// Dépendances : use cases LoadQuickCreateCatalog/LoadSpeciesDetails/
-///        LoadClassDetails, FinalizeLevel1Character, AppLogger, AppFailure,
-///        état [QuickCreateState].
-/// Exemple d'usage :
-///   final bloc = QuickCreateBloc(...)
-///     ..add(const QuickCreateStarted());
-///   bloc.stream.listen((state) => debugPrint(state.stepIndex.toString()));
-/// ---------------------------------------------------------------------------
+/// BLoC orchestrant le wizard de création rapide.
 library;
 import 'dart:async';
 import 'dart:math';
@@ -227,7 +217,18 @@ class QuickCreateCompletionCleared extends QuickCreateEvent {
 
 /// ---- BLoC ------------------------------------------------------------------
 
-/// QuickCreateBloc = ViewModel BLoC orchestrant le wizard de création rapide.
+/// Coordonne le cycle de vie de l'assistant : chargement du catalogue,
+/// navigation entre les étapes, persistance progressive du brouillon et
+/// finalisation dans l'entité [Character].
+///
+/// Le BLoC orchestre trois flux principaux :
+///
+/// - synchroniser l'état local avec le brouillon persistant (chargement initial
+///   et sauvegarde après chaque action) ;
+/// - enrichir la progression avec des données métier (détails d'espèce, classe,
+///   équipements) en pilotant les use cases correspondants ;
+/// - contrôler les transitions d'étapes en validant les prérequis calculés par
+///   [QuickCreateState].
 class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   /// Crée le bloc avec les dépendances nécessaires.
   QuickCreateBloc({
