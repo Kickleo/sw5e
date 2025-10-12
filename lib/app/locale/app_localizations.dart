@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 
 /// Provides application-specific translations for supported locales.
 class AppLocalizations {
@@ -21,6 +22,14 @@ class AppLocalizations {
   String get languageCode => locale.languageCode;
 
   bool get isFrench => languageCode == 'fr';
+
+  /// Returns the localized value of a [LocalizedText] according to [locale].
+  String localizedCatalogLabel(LocalizedText text) {
+    if (isFrench) {
+      return text.fr.isNotEmpty ? text.fr : text.en;
+    }
+    return text.en.isNotEmpty ? text.en : text.fr;
+  }
 
   String get appTitle => 'SW5e Manager';
 
@@ -383,7 +392,8 @@ class AppLocalizations {
   String startingEquipmentLine(String label, int quantity) =>
       '• $label ×$quantity';
 
-  String startingEquipmentOption(String option) => '• $option';
+  String startingEquipmentOption(LocalizedText option) =>
+      '• ${localizedCatalogLabel(option)}';
 
   String quickCreateSummaryTitle(String name) => isFrench
       ? 'Résumé de $name'

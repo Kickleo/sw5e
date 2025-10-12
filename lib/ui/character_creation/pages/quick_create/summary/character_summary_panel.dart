@@ -236,9 +236,11 @@ class _CharacterSummaryPanel extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   ...classDef.level1.startingEquipmentOptions.map(
-                    (optionId) => Padding(
+                    (option) => Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: Text('• ${_titleCase(optionId)}'),
+                      child: Text(
+                        '• ${l10n.localizedCatalogLabel(option)}',
+                      ),
                     ),
                   ),
                 ],

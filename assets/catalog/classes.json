@@ -21,9 +21,18 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a vibroweapon and a light or medium physical shield or (b) two vibroweapons",
-        "(a) two techaxes or (b) two vibrospears",
-        "(a) a dungeoneer's pack or (b) an explorer's pack"
+        {
+          "en": "(a) a vibroweapon and a light or medium physical shield or (b) two vibroweapons",
+          "fr": "(a) une vibro-arme et un bouclier physique léger ou moyen ou (b) deux vibro-armes"
+        },
+        {
+          "en": "(a) two techaxes or (b) two vibrospears",
+          "fr": "(a) deux techno-haches ou (b) deux vibrolances"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        }
       ]
     },
     "description": {
@@ -35,7 +44,7 @@
     "id": "consular",
     "name": {
       "en": "Consular",
-      "fr": "Consular"
+      "fr": "Consulaire"
     },
     "hit_die": 6,
     "level1": {
@@ -54,8 +63,14 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a simple lightweapon or (b) a simple vibroweapon",
-        "(a) a scholar’s pack, (b) an explorer’s pack, or (c) a diplomat’s pack"
+        {
+          "en": "(a) a simple lightweapon or (b) a simple vibroweapon",
+          "fr": "(a) une arme légère simple ou (b) une vibro-arme simple"
+        },
+        {
+          "en": "(a) a scholar’s pack, (b) an explorer’s pack, or (c) a diplomat’s pack",
+          "fr": "(a) un paquetage d'érudit, (b) un paquetage d'explorateur ou (c) un paquetage de diplomate"
+        }
       ]
     },
     "description": {
@@ -67,7 +82,7 @@
     "id": "engineer",
     "name": {
       "en": "Engineer",
-      "fr": "Engineer"
+      "fr": "Ingénieur"
     },
     "hit_die": 8,
     "level1": {
@@ -85,12 +100,30 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
-        "(a) a dungeoneer's pack or (b) an explorer's pack",
-        "A combat suit",
-        "a set of tinker's implements",
-        "a vibrodagger",
-        "and a wristpad"
+        {
+          "en": "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
+          "fr": "(a) une vibro-arme simple ou (b) un blaster simple et deux cellules d'énergie"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        },
+        {
+          "en": "A combat suit",
+          "fr": "Une combinaison de combat"
+        },
+        {
+          "en": "a set of tinker's implements",
+          "fr": "un jeu d'outils de bricoleur"
+        },
+        {
+          "en": "a vibrodagger",
+          "fr": "une vibro-dague"
+        },
+        {
+          "en": "and a wristpad",
+          "fr": "et un datapad-bracelet"
+        }
       ]
     },
     "description": {
@@ -102,7 +135,7 @@
     "id": "fighter",
     "name": {
       "en": "Fighter",
-      "fr": "Fighter"
+      "fr": "Guerrier"
     },
     "hit_die": 10,
     "level1": {
@@ -122,15 +155,42 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "Choisir 1 parmi: m-3-predator, m-4-shuriken, m-8-avenger, m-92-mantis, m-23-katana",
-        "Choisir 1 parmi: omni-blade, omni-hamer",
-        "Proficiencies: stock-light-armor, stock-medium-armor, stock-heavy-armor",
-        "(a) mesh armor or (b) a combat suit",
-        "blaster rifle or simple blaster",
-        "and two power cells",
-        "(a) a vibroweapon or heavy pistol and a light or medium physical shield or (b) two vibroweapons",
-        "(a) a light pistol and a power cell or (b) two vibrodaggers",
-        "(a) a dungeoneer's pack or (b) an explorer's pack"
+        {
+          "en": "Choisir 1 parmi: m-3-predator, m-4-shuriken, m-8-avenger, m-92-mantis, m-23-katana",
+          "fr": "Choisissez 1 parmi : M-3 Predator, M-4 Shuriken, M-8 Avenger, M-92 Mantis, M-23 Katana"
+        },
+        {
+          "en": "Choisir 1 parmi: omni-blade, omni-hamer",
+          "fr": "Choisissez 1 parmi : omni-lame, omni-marteau"
+        },
+        {
+          "en": "Proficiencies: stock-light-armor, stock-medium-armor, stock-heavy-armor",
+          "fr": "Maîtrises : armure légère standard, armure moyenne standard, armure lourde standard"
+        },
+        {
+          "en": "(a) mesh armor or (b) a combat suit",
+          "fr": "(a) une armure maillée ou (b) une combinaison de combat"
+        },
+        {
+          "en": "blaster rifle or simple blaster",
+          "fr": "un fusil blaster ou un blaster simple"
+        },
+        {
+          "en": "and two power cells",
+          "fr": "et deux cellules d'énergie"
+        },
+        {
+          "en": "(a) a vibroweapon or heavy pistol and a light or medium physical shield or (b) two vibroweapons",
+          "fr": "(a) une vibro-arme ou un pistolet lourd et un bouclier physique léger ou moyen, ou (b) deux vibro-armes"
+        },
+        {
+          "en": "(a) a light pistol and a power cell or (b) two vibrodaggers",
+          "fr": "(a) un pistolet léger et une cellule d'énergie ou (b) deux vibro-dagues"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        }
       ]
     },
     "description": {
@@ -142,7 +202,7 @@
     "id": "guardian",
     "name": {
       "en": "Guardian",
-      "fr": "Guardian"
+      "fr": "Gardien"
     },
     "hit_die": 10,
     "level1": {
@@ -163,11 +223,26 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) mesh armor",
-        "(b) a combat suit",
-        "and a light physical shield",
-        "(a) a lightweapon or vibroweapon and a light or medium physical shield or (b) two lightweapons or vibroweapons",
-        "(a) a priest's pack or (b) an explorer's pack"
+        {
+          "en": "(a) mesh armor",
+          "fr": "(a) une armure maillée"
+        },
+        {
+          "en": "(b) a combat suit",
+          "fr": "(b) une combinaison de combat"
+        },
+        {
+          "en": "and a light physical shield",
+          "fr": "et un bouclier physique léger"
+        },
+        {
+          "en": "(a) a lightweapon or vibroweapon and a light or medium physical shield or (b) two lightweapons or vibroweapons",
+          "fr": "(a) une arme légère ou une vibro-arme et un bouclier physique léger ou moyen, ou (b) deux armes légères ou vibro-armes"
+        },
+        {
+          "en": "(a) a priest's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de prêtre ou (b) un paquetage d'explorateur"
+        }
       ]
     },
     "description": {
@@ -179,7 +254,7 @@
     "id": "monk",
     "name": {
       "en": "Monk",
-      "fr": "Monk"
+      "fr": "Moine"
     },
     "hit_die": 8,
     "level1": {
@@ -197,9 +272,18 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
-        "(a) a dungeoneer's pack or (b) an explorer's pack",
-        "10 vibrodarts"
+        {
+          "en": "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
+          "fr": "(a) une vibro-arme avec laquelle vous êtes compétent ou (b) un blaster simple et une cellule d'énergie"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        },
+        {
+          "en": "10 vibrodarts",
+          "fr": "10 vibro-dards"
+        }
       ]
     },
     "description": {
@@ -211,7 +295,7 @@
     "id": "operative",
     "name": {
       "en": "Operative",
-      "fr": "Operative"
+      "fr": "Agent"
     },
     "hit_die": 8,
     "level1": {
@@ -224,13 +308,34 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
-        "(a) a simple blaster and two power cells or (b) a simple vibroweapon and a light physical shield",
-        "(a) a burglar's pack",
-        "(b) a dungeoneer's pack",
-        "or (c) an explorer's pack",
-        "A tool with which you are proficient",
-        "A combat suit and a vibrodagger"
+        {
+          "en": "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
+          "fr": "(a) une vibro-arme avec laquelle vous êtes compétent ou (b) un blaster simple et une cellule d'énergie"
+        },
+        {
+          "en": "(a) a simple blaster and two power cells or (b) a simple vibroweapon and a light physical shield",
+          "fr": "(a) un blaster simple et deux cellules d'énergie ou (b) une vibro-arme simple et un bouclier physique léger"
+        },
+        {
+          "en": "(a) a burglar's pack",
+          "fr": "(a) un paquetage de cambrioleur"
+        },
+        {
+          "en": "(b) a dungeoneer's pack",
+          "fr": "(b) un paquetage de spéléologue"
+        },
+        {
+          "en": "or (c) an explorer's pack",
+          "fr": "ou (c) un paquetage d'explorateur"
+        },
+        {
+          "en": "A tool with which you are proficient",
+          "fr": "Un outil avec lequel vous êtes compétent"
+        },
+        {
+          "en": "A combat suit and a vibrodagger",
+          "fr": "Une combinaison de combat et une vibro-dague"
+        }
       ]
     },
     "description": {
@@ -242,7 +347,7 @@
     "id": "scholar",
     "name": {
       "en": "Scholar",
-      "fr": "Scholar"
+      "fr": "Érudit"
     },
     "hit_die": 8,
     "level1": {
@@ -263,12 +368,30 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
-        "(a) a entertainer's pack",
-        "(b) an explorer's pack",
-        "or (c) a scholar's pack",
-        "A tool with which you are proficient",
-        "A combat suit"
+        {
+          "en": "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
+          "fr": "(a) une vibro-arme simple ou (b) un blaster simple et deux cellules d'énergie"
+        },
+        {
+          "en": "(a) a entertainer's pack",
+          "fr": "(a) un paquetage d'artiste"
+        },
+        {
+          "en": "(b) an explorer's pack",
+          "fr": "(b) un paquetage d'explorateur"
+        },
+        {
+          "en": "or (c) a scholar's pack",
+          "fr": "ou (c) un paquetage d'érudit"
+        },
+        {
+          "en": "A tool with which you are proficient",
+          "fr": "Un outil avec lequel vous êtes compétent"
+        },
+        {
+          "en": "A combat suit",
+          "fr": "Une combinaison de combat"
+        }
       ]
     },
     "description": {
@@ -280,7 +403,7 @@
     "id": "scout",
     "name": {
       "en": "Scout",
-      "fr": "Scout"
+      "fr": "Éclaireur"
     },
     "hit_die": 10,
     "level1": {
@@ -301,13 +424,34 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) mesh armor or (b) a combat suit",
-        "blaster rifle or simple blaster",
-        "and two power cells",
-        "(a) a vibroweapon and a light physical shield or (b) two simple vibroweapons",
-        "(a) a holdout and a power cell or (b) two vibrodaggers",
-        "(a) a dungeoneer's pack or (b) an explorer's pack",
-        "A wristpad"
+        {
+          "en": "(a) mesh armor or (b) a combat suit",
+          "fr": "(a) une armure maillée ou (b) une combinaison de combat"
+        },
+        {
+          "en": "blaster rifle or simple blaster",
+          "fr": "un fusil blaster ou un blaster simple"
+        },
+        {
+          "en": "and two power cells",
+          "fr": "et deux cellules d'énergie"
+        },
+        {
+          "en": "(a) a vibroweapon and a light physical shield or (b) two simple vibroweapons",
+          "fr": "(a) une vibro-arme et un bouclier physique léger ou (b) deux vibro-armes simples"
+        },
+        {
+          "en": "(a) a holdout and a power cell or (b) two vibrodaggers",
+          "fr": "(a) un hold-out et une cellule d'énergie ou (b) deux vibro-dagues"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        },
+        {
+          "en": "A wristpad",
+          "fr": "Un datapad-bracelet"
+        }
       ]
     },
     "description": {
@@ -319,7 +463,7 @@
     "id": "sentinel",
     "name": {
       "en": "Sentinel",
-      "fr": "Sentinel"
+      "fr": "Sentinelle"
     },
     "hit_die": 8,
     "level1": {
@@ -340,10 +484,22 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) two simple lightweapons or vibroweapons or (b) one lightweapon or vibroweapon with which you are proficient",
-        "(a) a dungeoneer's pack or (b) an explorer's pack",
-        "A specialist's kit with which you are proficient",
-        "A combat suit and a light physical shield"
+        {
+          "en": "(a) two simple lightweapons or vibroweapons or (b) one lightweapon or vibroweapon with which you are proficient",
+          "fr": "(a) deux armes légères ou vibro-armes simples, ou (b) une arme légère ou vibro-arme avec laquelle vous êtes compétent"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        },
+        {
+          "en": "A specialist's kit with which you are proficient",
+          "fr": "Un kit de spécialiste avec lequel vous êtes compétent"
+        },
+        {
+          "en": "A combat suit and a light physical shield",
+          "fr": "Une combinaison de combat et un bouclier physique léger"
+        }
       ]
     },
     "description": {

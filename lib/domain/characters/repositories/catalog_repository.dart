@@ -82,14 +82,14 @@ class ClassLevel1Data {
   final String? startingCreditsRoll; // Formule alternative (ex: "4d4 * 100").
   final List<StartingEquipmentLine>
       startingEquipment; // Pack d'équipement par défaut.
-  final List<String>
-      startingEquipmentOptions; // Identifiants d'options à choisir.
+  final List<LocalizedText>
+      startingEquipmentOptions; // Libellés localisés des options.
   const ClassLevel1Data({
     required this.proficiencies,
     this.startingCredits,
     this.startingCreditsRoll,
     required this.startingEquipment,
-    this.startingEquipmentOptions = const <String>[],
+    this.startingEquipmentOptions = const <LocalizedText>[],
   });
 }
 

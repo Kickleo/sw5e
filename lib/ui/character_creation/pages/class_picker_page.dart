@@ -224,8 +224,10 @@ class _ClassDetails extends StatelessWidget {
               style: theme.textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-            ...selected.level1.startingEquipmentOptions
-                .map((String option) => Text('• ${_titleCase(option)}')),
+            ...selected.level1.startingEquipmentOptions.map(
+              (LocalizedText option) =>
+                  Text('• ${l10n.localizedCatalogLabel(option)}'),
+            ),
           ],
         ],
       ),

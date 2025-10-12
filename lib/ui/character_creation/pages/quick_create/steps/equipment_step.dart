@@ -146,7 +146,9 @@ class _EquipmentStep extends HookWidget {
                     ...classData.level1.startingEquipmentOptions.map(
                       (option) => Padding(
                         padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Text(option),
+                        child: Text(
+                          '• ${l10n.localizedCatalogLabel(option)}',
+                        ),
                       ),
                     ),
                   ],

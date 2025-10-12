@@ -190,8 +190,8 @@ class ClassLevel1Dto {
   final String? startingCreditsRoll; // Formule de dés pour déterminer les crédits.
   final List<StartingEquipmentLineDto>
       startingEquipment; // Pack d'équipement accordé d'office.
-  final List<String>
-      startingEquipmentOptions; // Identifiants d'options alternatives.
+  final List<LocalizedTextDto>
+      startingEquipmentOptions; // Options d'équipement localisées.
 
   const ClassLevel1Dto({
     required this.proficiencies,
@@ -214,9 +214,17 @@ class ClassLevel1Dto {
       )
           .map(StartingEquipmentLineDto.fromJson)
           .toList(),
-      startingEquipmentOptions: List<String>.from(
-        json['starting_equipment_options'] as List? ?? const <String>[],
-      ),
+      startingEquipmentOptions: List<Map<String, dynamic>>.from(
+        json['starting_equipment_options']
+                as List? ??
+            const <Map<String, dynamic>>[],
+      )
+          .map(
+            (entry) => LocalizedTextDto.fromJson(
+              Map<String, dynamic>.from(entry),
+            ),
+          )
+          .toList(growable: false),
     );
   }
 
@@ -227,8 +235,9 @@ class ClassLevel1Dto {
         startingEquipment: startingEquipment
             .map((dto) => dto.toDomain())
             .toList(growable: false),
-        startingEquipmentOptions:
-            List<String>.unmodifiable(startingEquipmentOptions),
+        startingEquipmentOptions: startingEquipmentOptions
+            .map((dto) => dto.toDomain())
+            .toList(growable: false),
       ); // Construit la structure métier consommée par la logique de création.
 }
 

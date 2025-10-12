@@ -119,7 +119,8 @@ class _ClassStartingEquipment extends StatelessWidget {
     final l10n = context.l10n;
     final List<StartingEquipmentLine> fixed =
         classDef.level1.startingEquipment;
-    final List<String> options = classDef.level1.startingEquipmentOptions;
+    final List<LocalizedText> options =
+        classDef.level1.startingEquipmentOptions;
     final bool hasFixed = fixed.isNotEmpty;
     final bool hasOptions = options.isNotEmpty;
 
@@ -132,10 +133,8 @@ class _ClassStartingEquipment extends StatelessWidget {
       final String label;
       if (def == null) {
         label = line.id;
-      } else if (def.name.fr.isNotEmpty) {
-        label = def.name.fr;
       } else {
-        label = def.name.en;
+        label = l10n.localizedCatalogLabel(def.name);
       }
       return l10n.startingEquipmentLine(label, line.qty);
     }
