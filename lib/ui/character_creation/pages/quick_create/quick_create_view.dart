@@ -18,28 +18,18 @@ class _QuickCreateView extends StatelessWidget {
     if (completion == null) {
       return;
     }
+    final l10n = context.l10n;
     switch (completion) {
       case QuickCreateSuccess(:final Character character):
         showDialog<void>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Personnage créé'),
-            content: Text(
-              'Nom: ${character.name.value}\n'
-              'Espèce: ${character.speciesId.value}\n'
-              'Classe: ${character.classId.value}\n'
-              'BG: ${character.backgroundId.value}\n\n'
-              'HP: ${character.hitPoints.value}\n'
-              'Défense: ${character.defense.value}\n'
-              'Initiative: ${character.initiative.value}\n'
-              'Crédits: ${character.credits.value}\n'
-              'Inventaire: ${character.inventory.map((line) => "${line.itemId.value} x${line.quantity.value}").join(", ")}\n'
-              'Compétences: ${character.skills.map((skill) => skill.skillId).join(", ")}',
-            ),
+            title: Text(l10n.quickCreateCharacterCreated),
+            content: Text(l10n.quickCreateCharacterSummary(character)),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Fermer'),
+                child: Text(l10n.genericClose),
               ),
             ],
           ),
@@ -58,6 +48,7 @@ class _QuickCreateView extends StatelessWidget {
   /// pour synchroniser la navigation et les champs contrôlés.
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return MultiBlocListener(
       listeners: [
         BlocListener<QuickCreateBloc, QuickCreateState>(
@@ -102,11 +93,14 @@ class _QuickCreateView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'Création rapide — Étape ${state.stepIndex + 1}/${QuickCreateStep.values.length}',
+                l10n.quickCreateStepTitle(
+                  state.stepIndex + 1,
+                  QuickCreateStep.values.length,
+                ),
               ),
               leading: IconButton(
                 icon: const Icon(Icons.home_outlined),
-                tooltip: "Retour à l'accueil",
+                tooltip: l10n.quickCreateBackTooltip,
                 onPressed: () => context.go('/'),
               ),
             ),
@@ -115,9 +109,7 @@ class _QuickCreateView extends StatelessWidget {
                 if (connectivityStatus == ConnectivityStatus.disconnected)
                   MaterialBanner(
                     backgroundColor: Colors.orange.shade100,
-                    content: const Text(
-                      'Mode hors ligne : certaines fonctionnalités réseau sont indisponibles.',
-                    ),
+                    content: Text(l10n.offlineBanner),
                     actions: const [SizedBox.shrink()],
                   ),
                 if (state.statusMessage != null)

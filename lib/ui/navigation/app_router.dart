@@ -8,6 +8,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/app/home_nav.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/class_picker_page.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/saved_characters_page.dart';
@@ -65,7 +66,7 @@ GoRouter _buildAppRouter() {
     ],
     errorBuilder: (context, state) => Scaffold(
       body: Center(
-        child: Text('Erreur de navigation : ${state.error}'),
+        child: Text(context.l10n.navigationErrorMessage(state.error)),
       ),
     ),
   );

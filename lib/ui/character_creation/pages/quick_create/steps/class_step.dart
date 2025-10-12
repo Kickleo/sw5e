@@ -33,6 +33,7 @@ class _ClassStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final classDefData = classDef;
+    final l10n = context.l10n;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -41,9 +42,9 @@ class _ClassStep extends StatelessWidget {
             Expanded(
               child: DropdownButtonFormField<String>(
                 initialValue: selectedClass,
-                decoration: const InputDecoration(
-                  labelText: 'Classe',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.classLabel,
+                  border: const OutlineInputBorder(),
                 ),
                 items: classes
                     .map(
@@ -60,7 +61,7 @@ class _ClassStep extends StatelessWidget {
             OutlinedButton.icon(
               onPressed: onOpenPicker,
               icon: const Icon(Icons.search),
-              label: const Text('Détails'),
+              label: Text(l10n.classDetails),
             ),
           ],
         ),
@@ -68,7 +69,7 @@ class _ClassStep extends StatelessWidget {
         if (isLoadingDetails)
           const Center(child: CircularProgressIndicator())
         else if (classDefData == null)
-          const Text('Aucune classe sélectionnée.')
+          Text(l10n.noClassSelected)
         else
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,10 +86,12 @@ class _ClassStep extends StatelessWidget {
                 ),
               ],
               const SizedBox(height: 8),
-              Text('Dé de vie : d${classDefData.hitDie}'),
+              Text('${l10n.hitDiceLabel} : d${classDefData.hitDie}'),
               const SizedBox(height: 12),
               Text(
-                'Compétences : choisir ${classDefData.level1.proficiencies.skillsChoose} (étape suivante)',
+                l10n.classSkillsChoice(
+                  classDefData.level1.proficiencies.skillsChoose,
+                ),
               ),
               const SizedBox(height: 12),
               _ClassStartingEquipment(
@@ -111,21 +114,9 @@ class _ClassStartingEquipment extends StatelessWidget {
   final ClassDef classDef;
   final Map<String, EquipmentDef> equipmentDefinitions;
 
-  String _formatLine(StartingEquipmentLine line) {
-    final EquipmentDef? def = equipmentDefinitions[line.id];
-    final String label;
-    if (def == null) {
-      label = line.id;
-    } else if (def.name.fr.isNotEmpty) {
-      label = def.name.fr;
-    } else {
-      label = def.name.en;
-    }
-    return '• $label ×${line.qty}';
-  }
-
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final List<StartingEquipmentLine> fixed =
         classDef.level1.startingEquipment;
     final List<String> options = classDef.level1.startingEquipmentOptions;
@@ -133,30 +124,43 @@ class _ClassStartingEquipment extends StatelessWidget {
     final bool hasOptions = options.isNotEmpty;
 
     if (!hasFixed && !hasOptions) {
-      return const Text(
-        'Équipement de départ : cette classe ne propose pas de pack pré-défini.',
-      );
+      return Text(l10n.startingEquipmentEmpty);
+    }
+
+    String formatLine(StartingEquipmentLine line) {
+      final EquipmentDef? def = equipmentDefinitions[line.id];
+      final String label;
+      if (def == null) {
+        label = line.id;
+      } else if (def.name.fr.isNotEmpty) {
+        label = def.name.fr;
+      } else {
+        label = def.name.en;
+      }
+      return l10n.startingEquipmentLine(label, line.qty);
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Équipement de départ :',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Text(
+          l10n.startingEquipmentTitle,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         if (hasFixed) ...[
           const SizedBox(height: 4),
-          Text(fixed.map(_formatLine).join('\n')),
+          Text(fixed.map(formatLine).join('\n')),
         ],
         if (hasOptions) ...[
           if (hasFixed) const SizedBox(height: 8),
-          const Text(
-            'Options :',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Text(
+            l10n.startingEquipmentOptionsTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
-          Text(options.map((option) => '• $option').join('\n')),
+          Text(
+            options.map(l10n.startingEquipmentOption).join('\n'),
+          ),
         ],
       ],
     );

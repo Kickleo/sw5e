@@ -9,6 +9,7 @@
 library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
@@ -76,13 +77,13 @@ class _ClassPickerView extends StatelessWidget {
       builder: (BuildContext context, ClassPickerState state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Choisir une classe'),
+            title: Text(context.l10n.classPickerTitle),
             actions: <Widget>[
               TextButton(
                 onPressed: state.hasSelection
                     ? () => Navigator.of(context).pop(state.selectedClassId)
                     : null,
-                child: const Text('Sélectionner'),
+                child: Text(context.l10n.pickerSelectAction),
               ),
             ],
           ),
@@ -101,12 +102,13 @@ class _ClassPickerView extends StatelessWidget {
       return const Center(child: CircularProgressIndicator());
     }
 
+    final l10n = context.l10n;
     if (state.hasError && state.classIds.isEmpty) {
-      return Center(child: Text(state.errorMessage ?? 'Erreur inconnue'));
+      return Center(child: Text(state.errorMessage ?? l10n.unknownError));
     }
 
     if (state.classIds.isEmpty) {
-      return const Center(child: Text('Aucune classe disponible'));
+      return Center(child: Text(l10n.noClassesAvailable));
     }
 
     return Row(
@@ -166,8 +168,9 @@ class _ClassDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ClassDef? selected = state.selectedClass;
+    final l10n = context.l10n;
     if (selected == null) {
-      return const Center(child: Text('Aucune classe sélectionnée'));
+      return Center(child: Text(l10n.classPickerNoClass));
     }
 
     return Padding(
@@ -175,35 +178,49 @@ class _ClassDetails extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           Text(
-            _localizedName(selected.name),
+            _localizedName(l10n, selected.name),
             style: theme.textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
-          Text('Identifiant : ${selected.id}'),
+          Text(l10n.speciesIdentifier(selected.id)),
           const SizedBox(height: 12),
-          Text('Dé de vie : d${selected.hitDie}'),
+          Text(l10n.classPickerHitDie(selected.hitDie)),
           const SizedBox(height: 12),
           Text(
-            'Compétences : choisir ${selected.level1.proficiencies.skillsChoose} parmi :',
+            l10n.classPickerSkillsHeading(
+              selected.level1.proficiencies.skillsChoose,
+            ),
             style: theme.textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
-          ...selected.level1.proficiencies.skillsFrom
-              .map((String id) => Text('• ${_formatSkill(id, state)}')),
+          ...selected.level1.proficiencies.skillsFrom.map(
+            (String id) {
+              final skillLabel = _formatSkill(id, state, l10n);
+              final ability = _skillAbility(id, state, l10n);
+              if (ability.isEmpty) {
+                return Text('• $skillLabel');
+              }
+              return Text(l10n.classPickerSkillLine(skillLabel, ability));
+            },
+          ),
           const SizedBox(height: 16),
           Text(
-            'Équipement de départ',
+            l10n.classPickerStartingEquipmentTitle,
             style: theme.textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
           ...selected.level1.startingEquipment.map(
-            (StartingEquipmentLine line) =>
-                Text('• ${_formatEquipment(line.id, state)} ×${line.qty}'),
+            (StartingEquipmentLine line) => Text(
+              l10n.classPickerEquipmentLine(
+                _formatEquipment(line.id, state, l10n),
+                line.qty,
+              ),
+            ),
           ),
           if (selected.level1.startingEquipmentOptions.isNotEmpty) ...<Widget>[
             const SizedBox(height: 16),
             Text(
-              'Options supplémentaires',
+              l10n.classPickerExtraOptionsTitle,
               style: theme.textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
@@ -216,28 +233,48 @@ class _ClassDetails extends StatelessWidget {
   }
 }
 
-String _localizedName(LocalizedText text) {
-  return text.fr.isNotEmpty ? text.fr : text.en;
+String _localizedName(AppLocalizations l10n, LocalizedText text) {
+  if (l10n.isFrench) {
+    return text.fr.isNotEmpty ? text.fr : text.en;
+  }
+  return text.en.isNotEmpty ? text.en : text.fr;
 }
 
-String _formatSkill(String id, ClassPickerState state) {
+String _formatSkill(String id, ClassPickerState state, AppLocalizations l10n) {
   if (id == 'any') {
-    return "N'importe quelle compétence";
+    return l10n.classPickerAnySkill;
   }
   final SkillDef? def = state.skillDefinitions[id];
   if (def == null) {
     return _titleCase(id);
   }
-  return '${_titleCase(id)} (${def.ability.toUpperCase()})';
+  return _titleCase(id);
 }
 
-String _formatEquipment(String id, ClassPickerState state) {
+String _skillAbility(String id, ClassPickerState state, AppLocalizations l10n) {
+  if (id == 'any') {
+    return '';
+  }
+  final SkillDef? def = state.skillDefinitions[id];
+  if (def == null) {
+    return '';
+  }
+  return l10n.abilityAbbreviation(def.ability);
+}
+
+String _formatEquipment(
+  String id,
+  ClassPickerState state,
+  AppLocalizations l10n,
+) {
   final EquipmentDef? def = state.equipmentDefinitions[id];
   if (def == null) {
     return _titleCase(id);
   }
-  final String name = def.name.fr.isNotEmpty ? def.name.fr : def.name.en;
-  return name;
+  if (l10n.isFrench) {
+    return def.name.fr.isNotEmpty ? def.name.fr : def.name.en;
+  }
+  return def.name.en.isNotEmpty ? def.name.en : def.name.fr;
 }
 
 String _titleCase(String slug) {

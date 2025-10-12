@@ -23,33 +23,15 @@ class _SkillStep extends StatelessWidget {
       )
       .join(' ');
 
-  String _abilityLabel(String ability) {
-    switch (ability.toLowerCase()) {
-      case 'str':
-        return 'FOR';
-      case 'dex':
-        return 'DEX';
-      case 'con':
-        return 'CON';
-      case 'int':
-        return 'INT';
-      case 'wis':
-        return 'SAG';
-      case 'cha':
-        return 'CHA';
-      default:
-        return ability.toUpperCase();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     if (requiredCount == 0) {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Text(
-            'La classe sélectionnée n’offre aucun choix de compétence supplémentaire.',
+            l10n.skillStepNoAdditionalChoices,
             style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
@@ -62,7 +44,7 @@ class _SkillStep extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Text(
-            'Aucune compétence disponible pour cette classe. Vérifiez le catalogue.',
+            l10n.skillStepNoSkills,
             style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
@@ -78,7 +60,7 @@ class _SkillStep extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         Text(
-          'Choisissez $requiredCount compétence${requiredCount > 1 ? 's' : ''} (${chosenSkills.length}/$requiredCount sélectionnées).',
+          l10n.skillStepHeader(requiredCount, chosenSkills.length),
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 12),
@@ -89,7 +71,7 @@ class _SkillStep extends StatelessWidget {
           final ability = skillDef?.ability ?? '';
           final subtitle = ability.isEmpty
               ? null
-              : Text('Basée sur ${_abilityLabel(ability)}');
+              : Text(l10n.skillStepAbilitySubtitle(ability));
           return Card(
             child: CheckboxListTile(
               value: selected,
@@ -103,7 +85,7 @@ class _SkillStep extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 12),
             child: Text(
-              'Vous avez atteint le nombre maximum de compétences sélectionnées. Décochez-en une pour en choisir une autre.',
+              l10n.skillStepLimitReached,
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),

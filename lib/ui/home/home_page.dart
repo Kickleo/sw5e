@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sw5e_manager/app/locale/app_locale_controller.dart';
+import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/saved_characters_page.dart';
 
 /// Page d'accueil offrant les principales entrées de l'application.
@@ -17,12 +18,13 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
     final locale = ref.watch(appLocaleProvider);
     final localeController = ref.read(appLocaleProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SW5e Manager'),
+        title: Text(l10n.appTitle),
       ),
       body: Center(
         child: ConstrainedBox(
@@ -34,7 +36,7 @@ class HomePage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Bienvenue dans SW5e Manager',
+                  l10n.homeWelcomeTitle,
                   style: theme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -43,28 +45,36 @@ class HomePage extends ConsumerWidget {
                 const SizedBox(height: 12),
                 Align(
                   alignment: Alignment.center,
-                  child: DropdownButton<Locale>(
-                    value: locale,
-                    onChanged: (value) {
-                      if (value != null) {
-                        localeController.setLocale(value);
-                      }
-                    },
-                    items: const [
-                      DropdownMenuItem(
-                        value: Locale('fr'),
-                        child: Text('Français'),
-                      ),
-                      DropdownMenuItem(
-                        value: Locale('en'),
-                        child: Text('English'),
+                  child: Column(
+                    children: [
+                      Text(l10n.homeLanguageLabel),
+                      const SizedBox(height: 4),
+                      DropdownButton<Locale>(
+                        value: locale,
+                        onChanged: (value) {
+                          if (value != null) {
+                            localeController.setLocale(value);
+                          }
+                        },
+                        items: AppLocalizations.supportedLocales
+                            .map(
+                              (supportedLocale) => DropdownMenuItem(
+                                value: supportedLocale,
+                                child: Text(
+                                  supportedLocale.languageCode == 'fr'
+                                      ? l10n.languageFrench
+                                      : l10n.languageEnglish,
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  "Gérez vos héros : créez-en un nouveau ou ouvrez une fiche existante.",
+                  l10n.homeTagline,
                   style: theme.textTheme.bodyLarge,
                   textAlign: TextAlign.center,
                 ),
@@ -72,14 +82,14 @@ class HomePage extends ConsumerWidget {
                 FilledButton.icon(
                   onPressed: () => context.go('/create'),
                   icon: const Icon(Icons.bolt),
-                  label: const Text('Créer un nouveau personnage'),
+                  label: Text(l10n.homeCreateButton),
                 ),
                 const SizedBox(height: 16),
                 OutlinedButton.icon(
                   onPressed: () =>
                       context.goNamed(SavedCharactersPage.routeName),
                   icon: const Icon(Icons.folder_shared),
-                  label: const Text('Charger une fiche existante'),
+                  label: Text(l10n.homeLoadButton),
                 ),
               ],
             ),

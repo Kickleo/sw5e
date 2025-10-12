@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sw5e_manager/app/locale/app_locale_controller.dart';
+import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/app/router/app_router.dart';
 
 /// Widget racine de l'application.
@@ -48,13 +49,11 @@ class Sw5eApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       // Deux langues officiellement prises en charge (anglais + français) ; les
       // écrans peuvent déterminer les traductions disponibles via cette liste.
-      supportedLocales: const [
-        Locale('en'),
-        Locale('fr'),
-      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       // Enregistre les délégués qui chargent les traductions de widgets,
       // dialogues et composants Cupertino par défaut.
       localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

@@ -33,17 +33,18 @@ class _EquipmentStep extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
     final classData = classDef;
     if (classData == null) {
-      return const Center(
-        child: Text('Choisissez une classe pour configurer votre équipement.'),
+      return Center(
+        child: Text(l10n.equipmentStepSelectClass),
       );
     }
     if (equipmentDefinitions.isEmpty) {
-      return const Center(child: Text('Catalogue d\'équipement indisponible.'));
+      return Center(child: Text(l10n.equipmentStepCatalogMissing));
     }
 
     final queryController = useTextEditingController();
@@ -75,26 +76,37 @@ class _EquipmentStep extends HookWidget {
 
     final startingWeightG = _computeStartingWeight(classData);
     final purchasesWeightG = _computePurchasesWeight();
-    final displayTotalWeight = totalWeightG != null
-        ? _formatWeight(totalWeightG!)
-        : '—';
-    final displayCapacity = capacityG != null ? _formatWeight(capacityG!) : '—';
+    final displayTotalWeight =
+        totalWeightG != null ? _formatWeight(totalWeightG!) : '—';
+    final displayCapacity =
+        capacityG != null ? _formatWeight(capacityG!) : '—';
     final overCapacity =
         capacityG != null && totalWeightG != null && totalWeightG! > capacityG!;
     final overCredits = availableCredits >= 0 && totalCost > availableCredits;
+
+    String equipmentLabel(String id) {
+      final def = equipmentDefinitions[id];
+      if (def == null) return id;
+      if (l10n.isFrench) {
+        return def.name.fr.isNotEmpty ? def.name.fr : def.name.en;
+      }
+      return def.name.en.isNotEmpty ? def.name.en : def.name.fr;
+    }
 
     final header = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Crédits de départ : ${availableCredits}cr',
+          l10n.equipmentStepCredits(availableCredits),
           style: Theme.of(context).textTheme.titleMedium,
         ),
         if (classData.level1.startingCreditsRoll != null)
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Text(
-              'Jet alternatif : ${classData.level1.startingCreditsRoll}',
+              l10n.equipmentStepAlternateRoll(
+                classData.level1.startingCreditsRoll!,
+              ),
             ),
           ),
         const SizedBox(height: 16),
@@ -102,15 +114,16 @@ class _EquipmentStep extends HookWidget {
           value: useStartingEquipment,
           contentPadding: EdgeInsets.zero,
           onChanged: onToggleStartingEquipment,
-          title: const Text('Prendre l\'équipement de départ de la classe'),
+          title: Text(l10n.equipmentStepUseStarting),
           subtitle: classData.level1.startingEquipment.isEmpty
-              ? const Text(
-                  'Cette classe ne fournit pas d\'équipement spécifique par défaut.',
-                )
+              ? Text(l10n.equipmentStepNoStarting)
               : Text(
                   classData.level1.startingEquipment
                       .map(
-                        (line) => '• ${_equipmentLabel(line.id)} ×${line.qty}',
+                        (line) => l10n.startingEquipmentLine(
+                          equipmentLabel(line.id),
+                          line.qty,
+                        ),
                       )
                       .join('\n'),
                 ),
@@ -125,9 +138,9 @@ class _EquipmentStep extends HookWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Options d\'équipement de départ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      l10n.equipmentStepOptionsTitle,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     ...classData.level1.startingEquipmentOptions.map(
@@ -147,17 +160,21 @@ class _EquipmentStep extends HookWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Achats en cours',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Text(
+                  l10n.equipmentStepPurchasesTitle,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
                 ...chosenEquipment.entries.map((entry) {
                   final def = equipmentDefinitions[entry.key];
-                  final label = def != null ? def.name.fr : entry.key;
+                  final label = equipmentLabel(entry.key);
                   final cost = def?.cost ?? 0;
                   return Text(
-                    '• $label ×${entry.value} (${cost * entry.value}cr)',
+                    l10n.equipmentStepPurchaseLine(
+                      label,
+                      entry.value,
+                      cost * entry.value,
+                    ),
                   );
                 }),
               ],
@@ -167,28 +184,34 @@ class _EquipmentStep extends HookWidget {
           spacing: 16,
           runSpacing: 8,
           children: [
-            Text('Coût des achats : ${totalCost}cr'),
+            Text(l10n.equipmentStepCost(totalCost)),
             Text(
-              'Crédits restants : ${remainingCredits}cr',
+              l10n.equipmentStepRemainingCredits(remainingCredits),
               style: TextStyle(
                 color: remainingCredits < 0 ? Colors.red : null,
               ),
             ),
-            Text('Poids total : $displayTotalWeight'),
-            Text('Capacité : $displayCapacity'),
+            Text(l10n.equipmentStepTotalWeight(displayTotalWeight)),
+            Text(l10n.equipmentStepCapacity(displayCapacity)),
             if (useStartingEquipment && startingWeightG != null)
               Text(
-                'Équipement de départ : ${_formatWeight(startingWeightG)}',
+                l10n.equipmentStepStartingWeight(
+                  _formatWeight(startingWeightG),
+                ),
               ),
             if (chosenEquipment.isNotEmpty && purchasesWeightG != null)
-              Text('Achats : ${_formatWeight(purchasesWeightG)}'),
+              Text(
+                l10n.equipmentStepPurchasesWeight(
+                  _formatWeight(purchasesWeightG),
+                ),
+              ),
           ],
         ),
         if (overCredits)
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              'Vous dépassez vos crédits de départ.',
+              l10n.equipmentStepOverCredits,
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),
@@ -196,17 +219,17 @@ class _EquipmentStep extends HookWidget {
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Text(
-              'Le poids total dépasse votre capacité de portance.',
+              l10n.equipmentStepOverCapacity,
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),
         const SizedBox(height: 16),
         TextField(
           controller: queryController,
-          decoration: const InputDecoration(
-            labelText: 'Rechercher un objet…',
-            prefixIcon: Icon(Icons.search),
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: l10n.equipmentStepSearchLabel,
+            prefixIcon: const Icon(Icons.search),
+            border: const OutlineInputBorder(),
           ),
         ),
         const SizedBox(height: 12),
@@ -219,12 +242,10 @@ class _EquipmentStep extends HookWidget {
         slivers: [
           SliverToBoxAdapter(child: header),
           if (filteredIds.isEmpty)
-            const SliverFillRemaining(
+            SliverFillRemaining(
               hasScrollBody: false,
               child: Center(
-                child: Text(
-                  'Aucun équipement ne correspond à votre recherche.',
-                ),
+                child: Text(l10n.equipmentStepSearchEmpty),
               ),
             )
           else
@@ -251,9 +272,19 @@ class _EquipmentStep extends HookWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ListTile(
-                        title: Text(def.name.fr),
+                        title: Text(
+                          l10n.isFrench && def.name.fr.isNotEmpty
+                              ? def.name.fr
+                              : (def.name.en.isNotEmpty
+                                  ? def.name.en
+                                  : def.name.fr),
+                        ),
                         subtitle: Text(
-                          '${def.cost}cr · ${_formatWeight(def.weightG)} · ${def.type}',
+                          l10n.equipmentStepListSubtitle(
+                            def.cost,
+                            _formatWeight(def.weightG),
+                            def.type,
+                          ),
                         ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -289,12 +320,6 @@ class _EquipmentStep extends HookWidget {
         ],
       ),
     );
-  }
-
-  String _equipmentLabel(String id) {
-    final def = equipmentDefinitions[id];
-    if (def == null) return id;
-    return def.name.fr.isNotEmpty ? def.name.fr : def.name.en;
   }
 
   int? _computeStartingWeight(ClassDef classData) {
