@@ -25,13 +25,17 @@ Future<void> main(List<String> args) async {
 
   final dir = Directory(baseDir);
   if (!dir.existsSync()) {
-    print('catalog_validate: "$baseDir" absent — rien à valider (OK provisoire).');
+    stdout.writeln(
+      'catalog_validate: "$baseDir" absent — rien à valider (OK provisoire).',
+    );
     exit(0);
   }
 
   final existing = expected.where((f) => File('$baseDir/$f').existsSync()).toList();
   if (existing.isEmpty) {
-    print('catalog_validate: aucun fichier de catalogue trouvé — rien à valider (OK provisoire).');
+    stdout.writeln(
+      'catalog_validate: aucun fichier de catalogue trouvé — rien à valider (OK provisoire).',
+    );
     exit(0);
   }
 
@@ -82,7 +86,7 @@ Future<void> main(List<String> args) async {
 
   /// validateFormulas = contrôle basique du fichier `formulas.json` (objet).
   ///
-  /// TODO futur : renforcer les clés obligatoires/structure métier.
+  /// NOTE futur : renforcer les clés obligatoires/structure métier.
   Future<void> validateFormulas() async {
     const name = 'formulas.json';
     final path = '$baseDir/$name';
@@ -118,6 +122,6 @@ Future<void> main(List<String> args) async {
     }
     exit(1);
   } else {
-    print('catalog_validate: OK (${existing.length} fichier(s) validé(s)).');
+    stdout.writeln('catalog_validate: OK (${existing.length} fichier(s) validé(s)).');
   }
 }
