@@ -144,9 +144,17 @@ class _CharacterSummaryPanel extends StatelessWidget {
                 runSpacing: 8,
                 children: QuickCreateStep.values.map((step) {
                   final completed = state.stepIndex >= step.index;
+                  final baseContainer =
+                      theme.colorScheme.surfaceContainerHighest;
+                  final chipColor = completed
+                      ? baseContainer
+                      : baseContainer.withValues(alpha: 0.6);
                   return Chip(
+                    backgroundColor: chipColor,
                     avatar: Icon(
-                      completed ? Icons.check_circle : Icons.radio_button_unchecked,
+                      completed
+                          ? Icons.check_circle
+                          : Icons.radio_button_unchecked,
                       size: 18,
                       color: completed ? Colors.green : theme.colorScheme.outline,
                     ),
