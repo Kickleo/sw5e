@@ -146,18 +146,23 @@ class _CharacterSummaryPanel extends StatelessWidget {
                   final completed = state.stepIndex >= step.index;
                   final baseContainer =
                       theme.colorScheme.surfaceContainerHighest;
+                  final highlight = theme.colorScheme.primary;
+                  // Les étapes terminées bénéficient d'un léger voile de
+                  // couleur primaire pour signaler la progression, tandis que
+                  // les étapes restantes conservent un fond atténué.
                   final chipColor = completed
-                      ? baseContainer
+                      ? Color.alphaBlend(
+                          highlight.withValues(alpha: 0.12),
+                          baseContainer,
+                        )
                       : baseContainer.withValues(alpha: 0.6);
+                  final iconColor =
+                      completed ? highlight : theme.colorScheme.outline;
+                  final icon =
+                      completed ? Icons.check_circle : Icons.radio_button_unchecked;
                   return Chip(
                     backgroundColor: chipColor,
-                    avatar: Icon(
-                      completed
-                          ? Icons.check_circle
-                          : Icons.radio_button_unchecked,
-                      size: 18,
-                      color: completed ? Colors.green : theme.colorScheme.outline,
-                    ),
+                    avatar: Icon(icon, size: 18, color: iconColor),
                     label: Text(_stepLabel(step)),
                   );
                 }).toList(),
