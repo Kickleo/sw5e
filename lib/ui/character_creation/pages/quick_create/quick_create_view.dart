@@ -1,4 +1,4 @@
-part of quick_create_page;
+part of 'quick_create_page.dart';
 
 /// Vue principale contenant les listeners BLoC et le `PageView` d'étapes.
 class _QuickCreateView extends StatelessWidget {

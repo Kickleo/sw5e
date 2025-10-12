@@ -1,4 +1,4 @@
-part of quick_create_page;
+part of 'quick_create_page.dart';
 
 class _SummarySection extends StatelessWidget {
   const _SummarySection({required this.title, required this.children});

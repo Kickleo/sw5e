@@ -1,4 +1,4 @@
-part of quick_create_page;
+part of 'quick_create_page.dart';
 
 class _ManualAbilityField extends HookWidget {
   const _ManualAbilityField({

@@ -1,4 +1,4 @@
-part of quick_create_page;
+part of 'quick_create_page.dart';
 
 class _SummaryRow extends StatelessWidget {
   const _SummaryRow({required this.label, required this.value});

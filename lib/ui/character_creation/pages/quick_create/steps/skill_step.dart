@@ -1,4 +1,4 @@
-part of quick_create_page;
+part of 'quick_create_page.dart';
 
 class _SkillStep extends StatelessWidget {
   const _SkillStep({

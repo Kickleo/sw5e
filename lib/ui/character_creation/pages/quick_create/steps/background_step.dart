@@ -1,4 +1,4 @@
-part of quick_create_page;
+part of 'quick_create_page.dart';
 
 class _BackgroundStep extends StatelessWidget {
   const _BackgroundStep({

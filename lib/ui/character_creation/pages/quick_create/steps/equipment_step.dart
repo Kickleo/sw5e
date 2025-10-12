@@ -1,4 +1,4 @@
-part of quick_create_page;
+part of 'quick_create_page.dart';
 
 class _EquipmentStep extends HookWidget {
   const _EquipmentStep({
