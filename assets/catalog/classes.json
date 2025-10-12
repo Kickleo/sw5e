@@ -156,18 +156,6 @@
       "starting_equipment": [],
       "starting_equipment_options": [
         {
-          "en": "Choisir 1 parmi: m-3-predator, m-4-shuriken, m-8-avenger, m-92-mantis, m-23-katana",
-          "fr": "Choisissez 1 parmi : M-3 Predator, M-4 Shuriken, M-8 Avenger, M-92 Mantis, M-23 Katana"
-        },
-        {
-          "en": "Choisir 1 parmi: omni-blade, omni-hamer",
-          "fr": "Choisissez 1 parmi : omni-lame, omni-marteau"
-        },
-        {
-          "en": "Proficiencies: stock-light-armor, stock-medium-armor, stock-heavy-armor",
-          "fr": "Maîtrises : armure légère standard, armure moyenne standard, armure lourde standard"
-        },
-        {
           "en": "(a) mesh armor or (b) a combat suit",
           "fr": "(a) une armure maillée ou (b) une combinaison de combat"
         },
