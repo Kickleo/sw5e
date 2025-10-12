@@ -12,6 +12,7 @@ import 'package:sw5e_manager/app/home_nav.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/class_picker_page.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/saved_characters_page.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/species_picker.dart';
+import 'package:sw5e_manager/ui/home/home_page.dart';
 
 /// Provider Riverpod qui expose le `GoRouter` unique de l'application.
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -23,6 +24,10 @@ GoRouter _buildAppRouter() {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
+        path: '/create',
         builder: (context, state) => const HomeNav(),
         routes: [
           GoRoute(
@@ -47,15 +52,15 @@ GoRouter _buildAppRouter() {
               );
             },
           ),
-          GoRoute(
-            path: 'saved-characters',
-            name: SavedCharactersPage.routeName,
-            pageBuilder: (context, state) => MaterialPage(
-              key: state.pageKey,
-              child: const SavedCharactersPage(),
-            ),
-          ),
         ],
+      ),
+      GoRoute(
+        path: '/saved-characters',
+        name: SavedCharactersPage.routeName,
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const SavedCharactersPage(),
+        ),
       ),
     ],
     errorBuilder: (context, state) => Scaffold(
