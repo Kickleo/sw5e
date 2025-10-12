@@ -91,17 +91,17 @@ void main() {
         SpeciesAbilityBonus(
           amount: 2,
           choose: 1,
-          options: const <String>['wis', 'cha'],
+          options: <String>['wis', 'cha'],
         ),
         SpeciesAbilityBonus(
           amount: 1,
           choose: 2,
-          options: const <String>['any'],
+          options: <String>['any'],
         ),
         SpeciesAbilityBonus(
           amount: 1,
           choose: 4,
-          options: const <String>['any'],
+          options: <String>['any'],
           isAlternative: true,
         ),
       ],

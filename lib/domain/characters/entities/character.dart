@@ -1,14 +1,7 @@
-/// ---------------------------------------------------------------------------
-/// Fichier : lib/domain/characters/entities/character.dart
-/// Rôle : Modéliser un personnage de niveau 1 ainsi que son inventaire
-///        dans la couche domaine.
-/// Dépendances : Value Objects du dossier `value_objects/` et `meta` pour
-///        l'annotation d'immutabilité.
-/// Exemple d'usage :
-///   final character = Character(...);
-/// ---------------------------------------------------------------------------
-/// ---------------------------------------------------------------------------
+/// Entités de la couche domaine représentant un personnage finalisé et son
+/// inventaire.
 library;
+
 import 'package:meta/meta.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/background_id.dart';
@@ -30,14 +23,18 @@ import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.d
 import 'package:sw5e_manager/domain/characters/value_objects/species_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/superiority_dice.dart';
 
-/// Character = entité domaine représentant l'état persistant d'un héros.
+/// Représente l'état persistant d'un personnage prêt à être sauvegardé ou
+/// affiché à l'écran.
 ///
-/// * Pré-conditions :
-///   - `level` doit représenter le niveau 1 (MVP).
-///   - `abilities` doit contenir exactement les six clés attendues.
-///   - `inventory` ne doit pas contenir de quantité nulle.
-/// * Post-condition : structure immuable prête à être persistée ou affichée.
-/// * Erreurs : assertions déclenchées en mode debug si un invariant est violé.
+/// L'entité agrège toutes les décisions prises durant le wizard : identité,
+/// choix d'espèce/classe, scores calculés et inventaire final. Le constructeur
+/// vérifie explicitement les invariants fonctionnels :
+///
+/// - le MVP cible des personnages niveau 1 uniquement ;
+/// - la carte des caractéristiques doit contenir exactement les six abréviations
+///   standards (str, dex, con, int, wis, cha) ;
+/// - l'inventaire ne conserve que des quantités strictement positives (les
+///   objets à 0 sont filtrés au niveau du wizard).
 @immutable
 class Character {
   /// Identifiant unique du personnage.
@@ -94,7 +91,9 @@ class Character {
   /// Traits raciaux conférés par l'espèce.
   final Set<CharacterTrait> speciesTraits;
 
-  /// Construit une instance en validant les invariants via assertions.
+  /// Construit un personnage en s'assurant que les invariants métiers sont
+  /// respectés. L'utilisation d'objets valeur pour chaque champ évite de devoir
+  /// répéter les validations dans les couches supérieures.
   Character({
     required this.id,
     required this.name,
@@ -134,6 +133,9 @@ class Character {
 }
 
 /// InventoryLine = ligne d'inventaire immuable (objet + quantité).
+///
+/// Utilisée par [Character.inventory] pour mémoriser la dotation finale. Les
+/// règles de validation (quantité > 0) sont portées par [Quantity].
 @immutable
 class InventoryLine {
   /// Identifiant d'objet (slug catalogue).

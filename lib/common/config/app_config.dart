@@ -1,14 +1,8 @@
-/// ---------------------------------------------------------------------------
-/// Fichier : lib/common/config/app_config.dart
-/// Rôle : Charger les variables d'environnement (.env) et les exposer via une
-///        API typée pour le reste de l'application.
-/// Dépendances : flutter_dotenv pour le parsing .env, logger optionnel pour les
-///        messages (injecté plus tard via ServiceLocator).
-/// Exemple d'usage :
-///   final config = AppConfig();
-///   await config.load();
-///   final apiBaseUrl = config.getRequired('API_BASE_URL');
-/// ---------------------------------------------------------------------------
+/// Chargement et mise à disposition des variables d'environnement `.env`.
+///
+/// Cette façade centralise les interactions avec le package `flutter_dotenv` :
+/// elle s'assure que le fichier n'est chargé qu'une seule fois et offre des
+/// méthodes lisibles pour récupérer des clés optionnelles ou obligatoires.
 library;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -26,6 +20,8 @@ class AppConfig {
   ///
   /// Préconditions : le fichier doit exister dans les assets configurés.
   /// Postconditions : les paires clé/valeur sont disponibles via [getOptional].
+  /// L'appelant peut personnaliser le nom du fichier (utile pour les tests) via
+  /// le paramètre [fileName].
   Future<void> load({String fileName = '.env'}) async {
     // Évite de recharger plusieurs fois le même fichier .env ; un second appel
     // devient un no-op pour empêcher des lectures redondantes.
@@ -34,19 +30,22 @@ class AppConfig {
     }
 
     // Demande à flutter_dotenv de parser le fichier et de remplir les valeurs
-    // accessibles globalement via `dotenv`.
+    // accessibles globalement via `dotenv`. Les clés deviennent alors
+    // disponibles pour toutes les couches (repositories HTTP, etc.).
     await dotenv.load(fileName: fileName);
     // Marque l'état comme chargé afin de bloquer les futurs rechargements.
     _loaded = true;
   }
 
   /// Récupère une valeur optionnelle ; renvoie `null` si la clé est absente.
+  /// Permet aux appels d'implémenter leurs propres valeurs par défaut.
   String? getOptional(String key) {
     return dotenv.maybeGet(key);
   }
 
   /// Récupère une valeur obligatoire et lève [AppConfigMissingKeyException] si
-  /// la clé est absente.
+  /// la clé est absente ou vide. À utiliser pour les secrets critiques (token
+  /// d'API, identifiants d'espace de stockage, etc.).
   String getRequired(String key) {
     // Commence par lire la valeur via l'API optionnelle afin de mutualiser la
     // logique d'accès au store interne de flutter_dotenv.

@@ -1,13 +1,16 @@
-/// ---------------------------------------------------------------------------
-/// Fichier : lib/presentation/character_creation/states/quick_create_state.dart
-/// Rôle : Modéliser l'état immuable du flux de création rapide pour le ViewModel
-///        (BLoC) QuickCreate.
-/// Dépendances : entités/DTO du catalogue, AppFailure pour représenter les
-///        erreurs métier, Value Objects des caractéristiques.
-/// Exemple d'usage :
-///   final state = QuickCreateState.initial();
-///   final canCreate = state.canCreate; // booléen.
-/// ---------------------------------------------------------------------------
+/// Etat immuable de l'assistant de création rapide.
+///
+/// La structure regroupe quatre familles d'informations :
+///
+/// 1. les indicateurs de chargement/action (ex. `isLoadingCatalog`) utilisés
+///    pour afficher des spinners ;
+/// 2. les données fournies par les repositories (catalogues, définitions) ;
+/// 3. les choix utilisateur (sélections, champs saisis) ;
+/// 4. les métadonnées de flux (étape courante, messages, erreurs, résultat).
+///
+/// Toutes les propriétés sont `final` afin de favoriser la création de nouveaux
+/// états via [copyWith] et de préserver la prévisibilité des transitions dans le
+/// BLoC.
 library;
 import 'package:meta/meta.dart';
 import 'package:sw5e_manager/common/errors/app_failure.dart';
@@ -22,39 +25,48 @@ enum QuickCreateStep { species, abilities, classes, skills, equipment, backgroun
 /// AbilityGenerationMode = modes d'attribution des caractéristiques.
 enum AbilityGenerationMode { standardArray, roll, manual }
 
+/// Photographie complète de la progression : sélections utilisateur, résultats
+/// des chargements, messages d'erreur et indicateurs d'activité. Les méthodes
+/// dérivées (non montrées ici) facilitent la logique d'activation des étapes.
 @immutable
-/// QuickCreateState = photographie immuable de l'assistant de création rapide.
 class QuickCreateState {
+  // --- Etats de chargement/action -------------------------------------------------
   final bool isLoadingCatalog;
   final bool isLoadingClassDetails;
   final bool isLoadingEquipment;
   final bool isCreating;
+
+  // --- Données catalogues ---------------------------------------------------------
   final List<String> species;
   final List<String> classes;
   final List<String> backgrounds;
-  final String? selectedSpecies;
-  final String? selectedClass;
-  final String? selectedBackground;
   final ClassDef? selectedClassDef;
   final List<TraitDef> selectedSpeciesTraits;
   final List<CharacterEffect> selectedSpeciesEffects;
   final List<String> availableSkills;
   final Map<String, SkillDef> skillDefinitions;
-  final Set<String> chosenSkills;
-  final int skillChoicesRequired;
   final Map<String, EquipmentDef> equipmentDefinitions;
   final List<String> equipmentList;
+
+  // --- Choix utilisateur ----------------------------------------------------------
+  final String? selectedSpecies;
+  final String? selectedClass;
+  final String? selectedBackground;
+  final Set<String> chosenSkills;
+  final int skillChoicesRequired;
   final Map<String, int> chosenEquipment;
   final bool useStartingEquipment;
-  final int stepIndex;
   final String characterName;
+  final Map<String, int?> abilityAssignments;
+  final List<int> abilityPool;
+  final AbilityGenerationMode abilityMode;
+
+  // --- Métadonnées UI -------------------------------------------------------------
+  final int stepIndex;
   final String? statusMessage;
   final AppFailure? failure;
   final QuickCreateCompletion? completion;
   final bool hasLoadedOnce;
-  final Map<String, int?> abilityAssignments;
-  final List<int> abilityPool;
-  final AbilityGenerationMode abilityMode;
 
   const QuickCreateState({
     required this.isLoadingCatalog,
@@ -129,6 +141,7 @@ class QuickCreateState {
         abilityMode: AbilityGenerationMode.standardArray,
       );
 
+  /// Message d'erreur prêt à l'affichage en interface (code + libellé).
   String? get errorMessage =>
       failure?.toDisplayMessage(includeCode: true);
 
@@ -210,6 +223,8 @@ class QuickCreateState {
 
   QuickCreateStep get currentStep => QuickCreateStep.values[stepIndex];
 
+  /// Indique si les prérequis de l'étape courante sont remplis pour autoriser
+  /// l'utilisateur à avancer.
   bool get canGoNext {
     switch (currentStep) {
       case QuickCreateStep.species:
@@ -227,11 +242,17 @@ class QuickCreateState {
     }
   }
 
+  /// Autorise le retour en arrière tant que l'utilisateur n'est pas à la toute
+  /// première étape.
   bool get canGoPrevious => stepIndex > 0;
 
+  /// Valide les compétences sélectionnées : soit aucun choix requis, soit le
+  /// nombre de cases cochées correspond au quota imposé par la classe.
   bool get hasValidSkillSelection =>
       skillChoicesRequired == 0 || chosenSkills.length == skillChoicesRequired;
 
+  /// Préconditions nécessaires à la finalisation : l'intégralité des champs
+  /// obligatoires doivent être renseignés et valides.
   bool get canCreate =>
       selectedSpecies != null &&
       selectedClass != null &&
@@ -241,6 +262,8 @@ class QuickCreateState {
       hasValidAbilityAssignments &&
       hasValidEquipmentSelection;
 
+  /// Vérifie que l'équipement choisi respecte les limites de poids et de
+  /// budget définies par la classe.
   bool get hasValidEquipmentSelection {
     if (selectedClassDef == null) {
       return false;
@@ -263,8 +286,10 @@ class QuickCreateState {
     return true;
   }
 
+  /// Budget initial octroyé par la classe (0 si les détails ne sont pas chargés).
   int get availableCredits => selectedClassDef?.level1.startingCredits ?? 0;
 
+  /// Calcule le coût total des achats manuels en tenant compte des quantités.
   int get totalPurchasedEquipmentCost {
     var total = 0;
     for (final entry in chosenEquipment.entries) {
@@ -278,8 +303,10 @@ class QuickCreateState {
     return total;
   }
 
+  /// Montant restant disponible après achats manuels.
   int get remainingCredits => availableCredits - totalPurchasedEquipmentCost;
 
+  /// Limite d'encombrement convertie en grammes selon les règles SW5e.
   int? get carryingCapacityLimitG {
     final strength = abilityAssignments['str'];
     if (strength == null) {
@@ -289,6 +316,7 @@ class QuickCreateState {
     return (strength * 15 * gramsPerPound).floor();
   }
 
+  /// Poids total en grammes de l'inventaire combinant pack de départ et achats.
   int? get totalInventoryWeightG {
     final classDef = selectedClassDef;
     if (classDef == null) {
@@ -315,6 +343,9 @@ class QuickCreateState {
     return total;
   }
 
+  /// Vérifie que toutes les caractéristiques ont une valeur autorisée et que le
+  /// pool de points n'est pas dépassé (sauf mode manuel qui autorise toute
+  /// valeur dans l'intervalle).
   bool get hasValidAbilityAssignments {
     for (final ability in abilityOrder) {
       final value = abilityAssignments[ability];
