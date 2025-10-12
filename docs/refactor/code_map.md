@@ -54,7 +54,7 @@ Exemple d'usage : Consulter ce document pour comprendre où ajouter une nouvelle
 | `lib/ui/navigation/app_router.dart` | Construction du `GoRouter` (routes + erreurs) | `go_router`, `flutter_riverpod`, pages UI |
 | `lib/ui/character_creation/pages/class_picker_page.dart` | Vue Flutter (instancie ClassPickerBloc via ServiceLocator + rendu liste/détails) | `flutter_bloc`, `ServiceLocator` |
 | `lib/ui/character_creation/pages/species_picker.dart` | Vue Flutter (instancie SpeciesPickerBloc via ServiceLocator + rendu liste/détails) | `flutter_bloc`, `ServiceLocator` |
-| `lib/ui/character_creation/pages/quick_create_page.dart` | Vue Flutter binding QuickCreateBloc et étapes UI | `flutter_bloc`, `ServiceLocator`, Riverpod connectivité |
+| `lib/ui/character_creation/pages/quick_create/quick_create_page.dart` | Vue Flutter binding QuickCreateBloc et étapes UI | `flutter_bloc`, `ServiceLocator`, Riverpod connectivité |
 | `lib/ui/character_creation/pages/character_summary_page.dart` | Vue Flutter résumé branchée sur CharacterSummaryBloc + partage | `flutter_bloc`, `share_plus`, `ServiceLocator` |
 | `lib/ui/character_creation/pages/saved_characters_page.dart` | Vue Flutter listant les personnages sauvegardés | `flutter_bloc`, `ServiceLocator` |
 | `lib/ui/character_creation/widgets/README.md` | Guide des widgets partagés du module création | Flutter Material |

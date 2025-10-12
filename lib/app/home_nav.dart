@@ -2,7 +2,7 @@
 library;
 import 'package:flutter/material.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/character_summary_page.dart';
-import 'package:sw5e_manager/ui/character_creation/pages/quick_create_page.dart';
+import 'package:sw5e_manager/ui/character_creation/pages/quick_create/quick_create_page.dart';
 
 /// Affiche un [Scaffold] avec barre de navigation inférieure permettant de
 /// basculer entre l'assistant de création rapide et la page de résumé.
