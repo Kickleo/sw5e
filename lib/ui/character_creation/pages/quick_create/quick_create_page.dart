@@ -1,4 +1,4 @@
-/// Interface utilisateur principale de l'assistant de création rapide.
+// Interface utilisateur principale de l'assistant de création rapide.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
