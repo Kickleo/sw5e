@@ -104,6 +104,11 @@ class _QuickCreateView extends StatelessWidget {
               title: Text(
                 'Création rapide — Étape ${state.stepIndex + 1}/${QuickCreateStep.values.length}',
               ),
+              leading: IconButton(
+                icon: const Icon(Icons.home_outlined),
+                tooltip: "Retour à l'accueil",
+                onPressed: () => context.go('/'),
+              ),
             ),
             body: Column(
               children: [

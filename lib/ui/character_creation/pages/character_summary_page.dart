@@ -11,6 +11,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
@@ -95,6 +96,11 @@ class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Résumé de personnage'),
+            leading: IconButton(
+              icon: const Icon(Icons.home_outlined),
+              tooltip: "Retour à l'accueil",
+              onPressed: () => context.go('/'),
+            ),
             actions: [
               BlocBuilder<CharacterSummaryBloc, CharacterSummaryState>(
                 buildWhen: (previous, current) =>

@@ -16,13 +16,14 @@ Exemple d'usage : Lire avant d'ajouter une nouvelle route ou de modifier la navi
    GoRouter builder ------------------------+
           |
           v
-  +---------------------+
-  | Routes déclarées    |
-  | - '/' -> HomeNav    |
-  | - species-picker    |
-  | - class-picker      |
-  | - saved-characters  |
-  +---------------------+
+  +----------------------------+
+  | Routes déclarées           |
+  | - '/' -> HomePage          |
+  | - '/create' -> HomeNav     |
+  |   - species-picker         |
+  |   - class-picker           |
+  | - '/saved-characters'      |
+  +----------------------------+
 ```
 
 ## Principes

@@ -9,6 +9,7 @@
 library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
@@ -54,6 +55,11 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Personnages sauvegardés'),
+          leading: IconButton(
+            icon: const Icon(Icons.home_outlined),
+            tooltip: "Retour à l'accueil",
+            onPressed: () => context.go('/'),
+          ),
           actions: [
             BlocBuilder<SavedCharactersBloc, SavedCharactersState>(
               buildWhen: (prev, curr) => prev.isLoading != curr.isLoading,
