@@ -1,5 +1,4 @@
 /// Interface utilisateur principale de l'assistant de création rapide.
-library quick_create_page;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
