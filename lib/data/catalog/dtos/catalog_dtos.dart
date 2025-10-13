@@ -195,7 +195,7 @@ class SpeciesEffectLanguageBundleDto {
     String languageCode,
     Map<String, dynamic> json,
   ) {
-    Map<String, String> _normalizeMap(dynamic raw) {
+    Map<String, String> normalizeMap(dynamic raw) {
       if (raw is Map) {
         final Map<String, String> normalized = <String, String>{};
         raw.forEach((dynamic key, dynamic value) {
@@ -209,7 +209,7 @@ class SpeciesEffectLanguageBundleDto {
       return const <String, String>{};
     }
 
-    String _readString(String key, String defaultValue) {
+    String readString(String key, String defaultValue) {
       final dynamic value = json[key];
       if (value is String) {
         final String trimmed = value.trim();
@@ -221,38 +221,38 @@ class SpeciesEffectLanguageBundleDto {
     }
 
     return SpeciesEffectLanguageBundleDto(
-      listSeparator: _readString('list_separator', ', '),
-      abilityScoreIncreaseTitle: _readString(
+      listSeparator: readString('list_separator', ', '),
+      abilityScoreIncreaseTitle: readString(
         'ability_score_increase_title',
         'Ability Score Increase',
       ),
-      ageTitle: _readString('age_title', 'Age'),
-      alignmentTitle: _readString('alignment_title', 'Alignment'),
-      sizeTitle: _readString('size_title', 'Size'),
-      speedTitle: _readString('speed_title', 'Speed'),
-      languagesTitle: _readString('languages_title', 'Languages'),
-      abilityChoiceDefaultOptions: _readString(
+      ageTitle: readString('age_title', 'Age'),
+      alignmentTitle: readString('alignment_title', 'Alignment'),
+      sizeTitle: readString('size_title', 'Size'),
+      speedTitle: readString('speed_title', 'Speed'),
+      languagesTitle: readString('languages_title', 'Languages'),
+      abilityChoiceDefaultOptions: readString(
         'ability_choice_default_options',
         'abilities of your choice',
       ),
       abilityChoicePreposition:
-          _readString('ability_choice_preposition', 'to'),
-      abilityChoiceSuffixTemplate: _readString(
+          readString('ability_choice_preposition', 'to'),
+      abilityChoiceSuffixTemplate: readString(
         'ability_choice_suffix_template',
         '(choose {count})',
       ),
-      alternativePrefix: _readString('alternative_prefix', ''),
-      abilityNames: _normalizeMap(json['ability_names']),
-      twoOptionSeparator: _readString('two_option_separator', ' or '),
-      finalOptionSeparator: _readString('final_option_separator', ', or '),
-      sizeLabels: _normalizeMap(json['size_labels']),
+      alternativePrefix: readString('alternative_prefix', ''),
+      abilityNames: normalizeMap(json['ability_names']),
+      twoOptionSeparator: readString('two_option_separator', ' or '),
+      finalOptionSeparator: readString('final_option_separator', ', or '),
+      sizeLabels: normalizeMap(json['size_labels']),
       sizeFallbackTemplate:
-          _readString('size_fallback_template', 'Your size is {size}.'),
-      speedFallbackTemplate: _readString(
+          readString('size_fallback_template', 'Your size is {size}.'),
+      speedFallbackTemplate: readString(
         'speed_fallback_template',
         'Your base walking speed is {speed} feet.',
       ),
-      fallbackLanguageCode: _readString(
+      fallbackLanguageCode: readString(
         'fallback_language_code',
         languageCode,
       ),

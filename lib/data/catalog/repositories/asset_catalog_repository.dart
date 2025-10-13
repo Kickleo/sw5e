@@ -9,6 +9,7 @@
 /// ---------------------------------------------------------------------------
 library;
 import 'package:sw5e_manager/data/catalog/data_sources/asset_bundle_catalog_data_source.dart';
+import 'package:sw5e_manager/data/catalog/dtos/catalog_dtos.dart';
 import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 

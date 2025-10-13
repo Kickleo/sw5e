@@ -18,7 +18,7 @@ void main() {
   setUp(SpeciesEffectLocalizationCatalog.resetToDefaults);
 
   test('enregistre les effets d\'une espèce Bith dans le brouillon', () async {
-    const SpeciesDef species = SpeciesDef(
+    final SpeciesDef species = SpeciesDef(
       id: 'bith',
       name: LocalizedText(en: 'Bith', fr: 'Bith'),
       speed: 30,
@@ -106,7 +106,7 @@ void main() {
   });
 
   test('formate les bonus de caractéristique avec choix multiples', () async {
-    const SpeciesDef species = SpeciesDef(
+    final SpeciesDef species = SpeciesDef(
       id: 'human',
       name: LocalizedText(en: 'Human', fr: 'Humain'),
       speed: 30,
@@ -131,7 +131,7 @@ void main() {
       ],
     );
 
-    const QuickCreateSpeciesDetails details =
+    final QuickCreateSpeciesDetails details =
         QuickCreateSpeciesDetails(species: species, traits: <TraitDef>[]);
 
     final InMemoryCharacterDraftRepository repository =
@@ -163,7 +163,7 @@ void main() {
   });
 
   test('localise les effets en français selon la langue fournie', () async {
-    const SpeciesDef species = SpeciesDef(
+    final SpeciesDef species = SpeciesDef(
       id: 'twilek',
       name: LocalizedText(en: 'Twi\'lek', fr: 'Twi\'lek'),
       speed: 35,
@@ -268,7 +268,7 @@ void main() {
     );
     addTearDown(SpeciesEffectLocalizationCatalog.resetToDefaults);
 
-    const SpeciesDef species = SpeciesDef(
+    final SpeciesDef species = SpeciesDef(
       id: 'bothan',
       name: LocalizedText(
         en: 'Bothan',
@@ -289,7 +289,7 @@ void main() {
       ),
     );
 
-    const QuickCreateSpeciesDetails details =
+    final QuickCreateSpeciesDetails details =
         QuickCreateSpeciesDetails(species: species, traits: <TraitDef>[]);
 
     final InMemoryCharacterDraftRepository repository =
