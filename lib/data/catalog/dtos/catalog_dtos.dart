@@ -10,6 +10,7 @@
 /// ---------------------------------------------------------------------------
 library;
 import 'package:meta/meta.dart';
+import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 
 /// LocalizedTextDto = version sérialisable de [LocalizedText].
@@ -93,6 +94,190 @@ class LocalizedTextDto {
         en: en,
         fr: fr,
         otherTranslations: otherTranslations,
+      );
+}
+
+@immutable
+class SpeciesEffectLocalizationConfigDto {
+  const SpeciesEffectLocalizationConfigDto({
+    required this.fallbackLanguageCode,
+    required this.bundles,
+  });
+
+  final String fallbackLanguageCode;
+  final Map<String, SpeciesEffectLanguageBundleDto> bundles;
+
+  factory SpeciesEffectLocalizationConfigDto.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final String fallback =
+        (json['fallback_language'] as String? ?? 'en').toLowerCase();
+    final Map<String, SpeciesEffectLanguageBundleDto> parsedBundles =
+        <String, SpeciesEffectLanguageBundleDto>{};
+    final dynamic rawBundles = json['bundles'];
+    if (rawBundles is Map) {
+      rawBundles.forEach((dynamic key, dynamic value) {
+        if (value is Map) {
+          final String language = key.toString().toLowerCase();
+          final Map<String, dynamic> normalized = <String, dynamic>{};
+          value.forEach((dynamic innerKey, dynamic innerValue) {
+            normalized[innerKey.toString()] = innerValue;
+          });
+          parsedBundles[language] = SpeciesEffectLanguageBundleDto.fromJson(
+            language,
+            normalized,
+          );
+        }
+      });
+    }
+    return SpeciesEffectLocalizationConfigDto(
+      fallbackLanguageCode: fallback,
+      bundles: Map<String, SpeciesEffectLanguageBundleDto>.unmodifiable(
+        parsedBundles,
+      ),
+    );
+  }
+
+  Map<String, SpeciesEffectLanguageBundle> toDomainBundles() {
+    return Map<String, SpeciesEffectLanguageBundle>.unmodifiable(
+      <String, SpeciesEffectLanguageBundle>{
+        for (final MapEntry<String, SpeciesEffectLanguageBundleDto> entry
+            in bundles.entries)
+          entry.key: entry.value.toDomain(),
+      },
+    );
+  }
+}
+
+@immutable
+class SpeciesEffectLanguageBundleDto {
+  const SpeciesEffectLanguageBundleDto({
+    required this.listSeparator,
+    required this.abilityScoreIncreaseTitle,
+    required this.ageTitle,
+    required this.alignmentTitle,
+    required this.sizeTitle,
+    required this.speedTitle,
+    required this.languagesTitle,
+    required this.abilityChoiceDefaultOptions,
+    required this.abilityChoicePreposition,
+    required this.abilityChoiceSuffixTemplate,
+    required this.alternativePrefix,
+    required this.abilityNames,
+    required this.twoOptionSeparator,
+    required this.finalOptionSeparator,
+    required this.sizeLabels,
+    required this.sizeFallbackTemplate,
+    required this.speedFallbackTemplate,
+    required this.fallbackLanguageCode,
+  });
+
+  final String listSeparator;
+  final String abilityScoreIncreaseTitle;
+  final String ageTitle;
+  final String alignmentTitle;
+  final String sizeTitle;
+  final String speedTitle;
+  final String languagesTitle;
+  final String abilityChoiceDefaultOptions;
+  final String abilityChoicePreposition;
+  final String abilityChoiceSuffixTemplate;
+  final String alternativePrefix;
+  final Map<String, String> abilityNames;
+  final String twoOptionSeparator;
+  final String finalOptionSeparator;
+  final Map<String, String> sizeLabels;
+  final String sizeFallbackTemplate;
+  final String speedFallbackTemplate;
+  final String fallbackLanguageCode;
+
+  factory SpeciesEffectLanguageBundleDto.fromJson(
+    String languageCode,
+    Map<String, dynamic> json,
+  ) {
+    Map<String, String> _normalizeMap(dynamic raw) {
+      if (raw is Map) {
+        final Map<String, String> normalized = <String, String>{};
+        raw.forEach((dynamic key, dynamic value) {
+          final String trimmed = value.toString().trim();
+          if (trimmed.isNotEmpty) {
+            normalized[key.toString().toLowerCase()] = trimmed;
+          }
+        });
+        return normalized;
+      }
+      return const <String, String>{};
+    }
+
+    String _readString(String key, String defaultValue) {
+      final dynamic value = json[key];
+      if (value is String) {
+        final String trimmed = value.trim();
+        if (trimmed.isNotEmpty) {
+          return trimmed;
+        }
+      }
+      return defaultValue;
+    }
+
+    return SpeciesEffectLanguageBundleDto(
+      listSeparator: _readString('list_separator', ', '),
+      abilityScoreIncreaseTitle: _readString(
+        'ability_score_increase_title',
+        'Ability Score Increase',
+      ),
+      ageTitle: _readString('age_title', 'Age'),
+      alignmentTitle: _readString('alignment_title', 'Alignment'),
+      sizeTitle: _readString('size_title', 'Size'),
+      speedTitle: _readString('speed_title', 'Speed'),
+      languagesTitle: _readString('languages_title', 'Languages'),
+      abilityChoiceDefaultOptions: _readString(
+        'ability_choice_default_options',
+        'abilities of your choice',
+      ),
+      abilityChoicePreposition:
+          _readString('ability_choice_preposition', 'to'),
+      abilityChoiceSuffixTemplate: _readString(
+        'ability_choice_suffix_template',
+        '(choose {count})',
+      ),
+      alternativePrefix: _readString('alternative_prefix', ''),
+      abilityNames: _normalizeMap(json['ability_names']),
+      twoOptionSeparator: _readString('two_option_separator', ' or '),
+      finalOptionSeparator: _readString('final_option_separator', ', or '),
+      sizeLabels: _normalizeMap(json['size_labels']),
+      sizeFallbackTemplate:
+          _readString('size_fallback_template', 'Your size is {size}.'),
+      speedFallbackTemplate: _readString(
+        'speed_fallback_template',
+        'Your base walking speed is {speed} feet.',
+      ),
+      fallbackLanguageCode: _readString(
+        'fallback_language_code',
+        languageCode,
+      ),
+    );
+  }
+
+  SpeciesEffectLanguageBundle toDomain() => SpeciesEffectLanguageBundle(
+        listSeparator: listSeparator,
+        abilityScoreIncreaseTitle: abilityScoreIncreaseTitle,
+        ageTitle: ageTitle,
+        alignmentTitle: alignmentTitle,
+        sizeTitle: sizeTitle,
+        speedTitle: speedTitle,
+        languagesTitle: languagesTitle,
+        abilityChoiceDefaultOptions: abilityChoiceDefaultOptions,
+        abilityChoicePreposition: abilityChoicePreposition,
+        abilityChoiceSuffixTemplate: abilityChoiceSuffixTemplate,
+        alternativePrefix: alternativePrefix,
+        abilityNames: abilityNames,
+        twoOptionSeparator: twoOptionSeparator,
+        finalOptionSeparator: finalOptionSeparator,
+        sizeLabels: sizeLabels,
+        sizeFallbackTemplate: sizeFallbackTemplate,
+        speedFallbackTemplate: speedFallbackTemplate,
+        fallbackLanguageCode: fallbackLanguageCode,
       );
 }
 

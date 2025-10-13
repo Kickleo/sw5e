@@ -7,6 +7,7 @@ library;
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/data/characters/repositories/in_memory_character_draft_repository.dart';
 import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
+import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_species_impl.dart';
@@ -14,6 +15,8 @@ import 'package:sw5e_manager/domain/characters/value_objects/character_effect.da
 import 'package:test/test.dart';
 
 void main() {
+  setUp(SpeciesEffectLocalizationCatalog.resetToDefaults);
+
   test('enregistre les effets d\'une espèce Bith dans le brouillon', () async {
     const SpeciesDef species = SpeciesDef(
       id: 'bith',
@@ -263,9 +266,7 @@ void main() {
         fallbackLanguageCode: 'en',
       ),
     );
-    addTearDown(() {
-      SpeciesEffectLocalizationCatalog.unregister('es');
-    });
+    addTearDown(SpeciesEffectLocalizationCatalog.resetToDefaults);
 
     const SpeciesDef species = SpeciesDef(
       id: 'bothan',

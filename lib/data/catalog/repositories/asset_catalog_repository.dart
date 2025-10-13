@@ -9,6 +9,7 @@
 /// ---------------------------------------------------------------------------
 library;
 import 'package:sw5e_manager/data/catalog/data_sources/asset_bundle_catalog_data_source.dart';
+import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 
 /// AssetCatalogRepository = adapter hors-ligne basé sur les assets JSON embarqués.
@@ -24,6 +25,7 @@ class AssetCatalogRepository implements CatalogRepository {
       _equipment; // Cache de l'équipement indexé par identifiant.
   Map<String, TraitDef>? _traits; // Cache des traits d'espèce/background.
   FormulasDef? _formulas; // Formules métier (singleton).
+  bool _speciesLocalizationConfigured = false;
 
   AssetCatalogRepository({AssetBundleCatalogDataSource? dataSource})
       : _dataSource = dataSource ??
@@ -115,6 +117,7 @@ class AssetCatalogRepository implements CatalogRepository {
 
   Future<void> _ensureSpecies() async {
     if (_species != null) return; // Cache déjà rempli.
+    await _ensureSpeciesEffectLocalization();
     final dtos = await _dataSource.loadSpecies();
     _species = <String, SpeciesDef>{
       for (final dto in dtos) dto.id: dto.toDomain(),
@@ -165,5 +168,20 @@ class AssetCatalogRepository implements CatalogRepository {
     _traits = <String, TraitDef>{
       for (final dto in dtos) dto.id: dto.toDomain(),
     };
+  }
+
+  Future<void> _ensureSpeciesEffectLocalization() async {
+    if (_speciesLocalizationConfigured) {
+      return;
+    }
+    final SpeciesEffectLocalizationConfigDto? config =
+        await _dataSource.loadSpeciesEffectLocalizations();
+    if (config != null && config.bundles.isNotEmpty) {
+      SpeciesEffectLocalizationCatalog.configure(
+        bundles: config.toDomainBundles(),
+        fallbackLanguageCode: config.fallbackLanguageCode,
+      );
+    }
+    _speciesLocalizationConfigured = true;
   }
 }

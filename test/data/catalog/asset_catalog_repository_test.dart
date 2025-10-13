@@ -8,12 +8,14 @@
 library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sw5e_manager/data/catalog/repositories/asset_catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 
 void main() {
   // Nécessaire pour accéder à rootBundle dans les tests
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('charge le catalogue depuis assets/catalog/*', () async {
+    SpeciesEffectLocalizationCatalog.resetToDefaults();
     final repo = AssetCatalogRepository();
 
     // Skills
@@ -46,5 +48,13 @@ void main() {
     final formulas = await repo.getFormulas();
     expect(formulas.rulesVersion, '2025-10-06');
     expect(formulas.superiorityDiceByClass['guardian']!.count, 0);
+
+    final Map<String, SpeciesEffectLanguageBundle> bundles =
+        SpeciesEffectLocalizationCatalog.snapshot();
+    expect(bundles.keys, containsAll(<String>['en', 'fr', 'es']));
+    expect(
+      bundles['es']!.abilityScoreIncreaseTitle,
+      'Aumento de característica',
+    );
   });
 }
