@@ -16,6 +16,7 @@ class _ManualAbilityField extends HookWidget {
       text: initialValue?.toString() ?? '',
     );
     final errorText = useState<String?>(null);
+    final l10n = context.l10n;
 
     useEffect(() {
       final newText = initialValue?.toString() ?? '';
@@ -37,26 +38,26 @@ class _ManualAbilityField extends HookWidget {
       controller: controller,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        labelText: 'Score',
+        labelText: l10n.abilityScoreLabel,
         border: const OutlineInputBorder(),
         errorText: errorText.value,
       ),
       onChanged: (text) {
         final trimmed = text.trim();
         if (trimmed.isEmpty) {
-          errorText.value = 'Requis';
+          errorText.value = l10n.manualScoreRequired;
           onChanged(null);
           return;
         }
         final value = int.tryParse(trimmed);
         if (value == null) {
-          errorText.value = 'Entrez un nombre';
+          errorText.value = l10n.manualScoreNumberError;
           onChanged(null);
           return;
         }
         if (value < AbilityScore.min || value > AbilityScore.max) {
           errorText.value =
-              'Doit être entre ${AbilityScore.min} et ${AbilityScore.max}';
+              l10n.manualScoreRangeError(AbilityScore.min, AbilityScore.max);
           onChanged(null);
           return;
         }

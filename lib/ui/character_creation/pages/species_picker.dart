@@ -9,6 +9,7 @@
 library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
@@ -76,13 +77,13 @@ class _SpeciesPickerView extends StatelessWidget {
       builder: (BuildContext context, SpeciesPickerState state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Choisir une espèce'),
+            title: Text(context.l10n.speciesPickerTitle),
             actions: <Widget>[
               TextButton(
                 onPressed: state.hasSelection
                     ? () => Navigator.of(context).pop(state.selectedSpeciesId)
                     : null,
-                child: const Text('Sélectionner'),
+                child: Text(context.l10n.pickerSelectAction),
               ),
             ],
           ),
@@ -101,12 +102,13 @@ class _SpeciesPickerView extends StatelessWidget {
       return const Center(child: CircularProgressIndicator());
     }
 
+    final l10n = context.l10n;
     if (state.hasError && state.speciesIds.isEmpty) {
-      return Center(child: Text(state.errorMessage ?? 'Erreur inconnue'));
+      return Center(child: Text(state.errorMessage ?? l10n.unknownError));
     }
 
     if (state.speciesIds.isEmpty) {
-      return const Center(child: Text('Aucune espèce disponible'));
+      return Center(child: Text(l10n.noSpeciesAvailable));
     }
 
     return Row(
@@ -166,9 +168,10 @@ class _SpeciesDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SpeciesDef? selected = state.selectedSpecies;
+    final l10n = context.l10n;
 
     if (selected == null) {
-      return const Center(child: Text('Aucune espèce sélectionnée'));
+      return Center(child: Text(l10n.noSpeciesSelected));
     }
 
     return Padding(
@@ -176,27 +179,27 @@ class _SpeciesDetails extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           Text(
-            _localizedName(selected.name),
+            _localizedName(l10n, selected.name),
             style: theme.textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
-          Text('Identifiant : ${selected.id}'),
+          Text(l10n.speciesIdentifier(selected.id)),
           const SizedBox(height: 12),
-          Text('Vitesse : ${selected.speed}'),
-          Text('Taille : ${selected.size}'),
+          Text(l10n.speciesSpeed(selected.speed.toString())),
+          Text(l10n.speciesSize(selected.size.toString())),
           const SizedBox(height: 16),
           Text(
-            'Traits d\'espèce',
+            l10n.speciesPickerTraitsTitle,
             style: theme.textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
           if (state.selectedTraits.isEmpty)
-            const Text('Aucun trait listé pour cette espèce.')
+            Text(l10n.speciesPickerNoTraits)
           else
             ...state.selectedTraits.map(
               (TraitDef trait) => Card(
                 child: ListTile(
-                  title: Text(_localizedName(trait.name)),
+                  title: Text(_localizedName(l10n, trait.name)),
                   subtitle: Text(trait.description),
                 ),
               ),
@@ -207,8 +210,11 @@ class _SpeciesDetails extends StatelessWidget {
   }
 }
 
-String _localizedName(LocalizedText text) {
-  return text.fr.isNotEmpty ? text.fr : text.en;
+String _localizedName(AppLocalizations l10n, LocalizedText text) {
+  if (l10n.isFrench) {
+    return text.fr.isNotEmpty ? text.fr : text.en;
+  }
+  return text.en.isNotEmpty ? text.en : text.fr;
 }
 
 String _titleCase(String slug) {

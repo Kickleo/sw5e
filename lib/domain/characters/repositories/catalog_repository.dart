@@ -82,14 +82,14 @@ class ClassLevel1Data {
   final String? startingCreditsRoll; // Formule alternative (ex: "4d4 * 100").
   final List<StartingEquipmentLine>
       startingEquipment; // Pack d'équipement par défaut.
-  final List<String>
-      startingEquipmentOptions; // Identifiants d'options à choisir.
+  final List<LocalizedText>
+      startingEquipmentOptions; // Libellés localisés des options.
   const ClassLevel1Data({
     required this.proficiencies,
     this.startingCredits,
     this.startingCreditsRoll,
     required this.startingEquipment,
-    this.startingEquipmentOptions = const <String>[],
+    this.startingEquipmentOptions = const <LocalizedText>[],
   });
 }
 
@@ -104,11 +104,13 @@ class StartingEquipmentLine {
 class ClassDef {
   final String id; // slug (ex: "guardian")
   final LocalizedText name; // Titre localisé.
+  final LocalizedText? description; // Présentation courte.
   final int hitDie; // ex: 10
   final ClassLevel1Data level1; // Informations spécifiques au niveau 1.
   const ClassDef({
     required this.id,
     required this.name,
+    this.description,
     required this.hitDie,
     required this.level1,
   });

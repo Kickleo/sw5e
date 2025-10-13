@@ -27,6 +27,7 @@ class _SpeciesStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -35,9 +36,9 @@ class _SpeciesStep extends StatelessWidget {
             Expanded(
               child: DropdownButtonFormField<String>(
                 initialValue: selectedSpecies,
-                decoration: const InputDecoration(
-                  labelText: 'Espèce',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.speciesLabel,
+                  border: const OutlineInputBorder(),
                 ),
                 items: species
                     .map(
@@ -54,7 +55,7 @@ class _SpeciesStep extends StatelessWidget {
             OutlinedButton.icon(
               onPressed: onOpenPicker,
               icon: const Icon(Icons.search),
-              label: const Text('Parcourir'),
+              label: Text(l10n.speciesBrowse),
             ),
           ],
         ),
@@ -64,11 +65,11 @@ class _SpeciesStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Effets d’espèce',
+                l10n.speciesEffectsTitle,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
-              ...effects.map(_buildEffectCard),
+              ...effects.map((effect) => _buildEffectCard(context, effect)),
             ],
           )
         else if (traits.isNotEmpty)
@@ -76,7 +77,7 @@ class _SpeciesStep extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Traits d’espèce',
+                l10n.speciesTraitsTitle,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
@@ -93,12 +94,13 @@ class _SpeciesStep extends StatelessWidget {
             ],
           )
         else
-          const Text('Aucun trait spécifique pour cette espèce.'),
+          Text(l10n.noSpeciesTraits),
       ],
     );
   }
 
-  Widget _buildEffectCard(CharacterEffect effect) {
+  Widget _buildEffectCard(BuildContext context, CharacterEffect effect) {
+    final l10n = context.l10n;
     final String title = effect.title.isNotEmpty ? effect.title : effect.source;
     return Card(
       child: ListTile(
@@ -110,7 +112,7 @@ class _SpeciesStep extends StatelessWidget {
             Text(effect.description),
             const SizedBox(height: 8),
             Text(
-              _categoryLabel(effect.category),
+              _categoryLabel(l10n, effect.category),
               style: const TextStyle(fontStyle: FontStyle.italic),
             ),
           ],
@@ -119,14 +121,14 @@ class _SpeciesStep extends StatelessWidget {
     );
   }
 
-  String _categoryLabel(CharacterEffectCategory category) {
+  String _categoryLabel(AppLocalizations l10n, CharacterEffectCategory category) {
     switch (category) {
       case CharacterEffectCategory.passive:
-        return 'Effet passif';
+        return l10n.effectPassive;
       case CharacterEffectCategory.action:
-        return 'Action';
+        return l10n.effectAction;
       case CharacterEffectCategory.bonusAction:
-        return 'Action bonus';
+        return l10n.effectBonusAction;
     }
   }
 }

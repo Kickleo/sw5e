@@ -15,13 +15,28 @@
         "amount": 1
       }
     ],
-    "age": "Bith reach adulthood in their late teens and live less than a century.",
-    "alignment": "Biths' benevolent nature causes them to tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Bith reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Bith atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Biths' benevolent nature causes them to tend toward the light side, though there are exceptions.",
+      "fr": "La nature bienveillante des Bith les pousse vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Bith typically stand 5 to 6 feet tall and generally weigh about 120 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Bith typically stand 5 to 6 feet tall and generally weigh about 120 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Bith mesurent généralement entre 1,5 et 1,8 mètre et pèsent autour de 55 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic, Bith, and one more language of your choice.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic, Bith, and one more language of your choice.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique, le bith et une autre langue de votre choix."
+    },
     "traits": [
       "detail-oriented",
       "keen-hearing-and-smell",
@@ -47,13 +62,28 @@
         "amount": 1
       }
     ],
-    "age": "Bothans reach adulthood in their late teens and live less than a century.",
-    "alignment": "Bothans' duplicitous nature causes them to tend toward the dark side, though there are exceptions.",
+    "age": {
+      "en": "Bothans reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Bothans atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Bothans' duplicitous nature causes them to tend toward the dark side, though there are exceptions.",
+      "fr": "La nature duplice des Bothans les pousse vers le côté obscur, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Bothans stand 4-5 feet tall and weigh under 100 pounds. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Bothans stand 4-5 feet tall and weigh under 100 pounds. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Bothans mesurent entre 1,2 et 1,5 mètre et pèsent moins de 45 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Bothese. Bothese had a great influence on the forming of Galactic Basic; the two languages share many cognates.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Bothese. Bothese had a great influence on the forming of Galactic Basic; the two languages share many cognates.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le bothese. Le bothese a fortement influencé la formation du basique, et les deux langues partagent de nombreux cognats."
+    },
     "traits": [
       "naturally-stealthy",
       "nimble-escape"
@@ -75,13 +105,28 @@
         "amount": 1
       }
     ],
-    "age": "Cathar reach adulthood in their late teens and live less than a century.",
-    "alignment": "Cathar tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Cathar reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Cathars atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Cathar tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les Cathars n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "medium",
-    "size_text": "Cathar range from 5 to 7 feet tall, and can weigh up to 300 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Cathar range from 5 to 7 feet tall, and can weigh up to 300 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Cathars mesurent de 1,5 à 2,1 mètres et peuvent peser jusqu'à 135 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Catharese.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Catharese.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le cathar."
+    },
     "traits": [
       "cat-s-claws",
       "darkvision",
@@ -106,13 +151,28 @@
         "amount": 1
       }
     ],
-    "age": "Cereans reach adulthood in their late teens and live less than a century.",
-    "alignment": "Cereans' altruistic nature causes them to tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Cereans reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Céréens atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Cereans' altruistic nature causes them to tend toward the light side, though there are exceptions.",
+      "fr": "La nature altruiste des Céréens les pousse vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Cereans typically stand between 6 and 7 feet tall and weigh about 150 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Cereans typically stand between 6 and 7 feet tall and weigh about 150 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Céréens mesurent généralement entre 1,8 et 2,1 mètres et pèsent environ 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Cerean. Cerean is characterized by its gravelly sounds.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Cerean. Cerean is characterized by its gravelly sounds.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le céréen, une langue caractérisée par ses sonorités rocailleuses."
+    },
     "traits": [
       "intuitive-initiative",
       "natural-instinct",
@@ -137,13 +197,28 @@
         "amount": 1
       }
     ],
-    "age": "Chiss reach adulthood in their late teens and live less than a century.",
-    "alignment": "Chiss' tactical and selfish nature cause them to tend toward lawful dark side, though there are exceptions.",
+    "age": {
+      "en": "Chiss reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Chiss atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Chiss' tactical and selfish nature cause them to tend toward lawful dark side, though there are exceptions.",
+      "fr": "Leur nature tacticienne et égoïste pousse les Chiss vers un côté obscur loyal, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Chiss typically stand between 5 and 6 feet tall and weigh about 160 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Chiss typically stand between 5 and 6 feet tall and weigh about 160 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Chiss mesurent généralement entre 1,5 et 1,8 mètre et pèsent environ 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic, Cheunh, and your choice of Minnisiat or Sy Bisti. Cheunh is a complex language that is difficult for non-chiss to learn. Chiss take pride in this difficulty. Communications with outsiders are conducted through local trade-languages like Minnisiat or Sy Bisti.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic, Cheunh, and your choice of Minnisiat or Sy Bisti. Cheunh is a complex language that is difficult for non-chiss to learn. Chiss take pride in this difficulty. Communications with outsiders are conducted through local trade-languages like Minnisiat or Sy Bisti.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique, le cheunh et, au choix, le minnisiat ou le sy bisti. Le cheunh est une langue complexe, difficile à apprendre pour les non-Chiss, et cette difficulté fait leur fierté. Les échanges avec les étrangers se font via des langues commerciales locales comme le minnisiat ou le sy bisti."
+    },
     "traits": [
       "martial-proficiency",
       "politically-minded",
@@ -171,13 +246,28 @@
         "amount": 1
       }
     ],
-    "age": "Droids don't age, though they require maintenance to retain functionality.",
-    "alignment": "Droids tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Droids don't age, though they require maintenance to retain functionality.",
+      "fr": "Les droïdes ne vieillissent pas, mais nécessitent un entretien pour rester fonctionnels."
+    },
+    "alignment": {
+      "en": "Droids tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les droïdes n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "medium",
-    "size_text": "Class I droids stand between 5 and 6 feet tall and weigh about 170 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Class I droids stand between 5 and 6 feet tall and weigh about 170 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les droïdes de classe I mesurent entre 1,5 et 1,8 mètre et pèsent environ 75 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 25,
-    "speed_text": "Your base walking speed is 25 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and one language of your choice. You can understand spoken and written Binary, but you can not speak it.",
+    "speed_text": {
+      "en": "Your base walking speed is 25 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 7,5 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and one language of your choice. You can understand spoken and written Binary, but you can not speak it.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et une langue de votre choix. Vous comprenez le binaire, parlé comme écrit, mais vous êtes incapable de le parler."
+    },
     "traits": [
       "type",
       "armor-integration",
@@ -210,13 +300,28 @@
         "amount": 1
       }
     ],
-    "age": "Droids don't age, though they require maintenance to retain functionality.",
-    "alignment": "Droids tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Droids don't age, though they require maintenance to retain functionality.",
+      "fr": "Les droïdes ne vieillissent pas, mais nécessitent un entretien pour rester fonctionnels."
+    },
+    "alignment": {
+      "en": "Droids tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les droïdes n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "small",
-    "size_text": "Class II droids stand 2 to 4 feet tall and weigh about 70 lbs. Regardless of your position in that range, your size is Small.",
+    "size_text": {
+      "en": "Class II droids stand 2 to 4 feet tall and weigh about 70 lbs. Regardless of your position in that range, your size is Small.",
+      "fr": "Les droïdes de classe II mesurent entre 0,6 et 1,2 mètre et pèsent environ 30 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Petite."
+    },
     "speed": 25,
-    "speed_text": "Your base walking speed is 25 feet.",
-    "languages": "You can speak, read, and write Binary. You can understand spoken and written Galactic Basic and one language of your choice, but you can not speak them.",
+    "speed_text": {
+      "en": "Your base walking speed is 25 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 7,5 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Binary. You can understand spoken and written Galactic Basic and one language of your choice, but you can not speak them.",
+      "fr": "Vous pouvez parler, lire et écrire le binaire. Vous comprenez le basique galactique, parlé comme écrit, ainsi qu'une langue supplémentaire de votre choix, mais vous êtes incapable de les parler."
+    },
     "traits": [
       "type",
       "armor-integration",
@@ -251,13 +356,28 @@
         "amount": 1
       }
     ],
-    "age": "Droids don't age, though they require maintenance to retain functionality.",
-    "alignment": "Droids tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Droids don't age, though they require maintenance to retain functionality.",
+      "fr": "Les droïdes ne vieillissent pas, mais nécessitent un entretien pour rester fonctionnels."
+    },
+    "alignment": {
+      "en": "Droids tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les droïdes n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "medium",
-    "size_text": "Class III droids stand around the height of humans and weigh about 150 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Class III droids stand around the height of humans and weigh about 150 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les droïdes de classe III atteignent une taille comparable à celle des humains et pèsent environ 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 25,
-    "speed_text": "Your base walking speed is 25 feet.",
-    "languages": "You can speak, read, and write all registered languages.",
+    "speed_text": {
+      "en": "Your base walking speed is 25 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 7,5 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write all registered languages.",
+      "fr": "Vous pouvez parler, lire et écrire toutes les langues enregistrées."
+    },
     "traits": [
       "type",
       "armor-integration",
@@ -290,13 +410,28 @@
         "amount": 1
       }
     ],
-    "age": "Droids don't age, though they require maintenance to retain functionality.",
-    "alignment": "Droids tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Droids don't age, though they require maintenance to retain functionality.",
+      "fr": "Les droïdes ne vieillissent pas, mais nécessitent un entretien pour rester fonctionnels."
+    },
+    "alignment": {
+      "en": "Droids tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les droïdes n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "medium",
-    "size_text": "Class IV droids typically stand between 5 and 7 feet and weigh about 150 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Class IV droids typically stand between 5 and 7 feet and weigh about 150 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les droïdes de classe IV mesurent généralement entre 1,5 et 2,1 mètres et pèsent environ 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and one language of your choice. You can understand spoken and written Binary, but you can not speak it.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and one language of your choice. You can understand spoken and written Binary, but you can not speak it.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et une langue de votre choix. Vous comprenez le binaire, parlé comme écrit, mais vous êtes incapable de le parler."
+    },
     "traits": [
       "type",
       "armor-integration",
@@ -329,13 +464,28 @@
         "amount": 1
       }
     ],
-    "age": "Droids don't age, though they require maintenance to retain functionality.",
-    "alignment": "Droids tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Droids don't age, though they require maintenance to retain functionality.",
+      "fr": "Les droïdes ne vieillissent pas, mais nécessitent un entretien pour rester fonctionnels."
+    },
+    "alignment": {
+      "en": "Droids tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les droïdes n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "medium",
-    "size_text": "Class V droids typically stand between 5 and 7 feet and weigh around 260 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Class V droids typically stand between 5 and 7 feet and weigh around 260 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les droïdes de classe V mesurent généralement entre 1,5 et 2,1 mètres et pèsent près de 120 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Binary. You can understand spoken and written Galactic Basic and one language of your choice, but you can not speak it.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Binary. You can understand spoken and written Galactic Basic and one language of your choice, but you can not speak it.",
+      "fr": "Vous pouvez parler, lire et écrire le binaire. Vous comprenez le basique galactique, parlé comme écrit, ainsi qu'une langue supplémentaire de votre choix, mais vous ne pouvez pas les parler."
+    },
     "traits": [
       "type",
       "armor-integration",
@@ -365,13 +515,28 @@
         "amount": 1
       }
     ],
-    "age": "Devaronians reach adulthood in their late teens and live less than a century.",
-    "alignment": "Devaronians' greediness causes them to tend toward chaotic balanced, though there are exceptions.",
+    "age": {
+      "en": "Devaronians reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Devaroniens atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Devaronians' greediness causes them to tend toward chaotic balanced, though there are exceptions.",
+      "fr": "La cupidité des Devaroniens les pousse vers un alignement chaotique neutre, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Devaronians typically stand between 5 and 6 feet tall and weigh about 160 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Devaronians typically stand between 5 and 6 feet tall and weigh about 160 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Devaroniens mesurent généralement entre 1,5 et 1,8 mètre et pèsent environ 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Devaronese. Devaronese is characterized by grunts and grumbles. It is rare to hear a Devaronian speak it anywhere other than their homeworld of Devaron.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Devaronese. Devaronese is characterized by grunts and grumbles. It is rare to hear a Devaronian speak it anywhere other than their homeworld of Devaron.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le devaronien, une langue caractérisée par ses grognements et grondements. Il est rare d'entendre un Devaronien la parler ailleurs que sur leur monde natal, Devaron."
+    },
     "traits": [
       "curiosity",
       "heat-adaptation",
@@ -397,13 +562,28 @@
         "amount": 1
       }
     ],
-    "age": "Duros reach adulthood in their 20s and live an average of 150 years.",
-    "alignment": "Duros tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Duros reach adulthood in their 20s and live an average of 150 years.",
+      "fr": "Les Duros atteignent l'âge adulte dans la vingtaine et vivent en moyenne 150 ans."
+    },
+    "alignment": {
+      "en": "Duros tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les Duros n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "medium",
-    "size_text": "Duros stand around 6 feet tall and weigh around 160 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Duros stand around 6 feet tall and weigh around 160 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Duros mesurent environ 1,8 mètre et pèsent autour de 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Durese. Durese is a common interstellar tongue used by prominent spacers and traders.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Durese. Durese is a common interstellar tongue used by prominent spacers and traders.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le durese, une langue interstellaire courante utilisée par les spacers et les marchands."
+    },
     "traits": [
       "darkvision",
       "galactic-traveler",
@@ -428,13 +608,28 @@
         "amount": 1
       }
     ],
-    "age": "Ewoks reach adulthood in their early teens and live about 50 years.",
-    "alignment": "Ewoks are inherently accepting, albeit naive, and tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Ewoks reach adulthood in their early teens and live about 50 years.",
+      "fr": "Les Ewoks atteignent l'âge adulte dès le début de l'adolescence et vivent environ 50 ans."
+    },
+    "alignment": {
+      "en": "Ewoks are inherently accepting, albeit naive, and tend toward the light side, though there are exceptions.",
+      "fr": "Les Ewoks sont naturellement accueillants, quoique naïfs, et penchent vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "small",
-    "size_text": "Ewoks stand between 3 and 4 feet tall and weigh about 50 lbs. Regardless of your position in that range, your size is Small.",
+    "size_text": {
+      "en": "Ewoks stand between 3 and 4 feet tall and weigh about 50 lbs. Regardless of your position in that range, your size is Small.",
+      "fr": "Les Ewoks mesurent entre 0,9 et 1,2 mètre et pèsent environ 23 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Petite."
+    },
     "speed": 25,
-    "speed_text": "Your base walking speed is 25 feet.",
-    "languages": "You can speak, read, and write Ewokese. You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it.",
+    "speed_text": {
+      "en": "Your base walking speed is 25 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 7,5 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Ewokese. You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it.",
+      "fr": "Vous pouvez parler, lire et écrire l'ewokese. Vous comprenez le basique galactique, parlé comme écrit, mais vos cordes vocales ne vous permettent pas de le parler."
+    },
     "traits": [
       "crude-weapon-specialists",
       "keen-smell",
@@ -457,13 +652,28 @@
         "amount": 2
       }
     ],
-    "age": "Gamorreans reach adulthood in their early teens and live no more than 70 years.",
-    "alignment": "Gamorrean culture causes them to tend toward chaos, though there are exceptions.",
+    "age": {
+      "en": "Gamorreans reach adulthood in their early teens and live no more than 70 years.",
+      "fr": "Les Gamorréens atteignent l'âge adulte dès le début de l'adolescence et ne vivent pas au-delà de 70 ans."
+    },
+    "alignment": {
+      "en": "Gamorrean culture causes them to tend toward chaos, though there are exceptions.",
+      "fr": "La culture gamorréenne les pousse vers le chaos, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Gamorreans typically stand between 5 and 6 feet tall and weigh up to 200 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Gamorreans typically stand between 5 and 6 feet tall and weigh up to 200 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Gamorréens mesurent généralement entre 1,5 et 1,8 mètre et peuvent peser jusqu'à 90 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Gamorrese. You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it. Gamorrese is characterized by its grunts and squeals, and its writing is a crude, pictographic style.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Gamorrese. You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it. Gamorrese is characterized by its grunts and squeals, and its writing is a crude, pictographic style.",
+      "fr": "Vous pouvez parler, lire et écrire le gamorréen. Vous comprenez le basique galactique, parlé comme écrit, mais vos cordes vocales ne vous permettent pas de le parler. Le gamorréen se caractérise par ses grognements et couinements, et son écriture est un style pictographique rudimentaire."
+    },
     "traits": [
       "gamorrean-toughness",
       "gamorrean-weaponry",
@@ -486,13 +696,28 @@
         "amount": 1
       }
     ],
-    "age": "Gungans reach adulthood in their early teens and live about 70 years.",
-    "alignment": "Gungans tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Gungans reach adulthood in their early teens and live about 70 years.",
+      "fr": "Les Gungans atteignent l'âge adulte dès le début de l'adolescence et vivent environ 70 ans."
+    },
+    "alignment": {
+      "en": "Gungans tend toward the light side, though there are exceptions.",
+      "fr": "Les Gungans penchent vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Gungans typically stand 6 to 7 feet tall and weigh about 170 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Gungans typically stand 6 to 7 feet tall and weigh about 170 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Gungans mesurent généralement entre 1,8 et 2,1 mètres et pèsent environ 75 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Gungan. When speaking Galactic Basic, you often have trouble with word tenses and infinitives; this usually has a comical effect.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Gungan. When speaking Galactic Basic, you often have trouble with word tenses and infinitives; this usually has a comical effect.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le gungan. Lorsque vous parlez le basique, vous avez souvent du mal avec les temps et les infinitifs, ce qui prête généralement à sourire."
+    },
     "traits": [
       "amphibious",
       "darkvision",
@@ -533,13 +758,28 @@
         "alternative": true
       }
     ],
-    "age": "Humans reach adulthood in their late teens and live less than a century.",
-    "alignment": "Humans tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Humans reach adulthood in their late teens and live less than a century.",
+      "fr": "Les humains atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Humans tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les humains n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "medium",
-    "size_text": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les humains présentent une grande variété de tailles et de morphologies, d'à peine 1,5 mètre à plus de 1,8 mètre. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: trandoshan curses, twi'lek musical expressions, chiss military phrases, and so on.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: trandoshan curses, twi'lek musical expressions, chiss military phrases, and so on.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et une langue supplémentaire de votre choix. Les humains apprennent généralement les langues des peuples avec lesquels ils interagissent, y compris des dialectes obscurs, et parsèment souvent leurs propos d'expressions empruntées : jurons trandoshans, tournures musicales twi'leks, phrases militaires chiss, etc."
+    },
     "traits": [
       "defiant",
       "human-versatility"
@@ -561,13 +801,28 @@
         "amount": 1
       }
     ],
-    "age": "Ithorians reach adulthood in their late teens and live an average of 85 years.",
-    "alignment": "Ithorians tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Ithorians reach adulthood in their late teens and live an average of 85 years.",
+      "fr": "Les Ithoriens atteignent l'âge adulte vers la fin de l'adolescence et vivent en moyenne 85 ans."
+    },
+    "alignment": {
+      "en": "Ithorians tend toward the light side, though there are exceptions.",
+      "fr": "Les Ithoriens penchent vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Shorter Ithorians stand around 6 feet while taller reach over 7 and a half. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Shorter Ithorians stand around 6 feet while taller reach over 7 and a half. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Ithoriens les plus petits mesurent environ 1,8 mètre tandis que les plus grands dépassent 2,3 mètres. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Ithorese. You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Ithorese. You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it.",
+      "fr": "Vous pouvez parler, lire et écrire l'ithorésien. Vous comprenez le basique galactique, parlé comme écrit, mais vos cordes vocales ne vous permettent pas de le parler."
+    },
     "traits": [
       "call-for-peace",
       "hold-breath",
@@ -591,13 +846,28 @@
         "amount": 1
       }
     ],
-    "age": "Jawas are considered adults when they make their first sale and live less than a century.",
-    "alignment": "Jawas tendency to steal and swindle causes them to tend towards the dark side, though there are exceptions.",
+    "age": {
+      "en": "Jawas are considered adults when they make their first sale and live less than a century.",
+      "fr": "Les Jawas sont considérés comme adultes lorsqu'ils réalisent leur première vente et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Jawas tendency to steal and swindle causes them to tend towards the dark side, though there are exceptions.",
+      "fr": "Le penchant des Jawas pour le vol et l'escroquerie les entraîne vers le côté obscur, bien qu'il existe des exceptions."
+    },
     "size": "small",
-    "size_text": "Jawas stand around 3 to 4 feet tall and weigh about 40 lbs. Regardless of your position in that range, your size is Small.",
+    "size_text": {
+      "en": "Jawas stand around 3 to 4 feet tall and weigh about 40 lbs. Regardless of your position in that range, your size is Small.",
+      "fr": "Les Jawas mesurent entre 0,9 et 1,2 mètre et pèsent environ 18 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Petite."
+    },
     "speed": 25,
-    "speed_text": "Your base walking speed is 25 feet.",
-    "languages": "You can speak, read, and write Jawaese (and the Jawa Trade Language). You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it. Jawaese blends quickly spoken, semi-meaningless syllables with scents to be understood. To more easily bargain and trade with other species, they rely on a simplified variant called the Jawa Trade language which removes the use of scent.",
+    "speed_text": {
+      "en": "Your base walking speed is 25 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 7,5 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Jawaese (and the Jawa Trade Language). You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it. Jawaese blends quickly spoken, semi-meaningless syllables with scents to be understood. To more easily bargain and trade with other species, they rely on a simplified variant called the Jawa Trade language which removes the use of scent.",
+      "fr": "Vous pouvez parler, lire et écrire le jawa et la langue commerciale jawa. Vous comprenez le basique galactique, parlé comme écrit, mais vos cordes vocales ne vous permettent pas de le parler. Le jawa combine des syllabes rapides et quasi dénuées de sens à des senteurs pour être compris. Pour négocier plus facilement avec d'autres espèces, ils utilisent une variante simplifiée, la langue commerciale jawa, dépourvue de composante olfactive."
+    },
     "traits": [
       "darkvision",
       "grovel-cower-and-beg",
@@ -624,13 +894,28 @@
         "amount": 1
       }
     ],
-    "age": "Kel dor reach adulthood in their late teens and live less than a century.",
-    "alignment": "Kel dors' structured nature causes them to tend toward lawful balanced, though there are exceptions.",
+    "age": {
+      "en": "Kel dor reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Kel Dor atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Kel dors' structured nature causes them to tend toward lawful balanced, though there are exceptions.",
+      "fr": "La nature organisée des Kel Dor les pousse vers un alignement neutre loyal, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Kel dor typically stand around 6 feet tall and weigh about 160 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Kel dor typically stand around 6 feet tall and weigh about 160 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Kel Dor mesurent généralement près de 1,8 mètre et pèsent environ 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Kel Dor.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Kel Dor.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le kel dor."
+    },
     "traits": [
       "darkvision",
       "foreign-biology",
@@ -658,13 +943,28 @@
         "amount": 1
       }
     ],
-    "age": "Mon calamari reach adulthood in their late teens and live less than a century.",
-    "alignment": "Mon calamaris' love of the arts cause them to tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Mon calamari reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Mon Calamari atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Mon calamaris' love of the arts cause them to tend toward the light side, though there are exceptions.",
+      "fr": "L'amour des arts des Mon Calamari les pousse vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Mon calamari stand between 5 and 6 feet tall and rarely weigh more than 150 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Mon calamari stand between 5 and 6 feet tall and rarely weigh more than 150 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Mon Calamari mesurent entre 1,5 et 1,8 mètre et dépassent rarement 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic, Mon Cal, and one language of your choice.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic, Mon Cal, and one language of your choice.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique, le mon cal et une langue de votre choix."
+    },
     "traits": [
       "amphibious",
       "darkvision",
@@ -689,13 +989,28 @@
         "amount": 1
       }
     ],
-    "age": "Nautolans reach adulthood in their early teens and live about 70 years on average.",
-    "alignment": "Nautolans' benevolence cause them to tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Nautolans reach adulthood in their early teens and live about 70 years on average.",
+      "fr": "Les Nautolans atteignent l'âge adulte dès le début de l'adolescence et vivent en moyenne environ 70 ans."
+    },
+    "alignment": {
+      "en": "Nautolans' benevolence cause them to tend toward the light side, though there are exceptions.",
+      "fr": "La bienveillance des Nautolans les pousse vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Nautolans typically stand 5 to 6 feet tall and rarely weigh more than 160 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Nautolans typically stand 5 to 6 feet tall and rarely weigh more than 160 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Nautolans mesurent généralement entre 1,5 et 1,8 mètre et dépassent rarement 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Nautila. Nautila is unique in that it can only be properly pronounced underwater due to its use of pheromones in addition to spoken sounds. In any other environment, the language loses a great amount of detail; that nautolans find this annoying.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Nautila. Nautila is unique in that it can only be properly pronounced underwater due to its use of pheromones in addition to spoken sounds. In any other environment, the language loses a great amount of detail; that nautolans find this annoying.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le nautila. Cette langue est unique car elle ne peut être prononcée correctement que sous l'eau, combinant sons et phéromones. Dans tout autre environnement, elle perd une grande partie de ses nuances, ce que les Nautolans trouvent frustrant."
+    },
     "traits": [
       "acute-smell",
       "amphibious",
@@ -721,13 +1036,28 @@
         "amount": 1
       }
     ],
-    "age": "Rodians reach adulthood in their late teens and live less than a century.",
-    "alignment": "Rodian culture's violent focus causes them to tend toward the dark side, though there are exceptions.",
+    "age": {
+      "en": "Rodians reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Rodians atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Rodian culture's violent focus causes them to tend toward the dark side, though there are exceptions.",
+      "fr": "Le penchant violent de la culture rodienne les pousse vers le côté obscur, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Rodians typically stand 5 to 6 feet tall and weigh 160 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Rodians typically stand 5 to 6 feet tall and weigh 160 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Rodians mesurent généralement entre 1,5 et 1,8 mètre et pèsent près de 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Rodese. Rodians can communicate with each other using pheromones. Force-sensitives can detect this communication, though they can’t understand it.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Rodese. Rodians can communicate with each other using pheromones. Force-sensitives can detect this communication, though they can’t understand it.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le rodien. Les Rodians peuvent communiquer entre eux par phéromones. Les individus sensibles à la Force perçoivent ces échanges sans pouvoir les comprendre."
+    },
     "traits": [
       "adept-climbers",
       "darkvision",
@@ -755,13 +1085,28 @@
         "amount": 1
       }
     ],
-    "age": "Sith reach adulthood in their late teens and live less than a century.",
-    "alignment": "The cruelty of the Sith causes them to tend toward chaotic dark side, though there are exceptions.",
+    "age": {
+      "en": "Sith reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Sith atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "The cruelty of the Sith causes them to tend toward chaotic dark side, though there are exceptions.",
+      "fr": "La cruauté des Sith les pousse vers un côté obscur chaotique, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Sith generally stand between 5 and 6 feet tall and weigh less than 200 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Sith generally stand between 5 and 6 feet tall and weigh less than 200 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Sith mesurent généralement entre 1,5 et 1,8 mètre et pèsent moins de 90 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Sith. Sith is an agglutinative language, in which words or even phrases were made up of linears sequences of distinct meaningful units.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Sith. Sith is an agglutinative language, in which words or even phrases were made up of linears sequences of distinct meaningful units.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le sith. Le sith est une langue agglutinante où les mots, voire les phrases, se composent de suites linéaires d'unités porteuses de sens."
+    },
     "traits": [
       "darkvision",
       "force-sensitive",
@@ -789,13 +1134,28 @@
         "amount": 1
       }
     ],
-    "age": "Togruta reach adulthood in their late teens and live less than a century.",
-    "alignment": "Togruta culture focuses on unity which causes them to tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Togruta reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Togrutas atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Togruta culture focuses on unity which causes them to tend toward the light side, though there are exceptions.",
+      "fr": "La culture togruta, axée sur l'unité, les pousse vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Togruta typically stand between 5 and 6 feet tall and weigh 150 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Togruta typically stand between 5 and 6 feet tall and weigh 150 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Togrutas mesurent généralement entre 1,5 et 1,8 mètre et pèsent environ 68 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Togruti. Togruti is an ornate language characterized by trills and long vowel sounds which are modified by subtle tremors in the togruta’s head-tails. This language is heavily influenced by Basic, but also incorporates some native idioms, which cause Basic-speaking togruta to use seemingly strange expressions.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Togruti. Togruti is an ornate language characterized by trills and long vowel sounds which are modified by subtle tremors in the togruta’s head-tails. This language is heavily influenced by Basic, but also incorporates some native idioms, which cause Basic-speaking togruta to use seemingly strange expressions.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le togruti. Cette langue ornée se distingue par ses trilles et ses voyelles longues modulées par de subtiles vibrations des lekkus. Fortement influencée par le basique, elle conserve néanmoins des idiomes locaux qui donnent des expressions surprenantes aux Togrutas parlant basique."
+    },
     "traits": [
       "mask-of-the-wild",
       "montral-reception",
@@ -818,13 +1178,28 @@
         "amount": 1
       }
     ],
-    "age": "Trandoshans reach adulthood in their early teens and rarely live to be older than 70.",
-    "alignment": "Trandoshans tend toward the dark side, though there are exceptions.",
+    "age": {
+      "en": "Trandoshans reach adulthood in their early teens and rarely live to be older than 70.",
+      "fr": "Les Trandoshans atteignent l'âge adulte dès le début de l'adolescence et dépassent rarement 70 ans."
+    },
+    "alignment": {
+      "en": "Trandoshans tend toward the dark side, though there are exceptions.",
+      "fr": "Les Trandoshans penchent vers le côté obscur, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Trandoshans stand as tall as 7 and a half feet and can weigh over 300 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Trandoshans stand as tall as 7 and a half feet and can weigh over 300 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Trandoshans peuvent mesurer jusqu'à 2,3 mètres et dépasser 135 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Dosh. Dosh is characterized by its harsh grunts, hisses and growls, and its written form that used alphabetic glyphs.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Dosh. Dosh is characterized by its harsh grunts, hisses and growls, and its written form that used alphabetic glyphs.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le dosh, une langue faite de grognements, de sifflements et de grondements, dont la forme écrite utilise des glyphes alphabétiques."
+    },
     "traits": [
       "claws",
       "darkvision",
@@ -853,13 +1228,28 @@
         "amount": 1
       }
     ],
-    "age": "Tuskens are considered adults when they turn 15. Because of the harsh and unforgiving climate of their home world, they rarely live longer than half a century.",
-    "alignment": "Tusken culture's violent focus and disregard of those outside the tribe causes them to tend towards chaotic dark side, though there are exceptions.",
+    "age": {
+      "en": "Tuskens are considered adults when they turn 15. Because of the harsh and unforgiving climate of their home world, they rarely live longer than half a century.",
+      "fr": "Les Tuskens sont considérés comme adultes à 15 ans. En raison du climat rude et impitoyable de leur monde natal, ils vivent rarement au-delà d'un demi-siècle."
+    },
+    "alignment": {
+      "en": "Tusken culture's violent focus and disregard of those outside the tribe causes them to tend towards chaotic dark side, though there are exceptions.",
+      "fr": "La culture violente des Tuskens et leur mépris des étrangers les poussent vers un côté obscur chaotique, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Tusken stand between 5 and 6 feet tall and weigh around 155 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Tusken stand between 5 and 6 feet tall and weigh around 155 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Tuskens mesurent entre 1,5 et 1,8 mètre et pèsent environ 70 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak Tusken, and speak, read, and write Galactic Basic. Tusken is a guttural language characterized by its barks, growls, and roars. While Tuskens typically understand Galactic Basic, it is rare to hear them speak anything but Tusken. Tusken has no written form. Tuskens also know a complex sign language used to communicate with other tuskens silently.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak Tusken, and speak, read, and write Galactic Basic. Tusken is a guttural language characterized by its barks, growls, and roars. While Tuskens typically understand Galactic Basic, it is rare to hear them speak anything but Tusken. Tusken has no written form. Tuskens also know a complex sign language used to communicate with other tuskens silently.",
+      "fr": "Vous parlez le tusken et vous pouvez parler, lire et écrire le basique galactique. Le tusken est une langue gutturale caractérisée par ses aboiements, grognements et rugissements. Les Tuskens comprennent généralement le basique, mais il est rare de les entendre parler autre chose que le tusken. Cette langue n'a pas de forme écrite. Les Tuskens maîtrisent également un langage gestuel complexe pour communiquer silencieusement entre eux."
+    },
     "traits": [
       "aggressive",
       "animal-handler",
@@ -886,13 +1276,28 @@
         "amount": 1
       }
     ],
-    "age": "Twi'leks reach adulthood in their late teens and live less than a century.",
-    "alignment": "Twi'leks harsh upbringing cause them to tend toward the dark side, though there are exceptions.",
+    "age": {
+      "en": "Twi'leks reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Twi'leks atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Twi'leks harsh upbringing cause them to tend toward the dark side, though there are exceptions.",
+      "fr": "La dureté de l'éducation des Twi'leks les pousse vers le côté obscur, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Twi'leks stand between 5 and 7 feet tall and weigh up to 200 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Twi'leks stand between 5 and 7 feet tall and weigh up to 200 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Twi'leks mesurent entre 1,5 et 2,1 mètres et peuvent peser jusqu'à 90 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Twi’leki. You can communicate non-verbally with other twi’leks through a complex language of subtle head-tail motions.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Twi’leki. You can communicate non-verbally with other twi’leks through a complex language of subtle head-tail motions.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le twi'leki. Vous pouvez aussi communiquer non verbalement avec d'autres Twi'leks grâce à un langage complexe de mouvements subtils des lekkus."
+    },
     "traits": [
       "charismatic",
       "darkvision",
@@ -921,13 +1326,28 @@
         "amount": 1
       }
     ],
-    "age": "Weequay reach adulthood in their late teens and live less than a century.",
-    "alignment": "Weequay ruthlessness and greed cause them to tend toward chaotic dark side, though there are exceptions.",
+    "age": {
+      "en": "Weequay reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Weequay atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Weequay ruthlessness and greed cause them to tend toward chaotic dark side, though there are exceptions.",
+      "fr": "La cruauté et la cupidité des Weequay les poussent vers un côté obscur chaotique, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Weequay typically stand about 6 feet tall and weigh 150 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Weequay typically stand about 6 feet tall and weigh 150 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Weequay mesurent généralement autour de 1,8 mètre et pèsent environ 68 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Sriluurian. You can communicate with other Weequay within 30 feet without speaking through use of pheromones. Force attuned individuals can detect the communication but can’t understand it.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Sriluurian. You can communicate with other Weequay within 30 feet without speaking through use of pheromones. Force attuned individuals can detect the communication but can’t understand it.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le sriluurien. Vous pouvez communiquer avec d'autres Weequay à moins de 9 mètres sans parler grâce à des phéromones. Les personnes sensibles à la Force perçoivent ces échanges sans pouvoir les comprendre."
+    },
     "traits": [
       "keen-smell",
       "savage-attacks",
@@ -951,13 +1371,28 @@
         "amount": 1
       }
     ],
-    "age": "Wookiees reach adulthood at about 40 and can live to be 400.",
-    "alignment": "Wookiees tend toward the light side, though there are exceptions.",
+    "age": {
+      "en": "Wookiees reach adulthood at about 40 and can live to be 400.",
+      "fr": "Les Wookiees atteignent l'âge adulte vers 40 ans et peuvent vivre jusqu'à 400 ans."
+    },
+    "alignment": {
+      "en": "Wookiees tend toward the light side, though there are exceptions.",
+      "fr": "Les Wookiees penchent vers le côté lumineux, bien qu'il existe des exceptions."
+    },
     "size": "medium",
-    "size_text": "Wookiees tend to tower over other species, reaching heights over 8 feet and weighing 300 pounds. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Wookiees tend to tower over other species, reaching heights over 8 feet and weighing 300 pounds. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Wookiees dominent la plupart des autres espèces, dépassant souvent 2,4 mètres de haut pour environ 135 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Shyriiwook. You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Shyriiwook. You can understand spoken and written Galactic Basic, but your vocal cords do not allow you to speak it.",
+      "fr": "Vous pouvez parler, lire et écrire le shyriiwook. Vous comprenez le basique galactique, parlé comme écrit, mais vos cordes vocales ne vous permettent pas de le parler."
+    },
     "traits": [
       "claws",
       "darkvision",
@@ -987,13 +1422,28 @@
         "amount": 1
       }
     ],
-    "age": "Zabraks reach adulthood in their late teens and live less than a century.",
-    "alignment": "Zabraks tend toward no particular alignment. The best and worst are found among them.",
+    "age": {
+      "en": "Zabraks reach adulthood in their late teens and live less than a century.",
+      "fr": "Les Zabraks atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle."
+    },
+    "alignment": {
+      "en": "Zabraks tend toward no particular alignment. The best and worst are found among them.",
+      "fr": "Les Zabraks n'ont pas de penchant particulier. On trouve parmi eux le meilleur comme le pire."
+    },
     "size": "medium",
-    "size_text": "Zabraks stand anywhere from 5 to 7 feet tall and weigh up to 300 lbs. Regardless of your position in that range, your size is Medium.",
+    "size_text": {
+      "en": "Zabraks stand anywhere from 5 to 7 feet tall and weigh up to 300 lbs. Regardless of your position in that range, your size is Medium.",
+      "fr": "Les Zabraks mesurent de 1,5 à 2,1 mètres et peuvent peser jusqu'à 135 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne."
+    },
     "speed": 30,
-    "speed_text": "Your base walking speed is 30 feet.",
-    "languages": "You can speak, read, and write Galactic Basic and Zabraki.",
+    "speed_text": {
+      "en": "Your base walking speed is 30 feet.",
+      "fr": "Votre vitesse de déplacement au sol de base est de 9 mètres."
+    },
+    "languages": {
+      "en": "You can speak, read, and write Galactic Basic and Zabraki.",
+      "fr": "Vous pouvez parler, lire et écrire le basique galactique et le zabrak."
+    },
     "traits": [
       "coercive",
       "crafters",

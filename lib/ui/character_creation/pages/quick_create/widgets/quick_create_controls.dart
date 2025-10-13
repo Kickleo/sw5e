@@ -15,6 +15,7 @@ class _QuickCreateControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return SafeArea(
       top: false,
       child: Padding(
@@ -24,7 +25,7 @@ class _QuickCreateControls extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed: state.canGoPrevious ? onPrevious : null,
-                child: const Text('Précédent'),
+                child: Text(l10n.quickCreatePrevious),
               ),
             ),
             const SizedBox(width: 12),
@@ -42,13 +43,13 @@ class _QuickCreateControls extends StatelessWidget {
                                 strokeWidth: 2,
                                 color: Colors.white,
                               ),
-                            )
-                          : const Icon(Icons.check),
-                      label: const Text('Créer'),
+                          )
+                        : const Icon(Icons.check),
+                      label: Text(l10n.quickCreateSubmit),
                     )
                   : FilledButton(
                       onPressed: state.canGoNext ? onNext : null,
-                      child: const Text('Suivant'),
+                      child: Text(l10n.quickCreateNext),
                     ),
             ),
           ],

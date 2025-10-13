@@ -23,9 +23,30 @@ class LocalizedTextDto {
   factory LocalizedTextDto.fromJson(Map<String, dynamic> json) {
     // On lit directement les champs texte en s'assurant qu'ils sont bien des String.
     return LocalizedTextDto(
-      en: json['en'] as String,
-      fr: json['fr'] as String,
+      en: (json['en'] as String?) ?? (json['fr'] as String?) ?? '',
+      fr: (json['fr'] as String?) ?? (json['en'] as String?) ?? '',
     );
+  }
+
+  /// Interprète un champ JSON pouvant être déjà une chaîne ou une map localisée.
+  static LocalizedTextDto fromAny(dynamic raw) {
+    if (raw is LocalizedTextDto) {
+      return raw;
+    }
+    if (raw is String) {
+      return LocalizedTextDto(en: raw, fr: raw);
+    }
+    if (raw is Map<String, dynamic>) {
+      return LocalizedTextDto.fromJson(raw);
+    }
+    if (raw is Map) {
+      return LocalizedTextDto.fromJson(
+        raw.map(
+          (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+        ),
+      );
+    }
+    throw ArgumentError('Unsupported localized value: ${raw.runtimeType}');
   }
 
   LocalizedText toDomain() =>
@@ -99,9 +120,7 @@ class SpeciesDto {
     // Extrait et convertit chaque propriété du JSON brut.
     return SpeciesDto(
       id: json['id'] as String,
-      name: LocalizedTextDto.fromJson(
-        Map<String, dynamic>.from(json['name'] as Map),
-      ),
+      name: LocalizedTextDto.fromAny(json['name'] ?? const <String, String>{}),
       speed: (json['speed'] as num).toInt(),
       size: json['size'] as String,
       traitIds: List<String>.from(json['traits'] as List? ?? const <String>[]),
@@ -110,11 +129,11 @@ class SpeciesDto {
       )
           .map(SpeciesAbilityBonusDto.fromJson)
           .toList(growable: false),
-      age: json['age'] as String?,
-      alignment: json['alignment'] as String?,
-      sizeText: json['size_text'] as String?,
-      speedText: json['speed_text'] as String?,
-      languages: json['languages'] as String?,
+      age: _readLocalizedField(json['age']),
+      alignment: _readLocalizedField(json['alignment']),
+      sizeText: _readLocalizedField(json['size_text']),
+      speedText: _readLocalizedField(json['speed_text']),
+      languages: _readLocalizedField(json['languages']),
     );
   }
 
@@ -132,6 +151,31 @@ class SpeciesDto {
         speedText: speedText,
         languages: languages,
       ); // Crée l'entité de domaine immuable correspondante.
+}
+
+String? _readLocalizedField(dynamic raw) {
+  if (raw == null) {
+    return null;
+  }
+  if (raw is String) {
+    return raw;
+  }
+  if (raw is Map<String, dynamic>) {
+    final String? en = raw['en'] as String?;
+    final String? fr = raw['fr'] as String?;
+    return (en != null && en.trim().isNotEmpty)
+        ? en
+        : (fr != null && fr.trim().isNotEmpty)
+            ? fr
+            : null;
+  }
+  if (raw is Map) {
+    final Map<String, dynamic> map = raw.map(
+      (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+    );
+    return _readLocalizedField(map);
+  }
+  return raw.toString();
 }
 
 /// StartingEquipmentLineDto = ligne d'équipement initial pour une classe.
@@ -190,8 +234,8 @@ class ClassLevel1Dto {
   final String? startingCreditsRoll; // Formule de dés pour déterminer les crédits.
   final List<StartingEquipmentLineDto>
       startingEquipment; // Pack d'équipement accordé d'office.
-  final List<String>
-      startingEquipmentOptions; // Identifiants d'options alternatives.
+  final List<LocalizedTextDto>
+      startingEquipmentOptions; // Options d'équipement localisées.
 
   const ClassLevel1Dto({
     required this.proficiencies,
@@ -214,9 +258,17 @@ class ClassLevel1Dto {
       )
           .map(StartingEquipmentLineDto.fromJson)
           .toList(),
-      startingEquipmentOptions: List<String>.from(
-        json['starting_equipment_options'] as List? ?? const <String>[],
-      ),
+      startingEquipmentOptions: List<Map<String, dynamic>>.from(
+        json['starting_equipment_options']
+                as List? ??
+            const <Map<String, dynamic>>[],
+      )
+          .map(
+            (entry) => LocalizedTextDto.fromJson(
+              Map<String, dynamic>.from(entry),
+            ),
+          )
+          .toList(growable: false),
     );
   }
 
@@ -227,8 +279,9 @@ class ClassLevel1Dto {
         startingEquipment: startingEquipment
             .map((dto) => dto.toDomain())
             .toList(growable: false),
-        startingEquipmentOptions:
-            List<String>.unmodifiable(startingEquipmentOptions),
+        startingEquipmentOptions: startingEquipmentOptions
+            .map((dto) => dto.toDomain())
+            .toList(growable: false),
       ); // Construit la structure métier consommée par la logique de création.
 }
 
@@ -237,12 +290,14 @@ class ClassLevel1Dto {
 class ClassDto {
   final String id; // Identifiant unique de la classe.
   final LocalizedTextDto name; // Nom localisé affiché à l'utilisateur.
+  final LocalizedTextDto? description; // Résumé localisé de la classe.
   final int hitDie; // Taille du dé de vie (ex: d8, d10).
   final ClassLevel1Dto level1; // Données spécifiques au niveau 1.
 
   const ClassDto({
     required this.id,
     required this.name,
+    this.description,
     required this.hitDie,
     required this.level1,
   });
@@ -254,6 +309,11 @@ class ClassDto {
       name: LocalizedTextDto.fromJson(
         Map<String, dynamic>.from(json['name'] as Map),
       ),
+      description: json['description'] == null
+          ? null
+          : LocalizedTextDto.fromJson(
+              Map<String, dynamic>.from(json['description'] as Map),
+            ),
       hitDie: (json['hit_die'] as num).toInt(),
       level1: ClassLevel1Dto.fromJson(
         Map<String, dynamic>.from(json['level1'] as Map),
@@ -264,6 +324,7 @@ class ClassDto {
   ClassDef toDomain() => ClassDef(
         id: id,
         name: name.toDomain(),
+        description: description?.toDomain(),
         hitDie: hitDie,
         level1: level1.toDomain(),
       ); // Produit la représentation métier utilisée dans les use cases.
