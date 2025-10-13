@@ -60,6 +60,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
   late final PageController _pageController;
   late final TextEditingController _nameController;
   late final QuickCreateBloc _bloc;
+  late String _lastLanguageCode;
 
   /// Prépare les contrôleurs et instancie le BLoC avec les dépendances
   /// résolues via le service locator.
@@ -116,6 +117,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       clearCharacterDraft: clearDraft,
       languageCode: currentLocale.languageCode,
     )..add(const QuickCreateStarted());
+    _lastLanguageCode = currentLocale.languageCode;
 
     _pageController = PageController(initialPage: _bloc.state.stepIndex);
 
@@ -151,6 +153,11 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
           data: (status) => status,
           orElse: () => ConnectivityStatus.connected,
         );
+    final Locale locale = ref.watch(appLocaleProvider);
+    if (locale.languageCode != _lastLanguageCode) {
+      _lastLanguageCode = locale.languageCode;
+      _bloc.add(QuickCreateLocaleChanged(locale.languageCode));
+    }
 
     return BlocProvider<QuickCreateBloc>.value(
       value: _bloc,

@@ -71,6 +71,18 @@ class QuickCreateNameChanged extends QuickCreateEvent {
   List<Object?> get props => <Object?>[name];
 }
 
+/// QuickCreateLocaleChanged = modification de la langue active.
+class QuickCreateLocaleChanged extends QuickCreateEvent {
+  /// Nouveau code langue ISO (ex: "fr", "en").
+  final String languageCode;
+
+  /// Crée l'événement.
+  const QuickCreateLocaleChanged(this.languageCode);
+
+  @override
+  List<Object?> get props => <Object?>[languageCode];
+}
+
 /// QuickCreateSpeciesSelected = choix d'une espèce.
 class QuickCreateSpeciesSelected extends QuickCreateEvent {
   /// Identifiant de l'espèce.
@@ -283,6 +295,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     on<QuickCreateEquipmentQuantityChanged>(_onEquipmentQuantityChanged);
     on<QuickCreateSubmitted>(_onSubmitted);
     on<QuickCreateCompletionCleared>(_onCompletionCleared);
+    on<QuickCreateLocaleChanged>(_onLocaleChanged);
   }
 
   final LoadQuickCreateCatalog _loadQuickCreateCatalog;
@@ -300,7 +313,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   final PersistCharacterDraftEquipment _persistCharacterDraftEquipment;
   final PersistCharacterDraftStep _persistCharacterDraftStep;
   final ClearCharacterDraft _clearCharacterDraft;
-  final String _languageCode;
+  String _languageCode;
   final Random _random;
 
   static const List<int> _standardArray = <int>[15, 14, 13, 12, 10, 8];
@@ -1042,6 +1055,21 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   ) {
     if (state.completion != null) {
       emit(state.copyWith(completion: null));
+    }
+  }
+
+  Future<void> _onLocaleChanged(
+    QuickCreateLocaleChanged event,
+    Emitter<QuickCreateState> emit,
+  ) async {
+    final String normalized = event.languageCode.toLowerCase();
+    if (normalized == _languageCode.toLowerCase()) {
+      return;
+    }
+    _languageCode = normalized;
+    final String? speciesId = state.selectedSpecies;
+    if (speciesId != null) {
+      await _refreshSpeciesTraits(speciesId, emit);
     }
   }
 
