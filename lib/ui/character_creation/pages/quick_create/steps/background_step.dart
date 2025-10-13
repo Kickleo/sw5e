@@ -23,22 +23,23 @@ class _BackgroundStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         TextFormField(
           controller: nameController,
-          decoration: const InputDecoration(
-            labelText: 'Nom du personnage',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: l10n.quickCreateNameLabel,
+            border: const OutlineInputBorder(),
           ),
         ),
         const SizedBox(height: 16),
         DropdownButtonFormField<String>(
           initialValue: selectedBackground,
-          decoration: const InputDecoration(
-            labelText: 'Historique',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: l10n.quickCreateBackgroundLabel,
+            border: const OutlineInputBorder(),
           ),
           items: backgrounds
               .map(
@@ -48,9 +49,7 @@ class _BackgroundStep extends StatelessWidget {
           onChanged: onBackgroundChanged,
         ),
         const SizedBox(height: 24),
-        const Text(
-          'Pensez à vérifier votre équipement avant de finaliser la création.',
-        ),
+        Text(l10n.quickCreateEquipmentReminder),
       ],
     );
   }

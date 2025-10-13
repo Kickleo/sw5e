@@ -13,33 +13,42 @@ class _CharacterSummaryPanel extends StatelessWidget {
       )
       .join(' ');
 
-  String _localized(LocalizedText? text) {
+  String _localized(AppLocalizations l10n, LocalizedText? text) {
     if (text == null) {
-      return 'Inconnu';
+      return l10n.summaryUnknown;
     }
-    if (text.fr.isNotEmpty) {
-      return text.fr;
+    if (l10n.isFrench) {
+      if (text.fr.isNotEmpty) {
+        return text.fr;
+      }
+      if (text.en.isNotEmpty) {
+        return text.en;
+      }
+    } else {
+      if (text.en.isNotEmpty) {
+        return text.en;
+      }
+      if (text.fr.isNotEmpty) {
+        return text.fr;
+      }
     }
-    if (text.en.isNotEmpty) {
-      return text.en;
-    }
-    return 'Inconnu';
+    return l10n.summaryUnknown;
   }
 
-  String _stepLabel(QuickCreateStep step) {
+  String _stepLabel(AppLocalizations l10n, QuickCreateStep step) {
     switch (step) {
       case QuickCreateStep.species:
-        return 'Espèce';
+        return l10n.summaryStepSpecies;
       case QuickCreateStep.abilities:
-        return 'Caractéristiques';
+        return l10n.summaryStepAbilities;
       case QuickCreateStep.classes:
-        return 'Classe';
+        return l10n.summaryStepClass;
       case QuickCreateStep.skills:
-        return 'Compétences';
+        return l10n.summaryStepSkills;
       case QuickCreateStep.equipment:
-        return 'Équipement';
+        return l10n.summaryStepEquipment;
       case QuickCreateStep.background:
-        return 'Historique';
+        return l10n.summaryStepBackground;
     }
   }
 
@@ -50,22 +59,18 @@ class _CharacterSummaryPanel extends StatelessWidget {
     return '$grams g';
   }
 
-  String _abilityAbbreviation(String ability) {
-    return QuickCreateState.abilityAbbreviations[ability] ?? ability.toUpperCase();
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
     final classDef = state.selectedClassDef;
     final abilityCards = QuickCreateState.abilityOrder.map((ability) {
       final score = state.abilityAssignments[ability];
       final modifier = score != null ? AbilityScore(score).modifier : null;
       final label = QuickCreateState.abilityLabels[ability] ?? ability.toUpperCase();
-      final abbreviation = _abilityAbbreviation(ability);
-      final modifierLabel = modifier == null
-          ? 'Mod —'
-          : 'Mod ${modifier >= 0 ? '+' : ''}$modifier';
+      final abbreviation =
+          l10n.abilityAbbreviation(ability.toLowerCase());
+      final modifierLabel = l10n.modifierLabel(modifier);
       return Card(
         child: Padding(
           padding: const EdgeInsets.all(12),
@@ -95,19 +100,19 @@ class _CharacterSummaryPanel extends StatelessWidget {
     final startingEquipment = <Widget>[];
     if (state.useStartingEquipment && classDef != null) {
       startingEquipment
-        ..add(Text('Équipement de départ',
+        ..add(Text(l10n.summaryStartingEquipmentTitle,
             style: theme.textTheme.bodyMedium
                 ?.copyWith(fontWeight: FontWeight.w600)))
         ..add(const SizedBox(height: 4));
       for (final line in classDef.level1.startingEquipment) {
         final equipmentDef = state.equipmentDefinitions[line.id];
         final label = equipmentDef != null
-            ? _localized(equipmentDef.name)
+            ? _localized(l10n, equipmentDef.name)
             : _titleCase(line.id);
         startingEquipment.add(
           Padding(
             padding: const EdgeInsets.only(bottom: 4),
-            child: Text('• $label ×${line.qty}'),
+            child: Text(l10n.startingEquipmentLine(label, line.qty)),
           ),
         );
       }
@@ -116,11 +121,15 @@ class _CharacterSummaryPanel extends StatelessWidget {
 
     final purchasedEquipmentWidgets = purchasedEquipment.map((entry) {
       final def = state.equipmentDefinitions[entry.key];
-      final label = def != null ? _localized(def.name) : _titleCase(entry.key);
+      final label = def != null
+          ? _localized(l10n, def.name)
+          : _titleCase(entry.key);
       final cost = def?.cost ?? 0;
       return Padding(
         padding: const EdgeInsets.only(bottom: 4),
-        child: Text('• $label ×${entry.value} (${cost * entry.value}cr)'),
+        child: Text(
+          l10n.summaryPurchaseLine(label, entry.value, cost * entry.value),
+        ),
       );
     }).toList();
 
@@ -132,12 +141,12 @@ class _CharacterSummaryPanel extends StatelessWidget {
       child: ListView(
         children: [
           Text(
-            'Résumé du personnage',
+            l10n.summaryTitle,
             style: theme.textTheme.titleLarge,
           ),
           const SizedBox(height: 16),
           _SummarySection(
-            title: 'Progression',
+            title: l10n.summaryProgression,
             children: [
               Wrap(
                 spacing: 8,
@@ -163,72 +172,75 @@ class _CharacterSummaryPanel extends StatelessWidget {
                   return Chip(
                     backgroundColor: chipColor,
                     avatar: Icon(icon, size: 18, color: iconColor),
-                    label: Text(_stepLabel(step)),
+                    label: Text(_stepLabel(l10n, step)),
                   );
                 }).toList(),
               ),
             ],
           ),
           _SummarySection(
-            title: 'Identité',
+            title: l10n.summaryIdentity,
             children: [
               _SummaryRow(
-                label: 'Nom',
+                label: l10n.summaryName,
                 value: state.characterName.isEmpty
-                    ? 'Non renseigné'
+                    ? l10n.summaryNotProvided
                     : state.characterName,
               ),
               _SummaryRow(
-                label: 'Espèce',
+                label: l10n.summarySpeciesLabel,
                 value: state.selectedSpecies != null
                     ? _titleCase(state.selectedSpecies!)
-                    : 'Non sélectionnée',
+                    : l10n.summaryNotSelected(feminine: true),
               ),
               _SummaryRow(
-                label: 'Classe',
+                label: l10n.summaryClassLabel,
                 value: state.selectedClass != null
                     ? _titleCase(state.selectedClass!)
-                    : 'Non sélectionnée',
+                    : l10n.summaryNotSelected(feminine: true),
               ),
               _SummaryRow(
-                label: 'Historique',
+                label: l10n.summaryBackgroundLabel,
                 value: state.selectedBackground != null
                     ? _titleCase(state.selectedBackground!)
-                    : 'Non sélectionné',
+                    : l10n.summaryNotSelected(),
               ),
             ],
           ),
           _SummarySection(
-            title: 'Caractéristiques de classe',
+            title: l10n.summaryClassFeatures,
             children: [
               if (classDef == null)
-                const Text('Aucune classe sélectionnée pour l’instant.')
+                Text(l10n.summaryNoClassSelected)
               else ...[
                 _SummaryRow(
-                  label: 'Dé de vie',
+                  label: l10n.summaryHitDie,
                   value: 'd${classDef.hitDie}',
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Compétences à choisir : '
-                  '${classDef.level1.proficiencies.skillsChoose} parmi '
-                  '${classDef.level1.proficiencies.skillsFrom.length}',
+                  l10n.summaryClassSkillChoice(
+                    classDef.level1.proficiencies.skillsChoose,
+                    classDef.level1.proficiencies.skillsFrom.length,
+                  ),
                   style: theme.textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 8),
                 if (classDef.level1.startingEquipmentOptions.isEmpty)
-                  const Text('Cette classe ne propose pas d’options d’équipement.')
+                  Text(l10n.summaryNoEquipmentOptions)
                 else ...[
                   Text(
-                    'Options d’équipement de départ :',
+                    l10n.summaryEquipmentOptionsTitle,
                     style: theme.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 4),
                   ...classDef.level1.startingEquipmentOptions.map(
-                    (optionId) => Padding(
+                    (option) => Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: Text('• ${_titleCase(optionId)}'),
+                      child: Text(
+                        '• ${l10n.localizedCatalogLabel(option)}',
+                      ),
                     ),
                   ),
                 ],
@@ -236,11 +248,11 @@ class _CharacterSummaryPanel extends StatelessWidget {
             ],
           ),
           _SummarySection(
-            title: 'Espèce',
+            title: l10n.summarySpecies,
             children: [
               if (state.selectedSpeciesTraits.isEmpty &&
                   state.selectedSpeciesEffects.isEmpty)
-                const Text('Aucun trait d’espèce sélectionné.')
+                Text(l10n.summaryNoSpeciesTraits)
               else ...[
                 for (final trait in state.selectedSpeciesTraits)
                   Padding(
@@ -249,7 +261,7 @@ class _CharacterSummaryPanel extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _localized(trait.name),
+                          _localized(l10n, trait.name),
                           style: theme.textTheme.bodyMedium
                               ?.copyWith(fontWeight: FontWeight.w600),
                         ),
@@ -278,7 +290,7 @@ class _CharacterSummaryPanel extends StatelessWidget {
             ],
           ),
           _SummarySection(
-            title: 'Caractéristiques',
+            title: l10n.summaryAbilities,
             children: [
               Wrap(
                 spacing: 12,
@@ -288,27 +300,36 @@ class _CharacterSummaryPanel extends StatelessWidget {
             ],
           ),
           _SummarySection(
-            title: 'Compétences',
+            title: l10n.summarySkills,
             children: [
               if (chosenSkills.isEmpty)
-                const Text('Aucune compétence choisie pour le moment.')
+                Text(l10n.summarySkillsNone)
               else
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Sélection (${chosenSkills.length}/${state.skillChoicesRequired})',
+                      l10n.summarySkillsSelection(
+                        chosenSkills.length,
+                        state.skillChoicesRequired,
+                      ),
                       style: theme.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 4),
                     ...chosenSkills.map((skillId) {
                       final def = state.skillDefinitions[skillId];
-                      final ability =
-                          def != null ? _abilityAbbreviation(def.ability) : '—';
+                      final ability = def != null
+                          ? l10n.abilityAbbreviation(def.ability)
+                          : '—';
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 4),
-                        child: Text('• ${_titleCase(skillId)} ($ability)'),
+                        child: Text(
+                          l10n.summarySkillLine(
+                            _titleCase(skillId),
+                            ability,
+                          ),
+                        ),
                       );
                     }),
                   ],
@@ -316,10 +337,10 @@ class _CharacterSummaryPanel extends StatelessWidget {
             ],
           ),
           _SummarySection(
-            title: 'Équipement',
+            title: l10n.summaryEquipment,
             children: [
               if (startingEquipment.isEmpty && purchasedEquipmentWidgets.isEmpty)
-                const Text('Aucun équipement sélectionné.')
+                Text(l10n.summaryEquipmentNone)
               else
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -331,31 +352,31 @@ class _CharacterSummaryPanel extends StatelessWidget {
             ],
           ),
           _SummarySection(
-            title: 'Capacité de charge & finances',
+            title: l10n.summaryCarryingAndFinance,
             children: [
               _SummaryRow(
-                label: 'Crédits de départ',
+                label: l10n.summaryStartingCredits,
                 value: '${state.availableCredits}',
               ),
               _SummaryRow(
-                label: 'Coût actuel',
+                label: l10n.summaryCurrentCost,
                 value: '${state.totalPurchasedEquipmentCost}',
               ),
               _SummaryRow(
-                label: 'Crédits restants',
+                label: l10n.summaryRemainingCredits,
                 value: '${state.remainingCredits}',
               ),
               _SummaryRow(
-                label: 'Poids total',
+                label: l10n.summaryTotalWeight,
                 value: totalWeight != null
                     ? _formatWeight(totalWeight)
-                    : 'Indéterminé',
+                    : l10n.summaryUnknownWeight,
               ),
               _SummaryRow(
-                label: 'Charge maximale',
+                label: l10n.summaryCarryCapacity,
                 value: capacity != null
                     ? _formatWeight(capacity)
-                    : 'Indéterminée',
+                    : l10n.summaryUnknownCapacity,
               ),
             ],
           ),

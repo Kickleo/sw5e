@@ -10,6 +10,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
@@ -54,10 +55,10 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
       value: _bloc,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Personnages sauvegardés'),
+          title: Text(context.l10n.savedCharactersTitle),
           leading: IconButton(
             icon: const Icon(Icons.home_outlined),
-            tooltip: "Retour à l'accueil",
+            tooltip: context.l10n.backToHomeTooltip,
             onPressed: () => context.go('/'),
           ),
           actions: [
@@ -70,7 +71,7 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
                       : () => context
                           .read<SavedCharactersBloc>()
                           .add(const SavedCharactersRefreshRequested()),
-                  tooltip: 'Rafraîchir',
+                  tooltip: context.l10n.refreshTooltip,
                   icon: const Icon(Icons.refresh),
                 );
               },
@@ -85,7 +86,7 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
 
             if (state.hasError && state.characters.isEmpty) {
               return _ErrorView(
-                message: state.errorMessage ?? 'Erreur inconnue',
+                message: state.errorMessage ?? context.l10n.unknownError,
                 onRetry: () => context
                     .read<SavedCharactersBloc>()
                     .add(const SavedCharactersRefreshRequested()),
@@ -119,16 +120,16 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
                       state.characters.length + (state.hasError ? 1 : 0),
                   separatorBuilder: (_, _) => const CharacterSectionDivider(),
                   itemBuilder: (context, index) {
-                    if (state.hasError) {
-                      if (index == 0) {
-                        return _InlineErrorBanner(
-                          message:
-                              state.errorMessage ?? 'Erreur inconnue',
-                        );
-                      }
-                      final Character character = state.characters[index - 1];
-                      return _CharacterCard(character: character);
+                  if (state.hasError) {
+                    if (index == 0) {
+                      return _InlineErrorBanner(
+                        message:
+                            state.errorMessage ?? context.l10n.unknownError,
+                      );
                     }
+                    final Character character = state.characters[index - 1];
+                    return _CharacterCard(character: character);
+                  }
                     final Character character = state.characters[index];
                     return _CharacterCard(character: character);
                   },
@@ -152,6 +153,7 @@ class _CharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final l10n = context.l10n;
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Padding(
@@ -172,12 +174,17 @@ class _CharacterCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Espèce : ${character.speciesId.value} • Classe : ${character.classId.value}',
+                        l10n.savedCharactersHeader(
+                          character.speciesId.value,
+                          character.classId.value,
+                        ),
                         style: theme.textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Historique : ${character.backgroundId.value}',
+                        l10n.savedCharactersBackground(
+                          character.backgroundId.value,
+                        ),
                         style: theme.textTheme.bodySmall,
                       ),
                     ],
@@ -186,10 +193,14 @@ class _CharacterCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text('Niveau ${character.level.value}',
-                        style: theme.textTheme.bodyMedium),
-                    Text('Défense ${character.defense.value}',
-                        style: theme.textTheme.bodyMedium),
+                    Text(
+                      l10n.savedCharactersLevel(character.level.value),
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                    Text(
+                      l10n.savedCharactersDefense(character.defense.value),
+                      style: theme.textTheme.bodyMedium,
+                    ),
                   ],
                 ),
               ],
@@ -199,27 +210,28 @@ class _CharacterCard extends StatelessWidget {
               spacing: 12,
               runSpacing: 8,
               children: [
-                _ChipStat(label: 'PV', value: '${character.hitPoints.value}'),
+                _ChipStat(label: l10n.statHp, value: '${character.hitPoints.value}'),
                 _ChipStat(
-                    label: 'Init', value: _fmtSigned(character.initiative.value)),
+                    label: l10n.statInitiative,
+                    value: _fmtSigned(character.initiative.value)),
                 _ChipStat(
-                    label: 'Bonus maîtrise',
+                    label: l10n.statProficiency,
                     value: '+${character.proficiencyBonus.value}'),
-                _ChipStat(label: 'Crédits', value: '${character.credits.value}'),
+                _ChipStat(label: l10n.statCredits, value: '${character.credits.value}'),
                 _ChipStat(
-                    label: 'Charge',
+                    label: l10n.statEncumbrance,
                     value: '${character.encumbrance.grams} g'),
               ],
             ),
             const SizedBox(height: 16),
             _Section(
-              title: 'Caractéristiques',
+              title: l10n.savedCharactersCharacteristicsTitle,
               child: _AbilitiesTable(abilities: character.abilities),
             ),
             if (character.skills.isNotEmpty) ...[
               const SizedBox(height: 16),
               _Section(
-                title: 'Compétences',
+                title: l10n.savedCharactersSkillsTitle,
                 child: Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -235,12 +247,18 @@ class _CharacterCard extends StatelessWidget {
             if (character.inventory.isNotEmpty) ...[
               const SizedBox(height: 16),
               _Section(
-                title: 'Inventaire',
+                title: l10n.savedCharactersInventoryTitle,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: character.inventory
-                      .map((line) =>
-                          Text('• ${line.itemId.value} ×${line.quantity.value}'))
+                      .map(
+                        (line) => Text(
+                          l10n.inventoryLine(
+                            line.itemId.value,
+                            line.quantity.value,
+                          ),
+                        ),
+                      )
                       .toList(),
                 ),
               ),
@@ -290,15 +308,16 @@ class _EmptyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView(
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.all(32),
-      children: const [
-        Icon(Icons.group_off, size: 64),
-        SizedBox(height: 16),
+      children: [
+        const Icon(Icons.group_off, size: 64),
+        const SizedBox(height: 16),
         Center(
           child: Text(
-            'Aucun personnage enregistré pour le moment.',
+            l10n.savedCharactersEmpty,
             textAlign: TextAlign.center,
           ),
         ),
@@ -331,7 +350,7 @@ class _ErrorView extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: onRetry,
               icon: const Icon(Icons.refresh),
-              label: const Text('Réessayer'),
+              label: Text(context.l10n.retryLabel),
             ),
           ],
         ),

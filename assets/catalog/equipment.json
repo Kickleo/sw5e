@@ -433,7 +433,7 @@
     "id": "blaster-rifle",
     "name": {
       "en": "Blaster rifle",
-      "fr": "Blaster rifle"
+      "fr": "Fusil blaster"
     },
     "type": "weapon",
     "weight_g": 3402,
@@ -863,7 +863,7 @@
     "id": "combat-suit",
     "name": {
       "en": "Combat suit",
-      "fr": "Combat suit"
+      "fr": "Combinaison de combat"
     },
     "type": "armor",
     "weight_g": 4536,
@@ -2183,7 +2183,7 @@
     "id": "heavy-pistol",
     "name": {
       "en": "Heavy pistol",
-      "fr": "Heavy pistol"
+      "fr": "Pistolet lourd"
     },
     "type": "weapon",
     "weight_g": 1814,
@@ -2543,7 +2543,7 @@
     "id": "light-physical-shield",
     "name": {
       "en": "Light physical shield",
-      "fr": "Light physical shield"
+      "fr": "Bouclier physique léger"
     },
     "type": "armor",
     "weight_g": 0,
@@ -2553,7 +2553,7 @@
     "id": "light-pistol",
     "name": {
       "en": "Light pistol",
-      "fr": "Light pistol"
+      "fr": "Pistolet léger"
     },
     "type": "weapon",
     "weight_g": 227,
@@ -2893,7 +2893,7 @@
     "id": "mesh-armor",
     "name": {
       "en": "Mesh armor",
-      "fr": "Mesh armor"
+      "fr": "Armure maillée"
     },
     "type": "armor",
     "weight_g": 9072,
@@ -4353,7 +4353,7 @@
     "id": "techaxe",
     "name": {
       "en": "Techaxe",
-      "fr": "Techaxe"
+      "fr": "Techno-hache"
     },
     "type": "weapon",
     "weight_g": 454,
@@ -4623,7 +4623,7 @@
     "id": "vibroblade",
     "name": {
       "en": "Vibroblade",
-      "fr": "Vibroblade"
+      "fr": "Vibrolame"
     },
     "type": "weapon",
     "weight_g": 2268,
@@ -4683,7 +4683,7 @@
     "id": "vibrodagger",
     "name": {
       "en": "Vibrodagger",
-      "fr": "Vibrodagger"
+      "fr": "Vibro-dague"
     },
     "type": "weapon",
     "weight_g": 227,
@@ -4693,7 +4693,7 @@
     "id": "vibrodart",
     "name": {
       "en": "Vibrodart",
-      "fr": "Vibrodart"
+      "fr": "Vibro-dard"
     },
     "type": "weapon",
     "weight_g": 227,
@@ -4833,7 +4833,7 @@
     "id": "vibrospear",
     "name": {
       "en": "Vibrospear",
-      "fr": "Vibrospear"
+      "fr": "Vibrolance"
     },
     "type": "weapon",
     "weight_g": 1814,
@@ -4983,7 +4983,7 @@
     "id": "wristpad",
     "name": {
       "en": "Wristpad",
-      "fr": "Wristpad"
+      "fr": "Datapad-bracelet"
     },
     "type": "data recording and storage",
     "weight_g": 907,

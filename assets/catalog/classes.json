@@ -21,17 +21,30 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a vibroweapon and a light or medium physical shield or (b) two vibroweapons",
-        "(a) two techaxes or (b) two vibrospears",
-        "(a) a dungeoneer's pack or (b) an explorer's pack"
+        {
+          "en": "(a) a vibroweapon and a light or medium physical shield or (b) two vibroweapons",
+          "fr": "(a) une vibro-arme et un bouclier physique léger ou moyen ou (b) deux vibro-armes"
+        },
+        {
+          "en": "(a) two techaxes or (b) two vibrospears",
+          "fr": "(a) deux techno-haches ou (b) deux vibrolances"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        }
       ]
+    },
+    "description": {
+      "en": "A furious frontline warrior who channels rage into devastating melee strikes.",
+      "fr": "Un guerrier de première ligne qui canalise sa rage en frappes dévastatrices."
     }
   },
   {
     "id": "consular",
     "name": {
       "en": "Consular",
-      "fr": "Consular"
+      "fr": "Consulaire"
     },
     "hit_die": 6,
     "level1": {
@@ -50,16 +63,26 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a simple lightweapon or (b) a simple vibroweapon",
-        "(a) a scholar’s pack, (b) an explorer’s pack, or (c) a diplomat’s pack"
+        {
+          "en": "(a) a simple lightweapon or (b) a simple vibroweapon",
+          "fr": "(a) une arme légère simple ou (b) une vibro-arme simple"
+        },
+        {
+          "en": "(a) a scholar’s pack, (b) an explorer’s pack, or (c) a diplomat’s pack",
+          "fr": "(a) un paquetage d'érudit, (b) un paquetage d'explorateur ou (c) un paquetage de diplomate"
+        }
       ]
+    },
+    "description": {
+      "en": "A wise Force user focused on diplomacy, healing, and guiding allies.",
+      "fr": "Un utilisateur de la Force porté sur la diplomatie, les soins et le soutien des alliés."
     }
   },
   {
     "id": "engineer",
     "name": {
       "en": "Engineer",
-      "fr": "Engineer"
+      "fr": "Ingénieur"
     },
     "hit_die": 8,
     "level1": {
@@ -77,20 +100,42 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
-        "(a) a dungeoneer's pack or (b) an explorer's pack",
-        "A combat suit",
-        "a set of tinker's implements",
-        "a vibrodagger",
-        "and a wristpad"
+        {
+          "en": "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
+          "fr": "(a) une vibro-arme simple ou (b) un blaster simple et deux cellules d'énergie"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        },
+        {
+          "en": "A combat suit",
+          "fr": "Une combinaison de combat"
+        },
+        {
+          "en": "a set of tinker's implements",
+          "fr": "un jeu d'outils de bricoleur"
+        },
+        {
+          "en": "a vibrodagger",
+          "fr": "une vibro-dague"
+        },
+        {
+          "en": "and a wristpad",
+          "fr": "et un datapad-bracelet"
+        }
       ]
+    },
+    "description": {
+      "en": "A resourceful tinkerer who deploys gadgets, drones, and battlefield solutions.",
+      "fr": "Un bricoleur ingénieux qui déploie gadgets, droïdes et solutions de terrain."
     }
   },
   {
     "id": "fighter",
     "name": {
       "en": "Fighter",
-      "fr": "Fighter"
+      "fr": "Guerrier"
     },
     "hit_die": 10,
     "level1": {
@@ -110,23 +155,42 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "Choisir 1 parmi: m-3-predator, m-4-shuriken, m-8-avenger, m-92-mantis, m-23-katana",
-        "Choisir 1 parmi: omni-blade, omni-hamer",
-        "Proficiencies: stock-light-armor, stock-medium-armor, stock-heavy-armor",
-        "(a) mesh armor or (b) a combat suit",
-        "blaster rifle or simple blaster",
-        "and two power cells",
-        "(a) a vibroweapon or heavy pistol and a light or medium physical shield or (b) two vibroweapons",
-        "(a) a light pistol and a power cell or (b) two vibrodaggers",
-        "(a) a dungeoneer's pack or (b) an explorer's pack"
+        {
+          "en": "(a) mesh armor or (b) a combat suit",
+          "fr": "(a) une armure maillée ou (b) une combinaison de combat"
+        },
+        {
+          "en": "blaster rifle or simple blaster",
+          "fr": "un fusil blaster ou un blaster simple"
+        },
+        {
+          "en": "and two power cells",
+          "fr": "et deux cellules d'énergie"
+        },
+        {
+          "en": "(a) a vibroweapon or heavy pistol and a light or medium physical shield or (b) two vibroweapons",
+          "fr": "(a) une vibro-arme ou un pistolet lourd et un bouclier physique léger ou moyen, ou (b) deux vibro-armes"
+        },
+        {
+          "en": "(a) a light pistol and a power cell or (b) two vibrodaggers",
+          "fr": "(a) un pistolet léger et une cellule d'énergie ou (b) deux vibro-dagues"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        }
       ]
+    },
+    "description": {
+      "en": "A versatile combatant trained with a wide array of weapons and tactics.",
+      "fr": "Un combattant polyvalent formé à un large éventail d'armes et de tactiques."
     }
   },
   {
     "id": "guardian",
     "name": {
       "en": "Guardian",
-      "fr": "Guardian"
+      "fr": "Gardien"
     },
     "hit_die": 10,
     "level1": {
@@ -147,19 +211,38 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) mesh armor",
-        "(b) a combat suit",
-        "and a light physical shield",
-        "(a) a lightweapon or vibroweapon and a light or medium physical shield or (b) two lightweapons or vibroweapons",
-        "(a) a priest's pack or (b) an explorer's pack"
+        {
+          "en": "(a) mesh armor",
+          "fr": "(a) une armure maillée"
+        },
+        {
+          "en": "(b) a combat suit",
+          "fr": "(b) une combinaison de combat"
+        },
+        {
+          "en": "and a light physical shield",
+          "fr": "et un bouclier physique léger"
+        },
+        {
+          "en": "(a) a lightweapon or vibroweapon and a light or medium physical shield or (b) two lightweapons or vibroweapons",
+          "fr": "(a) une arme légère ou une vibro-arme et un bouclier physique léger ou moyen, ou (b) deux armes légères ou vibro-armes"
+        },
+        {
+          "en": "(a) a priest's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de prêtre ou (b) un paquetage d'explorateur"
+        }
       ]
+    },
+    "description": {
+      "en": "A disciplined defender who protects allies with the Force and martial prowess.",
+      "fr": "Un défenseur discipliné qui protège ses alliés grâce à la Force et à sa maîtrise martiale."
     }
   },
   {
     "id": "monk",
     "name": {
       "en": "Monk",
-      "fr": "Monk"
+      "fr": "Moine"
     },
     "hit_die": 8,
     "level1": {
@@ -177,17 +260,30 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
-        "(a) a dungeoneer's pack or (b) an explorer's pack",
-        "10 vibrodarts"
+        {
+          "en": "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
+          "fr": "(a) une vibro-arme avec laquelle vous êtes compétent ou (b) un blaster simple et une cellule d'énergie"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        },
+        {
+          "en": "10 vibrodarts",
+          "fr": "10 vibro-dards"
+        }
       ]
+    },
+    "description": {
+      "en": "A swift ascetic who turns focus and agility into precise, unarmed techniques.",
+      "fr": "Un ascète rapide qui transforme sa concentration et son agilité en techniques précises à mains nues."
     }
   },
   {
     "id": "operative",
     "name": {
       "en": "Operative",
-      "fr": "Operative"
+      "fr": "Agent"
     },
     "hit_die": 8,
     "level1": {
@@ -200,21 +296,46 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
-        "(a) a simple blaster and two power cells or (b) a simple vibroweapon and a light physical shield",
-        "(a) a burglar's pack",
-        "(b) a dungeoneer's pack",
-        "or (c) an explorer's pack",
-        "A tool with which you are proficient",
-        "A combat suit and a vibrodagger"
+        {
+          "en": "(a) a vibroweapon with which you are proficient or (b) a simple blaster and a power cell",
+          "fr": "(a) une vibro-arme avec laquelle vous êtes compétent ou (b) un blaster simple et une cellule d'énergie"
+        },
+        {
+          "en": "(a) a simple blaster and two power cells or (b) a simple vibroweapon and a light physical shield",
+          "fr": "(a) un blaster simple et deux cellules d'énergie ou (b) une vibro-arme simple et un bouclier physique léger"
+        },
+        {
+          "en": "(a) a burglar's pack",
+          "fr": "(a) un paquetage de cambrioleur"
+        },
+        {
+          "en": "(b) a dungeoneer's pack",
+          "fr": "(b) un paquetage de spéléologue"
+        },
+        {
+          "en": "or (c) an explorer's pack",
+          "fr": "ou (c) un paquetage d'explorateur"
+        },
+        {
+          "en": "A tool with which you are proficient",
+          "fr": "Un outil avec lequel vous êtes compétent"
+        },
+        {
+          "en": "A combat suit and a vibrodagger",
+          "fr": "Une combinaison de combat et une vibro-dague"
+        }
       ]
+    },
+    "description": {
+      "en": "A stealthy infiltrator specializing in sabotage, espionage, and precise strikes.",
+      "fr": "Un infiltré furtif spécialisé dans le sabotage, l'espionnage et les frappes ciblées."
     }
   },
   {
     "id": "scholar",
     "name": {
       "en": "Scholar",
-      "fr": "Scholar"
+      "fr": "Érudit"
     },
     "hit_die": 8,
     "level1": {
@@ -235,20 +356,42 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
-        "(a) a entertainer's pack",
-        "(b) an explorer's pack",
-        "or (c) a scholar's pack",
-        "A tool with which you are proficient",
-        "A combat suit"
+        {
+          "en": "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
+          "fr": "(a) une vibro-arme simple ou (b) un blaster simple et deux cellules d'énergie"
+        },
+        {
+          "en": "(a) a entertainer's pack",
+          "fr": "(a) un paquetage d'artiste"
+        },
+        {
+          "en": "(b) an explorer's pack",
+          "fr": "(b) un paquetage d'explorateur"
+        },
+        {
+          "en": "or (c) a scholar's pack",
+          "fr": "ou (c) un paquetage d'érudit"
+        },
+        {
+          "en": "A tool with which you are proficient",
+          "fr": "Un outil avec lequel vous êtes compétent"
+        },
+        {
+          "en": "A combat suit",
+          "fr": "Une combinaison de combat"
+        }
       ]
+    },
+    "description": {
+      "en": "A learned expert who supports the team with knowledge, analysis, and battlefield insight.",
+      "fr": "Un érudit qui soutient l'équipe grâce à ses connaissances, ses analyses et sa vision du champ de bataille."
     }
   },
   {
     "id": "scout",
     "name": {
       "en": "Scout",
-      "fr": "Scout"
+      "fr": "Éclaireur"
     },
     "hit_die": 10,
     "level1": {
@@ -269,21 +412,46 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) mesh armor or (b) a combat suit",
-        "blaster rifle or simple blaster",
-        "and two power cells",
-        "(a) a vibroweapon and a light physical shield or (b) two simple vibroweapons",
-        "(a) a holdout and a power cell or (b) two vibrodaggers",
-        "(a) a dungeoneer's pack or (b) an explorer's pack",
-        "A wristpad"
+        {
+          "en": "(a) mesh armor or (b) a combat suit",
+          "fr": "(a) une armure maillée ou (b) une combinaison de combat"
+        },
+        {
+          "en": "blaster rifle or simple blaster",
+          "fr": "un fusil blaster ou un blaster simple"
+        },
+        {
+          "en": "and two power cells",
+          "fr": "et deux cellules d'énergie"
+        },
+        {
+          "en": "(a) a vibroweapon and a light physical shield or (b) two simple vibroweapons",
+          "fr": "(a) une vibro-arme et un bouclier physique léger ou (b) deux vibro-armes simples"
+        },
+        {
+          "en": "(a) a holdout and a power cell or (b) two vibrodaggers",
+          "fr": "(a) un hold-out et une cellule d'énergie ou (b) deux vibro-dagues"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        },
+        {
+          "en": "A wristpad",
+          "fr": "Un datapad-bracelet"
+        }
       ]
+    },
+    "description": {
+      "en": "A nimble explorer skilled at tracking foes and thriving in hostile environments.",
+      "fr": "Un éclaireur agile, expert pour traquer ses ennemis et survivre dans les environnements hostiles."
     }
   },
   {
     "id": "sentinel",
     "name": {
       "en": "Sentinel",
-      "fr": "Sentinel"
+      "fr": "Sentinelle"
     },
     "hit_die": 8,
     "level1": {
@@ -304,11 +472,27 @@
       "starting_credits_roll": "5d4 × 100 cr",
       "starting_equipment": [],
       "starting_equipment_options": [
-        "(a) two simple lightweapons or vibroweapons or (b) one lightweapon or vibroweapon with which you are proficient",
-        "(a) a dungeoneer's pack or (b) an explorer's pack",
-        "A specialist's kit with which you are proficient",
-        "A combat suit and a light physical shield"
+        {
+          "en": "(a) two simple lightweapons or vibroweapons or (b) one lightweapon or vibroweapon with which you are proficient",
+          "fr": "(a) deux armes légères ou vibro-armes simples, ou (b) une arme légère ou vibro-arme avec laquelle vous êtes compétent"
+        },
+        {
+          "en": "(a) a dungeoneer's pack or (b) an explorer's pack",
+          "fr": "(a) un paquetage de spéléologue ou (b) un paquetage d'explorateur"
+        },
+        {
+          "en": "A specialist's kit with which you are proficient",
+          "fr": "Un kit de spécialiste avec lequel vous êtes compétent"
+        },
+        {
+          "en": "A combat suit and a light physical shield",
+          "fr": "Une combinaison de combat et un bouclier physique léger"
+        }
       ]
+    },
+    "description": {
+      "en": "A balanced guardian of the Force who blends investigation, defense, and decisive action.",
+      "fr": "Un gardien équilibré de la Force qui mêle investigation, défense et interventions décisives."
     }
   }
 ]

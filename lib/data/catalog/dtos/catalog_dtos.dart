@@ -190,8 +190,8 @@ class ClassLevel1Dto {
   final String? startingCreditsRoll; // Formule de dés pour déterminer les crédits.
   final List<StartingEquipmentLineDto>
       startingEquipment; // Pack d'équipement accordé d'office.
-  final List<String>
-      startingEquipmentOptions; // Identifiants d'options alternatives.
+  final List<LocalizedTextDto>
+      startingEquipmentOptions; // Options d'équipement localisées.
 
   const ClassLevel1Dto({
     required this.proficiencies,
@@ -214,9 +214,17 @@ class ClassLevel1Dto {
       )
           .map(StartingEquipmentLineDto.fromJson)
           .toList(),
-      startingEquipmentOptions: List<String>.from(
-        json['starting_equipment_options'] as List? ?? const <String>[],
-      ),
+      startingEquipmentOptions: List<Map<String, dynamic>>.from(
+        json['starting_equipment_options']
+                as List? ??
+            const <Map<String, dynamic>>[],
+      )
+          .map(
+            (entry) => LocalizedTextDto.fromJson(
+              Map<String, dynamic>.from(entry),
+            ),
+          )
+          .toList(growable: false),
     );
   }
 
@@ -227,8 +235,9 @@ class ClassLevel1Dto {
         startingEquipment: startingEquipment
             .map((dto) => dto.toDomain())
             .toList(growable: false),
-        startingEquipmentOptions:
-            List<String>.unmodifiable(startingEquipmentOptions),
+        startingEquipmentOptions: startingEquipmentOptions
+            .map((dto) => dto.toDomain())
+            .toList(growable: false),
       ); // Construit la structure métier consommée par la logique de création.
 }
 
@@ -237,12 +246,14 @@ class ClassLevel1Dto {
 class ClassDto {
   final String id; // Identifiant unique de la classe.
   final LocalizedTextDto name; // Nom localisé affiché à l'utilisateur.
+  final LocalizedTextDto? description; // Résumé localisé de la classe.
   final int hitDie; // Taille du dé de vie (ex: d8, d10).
   final ClassLevel1Dto level1; // Données spécifiques au niveau 1.
 
   const ClassDto({
     required this.id,
     required this.name,
+    this.description,
     required this.hitDie,
     required this.level1,
   });
@@ -254,6 +265,11 @@ class ClassDto {
       name: LocalizedTextDto.fromJson(
         Map<String, dynamic>.from(json['name'] as Map),
       ),
+      description: json['description'] == null
+          ? null
+          : LocalizedTextDto.fromJson(
+              Map<String, dynamic>.from(json['description'] as Map),
+            ),
       hitDie: (json['hit_die'] as num).toInt(),
       level1: ClassLevel1Dto.fromJson(
         Map<String, dynamic>.from(json['level1'] as Map),
@@ -264,6 +280,7 @@ class ClassDto {
   ClassDef toDomain() => ClassDef(
         id: id,
         name: name.toDomain(),
+        description: description?.toDomain(),
         hitDie: hitDie,
         level1: level1.toDomain(),
       ); // Produit la représentation métier utilisée dans les use cases.

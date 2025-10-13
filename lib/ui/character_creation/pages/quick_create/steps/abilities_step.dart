@@ -20,6 +20,7 @@ class _AbilitiesStep extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
     final abilityOrder = QuickCreateState.abilityOrder;
     final abilityLabels = QuickCreateState.abilityLabels;
     final abilityAbbreviations = QuickCreateState.abilityAbbreviations;
@@ -69,9 +70,9 @@ class _AbilitiesStep extends HookWidget {
       return DropdownButtonFormField<int?>(
         key: ValueKey('dropdown-$ability-${mode.name}'),
         initialValue: currentValue,
-        decoration: const InputDecoration(
-          labelText: 'Score',
-          border: OutlineInputBorder(),
+        decoration: InputDecoration(
+          labelText: l10n.abilityScoreLabel,
+          border: const OutlineInputBorder(),
         ),
         items: [
           const DropdownMenuItem<int?>(value: null, child: Text('—')),
@@ -87,17 +88,16 @@ class _AbilitiesStep extends HookWidget {
     }
 
     String modifierText(int? score) {
-      if (score == null) return 'Mod —';
+      if (score == null) return l10n.modifierLabel(null);
       final modifier = AbilityScore(score).modifier;
-      final sign = modifier >= 0 ? '+' : '';
-      return 'Mod $sign$modifier';
+      return l10n.modifierLabel(modifier);
     }
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         Text(
-          'Attribuez vos caractéristiques',
+          l10n.abilitiesHeader,
           style: theme.textTheme.titleMedium,
         ),
         const SizedBox(height: 8),
@@ -109,20 +109,16 @@ class _AbilitiesStep extends HookWidget {
             },
             child: Column(
               children: [
-                const RadioListTile<AbilityGenerationMode>(
+                RadioListTile<AbilityGenerationMode>(
                   value: AbilityGenerationMode.standardArray,
-                  title: Text('Tableau standard'),
-                  subtitle: Text(
-                    'Utiliser les scores fixes 15, 14, 13, 12, 10 et 8.',
-                  ),
+                  title: Text(l10n.abilityGenerationStandardArray),
+                  subtitle: Text(l10n.abilityGenerationStandardArrayDesc),
                 ),
                 const Divider(height: 0),
-                const RadioListTile<AbilityGenerationMode>(
+                RadioListTile<AbilityGenerationMode>(
                   value: AbilityGenerationMode.roll,
-                  title: Text('Lancer les dés'),
-                  subtitle: Text(
-                    'Lancez 4d6, conservez les 3 meilleurs et assignez les 6 scores obtenus.',
-                  ),
+                  title: Text(l10n.abilityGenerationRoll),
+                  subtitle: Text(l10n.abilityGenerationRollDesc),
                 ),
                 if (mode == AbilityGenerationMode.roll)
                   Padding(
@@ -136,17 +132,15 @@ class _AbilitiesStep extends HookWidget {
                       child: FilledButton.icon(
                         onPressed: onReroll,
                         icon: const Icon(Icons.casino),
-                        label: const Text('Lancer les dés'),
+                        label: Text(l10n.rerollDice),
                       ),
                     ),
                   ),
                 const Divider(height: 0),
-                const RadioListTile<AbilityGenerationMode>(
+                RadioListTile<AbilityGenerationMode>(
                   value: AbilityGenerationMode.manual,
-                  title: Text('Saisie manuelle'),
-                  subtitle: Text(
-                    'Entrez vous-même les scores obtenus ailleurs et assignez-les.',
-                  ),
+                  title: Text(l10n.abilityGenerationManual),
+                  subtitle: Text(l10n.abilityGenerationManualDesc),
                 ),
               ],
             ),
@@ -154,10 +148,10 @@ class _AbilitiesStep extends HookWidget {
         ),
         const SizedBox(height: 16),
         if (mode != AbilityGenerationMode.manual) ...[
-          Text('Scores disponibles', style: theme.textTheme.titleSmall),
+          Text(l10n.availableScores, style: theme.textTheme.titleSmall),
           const SizedBox(height: 8),
           if (sortedPoolEntries.isEmpty)
-            const Text('Aucun score généré pour le moment.')
+            Text(l10n.noGeneratedScores)
           else
             Wrap(
               spacing: 8,
@@ -166,16 +160,14 @@ class _AbilitiesStep extends HookWidget {
                 for (final entry in sortedPoolEntries)
                   Chip(
                     label: Text(
-                      entry.value > 1
-                          ? '${entry.key} ×${entry.value}'
-                          : entry.key.toString(),
+                      l10n.abilityScoreChip(entry.key, entry.value),
                     ),
                   ),
               ],
             ),
           const SizedBox(height: 16),
         ] else ...[
-          const Text('Chaque champ accepte une valeur entre 1 et 20.'),
+          Text(l10n.manualScoreHint),
           const SizedBox(height: 16),
         ],
         ...abilityOrder.map((ability) {
@@ -209,9 +201,7 @@ class _AbilitiesStep extends HookWidget {
           );
         }),
         const SizedBox(height: 12),
-        const Text(
-          'Astuce : pour calculer le modificateur, soustrayez 10 du score et divisez par 2 (arrondi à l’inférieur).',
-        ),
+        Text(l10n.abilityTip),
       ],
     );
   }
