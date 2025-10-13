@@ -51,7 +51,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:ability_bonuses',
-          title: 'Ability Score Increase',
+          title: 'Augmentation de caractéristiques',
           description: bonuses,
           category: CharacterEffectCategory.passive,
         ),
@@ -62,7 +62,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:age',
-          title: 'Age',
+          title: 'Âge',
           description: species.age!.trim(),
           category: CharacterEffectCategory.passive,
         ),
@@ -73,7 +73,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:alignment',
-          title: 'Alignment',
+          title: 'Alignement',
           description: species.alignment!.trim(),
           category: CharacterEffectCategory.passive,
         ),
@@ -84,7 +84,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:size',
-          title: 'Size',
+          title: 'Taille',
           description: species.sizeText!.trim(),
           category: CharacterEffectCategory.passive,
         ),
@@ -93,8 +93,8 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:size',
-          title: 'Size',
-          description: 'Your size is ${species.size}.',
+          title: 'Taille',
+          description: 'Votre taille est ${_localizedSize(species.size)}.',
           category: CharacterEffectCategory.passive,
         ),
       );
@@ -103,11 +103,11 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     final String speedDescription = (species.speedText != null &&
             species.speedText!.trim().isNotEmpty)
         ? species.speedText!.trim()
-        : 'Your base walking speed is ${species.speed} feet.';
+        : 'Votre vitesse de déplacement de base est de ${species.speed} pieds.';
     effects.add(
       CharacterEffect(
         source: 'species:${species.id}:speed',
-        title: 'Speed',
+        title: 'Vitesse',
         description: speedDescription,
         category: CharacterEffectCategory.passive,
       ),
@@ -117,7 +117,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:languages',
-          title: 'Languages',
+          title: 'Langues',
           description: species.languages!.trim(),
           category: CharacterEffectCategory.passive,
         ),
@@ -129,7 +129,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'trait:${trait.id}',
-          title: trait.name.en.isNotEmpty ? trait.name.en : trait.name.fr,
+          title: trait.name.fr.isNotEmpty ? trait.name.fr : trait.name.en,
           description: trait.description,
           category: category,
         ),
@@ -138,7 +138,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
 
     return DraftSpeciesSelection(
       speciesId: SpeciesId(species.id),
-      displayName: species.name.en.isNotEmpty ? species.name.en : species.name.fr,
+      displayName: species.name.fr.isNotEmpty ? species.name.fr : species.name.en,
       effects: List<CharacterEffect>.unmodifiable(effects),
     );
   }
@@ -163,7 +163,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     if (bonus.isChoice) {
       final int choose = bonus.choose ?? 1;
       final String options = _formatAbilityOptions(bonus.options);
-      return '$alternativePrefix$amount to $options (choose $choose)';
+      return '$alternativePrefix$amount pour $options ($choose au choix)';
     }
 
     final String ability = _abilityName(bonus.ability ?? 'any');
@@ -172,7 +172,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
 
   String _formatAbilityOptions(List<String> options) {
     if (options.isEmpty) {
-      return 'abilities of your choice';
+      return 'caractéristiques de votre choix';
     }
 
     final List<String> labels =
@@ -183,30 +183,49 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     }
 
     if (labels.length == 2) {
-      return '${labels[0]} or ${labels[1]}';
+      return '${labels[0]} ou ${labels[1]}';
     }
 
-    return '${labels.sublist(0, labels.length - 1).join(', ')}, or ${labels.last}';
+    return '${labels.sublist(0, labels.length - 1).join(', ')}, ou ${labels.last}';
   }
 
   String _abilityName(String ability) {
     switch (ability.toLowerCase()) {
       case 'str':
-        return 'Strength';
+        return 'Force';
       case 'dex':
-        return 'Dexterity';
+        return 'Dextérité';
       case 'con':
         return 'Constitution';
       case 'int':
         return 'Intelligence';
       case 'wis':
-        return 'Wisdom';
+        return 'Sagesse';
       case 'cha':
-        return 'Charisma';
+        return 'Charisme';
       case 'any':
-        return 'any ability';
+        return 'n\'importe quelle caractéristique';
       default:
         return ability.toUpperCase();
+    }
+  }
+
+  String _localizedSize(String size) {
+    switch (size.toLowerCase()) {
+      case 'tiny':
+        return 'minuscule';
+      case 'small':
+        return 'petite';
+      case 'medium':
+        return 'moyenne';
+      case 'large':
+        return 'grande';
+      case 'huge':
+        return 'très grande';
+      case 'gargantuan':
+        return 'gargantuesque';
+      default:
+        return size;
     }
   }
 }
