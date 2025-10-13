@@ -160,20 +160,48 @@ String? _readLocalizedField(dynamic raw) {
   if (raw is String) {
     return raw;
   }
+  if (raw is LocalizedTextDto) {
+    return raw.en.trim().isNotEmpty ? raw.en : raw.fr;
+  }
   if (raw is Map<String, dynamic>) {
-    final String? en = raw['en'] as String?;
-    final String? fr = raw['fr'] as String?;
-    return (en != null && en.trim().isNotEmpty)
-        ? en
-        : (fr != null && fr.trim().isNotEmpty)
-            ? fr
-            : null;
+    final dynamic en = raw['en'];
+    final dynamic fr = raw['fr'];
+
+    if (en is String && en.trim().isNotEmpty) {
+      return en;
+    }
+    if (fr is String && fr.trim().isNotEmpty) {
+      return fr;
+    }
+
+    final String? nestedEn = _readLocalizedField(en);
+    if (nestedEn != null && nestedEn.trim().isNotEmpty) {
+      return nestedEn;
+    }
+    final String? nestedFr = _readLocalizedField(fr);
+    if (nestedFr != null && nestedFr.trim().isNotEmpty) {
+      return nestedFr;
+    }
+
+    return null;
   }
   if (raw is Map) {
     final Map<String, dynamic> map = raw.map(
       (dynamic key, dynamic value) => MapEntry(key.toString(), value),
     );
     return _readLocalizedField(map);
+  }
+  if (raw is Iterable) {
+    final List<String> values = raw
+        .map(_readLocalizedField)
+        .whereType<String>()
+        .map((value) => value.trim())
+        .where((value) => value.isNotEmpty)
+        .toList(growable: false);
+    if (values.isNotEmpty) {
+      return values.join('\n');
+    }
+    return null;
   }
   return raw.toString();
 }
