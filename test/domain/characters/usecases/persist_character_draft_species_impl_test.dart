@@ -58,7 +58,7 @@ void main() {
       ),
     );
 
-    const QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
+    final QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
       species: species,
       traits: <TraitDef>[
         TraitDef(
@@ -174,7 +174,7 @@ void main() {
       traitIds: <String>['agility'],
     );
 
-    const QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
+    final QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
       species: species,
       traits: <TraitDef>[
         TraitDef(
