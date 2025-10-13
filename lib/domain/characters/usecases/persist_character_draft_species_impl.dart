@@ -142,7 +142,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
         CharacterEffect(
           source: 'trait:${trait.id}',
           title: l10n.localizedLabel(trait.name),
-          description: trait.description,
+          description: l10n.localizedLabel(trait.description),
           category: category,
         ),
       );
@@ -155,8 +155,10 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     );
   }
 
-  CharacterEffectCategory _inferCategory(String description) {
-    final String normalized = description.toLowerCase();
+  CharacterEffectCategory _inferCategory(LocalizedText description) {
+    final String normalized = description
+        .resolve('en', fallbackLanguageCode: 'en')
+        .toLowerCase();
     if (normalized.contains('bonus action')) {
       return CharacterEffectCategory.bonusAction;
     }

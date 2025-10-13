@@ -25,8 +25,16 @@ class AppLocalizations {
 
   /// Returns the localized value of a [LocalizedText] according to [locale].
   String localizedCatalogLabel(LocalizedText text) {
-    if (isFrench) {
-      return text.fr.isNotEmpty ? text.fr : text.en;
+    final String? resolved = text.maybeResolve(
+      languageCode,
+      fallbackLanguageCode: 'en',
+    );
+    if (resolved != null && resolved.trim().isNotEmpty) {
+      return resolved.trim();
+    }
+    final String fallback = text.resolve('en');
+    if (fallback.trim().isNotEmpty) {
+      return fallback.trim();
     }
     return text.en.isNotEmpty ? text.en : text.fr;
   }

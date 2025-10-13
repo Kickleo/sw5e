@@ -267,7 +267,7 @@ void main() {
         const QuickCreateSpeciesDetails(
           species: SpeciesDef(
             id: 'human',
-            name: LocalizedText(en: 'Human', fr: 'Humain'),
+            name: const LocalizedText(en: 'Human', fr: 'Humain'),
             speed: 30,
             size: 'medium',
             traitIds: <String>['adaptive'],
@@ -275,8 +275,9 @@ void main() {
           traits: <TraitDef>[
             TraitDef(
               id: 'adaptive',
-              name: LocalizedText(en: 'Adaptive', fr: 'Adaptable'),
-              description: 'Polyvalent.',
+              name: const LocalizedText(en: 'Adaptive', fr: 'Adaptable'),
+              description:
+                  const LocalizedText(en: 'Versatile.', fr: 'Polyvalent.'),
             ),
           ],
         ),
@@ -310,7 +311,7 @@ void main() {
         const QuickCreateClassDetails(
           classDef: ClassDef(
             id: 'guardian',
-            name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
+            name: const LocalizedText(en: 'Guardian', fr: 'Gardien'),
             hitDie: 10,
             level1: ClassLevel1Data(
               proficiencies: ClassLevel1Proficiencies(
@@ -389,7 +390,7 @@ void main() {
           const QuickCreateSpeciesDetails(
             species: SpeciesDef(
               id: 'bith',
-              name: LocalizedText(en: 'Bith', fr: 'Bith'),
+              name: const LocalizedText(en: 'Bith', fr: 'Bith'),
               speed: 30,
               size: 'medium',
               traitIds: <String>['detail-oriented'],
@@ -397,8 +398,12 @@ void main() {
             traits: <TraitDef>[
               TraitDef(
                 id: 'detail-oriented',
-                name: LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
-                description: 'You have advantage on Investigation checks within 5 feet.',
+                name: const LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
+                description: const LocalizedText(
+                  en: 'You have advantage on Investigation checks within 5 feet.',
+                  fr:
+                      'Vous avez l\'avantage aux tests d\'Investigation effectués dans un rayon de 1,50 mètre autour de vous.',
+                ),
               ),
             ],
           ),
@@ -410,7 +415,7 @@ void main() {
           const QuickCreateClassDetails(
             classDef: ClassDef(
               id: 'guardian',
-              name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
+              name: const LocalizedText(en: 'Guardian', fr: 'Gardien'),
               hitDie: 10,
               level1: ClassLevel1Data(
                 proficiencies: ClassLevel1Proficiencies(
@@ -561,7 +566,7 @@ void main() {
           const QuickCreateSpeciesDetails(
             species: SpeciesDef(
               id: 'human',
-              name: LocalizedText(en: 'Human', fr: 'Humain'),
+              name: const LocalizedText(en: 'Human', fr: 'Humain'),
               speed: 30,
               size: 'medium',
               traitIds: <String>['adaptive'],
@@ -576,7 +581,7 @@ void main() {
           const QuickCreateClassDetails(
             classDef: ClassDef(
               id: 'guardian',
-              name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
+              name: const LocalizedText(en: 'Guardian', fr: 'Gardien'),
               hitDie: 10,
               level1: ClassLevel1Data(
                 proficiencies: ClassLevel1Proficiencies(

@@ -243,9 +243,9 @@ class FormulasDef {
 /// Définition d’un trait d’espèce (affichage / compendium)
 @immutable
 class TraitDef {
-  final String id;            // ex: "nimble-escape"
-  final LocalizedText name;   // {en, fr}
-  final String description;   // texte/markdown court décrivant le trait.
+  final String id; // ex: "nimble-escape"
+  final LocalizedText name; // {en, fr, ...}
+  final LocalizedText description; // Texte localisé décrivant le trait.
 
   const TraitDef({
     required this.id,

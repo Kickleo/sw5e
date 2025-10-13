@@ -17,20 +17,16 @@ class _CharacterSummaryPanel extends StatelessWidget {
     if (text == null) {
       return l10n.summaryUnknown;
     }
-    if (l10n.isFrench) {
-      if (text.fr.isNotEmpty) {
-        return text.fr;
-      }
-      if (text.en.isNotEmpty) {
-        return text.en;
-      }
-    } else {
-      if (text.en.isNotEmpty) {
-        return text.en;
-      }
-      if (text.fr.isNotEmpty) {
-        return text.fr;
-      }
+    final String? resolved = text.maybeResolve(
+      l10n.languageCode,
+      fallbackLanguageCode: 'en',
+    );
+    if (resolved != null && resolved.trim().isNotEmpty) {
+      return resolved.trim();
+    }
+    final String fallback = text.resolve('en');
+    if (fallback.trim().isNotEmpty) {
+      return fallback.trim();
     }
     return l10n.summaryUnknown;
   }
@@ -266,7 +262,7 @@ class _CharacterSummaryPanel extends StatelessWidget {
                               ?.copyWith(fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(height: 4),
-                        Text(trait.description),
+                        Text(_localized(l10n, trait.description)),
                       ],
                     ),
                   ),

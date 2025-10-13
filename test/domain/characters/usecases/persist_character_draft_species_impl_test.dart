@@ -136,6 +136,7 @@ void main() {
       (CharacterEffect effect) => effect.source == 'trait:agility',
     );
     expect(traitEffect.title, 'Agilité');
+    expect(traitEffect.description, 'Agile et vive.');
   });
 
   test('supporte l\'enregistrement d\'une nouvelle langue', () async {
@@ -271,15 +272,23 @@ List<TraitDef> _buildBithTraits() {
   return const <TraitDef>[
     TraitDef(
       id: 'detail-oriented',
-      name: LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
-      description:
-          'You are practiced at scouring for details. You have advantage on Intelligence (Investigation) checks within 5 feet.',
+      name: const LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
+      description: const LocalizedText(
+        en:
+            'You are practiced at scouring for details. You have advantage on Intelligence (Investigation) checks within 5 feet.',
+        fr:
+            'Vous êtes exercé à traquer le moindre indice. Vous avez l\'avantage aux tests d\'Intelligence (Investigation) effectués dans un rayon de 1,50 mètre autour de vous.',
+      ),
     ),
     TraitDef(
       id: 'sonic-sensitivity',
-      name: LocalizedText(en: 'Sonic Sensitivity', fr: 'Sonic Sensitivity'),
-      description:
-          'You have disadvantage on saving throws against effects that would deal sonic damage (explained in chapter 9).',
+      name: const LocalizedText(en: 'Sonic Sensitivity', fr: 'Sonic Sensitivity'),
+      description: const LocalizedText(
+        en:
+            'You have disadvantage on saving throws against effects that would deal sonic damage (explained in chapter 9).',
+        fr:
+            'Votre ouïe particulièrement fine vous rend vulnérable aux sons assourdissants. Vous subissez un désavantage aux jets de sauvegarde contre les effets qui infligent des dégâts soniques (décrits au chapitre 9).',
+      ),
     ),
   ];
 }
@@ -328,8 +337,11 @@ List<TraitDef> _buildTwilekTraits() {
   return const <TraitDef>[
     TraitDef(
       id: 'agility',
-      name: LocalizedText(en: 'Agility', fr: 'Agilité'),
-      description: 'Agile et vive.',
+      name: const LocalizedText(en: 'Agility', fr: 'Agilité'),
+      description: const LocalizedText(
+        en: 'Agile and lively.',
+        fr: 'Agile et vive.',
+      ),
     ),
   ];
 }

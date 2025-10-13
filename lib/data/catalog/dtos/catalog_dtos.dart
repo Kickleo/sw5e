@@ -150,6 +150,35 @@ class SpeciesEffectLocalizationConfigDto {
 }
 
 @immutable
+class TraitLocalizationConfigDto {
+  const TraitLocalizationConfigDto({required this.traits});
+
+  final Map<String, Map<String, String>> traits;
+
+  factory TraitLocalizationConfigDto.fromJson(Map<String, dynamic> json) {
+    final Map<String, Map<String, String>> parsed =
+        <String, Map<String, String>>{};
+    final dynamic rawTraits = json['traits'];
+    if (rawTraits is Map) {
+      rawTraits.forEach((dynamic key, dynamic value) {
+        if (key == null || value == null) {
+          return;
+        }
+        final Map<String, String> localized = _readLocalizedMap(value);
+        if (localized.isNotEmpty) {
+          parsed[key.toString()] = Map<String, String>.unmodifiable(localized);
+        }
+      });
+    }
+    return TraitLocalizationConfigDto(
+      traits: Map<String, Map<String, String>>.unmodifiable(parsed),
+    );
+  }
+
+  Map<String, String>? forTrait(String traitId) => traits[traitId];
+}
+
+@immutable
 class SpeciesEffectLanguageBundleDto {
   const SpeciesEffectLanguageBundleDto({
     required this.listSeparator,
@@ -787,28 +816,93 @@ class FormulasDto {
 class TraitDto {
   final String id; // Identifiant unique du trait.
   final LocalizedTextDto name; // Nom localisé.
-  final String description; // Description longue montrée à l'utilisateur.
+  final LocalizedTextDto description; // Description localisée.
+  final Map<String, String> descriptionLocalizations; // Surcouches assets.
 
   const TraitDto({
     required this.id,
     required this.name,
     required this.description,
+    this.descriptionLocalizations = const <String, String>{},
   });
 
   factory TraitDto.fromJson(Map<String, dynamic> json) {
-    // Décodage direct des champs et conversion du nom localisé.
+    final Map<String, dynamic> rawName =
+        Map<String, dynamic>.from(json['name'] as Map);
+    final LocalizedTextDto baseDescription =
+        LocalizedTextDto.fromAny(json['description']);
+    final Map<String, String> localized =
+        _readLocalizedMap(json['description_localizations']);
+
     return TraitDto(
       id: json['id'] as String,
-      name: LocalizedTextDto.fromJson(
-        Map<String, dynamic>.from(json['name'] as Map),
-      ),
-      description: json['description'] as String,
+      name: LocalizedTextDto.fromJson(rawName),
+      description: baseDescription,
+      descriptionLocalizations: Map<String, String>.unmodifiable(localized),
     );
   }
 
-  TraitDef toDomain() => TraitDef(
-        id: id,
-        name: name.toDomain(),
-        description: description,
-      ); // Structure métier finale exposée à la présentation.
+  TraitDef toDomain({Map<String, String>? descriptionOverride}) {
+    LocalizedText resolvedDescription = description.toDomain();
+
+    if (descriptionLocalizations.isNotEmpty) {
+      resolvedDescription = _mergeLocalizedText(
+        resolvedDescription,
+        descriptionLocalizations,
+      );
+    }
+
+    if (descriptionOverride != null && descriptionOverride.isNotEmpty) {
+      resolvedDescription = _mergeLocalizedText(
+        resolvedDescription,
+        descriptionOverride,
+      );
+    }
+
+    return TraitDef(
+      id: id,
+      name: name.toDomain(),
+      description: resolvedDescription,
+    ); // Structure métier finale exposée à la présentation.
+  }
+}
+
+LocalizedText _mergeLocalizedText(
+  LocalizedText base,
+  Map<String, String> overrides,
+) {
+  if (overrides.isEmpty) {
+    return base;
+  }
+
+  final Map<String, String> normalized = <String, String>{
+    'en': base.en,
+    'fr': base.fr,
+    ...base.otherTranslations,
+  };
+
+  overrides.forEach((String key, String value) {
+    final String trimmedKey = key.toLowerCase();
+    final String trimmedValue = value.trim();
+    if (trimmedValue.isNotEmpty) {
+      normalized[trimmedKey] = trimmedValue;
+    }
+  });
+
+  final String resolvedEn =
+      normalized['en']?.trim().isNotEmpty == true ? normalized['en']!.trim() : '';
+  final String resolvedFr =
+      normalized['fr']?.trim().isNotEmpty == true ? normalized['fr']!.trim() : '';
+
+  final Map<String, String> others = Map<String, String>.from(normalized)
+    ..remove('en')
+    ..remove('fr');
+
+  return LocalizedText(
+    en: resolvedEn.isNotEmpty ? resolvedEn : base.en,
+    fr: resolvedFr.isNotEmpty
+        ? resolvedFr
+        : (resolvedEn.isNotEmpty ? resolvedEn : base.fr),
+    otherTranslations: Map<String, String>.unmodifiable(others),
+  );
 }

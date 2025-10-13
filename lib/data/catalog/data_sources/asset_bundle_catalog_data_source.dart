@@ -75,6 +75,16 @@ class AssetBundleCatalogDataSource {
     }
   }
 
+  Future<TraitLocalizationConfigDto?> loadTraitLocalizations() async {
+    try {
+      final raw =
+          await _loadObject('assets/catalog/localization/traits.json');
+      return TraitLocalizationConfigDto.fromJson(raw);
+    } catch (_) {
+      return null;
+    }
+  }
+
   Future<List<Map<String, dynamic>>> _loadArray(String path) async {
     // Lecture brute du fichier asset.
     final content = await _bundle.loadString(path);
