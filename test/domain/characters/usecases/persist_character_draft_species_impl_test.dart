@@ -25,14 +25,34 @@ void main() {
         SpeciesAbilityBonus(ability: 'int', amount: 2),
         SpeciesAbilityBonus(ability: 'dex', amount: 1),
       ],
-      age: 'Bith reach adulthood in their late teens and live less than a century.',
-      alignment:
-          'Biths\' benevolent nature causes them to tend toward the light side, though there are exceptions.',
-      sizeText:
-          'Bith typically stand 5 to 6 feet tall and generally weigh about 120 lbs. Regardless of your position in that range, your size is Medium.',
-      speedText: 'Your base walking speed is 30 feet.',
-      languages:
-          'You can speak, read, and write Galactic Basic, Bith, and one more language of your choice.',
+      age: LocalizedText(
+        en:
+            'Bith reach adulthood in their late teens and live less than a century.',
+        fr:
+            "Les Bith atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle.",
+      ),
+      alignment: LocalizedText(
+        en:
+            "Biths' benevolent nature causes them to tend toward the light side, though there are exceptions.",
+        fr:
+            'La nature bienveillante des Bith les pousse vers le côté lumineux, bien qu\'il existe des exceptions.',
+      ),
+      sizeText: LocalizedText(
+        en:
+            'Bith typically stand 5 to 6 feet tall and generally weigh about 120 lbs. Regardless of your position in that range, your size is Medium.',
+        fr:
+            'Les Bith mesurent généralement entre 1,5 et 1,8 mètre et pèsent autour de 55 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne.',
+      ),
+      speedText: LocalizedText(
+        en: 'Your base walking speed is 30 feet.',
+        fr: 'Votre vitesse de déplacement au sol de base est de 9 mètres.',
+      ),
+      languages: LocalizedText(
+        en:
+            'You can speak, read, and write Galactic Basic, Bith, and one more language of your choice.',
+        fr:
+            'Vous pouvez parler, lire et écrire le basique galactique, le bith et une autre langue de votre choix.',
+      ),
     );
 
     const QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
@@ -201,5 +221,111 @@ void main() {
       (CharacterEffect effect) => effect.source == 'trait:agility',
     );
     expect(traitEffect.title, 'Agilité');
+  });
+
+  test('supporte l\'enregistrement d\'une nouvelle langue', () async {
+    SpeciesEffectLocalizationCatalog.register(
+      'es',
+      const SpeciesEffectLanguageBundle(
+        listSeparator: ', ',
+        abilityScoreIncreaseTitle: 'Aumento de característica',
+        ageTitle: 'Edad',
+        alignmentTitle: 'Alineamiento',
+        sizeTitle: 'Tamaño',
+        speedTitle: 'Velocidad',
+        languagesTitle: 'Idiomas',
+        abilityChoiceDefaultOptions: 'características a tu elección',
+        abilityChoicePreposition: 'a',
+        abilityChoiceSuffixTemplate: '(elige {count})',
+        alternativePrefix: '[Alternativa] ',
+        abilityNames: <String, String>{
+          'str': 'Fuerza',
+          'dex': 'Destreza',
+          'con': 'Constitución',
+          'int': 'Inteligencia',
+          'wis': 'Sabiduría',
+          'cha': 'Carisma',
+          'any': 'cualquier característica',
+        },
+        twoOptionSeparator: ' o ',
+        finalOptionSeparator: ', o ',
+        sizeLabels: <String, String>{
+          'tiny': 'diminuto',
+          'small': 'pequeño',
+          'medium': 'mediano',
+          'large': 'grande',
+          'huge': 'enorme',
+          'gargantuan': 'colosal',
+        },
+        sizeFallbackTemplate: 'Tu tamaño es {size}.',
+        speedFallbackTemplate:
+            'Tu velocidad base al caminar es de {speed} pies.',
+        fallbackLanguageCode: 'en',
+      ),
+    );
+    addTearDown(() {
+      SpeciesEffectLocalizationCatalog.unregister('es');
+    });
+
+    const SpeciesDef species = SpeciesDef(
+      id: 'bothan',
+      name: LocalizedText(
+        en: 'Bothan',
+        fr: 'Bothan',
+        otherTranslations: const <String, String>{'es': 'Bothaniano'},
+      ),
+      speed: 35,
+      size: 'medium',
+      abilityBonuses: <SpeciesAbilityBonus>[
+        SpeciesAbilityBonus(ability: 'cha', amount: 2),
+      ],
+      languages: LocalizedText(
+        en: 'You can speak Galactic Basic.',
+        fr: 'Vous pouvez parler le basique galactique.',
+        otherTranslations: const <String, String>{
+          'es': 'Puedes hablar Básico Galáctico.',
+        },
+      ),
+    );
+
+    const QuickCreateSpeciesDetails details =
+        QuickCreateSpeciesDetails(species: species, traits: <TraitDef>[]);
+
+    final InMemoryCharacterDraftRepository repository =
+        InMemoryCharacterDraftRepository();
+    final PersistCharacterDraftSpeciesImpl useCase =
+        PersistCharacterDraftSpeciesImpl(repository);
+
+    final AppResult<CharacterDraft> result =
+        await useCase(details, languageCode: 'es');
+    expect(result.isOk, isTrue);
+
+    final CharacterDraft saved = (await repository.load())!;
+    expect(saved.species!.displayName, 'Bothaniano');
+
+    final CharacterEffect abilityEffect = saved.species!.effects.firstWhere(
+      (CharacterEffect effect) =>
+          effect.source == 'species:bothan:ability_bonuses',
+    );
+    expect(abilityEffect.title, 'Aumento de característica');
+    expect(abilityEffect.description, contains('+2 Carisma'));
+
+    final CharacterEffect sizeEffect = saved.species!.effects.firstWhere(
+      (CharacterEffect effect) => effect.source == 'species:bothan:size',
+    );
+    expect(sizeEffect.description, 'Tu tamaño es mediano.');
+
+    final CharacterEffect speedEffect = saved.species!.effects.firstWhere(
+      (CharacterEffect effect) => effect.source == 'species:bothan:speed',
+    );
+    expect(
+      speedEffect.description,
+      'Tu velocidad base al caminar es de 35 pies.',
+    );
+
+    final CharacterEffect languagesEffect = saved.species!.effects.firstWhere(
+      (CharacterEffect effect) => effect.source == 'species:bothan:languages',
+    );
+    expect(languagesEffect.description, 'Puedes hablar Básico Galáctico.');
   });
 }

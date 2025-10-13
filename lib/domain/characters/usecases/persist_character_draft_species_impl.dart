@@ -67,34 +67,37 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       );
     }
 
-    if (species.age != null && species.age!.trim().isNotEmpty) {
+    final String? ageDescription = l10n.maybeLocalized(species.age);
+    if (ageDescription != null) {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:age',
           title: l10n.ageTitle,
-          description: species.age!.trim(),
+          description: ageDescription,
           category: CharacterEffectCategory.passive,
         ),
       );
     }
 
-    if (species.alignment != null && species.alignment!.trim().isNotEmpty) {
+    final String? alignmentDescription = l10n.maybeLocalized(species.alignment);
+    if (alignmentDescription != null) {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:alignment',
           title: l10n.alignmentTitle,
-          description: species.alignment!.trim(),
+          description: alignmentDescription,
           category: CharacterEffectCategory.passive,
         ),
       );
     }
 
-    if (species.sizeText != null && species.sizeText!.trim().isNotEmpty) {
+    final String? sizeDescription = l10n.maybeLocalized(species.sizeText);
+    if (sizeDescription != null) {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:size',
           title: l10n.sizeTitle,
-          description: species.sizeText!.trim(),
+          description: sizeDescription,
           category: CharacterEffectCategory.passive,
         ),
       );
@@ -109,10 +112,8 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       );
     }
 
-    final String speedDescription = (species.speedText != null &&
-            species.speedText!.trim().isNotEmpty)
-        ? species.speedText!.trim()
-        : l10n.speedFallback(species.speed);
+    final String speedDescription =
+        l10n.maybeLocalized(species.speedText) ?? l10n.speedFallback(species.speed);
     effects.add(
       CharacterEffect(
         source: 'species:${species.id}:speed',
@@ -122,12 +123,13 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       ),
     );
 
-    if (species.languages != null && species.languages!.trim().isNotEmpty) {
+    final String? languagesDescription = l10n.maybeLocalized(species.languages);
+    if (languagesDescription != null) {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:languages',
           title: l10n.languagesTitle,
-          description: species.languages!.trim(),
+          description: languagesDescription,
           category: CharacterEffectCategory.passive,
         ),
       );
@@ -166,147 +168,269 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
 
 }
 
+class SpeciesEffectLanguageBundle {
+  const SpeciesEffectLanguageBundle({
+    required this.listSeparator,
+    required this.abilityScoreIncreaseTitle,
+    required this.ageTitle,
+    required this.alignmentTitle,
+    required this.sizeTitle,
+    required this.speedTitle,
+    required this.languagesTitle,
+    required this.abilityChoiceDefaultOptions,
+    required this.abilityChoicePreposition,
+    required this.abilityChoiceSuffixTemplate,
+    required this.alternativePrefix,
+    required this.abilityNames,
+    required this.twoOptionSeparator,
+    required this.finalOptionSeparator,
+    required this.sizeLabels,
+    required this.sizeFallbackTemplate,
+    required this.speedFallbackTemplate,
+    this.fallbackLanguageCode = 'en',
+  });
+
+  final String listSeparator;
+  final String abilityScoreIncreaseTitle;
+  final String ageTitle;
+  final String alignmentTitle;
+  final String sizeTitle;
+  final String speedTitle;
+  final String languagesTitle;
+  final String abilityChoiceDefaultOptions;
+  final String abilityChoicePreposition;
+  final String abilityChoiceSuffixTemplate;
+  final String alternativePrefix;
+  final Map<String, String> abilityNames;
+  final String twoOptionSeparator;
+  final String finalOptionSeparator;
+  final Map<String, String> sizeLabels;
+  final String sizeFallbackTemplate;
+  final String speedFallbackTemplate;
+  final String fallbackLanguageCode;
+
+  String abilityName(String ability) {
+    final String normalized = ability.toLowerCase();
+    final String? direct = abilityNames[normalized];
+    if (direct != null && direct.trim().isNotEmpty) {
+      return direct;
+    }
+    if (normalized != 'any') {
+      final String? fallbackAny = abilityNames['any'];
+      if (fallbackAny != null && fallbackAny.trim().isNotEmpty) {
+        return fallbackAny;
+      }
+    } else {
+      final String? fallbackAny = abilityNames['any'];
+      if (fallbackAny != null && fallbackAny.trim().isNotEmpty) {
+        return fallbackAny;
+      }
+    }
+    return ability.toUpperCase();
+  }
+
+  String abilityChoiceSuffix(int choose) =>
+      abilityChoiceSuffixTemplate.replaceAll('{count}', '$choose');
+
+  String sizeLabel(String size) {
+    final String normalized = size.toLowerCase();
+    return sizeLabels[normalized] ?? size;
+  }
+
+  String sizeFallback(String size) =>
+      sizeFallbackTemplate.replaceAll('{size}', sizeLabel(size));
+
+  String speedFallback(int speed) =>
+      speedFallbackTemplate.replaceAll('{speed}', '$speed');
+}
+
+class SpeciesEffectLocalizationCatalog {
+  SpeciesEffectLocalizationCatalog._();
+
+  static const Map<String, SpeciesEffectLanguageBundle> _defaults =
+      <String, SpeciesEffectLanguageBundle>{
+    'en': _englishSpeciesBundle,
+    'fr': _frenchSpeciesBundle,
+  };
+
+  static final Map<String, SpeciesEffectLanguageBundle> _bundles =
+      Map<String, SpeciesEffectLanguageBundle>.from(_defaults);
+
+  static SpeciesEffectLanguageBundle forLanguage(String languageCode) {
+    final String normalized = languageCode.toLowerCase();
+    return _bundles[normalized] ?? _bundles['en']!;
+  }
+
+  static void register(String languageCode, SpeciesEffectLanguageBundle bundle) {
+    _bundles[languageCode.toLowerCase()] = bundle;
+  }
+
+  static void unregister(String languageCode) {
+    final String normalized = languageCode.toLowerCase();
+    if (_defaults.containsKey(normalized)) {
+      _bundles[normalized] = _defaults[normalized]!;
+    } else {
+      _bundles.remove(normalized);
+    }
+  }
+
+  static void resetToDefaults() {
+    _bundles
+      ..clear()
+      ..addAll(_defaults);
+  }
+}
+
+const SpeciesEffectLanguageBundle _englishSpeciesBundle =
+    SpeciesEffectLanguageBundle(
+  listSeparator: ', ',
+  abilityScoreIncreaseTitle: 'Ability Score Increase',
+  ageTitle: 'Age',
+  alignmentTitle: 'Alignment',
+  sizeTitle: 'Size',
+  speedTitle: 'Speed',
+  languagesTitle: 'Languages',
+  abilityChoiceDefaultOptions: 'abilities of your choice',
+  abilityChoicePreposition: 'to',
+  abilityChoiceSuffixTemplate: '(choose {count})',
+  alternativePrefix: '[Alternative] ',
+  abilityNames: <String, String>{
+    'str': 'Strength',
+    'dex': 'Dexterity',
+    'con': 'Constitution',
+    'int': 'Intelligence',
+    'wis': 'Wisdom',
+    'cha': 'Charisma',
+    'any': 'any ability',
+  },
+  twoOptionSeparator: ' or ',
+  finalOptionSeparator: ', or ',
+  sizeLabels: <String, String>{
+    'tiny': 'Tiny',
+    'small': 'Small',
+    'medium': 'Medium',
+    'large': 'Large',
+    'huge': 'Huge',
+    'gargantuan': 'Gargantuan',
+  },
+  sizeFallbackTemplate: 'Your size is {size}.',
+  speedFallbackTemplate: 'Your base walking speed is {speed} feet.',
+  fallbackLanguageCode: 'en',
+);
+
+const SpeciesEffectLanguageBundle _frenchSpeciesBundle =
+    SpeciesEffectLanguageBundle(
+  listSeparator: ', ',
+  abilityScoreIncreaseTitle: 'Augmentation de caractéristiques',
+  ageTitle: 'Âge',
+  alignmentTitle: 'Alignement',
+  sizeTitle: 'Taille',
+  speedTitle: 'Vitesse',
+  languagesTitle: 'Langues',
+  abilityChoiceDefaultOptions: 'caractéristiques de votre choix',
+  abilityChoicePreposition: 'pour',
+  abilityChoiceSuffixTemplate: '({count} au choix)',
+  alternativePrefix: '[Variante] ',
+  abilityNames: <String, String>{
+    'str': 'Force',
+    'dex': 'Dextérité',
+    'con': 'Constitution',
+    'int': 'Intelligence',
+    'wis': 'Sagesse',
+    'cha': 'Charisme',
+    'any': "n'importe quelle caractéristique",
+  },
+  twoOptionSeparator: ' ou ',
+  finalOptionSeparator: ', ou ',
+  sizeLabels: <String, String>{
+    'tiny': 'minuscule',
+    'small': 'petite',
+    'medium': 'moyenne',
+    'large': 'grande',
+    'huge': 'très grande',
+    'gargantuan': 'gargantuesque',
+  },
+  sizeFallbackTemplate: 'Votre taille est {size}.',
+  speedFallbackTemplate: 'Votre vitesse de déplacement de base est de {speed} pieds.',
+  fallbackLanguageCode: 'en',
+);
+
 class _SpeciesEffectLocalizer {
-  const _SpeciesEffectLocalizer({required this.languageCode});
+  _SpeciesEffectLocalizer({required this.languageCode})
+      : bundle =
+            SpeciesEffectLocalizationCatalog.forLanguage(languageCode);
 
   final String languageCode;
+  final SpeciesEffectLanguageBundle bundle;
 
-  bool get _isFrench => languageCode.toLowerCase() == 'fr';
+  String get listSeparator => bundle.listSeparator;
+  String get abilityScoreIncreaseTitle => bundle.abilityScoreIncreaseTitle;
+  String get ageTitle => bundle.ageTitle;
+  String get alignmentTitle => bundle.alignmentTitle;
+  String get sizeTitle => bundle.sizeTitle;
+  String get speedTitle => bundle.speedTitle;
+  String get languagesTitle => bundle.languagesTitle;
 
-  String get listSeparator => ', ';
+  String localizedLabel(LocalizedText text) => text.resolve(
+        languageCode,
+        fallbackLanguageCode: bundle.fallbackLanguageCode,
+      );
 
-  String get abilityScoreIncreaseTitle =>
-      _isFrench ? 'Augmentation de caractéristiques' : 'Ability Score Increase';
-
-  String get ageTitle => _isFrench ? 'Âge' : 'Age';
-
-  String get alignmentTitle => _isFrench ? 'Alignement' : 'Alignment';
-
-  String get sizeTitle => _isFrench ? 'Taille' : 'Size';
-
-  String get speedTitle => _isFrench ? 'Vitesse' : 'Speed';
-
-  String get languagesTitle => _isFrench ? 'Langues' : 'Languages';
-
-  String localizedLabel(LocalizedText text) {
-    if (_isFrench) {
-      return text.fr.isNotEmpty ? text.fr : text.en;
+  String? maybeLocalized(LocalizedText? text) {
+    if (text == null) {
+      return null;
     }
-    return text.en.isNotEmpty ? text.en : text.fr;
+    final String? resolved = text.maybeResolve(
+      languageCode,
+      fallbackLanguageCode: bundle.fallbackLanguageCode,
+    );
+    if (resolved == null) {
+      return null;
+    }
+    final String trimmed = resolved.trim();
+    return trimmed.isEmpty ? null : trimmed;
   }
 
   String formatAbilityBonus(SpeciesAbilityBonus bonus) {
     final String sign = bonus.amount >= 0 ? '+' : '';
     final String amount = '$sign${bonus.amount}';
     final String alternativePrefix =
-        bonus.isAlternative ? (_isFrench ? '[Variante] ' : '[Alternative] ') : '';
+        bonus.isAlternative ? bundle.alternativePrefix : '';
 
     if (bonus.isChoice) {
       final int choose = bonus.choose ?? 1;
       final String options = _formatAbilityOptions(bonus.options);
-      final String chooseSuffix =
-          _isFrench ? '($choose au choix)' : '(choose $choose)';
-      final String preposition =
-          _isFrench ? 'pour' : 'to';
-      return '$alternativePrefix$amount $preposition $options $chooseSuffix';
+      final String chooseSuffix = bundle.abilityChoiceSuffix(choose);
+      final String preposition = bundle.abilityChoicePreposition;
+      final String formatted =
+          '$alternativePrefix$amount $preposition $options $chooseSuffix';
+      return formatted.trim();
     }
 
-    final String ability = _abilityName(bonus.ability ?? 'any');
-    return '$alternativePrefix$amount $ability';
+    final String ability = bundle.abilityName(bonus.ability ?? 'any');
+    return ('$alternativePrefix$amount $ability').trim();
   }
 
-  String speedFallback(int speed) => _isFrench
-      ? 'Votre vitesse de déplacement de base est de $speed pieds.'
-      : 'Your base walking speed is $speed feet.';
+  String speedFallback(int speed) => bundle.speedFallback(speed);
 
-  String sizeFallback(String size) {
-    final String localized = _isFrench ? _localizedSizeFr(size) : _localizedSizeEn(size);
-    return _isFrench
-        ? 'Votre taille est $localized.'
-        : 'Your size is $localized.';
-  }
+  String sizeFallback(String size) => bundle.sizeFallback(size);
 
   String _formatAbilityOptions(List<String> options) {
     if (options.isEmpty) {
-      return _isFrench ? 'caractéristiques de votre choix' : 'abilities of your choice';
+      return bundle.abilityChoiceDefaultOptions;
     }
 
     final List<String> labels =
-        options.map((String option) => _abilityName(option)).toList();
-
+        options.map((String option) => bundle.abilityName(option)).toList();
     if (labels.length == 1) {
       return labels.first;
     }
-
     if (labels.length == 2) {
-      final String separator = _isFrench ? ' ou ' : ' or ';
-      return '${labels[0]}$separator${labels[1]}';
+      return '${labels[0]}${bundle.twoOptionSeparator}${labels[1]}';
     }
 
     final String penultimate =
-        labels.sublist(0, labels.length - 1).join(', ');
-    final String conjunction = _isFrench ? ', ou ' : ', or ';
-    return '$penultimate$conjunction${labels.last}';
-  }
-
-  String _abilityName(String ability) {
-    switch (ability.toLowerCase()) {
-      case 'str':
-        return _isFrench ? 'Force' : 'Strength';
-      case 'dex':
-        return _isFrench ? 'Dextérité' : 'Dexterity';
-      case 'con':
-        return _isFrench ? 'Constitution' : 'Constitution';
-      case 'int':
-        return _isFrench ? 'Intelligence' : 'Intelligence';
-      case 'wis':
-        return _isFrench ? 'Sagesse' : 'Wisdom';
-      case 'cha':
-        return _isFrench ? 'Charisme' : 'Charisma';
-      case 'any':
-        return _isFrench
-            ? "n'importe quelle caractéristique"
-            : 'any ability';
-      default:
-        return ability.toUpperCase();
-    }
-  }
-
-  String _localizedSizeFr(String size) {
-    switch (size.toLowerCase()) {
-      case 'tiny':
-        return 'minuscule';
-      case 'small':
-        return 'petite';
-      case 'medium':
-        return 'moyenne';
-      case 'large':
-        return 'grande';
-      case 'huge':
-        return 'très grande';
-      case 'gargantuan':
-        return 'gargantuesque';
-      default:
-        return size;
-    }
-  }
-
-  String _localizedSizeEn(String size) {
-    switch (size.toLowerCase()) {
-      case 'tiny':
-        return 'Tiny';
-      case 'small':
-        return 'Small';
-      case 'medium':
-        return 'Medium';
-      case 'large':
-        return 'Large';
-      case 'huge':
-        return 'Huge';
-      case 'gargantuan':
-        return 'Gargantuan';
-      default:
-        return size;
-    }
+        labels.sublist(0, labels.length - 1).join(bundle.listSeparator);
+    return '$penultimate${bundle.finalOptionSeparator}${labels.last}';
   }
 }

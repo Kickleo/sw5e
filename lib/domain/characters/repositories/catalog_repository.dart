@@ -14,7 +14,70 @@ import 'package:meta/meta.dart';
 class LocalizedText {
   final String en; // Libellé anglais.
   final String fr; // Libellé français.
-  const LocalizedText({required this.en, required this.fr});
+  final Map<String, String> otherTranslations; // Traductions additionnelles.
+
+  const LocalizedText({
+    this.en = '',
+    this.fr = '',
+    this.otherTranslations = const <String, String>{},
+  });
+
+  /// Retourne l'ensemble des traductions connues, clé = code langue.
+  Map<String, String> get translations {
+    final Map<String, String> normalized = <String, String>{};
+    if (en.trim().isNotEmpty) {
+      normalized['en'] = en;
+    }
+    if (fr.trim().isNotEmpty) {
+      normalized['fr'] = fr;
+    }
+    otherTranslations.forEach((String key, String value) {
+      final String trimmedKey = key.toLowerCase();
+      if ((trimmedKey == 'en') || (trimmedKey == 'fr')) {
+        // Ces clés sont déjà gérées ci-dessus.
+        return;
+      }
+      final String trimmedValue = value.trim();
+      if (trimmedValue.isNotEmpty) {
+        normalized[trimmedKey] = trimmedValue;
+      }
+    });
+    return Map<String, String>.unmodifiable(normalized);
+  }
+
+  /// Renvoie la traduction dans la [languageCode] demandée, avec repli.
+  String resolve(String languageCode, {String? fallbackLanguageCode}) {
+    final Map<String, String> values = translations;
+    final String normalized = languageCode.toLowerCase();
+    final String? primary = values[normalized];
+    if (primary != null && primary.trim().isNotEmpty) {
+      return primary.trim();
+    }
+
+    if (fallbackLanguageCode != null) {
+      final String? fallback =
+          values[fallbackLanguageCode.toLowerCase()]?.trim();
+      if (fallback != null && fallback.isNotEmpty) {
+        return fallback;
+      }
+    }
+
+    for (final String value in values.values) {
+      final String trimmed = value.trim();
+      if (trimmed.isNotEmpty) {
+        return trimmed;
+      }
+    }
+
+    return '';
+  }
+
+  /// Renvoie la traduction demandée ou `null` si aucune valeur disponible.
+  String? maybeResolve(String languageCode, {String? fallbackLanguageCode}) {
+    final String value =
+        resolve(languageCode, fallbackLanguageCode: fallbackLanguageCode);
+    return value.isEmpty ? null : value;
+  }
 }
 
 @immutable
@@ -44,11 +107,11 @@ class SpeciesDef {
   final String size; // ex: "medium"
   final List<String> traitIds; // Traits référencés dans [TraitDef].
   final List<SpeciesAbilityBonus> abilityBonuses; // bonus de caractéristique.
-  final String? age; // Texte descriptif de l'âge.
-  final String? alignment; // Inclinaison morale typique.
-  final String? sizeText; // Description détaillée de la taille.
-  final String? speedText; // Description détaillée de la vitesse.
-  final String? languages; // Langues parlées par défaut.
+  final LocalizedText? age; // Texte descriptif de l'âge.
+  final LocalizedText? alignment; // Inclinaison morale typique.
+  final LocalizedText? sizeText; // Description détaillée de la taille.
+  final LocalizedText? speedText; // Description détaillée de la vitesse.
+  final LocalizedText? languages; // Langues parlées par défaut.
 
   const SpeciesDef({
     required this.id,

@@ -17,27 +17,64 @@ import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.d
 class LocalizedTextDto {
   final String en; // Traduction anglaise de l'intitulé.
   final String fr; // Traduction française.
+  final Map<String, String> otherTranslations; // Autres traductions disponibles.
 
-  const LocalizedTextDto({required this.en, required this.fr});
+  const LocalizedTextDto({
+    required this.en,
+    required this.fr,
+    this.otherTranslations = const <String, String>{},
+  });
 
   factory LocalizedTextDto.fromJson(Map<String, dynamic> json) {
-    // Normalise les valeurs potentiellement imbriquées (maps, listes...) en String.
-    final String? rawEn = _readLocalizedField(json['en']);
-    final String? rawFr = _readLocalizedField(json['fr']);
+    final Map<String, String> normalized = _readLocalizedMap(json);
+    final Map<String, String> others = Map<String, String>.from(normalized)
+      ..remove('en')
+      ..remove('fr');
 
-    final String resolvedEn = _resolveLocalizedValue(rawEn, rawFr);
-    final String resolvedFr = _resolveLocalizedValue(rawFr, rawEn);
+    final String resolvedEn = _resolveLocalizedValue(
+      normalized['en'],
+      normalized['fr'],
+      others.values,
+    );
+    final String resolvedFr = _resolveLocalizedValue(
+      normalized['fr'],
+      resolvedEn,
+      others.values,
+    );
 
-    return LocalizedTextDto(en: resolvedEn, fr: resolvedFr);
+    return LocalizedTextDto(
+      en: resolvedEn,
+      fr: resolvedFr,
+      otherTranslations: Map<String, String>.unmodifiable(others),
+    );
   }
 
   /// Interprète un champ JSON pouvant être déjà une chaîne ou une map localisée.
   static LocalizedTextDto fromAny(dynamic raw) {
+    final LocalizedTextDto? maybe = maybeFromAny(raw);
+    if (maybe != null) {
+      return maybe;
+    }
+    throw ArgumentError('Unsupported localized value: ${raw.runtimeType}');
+  }
+
+  static LocalizedTextDto? maybeFromAny(dynamic raw) {
+    if (raw == null) {
+      return null;
+    }
     if (raw is LocalizedTextDto) {
       return raw;
     }
+    if (raw is LocalizedText) {
+      return LocalizedTextDto(
+        en: raw.en,
+        fr: raw.fr,
+        otherTranslations: raw.otherTranslations,
+      );
+    }
     if (raw is String) {
-      return LocalizedTextDto(en: raw, fr: raw);
+      final String trimmed = raw.trim();
+      return LocalizedTextDto(en: trimmed, fr: trimmed);
     }
     if (raw is Map<String, dynamic>) {
       return LocalizedTextDto.fromJson(raw);
@@ -49,11 +86,14 @@ class LocalizedTextDto {
         ),
       );
     }
-    throw ArgumentError('Unsupported localized value: ${raw.runtimeType}');
+    return null;
   }
 
-  LocalizedText toDomain() =>
-      LocalizedText(en: en, fr: fr); // Conversion vers le modèle de domaine.
+  LocalizedText toDomain() => LocalizedText(
+        en: en,
+        fr: fr,
+        otherTranslations: otherTranslations,
+      );
 }
 
 /// SpeciesDto = structure JSON des espèces (assets/catalog/species.json).
@@ -99,11 +139,11 @@ class SpeciesDto {
   final String size; // Catégorie de taille (small, medium...).
   final List<String> traitIds; // Traits conférés par l'espèce.
   final List<SpeciesAbilityBonusDto> abilityBonuses; // Bonus aux caractéristiques.
-  final String? age; // Description d'âge.
-  final String? alignment; // Alignement typique.
-  final String? sizeText; // Texte détaillant la taille.
-  final String? speedText; // Texte détaillant la vitesse.
-  final String? languages; // Langues connues.
+  final LocalizedTextDto? age; // Description d'âge.
+  final LocalizedTextDto? alignment; // Alignement typique.
+  final LocalizedTextDto? sizeText; // Texte détaillant la taille.
+  final LocalizedTextDto? speedText; // Texte détaillant la vitesse.
+  final LocalizedTextDto? languages; // Langues connues.
 
   const SpeciesDto({
     required this.id,
@@ -132,11 +172,11 @@ class SpeciesDto {
       )
           .map(SpeciesAbilityBonusDto.fromJson)
           .toList(growable: false),
-      age: _readLocalizedField(json['age']),
-      alignment: _readLocalizedField(json['alignment']),
-      sizeText: _readLocalizedField(json['size_text']),
-      speedText: _readLocalizedField(json['speed_text']),
-      languages: _readLocalizedField(json['languages']),
+      age: LocalizedTextDto.maybeFromAny(json['age']),
+      alignment: LocalizedTextDto.maybeFromAny(json['alignment']),
+      sizeText: LocalizedTextDto.maybeFromAny(json['size_text']),
+      speedText: LocalizedTextDto.maybeFromAny(json['speed_text']),
+      languages: LocalizedTextDto.maybeFromAny(json['languages']),
     );
   }
 
@@ -148,15 +188,19 @@ class SpeciesDto {
         traitIds: List<String>.unmodifiable(traitIds),
         abilityBonuses:
             abilityBonuses.map((bonus) => bonus.toDomain()).toList(growable: false),
-        age: age,
-        alignment: alignment,
-        sizeText: sizeText,
-        speedText: speedText,
-        languages: languages,
+        age: age?.toDomain(),
+        alignment: alignment?.toDomain(),
+        sizeText: sizeText?.toDomain(),
+        speedText: speedText?.toDomain(),
+        languages: languages?.toDomain(),
       ); // Crée l'entité de domaine immuable correspondante.
 }
 
-String _resolveLocalizedValue(String? primary, String? fallback) {
+String _resolveLocalizedValue(
+  String? primary,
+  String? fallback,
+  Iterable<String> additionalFallbacks,
+) {
   final String? trimmedPrimary = primary?.trim();
   if (trimmedPrimary != null && trimmedPrimary.isNotEmpty) {
     return trimmedPrimary;
@@ -165,10 +209,43 @@ String _resolveLocalizedValue(String? primary, String? fallback) {
   if (trimmedFallback != null && trimmedFallback.isNotEmpty) {
     return trimmedFallback;
   }
+  for (final String candidate in additionalFallbacks) {
+    final String trimmed = candidate.trim();
+    if (trimmed.isNotEmpty) {
+      return trimmed;
+    }
+  }
   return '';
 }
 
-String? _readLocalizedField(dynamic raw) {
+Map<String, String> _readLocalizedMap(dynamic raw) {
+  if (raw == null) {
+    return const <String, String>{};
+  }
+  if (raw is Map<String, dynamic>) {
+    final Map<String, String> result = <String, String>{};
+    raw.forEach((String key, dynamic value) {
+      final String? resolved = _readLocalizedScalar(value);
+      if (resolved != null && resolved.trim().isNotEmpty) {
+        result[key.toLowerCase()] = resolved.trim();
+      }
+    });
+    return result;
+  }
+  if (raw is Map) {
+    final Map<String, dynamic> converted = raw.map(
+      (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+    );
+    return _readLocalizedMap(converted);
+  }
+  final String? scalar = _readLocalizedScalar(raw);
+  if (scalar == null || scalar.trim().isEmpty) {
+    return const <String, String>{};
+  }
+  return <String, String>{'und': scalar.trim()};
+}
+
+String? _readLocalizedScalar(dynamic raw) {
   if (raw == null) {
     return null;
   }
@@ -178,49 +255,36 @@ String? _readLocalizedField(dynamic raw) {
   if (raw is LocalizedTextDto) {
     return raw.en.trim().isNotEmpty ? raw.en : raw.fr;
   }
+  if (raw is LocalizedText) {
+    return raw.en.trim().isNotEmpty ? raw.en : raw.fr;
+  }
   if (raw is Map<String, dynamic>) {
-    final dynamic en = raw['en'];
-    final dynamic fr = raw['fr'];
-
-    if (en is String && en.trim().isNotEmpty) {
-      return en;
+    for (final MapEntry<String, dynamic> entry in raw.entries) {
+      final String? nested = _readLocalizedScalar(entry.value);
+      if (nested != null && nested.trim().isNotEmpty) {
+        return nested;
+      }
     }
-    if (fr is String && fr.trim().isNotEmpty) {
-      return fr;
-    }
-
-    final String? nestedEn = _readLocalizedField(en);
-    if (nestedEn != null && nestedEn.trim().isNotEmpty) {
-      return nestedEn;
-    }
-    final String? nestedFr = _readLocalizedField(fr);
-    if (nestedFr != null && nestedFr.trim().isNotEmpty) {
-      return nestedFr;
-    }
-
     return null;
   }
   if (raw is Map) {
-    final Map<String, dynamic> map = raw.map(
-      (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+    return _readLocalizedScalar(
+      raw.map(
+        (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+      ),
     );
-    return _readLocalizedField(map);
   }
   if (raw is Iterable) {
-    final List<String> values = raw
-        .map(_readLocalizedField)
-        .whereType<String>()
-        .map((value) => value.trim())
-        .where((value) => value.isNotEmpty)
-        .toList(growable: false);
-    if (values.isNotEmpty) {
-      return values.join('\n');
+    for (final dynamic value in raw) {
+      final String? nested = _readLocalizedScalar(value);
+      if (nested != null && nested.trim().isNotEmpty) {
+        return nested;
+      }
     }
     return null;
   }
   return raw.toString();
 }
-
 /// StartingEquipmentLineDto = ligne d'équipement initial pour une classe.
 @immutable
 class StartingEquipmentLineDto {
