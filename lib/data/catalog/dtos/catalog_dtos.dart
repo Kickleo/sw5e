@@ -21,11 +21,14 @@ class LocalizedTextDto {
   const LocalizedTextDto({required this.en, required this.fr});
 
   factory LocalizedTextDto.fromJson(Map<String, dynamic> json) {
-    // On lit directement les champs texte en s'assurant qu'ils sont bien des String.
-    return LocalizedTextDto(
-      en: (json['en'] as String?) ?? (json['fr'] as String?) ?? '',
-      fr: (json['fr'] as String?) ?? (json['en'] as String?) ?? '',
-    );
+    // Normalise les valeurs potentiellement imbriquées (maps, listes...) en String.
+    final String? rawEn = _readLocalizedField(json['en']);
+    final String? rawFr = _readLocalizedField(json['fr']);
+
+    final String resolvedEn = _resolveLocalizedValue(rawEn, rawFr);
+    final String resolvedFr = _resolveLocalizedValue(rawFr, rawEn);
+
+    return LocalizedTextDto(en: resolvedEn, fr: resolvedFr);
   }
 
   /// Interprète un champ JSON pouvant être déjà une chaîne ou une map localisée.
@@ -151,6 +154,18 @@ class SpeciesDto {
         speedText: speedText,
         languages: languages,
       ); // Crée l'entité de domaine immuable correspondante.
+}
+
+String _resolveLocalizedValue(String? primary, String? fallback) {
+  final String? trimmedPrimary = primary?.trim();
+  if (trimmedPrimary != null && trimmedPrimary.isNotEmpty) {
+    return trimmedPrimary;
+  }
+  final String? trimmedFallback = fallback?.trim();
+  if (trimmedFallback != null && trimmedFallback.isNotEmpty) {
+    return trimmedFallback;
+  }
+  return '';
 }
 
 String? _readLocalizedField(dynamic raw) {
