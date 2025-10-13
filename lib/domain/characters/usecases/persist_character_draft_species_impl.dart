@@ -20,12 +20,16 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
   final CharacterDraftRepository _drafts;
 
   @override
-  Future<AppResult<CharacterDraft>> call(QuickCreateSpeciesDetails details) async {
+  Future<AppResult<CharacterDraft>> call(
+    QuickCreateSpeciesDetails details, {
+    required String languageCode,
+  }) async {
     try {
       // On repart du brouillon sauvegardé pour conserver les autres champs.
       final CharacterDraft existing = await _drafts.load() ?? CharacterDraft();
       // Les détails du catalogue sont transformés en une structure persistable.
-      final DraftSpeciesSelection selection = _buildSpeciesSelection(details);
+      final DraftSpeciesSelection selection =
+          _buildSpeciesSelection(details, languageCode);
       final CharacterDraft updated = existing.copyWith(species: selection);
       await _drafts.save(updated);
       return appOk(updated);
@@ -40,18 +44,23 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     }
   }
 
-  DraftSpeciesSelection _buildSpeciesSelection(QuickCreateSpeciesDetails details) {
+  DraftSpeciesSelection _buildSpeciesSelection(
+    QuickCreateSpeciesDetails details,
+    String languageCode,
+  ) {
     final SpeciesDef species = details.species;
     final List<CharacterEffect> effects = <CharacterEffect>[];
+    final _SpeciesEffectLocalizer l10n =
+        _SpeciesEffectLocalizer(languageCode: languageCode);
 
     if (species.abilityBonuses.isNotEmpty) {
       final String bonuses = species.abilityBonuses
-          .map(_formatAbilityBonus)
-          .join(', ');
+          .map(l10n.formatAbilityBonus)
+          .join(l10n.listSeparator);
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:ability_bonuses',
-          title: 'Augmentation de caractéristiques',
+          title: l10n.abilityScoreIncreaseTitle,
           description: bonuses,
           category: CharacterEffectCategory.passive,
         ),
@@ -62,7 +71,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:age',
-          title: 'Âge',
+          title: l10n.ageTitle,
           description: species.age!.trim(),
           category: CharacterEffectCategory.passive,
         ),
@@ -73,7 +82,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:alignment',
-          title: 'Alignement',
+          title: l10n.alignmentTitle,
           description: species.alignment!.trim(),
           category: CharacterEffectCategory.passive,
         ),
@@ -84,7 +93,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:size',
-          title: 'Taille',
+          title: l10n.sizeTitle,
           description: species.sizeText!.trim(),
           category: CharacterEffectCategory.passive,
         ),
@@ -93,8 +102,8 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:size',
-          title: 'Taille',
-          description: 'Votre taille est ${_localizedSize(species.size)}.',
+          title: l10n.sizeTitle,
+          description: l10n.sizeFallback(species.size),
           category: CharacterEffectCategory.passive,
         ),
       );
@@ -103,11 +112,11 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     final String speedDescription = (species.speedText != null &&
             species.speedText!.trim().isNotEmpty)
         ? species.speedText!.trim()
-        : 'Votre vitesse de déplacement de base est de ${species.speed} pieds.';
+        : l10n.speedFallback(species.speed);
     effects.add(
       CharacterEffect(
         source: 'species:${species.id}:speed',
-        title: 'Vitesse',
+        title: l10n.speedTitle,
         description: speedDescription,
         category: CharacterEffectCategory.passive,
       ),
@@ -117,7 +126,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:languages',
-          title: 'Langues',
+          title: l10n.languagesTitle,
           description: species.languages!.trim(),
           category: CharacterEffectCategory.passive,
         ),
@@ -129,7 +138,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       effects.add(
         CharacterEffect(
           source: 'trait:${trait.id}',
-          title: trait.name.fr.isNotEmpty ? trait.name.fr : trait.name.en,
+          title: l10n.localizedLabel(trait.name),
           description: trait.description,
           category: category,
         ),
@@ -138,7 +147,7 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
 
     return DraftSpeciesSelection(
       speciesId: SpeciesId(species.id),
-      displayName: species.name.fr.isNotEmpty ? species.name.fr : species.name.en,
+      displayName: l10n.localizedLabel(species.name),
       effects: List<CharacterEffect>.unmodifiable(effects),
     );
   }
@@ -155,24 +164,71 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     return CharacterEffectCategory.passive;
   }
 
-  String _formatAbilityBonus(SpeciesAbilityBonus bonus) {
+}
+
+class _SpeciesEffectLocalizer {
+  const _SpeciesEffectLocalizer({required this.languageCode});
+
+  final String languageCode;
+
+  bool get _isFrench => languageCode.toLowerCase() == 'fr';
+
+  String get listSeparator => ', ';
+
+  String get abilityScoreIncreaseTitle =>
+      _isFrench ? 'Augmentation de caractéristiques' : 'Ability Score Increase';
+
+  String get ageTitle => _isFrench ? 'Âge' : 'Age';
+
+  String get alignmentTitle => _isFrench ? 'Alignement' : 'Alignment';
+
+  String get sizeTitle => _isFrench ? 'Taille' : 'Size';
+
+  String get speedTitle => _isFrench ? 'Vitesse' : 'Speed';
+
+  String get languagesTitle => _isFrench ? 'Langues' : 'Languages';
+
+  String localizedLabel(LocalizedText text) {
+    if (_isFrench) {
+      return text.fr.isNotEmpty ? text.fr : text.en;
+    }
+    return text.en.isNotEmpty ? text.en : text.fr;
+  }
+
+  String formatAbilityBonus(SpeciesAbilityBonus bonus) {
     final String sign = bonus.amount >= 0 ? '+' : '';
     final String amount = '$sign${bonus.amount}';
-    final String alternativePrefix = bonus.isAlternative ? '[Alternative] ' : '';
+    final String alternativePrefix =
+        bonus.isAlternative ? (_isFrench ? '[Variante] ' : '[Alternative] ') : '';
 
     if (bonus.isChoice) {
       final int choose = bonus.choose ?? 1;
       final String options = _formatAbilityOptions(bonus.options);
-      return '$alternativePrefix$amount pour $options ($choose au choix)';
+      final String chooseSuffix =
+          _isFrench ? '($choose au choix)' : '(choose $choose)';
+      final String preposition =
+          _isFrench ? 'pour' : 'to';
+      return '$alternativePrefix$amount $preposition $options $chooseSuffix';
     }
 
     final String ability = _abilityName(bonus.ability ?? 'any');
     return '$alternativePrefix$amount $ability';
   }
 
+  String speedFallback(int speed) => _isFrench
+      ? 'Votre vitesse de déplacement de base est de $speed pieds.'
+      : 'Your base walking speed is $speed feet.';
+
+  String sizeFallback(String size) {
+    final String localized = _isFrench ? _localizedSizeFr(size) : _localizedSizeEn(size);
+    return _isFrench
+        ? 'Votre taille est $localized.'
+        : 'Your size is $localized.';
+  }
+
   String _formatAbilityOptions(List<String> options) {
     if (options.isEmpty) {
-      return 'caractéristiques de votre choix';
+      return _isFrench ? 'caractéristiques de votre choix' : 'abilities of your choice';
     }
 
     final List<String> labels =
@@ -183,34 +239,40 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
     }
 
     if (labels.length == 2) {
-      return '${labels[0]} ou ${labels[1]}';
+      final String separator = _isFrench ? ' ou ' : ' or ';
+      return '${labels[0]}$separator${labels[1]}';
     }
 
-    return '${labels.sublist(0, labels.length - 1).join(', ')}, ou ${labels.last}';
+    final String penultimate =
+        labels.sublist(0, labels.length - 1).join(', ');
+    final String conjunction = _isFrench ? ', ou ' : ', or ';
+    return '$penultimate$conjunction${labels.last}';
   }
 
   String _abilityName(String ability) {
     switch (ability.toLowerCase()) {
       case 'str':
-        return 'Force';
+        return _isFrench ? 'Force' : 'Strength';
       case 'dex':
-        return 'Dextérité';
+        return _isFrench ? 'Dextérité' : 'Dexterity';
       case 'con':
-        return 'Constitution';
+        return _isFrench ? 'Constitution' : 'Constitution';
       case 'int':
-        return 'Intelligence';
+        return _isFrench ? 'Intelligence' : 'Intelligence';
       case 'wis':
-        return 'Sagesse';
+        return _isFrench ? 'Sagesse' : 'Wisdom';
       case 'cha':
-        return 'Charisme';
+        return _isFrench ? 'Charisme' : 'Charisma';
       case 'any':
-        return 'n\'importe quelle caractéristique';
+        return _isFrench
+            ? "n'importe quelle caractéristique"
+            : 'any ability';
       default:
         return ability.toUpperCase();
     }
   }
 
-  String _localizedSize(String size) {
+  String _localizedSizeFr(String size) {
     switch (size.toLowerCase()) {
       case 'tiny':
         return 'minuscule';
@@ -224,6 +286,25 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
         return 'très grande';
       case 'gargantuan':
         return 'gargantuesque';
+      default:
+        return size;
+    }
+  }
+
+  String _localizedSizeEn(String size) {
+    switch (size.toLowerCase()) {
+      case 'tiny':
+        return 'Tiny';
+      case 'small':
+        return 'Small';
+      case 'medium':
+        return 'Medium';
+      case 'large':
+        return 'Large';
+      case 'huge':
+        return 'Huge';
+      case 'gargantuan':
+        return 'Gargantuan';
       default:
         return size;
     }

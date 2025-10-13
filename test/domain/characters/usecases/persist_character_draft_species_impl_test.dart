@@ -58,7 +58,8 @@ void main() {
     final PersistCharacterDraftSpeciesImpl useCase =
         PersistCharacterDraftSpeciesImpl(repository);
 
-    final AppResult<CharacterDraft> result = await useCase(details);
+    final AppResult<CharacterDraft> result =
+        await useCase(details, languageCode: 'en');
     expect(result.isOk, isTrue);
 
     final CharacterDraft? saved = await repository.load();
@@ -115,7 +116,8 @@ void main() {
     final PersistCharacterDraftSpeciesImpl useCase =
         PersistCharacterDraftSpeciesImpl(repository);
 
-    final AppResult<CharacterDraft> result = await useCase(details);
+    final AppResult<CharacterDraft> result =
+        await useCase(details, languageCode: 'en');
     expect(result.isOk, isTrue);
 
     final CharacterDraft? saved = await repository.load();
@@ -135,5 +137,69 @@ void main() {
       abilityEffect.description,
       contains('[Alternative] +1 to any ability (choose 4)'),
     );
+  });
+
+  test('localise les effets en français selon la langue fournie', () async {
+    const SpeciesDef species = SpeciesDef(
+      id: 'twilek',
+      name: LocalizedText(en: 'Twi\'lek', fr: 'Twi\'lek'),
+      speed: 35,
+      size: 'medium',
+      abilityBonuses: <SpeciesAbilityBonus>[
+        SpeciesAbilityBonus(ability: 'str', amount: 2),
+      ],
+      traitIds: <String>['agility'],
+    );
+
+    const QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
+      species: species,
+      traits: <TraitDef>[
+        TraitDef(
+          id: 'agility',
+          name: LocalizedText(en: 'Agility', fr: 'Agilité'),
+          description: 'Agile et vive.',
+        ),
+      ],
+    );
+
+    final InMemoryCharacterDraftRepository repository =
+        InMemoryCharacterDraftRepository();
+    final PersistCharacterDraftSpeciesImpl useCase =
+        PersistCharacterDraftSpeciesImpl(repository);
+
+    final AppResult<CharacterDraft> result =
+        await useCase(details, languageCode: 'fr');
+    expect(result.isOk, isTrue);
+
+    final CharacterDraft saved = (await repository.load())!;
+
+    expect(saved.species!.displayName, 'Twi\'lek');
+
+    final CharacterEffect abilityEffect = saved.species!.effects.firstWhere(
+      (CharacterEffect effect) =>
+          effect.source == 'species:twilek:ability_bonuses',
+    );
+    expect(abilityEffect.title, 'Augmentation de caractéristiques');
+    expect(abilityEffect.description, contains('+2 Force'));
+
+    final CharacterEffect sizeEffect = saved.species!.effects.firstWhere(
+      (CharacterEffect effect) => effect.source == 'species:twilek:size',
+    );
+    expect(sizeEffect.title, 'Taille');
+    expect(sizeEffect.description, 'Votre taille est moyenne.');
+
+    final CharacterEffect speedEffect = saved.species!.effects.firstWhere(
+      (CharacterEffect effect) => effect.source == 'species:twilek:speed',
+    );
+    expect(speedEffect.title, 'Vitesse');
+    expect(
+      speedEffect.description,
+      'Votre vitesse de déplacement de base est de 35 pieds.',
+    );
+
+    final CharacterEffect traitEffect = saved.species!.effects.firstWhere(
+      (CharacterEffect effect) => effect.source == 'trait:agility',
+    );
+    expect(traitEffect.title, 'Agilité');
   });
 }

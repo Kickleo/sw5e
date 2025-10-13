@@ -247,6 +247,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     required PersistCharacterDraftEquipment persistCharacterDraftEquipment,
     required PersistCharacterDraftStep persistCharacterDraftStep,
     required ClearCharacterDraft clearCharacterDraft,
+    required String languageCode,
     Random? random,
   })  : _loadQuickCreateCatalog = loadQuickCreateCatalog,
         _loadSpeciesDetails = loadSpeciesDetails,
@@ -263,6 +264,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         _persistCharacterDraftEquipment = persistCharacterDraftEquipment,
         _persistCharacterDraftStep = persistCharacterDraftStep,
         _clearCharacterDraft = clearCharacterDraft,
+        _languageCode = languageCode,
         _random = random ?? Random(),
         super(QuickCreateState.initial()) {
     on<QuickCreateStarted>(_onStarted);
@@ -298,6 +300,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   final PersistCharacterDraftEquipment _persistCharacterDraftEquipment;
   final PersistCharacterDraftStep _persistCharacterDraftStep;
   final ClearCharacterDraft _clearCharacterDraft;
+  final String _languageCode;
   final Random _random;
 
   static const List<int> _standardArray = <int>[15, 14, 13, 12, 10, 8];
@@ -1068,7 +1071,10 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
           ),
         );
         final AppResult<CharacterDraft> draftResult =
-            await _persistCharacterDraftSpecies(details);
+            await _persistCharacterDraftSpecies(
+              details,
+              languageCode: _languageCode,
+            );
         draftResult.match(
           ok: (CharacterDraft draft) {
             emit(

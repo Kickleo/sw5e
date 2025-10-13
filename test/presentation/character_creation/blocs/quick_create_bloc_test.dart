@@ -196,7 +196,8 @@ void main() {
             error: any(named: 'error'),
             stackTrace: any(named: 'stackTrace')))
         .thenAnswer((_) {});
-    when(() => persistDraftSpecies.call(any()))
+    when(() =>
+            persistDraftSpecies.call(any(), languageCode: any(named: 'languageCode')))
         .thenAnswer((_) async => appOk(CharacterDraft()));
     when(() => persistDraftName.call(any()))
         .thenAnswer((_) async => appOk(CharacterDraft()));
@@ -234,6 +235,7 @@ void main() {
       persistCharacterDraftEquipment: persistDraftEquipment,
       persistCharacterDraftStep: persistDraftStep,
       clearCharacterDraft: clearDraft,
+      languageCode: 'en',
     );
   }
 
@@ -281,7 +283,10 @@ void main() {
       ),
     );
 
-    when(() => persistDraftSpecies.call(any())).thenAnswer(
+    when(() => persistDraftSpecies.call(
+          any(),
+          languageCode: any(named: 'languageCode'),
+        )).thenAnswer(
       (_) async => appOk(
         CharacterDraft(
           species: DraftSpeciesSelection(
@@ -423,7 +428,10 @@ void main() {
         ),
       );
 
-      when(() => persistDraftSpecies.call(any())).thenAnswer(
+      when(() => persistDraftSpecies.call(
+            any(),
+            languageCode: any(named: 'languageCode'),
+          )).thenAnswer(
         (_) async => appOk(
           CharacterDraft(
             species: DraftSpeciesSelection(

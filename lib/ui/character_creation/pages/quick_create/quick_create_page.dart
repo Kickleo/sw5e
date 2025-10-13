@@ -95,6 +95,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
         ServiceLocator.resolve<PersistCharacterDraftStep>();
     final ClearCharacterDraft clearDraft =
         ServiceLocator.resolve<ClearCharacterDraft>();
+    final Locale currentLocale = ref.read(appLocaleProvider);
 
     _bloc = QuickCreateBloc(
       loadQuickCreateCatalog: loadCatalog,
@@ -112,6 +113,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       persistCharacterDraftEquipment: persistDraftEquipment,
       persistCharacterDraftStep: persistDraftStep,
       clearCharacterDraft: clearDraft,
+      languageCode: currentLocale.languageCode,
     )..add(const QuickCreateStarted());
 
     _pageController = PageController(initialPage: _bloc.state.stepIndex);
