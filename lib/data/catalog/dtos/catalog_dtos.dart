@@ -21,11 +21,35 @@ class LocalizedTextDto {
   const LocalizedTextDto({required this.en, required this.fr});
 
   factory LocalizedTextDto.fromJson(Map<String, dynamic> json) {
-    // On lit directement les champs texte en s'assurant qu'ils sont bien des String.
-    return LocalizedTextDto(
-      en: json['en'] as String,
-      fr: json['fr'] as String,
-    );
+    // Normalise les valeurs potentiellement imbriquées (maps, listes...) en String.
+    final String? rawEn = _readLocalizedField(json['en']);
+    final String? rawFr = _readLocalizedField(json['fr']);
+
+    final String resolvedEn = _resolveLocalizedValue(rawEn, rawFr);
+    final String resolvedFr = _resolveLocalizedValue(rawFr, rawEn);
+
+    return LocalizedTextDto(en: resolvedEn, fr: resolvedFr);
+  }
+
+  /// Interprète un champ JSON pouvant être déjà une chaîne ou une map localisée.
+  static LocalizedTextDto fromAny(dynamic raw) {
+    if (raw is LocalizedTextDto) {
+      return raw;
+    }
+    if (raw is String) {
+      return LocalizedTextDto(en: raw, fr: raw);
+    }
+    if (raw is Map<String, dynamic>) {
+      return LocalizedTextDto.fromJson(raw);
+    }
+    if (raw is Map) {
+      return LocalizedTextDto.fromJson(
+        raw.map(
+          (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+        ),
+      );
+    }
+    throw ArgumentError('Unsupported localized value: ${raw.runtimeType}');
   }
 
   LocalizedText toDomain() =>
@@ -99,9 +123,7 @@ class SpeciesDto {
     // Extrait et convertit chaque propriété du JSON brut.
     return SpeciesDto(
       id: json['id'] as String,
-      name: LocalizedTextDto.fromJson(
-        Map<String, dynamic>.from(json['name'] as Map),
-      ),
+      name: LocalizedTextDto.fromAny(json['name'] ?? const <String, String>{}),
       speed: (json['speed'] as num).toInt(),
       size: json['size'] as String,
       traitIds: List<String>.from(json['traits'] as List? ?? const <String>[]),
@@ -110,11 +132,11 @@ class SpeciesDto {
       )
           .map(SpeciesAbilityBonusDto.fromJson)
           .toList(growable: false),
-      age: json['age'] as String?,
-      alignment: json['alignment'] as String?,
-      sizeText: json['size_text'] as String?,
-      speedText: json['speed_text'] as String?,
-      languages: json['languages'] as String?,
+      age: _readLocalizedField(json['age']),
+      alignment: _readLocalizedField(json['alignment']),
+      sizeText: _readLocalizedField(json['size_text']),
+      speedText: _readLocalizedField(json['speed_text']),
+      languages: _readLocalizedField(json['languages']),
     );
   }
 
@@ -132,6 +154,71 @@ class SpeciesDto {
         speedText: speedText,
         languages: languages,
       ); // Crée l'entité de domaine immuable correspondante.
+}
+
+String _resolveLocalizedValue(String? primary, String? fallback) {
+  final String? trimmedPrimary = primary?.trim();
+  if (trimmedPrimary != null && trimmedPrimary.isNotEmpty) {
+    return trimmedPrimary;
+  }
+  final String? trimmedFallback = fallback?.trim();
+  if (trimmedFallback != null && trimmedFallback.isNotEmpty) {
+    return trimmedFallback;
+  }
+  return '';
+}
+
+String? _readLocalizedField(dynamic raw) {
+  if (raw == null) {
+    return null;
+  }
+  if (raw is String) {
+    return raw;
+  }
+  if (raw is LocalizedTextDto) {
+    return raw.en.trim().isNotEmpty ? raw.en : raw.fr;
+  }
+  if (raw is Map<String, dynamic>) {
+    final dynamic en = raw['en'];
+    final dynamic fr = raw['fr'];
+
+    if (en is String && en.trim().isNotEmpty) {
+      return en;
+    }
+    if (fr is String && fr.trim().isNotEmpty) {
+      return fr;
+    }
+
+    final String? nestedEn = _readLocalizedField(en);
+    if (nestedEn != null && nestedEn.trim().isNotEmpty) {
+      return nestedEn;
+    }
+    final String? nestedFr = _readLocalizedField(fr);
+    if (nestedFr != null && nestedFr.trim().isNotEmpty) {
+      return nestedFr;
+    }
+
+    return null;
+  }
+  if (raw is Map) {
+    final Map<String, dynamic> map = raw.map(
+      (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+    );
+    return _readLocalizedField(map);
+  }
+  if (raw is Iterable) {
+    final List<String> values = raw
+        .map(_readLocalizedField)
+        .whereType<String>()
+        .map((value) => value.trim())
+        .where((value) => value.isNotEmpty)
+        .toList(growable: false);
+    if (values.isNotEmpty) {
+      return values.join('\n');
+    }
+    return null;
+  }
+  return raw.toString();
 }
 
 /// StartingEquipmentLineDto = ligne d'équipement initial pour une classe.
