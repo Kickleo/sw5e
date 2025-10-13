@@ -18,39 +18,39 @@ void main() {
   setUp(SpeciesEffectLocalizationCatalog.resetToDefaults);
 
   test('enregistre les effets d\'une espèce Bith dans le brouillon', () async {
-    final SpeciesDef species = SpeciesDef(
+    const SpeciesDef species = SpeciesDef(
       id: 'bith',
-      name: LocalizedText(en: 'Bith', fr: 'Bith'),
+      name: const LocalizedText(en: 'Bith', fr: 'Bith'),
       speed: 30,
       size: 'medium',
-      traitIds: <String>['detail-oriented', 'sonic-sensitivity'],
-      abilityBonuses: <SpeciesAbilityBonus>[
-        SpeciesAbilityBonus(ability: 'int', amount: 2),
-        SpeciesAbilityBonus(ability: 'dex', amount: 1),
+      traitIds: const <String>['detail-oriented', 'sonic-sensitivity'],
+      abilityBonuses: const <SpeciesAbilityBonus>[
+        const SpeciesAbilityBonus(ability: 'int', amount: 2),
+        const SpeciesAbilityBonus(ability: 'dex', amount: 1),
       ],
-      age: LocalizedText(
+      age: const LocalizedText(
         en:
             'Bith reach adulthood in their late teens and live less than a century.',
         fr:
             "Les Bith atteignent l'âge adulte vers la fin de l'adolescence et vivent moins d'un siècle.",
       ),
-      alignment: LocalizedText(
+      alignment: const LocalizedText(
         en:
             "Biths' benevolent nature causes them to tend toward the light side, though there are exceptions.",
         fr:
             'La nature bienveillante des Bith les pousse vers le côté lumineux, bien qu\'il existe des exceptions.',
       ),
-      sizeText: LocalizedText(
+      sizeText: const LocalizedText(
         en:
             'Bith typically stand 5 to 6 feet tall and generally weigh about 120 lbs. Regardless of your position in that range, your size is Medium.',
         fr:
             'Les Bith mesurent généralement entre 1,5 et 1,8 mètre et pèsent autour de 55 kilos. Quelle que soit votre position dans cette fourchette, votre taille est Moyenne.',
       ),
-      speedText: LocalizedText(
+      speedText: const LocalizedText(
         en: 'Your base walking speed is 30 feet.',
         fr: 'Votre vitesse de déplacement au sol de base est de 9 mètres.',
       ),
-      languages: LocalizedText(
+      languages: const LocalizedText(
         en:
             'You can speak, read, and write Galactic Basic, Bith, and one more language of your choice.',
         fr:
@@ -58,18 +58,18 @@ void main() {
       ),
     );
 
-    final QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
+    final QuickCreateSpeciesDetails details = const QuickCreateSpeciesDetails(
       species: species,
-      traits: <TraitDef>[
-        TraitDef(
+      traits: const <TraitDef>[
+        const TraitDef(
           id: 'detail-oriented',
-          name: LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
+          name: const LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
           description:
               'You are practiced at scouring for details. You have advantage on Intelligence (Investigation) checks within 5 feet.',
         ),
-        TraitDef(
+        const TraitDef(
           id: 'sonic-sensitivity',
-          name: LocalizedText(en: 'Sonic Sensitivity', fr: 'Sonic Sensitivity'),
+          name: const LocalizedText(en: 'Sonic Sensitivity', fr: 'Sonic Sensitivity'),
           description:
               'You have disadvantage on saving throws against effects that would deal sonic damage (explained in chapter 9).',
         ),
@@ -106,33 +106,33 @@ void main() {
   });
 
   test('formate les bonus de caractéristique avec choix multiples', () async {
-    final SpeciesDef species = SpeciesDef(
+    const SpeciesDef species = SpeciesDef(
       id: 'human',
-      name: LocalizedText(en: 'Human', fr: 'Humain'),
+      name: const LocalizedText(en: 'Human', fr: 'Humain'),
       speed: 30,
       size: 'medium',
-      abilityBonuses: <SpeciesAbilityBonus>[
-        SpeciesAbilityBonus(
+      abilityBonuses: const <SpeciesAbilityBonus>[
+        const SpeciesAbilityBonus(
           amount: 2,
           choose: 1,
-          options: <String>['wis', 'cha'],
+          options: const <String>['wis', 'cha'],
         ),
-        SpeciesAbilityBonus(
+        const SpeciesAbilityBonus(
           amount: 1,
           choose: 2,
-          options: <String>['any'],
+          options: const <String>['any'],
         ),
-        SpeciesAbilityBonus(
+        const SpeciesAbilityBonus(
           amount: 1,
           choose: 4,
-          options: <String>['any'],
+          options: const <String>['any'],
           isAlternative: true,
         ),
       ],
     );
 
     final QuickCreateSpeciesDetails details =
-        QuickCreateSpeciesDetails(species: species, traits: <TraitDef>[]);
+        const QuickCreateSpeciesDetails(species: species, traits: const <TraitDef>[]);
 
     final InMemoryCharacterDraftRepository repository =
         InMemoryCharacterDraftRepository();
@@ -163,23 +163,23 @@ void main() {
   });
 
   test('localise les effets en français selon la langue fournie', () async {
-    final SpeciesDef species = SpeciesDef(
+    const SpeciesDef species = SpeciesDef(
       id: 'twilek',
-      name: LocalizedText(en: 'Twi\'lek', fr: 'Twi\'lek'),
+      name: const LocalizedText(en: 'Twi\'lek', fr: 'Twi\'lek'),
       speed: 35,
       size: 'medium',
-      abilityBonuses: <SpeciesAbilityBonus>[
-        SpeciesAbilityBonus(ability: 'str', amount: 2),
+      abilityBonuses: const <SpeciesAbilityBonus>[
+        const SpeciesAbilityBonus(ability: 'str', amount: 2),
       ],
-      traitIds: <String>['agility'],
+      traitIds: const <String>['agility'],
     );
 
-    final QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
+    final QuickCreateSpeciesDetails details = const QuickCreateSpeciesDetails(
       species: species,
-      traits: <TraitDef>[
-        TraitDef(
+      traits: const <TraitDef>[
+        const TraitDef(
           id: 'agility',
-          name: LocalizedText(en: 'Agility', fr: 'Agilité'),
+          name: const LocalizedText(en: 'Agility', fr: 'Agilité'),
           description: 'Agile et vive.',
         ),
       ],
@@ -268,19 +268,19 @@ void main() {
     );
     addTearDown(SpeciesEffectLocalizationCatalog.resetToDefaults);
 
-    final SpeciesDef species = SpeciesDef(
+    const SpeciesDef species = SpeciesDef(
       id: 'bothan',
-      name: LocalizedText(
+      name: const LocalizedText(
         en: 'Bothan',
         fr: 'Bothan',
         otherTranslations: const <String, String>{'es': 'Bothaniano'},
       ),
       speed: 35,
       size: 'medium',
-      abilityBonuses: <SpeciesAbilityBonus>[
-        SpeciesAbilityBonus(ability: 'cha', amount: 2),
+      abilityBonuses: const <SpeciesAbilityBonus>[
+        const SpeciesAbilityBonus(ability: 'cha', amount: 2),
       ],
-      languages: LocalizedText(
+      languages: const LocalizedText(
         en: 'You can speak Galactic Basic.',
         fr: 'Vous pouvez parler le basique galactique.',
         otherTranslations: const <String, String>{
@@ -290,7 +290,7 @@ void main() {
     );
 
     final QuickCreateSpeciesDetails details =
-        QuickCreateSpeciesDetails(species: species, traits: <TraitDef>[]);
+        const QuickCreateSpeciesDetails(species: species, traits: const <TraitDef>[]);
 
     final InMemoryCharacterDraftRepository repository =
         InMemoryCharacterDraftRepository();
