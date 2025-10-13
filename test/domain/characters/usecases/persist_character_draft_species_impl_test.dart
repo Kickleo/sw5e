@@ -227,13 +227,13 @@ void main() {
 }
 
 SpeciesDef _buildBithSpecies() {
-  return SpeciesDef(
+  return const SpeciesDef(
     id: 'bith',
     name: LocalizedText(en: 'Bith', fr: 'Bith'),
     speed: 30,
     size: 'medium',
-    traitIds: <String>['detail-oriented', 'sonic-sensitivity'],
-    abilityBonuses: <SpeciesAbilityBonus>[
+    traitIds: const <String>['detail-oriented', 'sonic-sensitivity'],
+    abilityBonuses: const <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(ability: 'int', amount: 2),
       SpeciesAbilityBonus(ability: 'dex', amount: 1),
     ],
@@ -268,7 +268,7 @@ SpeciesDef _buildBithSpecies() {
 }
 
 List<TraitDef> _buildBithTraits() {
-  return <TraitDef>[
+  return const <TraitDef>[
     TraitDef(
       id: 'detail-oriented',
       name: LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
@@ -285,26 +285,26 @@ List<TraitDef> _buildBithTraits() {
 }
 
 SpeciesDef _buildHumanSpecies() {
-  return SpeciesDef(
+  return const SpeciesDef(
     id: 'human',
     name: LocalizedText(en: 'Human', fr: 'Humain'),
     speed: 30,
     size: 'medium',
-    abilityBonuses: <SpeciesAbilityBonus>[
+    abilityBonuses: const <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(
         amount: 2,
         choose: 1,
-        options: <String>['wis', 'cha'],
+        options: const <String>['wis', 'cha'],
       ),
       SpeciesAbilityBonus(
         amount: 1,
         choose: 2,
-        options: <String>['any'],
+        options: const <String>['any'],
       ),
       SpeciesAbilityBonus(
         amount: 1,
         choose: 4,
-        options: <String>['any'],
+        options: const <String>['any'],
         isAlternative: true,
       ),
     ],
@@ -312,20 +312,20 @@ SpeciesDef _buildHumanSpecies() {
 }
 
 SpeciesDef _buildTwilekSpecies() {
-  return SpeciesDef(
+  return const SpeciesDef(
     id: 'twilek',
     name: LocalizedText(en: 'Twi\'lek', fr: 'Twi\'lek'),
     speed: 35,
     size: 'medium',
-    abilityBonuses: <SpeciesAbilityBonus>[
+    abilityBonuses: const <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(ability: 'str', amount: 2),
     ],
-    traitIds: <String>['agility'],
+    traitIds: const <String>['agility'],
   );
 }
 
 List<TraitDef> _buildTwilekTraits() {
-  return <TraitDef>[
+  return const <TraitDef>[
     TraitDef(
       id: 'agility',
       name: LocalizedText(en: 'Agility', fr: 'Agilité'),
@@ -335,22 +335,22 @@ List<TraitDef> _buildTwilekTraits() {
 }
 
 SpeciesDef _buildBothanSpecies() {
-  return SpeciesDef(
+  return const SpeciesDef(
     id: 'bothan',
     name: LocalizedText(
       en: 'Bothan',
       fr: 'Bothan',
-      otherTranslations: <String, String>{'es': 'Bothaniano'},
+      otherTranslations: const <String, String>{'es': 'Bothaniano'},
     ),
     speed: 35,
     size: 'medium',
-    abilityBonuses: <SpeciesAbilityBonus>[
+    abilityBonuses: const <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(ability: 'cha', amount: 2),
     ],
     languages: LocalizedText(
       en: 'You can speak Galactic Basic.',
       fr: 'Vous pouvez parler le basique galactique.',
-      otherTranslations: <String, String>{
+      otherTranslations: const <String, String>{
         'es': 'Puedes hablar Básico Galáctico.',
       },
     ),
