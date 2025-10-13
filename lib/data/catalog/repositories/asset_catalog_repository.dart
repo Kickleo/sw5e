@@ -171,7 +171,9 @@ class AssetCatalogRepository implements CatalogRepository {
     _traits = <String, TraitDef>{
       for (final dto in dtos)
         dto.id: dto.toDomain(
-          descriptionOverride: traitLocalization?.forTrait(dto.id),
+          nameOverride: traitLocalization?.forTrait(dto.id)?.name,
+          descriptionOverride:
+              traitLocalization?.forTrait(dto.id)?.description,
         ),
     };
   }

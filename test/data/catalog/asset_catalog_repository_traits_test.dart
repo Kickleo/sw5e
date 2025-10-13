@@ -31,5 +31,11 @@ void main() {
     final darkvision = await repo.getTrait('darkvision');
     expect(darkvision, isNotNull);
     expect(darkvision!.description.fr, startsWith('Votre vision perce'));
+
+    final detail = await repo.getTrait('detail-oriented');
+    expect(detail, isNotNull);
+    expect(detail!.name.fr, 'Sens du détail');
+    expect(detail.description.fr,
+        contains("tests d'Intelligence (Investigation)"));
   });
 }

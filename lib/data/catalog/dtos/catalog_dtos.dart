@@ -153,29 +153,103 @@ class SpeciesEffectLocalizationConfigDto {
 class TraitLocalizationConfigDto {
   const TraitLocalizationConfigDto({required this.traits});
 
-  final Map<String, Map<String, String>> traits;
+  final Map<String, TraitLocalizationOverrideDto> traits;
 
   factory TraitLocalizationConfigDto.fromJson(Map<String, dynamic> json) {
-    final Map<String, Map<String, String>> parsed =
-        <String, Map<String, String>>{};
+    final Map<String, TraitLocalizationOverrideDto> parsed =
+        <String, TraitLocalizationOverrideDto>{};
     final dynamic rawTraits = json['traits'];
     if (rawTraits is Map) {
       rawTraits.forEach((dynamic key, dynamic value) {
         if (key == null || value == null) {
           return;
         }
-        final Map<String, String> localized = _readLocalizedMap(value);
-        if (localized.isNotEmpty) {
-          parsed[key.toString()] = Map<String, String>.unmodifiable(localized);
+        final TraitLocalizationOverrideDto? override =
+            TraitLocalizationOverrideDto.maybeFromAny(value);
+        if (override != null && !override.isEmpty) {
+          parsed[key.toString()] = override;
         }
       });
     }
     return TraitLocalizationConfigDto(
-      traits: Map<String, Map<String, String>>.unmodifiable(parsed),
+      traits:
+          Map<String, TraitLocalizationOverrideDto>.unmodifiable(parsed),
     );
   }
 
-  Map<String, String>? forTrait(String traitId) => traits[traitId];
+  TraitLocalizationOverrideDto? forTrait(String traitId) => traits[traitId];
+}
+
+@immutable
+class TraitLocalizationOverrideDto {
+  const TraitLocalizationOverrideDto({
+    this.name = const <String, String>{},
+    this.description = const <String, String>{},
+  });
+
+  final Map<String, String> name;
+  final Map<String, String> description;
+
+  bool get isEmpty => name.isEmpty && description.isEmpty;
+
+  static TraitLocalizationOverrideDto? maybeFromAny(dynamic raw) {
+    if (raw == null) {
+      return null;
+    }
+    if (raw is TraitLocalizationOverrideDto) {
+      return raw.isEmpty ? null : raw;
+    }
+    if (raw is Map<String, dynamic>) {
+      return _fromNormalized(raw);
+    }
+    if (raw is Map) {
+      final Map<String, dynamic> normalized = raw.map(
+        (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+      );
+      return _fromNormalized(normalized);
+    }
+
+    final Map<String, String> description = _readLocalizedMap(raw);
+    if (description.isEmpty) {
+      return null;
+    }
+    return TraitLocalizationOverrideDto(
+      description: Map<String, String>.unmodifiable(description),
+    );
+  }
+
+  static TraitLocalizationOverrideDto? _fromNormalized(
+    Map<String, dynamic> raw,
+  ) {
+    if (raw.isEmpty) {
+      return null;
+    }
+
+    final Map<String, String> name = _readLocalizedMap(raw['name']);
+    final Map<String, String> description =
+        _readLocalizedMap(raw['description']);
+
+    final Map<String, dynamic> inline = Map<String, dynamic>.from(raw)
+      ..remove('name')
+      ..remove('description');
+    final Map<String, String> inlineDescription = _readLocalizedMap(inline);
+
+    final Map<String, String> mergedDescription = description.isEmpty
+        ? inlineDescription
+        : <String, String>{
+            ...description,
+            ...inlineDescription,
+          };
+
+    if (name.isEmpty && mergedDescription.isEmpty) {
+      return null;
+    }
+
+    return TraitLocalizationOverrideDto(
+      name: Map<String, String>.unmodifiable(name),
+      description: Map<String, String>.unmodifiable(mergedDescription),
+    );
+  }
 }
 
 @immutable
@@ -842,8 +916,19 @@ class TraitDto {
     );
   }
 
-  TraitDef toDomain({Map<String, String>? descriptionOverride}) {
+  TraitDef toDomain({
+    Map<String, String>? nameOverride,
+    Map<String, String>? descriptionOverride,
+  }) {
+    LocalizedText resolvedName = name.toDomain();
     LocalizedText resolvedDescription = description.toDomain();
+
+    if (nameOverride != null && nameOverride.isNotEmpty) {
+      resolvedName = _mergeLocalizedText(
+        resolvedName,
+        nameOverride,
+      );
+    }
 
     if (descriptionLocalizations.isNotEmpty) {
       resolvedDescription = _mergeLocalizedText(
@@ -861,7 +946,7 @@ class TraitDto {
 
     return TraitDef(
       id: id,
-      name: name.toDomain(),
+      name: resolvedName,
       description: resolvedDescription,
     ); // Structure métier finale exposée à la présentation.
   }

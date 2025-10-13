@@ -1,32 +1,109 @@
 {
   "traits": {
+    "agility": {
+      "name": {
+        "fr": "Agilité"
+      },
+      "description": {
+        "fr": "Agile et vive."
+      }
+    },
     "darkvision": {
-      "fr": "Votre vision perce aisément l'obscurité. Vous voyez dans une lumière faible à 18 mètres comme s'il s'agissait de pleine lumière, et dans l'obscurité comme s'il s'agissait d'une lumière faible. Vous ne distinguez pas les couleurs dans l'obscurité, uniquement des nuances de gris."
-    },
-    "detail-oriented": {
-      "fr": "Vous êtes exercé à traquer le moindre indice. Vous avez l'avantage aux tests d'Intelligence (Investigation) effectués dans un rayon de 1,50 mètre autour de vous."
-    },
-    "sonic-sensitivity": {
-      "fr": "Votre ouïe particulièrement fine vous rend vulnérable aux sons assourdissants. Vous subissez un désavantage aux jets de sauvegarde contre les effets qui infligent des dégâts soniques (décrits au chapitre 9)."
-    },
-    "nimble-escape": {
-      "fr": "Vous pouvez effectuer l'action Se désengager ou Vous cacher en action bonus à chacun de vos tours. > Bien que les bothans conviennent à de nombreuses classes, ils excellent particulièrement comme opérateurs. Le trait spécial ***Fuite agile*** recoupe toutefois fortement la capacité ***Action rusée*** de l'opérateur, ce qui peut rendre ce couple espèce/classe contre-intuitif. Si, pendant la création de personnage, un joueur choisit un bothan opérateur, envisagez de lui proposer la capacité suivante à la place : > > ***Polyvalence experte.*** Vous gagnez la maîtrise d'une compétence de votre choix. Vous gagnez l'expertise dans une compétence maîtrisée de votre choix. &emsp;***Perspicace.*** Vous maîtrisez les compétences Intuition et Tromperie.",
-      "es": "Puedes realizar la acción de Desengancharte o Esconderte como acción adicional en cada uno de tus turnos. > Aunque los bothanos se adaptan a muchas clases, destacan como operativos. Sin embargo, el rasgo especial ***Fuga ágil*** se solapa en gran medida con la característica ***Acción astuta*** del operativo, lo que puede hacer que esta combinación especie/clase resulte contraintuitiva. Si, durante la creación del personaje, un jugador decide ser un bothano operativo, considera ofrecerle la siguiente capacidad en su lugar: > > ***Pericia versátil.*** Obtienes competencia en una habilidad a tu elección. Obtienes pericia en una habilidad en la que seas competente. &emsp;***Perspicaz.*** Eres competente en las habilidades Perspicacia y Engaño."
+      "name": {
+        "fr": "Vision dans le noir"
+      },
+      "description": {
+        "fr": "Votre vision perce aisément l'obscurité. Vous voyez dans une lumière faible à 18 mètres comme s'il s'agissait de pleine lumière, et dans l'obscurité comme s'il s'agissait d'une lumière faible. Vous ne distinguez pas les couleurs dans l'obscurité, uniquement des nuances de gris."
+      }
     },
     "defiant": {
-      "fr": "Les humains sont réputés pour leur ténacité et refusent souvent d'abandonner, même face aux pires difficultés. Lorsque vous ou une créature que vous voyez, qui peut vous voir et vous comprendre, effectuez un test de caractéristique, un jet d'attaque ou un jet de sauvegarde, vous pouvez lancer 1d4 et ajouter le résultat à son jet (aucune action requise). Une fois cette capacité utilisée, vous devez terminer un repos court ou long avant de pouvoir l'utiliser de nouveau."
+      "name": {
+        "fr": "Défiant"
+      },
+      "description": {
+        "fr": "Les humains sont réputés pour leur ténacité et refusent souvent d'abandonner, même face aux pires difficultés. Lorsque vous ou une créature que vous voyez, qui peut vous voir et vous comprendre, effectuez un test de caractéristique, un jet d'attaque ou un jet de sauvegarde, vous pouvez lancer 1d4 et ajouter le résultat à son jet (aucune action requise). Une fois cette capacité utilisée, vous devez terminer un repos court ou long avant de pouvoir l'utiliser de nouveau."
+      }
+    },
+    "detail-oriented": {
+      "name": {
+        "fr": "Sens du détail"
+      },
+      "description": {
+        "fr": "Vous êtes exercé à traquer le moindre indice. Vous avez l'avantage aux tests d'Intelligence (Investigation) effectués dans un rayon de 1,50 mètre autour de vous."
+      }
     },
     "desert-protection": {
-      "fr": "Vous avez l'avantage aux jets de sauvegarde contre l'aveuglement."
+      "name": {
+        "fr": "Protection contre le désert"
+      },
+      "description": {
+        "fr": "Vous avez l'avantage aux jets de sauvegarde contre l'aveuglement."
+      }
+    },
+    "keen-hearing-and-smell": {
+      "name": {
+        "fr": "Ouïe et odorat aiguisés"
+      },
+      "description": {
+        "fr": "Vous avez l'avantage aux tests de Sagesse (Perception) qui reposent sur l'ouïe ou l'odorat."
+      }
+    },
+    "musician": {
+      "name": {
+        "fr": "Musicien accompli"
+      },
+      "description": {
+        "fr": "Vous maîtrisez un instrument de musique de votre choix."
+      }
+    },
+    "nimble-escape": {
+      "name": {
+        "fr": "Fuite agile"
+      },
+      "description": {
+        "fr": "Vous pouvez effectuer l'action Se désengager ou Vous cacher en action bonus à chacun de vos tours. > Bien que les bothans conviennent à de nombreuses classes, ils excellent particulièrement comme opérateurs. Le trait spécial ***Fuite agile*** recoupe toutefois fortement la capacité ***Action rusée*** de l'opérateur, ce qui peut rendre ce couple espèce/classe contre-intuitif. Si, pendant la création de personnage, un joueur choisit un bothan opérateur, envisagez de lui proposer la capacité suivante à la place : > > ***Polyvalence experte.*** Vous gagnez la maîtrise d'une compétence de votre choix. Vous gagnez l'expertise dans une compétence maîtrisée de votre choix. &emsp;***Perspicace.*** Vous maîtrisez les compétences Intuition et Tromperie.",
+        "es": "Puedes realizar la acción de Desengancharte o Esconderte como acción adicional en cada uno de tus turnos. > Aunque los bothanos se adaptan a muchas clases, destacan como operativos. Sin embargo, el rasgo especial ***Fuga ágil*** se solapa en gran medida con la característica ***Acción astuta*** del operativo, lo que puede hacer que esta combinación especie/clase resulte contraintuitiva. Si, durante la creación del personaje, un jugador decide ser un bothano operativo, considera ofrecerle la siguiente capacidad en su lugar: > > ***Pericia versátil.*** Obtienes competencia en una habilidad a tu elección. Obtienes pericia en una habilidad en la que seas competente. &emsp;***Perspicaz.*** Eres competente en las habilidades Perspicacia y Engaño."
+      }
+    },
+    "programmer": {
+      "name": {
+        "fr": "Programmeur"
+      },
+      "description": {
+        "fr": "Lorsque vous effectuez un test d'Intelligence (Technologie) lié aux systèmes informatiques, vous êtes considéré comme disposant de l'expertise dans la compétence Technologie."
+      }
+    },
+    "sonic-sensitivity": {
+      "name": {
+        "fr": "Sensibilité sonore"
+      },
+      "description": {
+        "fr": "Votre ouïe particulièrement fine vous rend vulnérable aux sons assourdissants. Vous subissez un désavantage aux jets de sauvegarde contre les effets qui infligent des dégâts soniques (décrits au chapitre 9)."
+      }
     },
     "stalking-hunter": {
-      "fr": "Vous maîtrisez les compétences Survie et Discrétion."
+      "name": {
+        "fr": "Chasseur furtif"
+      },
+      "description": {
+        "fr": "Vous maîtrisez les compétences Survie et Discrétion."
+      }
     },
     "strong-legged": {
-      "fr": "Lorsque vous effectuez un saut en longueur, vous pouvez parcourir un nombre de pieds égal au double de votre score de Force. Lorsque vous effectuez un saut en hauteur, vous pouvez bondir d'un nombre de pieds égal à 3 + deux fois votre modificateur de Force."
+      "name": {
+        "fr": "Jambes puissantes"
+      },
+      "description": {
+        "fr": "Lorsque vous effectuez un saut en longueur, vous pouvez parcourir un nombre de pieds égal au double de votre score de Force. Lorsque vous effectuez un saut en hauteur, vous pouvez bondir d'un nombre de pieds égal à 3 + deux fois votre modificateur de Force."
+      }
     },
-    "agility": {
-      "fr": "Agile et vive."
+    "trance": {
+      "name": {
+        "fr": "Transe méditative"
+      },
+      "description": {
+        "fr": "Vous n'avez besoin que de 3 heures de sommeil durant un repos long pour en tirer les bénéfices, au lieu de 6. De plus, si votre repos long est interrompu, il vous suffit de le terminer au lieu de le recommencer pour bénéficier de ses effets."
+      }
     }
   }
 }
