@@ -3,433 +3,595 @@
     "id": "acute-smell",
     "name": {
       "en": "Acute Smell",
-      "fr": "Acute Smell"
+      "fr": "Odorat aiguisé"
     },
-    "description": "Whenever you make a Wisdom (Perception) check involving smell, you are considered to have expertise in the Perception skill."
+    "description": {
+      "en": "Whenever you make a Wisdom (Perception) check involving smell, you are considered to have expertise in the Perception skill.",
+      "fr": "Lorsque vous effectuez un test de Sagesse (Perception) faisant intervenir l'odorat, vous êtes considéré comme bénéficiant de l'expertise dans la compétence Perception."
+    }
   },
   {
     "id": "adept-climbers",
     "name": {
       "en": "Adept Climbers",
-      "fr": "Adept Climbers"
+      "fr": "Grimpeurs accomplis"
     },
-    "description": "You have a climbing speed of 30 feet."
+    "description": {
+      "en": "You have a climbing speed of 30 feet.",
+      "fr": "Vous disposez d'une vitesse d'escalade de 9 mètres."
+    }
   },
   {
     "id": "aggressive",
     "name": {
       "en": "Aggressive",
-      "fr": "Aggressive"
+      "fr": "Agressif"
     },
-    "description": "As a bonus action, you can move up to your speed toward an enemy of your choice that you can see or hear. You must end this move closer to the enemy than you started."
+    "description": {
+      "en": "As a bonus action, you can move up to your speed toward an enemy of your choice that you can see or hear. You must end this move closer to the enemy than you started.",
+      "fr": "Comme action bonus, vous pouvez vous déplacer d'un nombre de mètres égal à votre vitesse en direction d'un ennemi que vous pouvez voir ou entendre. Vous devez terminer ce déplacement plus près de la cible qu'au départ."
+    }
   },
   {
     "id": "amphibious",
     "name": {
       "en": "Amphibious",
-      "fr": "Amphibious"
+      "fr": "Amphibie"
     },
-    "description": "You can breathe air and water."
+    "description": {
+      "en": "You can breathe air and water.",
+      "fr": "Vous pouvez respirer à la fois dans l'air et sous l'eau."
+    }
   },
   {
     "id": "animal-handler",
     "name": {
       "en": "Animal Handler",
-      "fr": "Animal Handler"
+      "fr": "Dresseur d'animaux"
     },
-    "description": "You have proficiency in the Animal Handling skill."
+    "description": {
+      "en": "You have proficiency in the Animal Handling skill.",
+      "fr": "Vous maîtrisez la compétence Dressage."
+    }
   },
   {
     "id": "armor-integration",
     "name": {
       "en": "Armor Integration",
-      "fr": "Armor Integration"
+      "fr": "Intégration d'armure"
     },
-    "description": "You can not wear armor, but you can have the armor professionally integrated into your chassis over the course of a long rest. This work must be done by someone proficient with astrotech's implements. You must be proficient in armor in order to have it integrated."
+    "description": {
+      "en": "You can not wear armor, but you can have the armor professionally integrated into your chassis over the course of a long rest. This work must be done by someone proficient with astrotech's implements. You must be proficient in armor in order to have it integrated.",
+      "fr": "Vous ne pouvez pas porter d'armure, mais vous pouvez faire intégrer une armure à votre châssis lors d'un repos long. Ce travail doit être réalisé par une créature maîtrisant les outils d'astrotech, et vous devez maîtriser l'armure pour qu'elle puisse être intégrée."
+    }
   },
   {
     "id": "call-for-peace",
     "name": {
       "en": "Call for Peace",
-      "fr": "Call for Peace"
+      "fr": "Appel à la paix"
     },
-    "description": "As an action on your turn, you can emphatically demand that your foes embrace peace, thereby distracting them. Until the end of your next turn, enemies within 10 feet of you that can see you gain disadvantage on attack rolls against your allies. Once you use this trait, you can't use it again until you finish a short or long rest."
+    "description": {
+      "en": "As an action on your turn, you can emphatically demand that your foes embrace peace, thereby distracting them. Until the end of your next turn, enemies within 10 feet of you that can see you gain disadvantage on attack rolls against your allies. Once you use this trait, you can't use it again until you finish a short or long rest.",
+      "fr": "À votre tour, vous pouvez utiliser votre action pour sommer vos ennemis d'embrasser la paix et les distraire. Jusqu'à la fin de votre prochain tour, les ennemis à 3 mètres de vous qui peuvent vous voir ont un désavantage aux jets d'attaque visant vos alliés. Une fois ce trait utilisé, vous devez terminer un repos court ou long avant de pouvoir l'utiliser à nouveau."
+    }
   },
   {
     "id": "cat-s-claws",
     "name": {
       "en": "Cat's Claws",
-      "fr": "Cat's Claws"
+      "fr": "Griffes félines"
     },
-    "description": "Your unarmed strikes deal 1d6 kinetic damage and have the finesse property."
+    "description": {
+      "en": "Your unarmed strikes deal 1d6 kinetic damage and have the finesse property.",
+      "fr": "Vos attaques à mains nues infligent 1d6 dégâts cinétiques et ont la propriété de finesse."
+    }
   },
   {
     "id": "charismatic",
     "name": {
       "en": "Charismatic",
-      "fr": "Charismatic"
+      "fr": "Charismatique"
     },
-    "description": "You have proficiency with Deception or Persuasion (your choice)."
+    "description": {
+      "en": "You have proficiency with Deception or Persuasion (your choice).",
+      "fr": "Vous maîtrisez la compétence Tromperie ou Persuasion (au choix)."
+    }
   },
   {
     "id": "claws",
     "name": {
       "en": "Claws",
-      "fr": "Claws"
+      "fr": "Griffes"
     },
-    "description": "Your claws are natural weapons, which you can use to make unarmed strikes. Additionally, your unarmed strikes deal 1d4 kinetic damage."
+    "description": {
+      "en": "Your claws are natural weapons, which you can use to make unarmed strikes. Additionally, your unarmed strikes deal 1d4 kinetic damage.",
+      "fr": "Vos griffes comptent comme des armes naturelles que vous pouvez utiliser pour effectuer des attaques à mains nues. De plus, vos attaques à mains nues infligent 1d4 dégâts cinétiques."
+    }
   },
   {
     "id": "coercive",
     "name": {
       "en": "Coercive",
-      "fr": "Coercive"
+      "fr": "Coercitif"
     },
-    "description": "You have proficiency with Persuasion or Intimidation (your choice)."
+    "description": {
+      "en": "You have proficiency with Persuasion or Intimidation (your choice).",
+      "fr": "Vous maîtrisez la compétence Persuasion ou Intimidation (au choix)."
+    }
   },
   {
     "id": "crafters",
     "name": {
       "en": "Crafters",
-      "fr": "Crafters"
+      "fr": "Artisans"
     },
-    "description": "You have proficiency with one set of artisan’s implements of your choice."
+    "description": {
+      "en": "You have proficiency with one set of artisan’s implements of your choice.",
+      "fr": "Vous maîtrisez un ensemble d'outils d'artisan de votre choix."
+    }
   },
   {
     "id": "crude-weapon-specialists",
     "name": {
       "en": "Crude Weapon Specialists",
-      "fr": "Crude Weapon Specialists"
+      "fr": "Experts en armes rudimentaires"
     },
-    "description": "Ewoks are used to making do with less. You can spend 1 hour, which you can do over the course of a short rest, crafting a weapon out of loose materials. You can craft any simple kinetic weapon, but the weapon's damage suffers a -1 penalty."
+    "description": {
+      "en": "Ewoks are used to making do with less. You can spend 1 hour, which you can do over the course of a short rest, crafting a weapon out of loose materials. You can craft any simple kinetic weapon, but the weapon's damage suffers a -1 penalty.",
+      "fr": "Habitué à tirer parti de peu de choses, vous pouvez consacrer 1 heure, éventuellement pendant un repos court, à fabriquer une arme à partir de matériaux de récupération. Vous pouvez créer n'importe quelle arme cinétique simple, mais ses jets de dégâts subissent un malus de −1."
+    }
   },
   {
     "id": "curiosity",
     "name": {
       "en": "Curiosity",
-      "fr": "Curiosity"
+      "fr": "Curiosité"
     },
-    "description": "You have proficiency with Survival or Investigation (your choice)."
+    "description": {
+      "en": "You have proficiency with Survival or Investigation (your choice).",
+      "fr": "Vous maîtrisez la compétence Survie ou Investigation (au choix)."
+    }
   },
   {
     "id": "darkvision",
     "name": {
       "en": "Darkvision",
-      "fr": "Darkvision"
+      "fr": "Vision dans le noir"
     },
-    "description": "Your vision can easily cut through darkness. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray."
+    "description": {
+      "en": "Your vision can easily cut through darkness. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
+      "fr": "Votre vision perce aisément l'obscurité. Vous voyez dans une lumière faible à 18 mètres comme s'il s'agissait de pleine lumière et dans l'obscurité comme s'il s'agissait d'une lumière faible. Vous ne distinguez pas les couleurs dans l'obscurité, uniquement des nuances de gris."
+    }
   },
   {
     "id": "defiant",
     "name": {
       "en": "Defiant",
-      "fr": "Defiant"
+      "fr": "Défiant"
     },
-    "description": "Humans are known to be stubborn and often refuse to give up, even against the worst odds. When you or a creature you can see that can see and understand you makes an ability check, attack roll, or saving throw, you can roll a d4 and add it to their roll (no action required). Once you've used this feature, you must complete a short or long rest before you can use it again."
+    "description": {
+      "en": "Humans are known to be stubborn and often refuse to give up, even against the worst odds. When you or a creature you can see that can see and understand you makes an ability check, attack roll, or saving throw, you can roll a d4 and add it to their roll (no action required). Once you've used this feature, you must complete a short or long rest before you can use it again.",
+      "fr": "Les humains sont réputés pour leur ténacité et refusent souvent d'abandonner face à l'adversité. Lorsque vous ou une créature que vous voyez, qui peut vous voir et vous comprendre, effectuez un test de caractéristique, un jet d'attaque ou un jet de sauvegarde, vous pouvez lancer 1d4 et ajouter le résultat au jet (aucune action requise). Une fois cette capacité utilisée, vous devez terminer un repos court ou long avant de pouvoir l'utiliser de nouveau."
+    }
   },
   {
     "id": "desert-protection",
     "name": {
       "en": "Desert Protection",
-      "fr": "Desert Protection"
+      "fr": "Protection contre le désert"
     },
-    "description": "You have advantage on saving throws against being blinded."
+    "description": {
+      "en": "You have advantage on saving throws against being blinded.",
+      "fr": "Vous avez l'avantage aux jets de sauvegarde contre l'aveuglement."
+    }
   },
   {
     "id": "detail-oriented",
     "name": {
       "en": "Detail Oriented",
-      "fr": "Detail Oriented"
+      "fr": "Sens du détail"
     },
-    "description": "You are practiced at scouring for details. You have advantage on Intelligence (Investigation) checks within 5 feet."
+    "description": {
+      "en": "You are practiced at scouring for details. You have advantage on Intelligence (Investigation) checks within 5 feet.",
+      "fr": "Vous êtes exercé à traquer le moindre indice. Vous avez l'avantage aux tests d'Intelligence (Investigation) effectués dans un rayon de 1,50 mètre autour de vous."
+    }
   },
   {
     "id": "droid-resistances",
     "name": {
       "en": "Droid Resistances",
-      "fr": "Droid Resistances"
+      "fr": "Résistances droïdes"
     },
-    "description": "You are resistant to necrotic, poison, and psychic damage, and are immune to poison and disease."
+    "description": {
+      "en": "You are resistant to necrotic, poison, and psychic damage, and are immune to poison and disease.",
+      "fr": "Vous résistez aux dégâts nécrotiques, au poison et aux dégâts psychiques, et vous êtes immunisé contre le poison et les maladies."
+    }
   },
   {
     "id": "droid-systems",
     "name": {
       "en": "Droid Systems",
-      "fr": "Droid Systems"
+      "fr": "Systèmes droïdes"
     },
-    "description": "You do not need to eat, drink, or breathe. Additionally, you no longer require a tech focus to cast tech powers."
+    "description": {
+      "en": "You do not need to eat, drink, or breathe. Additionally, you no longer require a tech focus to cast tech powers.",
+      "fr": "Vous n'avez pas besoin de manger, de boire ou de respirer. De plus, vous n'avez plus besoin de focaliseur technologique pour lancer des pouvoirs technologiques."
+    }
   },
   {
     "id": "droid-vulnerabilities",
     "name": {
       "en": "Droid Vulnerabilities",
-      "fr": "Droid Vulnerabilities"
+      "fr": "Vulnérabilités droïdes"
     },
-    "description": "You are vulnerable to ion damage. Additionally, you have disadvantage on saving throws against effects that would deal ion or lightning damage."
+    "description": {
+      "en": "You are vulnerable to ion damage. Additionally, you have disadvantage on saving throws against effects that would deal ion or lightning damage.",
+      "fr": "Vous êtes vulnérable aux dégâts ioniques. De plus, vous subissez un désavantage aux jets de sauvegarde contre les effets qui infligent des dégâts ioniques ou électriques."
+    }
   },
   {
     "id": "elegant-dancers",
     "name": {
       "en": "Elegant Dancers",
-      "fr": "Elegant Dancers"
+      "fr": "Danseurs élégants"
     },
-    "description": "You have proficiency in the Performance skill."
+    "description": {
+      "en": "You have proficiency in the Performance skill.",
+      "fr": "Vous maîtrisez la compétence Représentation."
+    }
   },
   {
     "id": "fearsome-roar",
     "name": {
       "en": "Fearsome Roar",
-      "fr": "Fearsome Roar"
+      "fr": "Rugissement terrifiant"
     },
-    "description": "Once per day, you can cast the *fear* force power. Charisma is your forcecasting ability for this power."
+    "description": {
+      "en": "Once per day, you can cast the *fear* force power. Charisma is your forcecasting ability for this power.",
+      "fr": "Une fois par jour, vous pouvez lancer le pouvoir de Force *peur*. Le Charisme est votre caractéristique de lancement pour ce pouvoir."
+    }
   },
   {
     "id": "flexible",
     "name": {
       "en": "Flexible",
-      "fr": "Flexible"
+      "fr": "Souple"
     },
-    "description": "You have advantage on Dexterity (Acrobatics) checks that involve flexibility."
+    "description": {
+      "en": "You have advantage on Dexterity (Acrobatics) checks that involve flexibility.",
+      "fr": "Vous avez l'avantage aux tests de Dextérité (Acrobaties) faisant intervenir votre souplesse."
+    }
   },
   {
     "id": "force-insensitive",
     "name": {
       "en": "Force-Insensitive",
-      "fr": "Force-Insensitive"
+      "fr": "Insensible à la Force"
     },
-    "description": "While droids can be manipulated by many force powers, they can not sense the Force. You can not use force powers or take levels in forcecasting classes."
+    "description": {
+      "en": "While droids can be manipulated by many force powers, they can not sense the Force. You can not use force powers or take levels in forcecasting classes.",
+      "fr": "Bien que de nombreux pouvoirs de Force puissent manipuler les droïdes, ceux-ci ne perçoivent pas la Force. Vous ne pouvez pas utiliser de pouvoirs de Force ni prendre de niveaux dans une classe de lanceur de Force."
+    }
   },
   {
     "id": "force-sensitive",
     "name": {
       "en": "Force-Sensitive",
-      "fr": "Force-Sensitive"
+      "fr": "Sensible à la Force"
     },
-    "description": "You know the *denounce* at-will force power. When you reach 3rd level, you learn and can cast the *curse* force power once per long rest. When you reach 5th level, you learn and can cast the *bestow curse* force power once per long rest. Your forcecasting ability is Charisma for these powers."
+    "description": {
+      "en": "You know the *denounce* at-will force power. When you reach 3rd level, you learn and can cast the *curse* force power once per long rest. When you reach 5th level, you learn and can cast the *bestow curse* force power once per long rest. Your forcecasting ability is Charisma for these powers.",
+      "fr": "Vous connaissez le pouvoir de Force à volonté *denounce*. Lorsque vous atteignez le niveau 3, vous apprenez et pouvez lancer le pouvoir de Force *curse* une fois par repos long. Au niveau 5, vous apprenez et pouvez lancer le pouvoir de Force *bestow curse* une fois par repos long. Le Charisme est votre caractéristique de lancement pour ces pouvoirs."
+    }
   },
   {
     "id": "foreign-biology",
     "name": {
       "en": "Foreign Biology",
-      "fr": "Foreign Biology"
+      "fr": "Biologie étrangère"
     },
-    "description": "You cannot breathe oxygen. The kel dors have created a breathing apparatus to negate the negative effects of living in an oxygen rich environment, but if your mask is removed while you are in such an environment, you lose consciousness."
+    "description": {
+      "en": "You cannot breathe oxygen. The kel dors have created a breathing apparatus to negate the negative effects of living in an oxygen rich environment, but if your mask is removed while you are in such an environment, you lose consciousness.",
+      "fr": "Vous ne pouvez pas respirer d'oxygène. Les Kel Dor ont conçu un appareil respiratoire pour neutraliser les effets d'un environnement riche en oxygène, mais si votre masque est retiré dans un tel environnement, vous perdez connaissance."
+    }
   },
   {
     "id": "galactic-traveler",
     "name": {
       "en": "Galactic Traveler",
-      "fr": "Galactic Traveler"
+      "fr": "Voyageur galactique"
     },
-    "description": "You have proficiency in the Piloting and Lore skills."
+    "description": {
+      "en": "You have proficiency in the Piloting and Lore skills.",
+      "fr": "Vous maîtrisez les compétences Pilotage et Savoirs."
+    }
   },
   {
     "id": "gamorrean-toughness",
     "name": {
       "en": "Gamorrean Toughness",
-      "fr": "Gamorrean Toughness"
+      "fr": "Robustesse gamoréenne"
     },
-    "description": "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level. Additionally, you have advantage on Constitution saving throws."
+    "description": {
+      "en": "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level. Additionally, you have advantage on Constitution saving throws.",
+      "fr": "Votre maximum de points de vie augmente de 1, puis encore de 1 chaque fois que vous gagnez un niveau. De plus, vous avez l'avantage aux jets de sauvegarde de Constitution."
+    }
   },
   {
     "id": "gamorrean-weaponry",
     "name": {
       "en": "Gamorrean Weaponry",
-      "fr": "Gamorrean Weaponry"
+      "fr": "Arsenal gamoréen"
     },
-    "description": "You have proficiency with the vibroaxe, vibromace, and vibrosword."
+    "description": {
+      "en": "You have proficiency with the vibroaxe, vibromace, and vibrosword.",
+      "fr": "Vous maîtrisez la vibro-hache, la vibromasse et l'épée vibro."
+    }
   },
   {
     "id": "grovel-cower-and-beg",
     "name": {
       "en": "Grovel, Cower, and Beg",
-      "fr": "Grovel, Cower, and Beg"
+      "fr": "Ramper, geindre et supplier"
     },
-    "description": "As an action on your turn, you can cower pathetically to distract nearby foes. Until the end of your next turn, your allies gain advantage on attack rolls against enemies within 10 feet of you that can see you. Once you use this trait, you can’t use it again until you finish a short or long rest."
+    "description": {
+      "en": "As an action on your turn, you can cower pathetically to distract nearby foes. Until the end of your next turn, your allies gain advantage on attack rolls against enemies within 10 feet of you that can see you. Once you use this trait, you can’t use it again until you finish a short or long rest.",
+      "fr": "Comme action, vous pouvez vous recroqueviller pitoyablement pour distraire vos ennemis. Jusqu'à la fin de votre prochain tour, vos alliés ont l'avantage aux jets d'attaque contre les ennemis situés à 3 mètres de vous qui peuvent vous voir. Une fois ce trait utilisé, vous devez terminer un repos court ou long avant de pouvoir l'utiliser à nouveau."
+    }
   },
   {
     "id": "heat-adaptation",
     "name": {
       "en": "Heat Adaptation",
-      "fr": "Heat Adaptation"
+      "fr": "Adaptation à la chaleur"
     },
-    "description": "You have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat."
+    "description": {
+      "en": "You have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat.",
+      "fr": "Vous avez l'avantage aux jets de sauvegarde effectués pour éviter l'épuisement dû à une chaleur extrême."
+    }
   },
   {
     "id": "heat-sensitivity",
     "name": {
       "en": "Heat Sensitivity",
-      "fr": "Heat Sensitivity"
+      "fr": "Sensibilité à la chaleur"
     },
-    "description": "You have disadvantage on Constitution saving throws made to avoid exhaustion due to extreme heat."
+    "description": {
+      "en": "You have disadvantage on Constitution saving throws made to avoid exhaustion due to extreme heat.",
+      "fr": "Vous subissez un désavantage aux jets de sauvegarde effectués pour éviter l'épuisement causé par une chaleur extrême."
+    }
   },
   {
     "id": "hide",
     "name": {
       "en": "Hide",
-      "fr": "Hide"
+      "fr": "Peau épaisse"
     },
-    "description": "You have a thick hide. While you are unarmored or wearing light armor, your AC is 12 + your Dexterity modifier."
+    "description": {
+      "en": "You have a thick hide. While you are unarmored or wearing light armor, your AC is 12 + your Dexterity modifier.",
+      "fr": "Vous avez une peau coriace qui augmente votre robustesse. Quand vous ne portez pas d'armure, votre CA est égale à 12 + votre modificateur de Dextérité."
+    }
   },
   {
     "id": "hold-breath",
     "name": {
       "en": "Hold Breath",
-      "fr": "Hold Breath"
+      "fr": "Rétention de souffle"
     },
-    "description": "Ithorians have a great lung capacity and can hold their breath for up to 15 minutes at a time."
+    "description": {
+      "en": "Ithorians have a great lung capacity and can hold their breath for up to 15 minutes at a time.",
+      "fr": "Vous pouvez retenir votre respiration pendant une durée allant jusqu'à 15 minutes."
+    }
   },
   {
     "id": "human-versatility",
     "name": {
       "en": "Human Versatility",
-      "fr": "Human Versatility"
+      "fr": "Polyvalence humaine"
     },
-    "description": "You gain proficiency in one skill, one tool, and one weapon of your choice."
+    "description": {
+      "en": "You gain proficiency in one skill, one tool, and one weapon of your choice.",
+      "fr": "Vous gagnez la maîtrise d'une compétence, d'un outil et d'une arme de votre choix."
+    }
   },
   {
     "id": "integrated-engineering",
     "name": {
       "en": "Integrated Engineering",
-      "fr": "Integrated Engineering"
+      "fr": "Ingénierie intégrée"
     },
-    "description": "You have proficiency in one specialist's kit of your choice. The chosen kit is integrated into your chassis, and can not be removed while you are conscious."
+    "description": {
+      "en": "You have proficiency in one specialist's kit of your choice. The chosen kit is integrated into your chassis, and can not be removed while you are conscious.",
+      "fr": "Vous maîtrisez une trousse de spécialiste de votre choix. La trousse choisie est intégrée à votre châssis et ne peut pas être retirée tant que vous êtes conscient."
+    }
   },
   {
     "id": "intuitive-initiative",
     "name": {
       "en": "Intuitive Initiative",
-      "fr": "Intuitive Initiative"
+      "fr": "Initiative intuitive"
     },
-    "description": "You can choose to reroll Initiative checks, but you must use the new roll."
+    "description": {
+      "en": "You can choose to reroll Initiative checks, but you must use the new roll.",
+      "fr": "Vous pouvez choisir de relancer vos jets d'initiative, mais vous devez conserver le nouveau résultat."
+    }
   },
   {
     "id": "jungle-dweller",
     "name": {
       "en": "Jungle Dweller",
-      "fr": "Jungle Dweller"
+      "fr": "Habitant de la jungle"
     },
-    "description": "Growing up in the jungles of Devaron has left an impact. You don’t treat jungle terrain as difficult terrain."
+    "description": {
+      "en": "Growing up in the jungles of Devaron has left an impact. You don’t treat jungle terrain as difficult terrain.",
+      "fr": "Vous ne considérez pas les terrains de jungle comme des terrains difficiles."
+    }
   },
   {
     "id": "keen-hearing-and-smell",
     "name": {
       "en": "Keen Hearing and Smell",
-      "fr": "Keen Hearing and Smell"
+      "fr": "Ouïe et odorat aiguisés"
     },
-    "description": "You have advantage on Wisdom (Perception) checks that involve hearing or smell."
+    "description": {
+      "en": "You have advantage on Wisdom (Perception) checks that involve hearing or smell.",
+      "fr": "Vous avez l'avantage aux tests de Sagesse (Perception) reposant sur l'ouïe ou l'odorat."
+    }
   },
   {
     "id": "keen-senses",
     "name": {
       "en": "Keen Senses",
-      "fr": "Keen Senses"
+      "fr": "Sens affûtés"
     },
-    "description": "You have proficiency in the Perception skill."
+    "description": {
+      "en": "You have proficiency in the Perception skill.",
+      "fr": "Vous maîtrisez la compétence Perception."
+    }
   },
   {
     "id": "keen-smell",
     "name": {
       "en": "Keen Smell",
-      "fr": "Keen Smell"
+      "fr": "Odorat affûté"
     },
-    "description": "You have advantage on Wisdom (Perception) checks that rely on smell."
+    "description": {
+      "en": "You have advantage on Wisdom (Perception) checks that rely on smell.",
+      "fr": "Vous avez l'avantage aux tests de Sagesse (Perception) reposant sur l'odorat."
+    }
   },
   {
     "id": "knowledge-protocol",
     "name": {
       "en": "Knowledge Protocol",
-      "fr": "Knowledge Protocol"
+      "fr": "Protocole de connaissances"
     },
-    "description": "You have proficiency in two Intelligence, Wisdom, or Charisma skills of your choice."
+    "description": {
+      "en": "You have proficiency in two Intelligence, Wisdom, or Charisma skills of your choice.",
+      "fr": "Vous maîtrisez deux compétences de votre choix parmi celles reposant sur l'Intelligence, la Sagesse ou le Charisme."
+    }
   },
   {
     "id": "law-of-life",
     "name": {
       "en": "Law of Life",
-      "fr": "Law of Life"
+      "fr": "Loi du vivant"
     },
-    "description": "Ithorians have a sacred respect for the natural world, taking great care to preserve and study it. You have proficiency in the Nature skill and the bioanalysis kit."
+    "description": {
+      "en": "Ithorians have a sacred respect for the natural world, taking great care to preserve and study it. You have proficiency in the Nature skill and the bioanalysis kit.",
+      "fr": "Vous maîtrisez la compétence Nature ainsi que la trousse de bioanalyse."
+    }
   },
   {
     "id": "leonine-agility",
     "name": {
       "en": "Leonine Agility",
-      "fr": "Leonine Agility"
+      "fr": "Agilité léonine"
     },
-    "description": "Your reflexes and agility allow you to move with a burst of speed. When you move on your turn in combat, you can double your speed until the end of the turn. Once you use this trait, you can’t use it again until you move 0 feet on one of your turns."
+    "description": {
+      "en": "Your reflexes and agility allow you to move with a burst of speed. When you move on your turn in combat, you can double your speed until the end of the turn. Once you use this trait, you can’t use it again until you move 0 feet on one of your turns.",
+      "fr": "Vos réflexes félins vous permettent d'accélérer. Lorsque vous vous déplacez durant votre tour en combat, vous pouvez doubler votre vitesse jusqu'à la fin du tour. Une fois ce trait utilisé, vous ne pouvez plus l'utiliser tant que vous ne vous êtes pas déplacé de 0 mètre à l'un de vos tours."
+    }
   },
   {
     "id": "life-in-the-void",
     "name": {
       "en": "Life in the Void",
-      "fr": "Life in the Void"
+      "fr": "Vie dans le vide"
     },
-    "description": "You have resistance to necrotic damage, and while exposed to the vacuum of space, you can survive for a number of hours equal to your Constitution modifier (minimum 1 hour), instead of a number of rounds."
+    "description": {
+      "en": "You have resistance to necrotic damage, and while exposed to the vacuum of space, you can survive for a number of hours equal to your Constitution modifier (minimum 1 hour), instead of a number of rounds.",
+      "fr": "Vous êtes résistant aux dégâts nécrotiques et, lorsque vous êtes exposé au vide spatial, vous pouvez survivre pendant un nombre d'heures égal à votre modificateur de Constitution (minimum 1 heure) au lieu d'un nombre de rounds."
+    }
   },
   {
     "id": "maintenance-mode",
     "name": {
       "en": "Maintenance Mode",
-      "fr": "Maintenance Mode"
+      "fr": "Mode maintenance"
     },
-    "description": "Rather than sleep, you must spend 3 hours performing routine maintenance during a long rest to gain its benefits, during which you have disadvantage on Wisdom (Perception) checks. Additionally, if your long rest would be interrupted, you only need to complete the long rest instead of restarting it."
+    "description": {
+      "en": "Rather than sleep, you must spend 3 hours performing routine maintenance during a long rest to gain its benefits, during which you have disadvantage on Wisdom (Perception) checks. Additionally, if your long rest would be interrupted, you only need to complete the long rest instead of restarting it.",
+      "fr": "Plutôt que de dormir, vous devez consacrer 3 heures à des opérations de maintenance durant un repos long pour en tirer les bénéfices, et vous avez un désavantage aux tests de Sagesse (Perception) pendant ce temps. De plus, si votre repos long est interrompu, il vous suffit de le terminer au lieu de le recommencer pour bénéficier de ses effets."
+    }
   },
   {
     "id": "manual-laborer",
     "name": {
       "en": "Manual Laborer",
-      "fr": "Manual Laborer"
+      "fr": "Travailleur manuel"
     },
-    "description": "You have proficiency in Athletics and one set of artisan's implements of your choice."
+    "description": {
+      "en": "You have proficiency in Athletics and one set of artisan's implements of your choice.",
+      "fr": "Vous maîtrisez la compétence Athlétisme ainsi qu'un ensemble d'outils d'artisan de votre choix."
+    }
   },
   {
     "id": "martial-proficiency",
     "name": {
       "en": "Martial Proficiency",
-      "fr": "Martial Proficiency"
+      "fr": "Maîtrise martiale"
     },
-    "description": "You have proficiency with light and medium armor as well as the heavy pistol and sniper rifle."
+    "description": {
+      "en": "You have proficiency with light and medium armor as well as the heavy pistol and sniper rifle.",
+      "fr": "Vous maîtrisez les armures légères et intermédiaires ainsi que le pistolet lourd et le fusil de précision."
+    }
   },
   {
     "id": "martial-protocol",
     "name": {
       "en": "Martial Protocol",
-      "fr": "Martial Protocol"
+      "fr": "Protocole martial"
     },
-    "description": "You have proficiency with light and medium armor as well as two simple or martial blasters or vibroweapons of your choice."
+    "description": {
+      "en": "You have proficiency with light and medium armor as well as two simple or martial blasters or vibroweapons of your choice.",
+      "fr": "Vous maîtrisez les armures légères et intermédiaires ainsi que deux blasters ou vibro-armes, simples ou martiaux, de votre choix."
+    }
   },
   {
     "id": "mask-of-the-wild",
     "name": {
       "en": "Mask of the Wild",
-      "fr": "Mask of the Wild"
+      "fr": "Masque de la nature"
     },
-    "description": "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena."
+    "description": {
+      "en": "You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.",
+      "fr": "Vous pouvez tenter de vous cacher même lorsque vous êtes faiblement dissimulé par le feuillage, la pluie, la neige ou tout autre phénomène naturel."
+    }
   },
   {
     "id": "menacing",
     "name": {
       "en": "Menacing",
-      "fr": "Menacing"
+      "fr": "Menaçant"
     },
-    "description": "You have proficiency in the Intimidation skill."
+    "description": {
+      "en": "You have proficiency in the Intimidation skill.",
+      "fr": "Vous maîtrisez la compétence Intimidation."
+    }
   },
   {
     "id": "mon-calamari-resistance",
     "name": {
       "en": "Mon Calamari Resistance",
-      "fr": "Mon Calamari Resistance"
+      "fr": "Résistance mon calamari"
     },
-    "description": "You have advantage on saving throws against effects that grant the slowed condition and you have resistance against cold damage (explained in chapter 9)."
+    "description": {
+      "en": "You have advantage on saving throws against effects that grant the slowed condition and you have resistance against cold damage (explained in chapter 9).",
+      "fr": "Vous avez l'avantage aux jets de sauvegarde contre les effets qui infligent la condition ralenti et vous êtes résistant aux dégâts de froid."
+    }
   },
   {
     "id": "montral-reception",
     "name": {
       "en": "Montral Reception",
-      "fr": "Montral Reception"
+      "fr": "Réception des montrals"
     },
-    "description": "You have tremorsense out to 30 feet. You can detect and pinpoint the origin of vibrations within a specific radius, provided that you and the source of the vibrations are in contact with the same ground or substance. Tremorsense can’t be used to detect flying or incorporeal creatures."
+    "description": {
+      "en": "You have tremorsense out to 30 feet. You can detect and pinpoint the origin of vibrations within a specific radius, provided that you and the source of the vibrations are in contact with the same ground or substance. Tremorsense can’t be used to detect flying or incorporeal creatures.",
+      "fr": "Vous disposez d'une perception vibratoire (tremorsense) sur un rayon de 9 mètres. Vous pouvez détecter et localiser l'origine des vibrations tant que vous et la source êtes en contact avec le même sol ou la même surface. Ce sens ne détecte pas les créatures volantes ou incorporelles."
+    }
   },
   {
     "id": "musical",
@@ -437,335 +599,461 @@
       "en": "Musical",
       "fr": "Musical"
     },
-    "description": "You have proficiency in one musical instrument of your choice."
+    "description": {
+      "en": "You have proficiency in one musical instrument of your choice.",
+      "fr": "Vous maîtrisez un instrument de musique de votre choix."
+    }
   },
   {
     "id": "musical-culture",
     "name": {
       "en": "Musical Culture",
-      "fr": "Musical Culture"
+      "fr": "Culture musicale"
     },
-    "description": "Ewoks incorporate music in their celebrations and rituals. You have proficiency in an instrument of your choice."
+    "description": {
+      "en": "Ewoks incorporate music in their celebrations and rituals. You have proficiency in an instrument of your choice.",
+      "fr": "Vous maîtrisez un instrument de musique de votre choix."
+    }
   },
   {
     "id": "musician",
     "name": {
       "en": "Musician",
-      "fr": "Musician"
+      "fr": "Musicien accompli"
     },
-    "description": "You are proficient in one musical instrument of your choice."
+    "description": {
+      "en": "You are proficient in one musical instrument of your choice.",
+      "fr": "Vous maîtrisez un instrument de musique de votre choix."
+    }
   },
   {
     "id": "natural-antitoxins",
     "name": {
       "en": "Natural Antitoxins",
-      "fr": "Natural Antitoxins"
+      "fr": "Antitoxines naturelles"
     },
-    "description": "You have advantage on saving throws against poison and disease, and you have resistance against poison damage (explained in Chapter 9)."
+    "description": {
+      "en": "You have advantage on saving throws against poison and disease, and you have resistance against poison damage (explained in Chapter 9).",
+      "fr": "Vous avez l'avantage aux jets de sauvegarde contre le poison et les maladies, et vous êtes résistant aux dégâts de poison."
+    }
   },
   {
     "id": "natural-empathy",
     "name": {
       "en": "Natural Empathy",
-      "fr": "Natural Empathy"
+      "fr": "Empathie naturelle"
     },
-    "description": "Nautolan head tentacles are adept at determining moods. You have advantage on Wisdom (Insight) checks to determine emotions against humanoids and beasts within 10 feet of you."
+    "description": {
+      "en": "Nautolan head tentacles are adept at determining moods. You have advantage on Wisdom (Insight) checks to determine emotions against humanoids and beasts within 10 feet of you.",
+      "fr": "Vos tentacules sensitifs vous aident à lire les autres. Vous avez l'avantage aux tests de Sagesse (Intuition) pour déterminer les émotions des humanoïdes et des bêtes dans un rayon de 3 mètres."
+    }
   },
   {
     "id": "natural-instinct",
     "name": {
       "en": "Natural Instinct",
-      "fr": "Natural Instinct"
+      "fr": "Instinct naturel"
     },
-    "description": "You have proficiency with Nature or Perception (your choice)."
+    "description": {
+      "en": "You have proficiency with Nature or Perception (your choice).",
+      "fr": "Vous maîtrisez la compétence Nature ou Perception (au choix)."
+    }
   },
   {
     "id": "natural-survivalist",
     "name": {
       "en": "Natural Survivalist",
-      "fr": "Natural Survivalist"
+      "fr": "Survivaliste né"
     },
-    "description": "You have proficiency in Nature and Survival."
+    "description": {
+      "en": "You have proficiency in Nature and Survival.",
+      "fr": "Vous maîtrisez les compétences Survie et Nature."
+    }
   },
   {
     "id": "naturally-stealthy",
     "name": {
       "en": "Naturally Stealthy",
-      "fr": "Naturally Stealthy"
+      "fr": "Discrétion innée"
     },
-    "description": "You can attempt to hide even when you are obscured only by a creature that is your size or larger than you."
+    "description": {
+      "en": "You can attempt to hide even when you are obscured only by a creature that is your size or larger than you.",
+      "fr": "Vous pouvez tenter de vous cacher même lorsqu'une créature de votre taille ou plus grande vous procure un simple couvert."
+    }
   },
   {
     "id": "navigators",
     "name": {
       "en": "Navigators",
-      "fr": "Navigators"
+      "fr": "Navigateurs"
     },
-    "description": "You have proficiency in surveyor's implements."
+    "description": {
+      "en": "You have proficiency in surveyor's implements.",
+      "fr": "Vous maîtrisez les outils d'arpenteur."
+    }
   },
   {
     "id": "nimble-escape",
     "name": {
       "en": "Nimble Escape",
-      "fr": "Nimble Escape"
+      "fr": "Fuite agile"
     },
-    "description": "You can take the Disengage or Hide action as a bonus action on each of your turns. > While bothans are suitable for many classes, they most iconically fit as operatives. The ***Nimble Escape*** special trait heavily overlaps with the operative's ***Cunning Action*** feature, however, making this species/class combination counterintuitive. If, during the character creation part of your game, a player decides to make a bothan operative, consider letting them use the following feature instead: > > ***Versatile Expertise.*** You gain proficiency in one skill of your choice. You gain expertise in one skill of your choice in which you are proficient. &emsp;***Shrewd.*** You are proficient in the Insight and Deception skills."
+    "description": {
+      "en": "You can take the Disengage or Hide action as a bonus action on each of your turns. > While bothans are suitable for many classes, they most iconically fit as operatives. The ***Nimble Escape*** special trait heavily overlaps with the operative's ***Cunning Action*** feature, however, making this species/class combination counterintuitive. If, during the character creation part of your game, a player decides to make a bothan operative, consider letting them use the following feature instead: > > ***Versatile Expertise.*** You gain proficiency in one skill of your choice. You gain expertise in one skill of your choice in which you are proficient. &emsp;***Shrewd.*** You are proficient in the Insight and Deception skills.",
+      "fr": "Vous pouvez effectuer l'action Se désengager ou Vous cacher en action bonus à chacun de vos tours. > Bien que les Bothans conviennent à de nombreuses classes, ils excellent particulièrement comme opérateurs. Le trait spécial ***Fuite agile*** recoupe toutefois fortement la capacité ***Action rusée*** de l'opérateur, ce qui peut rendre ce couple espèce/classe contre-intuitif. Si, pendant la création de personnage, un joueur choisit un Bothan opérateur, envisagez de lui proposer la capacité suivante à la place : > > ***Polyvalence experte.*** Vous gagnez la maîtrise d'une compétence de votre choix. Vous gagnez l'expertise dans une compétence maîtrisée de votre choix. &emsp;***Perspicace.*** Vous maîtrisez les compétences Intuition et Tromperie."
+    }
   },
   {
     "id": "politically-minded",
     "name": {
       "en": "Politically Minded",
-      "fr": "Politically Minded"
+      "fr": "Sens politique"
     },
-    "description": "You have proficiency in the Insight skill."
+    "description": {
+      "en": "You have proficiency in the Insight skill.",
+      "fr": "Vous maîtrisez la compétence Intuition."
+    }
   },
   {
     "id": "powerful-build",
     "name": {
       "en": "Powerful Build",
-      "fr": "Powerful Build"
+      "fr": "Carrure puissante"
     },
-    "description": "Your carrying capacity and the weight you can push, drag, or lift doubles. If it would already double, it instead triples."
+    "description": {
+      "en": "Your carrying capacity and the weight you can push, drag, or lift doubles. If it would already double, it instead triples.",
+      "fr": "Votre capacité de portage ainsi que le poids que vous pouvez pousser, tirer ou soulever est doublé. S'il devait déjà être doublé, il est à la place triplé."
+    }
   },
   {
     "id": "prediction",
     "name": {
       "en": "Prediction",
-      "fr": "Prediction"
+      "fr": "Prémonition"
     },
-    "description": "You can embrace the Force and use your advanced insight to predict likely outcomes, allowing you to turn failures into successes. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll."
+    "description": {
+      "en": "You can embrace the Force and use your advanced insight to predict likely outcomes, allowing you to turn failures into successes. When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.",
+      "fr": "Vous pouvez embrasser la Force et utiliser votre clairvoyance pour anticiper les issues probables, transformant les échecs en réussites. Lorsque vous obtenez un 1 sur un jet d'attaque, un test de caractéristique ou un jet de sauvegarde, vous pouvez relancer le dé et devez utiliser le nouveau résultat."
+    }
   },
   {
     "id": "programmer",
     "name": {
       "en": "Programmer",
-      "fr": "Programmer"
+      "fr": "Programmeur"
     },
-    "description": "Whenever you make an Intelligence (Technology) check related to computers, you are considered to have expertise in the Technology skill."
+    "description": {
+      "en": "Whenever you make an Intelligence (Technology) check related to computers, you are considered to have expertise in the Technology skill.",
+      "fr": "Lorsque vous effectuez un test d'Intelligence (Technologie) lié aux systèmes informatiques, vous êtes considéré comme disposant de l'expertise dans la compétence Technologie."
+    }
   },
   {
     "id": "rapid-reconstruction",
     "name": {
       "en": "Rapid Reconstruction",
-      "fr": "Rapid Reconstruction"
+      "fr": "Reconstruction rapide"
     },
-    "description": "You are built with internal repair mechanisms. As a bonus action, you can choose to spend one of your Hit Dice to recover hit points."
+    "description": {
+      "en": "You are built with internal repair mechanisms. As a bonus action, you can choose to spend one of your Hit Dice to recover hit points.",
+      "fr": "Vous êtes doté de mécanismes de réparation internes. Comme action bonus, vous pouvez dépenser un de vos dés de vie pour récupérer des points de vie."
+    }
   },
   {
     "id": "regenerative",
     "name": {
       "en": "Regenerative",
-      "fr": "Regenerative"
+      "fr": "Régénération"
     },
-    "description": "When you take damage, you can use your reaction and expend a Hit Die to regain hit points as long as the damage would not reduce your hit points to 0."
+    "description": {
+      "en": "When you take damage, you can use your reaction and expend a Hit Die to regain hit points as long as the damage would not reduce your hit points to 0.",
+      "fr": "Lorsque vous subissez des dégâts, vous pouvez utiliser votre réaction et dépenser un dé de vie pour regagner des points de vie tant que les dégâts ne réduisent pas vos points de vie à 0."
+    }
   },
   {
     "id": "savage-attacks",
     "name": {
       "en": "Savage Attacks",
-      "fr": "Savage Attacks"
+      "fr": "Attaques sauvages"
     },
-    "description": "When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit."
+    "description": {
+      "en": "When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit.",
+      "fr": "Lorsque vous obtenez un coup critique avec une attaque d'arme de mêlée, vous pouvez lancer un dé de dégâts supplémentaire de l'arme et l'ajouter aux dégâts supplémentaires du coup critique."
+    }
   },
   {
     "id": "saving-face",
     "name": {
       "en": "Saving Face",
-      "fr": "Saving Face"
+      "fr": "Sauver la face"
     },
-    "description": "Trandoshans are careful not to show weakness in front of their allies, for fear of losing status. If you miss with an attack roll or fail an ability check or a saving throw, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can’t use it again until you finish a short or long rest."
+    "description": {
+      "en": "Trandoshans are careful not to show weakness in front of their allies, for fear of losing status. If you miss with an attack roll or fail an ability check or a saving throw, you can gain a bonus to the roll equal to the number of allies you can see within 30 feet of you (maximum bonus of +5). Once you use this trait, you can’t use it again until you finish a short or long rest.",
+      "fr": "Les Trandoshans veillent à ne pas montrer de faiblesse devant leurs alliés, de peur de perdre en statut. Si vous ratez un jet d'attaque ou échouez à un test de caractéristique ou un jet de sauvegarde, vous pouvez ajouter un bonus égal au nombre d'alliés que vous voyez dans un rayon de 9 mètres (bonus maximum de +5). Une fois ce trait utilisé, vous devez terminer un repos court ou long avant de pouvoir l'utiliser à nouveau."
+    }
   },
   {
     "id": "second-heart",
     "name": {
       "en": "Second Heart",
-      "fr": "Second Heart"
+      "fr": "Second cœur"
     },
-    "description": "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest."
+    "description": {
+      "en": "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.",
+      "fr": "Lorsque vous devriez être réduit à 0 point de vie sans être tué sur le coup, vous pouvez tomber à 1 point de vie à la place. Vous ne pouvez pas réutiliser ce trait avant d'avoir terminé un repos long."
+    }
   },
   {
     "id": "silent-step",
     "name": {
       "en": "Silent Step",
-      "fr": "Silent Step"
+      "fr": "Pas feutrés"
     },
-    "description": "You have proficiency in the Stealth skill."
+    "description": {
+      "en": "You have proficiency in the Stealth skill.",
+      "fr": "Vous maîtrisez la compétence Discrétion."
+    }
   },
   {
     "id": "silver-tongue",
     "name": {
       "en": "Silver Tongue",
-      "fr": "Silver Tongue"
+      "fr": "Langue d'argent"
     },
-    "description": "You have proficiency with Deception or Persuasion (your choice)."
+    "description": {
+      "en": "You have proficiency with Deception or Persuasion (your choice).",
+      "fr": "Vous maîtrisez la compétence Tromperie ou Persuasion (au choix)."
+    }
   },
   {
     "id": "skill-protocol",
     "name": {
       "en": "Skill Protocol",
-      "fr": "Skill Protocol"
+      "fr": "Protocole de compétences"
     },
-    "description": "You have proficiency in two skills of your choice."
+    "description": {
+      "en": "You have proficiency in two skills of your choice.",
+      "fr": "Vous maîtrisez deux compétences de votre choix."
+    }
   },
   {
     "id": "sonic-scream",
     "name": {
       "en": "Sonic Scream",
-      "fr": "Sonic Scream"
+      "fr": "Cri sonique"
     },
-    "description": "As an action, you can violently expel air in a 15-foot cone. When you do so, each creature in the area of the exhalation must make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Constitution modifier). A creature takes 2d6 sonic damage on a failed save, and half as much damage on a successful one. The damage increases to 4d6 at 5th level, 6d6 at 11th level, and 8d6 at 17th level. This ability has no effect on constructs. You can use this feature a number of times equal to your proficiency bonus. You regain all expended uses when you complete a long rest."
+    "description": {
+      "en": "As an action, you can violently expel air in a 15-foot cone. When you do so, each creature in the area of the exhalation must make a Wisdom saving throw (DC = 8 + your proficiency bonus + your Constitution modifier). A creature takes 2d6 sonic damage on a failed save, and half as much damage on a successful one. The damage increases to 4d6 at 5th level, 6d6 at 11th level, and 8d6 at 17th level. This ability has no effect on constructs. You can use this feature a number of times equal to your proficiency bonus. You regain all expended uses when you complete a long rest.",
+      "fr": "Comme action, vous pouvez expulser violemment de l'air dans un cône de 4,50 mètres. Chaque créature dans la zone doit réussir un jet de sauvegarde de Sagesse (DD = 8 + votre bonus de maîtrise + votre modificateur de Constitution) ou subir 2d6 dégâts soniques, ou la moitié en cas de réussite. Les dégâts passent à 4d6 au niveau 5, 6d6 au niveau 11 et 8d6 au niveau 17. Cette capacité est sans effet sur les créatures artificielles. Vous pouvez l'utiliser un nombre de fois égal à votre bonus de maîtrise et récupérez toutes les utilisations dépensées après un repos long."
+    }
   },
   {
     "id": "sonic-sensitivity",
     "name": {
       "en": "Sonic Sensitivity",
-      "fr": "Sonic Sensitivity"
+      "fr": "Sensibilité sonore"
     },
-    "description": "Your powerful sense of hearing makes you especially vulnerable to deafening sounds. You have disadvantage on saving throws against effects that would deal sonic damage (explained in chapter 9)."
+    "description": {
+      "en": "Your powerful sense of hearing makes you especially vulnerable to deafening sounds. You have disadvantage on saving throws against effects that would deal sonic damage (explained in chapter 9).",
+      "fr": "Votre ouïe particulièrement fine vous rend vulnérable aux sons assourdissants. Vous subissez un désavantage aux jets de sauvegarde contre les effets qui infligent des dégâts soniques (décrits au chapitre 9)."
+    }
   },
   {
     "id": "stalking-hunter",
     "name": {
       "en": "Stalking Hunter",
-      "fr": "Stalking Hunter"
+      "fr": "Chasseur furtif"
     },
-    "description": "You have proficiency in the Survival and Stealth skills."
+    "description": {
+      "en": "You have proficiency in the Survival and Stealth skills.",
+      "fr": "Vous maîtrisez les compétences Survie et Discrétion."
+    }
   },
   {
     "id": "strong-legged",
     "name": {
       "en": "Strong-Legged",
-      "fr": "Strong-Legged"
+      "fr": "Jambes puissantes"
     },
-    "description": "When you make a long jump, you can cover a number of feet up to twice your Strength score. When you make a high jump, you can leap a number of feet up into the air equal to 3 + twice your Strength modifier."
+    "description": {
+      "en": "When you make a long jump, you can cover a number of feet up to twice your Strength score. When you make a high jump, you can leap a number of feet up into the air equal to 3 + twice your Strength modifier.",
+      "fr": "Lorsque vous effectuez un saut en longueur, vous pouvez parcourir un nombre de pieds égal au double de votre score de Force. Lorsque vous effectuez un saut en hauteur, vous pouvez bondir d'un nombre de pieds égal à 3 + deux fois votre modificateur de Force."
+    }
   },
   {
     "id": "superior-darkvision",
     "name": {
       "en": "Superior Darkvision",
-      "fr": "Superior Darkvision"
+      "fr": "Vision dans le noir supérieure"
     },
-    "description": "Your vision can easily cut through darkness. You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray."
+    "description": {
+      "en": "Your vision can easily cut through darkness. You can see in dim light within 120 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",
+      "fr": "Votre vision perce aisément l'obscurité. Vous voyez dans une lumière faible à 36 mètres comme s'il s'agissait de pleine lumière et dans l'obscurité comme s'il s'agissait d'une lumière faible. Vous ne distinguez pas les couleurs dans l'obscurité, uniquement des nuances de gris."
+    }
   },
   {
     "id": "superior-memory",
     "name": {
       "en": "Superior Memory",
-      "fr": "Superior Memory"
+      "fr": "Mémoire supérieure"
     },
-    "description": "You can double your proficiency bonus for it when you make an Intelligence (Lore) check to recall information you have learned, or to recall the details of your experiences."
+    "description": {
+      "en": "You can double your proficiency bonus for it when you make an Intelligence (Lore) check to recall information you have learned, or to recall the details of your experiences.",
+      "fr": "Lorsque vous effectuez un test d'Intelligence (Savoirs) pour vous souvenir d'une information apprise ou des détails d'une expérience vécue, vous doublez votre bonus de maîtrise pour ce jet."
+    }
   },
   {
     "id": "survivors-of-the-sands",
     "name": {
       "en": "Survivors of the Sands",
-      "fr": "Survivors of the Sands"
+      "fr": "Survivants des sables"
     },
-    "description": "You have proficiency in the Survival skill. Additionally, you don’t treat desert terrain as difficult terrain. Lastly, you have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat."
+    "description": {
+      "en": "You have proficiency in the Survival skill. Additionally, you don’t treat desert terrain as difficult terrain. Lastly, you have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat.",
+      "fr": "Vous maîtrisez la compétence Survie. De plus, vous ne considérez pas les terrains désertiques comme des terrains difficiles. Enfin, vous avez l'avantage aux jets de sauvegarde de Constitution effectués pour éviter l'épuisement dû à une chaleur extrême."
+    }
   },
   {
     "id": "swim",
     "name": {
       "en": "Swim",
-      "fr": "Swim"
+      "fr": "Nageur"
     },
-    "description": "You have a swimming speed of 30 feet."
+    "description": {
+      "en": "You have a swimming speed of 30 feet.",
+      "fr": "Vous disposez d'une vitesse de nage de 9 mètres."
+    }
   },
   {
     "id": "tanned",
     "name": {
       "en": "Tanned",
-      "fr": "Tanned"
+      "fr": "Peau cuirassée"
     },
-    "description": "You have tough, leathery skin. While you are unarmored or wearing light armor, your AC is 13 + your Dexterity modifier. Additionally, You have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat."
+    "description": {
+      "en": "You have tough, leathery skin. While you are unarmored or wearing light armor, your AC is 13 + your Dexterity modifier. Additionally, You have advantage on Constitution saving throws made to avoid exhaustion due to extreme heat.",
+      "fr": "Votre peau épaisse vous protège naturellement. Tant que vous ne portez pas d'armure ou que vous portez une armure légère, votre CA est égale à 13 + votre modificateur de Dextérité. De plus, vous avez l'avantage aux jets de sauvegarde de Constitution effectués pour éviter l'épuisement dû à une chaleur extrême."
+    }
   },
   {
     "id": "tech-dabbler",
     "name": {
       "en": "Tech Dabbler",
-      "fr": "Tech Dabbler"
+      "fr": "Bricoleur technologique"
     },
-    "description": "You know the *ion blast* at-will tech power. When you reach 3rd level, you learn and can cast the *repair droid* tech power once per long rest. When you reach 5th level, you learn and can cast the *hold droid* tech power once per long rest. Your techcasting ability is Intelligence. You do not require use of a wristpad for these powers."
+    "description": {
+      "en": "You know the *ion blast* at-will tech power. When you reach 3rd level, you learn and can cast the *repair droid* tech power once per long rest. When you reach 5th level, you learn and can cast the *hold droid* tech power once per long rest. Your techcasting ability is Intelligence. You do not require use of a wristpad for these powers.",
+      "fr": "Vous connaissez le pouvoir technologique à volonté *décharge ionique*. Au niveau 3, vous apprenez à lancer *réparer un droïde* une fois par repos long. Au niveau 5, vous apprenez à lancer *immobiliser un droïde* une fois par repos long. L'Intelligence est votre caractéristique de lancement pour ces pouvoirs. Vous n'avez pas besoin de brassard informatique pour les lancer."
+    }
   },
   {
     "id": "tech-impaired",
     "name": {
       "en": "Tech-Impaired",
-      "fr": "Tech-Impaired"
+      "fr": "Maladroit avec la technologie"
     },
-    "description": "While tuskens can figure out basic technology, they experience difficulty using more complex equipment like wristpads. You can not use tech powers or take levels in techcasting classes."
+    "description": {
+      "en": "While tuskens can figure out basic technology, they experience difficulty using more complex equipment like wristpads. You can not use tech powers or take levels in techcasting classes.",
+      "fr": "Bien que les Tuskens puissent comprendre la technologie de base, ils peinent à utiliser des équipements plus complexes comme les brassards informatiques. Vous ne pouvez pas utiliser de pouvoirs technologiques ni prendre de niveaux dans une classe de techno-lanceur."
+    }
   },
   {
     "id": "tech-resistance",
     "name": {
       "en": "Tech Resistance",
-      "fr": "Tech Resistance"
+      "fr": "Résistance technologique"
     },
-    "description": "Growing up around technology leaves an impact on chiss. You have advantage on Dexterity and Intelligence saving throws against tech powers."
+    "description": {
+      "en": "Growing up around technology leaves an impact on chiss. You have advantage on Dexterity and Intelligence saving throws against tech powers.",
+      "fr": "Grandir entouré de technologie laisse son empreinte. Vous avez l'avantage aux jets de sauvegarde de Dextérité et d'Intelligence contre les pouvoirs technologiques."
+    }
   },
   {
     "id": "telepathy",
     "name": {
       "en": "Telepathy",
-      "fr": "Telepathy"
+      "fr": "Télépathie"
     },
-    "description": "You can communicate telepathically with creatures within 30 feet of you. You must share a language with the target in order to communicate in this way."
+    "description": {
+      "en": "You can communicate telepathically with creatures within 30 feet of you. You must share a language with the target in order to communicate in this way.",
+      "fr": "Vous pouvez communiquer télépathiquement avec les créatures situées dans un rayon de 9 mètres. Vous devez partager une langue avec la cible pour utiliser ce mode de communication."
+    }
   },
   {
     "id": "thieving",
     "name": {
       "en": "Thieving",
-      "fr": "Thieving"
+      "fr": "Pickpocket"
     },
-    "description": "You have proficiency in the Sleight of Hand skill."
+    "description": {
+      "en": "You have proficiency in the Sleight of Hand skill.",
+      "fr": "Vous maîtrisez la compétence Escamotage."
+    }
   },
   {
     "id": "tinker",
     "name": {
       "en": "Tinker",
-      "fr": "Tinker"
+      "fr": "Bricoleur"
     },
-    "description": "You have proficiency with tinker’s implements. You can use these and spend 1 hour and 100 cr worth of materials to construct a Tiny Device (AC 5, 1 hp). You can take the Use an Object action to have your device cause one of the following effects: create a small explosion, create a repeating loud noise for 1 minute, create smoke for 1 minute, cause a small electrical fire. You can maintain a number of these devices up to your proficiency bonus at once, and a device stops functioning after 24 hours away from you. You can dismantle the device to reclaim the materials used to create it."
+    "description": {
+      "en": "You have proficiency with tinker’s implements. You can use these and spend 1 hour and 100 cr worth of materials to construct a Tiny Device (AC 5, 1 hp). You can take the Use an Object action to have your device cause one of the following effects: create a small explosion, create a repeating loud noise for 1 minute, create smoke for 1 minute, cause a small electrical fire. You can maintain a number of these devices up to your proficiency bonus at once, and a device stops functioning after 24 hours away from you. You can dismantle the device to reclaim the materials used to create it.",
+      "fr": "Vous maîtrisez les outils de bricoleur. Vous pouvez les utiliser et dépenser 1 heure ainsi que 100 crédits de matériaux pour construire un petit dispositif (CA 5, 1 PV). Vous pouvez utiliser l'action Utiliser un objet pour produire l'un des effets suivants : créer une petite explosion, produire un bruit répétitif pendant 1 minute, générer de la fumée pendant 1 minute ou provoquer un petit départ de feu électrique. Vous pouvez maintenir un nombre de dispositifs égal à votre bonus de maîtrise à la fois, et un dispositif cesse de fonctionner après 24 heures loin de vous. Vous pouvez démonter le dispositif pour récupérer les matériaux utilisés."
+    }
   },
   {
     "id": "toughness",
     "name": {
       "en": "Toughness",
-      "fr": "Toughness"
+      "fr": "Robustesse"
     },
-    "description": "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level."
+    "description": {
+      "en": "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.",
+      "fr": "Votre maximum de points de vie augmente de 1, puis encore de 1 chaque fois que vous gagnez un niveau."
+    }
   },
   {
     "id": "trance",
     "name": {
       "en": "Trance",
-      "fr": "Trance"
+      "fr": "Transe méditative"
     },
-    "description": "You only need 3 hours of sleep during a long rest to gain its benefits, instead of 6. Additionally, if your long rest would be interrupted, you only need to complete the long rest instead of restarting it to gain its benefits."
+    "description": {
+      "en": "You only need 3 hours of sleep during a long rest to gain its benefits, instead of 6. Additionally, if your long rest would be interrupted, you only need to complete the long rest instead of restarting it to gain its benefits.",
+      "fr": "Vous n'avez besoin que de 3 heures de sommeil durant un repos long pour en tirer les bénéfices, au lieu de 6. De plus, si votre repos long est interrompu, il vous suffit de le terminer au lieu de le recommencer pour bénéficier de ses effets."
+    }
   },
   {
     "id": "treeclimber",
     "name": {
       "en": "Treeclimber",
-      "fr": "Treeclimber"
+      "fr": "Grimpeur arboricole"
     },
-    "description": "You have a climbing speed of 30 feet. You have advantage on Strength saving throws and Strength (Athletics) checks that involve climbing."
+    "description": {
+      "en": "You have a climbing speed of 30 feet. You have advantage on Strength saving throws and Strength (Athletics) checks that involve climbing.",
+      "fr": "Vous disposez d'une vitesse d'escalade de 9 mètres et vous avez l'avantage aux jets de sauvegarde de Force ainsi qu'aux tests de Force (Athlétisme) liés à l'escalade."
+    }
   },
   {
     "id": "tusken-weaponry",
     "name": {
       "en": "Tusken Weaponry",
-      "fr": "Tusken Weaponry"
+      "fr": "Arsenal tusken"
     },
-    "description": "You have proficiency with the cycler rifle and vibroaxe."
+    "description": {
+      "en": "You have proficiency with the cycler rifle and vibroaxe.",
+      "fr": "Vous maîtrisez le fusil cycler et la vibro-hache."
+    }
   },
   {
     "id": "two-livered",
     "name": {
       "en": "Two Livered",
-      "fr": "Two Livered"
+      "fr": "Double foie"
     },
-    "description": "Devaronians have two livers, which makes them adept at filtering toxins. You have advantage on saving throws against poison, and you have resistance against poison damage (explained in chapter 9)."
+    "description": {
+      "en": "Devaronians have two livers, which makes them adept at filtering toxins. You have advantage on saving throws against poison, and you have resistance against poison damage (explained in chapter 9).",
+      "fr": "Les Devaroniens possèdent deux foies, ce qui les rend particulièrement aptes à filtrer les toxines. Vous avez l'avantage aux jets de sauvegarde contre le poison et êtes résistant aux dégâts de poison."
+    }
   },
   {
     "id": "type",
@@ -773,38 +1061,53 @@
       "en": "Type",
       "fr": "Type"
     },
-    "description": "Your creature type is droid."
+    "description": {
+      "en": "Your creature type is droid.",
+      "fr": "Votre type de créature est droïde."
+    }
   },
   {
     "id": "unarmed-combatant",
     "name": {
       "en": "Unarmed Combatant",
-      "fr": "Unarmed Combatant"
+      "fr": "Combattant à mains nues"
     },
-    "description": "Your unarmed strikes deal 1d4 kinetic damage and have the finesse property."
+    "description": {
+      "en": "Your unarmed strikes deal 1d4 kinetic damage and have the finesse property.",
+      "fr": "Vos attaques à mains nues infligent 1d4 dégâts cinétiques et ont la propriété de finesse."
+    }
   },
   {
     "id": "undersized",
     "name": {
       "en": "Undersized",
-      "fr": "Undersized"
+      "fr": "De petite taille"
     },
-    "description": "Your small stature makes it hard for you to wield bigger weapons. You can't use heavy shields. Additionally, you can't use martial weapons with the two-handed property unless it also has the light property, and if a martial weapon has the versatile property, you can only wield it in two hands."
+    "description": {
+      "en": "Your small stature makes it hard for you to wield bigger weapons. You can't use heavy shields. Additionally, you can't use martial weapons with the two-handed property unless it also has the light property, and if a martial weapon has the versatile property, you can only wield it in two hands.",
+      "fr": "Votre petite stature vous empêche de manier de grandes armes. Vous ne pouvez pas utiliser de boucliers lourds. De plus, vous ne pouvez pas utiliser d'armes martiales possédant la propriété à deux mains, sauf si elles ont également la propriété légère, et si une arme martiale possède la propriété polyvalente, vous ne pouvez la manier qu'à deux mains."
+    }
   },
   {
     "id": "weapon-training",
     "name": {
       "en": "Weapon Training",
-      "fr": "Weapon Training"
+      "fr": "Entraînement aux armes"
     },
-    "description": "You have proficiency in two vibroweapons or blasters of your choice."
+    "description": {
+      "en": "You have proficiency in two vibroweapons or blasters of your choice.",
+      "fr": "Vous maîtrisez deux vibro-armes ou blasters de votre choix."
+    }
   },
   {
     "id": "wild-hunters",
     "name": {
       "en": "Wild Hunters",
-      "fr": "Wild Hunters"
+      "fr": "Chasseurs sauvages"
     },
-    "description": "You have proficiency in the Survival skill."
+    "description": {
+      "en": "You have proficiency in the Survival skill.",
+      "fr": "Vous maîtrisez la compétence Survie."
+    }
   }
 ]

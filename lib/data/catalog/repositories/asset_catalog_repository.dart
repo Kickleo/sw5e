@@ -166,15 +166,8 @@ class AssetCatalogRepository implements CatalogRepository {
   Future<void> _ensureTraits() async {
     if (_traits != null) return;
     final dtos = await _dataSource.loadTraits();
-    final TraitLocalizationConfigDto? traitLocalization =
-        await _dataSource.loadTraitLocalizations();
     _traits = <String, TraitDef>{
-      for (final dto in dtos)
-        dto.id: dto.toDomain(
-          nameOverride: traitLocalization?.forTrait(dto.id)?.name,
-          descriptionOverride:
-              traitLocalization?.forTrait(dto.id)?.description,
-        ),
+      for (final dto in dtos) dto.id: dto.toDomain(),
     };
   }
 
