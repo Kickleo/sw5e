@@ -233,8 +233,8 @@ SpeciesDef _buildBithSpecies() {
     name: LocalizedText(en: 'Bith', fr: 'Bith'),
     speed: 30,
     size: 'medium',
-    traitIds: const <String>['detail-oriented', 'sonic-sensitivity'],
-    abilityBonuses: const <SpeciesAbilityBonus>[
+    traitIds: <String>['detail-oriented', 'sonic-sensitivity'],
+    abilityBonuses: <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(ability: 'int', amount: 2),
       SpeciesAbilityBonus(ability: 'dex', amount: 1),
     ],
@@ -299,21 +299,21 @@ SpeciesDef _buildHumanSpecies() {
     name: LocalizedText(en: 'Human', fr: 'Humain'),
     speed: 30,
     size: 'medium',
-    abilityBonuses: const <SpeciesAbilityBonus>[
+    abilityBonuses: <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(
         amount: 2,
         choose: 1,
-        options: const <String>['wis', 'cha'],
+        options: <String>['wis', 'cha'],
       ),
       SpeciesAbilityBonus(
         amount: 1,
         choose: 2,
-        options: const <String>['any'],
+        options: <String>['any'],
       ),
       SpeciesAbilityBonus(
         amount: 1,
         choose: 4,
-        options: const <String>['any'],
+        options: <String>['any'],
         isAlternative: true,
       ),
     ],
@@ -326,10 +326,10 @@ SpeciesDef _buildTwilekSpecies() {
     name: LocalizedText(en: 'Twi\'lek', fr: 'Twi\'lek'),
     speed: 35,
     size: 'medium',
-    abilityBonuses: const <SpeciesAbilityBonus>[
+    abilityBonuses: <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(ability: 'str', amount: 2),
     ],
-    traitIds: const <String>['agility'],
+    traitIds: <String>['agility'],
   );
 }
 
@@ -352,17 +352,17 @@ SpeciesDef _buildBothanSpecies() {
     name: LocalizedText(
       en: 'Bothan',
       fr: 'Bothan',
-      otherTranslations: const <String, String>{'es': 'Bothaniano'},
+      otherTranslations: <String, String>{'es': 'Bothaniano'},
     ),
     speed: 35,
     size: 'medium',
-    abilityBonuses: const <SpeciesAbilityBonus>[
+    abilityBonuses: <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(ability: 'cha', amount: 2),
     ],
     languages: LocalizedText(
       en: 'You can speak Galactic Basic.',
       fr: 'Vous pouvez parler le basique galactique.',
-      otherTranslations: const <String, String>{
+      otherTranslations: <String, String>{
         'es': 'Puedes hablar Básico Galáctico.',
       },
     ),
