@@ -1,0 +1,22 @@
+[
+  {
+    "id": "8db5b325-643a-5d32-bd3e-483550e4be09",
+    "slug": "twilek",
+    "name": { "en": "Twi'lek", "fr": "Twi'lek" },
+    "size": "medium",
+    "speed_m": 9,
+    "ability_increases": { "CHA": 2, "DEX": 1 },
+    "languages": [ "c07e82f8-f9bd-5a74-83e7-419c2303ad24" ],
+    "traits": [ { "type": "trait", "id": "5e2f8c78-8e20-5800-a118-a1f4ad56aed0" } ],
+    "description_short": {
+      "en": "Graceful diplomats from Ryloth.",
+      "fr": "Diplomates gracieux originaires de Ryloth."
+    },
+    "description": {
+      "en": "Twi'leks blend agility and charm, excelling at negotiation and covert work across the Outer Rim.",
+      "fr": "Les Twi'lek mêlent agilité et charisme, excellant dans la négociation comme dans l'espionnage à travers la Bordure extérieure."
+    },
+    "source": { "book": "PHB SW5e", "section": "Species", "url": "https://sw5e.com/rules/phb/species" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

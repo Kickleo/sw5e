@@ -1,0 +1,26 @@
+[
+  {
+    "id": "dcf95531-9d8e-56e3-85a9-dc0cfdfa10f5",
+    "slug": "str",
+    "name": { "en": "Strength", "fr": "Force" },
+    "abbr": "STR",
+    "description": {
+      "en": "Measures muscle power and athletic might.",
+      "fr": "Mesure la puissance musculaire et la vigueur athlétique."
+    },
+    "source": { "book": "PHB SW5e", "section": "Abilities", "url": "https://sw5e.com/rules/phb/abilities" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "04e50cf7-4ff9-5685-b9c2-4537a30ac448",
+    "slug": "dex",
+    "name": { "en": "Dexterity", "fr": "Dextérité" },
+    "abbr": "DEX",
+    "description": {
+      "en": "Represents agility, reflexes, and control.",
+      "fr": "Représente l'agilité, les réflexes et la précision."
+    },
+    "source": { "book": "PHB SW5e", "section": "Abilities", "url": "https://sw5e.com/rules/phb/abilities" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

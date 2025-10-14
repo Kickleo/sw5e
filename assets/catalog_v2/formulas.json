@@ -1,0 +1,4 @@
+{
+  "attack_bonus": "proficiency + ability_mod",
+  "power_save_dc": "8 + proficiency + casting_ability_mod"
+}

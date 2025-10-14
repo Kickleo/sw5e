@@ -1,0 +1,20 @@
+[
+  {
+    "id": "99ff7464-d4cc-5ebe-b5f3-72ecac188eb6",
+    "slug": "form-ii-makashi",
+    "name": { "en": "Form II: Makashi", "fr": "Forme II : Makashi" },
+    "category": "lightsaber-form",
+    "effects": [
+      {
+        "id": "ba1af3d4-9a7d-52ab-ae4e-1ab9df184495",
+        "kind": "modifier",
+        "target": "attack",
+        "modifier": { "stat": "attack", "op": "add", "value": 1 },
+        "text": { "en": "+1 to lightsaber attacks.", "fr": "+1 aux attaques de sabre laser." }
+      }
+    ],
+    "prerequisite": { "and": [ { "class_id": "4dc8dba9-32a6-5289-b428-f733eee23bf5", "min_level": 2 } ] },
+    "source": { "book": "PHB SW5e", "section": "Customization Options", "url": "https://sw5e.com/rules/phb/customization" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

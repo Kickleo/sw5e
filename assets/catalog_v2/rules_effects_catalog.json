@@ -1,0 +1,18 @@
+[
+  {
+    "id": "29d809fc-46f2-5055-b3e0-fb94ba7d1c49",
+    "slug": "darkvision",
+    "name": { "en": "Darkvision", "fr": "Vision dans le noir" },
+    "effect": {
+      "id": "6d7c1fa9-9535-5e05-9b3c-d0848b3ed9d0",
+      "kind": "sense",
+      "target": "self",
+      "text": {
+        "en": "See in dim light within 18 meters as if it were bright light.",
+        "fr": "Voyez en pénombre jusqu'à 18 mètres comme en pleine lumière."
+      }
+    },
+    "source": { "book": "PHB SW5e", "section": "Rules Reference", "url": "https://sw5e.com/rules/phb" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

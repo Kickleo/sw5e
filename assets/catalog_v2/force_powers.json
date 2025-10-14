@@ -1,0 +1,30 @@
+[
+  {
+    "id": "7b64e23e-9f44-5121-9b44-841e35b5e57e",
+    "slug": "battle-meditation",
+    "name": { "en": "Battle Meditation", "fr": "Méditation de bataille" },
+    "level": 2,
+    "alignment": "light",
+    "school": "support",
+    "casting_time": "action",
+    "range": { "type": "area", "distance_m": 18 },
+    "duration": { "unit": "minute", "value": 10, "concentration": true },
+    "components": ["vocal", "somatic"],
+    "description": {
+      "en": "Bolster allies with coordinated insight.",
+      "fr": "Renforcez vos alliés grâce à une vision coordonnée."
+    },
+    "effects": [
+      {
+        "id": "d5ec4c8f-13ed-5a70-9464-27cb32ecf7c4",
+        "kind": "modifier",
+        "target": "ally",
+        "modifier": { "stat": "attack", "op": "add", "value": 1 },
+        "text": { "en": "+1 to allied attacks.", "fr": "+1 aux attaques des alliés." }
+      }
+    ],
+    "classes": [ { "type": "class", "id": "4dc8dba9-32a6-5289-b428-f733eee23bf5" } ],
+    "source": { "book": "PHB SW5e", "section": "Force Powers", "url": "https://sw5e.com/characters/forcePowers" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

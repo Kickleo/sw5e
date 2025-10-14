@@ -1,0 +1,28 @@
+[
+  {
+    "id": "64ea13ef-8e05-5afa-84bf-01daa57c7694",
+    "slug": "voltaic-shielding",
+    "name": { "en": "Voltaic Shielding", "fr": "Bouclier voltaïque" },
+    "level": 2,
+    "casting_time": "action",
+    "range": { "type": "self" },
+    "duration": { "unit": "minute", "value": 10, "concentration": true },
+    "components": ["somatic", "tech"],
+    "description": {
+      "en": "Project a crackling barrier that halves energy strikes.",
+      "fr": "Projetez une barrière crépitante qui réduit les tirs énergétiques."
+    },
+    "effects": [
+      {
+        "id": "8b177a4e-0f5d-5f78-a309-1fc6d62a9624",
+        "kind": "resistance",
+        "target": "self",
+        "damage": { "type_ref": "a8fbe98f-6d9b-54a5-bd47-0dd6efae5e3b" },
+        "text": { "en": "Gain resistance to energy damage.", "fr": "Gagnez la résistance aux dégâts d'énergie." }
+      }
+    ],
+    "classes": [ { "type": "class", "id": "4dc8dba9-32a6-5289-b428-f733eee23bf5" } ],
+    "source": { "book": "PHB SW5e", "section": "Tech Powers", "url": "https://sw5e.com/characters/techPowers" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

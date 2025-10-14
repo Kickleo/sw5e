@@ -1,0 +1,20 @@
+[
+  {
+    "id": "05da4c85-7cf7-504b-a56a-2a13dbe0374c",
+    "slug": "blaster-pistol",
+    "name": { "en": "Blaster Pistol", "fr": "Pistolet blaster" },
+    "category": "ranged",
+    "cost": { "credits": 500 },
+    "weight_kg": 1.0,
+    "rarity": "common",
+    "damage": [ { "type_ref": "a8fbe98f-6d9b-54a5-bd47-0dd6efae5e3b", "dice": { "count": 1, "die": 8 } } ],
+    "range_primary_m": 12,
+    "range_max_m": 48,
+    "description": {
+      "en": "Reliable sidearm favoured by spacers.",
+      "fr": "Arme de poing fiable prisée des voyageurs spatiaux."
+    },
+    "source": { "book": "PHB SW5e", "section": "Weapons", "url": "https://sw5e.com/rules/phb/equipment" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1fa4b3ab-228a-57c5-b36f-29c0949084d8",
+    "slug": "macrobinoculars",
+    "name": { "en": "Macrobinoculars", "fr": "Macrojumelles" },
+    "category": "gear",
+    "cost": { "credits": 450 },
+    "weight_kg": 1.2,
+    "rarity": "uncommon",
+    "description": {
+      "en": "Compact optics granting advantage on long-range perception.",
+      "fr": "Optiques compactes offrant l'avantage aux tests de perception lointaine."
+    },
+    "source": { "book": "PHB SW5e", "section": "Equipment", "url": "https://sw5e.com/rules/phb/equipment" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

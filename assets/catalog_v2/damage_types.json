@@ -1,0 +1,13 @@
+[
+  {
+    "id": "a8fbe98f-6d9b-54a5-bd47-0dd6efae5e3b",
+    "slug": "energy",
+    "name": { "en": "Energy", "fr": "Énergie" },
+    "notes": {
+      "en": "Blasters, lightsabers, plasma discharges.",
+      "fr": "Blasters, sabres laser et décharges de plasma."
+    },
+    "source": { "book": "PHB SW5e", "section": "Damage Types", "url": "https://sw5e.com/rules/phb/combat" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]
