@@ -272,8 +272,8 @@ List<TraitDef> _buildBithTraits() {
   return const <TraitDef>[
     TraitDef(
       id: 'detail-oriented',
-      name: const LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
-      description: const LocalizedText(
+      name: LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
+      description: LocalizedText(
         en:
             'You are practiced at scouring for details. You have advantage on Intelligence (Investigation) checks within 5 feet.',
         fr:
@@ -282,8 +282,8 @@ List<TraitDef> _buildBithTraits() {
     ),
     TraitDef(
       id: 'sonic-sensitivity',
-      name: const LocalizedText(en: 'Sonic Sensitivity', fr: 'Sonic Sensitivity'),
-      description: const LocalizedText(
+      name: LocalizedText(en: 'Sonic Sensitivity', fr: 'Sonic Sensitivity'),
+      description: LocalizedText(
         en:
             'You have disadvantage on saving throws against effects that would deal sonic damage (explained in chapter 9).',
         fr:
@@ -337,8 +337,8 @@ List<TraitDef> _buildTwilekTraits() {
   return const <TraitDef>[
     TraitDef(
       id: 'agility',
-      name: const LocalizedText(en: 'Agility', fr: 'Agilité'),
-      description: const LocalizedText(
+      name: LocalizedText(en: 'Agility', fr: 'Agilité'),
+      description: LocalizedText(
         en: 'Agile and lively.',
         fr: 'Agile et vive.',
       ),

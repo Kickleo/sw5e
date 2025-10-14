@@ -35,8 +35,8 @@ void main() {
     when(() => catalog.getTrait('keen-smell')).thenAnswer(
       (_) async => const TraitDef(
         id: 'keen-smell',
-        name: const LocalizedText(en: 'Keen Smell', fr: 'Odorat affûté'),
-        description: const LocalizedText(
+        name: LocalizedText(en: 'Keen Smell', fr: 'Odorat affûté'),
+        description: LocalizedText(
           en: 'Advantage on Perception checks that rely on smell.',
           fr: 'Avantage sur les tests de Perception faisant appel à l\'odorat.',
         ),
