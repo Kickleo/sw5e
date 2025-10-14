@@ -63,18 +63,6 @@ class AssetBundleCatalogDataSource {
     return raw.map(TraitDto.fromJson).toList(growable: false);
   }
 
-  Future<SpeciesEffectLocalizationConfigDto?>
-      loadSpeciesEffectLocalizations() async {
-    try {
-      final raw = await _loadObject(
-        'assets/catalog/localization/species_effects.json',
-      );
-      return SpeciesEffectLocalizationConfigDto.fromJson(raw);
-    } catch (_) {
-      return null;
-    }
-  }
-
   Future<List<Map<String, dynamic>>> _loadArray(String path) async {
     // Lecture brute du fichier asset.
     final content = await _bundle.loadString(path);

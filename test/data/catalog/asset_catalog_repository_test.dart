@@ -51,10 +51,6 @@ void main() {
 
     final Map<String, SpeciesEffectLanguageBundle> bundles =
         SpeciesEffectLocalizationCatalog.snapshot();
-    expect(bundles.keys, containsAll(<String>['en', 'fr', 'es']));
-    expect(
-      bundles['es']!.abilityScoreIncreaseTitle,
-      'Aumento de característica',
-    );
+    expect(bundles.keys, containsAll(<String>['en', 'fr']));
   });
 }
