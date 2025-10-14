@@ -1,0 +1,23 @@
+[
+  {
+    "id": "5e2f8c78-8e20-5800-a118-a1f4ad56aed0",
+    "slug": "lekku-sensitivity",
+    "name": { "en": "Lekku Sensitivity", "fr": "Sensibilité des lekkus" },
+    "effects": [
+      {
+        "id": "7f90fbb9-3e4d-5664-8b59-62f58dd8fb6d",
+        "kind": "modifier",
+        "target": "skill",
+        "skill_ref": "56559745-9f3a-5437-ac9b-5746f08ddc11",
+        "modifier": { "stat": "check", "op": "add", "value": 1 },
+        "text": { "en": "+1 to tactile insight checks.", "fr": "+1 aux tests liés aux sensations tactiles." }
+      }
+    ],
+    "description": {
+      "en": "Lekku read subtle air currents and micro-expressions.",
+      "fr": "Les lekkus analysent les courants d'air et les micro-expressions."
+    },
+    "source": { "book": "PHB SW5e", "section": "Species Traits", "url": "https://sw5e.com/rules/phb/species" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

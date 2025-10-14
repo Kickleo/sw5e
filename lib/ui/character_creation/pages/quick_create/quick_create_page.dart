@@ -5,11 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sw5e_manager/app/locale/app_locale_controller.dart';
+import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/core/connectivity/connectivity_providers.dart';
-import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
@@ -59,6 +60,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
   late final PageController _pageController;
   late final TextEditingController _nameController;
   late final QuickCreateBloc _bloc;
+  late String _lastLanguageCode;
 
   /// Prépare les contrôleurs et instancie le BLoC avec les dépendances
   /// résolues via le service locator.
@@ -95,6 +97,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
         ServiceLocator.resolve<PersistCharacterDraftStep>();
     final ClearCharacterDraft clearDraft =
         ServiceLocator.resolve<ClearCharacterDraft>();
+    final Locale currentLocale = ref.read(appLocaleProvider);
 
     _bloc = QuickCreateBloc(
       loadQuickCreateCatalog: loadCatalog,
@@ -112,7 +115,9 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       persistCharacterDraftEquipment: persistDraftEquipment,
       persistCharacterDraftStep: persistDraftStep,
       clearCharacterDraft: clearDraft,
+      languageCode: currentLocale.languageCode,
     )..add(const QuickCreateStarted());
+    _lastLanguageCode = currentLocale.languageCode;
 
     _pageController = PageController(initialPage: _bloc.state.stepIndex);
 
@@ -148,6 +153,11 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
           data: (status) => status,
           orElse: () => ConnectivityStatus.connected,
         );
+    final Locale locale = ref.watch(appLocaleProvider);
+    if (locale.languageCode != _lastLanguageCode) {
+      _lastLanguageCode = locale.languageCode;
+      _bloc.add(QuickCreateLocaleChanged(locale.languageCode));
+    }
 
     return BlocProvider<QuickCreateBloc>.value(
       value: _bloc,

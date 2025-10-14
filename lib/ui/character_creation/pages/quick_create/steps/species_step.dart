@@ -87,7 +87,8 @@ class _SpeciesStep extends StatelessWidget {
                     title: Text(
                       trait.name.fr.isNotEmpty ? trait.name.fr : trait.name.en,
                     ),
-                    subtitle: Text(trait.description),
+                    subtitle:
+                        Text(l10n.localizedCatalogLabel(trait.description)),
                   ),
                 ),
               ),

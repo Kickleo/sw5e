@@ -1,0 +1,14 @@
+{
+  "byType": {
+    "species": ["8db5b325-643a-5d32-bd3e-483550e4be09"],
+    "class": ["4dc8dba9-32a6-5289-b428-f733eee23bf5"],
+    "trait": ["5e2f8c78-8e20-5800-a118-a1f4ad56aed0"],
+    "weapon": ["05da4c85-7cf7-504b-a56a-2a13dbe0374c"]
+  },
+  "byTag": {
+    "support": ["4dc8dba9-32a6-5289-b428-f733eee23bf5"]
+  },
+  "bySource": {
+    "PHB SW5e:Species": ["8db5b325-643a-5d32-bd3e-483550e4be09"]
+  }
+}

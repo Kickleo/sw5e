@@ -10,5 +10,8 @@ import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 
 abstract class PersistCharacterDraftSpecies {
-  Future<AppResult<CharacterDraft>> call(QuickCreateSpeciesDetails details);
+  Future<AppResult<CharacterDraft>> call(
+    QuickCreateSpeciesDetails details, {
+    required String languageCode,
+  });
 }

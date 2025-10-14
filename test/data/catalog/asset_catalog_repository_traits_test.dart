@@ -21,10 +21,21 @@ void main() {
     final shrewd = await repo.getTrait('shrewd');
     expect(shrewd, isA<TraitDef>());
     expect(shrewd!.name.fr, 'Perspicace');
-    expect(shrewd.description, contains('Insight'));
+    expect(shrewd.description.en, contains('Insight'));
 
     final nimble = await repo.getTrait('nimble-escape');
     expect(nimble, isNotNull);
-    expect(nimble!.description.toLowerCase(), contains('bonus action'));
+    expect(nimble!.description.en.toLowerCase(), contains('bonus action'));
+    expect(nimble.description.fr, contains("action Se désengager"));
+
+    final darkvision = await repo.getTrait('darkvision');
+    expect(darkvision, isNotNull);
+    expect(darkvision!.description.fr, startsWith('Votre vision perce'));
+
+    final detail = await repo.getTrait('detail-oriented');
+    expect(detail, isNotNull);
+    expect(detail!.name.fr, 'Sens du détail');
+    expect(detail.description.fr,
+        contains("tests d'Intelligence (Investigation)"));
   });
 }

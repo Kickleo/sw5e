@@ -166,4 +166,5 @@ class AssetCatalogRepository implements CatalogRepository {
       for (final dto in dtos) dto.id: dto.toDomain(),
     };
   }
+
 }

@@ -200,7 +200,8 @@ class _SpeciesDetails extends StatelessWidget {
               (TraitDef trait) => Card(
                 child: ListTile(
                   title: Text(_localizedName(l10n, trait.name)),
-                  subtitle: Text(trait.description),
+                  subtitle:
+                      Text(l10n.localizedCatalogLabel(trait.description)),
                 ),
               ),
             ),
@@ -211,10 +212,7 @@ class _SpeciesDetails extends StatelessWidget {
 }
 
 String _localizedName(AppLocalizations l10n, LocalizedText text) {
-  if (l10n.isFrench) {
-    return text.fr.isNotEmpty ? text.fr : text.en;
-  }
-  return text.en.isNotEmpty ? text.en : text.fr;
+  return l10n.localizedCatalogLabel(text);
 }
 
 String _titleCase(String slug) {

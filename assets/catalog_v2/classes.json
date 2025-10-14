@@ -1,0 +1,41 @@
+[
+  {
+    "id": "4dc8dba9-32a6-5289-b428-f733eee23bf5",
+    "slug": "sentinel",
+    "name": { "en": "Sentinel", "fr": "Sentinelle" },
+    "hit_die": 10,
+    "primary_abilities": ["DEX", "WIS"],
+    "saving_throws": ["DEX", "WIS"],
+    "proficiencies": {
+      "weapons": ["simple", "martial"],
+      "armors": ["light", "medium"],
+      "tools": [],
+      "skills_pick": 2,
+      "skills_list": ["56559745-9f3a-5437-ac9b-5746f08ddc11"]
+    },
+    "power_source": "force",
+    "features_by_level": {
+      "1": [
+        {
+          "name": { "en": "Guardian's Focus", "fr": "Focalisation du gardien" },
+          "effects": [
+            {
+              "id": "f302b4a6-1a2e-53f8-97d3-c2ad4c96047a",
+              "kind": "grant",
+              "target": "skill",
+              "grant": { "proficiency": "skill", "ref_id": "56559745-9f3a-5437-ac9b-5746f08ddc11" },
+              "text": { "en": "Gain proficiency in a sentinel skill.", "fr": "Gagnez la maîtrise d'une compétence de sentinelle." }
+            }
+          ],
+          "text": { "en": "Sharpen senses to defend allies.", "fr": "Affinez vos sens pour défendre vos alliés." }
+        }
+      ]
+    },
+    "archetype_choices": [],
+    "power_list": { "force_allowed": true, "tech_allowed": false, "spellcasting_progression": "half" },
+    "starting_equipment": [ { "ref": { "type": "weapon", "id": "05da4c85-7cf7-504b-a56a-2a13dbe0374c" } } ],
+    "multiclassing": { "requirements": { "DEX": 13, "WIS": 13 } },
+    "source": { "book": "PHB SW5e", "section": "Classes", "url": "https://sw5e.com/rules/phb/classes" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

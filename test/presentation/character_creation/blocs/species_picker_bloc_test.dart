@@ -62,7 +62,8 @@ void main() {
     return TraitDef(
       id: id,
       name: const LocalizedText(en: 'Trait', fr: 'Trait'),
-      description: 'Description',
+      description:
+          const LocalizedText(en: 'Description', fr: 'Description'),
     );
   }
 

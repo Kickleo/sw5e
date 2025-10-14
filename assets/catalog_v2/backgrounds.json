@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1c20050c-6338-5534-92da-d8e3ce96809f",
+    "slug": "outlander",
+    "name": { "en": "Outlander", "fr": "Hors-des-mondes" },
+    "skill_proficiencies": ["56559745-9f3a-5437-ac9b-5746f08ddc11"],
+    "tool_proficiencies": [],
+    "languages_pick": 1,
+    "equipment": [ { "ref": { "type": "gear", "id": "1fa4b3ab-228a-57c5-b36f-29c0949084d8" } } ],
+    "feature": {
+      "name": { "en": "Wanderer", "fr": "Vagabond" },
+      "effects": [
+        {
+          "id": "0f0c6b53-671a-5f38-8a9f-975530c04021",
+          "kind": "sense",
+          "target": "self",
+          "text": { "en": "Recall natural terrain maps.", "fr": "Retenez la topographie d'un terrain sauvage." }
+        }
+      ]
+    },
+    "personality": {
+      "traits": [ { "en": "I chart every horizon.", "fr": "Je cartographie chaque horizon." } ],
+      "ideals": [ { "en": "Freedom lives in the wilds.", "fr": "La liberté vit dans les étendues sauvages." } ],
+      "bonds": [ { "en": "My clan shelters travellers.", "fr": "Mon clan accueille les voyageurs." } ],
+      "flaws": [ { "en": "I distrust city officials.", "fr": "Je me méfie des autorités urbaines." } ]
+    },
+    "source": { "book": "PHB SW5e", "section": "Backgrounds", "url": "https://sw5e.com/rules/phb/backgrounds" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

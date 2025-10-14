@@ -1,0 +1,14 @@
+[
+  {
+    "id": "56559745-9f3a-5437-ac9b-5746f08ddc11",
+    "slug": "athletics",
+    "name": { "en": "Athletics", "fr": "Athlétisme" },
+    "ability_ref": "dcf95531-9d8e-56e3-85a9-dc0cfdfa10f5",
+    "description": {
+      "en": "Climbing, jumping, and swimming challenges.",
+      "fr": "Escalade, sauts et traversées à la nage."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

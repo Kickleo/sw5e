@@ -1,0 +1,17 @@
+[
+  {
+    "id": "c07e82f8-f9bd-5a74-83e7-419c2303ad24",
+    "slug": "galactic-basic",
+    "name": { "en": "Galactic Basic", "fr": "Basic galactique" },
+    "script": { "en": "Aurebesh", "fr": "Aurebesh" },
+    "typical_speakers": [
+      { "type": "species", "id": "8db5b325-643a-5d32-bd3e-483550e4be09", "name": { "en": "Twi'lek", "fr": "Twi'lek" } }
+    ],
+    "description": {
+      "en": "Common interstellar trade tongue.",
+      "fr": "Langue interstellaire la plus répandue."
+    },
+    "source": { "book": "PHB SW5e", "section": "Languages", "url": "https://sw5e.com/rules/phb/backgrounds" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  }
+]

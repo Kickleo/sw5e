@@ -196,7 +196,8 @@ void main() {
             error: any(named: 'error'),
             stackTrace: any(named: 'stackTrace')))
         .thenAnswer((_) {});
-    when(() => persistDraftSpecies.call(any()))
+    when(() =>
+            persistDraftSpecies.call(any(), languageCode: any(named: 'languageCode')))
         .thenAnswer((_) async => appOk(CharacterDraft()));
     when(() => persistDraftName.call(any()))
         .thenAnswer((_) async => appOk(CharacterDraft()));
@@ -234,6 +235,7 @@ void main() {
       persistCharacterDraftEquipment: persistDraftEquipment,
       persistCharacterDraftStep: persistDraftStep,
       clearCharacterDraft: clearDraft,
+      languageCode: 'en',
     );
   }
 
@@ -274,30 +276,42 @@ void main() {
             TraitDef(
               id: 'adaptive',
               name: LocalizedText(en: 'Adaptive', fr: 'Adaptable'),
-              description: 'Polyvalent.',
+              description:
+                  LocalizedText(en: 'Versatile.', fr: 'Polyvalent.'),
             ),
           ],
         ),
       ),
     );
 
-    when(() => persistDraftSpecies.call(any())).thenAnswer(
-      (_) async => appOk(
-        CharacterDraft(
-          species: DraftSpeciesSelection(
-            speciesId: SpeciesId('human'),
-            displayName: 'Human',
-            effects: const <CharacterEffect>[
-              CharacterEffect(
-                source: 'test:adaptive',
-                title: 'Adaptive',
-                description: 'Versatile ability boost.',
-                category: CharacterEffectCategory.passive,
-              ),
-            ],
+    when(() => persistDraftSpecies.call(
+          any(),
+          languageCode: any(named: 'languageCode'),
+        )).thenAnswer(
+      (invocation) async {
+        const Symbol languageCodeSymbol = Symbol('languageCode');
+        final String language = (invocation.namedArguments[languageCodeSymbol]
+                as String?)?.toLowerCase() ??
+            'en';
+        final bool isFrench = language == 'fr';
+        final CharacterEffect effect = CharacterEffect(
+          source: 'test:adaptive',
+          title: isFrench ? 'Adaptable' : 'Adaptive',
+          description: isFrench
+              ? 'Bonus de polyvalence.'
+              : 'Versatile ability boost.',
+          category: CharacterEffectCategory.passive,
+        );
+        return appOk(
+          CharacterDraft(
+            species: DraftSpeciesSelection(
+              speciesId: SpeciesId('human'),
+              displayName: isFrench ? 'Humain' : 'Human',
+              effects: <CharacterEffect>[effect],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
 
     when(() => loadClassDetails('guardian')).thenAnswer(
@@ -354,6 +368,28 @@ void main() {
   );
 
   blocTest<QuickCreateBloc, QuickCreateState>(
+    'relocalise les effets d\'espèce lors d\'un changement de langue',
+    build: () {
+      arrangeCatalogSuccess();
+      return buildBloc();
+    },
+    act: (bloc) async {
+      bloc.add(const QuickCreateStarted());
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      bloc.add(const QuickCreateLocaleChanged('fr'));
+    },
+    wait: const Duration(milliseconds: 80),
+    verify: (bloc) {
+      verify(() => persistDraftSpecies.call(any(), languageCode: 'fr'))
+          .called(1);
+      expect(bloc.state.selectedSpeciesEffects, isNotEmpty);
+      final CharacterEffect effect = bloc.state.selectedSpeciesEffects.first;
+      expect(effect.title, 'Adaptable');
+      expect(effect.description, 'Bonus de polyvalence.');
+    },
+  );
+
+  blocTest<QuickCreateBloc, QuickCreateState>(
     'réutilise l\'espèce sauvegardée si elle est disponible',
     build: () {
       final EquipmentDef equipment = const EquipmentDef(
@@ -393,7 +429,11 @@ void main() {
               TraitDef(
                 id: 'detail-oriented',
                 name: LocalizedText(en: 'Detail Oriented', fr: 'Detail Oriented'),
-                description: 'You have advantage on Investigation checks within 5 feet.',
+                description: LocalizedText(
+                  en: 'You have advantage on Investigation checks within 5 feet.',
+                  fr:
+                      'Vous avez l\'avantage aux tests d\'Investigation effectués dans un rayon de 1,50 mètre autour de vous.',
+                ),
               ),
             ],
           ),
@@ -423,7 +463,10 @@ void main() {
         ),
       );
 
-      when(() => persistDraftSpecies.call(any())).thenAnswer(
+      when(() => persistDraftSpecies.call(
+            any(),
+            languageCode: any(named: 'languageCode'),
+          )).thenAnswer(
         (_) async => appOk(
           CharacterDraft(
             species: DraftSpeciesSelection(
