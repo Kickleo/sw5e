@@ -1,40 +1,33 @@
 [
   {
     "id": "5e2f8c78-8e20-5800-a118-a1f4ad56aed0",
-    "slug": "lekku-sensitivity",
+    "slug": "lekku-communication",
     "name": {
-      "en": "Lekku Sensitivity",
-      "fr": "Sensibilité des lekkus"
+      "en": "Lekku Communication",
+      "fr": "Communication par lekkus"
     },
     "effects": [
       {
-        "id": "7f90fbb9-3e4d-5664-8b59-62f58dd8fb6d",
-        "kind": "modifier",
-        "target": "skill",
-        "skill_ref": "56559745-9f3a-5437-ac9b-5746f08ddc11",
-        "modifier": {
-          "stat": "check",
-          "op": "add",
-          "value": 1
-        },
+        "id": "badd7514-ef8b-492a-9d1d-467a1f20bc47",
+        "kind": "feature",
         "text": {
-          "en": "+1 to tactile insight checks.",
-          "fr": "+1 aux tests liés aux sensations tactiles."
+          "en": "You can silently converse with other Twi'leks within 9 meters using nuanced lekku motions. Creatures that understand Ryl can read these signals; others perceive only graceful gestures.",
+          "fr": "Vous pouvez converser silencieusement avec d'autres Twi'leks dans un rayon de 9 mètres grâce à des mouvements subtils de vos lekkus. Les créatures qui comprennent le ryl peuvent les interpréter ; les autres n'y voient que des gestes gracieux."
         }
       }
     ],
     "description": {
-      "en": "Lekku read subtle air currents and micro-expressions.",
-      "fr": "Les lekkus analysent les courants d'air et les micro-expressions."
+      "en": "Lekku convey complex ideas through rhythmic motions, letting Twi'leks trade messages without a spoken word.",
+      "fr": "Les lekkus transmettent des idées complexes par des mouvements rythmiques, permettant aux Twi'leks d'échanger sans dire un mot."
     },
     "source": {
       "book": "PHB SW5e",
-      "section": "Species Traits",
+      "section": "Species Traits – Twi'lek",
       "url": "https://sw5e.com/rules/phb/species"
     },
     "version": {
-      "semver": "0.1.0",
-      "last_updated": "2024-05-01"
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
     }
   },
   {
@@ -6851,66 +6844,66 @@
       "en": "Gravity Throne Savants",
       "fr": "Savant·e·s du trône gravitationnel"
     },
-  "effects": [
-    {
-      "id": "d4ff153e-9054-4ac5-86c8-3b4e284e87bd",
-      "kind": "grant",
-      "target": "skill",
-      "grant": {
-        "proficiency": "skill",
-        "ref_id": "13968233-5ae0-49b3-b39d-09ca38e7bb8a"
+    "effects": [
+      {
+        "id": "d4ff153e-9054-4ac5-86c8-3b4e284e87bd",
+        "kind": "grant",
+        "target": "skill",
+        "grant": {
+          "proficiency": "skill",
+          "ref_id": "13968233-5ae0-49b3-b39d-09ca38e7bb8a"
+        },
+        "text": {
+          "en": "You gain proficiency in Lore. If you already have proficiency, you instead gain expertise with the skill.",
+          "fr": "Vous gagnez la maîtrise de Connaissances. Si vous l'avez déjà, vous gagnez à la place l'expertise de cette compétence."
+        }
       },
-      "text": {
-        "en": "You gain proficiency in Lore. If you already have proficiency, you instead gain expertise with the skill.",
-        "fr": "Vous gagnez la maîtrise de Connaissances. Si vous l'avez déjà, vous gagnez à la place l'expertise de cette compétence."
+      {
+        "id": "5724db71-b444-40e0-8055-18c945de2a6d",
+        "kind": "feature",
+        "text": {
+          "en": "Gravity Throne. While seated in a calibrated gravity throne, you have a flying speed of 6 meters and are considered to be wielding a finesse vehicle for the purpose of resisting forced movement. Losing access to a throne reduces your walking speed to 1.5 meters and imposes disadvantage on Strength and Dexterity ability checks until you complete a short rest with a replacement.",
+          "fr": "Trône gravitationnel. Tant que vous êtes assis·e sur un trône gravitationnel calibré, vous disposez d'une vitesse de vol de 6 mètres et êtes considéré·e comme manœuvrant un véhicule de précision pour résister aux déplacements forcés. Sans trône, votre vitesse de marche tombe à 1,5 mètre et vous subissez un désavantage aux tests de Force et de Dextérité jusqu'à terminer un repos court avec un nouveau trône."
+        }
+      },
+      {
+        "id": "3a75466e-473d-4828-8185-ccac4e5bd93d",
+        "kind": "feature",
+        "text": {
+          "en": "Predictive Commands. As a bonus action, you can feed a probability map to an ally you can see within 9 meters. The target adds a d4 to the next attack roll or ability check it makes before the start of your next turn. You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
+          "fr": "Ordres prédictifs. Par une action bonus, vous transmettez une carte de probabilités à un allié que vous voyez à 9 mètres. La cible ajoute 1d4 au prochain jet d'attaque ou test de caractéristique qu'elle effectue avant le début de votre prochain tour. Vous pouvez utiliser ce trait un nombre de fois égal à votre bonus de maîtrise et récupérez toutes les utilisations dépensées après un repos long."
+        }
+      },
+      {
+        "id": "4bcbfdc9-da5c-4925-a849-5de8fc9e6d2b",
+        "kind": "feature",
+        "text": {
+          "en": "Telepathic Uplink. You can communicate telepathically with a creature you can see within 9 meters, provided you and the creature share a language. You can speak to only one creature at a time this way, and conversation lasts until either of you ends it as a bonus action.",
+          "fr": "Lien télépathique. Vous pouvez communiquer par télépathie avec une créature que vous voyez à 9 mètres, pourvu que vous partagiez une langue. Vous ne pouvez converser qu'avec une seule créature à la fois de cette manière, et l'échange prend fin si l'une ou l'autre utilise une action bonus pour le rompre."
+        }
+      },
+      {
+        "id": "4cdf3cb7-8670-4c2c-b515-bd9b38bc53d0",
+        "kind": "feature",
+        "text": {
+          "en": "Throne Fabrication. Constructing a new gravity throne requires 100 credits of specialized components and 8 hours of work with Engineering tools; Heretic's Guide to the Galaxy notes that most Columi keep schematics cached aboard their vessels.",
+          "fr": "Fabrication de trône. Construire un nouveau trône gravitationnel nécessite 100 crédits de composants spécialisés et 8 heures de travail avec des outils d'ingénierie ; le Guide hérétique de la galaxie précise que la plupart des Columi conservent des plans embarqués."
+        }
       }
+    ],
+    "description": {
+      "en": "Heretic's Guide details how Columi rely on repulsorlift thrones, telepathic uplinks, and probability matrices to guide allies through complex maneuvers.",
+      "fr": "Le Guide hérétique explique que les Columi s'appuient sur des trônes antigrav, des liens télépathiques et des matrices de probabilité pour guider leurs alliés dans des manœuvres complexes."
     },
-    {
-      "id": "5724db71-b444-40e0-8055-18c945de2a6d",
-      "kind": "feature",
-      "text": {
-        "en": "Gravity Throne. While seated in a calibrated gravity throne, you have a flying speed of 6 meters and are considered to be wielding a finesse vehicle for the purpose of resisting forced movement. Losing access to a throne reduces your walking speed to 1.5 meters and imposes disadvantage on Strength and Dexterity ability checks until you complete a short rest with a replacement.",
-        "fr": "Trône gravitationnel. Tant que vous êtes assis·e sur un trône gravitationnel calibré, vous disposez d'une vitesse de vol de 6 mètres et êtes considéré·e comme manœuvrant un véhicule de précision pour résister aux déplacements forcés. Sans trône, votre vitesse de marche tombe à 1,5 mètre et vous subissez un désavantage aux tests de Force et de Dextérité jusqu'à terminer un repos court avec un nouveau trône."
-      }
+    "source": {
+      "book": "Heretic's Guide to the Galaxy",
+      "section": "Species Traits – Columi",
+      "url": "https://www.gmbinder.com/share/-M815p5BfQ0wbdKY7zqN"
     },
-    {
-      "id": "3a75466e-473d-4828-8185-ccac4e5bd93d",
-      "kind": "feature",
-      "text": {
-        "en": "Predictive Commands. As a bonus action, you can feed a probability map to an ally you can see within 9 meters. The target adds a d4 to the next attack roll or ability check it makes before the start of your next turn. You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
-        "fr": "Ordres prédictifs. Par une action bonus, vous transmettez une carte de probabilités à un allié que vous voyez à 9 mètres. La cible ajoute 1d4 au prochain jet d'attaque ou test de caractéristique qu'elle effectue avant le début de votre prochain tour. Vous pouvez utiliser ce trait un nombre de fois égal à votre bonus de maîtrise et récupérez toutes les utilisations dépensées après un repos long."
-      }
-    },
-    {
-      "id": "4bcbfdc9-da5c-4925-a849-5de8fc9e6d2b",
-      "kind": "feature",
-      "text": {
-        "en": "Telepathic Uplink. You can communicate telepathically with a creature you can see within 9 meters, provided you and the creature share a language. You can speak to only one creature at a time this way, and conversation lasts until either of you ends it as a bonus action.",
-        "fr": "Lien télépathique. Vous pouvez communiquer par télépathie avec une créature que vous voyez à 9 mètres, pourvu que vous partagiez une langue. Vous ne pouvez converser qu'avec une seule créature à la fois de cette manière, et l'échange prend fin si l'une ou l'autre utilise une action bonus pour le rompre."
-      }
-    },
-    {
-      "id": "4cdf3cb7-8670-4c2c-b515-bd9b38bc53d0",
-      "kind": "feature",
-      "text": {
-        "en": "Throne Fabrication. Constructing a new gravity throne requires 100 credits of specialized components and 8 hours of work with Engineering tools; Heretic's Guide to the Galaxy notes that most Columi keep schematics cached aboard their vessels.",
-        "fr": "Fabrication de trône. Construire un nouveau trône gravitationnel nécessite 100 crédits de composants spécialisés et 8 heures de travail avec des outils d'ingénierie ; le Guide hérétique de la galaxie précise que la plupart des Columi conservent des plans embarqués."
-      }
+    "version": {
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
     }
-  ],
-  "description": {
-    "en": "Heretic's Guide details how Columi rely on repulsorlift thrones, telepathic uplinks, and probability matrices to guide allies through complex maneuvers.",
-    "fr": "Le Guide hérétique explique que les Columi s'appuient sur des trônes antigrav, des liens télépathiques et des matrices de probabilité pour guider leurs alliés dans des manœuvres complexes."
-  },
-  "source": {
-    "book": "Heretic's Guide to the Galaxy",
-    "section": "Species Traits – Columi",
-    "url": "https://www.gmbinder.com/share/-M815p5BfQ0wbdKY7zqN"
-  },
-  "version": {
-    "semver": "0.2.0",
-    "last_updated": "2024-10-22"
-  }
   },
   {
     "id": "8d1b159b-bcf4-471e-bada-a01e2f0b8a51",
@@ -7165,6 +7158,166 @@
     "version": {
       "semver": "0.1.0",
       "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "86c7222b-2bea-4bd8-9107-ad6c0f50fb0a",
+    "slug": "charismatic-presence",
+    "name": {
+      "en": "Charismatic Presence",
+      "fr": "Présence charismatique"
+    },
+    "effects": [
+      {
+        "id": "eb7d3f73-135e-4d99-beec-25486521d898",
+        "kind": "feature",
+        "text": {
+          "en": "You have proficiency in Deception or Persuasion (your choice).",
+          "fr": "Vous maîtrisez la compétence Tromperie ou Persuasion (au choix)."
+        }
+      }
+    ],
+    "description": {
+      "en": "Twi'lek poise and training let you bend conversations with a well-placed smile or feint.",
+      "fr": "L'aisance et l'entraînement des Twi'leks vous permettent d'infléchir une conversation avec un sourire ou un faux-semblant bien placé."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Species Traits – Twi'lek",
+      "url": "https://sw5e.com/rules/phb/species"
+    },
+    "version": {
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
+    }
+  },
+  {
+    "id": "22362b06-121b-4990-a1a5-501bc5345e96",
+    "slug": "twilek-darkvision",
+    "name": {
+      "en": "Darkvision",
+      "fr": "Vision dans le noir"
+    },
+    "effects": [
+      {
+        "id": "a93eab94-408e-4ebb-a5a9-df682ef57f89",
+        "kind": "feature",
+        "text": {
+          "en": "Accustomed to Ryloth's twilight caverns, you can see in dim light within 18 meters as if it were bright light and in darkness as if it were dim light. You discern no color in darkness, only shades of gray.",
+          "fr": "Habitué·e aux cavernes crépusculaires de Ryloth, vous voyez dans une lumière faible à 18 mètres comme s'il s'agissait de pleine lumière et dans l'obscurité comme s'il s'agissait d'une lumière faible. Vous ne distinguez pas les couleurs dans l'obscurité, seulement des nuances de gris."
+        }
+      }
+    ],
+    "description": {
+      "en": "Generations beneath the suns have tuned your eyes to the faintest glow.",
+      "fr": "Des générations passées sous les soleils ont adapté vos yeux à la moindre lueur."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Species Traits – Twi'lek",
+      "url": "https://sw5e.com/rules/phb/species"
+    },
+    "version": {
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
+    }
+  },
+  {
+    "id": "977046d5-5781-47c7-bc90-a92a912dda19",
+    "slug": "elegant-dancers",
+    "name": {
+      "en": "Elegant Dancers",
+      "fr": "Danseur·se·s élégants"
+    },
+    "effects": [
+      {
+        "id": "dd5d9597-d81f-46b5-94ec-014194bc3a49",
+        "kind": "grant",
+        "target": "skill",
+        "grant": {
+          "proficiency": "skill",
+          "ref_id": "df14af11-1f0d-4de6-a611-1b705f2c3308"
+        },
+        "text": {
+          "en": "You gain proficiency in Performance.",
+          "fr": "Vous gagnez la maîtrise de Représentation."
+        }
+      }
+    ],
+    "description": {
+      "en": "Years spent mastering lekku rhythms and stagecraft leave you light on your feet.",
+      "fr": "Des années à maîtriser les rythmes des lekkus et l'art de la scène vous rendent léger·ère sur vos appuis."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Species Traits – Twi'lek",
+      "url": "https://sw5e.com/rules/phb/species"
+    },
+    "version": {
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
+    }
+  },
+  {
+    "id": "60a596cc-520f-4693-8bed-123f4d3a3955",
+    "slug": "natural-antitoxins",
+    "name": {
+      "en": "Natural Antitoxins",
+      "fr": "Antitoxines naturelles"
+    },
+    "effects": [
+      {
+        "id": "9674e71f-f56f-485d-919d-26671a2a2a97",
+        "kind": "feature",
+        "text": {
+          "en": "You have advantage on saving throws against poison and disease, and you have resistance to poison damage.",
+          "fr": "Vous avez l'avantage aux jets de sauvegarde contre le poison et les maladies, et vous êtes résistant·e aux dégâts de poison."
+        }
+      }
+    ],
+    "description": {
+      "en": "Subdermal glands filter toxins before they can cripple you.",
+      "fr": "Des glandes sous-cutanées filtrent les toxines avant qu'elles ne puissent vous affaiblir."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Species Traits – Twi'lek",
+      "url": "https://sw5e.com/rules/phb/species"
+    },
+    "version": {
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
+    }
+  },
+  {
+    "id": "abbfc350-6925-4d53-978d-b05984bb4f89",
+    "slug": "unarmed-combatant",
+    "name": {
+      "en": "Unarmed Combatant",
+      "fr": "Combattant·e à mains nues"
+    },
+    "effects": [
+      {
+        "id": "02ccd44b-d5cd-474f-828f-2e12ff5d278a",
+        "kind": "feature",
+        "text": {
+          "en": "Your unarmed strikes deal 1d4 kinetic damage and have the finesse property.",
+          "fr": "Vos attaques à mains nues infligent 1d4 dégâts cinétiques et ont la propriété de finesse."
+        }
+      }
+    ],
+    "description": {
+      "en": "Lekku-aided balance makes every strike precise and hard-hitting.",
+      "fr": "L'équilibre offert par vos lekkus rend chaque frappe précise et percutante."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Species Traits – Twi'lek",
+      "url": "https://sw5e.com/rules/phb/species"
+    },
+    "version": {
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
     }
   }
 ]

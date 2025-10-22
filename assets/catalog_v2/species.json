@@ -60,16 +60,36 @@
     "traits": [
       {
         "type": "trait",
+        "id": "86c7222b-2bea-4bd8-9107-ad6c0f50fb0a"
+      },
+      {
+        "type": "trait",
+        "id": "22362b06-121b-4990-a1a5-501bc5345e96"
+      },
+      {
+        "type": "trait",
+        "id": "977046d5-5781-47c7-bc90-a92a912dda19"
+      },
+      {
+        "type": "trait",
+        "id": "60a596cc-520f-4693-8bed-123f4d3a3955"
+      },
+      {
+        "type": "trait",
+        "id": "abbfc350-6925-4d53-978d-b05984bb4f89"
+      },
+      {
+        "type": "trait",
         "id": "5e2f8c78-8e20-5800-a118-a1f4ad56aed0"
       }
     ],
     "description_short": {
-      "en": "Graceful diplomats from Ryloth.",
-      "fr": "Diplomates gracieux originaires de Ryloth."
+      "en": "Charismatic survivors whose lekku grace hides tenacity.",
+      "fr": "Des survivant·e·s charismatiques dont la grâce des lekkus masque une grande ténacité."
     },
     "description": {
-      "en": "Twi'leks blend agility and charm, excelling at negotiation and covert work across the Outer Rim.",
-      "fr": "Les Twi'lek mêlent agilité et charisme, excellant dans la négociation comme dans l'espionnage à travers la Bordure extérieure."
+      "en": "Whether performing in palace courts or resisting occupation on Ryloth, Twi'leks wield charm, agility, and silent lekku signals to survive. Their flexible combat training and natural resistances make them adept diplomats and covert operatives alike.",
+      "fr": "Qu'ils se produisent dans les cours des palais ou qu'ils résistent à l'occupation sur Ryloth, les Twi'leks misent sur leur charme, leur agilité et leurs signaux silencieux de lekkus pour survivre. Leur entraînement souple au combat et leurs résistances naturelles en font d'habiles diplomates comme d'efficaces agents clandestins."
     },
     "source": {
       "book": "PHB SW5e",
@@ -77,8 +97,8 @@
       "url": "https://sw5e.com/rules/phb/species"
     },
     "version": {
-      "semver": "0.1.0",
-      "last_updated": "2024-05-01"
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
     }
   },
   {
@@ -1120,7 +1140,7 @@
       "fr": "Toydarien"
     },
     "size": "small",
-  "speed_m": 6,
+    "speed_m": 6,
     "ability_increases": {
       "DEX": 2,
       "WIS": 1
@@ -5462,13 +5482,13 @@
   },
   {
     "id": "1274d904-68e0-4c61-835b-94a66f326ff6",
-  "slug": "columi",
-  "name": {
-    "en": "Columi",
-    "fr": "Columi"
-  },
-  "size": "small",
-  "speed_m": 6,
+    "slug": "columi",
+    "name": {
+      "en": "Columi",
+      "fr": "Columi"
+    },
+    "size": "small",
+    "speed_m": 6,
     "ability_increases": {
       "INT": 2,
       "WIS": 1
@@ -5483,23 +5503,23 @@
         "id": "f00a0113-d63d-4e15-a85f-ec9ea5360fab"
       }
     ],
-  "description_short": {
-    "en": "Frail, big-brained strategists who never stray far from their humming gravity thrones.",
-    "fr": "Stratèges frêles aux crânes hypertrophiés, inséparables de leurs trônes gravitationnels vibrants."
-  },
-  "description": {
-    "en": "Heretic's Guide to the Galaxy portrays the Columi as ancient masterminds with towering cerebrums and atrophied limbs. They traverse command gantries in levitating thrones, speak in cascades of luminous equations, and coordinate crews through cool, probabilistic telepathy that can outmaneuver admirals and politicians alike.",
-    "fr": "Le Guide hérétique de la galaxie décrit les Columi comme des cerveaux ancestraux aux membres atrophiés. Ils parcourent les passerelles de commandement sur des trônes lévitants, s'expriment par des équations lumineuses et coordonnent leurs équipages grâce à une télépathie probabiliste capable de déjouer amiraux et politicien·ne·s."
-  },
-  "source": {
-    "book": "Heretic's Guide to the Galaxy",
-    "section": "Species – Columi",
-    "url": "https://www.gmbinder.com/share/-M815p5BfQ0wbdKY7zqN"
-  },
-  "version": {
-    "semver": "0.2.0",
-    "last_updated": "2024-10-22"
-  }
+    "description_short": {
+      "en": "Frail, big-brained strategists who never stray far from their humming gravity thrones.",
+      "fr": "Stratèges frêles aux crânes hypertrophiés, inséparables de leurs trônes gravitationnels vibrants."
+    },
+    "description": {
+      "en": "Heretic's Guide to the Galaxy portrays the Columi as ancient masterminds with towering cerebrums and atrophied limbs. They traverse command gantries in levitating thrones, speak in cascades of luminous equations, and coordinate crews through cool, probabilistic telepathy that can outmaneuver admirals and politicians alike.",
+      "fr": "Le Guide hérétique de la galaxie décrit les Columi comme des cerveaux ancestraux aux membres atrophiés. Ils parcourent les passerelles de commandement sur des trônes lévitants, s'expriment par des équations lumineuses et coordonnent leurs équipages grâce à une télépathie probabiliste capable de déjouer amiraux et politicien·ne·s."
+    },
+    "source": {
+      "book": "Heretic's Guide to the Galaxy",
+      "section": "Species – Columi",
+      "url": "https://www.gmbinder.com/share/-M815p5BfQ0wbdKY7zqN"
+    },
+    "version": {
+      "semver": "0.2.0",
+      "last_updated": "2024-10-22"
+    }
   },
   {
     "id": "4ac92419-6f29-403c-a512-ef29dfe221e4",
