@@ -7,27 +7,15 @@ Exemple d'usage : Consulter ce fichier avant de modifier les adapters du catalog
 
 # Data › Catalog Module
 
-```
-+---------------------------+
-|  AssetBundle (.json)      |
-+-------------+-------------+
-              |
-+-------------v-------------+
-| AssetBundleCatalogDataSource |
-+-------------+-------------+
-              |
-+-------------v-------------+
-| AssetCatalogRepository      |
-+-------------+-------------+
-              |
-+-------------v-------------+
-| CatalogRepository (Domain)  |
-+-----------------------------+
-```
+- Assets `assets/catalog/` → `AssetBundleCatalogDataSource`
+- Assets `assets/catalog_v2/` → `AssetBundleCatalogV2DataSource`
+- `AssetCatalogRepository` agrège les deux data sources et expose `CatalogRepository` au domaine.
 
 ## Composants
-- **DTOs** (`dtos/catalog_dtos.dart`) : décrivent la structure JSON et assurent le mapping vers les objets domaine.
-- **Data source** (`data_sources/asset_bundle_catalog_data_source.dart`) : lit les fichiers `assets/catalog/*.json`.
+- **DTOs historiques** (`dtos/catalog_dtos.dart`) : décrivent la structure JSON v1 et assurent le mapping vers les objets domaine.
+- **DTOs v2** (`../catalog_v2/dtos/catalog_v2_dtos.dart`) : structures spécifiques aux assets `assets/catalog_v2/*`.
+- **Data source v1** (`data_sources/asset_bundle_catalog_data_source.dart`) : lit les fichiers `assets/catalog/*.json`.
+- **Data source v2** (`../catalog_v2/data_sources/asset_bundle_catalog_v2_data_source.dart`) : lit les fichiers `assets/catalog_v2/*.json`.
 - **Repository** (`repositories/asset_catalog_repository.dart`) : met en cache les DTO convertis et expose l'interface domaine.
 
 ## Tests associés

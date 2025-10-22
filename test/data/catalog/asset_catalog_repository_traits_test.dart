@@ -16,26 +16,28 @@ void main() {
     final repo = AssetCatalogRepository();
 
     final ids = await repo.listTraits();
-    expect(ids, containsAll(<String>['shrewd', 'nimble-escape']));
+    expect(
+      ids,
+      containsAll(<String>[
+        'lekku-communication',
+        'charismatic-presence',
+        'twilek-darkvision',
+      ]),
+    );
 
-    final shrewd = await repo.getTrait('shrewd');
-    expect(shrewd, isA<TraitDef>());
-    expect(shrewd!.name.fr, 'Perspicace');
-    expect(shrewd.description.en, contains('Insight'));
+    final lekku = await repo.getTrait('lekku-communication');
+    expect(lekku, isA<TraitDef>());
+    expect(lekku!.description.en, contains('Lekku convey complex ideas'));
+    expect(lekku.description.fr, contains('mouvements rythmiques'));
 
-    final nimble = await repo.getTrait('nimble-escape');
-    expect(nimble, isNotNull);
-    expect(nimble!.description.en.toLowerCase(), contains('bonus action'));
-    expect(nimble.description.fr, contains("action Se désengager"));
+    final presence = await repo.getTrait('charismatic-presence');
+    expect(presence, isNotNull);
+    expect(presence!.name.fr, 'Présence charismatique');
+    expect(presence.description.en, contains('bend conversations'));
 
-    final darkvision = await repo.getTrait('darkvision');
+    final darkvision = await repo.getTrait('twilek-darkvision');
     expect(darkvision, isNotNull);
-    expect(darkvision!.description.fr, startsWith('Votre vision perce'));
-
-    final detail = await repo.getTrait('detail-oriented');
-    expect(detail, isNotNull);
-    expect(detail!.name.fr, 'Sens du détail');
-    expect(detail.description.fr,
-        contains("tests d'Intelligence (Investigation)"));
+    expect(darkvision!.description.fr,
+        startsWith('Des générations passées sous les soleils'));
   });
 }

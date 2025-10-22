@@ -1,6 +1,6 @@
 {
   "entries": {
-    "abilities.json": 2,
+    "abilities.json": 6,
     "backgrounds.json": 1,
     "classes.json": 1,
     "customization_options.json": 1,
@@ -9,12 +9,12 @@
     "force_powers.json": 1,
     "formulas.json": 2,
     "indexes.json": 3,
-    "languages.json": 1,
+    "languages.json": 139,
     "rules_effects_catalog.json": 1,
-    "skills.json": 1,
-    "species.json": 1,
+    "skills.json": 18,
+    "species.json": 139,
     "tech_powers.json": 1,
-    "traits.json": 1,
+    "traits.json": 144,
     "weapons.json": 1
   },
   "warnings": [
