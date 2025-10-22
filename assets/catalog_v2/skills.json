@@ -10,5 +10,209 @@
     },
     "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
     "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "cec69f04-6aca-4ccc-9c89-4ae00d604c70",
+    "slug": "insight",
+    "name": { "en": "Insight", "fr": "Perspicacité" },
+    "ability_ref": "e953761e-fc98-4495-aec1-bc7b475fb073",
+    "description": {
+      "en": "Discern intentions, read emotions, and sense disturbances in the Force.",
+      "fr": "Déceler les intentions, lire les émotions et ressentir les perturbations de la Force."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "13968233-5ae0-49b3-b39d-09ca38e7bb8a",
+    "slug": "lore",
+    "name": { "en": "Lore", "fr": "Connaissances" },
+    "ability_ref": "e882e3e3-6b05-4c33-86ae-009b90aad351",
+    "description": {
+      "en": "Recall historical, cultural, and scientific facts from the galactic record.",
+      "fr": "Se souvenir de faits historiques, culturels et scientifiques issus des archives galactiques."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "be73a6f7-c100-48cc-9097-41901d0181df",
+    "slug": "perception",
+    "name": { "en": "Perception", "fr": "Perception" },
+    "ability_ref": "e953761e-fc98-4495-aec1-bc7b475fb073",
+    "description": {
+      "en": "Spot ambushes, notice hidden threats, and interpret environmental cues.",
+      "fr": "Repérer les embuscades, percevoir les menaces cachées et interpréter les signaux environnementaux."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "1a275a68-278f-4b67-ae38-a7caa26c7cad",
+    "slug": "persuasion",
+    "name": { "en": "Persuasion", "fr": "Persuasion" },
+    "ability_ref": "59c09290-510d-49fe-a18c-74a8a108dfc6",
+    "description": {
+      "en": "Diplomatic appeals, negotiations, and calming tense situations.",
+      "fr": "Appels diplomatiques, négociations et apaisement de situations tendues."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "a8024c52-6734-4aab-afc8-8f1181f2661f",
+    "slug": "survival",
+    "name": { "en": "Survival", "fr": "Survie" },
+    "ability_ref": "e953761e-fc98-4495-aec1-bc7b475fb073",
+    "description": {
+      "en": "Track quarry, find shelter, and endure harsh environments.",
+      "fr": "Pister une proie, trouver un abri et endurer des environnements hostiles."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "4f2582c4-0507-4066-9ea6-ac01e3c5b930",
+    "slug": "acrobatics",
+    "name": { "en": "Acrobatics", "fr": "Acrobaties" },
+    "ability_ref": "04e50cf7-4ff9-5685-b9c2-4537a30ac448",
+    "description": {
+      "en": "Maintain balance, tumble through defenses, and perform aerial maneuvers.",
+      "fr": "Garder l'équilibre, traverser les défenses en roulades et exécuter des manœuvres aériennes."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "3e8768eb-dfa7-47f4-93eb-426cdf4fbbda",
+    "slug": "deception",
+    "name": { "en": "Deception", "fr": "Tromperie" },
+    "ability_ref": "59c09290-510d-49fe-a18c-74a8a108dfc6",
+    "description": {
+      "en": "Lie convincingly, forge cover identities, and mislead adversaries.",
+      "fr": "Mentir avec conviction, forger des couvertures et égarer les adversaires."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "4bdc10d2-f1d2-40d9-b06d-336206542f01",
+    "slug": "stealth",
+    "name": { "en": "Stealth", "fr": "Discrétion" },
+    "ability_ref": "04e50cf7-4ff9-5685-b9c2-4537a30ac448",
+    "description": {
+      "en": "Move silently, blend into cover, and avoid electronic detection.",
+      "fr": "Se déplacer en silence, se fondre dans le couvert et éviter la détection électronique."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "e7102976-d8a9-4a8f-bd2d-071aab51a255",
+    "slug": "intimidation",
+    "name": { "en": "Intimidation", "fr": "Intimidation" },
+    "ability_ref": "59c09290-510d-49fe-a18c-74a8a108dfc6",
+    "description": {
+      "en": "Coerce compliance through presence, threat displays, or resonant roars.",
+      "fr": "Contraindre par votre prestance, vos menaces ou vos rugissements résonnants."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "54cf1b2e-953d-4453-b6fe-8897f7837cc7",
+    "slug": "medicine",
+    "name": { "en": "Medicine", "fr": "Médecine" },
+    "ability_ref": "e953761e-fc98-4495-aec1-bc7b475fb073",
+    "description": {
+      "en": "Stabilize the wounded, diagnose ailments, and apply bacta-based treatments.",
+      "fr": "Stabiliser les blessés, diagnostiquer les maux et appliquer des traitements à base de bacta."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "df14af11-1f0d-4de6-a611-1b705f2c3308",
+    "slug": "performance",
+    "name": { "en": "Performance", "fr": "Représentation" },
+    "ability_ref": "59c09290-510d-49fe-a18c-74a8a108dfc6",
+    "description": {
+      "en": "Captivate audiences with music, dance, storytelling, or dramatic flair.",
+      "fr": "Captiver un public par la musique, la danse, le récit ou une mise en scène éclatante."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "0a6b116c-43ae-452f-90ea-0676b2a0f279",
+    "slug": "animal-handling",
+    "name": { "en": "Animal Handling", "fr": "Dressage" },
+    "ability_ref": "e953761e-fc98-4495-aec1-bc7b475fb073",
+    "description": {
+      "en": "Calm mounts, understand beast behavior, and direct trained companions.",
+      "fr": "Apaiser les montures, comprendre le comportement des bêtes et diriger des compagnons dressés."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "2fcd0b5b-74d6-4214-8f68-0ebaf5120d4e",
+    "slug": "investigation",
+    "name": { "en": "Investigation", "fr": "Investigation" },
+    "ability_ref": "e882e3e3-6b05-4c33-86ae-009b90aad351",
+    "description": {
+      "en": "Reconstruct events, decipher clues, and search for hidden contraband.",
+      "fr": "Reconstituer des événements, déchiffrer des indices et rechercher des contrebandes dissimulées."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "5d095b02-5acf-4ffb-8bfa-51370045cdee",
+    "slug": "nature",
+    "name": { "en": "Nature", "fr": "Nature" },
+    "ability_ref": "e882e3e3-6b05-4c33-86ae-009b90aad351",
+    "description": {
+      "en": "Identify alien ecosystems, predict weather, and recall planetary lore.",
+      "fr": "Identifier les écosystèmes extraterrestres, prévoir la météo et se souvenir du folklore planétaire."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "8a735afd-ef11-4e92-9a42-8980a232625e",
+    "slug": "piloting",
+    "name": { "en": "Piloting", "fr": "Pilotage" },
+    "ability_ref": "04e50cf7-4ff9-5685-b9c2-4537a30ac448",
+    "description": {
+      "en": "Maneuver speeders, starfighters, and capital craft through hazards.",
+      "fr": "Manœuvrer speeders, chasseurs stellaires et vaisseaux capitaux à travers les dangers."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "d822c6a6-d979-4ec1-9f19-c9f30f0d7d37",
+    "slug": "sleight-of-hand",
+    "name": { "en": "Sleight of Hand", "fr": "Escamotage" },
+    "ability_ref": "04e50cf7-4ff9-5685-b9c2-4537a30ac448",
+    "description": {
+      "en": "Palm objects, plant devices, and manipulate security seals unnoticed.",
+      "fr": "Escamoter des objets, placer des dispositifs et manipuler des scellés de sécurité sans être vu."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "49d0a651-4cbb-4a21-9fb3-e0122972d91d",
+    "slug": "technology",
+    "name": { "en": "Technology", "fr": "Technologie" },
+    "ability_ref": "e882e3e3-6b05-4c33-86ae-009b90aad351",
+    "description": {
+      "en": "Bypass security systems, repair droids, and optimize starship subsystems.",
+      "fr": "Contourner les systèmes de sécurité, réparer des droïdes et optimiser les sous-systèmes de vaisseaux spatiaux."
+    },
+    "source": { "book": "PHB SW5e", "section": "Skills", "url": "https://sw5e.com/rules/phb/skills" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
   }
 ]
