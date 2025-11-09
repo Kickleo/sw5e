@@ -22,6 +22,16 @@ void main() {
     final QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
       species: species,
       traits: _buildBithTraits(),
+      languages: const <LanguageDef>[
+        LanguageDef(
+          id: 'basic',
+          name: LocalizedText(en: 'Galactic Basic', fr: 'Basic galactique'),
+        ),
+        LanguageDef(
+          id: 'bith',
+          name: LocalizedText(en: 'Bith', fr: 'Bith'),
+        ),
+      ],
     );
 
     final InMemoryCharacterDraftRepository repository =
@@ -51,6 +61,11 @@ void main() {
         effects.firstWhere((effect) => effect.source == 'trait:sonic-sensitivity');
     expect(sonicSensitivity.category, CharacterEffectCategory.passive);
     expect(sonicSensitivity.description, contains('sonic damage'));
+
+    final CharacterEffect languagesEffect =
+        effects.firstWhere((effect) => effect.source == 'species:bith:languages');
+    expect(languagesEffect.title, 'Languages');
+    expect(languagesEffect.description, 'Galactic Basic, Bith');
   });
 
   test('formate les bonus de caractéristique avec choix multiples', () async {
@@ -59,6 +74,16 @@ void main() {
     final QuickCreateSpeciesDetails details = QuickCreateSpeciesDetails(
       species: species,
       traits: const <TraitDef>[],
+      languages: const <LanguageDef>[
+        LanguageDef(
+          id: 'basic',
+          name: LocalizedText(
+            en: 'Galactic Basic',
+            fr: 'Basic galactique',
+            otherTranslations: <String, String>{'es': 'Básico Galáctico'},
+          ),
+        ),
+      ],
     );
 
     final InMemoryCharacterDraftRepository repository =
@@ -223,7 +248,8 @@ void main() {
     final CharacterEffect languagesEffect = saved.species!.effects.firstWhere(
       (CharacterEffect effect) => effect.source == 'species:bothan:languages',
     );
-    expect(languagesEffect.description, 'Puedes hablar Básico Galáctico.');
+    expect(languagesEffect.title, 'Idiomas');
+    expect(languagesEffect.description, 'Básico Galáctico');
   });
 }
 
@@ -238,6 +264,7 @@ SpeciesDef _buildBithSpecies() {
       SpeciesAbilityBonus(ability: 'int', amount: 2),
       SpeciesAbilityBonus(ability: 'dex', amount: 1),
     ],
+    languageIds: <String>['basic', 'bith'],
     age: LocalizedText(
       en: 'Bith reach adulthood in their late teens and live less than a century.',
       fr:
@@ -359,6 +386,7 @@ SpeciesDef _buildBothanSpecies() {
     abilityBonuses: <SpeciesAbilityBonus>[
       SpeciesAbilityBonus(ability: 'cha', amount: 2),
     ],
+    languageIds: <String>['basic'],
     languages: LocalizedText(
       en: 'You can speak Galactic Basic.',
       fr: 'Vous pouvez parler le basique galactique.',

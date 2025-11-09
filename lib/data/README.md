@@ -24,9 +24,9 @@ La couche **Data** implémente les ports du domaine via des adapters (assets, AP
 ```
 
 ## Modules en place
-- `catalog/dtos/` : DTO sérialisables (structures JSON) avec conversion vers le domaine.
-- `catalog/data_sources/` : Source `AssetBundleCatalogDataSource` lisant les assets.
-- `catalog/repositories/` : Adapter `AssetCatalogRepository` qui implémente `CatalogRepository`.
+- `catalog_v2/dtos/` : DTO sérialisables pour `assets/catalog_v2/*` (avec conversion vers le domaine).
+- `catalog_v2/data_sources/` : Source `AssetBundleCatalogV2DataSource` lisant les assets embarqués.
+- `catalog/repositories/` : Adapter `AssetCatalogRepository` qui implémente `CatalogRepository` en s'appuyant sur la v2.
 - `characters/repositories/` : Adapters `InMemoryCharacterRepository` (volatil)
   et `PersistentCharacterRepository` (fichier JSON local) implémentant
   `CharacterRepository`.

@@ -56,8 +56,10 @@ class SpeciesPickerState extends Equatable {
     required this.selectedSpeciesId,
     required this.selectedSpecies,
     required this.selectedTraits,
+    required this.selectedLanguages,
     required this.speciesDefinitions,
     required this.traitDefinitions,
+    required this.languageDefinitions,
     required this.failure,
     required this.hasLoadedOnce,
   });
@@ -70,8 +72,10 @@ class SpeciesPickerState extends Equatable {
         selectedSpeciesId: null,
         selectedSpecies: null,
         selectedTraits: <TraitDef>[],
+        selectedLanguages: <LanguageDef>[],
         speciesDefinitions: <String, SpeciesDef>{},
         traitDefinitions: <String, TraitDef>{},
+        languageDefinitions: <String, LanguageDef>{},
         failure: null,
         hasLoadedOnce: false,
       );
@@ -82,8 +86,10 @@ class SpeciesPickerState extends Equatable {
   final String? selectedSpeciesId;
   final SpeciesDef? selectedSpecies;
   final List<TraitDef> selectedTraits;
+  final List<LanguageDef> selectedLanguages;
   final Map<String, SpeciesDef> speciesDefinitions;
   final Map<String, TraitDef> traitDefinitions;
+  final Map<String, LanguageDef> languageDefinitions;
   final AppFailure? failure;
   final bool hasLoadedOnce;
 
@@ -99,8 +105,10 @@ class SpeciesPickerState extends Equatable {
     String? selectedSpeciesId,
     SpeciesDef? selectedSpecies,
     List<TraitDef>? selectedTraits,
+    List<LanguageDef>? selectedLanguages,
     Map<String, SpeciesDef>? speciesDefinitions,
     Map<String, TraitDef>? traitDefinitions,
+    Map<String, LanguageDef>? languageDefinitions,
     AppFailure? failure,
     bool clearFailure = false,
     bool? hasLoadedOnce,
@@ -112,8 +120,10 @@ class SpeciesPickerState extends Equatable {
       selectedSpeciesId: selectedSpeciesId ?? this.selectedSpeciesId,
       selectedSpecies: selectedSpecies ?? this.selectedSpecies,
       selectedTraits: selectedTraits ?? this.selectedTraits,
+      selectedLanguages: selectedLanguages ?? this.selectedLanguages,
       speciesDefinitions: speciesDefinitions ?? this.speciesDefinitions,
       traitDefinitions: traitDefinitions ?? this.traitDefinitions,
+      languageDefinitions: languageDefinitions ?? this.languageDefinitions,
       failure: clearFailure ? null : (failure ?? this.failure),
       hasLoadedOnce: hasLoadedOnce ?? this.hasLoadedOnce,
     );
@@ -127,8 +137,10 @@ class SpeciesPickerState extends Equatable {
         selectedSpeciesId,
         selectedSpecies,
         selectedTraits,
+        selectedLanguages,
         speciesDefinitions,
         traitDefinitions,
+        languageDefinitions,
         failure,
         hasLoadedOnce,
       ];
@@ -184,7 +196,20 @@ class SpeciesPickerBloc extends Bloc<SpeciesPickerEvent, SpeciesPickerState> {
         targetId,
         existingSpecies: state.speciesDefinitions,
         existingTraits: state.traitDefinitions,
+        existingLanguages: state.languageDefinitions,
       );
+
+      final Map<String, SpeciesDef> speciesDefinitions =
+          Map<String, SpeciesDef>.from(selection.speciesDefinitions);
+      for (final String id in ids) {
+        if (speciesDefinitions.containsKey(id)) {
+          continue;
+        }
+        final SpeciesDef? def = await _catalog.getSpecies(id);
+        if (def != null) {
+          speciesDefinitions[id] = def;
+        }
+      }
 
       emit(
         state.copyWith(
@@ -194,8 +219,11 @@ class SpeciesPickerBloc extends Bloc<SpeciesPickerEvent, SpeciesPickerState> {
           selectedSpeciesId: targetId,
           selectedSpecies: selection.species,
           selectedTraits: selection.traits,
-          speciesDefinitions: selection.speciesDefinitions,
+          selectedLanguages: selection.languages,
+          speciesDefinitions:
+              Map<String, SpeciesDef>.unmodifiable(speciesDefinitions),
           traitDefinitions: selection.traitDefinitions,
+          languageDefinitions: selection.languageDefinitions,
           clearFailure: true,
           hasLoadedOnce: true,
         ),
@@ -243,6 +271,7 @@ class SpeciesPickerBloc extends Bloc<SpeciesPickerEvent, SpeciesPickerState> {
         event.speciesId,
         existingSpecies: state.speciesDefinitions,
         existingTraits: state.traitDefinitions,
+        existingLanguages: state.languageDefinitions,
       );
 
       emit(
@@ -250,8 +279,11 @@ class SpeciesPickerBloc extends Bloc<SpeciesPickerEvent, SpeciesPickerState> {
           isLoadingDetails: false,
           selectedSpecies: selection.species,
           selectedTraits: selection.traits,
-          speciesDefinitions: selection.speciesDefinitions,
+          selectedLanguages: selection.languages,
+          speciesDefinitions:
+              Map<String, SpeciesDef>.unmodifiable(selection.speciesDefinitions),
           traitDefinitions: selection.traitDefinitions,
+          languageDefinitions: selection.languageDefinitions,
           clearFailure: true,
         ),
       );
@@ -279,6 +311,7 @@ class SpeciesPickerBloc extends Bloc<SpeciesPickerEvent, SpeciesPickerState> {
     String speciesId, {
     required Map<String, SpeciesDef> existingSpecies,
     required Map<String, TraitDef> existingTraits,
+    required Map<String, LanguageDef> existingLanguages,
   }) async {
     SpeciesDef? species = existingSpecies[speciesId];
     final Map<String, SpeciesDef> speciesDefinitions = Map<String, SpeciesDef>.from(
@@ -298,6 +331,8 @@ class SpeciesPickerBloc extends Bloc<SpeciesPickerEvent, SpeciesPickerState> {
         traits: const <TraitDef>[],
         speciesDefinitions: speciesDefinitions,
         traitDefinitions: existingTraits,
+        languages: const <LanguageDef>[],
+        languageDefinitions: existingLanguages,
       );
     }
 
@@ -305,6 +340,9 @@ class SpeciesPickerBloc extends Bloc<SpeciesPickerEvent, SpeciesPickerState> {
       existingTraits,
     );
     final List<TraitDef> traits = <TraitDef>[];
+    final Map<String, LanguageDef> languageDefinitions =
+        Map<String, LanguageDef>.from(existingLanguages);
+    final List<LanguageDef> languages = <LanguageDef>[];
 
     for (final String traitId in species.traitIds) {
       TraitDef? trait = traitDefinitions[traitId];
@@ -319,11 +357,26 @@ class SpeciesPickerBloc extends Bloc<SpeciesPickerEvent, SpeciesPickerState> {
       }
     }
 
+    for (final String languageId in species.languageIds) {
+      LanguageDef? language = languageDefinitions[languageId];
+      if (language == null) {
+        language = await _catalog.getLanguage(languageId);
+        if (language != null) {
+          languageDefinitions[languageId] = language;
+        }
+      }
+      if (language != null) {
+        languages.add(language);
+      }
+    }
+
     return _SpeciesSelection(
       species: species,
       traits: traits,
       speciesDefinitions: speciesDefinitions,
       traitDefinitions: traitDefinitions,
+      languages: languages,
+      languageDefinitions: languageDefinitions,
     );
   }
 }
@@ -335,10 +388,14 @@ class _SpeciesSelection {
     required this.traits,
     required this.speciesDefinitions,
     required this.traitDefinitions,
+    required this.languages,
+    required this.languageDefinitions,
   });
 
   final SpeciesDef? species;
   final List<TraitDef> traits;
   final Map<String, SpeciesDef> speciesDefinitions;
   final Map<String, TraitDef> traitDefinitions;
+  final List<LanguageDef> languages;
+  final Map<String, LanguageDef> languageDefinitions;
 }

@@ -30,6 +30,7 @@ void main() {
         speed: 30,
         size: 'medium',
         traitIds: <String>['keen-smell', 'missing'],
+        languageIds: <String>['basic', 'shyriiwook'],
       ),
     );
     when(() => catalog.getTrait('keen-smell')).thenAnswer(
@@ -43,6 +44,18 @@ void main() {
       ),
     );
     when(() => catalog.getTrait('missing')).thenAnswer((_) async => null);
+    when(() => catalog.getLanguage('basic')).thenAnswer(
+      (_) async => const LanguageDef(
+        id: 'basic',
+        name: LocalizedText(en: 'Galactic Basic', fr: 'Basic galactique'),
+        description: LocalizedText(
+          en: 'Spoken across the galaxy.',
+          fr: 'Parlé à travers la galaxie.',
+        ),
+      ),
+    );
+    when(() => catalog.getLanguage('shyriiwook'))
+        .thenAnswer((_) async => null);
 
     final AppResult<QuickCreateSpeciesDetails> result = await useCase('bothan');
 
@@ -52,6 +65,8 @@ void main() {
         expect(details.traits, hasLength(1));
         expect(details.traits.first.id, 'keen-smell');
         expect(details.missingTraitIds, equals(const <String>['missing']));
+        expect(details.languages, hasLength(1));
+        expect(details.languages.first.id, 'basic');
       },
       err: (_) => fail('Devrait retourner un succès'),
     );

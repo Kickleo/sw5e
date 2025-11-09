@@ -134,13 +134,29 @@ void main() {
         // On mappe chaque skill à son ability attendue
         switch (id) {
           case 'perception':
-            return const SkillDef(id: 'perception', ability: 'wis');
+            return const SkillDef(
+              id: 'perception',
+              ability: 'wis',
+              name: LocalizedText(en: 'Perception', fr: 'Perception'),
+            );
           case 'athletics':
-            return const SkillDef(id: 'athletics', ability: 'str');
+            return const SkillDef(
+              id: 'athletics',
+              ability: 'str',
+              name: LocalizedText(en: 'Athletics', fr: 'Athlétisme'),
+            );
           case 'stealth':
-            return const SkillDef(id: 'stealth', ability: 'dex');
+            return const SkillDef(
+              id: 'stealth',
+              ability: 'dex',
+              name: LocalizedText(en: 'Stealth', fr: 'Discrétion'),
+            );
           case 'deception':
-            return const SkillDef(id: 'deception', ability: 'cha');
+            return const SkillDef(
+              id: 'deception',
+              ability: 'cha',
+              name: LocalizedText(en: 'Deception', fr: 'Tromperie'),
+            );
         }
         return null;
       });
@@ -276,7 +292,11 @@ void main() {
 
       when(() => catalog.getSkill(any())).thenAnswer((invocation) async {
         final id = invocation.positionalArguments.first as String;
-        return SkillDef(id: id, ability: 'wis');
+        return SkillDef(
+          id: id,
+          ability: 'wis',
+          name: LocalizedText(en: id, fr: id),
+        );
       });
 
       when(() => catalog.getEquipment('energy-shield')).thenAnswer((_) async => const EquipmentDef(

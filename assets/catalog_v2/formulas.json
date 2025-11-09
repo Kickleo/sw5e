@@ -1,4 +1,11 @@
 {
+  "rules_version": "2024-05-01",
+  "hp_level1": "max(hit_die) + mod(CON)",
+  "defense_base": "armor_base + mod(DEX) + shield + misc",
+  "initiative": "mod(DEX) + misc",
+  "superiority_dice": {
+    "sentinel": { "count": 0, "die": null }
+  },
   "attack_bonus": "proficiency + ability_mod",
   "power_save_dc": "8 + proficiency + casting_ability_mod"
 }
