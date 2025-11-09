@@ -1,4 +1,4 @@
-# SW5e Catalog v2 (work in progress)
+# SW5e Catalog v2
 
 This folder prototypes the normalized data model requested for a future rewrite of the
 asset catalog. Each JSON file co-locates localized strings with the rules payload so new
@@ -6,8 +6,8 @@ languages can be added without touching the application code. The schema follows
 prompt shared in the latest product discussion and focuses on a bilingual EN/FR sample
 covering a handful of entries per collection.
 
-> ⚠️ The current application still relies on the legacy `assets/catalog/` data. The new
-> files exist as reference material while the migration tooling and DTOs are built.
+These assets now power the application directly; the legacy `assets/catalog/` payloads
+have been retired from the build.
 
 ## File inventory
 

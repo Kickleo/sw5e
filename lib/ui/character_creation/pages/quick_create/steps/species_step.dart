@@ -3,7 +3,10 @@ part of '../quick_create_page.dart';
 class _SpeciesStep extends StatelessWidget {
   const _SpeciesStep({
     required this.species,
+    required this.speciesLabels,
     required this.selectedSpecies,
+    required this.selectedSpeciesDef,
+    required this.selectedLanguages,
     required this.traits,
     required this.effects,
     required this.onSelect,
@@ -11,14 +14,17 @@ class _SpeciesStep extends StatelessWidget {
   });
 
   final List<String> species;
+  final Map<String, LocalizedText> speciesLabels;
   final String? selectedSpecies;
+  final SpeciesDef? selectedSpeciesDef;
+  final List<LanguageDef> selectedLanguages;
   final List<TraitDef> traits;
   final List<CharacterEffect> effects;
   final ValueChanged<String?> onSelect;
   final VoidCallback onOpenPicker;
 
   String _titleCase(String slug) => slug
-      .split(RegExp(r'[-_]'))
+      .split(RegExp(r'[\-_.]'))
       .map(
         (part) =>
             part.isEmpty ? part : part[0].toUpperCase() + part.substring(1),
@@ -28,6 +34,16 @@ class _SpeciesStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final LocalizedText? fallbackLanguages = selectedSpeciesDef?.languages;
+    final bool showLanguageCard = LanguageDetailsCard.hasDisplayableContent(
+      l10n,
+      selectedLanguages,
+      fallback: fallbackLanguages,
+    );
+    final List<SpeciesAbilityBonus> abilityBonuses =
+        selectedSpeciesDef?.abilityBonuses ?? const <SpeciesAbilityBonus>[];
+    final bool showAbilityBonuses =
+        SpeciesAbilityBonusesCard.hasDisplayableContent(abilityBonuses);
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -44,7 +60,7 @@ class _SpeciesStep extends StatelessWidget {
                     .map(
                       (id) => DropdownMenuItem(
                         value: id,
-                        child: Text(_titleCase(id)),
+                        child: Text(_labelFor(l10n, id)),
                       ),
                     )
                     .toList(),
@@ -60,6 +76,17 @@ class _SpeciesStep extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
+        if (showAbilityBonuses) ...[
+          SpeciesAbilityBonusesCard(bonuses: abilityBonuses),
+          const SizedBox(height: 16),
+        ],
+        if (showLanguageCard) ...[
+          LanguageDetailsCard(
+            languages: selectedLanguages,
+            fallback: fallbackLanguages,
+          ),
+          const SizedBox(height: 16),
+        ],
         if (effects.isNotEmpty)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,23 +108,24 @@ class _SpeciesStep extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
-              ...traits.map(
-                (trait) => Card(
-                  child: ListTile(
-                    title: Text(
-                      trait.name.fr.isNotEmpty ? trait.name.fr : trait.name.en,
-                    ),
-                    subtitle:
-                        Text(l10n.localizedCatalogLabel(trait.description)),
-                  ),
-                ),
-              ),
+              SpeciesTraitDetailsList.fromDefinitions(traits: traits),
             ],
           )
         else
           Text(l10n.noSpeciesTraits),
       ],
     );
+  }
+
+  String _labelFor(AppLocalizations l10n, String id) {
+    final LocalizedText? text = speciesLabels[id];
+    if (text != null) {
+      final String label = l10n.localizedCatalogLabel(text).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(id);
   }
 
   Widget _buildEffectCard(BuildContext context, CharacterEffect effect) {

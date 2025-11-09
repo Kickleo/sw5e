@@ -29,6 +29,8 @@ import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_characte
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
@@ -200,6 +202,11 @@ void registerCharacterCreationModule() {
       ServiceLocator.resolve<CatalogRepository>(),
     ),
   );
+  ServiceLocator.registerLazySingleton<LoadBackgroundDetails>(
+    () => LoadBackgroundDetailsImpl(
+      ServiceLocator.resolve<CatalogRepository>(),
+    ),
+  );
 }
 
 /// Expose le repository du catalogue sous forme de provider Riverpod afin
@@ -271,4 +278,11 @@ final loadSpeciesDetailsProvider = Provider<LoadSpeciesDetails>((ref) {
 final loadClassDetailsProvider = Provider<LoadClassDetails>((ref) {
   registerCharacterCreationModule();
   return ServiceLocator.resolve<LoadClassDetails>();
+});
+
+/// Fournit l'use case récupérant les informations détaillées d'un historique
+/// (compétences accordées, équipement, trait narratif, etc.).
+final loadBackgroundDetailsProvider = Provider<LoadBackgroundDetails>((ref) {
+  registerCharacterCreationModule();
+  return ServiceLocator.resolve<LoadBackgroundDetails>();
 });

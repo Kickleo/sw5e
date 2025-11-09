@@ -38,7 +38,11 @@ void main() {
       ),
     );
     when(() => catalog.getSkill('athletics')).thenAnswer(
-      (_) async => const SkillDef(id: 'athletics', ability: 'str'),
+      (_) async => const SkillDef(
+        id: 'athletics',
+        ability: 'str',
+        name: LocalizedText(en: 'Athletics', fr: 'Athlétisme'),
+      ),
     );
     when(() => catalog.getSkill('acrobatics')).thenAnswer((_) async => null);
 

@@ -18,10 +18,18 @@ class QuickCreateCatalogSnapshot {
   /// Crée une instance.
   const QuickCreateCatalogSnapshot({
     required this.speciesIds,
+    required this.speciesNames,
     required this.classIds,
+    required this.classNames,
     required this.backgroundIds,
+    required this.backgroundNames,
     required this.equipmentById,
     required this.sortedEquipmentIds,
+    required this.abilityDefinitions,
+    required this.languageDefinitions,
+    required this.customizationOptionDefinitions,
+    required this.forcePowerDefinitions,
+    required this.techPowerDefinitions,
     this.defaultSpeciesId,
     this.defaultClassId,
     this.defaultBackgroundId,
@@ -30,17 +38,41 @@ class QuickCreateCatalogSnapshot {
   /// Identifiants d'espèces disponibles.
   final List<String> speciesIds;
 
+  /// Libellés localisés associés aux espèces (clé = identifiant).
+  final Map<String, LocalizedText> speciesNames;
+
   /// Identifiants de classes disponibles.
   final List<String> classIds;
 
+  /// Libellés localisés associés aux classes (clé = identifiant).
+  final Map<String, LocalizedText> classNames;
+
   /// Identifiants de backgrounds disponibles.
   final List<String> backgroundIds;
+
+  /// Libellés localisés associés aux backgrounds (clé = identifiant).
+  final Map<String, LocalizedText> backgroundNames;
 
   /// Map des équipements (clé = slug) pour affichage/validation.
   final Map<String, EquipmentDef> equipmentById;
 
   /// Ordre déjà trié des équipements pour l'affichage UI.
   final List<String> sortedEquipmentIds;
+
+  /// Définitions des caractéristiques disponibles (clé = slug).
+  final Map<String, AbilityDef> abilityDefinitions;
+
+  /// Définitions des langues disponibles (clé = slug).
+  final Map<String, LanguageDef> languageDefinitions;
+
+  /// Définitions complètes des options de personnalisation disponibles.
+  final Map<String, CustomizationOptionDef> customizationOptionDefinitions;
+
+  /// Définitions complètes des pouvoirs de la Force disponibles.
+  final Map<String, PowerDef> forcePowerDefinitions;
+
+  /// Définitions complètes des pouvoirs technologiques disponibles.
+  final Map<String, PowerDef> techPowerDefinitions;
 
   /// Sélection par défaut suggérée pour l'espèce.
   final String? defaultSpeciesId;

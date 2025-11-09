@@ -6,6 +6,7 @@
 library;
 
 import 'package:meta/meta.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 
 @immutable
 class SpeciesEffectLanguageBundle {
@@ -49,6 +50,31 @@ class SpeciesEffectLanguageBundle {
   final String speedFallbackTemplate;
   final String fallbackLanguageCode;
 
+  SpeciesEffectLanguageBundle copyWith({
+    Map<String, String>? abilityNames,
+  }) {
+    return SpeciesEffectLanguageBundle(
+      listSeparator: listSeparator,
+      abilityScoreIncreaseTitle: abilityScoreIncreaseTitle,
+      ageTitle: ageTitle,
+      alignmentTitle: alignmentTitle,
+      sizeTitle: sizeTitle,
+      speedTitle: speedTitle,
+      languagesTitle: languagesTitle,
+      abilityChoiceDefaultOptions: abilityChoiceDefaultOptions,
+      abilityChoicePreposition: abilityChoicePreposition,
+      abilityChoiceSuffixTemplate: abilityChoiceSuffixTemplate,
+      alternativePrefix: alternativePrefix,
+      abilityNames: abilityNames ?? this.abilityNames,
+      twoOptionSeparator: twoOptionSeparator,
+      finalOptionSeparator: finalOptionSeparator,
+      sizeLabels: sizeLabels,
+      sizeFallbackTemplate: sizeFallbackTemplate,
+      speedFallbackTemplate: speedFallbackTemplate,
+      fallbackLanguageCode: fallbackLanguageCode,
+    );
+  }
+
   String abilityName(String ability) {
     final String normalized = ability.toLowerCase();
     final String? direct = abilityNames[normalized];
@@ -82,6 +108,58 @@ class SpeciesEffectLanguageBundle {
 
   String speedFallback(int speed) =>
       speedFallbackTemplate.replaceAll('{speed}', '$speed');
+}
+
+/// Utility responsible for formatting a [SpeciesAbilityBonus] according to the
+/// strings provided by a [SpeciesEffectLanguageBundle]. The formatter mirrors
+/// the logic used when persisting species effects so UI layers can render the
+/// same text without duplicating the string rules.
+class SpeciesAbilityBonusFormatter {
+  const SpeciesAbilityBonusFormatter(this.bundle);
+
+  final SpeciesEffectLanguageBundle bundle;
+
+  /// Formats a single ability bonus using localized ability names, handling
+  /// alternative clauses as well as "choose" style bonuses.
+  String format(SpeciesAbilityBonus bonus) {
+    final String prefix = bonus.isAlternative ? bundle.alternativePrefix : '';
+    final String sign = bonus.amount >= 0 ? '+' : '';
+    final String amount = '$sign${bonus.amount}';
+
+    if (bonus.isChoice) {
+      final int choose = bonus.choose ?? 1;
+      final String options = _formatAbilityOptions(bonus.options);
+      final String suffix = bundle.abilityChoiceSuffix(choose);
+      final String preposition = bundle.abilityChoicePreposition;
+      final String formatted =
+          '$prefix$amount $preposition $options $suffix'.trim();
+      return formatted;
+    }
+
+    final String ability = bundle.abilityName(bonus.ability ?? 'any');
+    return ('$prefix$amount $ability').trim();
+  }
+
+  String _formatAbilityOptions(List<String> options) {
+    if (options.isEmpty) {
+      return bundle.abilityChoiceDefaultOptions;
+    }
+
+    final List<String> labels = options
+        .map((String option) => bundle.abilityName(option))
+        .toList(growable: false);
+    if (labels.length == 1) {
+      return labels.first;
+    }
+    if (labels.length == 2) {
+      return '${labels[0]}${bundle.twoOptionSeparator}${labels[1]}';
+    }
+
+    final String penultimate = labels
+        .sublist(0, labels.length - 1)
+        .join(bundle.listSeparator);
+    return '$penultimate${bundle.finalOptionSeparator}${labels.last}';
+  }
 }
 
 class SpeciesEffectLocalizationCatalog {
@@ -232,6 +310,38 @@ class SpeciesEffectLocalizationCatalog {
     if (defaultBundle != null) {
       _bundles.putIfAbsent(normalized, () => defaultBundle);
     }
+  }
+
+  static void updateAbilityNames(Map<String, LocalizedText> abilityNames) {
+    if (abilityNames.isEmpty) {
+      return;
+    }
+
+    void apply(Map<String, SpeciesEffectLanguageBundle> target) {
+      target.updateAll((String languageCode, SpeciesEffectLanguageBundle bundle) {
+        final Map<String, String> merged =
+            Map<String, String>.from(bundle.abilityNames);
+        abilityNames.forEach((String slug, LocalizedText text) {
+          final String normalizedSlug = slug.toLowerCase();
+          final String resolved = text
+              .resolve(
+                languageCode,
+                fallbackLanguageCode: bundle.fallbackLanguageCode,
+              )
+              .trim();
+          if (resolved.isEmpty) {
+            return;
+          }
+          merged[normalizedSlug] = resolved;
+        });
+        return bundle.copyWith(
+          abilityNames: Map<String, String>.unmodifiable(merged),
+        );
+      });
+    }
+
+    apply(_bundles);
+    apply(_configuredDefaults);
   }
 
   static void resetToDefaults() {

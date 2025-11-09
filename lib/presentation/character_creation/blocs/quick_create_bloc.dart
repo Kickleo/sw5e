@@ -10,10 +10,10 @@ import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
-import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart'
-    show ClassDef;
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
@@ -247,6 +247,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     required LoadQuickCreateCatalog loadQuickCreateCatalog,
     required LoadSpeciesDetails loadSpeciesDetails,
     required LoadClassDetails loadClassDetails,
+    required LoadBackgroundDetails loadBackgroundDetails,
     required LoadCharacterDraft loadCharacterDraft,
     required FinalizeLevel1Character finalizeLevel1Character,
     required AppLogger logger,
@@ -264,6 +265,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   })  : _loadQuickCreateCatalog = loadQuickCreateCatalog,
         _loadSpeciesDetails = loadSpeciesDetails,
         _loadClassDetails = loadClassDetails,
+        _loadBackgroundDetails = loadBackgroundDetails,
         _loadCharacterDraft = loadCharacterDraft,
         _finalizeLevel1Character = finalizeLevel1Character,
         _logger = logger,
@@ -301,6 +303,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
   final LoadQuickCreateCatalog _loadQuickCreateCatalog;
   final LoadSpeciesDetails _loadSpeciesDetails;
   final LoadClassDetails _loadClassDetails;
+  final LoadBackgroundDetails _loadBackgroundDetails;
   final LoadCharacterDraft _loadCharacterDraft;
   final FinalizeLevel1Character _finalizeLevel1Character;
   final AppLogger _logger;
@@ -470,6 +473,19 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             species: snapshot.speciesIds,
             classes: snapshot.classIds,
             backgrounds: snapshot.backgroundIds,
+            speciesLabels: snapshot.speciesNames,
+            classLabels: snapshot.classNames,
+            backgroundLabels: snapshot.backgroundNames,
+            abilityDefinitions: snapshot.abilityDefinitions,
+            languageDefinitions: snapshot.languageDefinitions,
+            customizationOptionDefinitions:
+                snapshot.customizationOptionDefinitions,
+            forcePowerDefinitions: snapshot.forcePowerDefinitions,
+            techPowerDefinitions: snapshot.techPowerDefinitions,
+            selectedBackgroundDef: null,
+            backgroundSkillDefinitions: const <String, SkillDef>{},
+            backgroundEquipmentDefinitions: const <String, EquipmentDef>{},
+            selectedSpeciesDef: null,
             selectedSpecies: resolvedSpeciesId,
             selectedClass: resolvedClassId,
             selectedBackground: resolvedBackgroundId,
@@ -483,6 +499,9 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             equipmentList: snapshot.sortedEquipmentIds,
             chosenEquipment: resolvedEquipment,
             useStartingEquipment: resolvedUseStartingEquipment,
+            selectedCustomizationOptions: const <String>{},
+            selectedForcePowers: const <String>{},
+            selectedTechPowers: const <String>{},
             isLoadingEquipment: false,
             characterName: existingDraft?.name ?? state.characterName,
             abilityAssignments: resolvedAssignments,
@@ -491,6 +510,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             stepIndex: resolvedStepIndex,
             selectedSpeciesEffects:
                 existingDraft?.species?.effects ?? const <CharacterEffect>[],
+            selectedSpeciesLanguages: const <LanguageDef>[],
           ),
         );
 
@@ -499,6 +519,9 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         }
         if (resolvedClassId != null) {
           await _refreshClassDef(resolvedClassId, emit);
+        }
+        if (resolvedBackgroundId != null) {
+          await _refreshBackgroundDetails(resolvedBackgroundId, emit);
         }
       },
       err: (DomainError error) async {
@@ -552,7 +575,16 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     if (event.speciesId == state.selectedSpecies) {
       return;
     }
-    emit(state.copyWith(selectedSpecies: event.speciesId, statusMessage: null));
+    emit(
+      state.copyWith(
+        selectedSpecies: event.speciesId,
+        selectedSpeciesDef: null,
+        selectedSpeciesTraits: const <TraitDef>[],
+        selectedSpeciesEffects: const <CharacterEffect>[],
+        selectedSpeciesLanguages: const <LanguageDef>[],
+        statusMessage: null,
+      ),
+    );
     await _refreshSpeciesTraits(event.speciesId, emit);
   }
 
@@ -574,6 +606,9 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
       skillChoicesRequired: 0,
       chosenEquipment: const <String, int>{},
       useStartingEquipment: true,
+      selectedCustomizationOptions: const <String>{},
+      selectedForcePowers: const <String>{},
+      selectedTechPowers: const <String>{},
     );
     emit(updated);
     final AppResult<CharacterDraft> persistClassResult =
@@ -604,6 +639,9 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
     final QuickCreateState updated = state.copyWith(
       selectedBackground: event.backgroundId,
       statusMessage: null,
+      selectedBackgroundDef: null,
+      backgroundSkillDefinitions: const <String, SkillDef>{},
+      backgroundEquipmentDefinitions: const <String, EquipmentDef>{},
     );
     emit(updated);
     final AppResult<CharacterDraft> result =
@@ -618,6 +656,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         );
       },
     );
+    await _refreshBackgroundDetails(event.backgroundId, emit);
   }
 
   /// Synchronise l'étape courante avec la navigation manuelle de l'UI.
@@ -932,7 +971,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             failure: AppFailure.validation(
               code: 'InvalidAbilityValue',
               message:
-                  'Valeur invalide pour ${QuickCreateState.abilityLabels[ability] ?? ability.toUpperCase()}.',
+                  'Valeur invalide pour ${state.resolveAbilityLabel(ability, locale: 'fr')}.',
               details: {'ability': ability, 'value': rawValue},
             ),
           ),
@@ -992,6 +1031,10 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
               statusMessage: 'OK: ${character.name.value}',
               completion: QuickCreateSuccess(character),
               failure: null,
+              selectedCustomizationOptions:
+                  character.customizationOptionIds.toSet(),
+              selectedForcePowers: character.forcePowerIds.toSet(),
+              selectedTechPowers: character.techPowerIds.toSet(),
             ),
           );
           final AppResult<void> clearResult = await _clearCharacterDraft();
@@ -1093,7 +1136,9 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         }
         emit(
           state.copyWith(
+            selectedSpeciesDef: details.species,
             selectedSpeciesTraits: details.traits,
+            selectedSpeciesLanguages: details.languages,
             statusMessage: null,
             failure: null,
           ),
@@ -1263,6 +1308,82 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             statusMessage:
                 'Erreur lors du chargement de la classe: ${error.message ?? error.code}',
             isLoadingClassDetails: false,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _refreshBackgroundDetails(
+    String backgroundId,
+    Emitter<QuickCreateState> emit,
+  ) async {
+    final AppResult<QuickCreateBackgroundDetails> result =
+        await _loadBackgroundDetails(backgroundId);
+
+    await result.match(
+      ok: (QuickCreateBackgroundDetails details) async {
+        if (details.missingSkillIds.isNotEmpty) {
+          _logger.warn(
+            'Compétences introuvables pour le background',
+            payload: {
+              'backgroundId': backgroundId,
+              'missingSkillIds': details.missingSkillIds,
+            },
+          );
+        }
+        if (details.missingEquipmentIds.isNotEmpty) {
+          _logger.warn(
+            'Équipement introuvable pour le background',
+            payload: {
+              'backgroundId': backgroundId,
+              'missingEquipmentIds': details.missingEquipmentIds,
+            },
+          );
+        }
+
+        if (details.missingToolIds.isNotEmpty) {
+          _logger.warn(
+            'Outils introuvables pour le background',
+            payload: {
+              'backgroundId': backgroundId,
+              'missingToolIds': details.missingToolIds,
+            },
+          );
+        }
+
+        final Map<String, EquipmentDef> mergedEquipment =
+            Map<String, EquipmentDef>.from(state.equipmentDefinitions)
+              ..addAll(details.equipmentDefinitions);
+        final Map<String, BackgroundDef> mergedBackgrounds =
+            Map<String, BackgroundDef>.from(state.backgroundDefinitions)
+              ..[details.background.id] = details.background;
+
+        emit(
+          state.copyWith(
+            selectedBackgroundDef: details.background,
+            backgroundSkillDefinitions: details.skillDefinitions,
+            backgroundEquipmentDefinitions: details.equipmentDefinitions,
+            equipmentDefinitions: mergedEquipment,
+            backgroundDefinitions: mergedBackgrounds,
+            statusMessage: null,
+            failure: null,
+          ),
+        );
+      },
+      err: (DomainError error) async {
+        _logger.warn(
+          'Erreur lors du chargement du background',
+          error: error,
+          payload: {'backgroundId': backgroundId},
+        );
+        emit(
+          state.copyWith(
+            selectedBackgroundDef: null,
+            backgroundSkillDefinitions: const <String, SkillDef>{},
+            backgroundEquipmentDefinitions: const <String, EquipmentDef>{},
+            statusMessage:
+                'Erreur lors du chargement de l\'historique: ${error.message ?? error.code}',
           ),
         );
       },
