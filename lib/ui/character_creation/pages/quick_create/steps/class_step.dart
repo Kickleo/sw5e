@@ -70,13 +70,131 @@ class _ClassStep extends StatelessWidget {
         if (isLoadingDetails)
           const Center(child: CircularProgressIndicator())
         else
-          _buildClassDetails(
-            context: context,
-            l10n: l10n,
-            classDefData: classDefData,
-            abilityDefinitions: abilityDefinitions,
-            equipmentDefinitions: equipmentDefinitions,
-          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.localizedCatalogLabel(classDefData.name),
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              if (classDefData.description != null) ...[
+                const SizedBox(height: 8),
+                Text(
+                  l10n.localizedCatalogLabel(classDefData.description!),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+              const SizedBox(height: 8),
+              Text('${l10n.hitDiceLabel} : d${classDefData.hitDie}'),
+              const SizedBox(height: 12),
+              if (classDefData.primaryAbilities.isNotEmpty) ...[
+                Text(
+                  l10n.classPickerPrimaryAbilitiesTitle,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  _formatAbilities(
+                    l10n,
+                    abilityDefinitions,
+                    classDefData.primaryAbilities,
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+              if (classDefData.savingThrows.isNotEmpty) ...[
+                Text(
+                  l10n.classPickerSavingThrowsTitle,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  _formatAbilities(
+                    l10n,
+                    abilityDefinitions,
+                    classDefData.savingThrows,
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+              if (_classHasPowerInfo(classDefData)) ...[
+                ClassPowerDetails(classDef: classDefData),
+                const SizedBox(height: 12),
+              ],
+              if (classDefData.weaponProficiencies.isNotEmpty) ...[
+                Text(
+                  l10n.classPickerWeaponProficienciesTitle,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  formatClassProficiencies(
+                    values: classDefData.weaponProficiencies,
+                    l10n: l10n,
+                    category: ClassProficiencyCategory.weapon,
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+              if (classDefData.armorProficiencies.isNotEmpty) ...[
+                Text(
+                  l10n.classPickerArmorProficienciesTitle,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  formatClassProficiencies(
+                    values: classDefData.armorProficiencies,
+                    l10n: l10n,
+                    category: ClassProficiencyCategory.armor,
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+              if (classDefData.toolProficiencies.isNotEmpty) ...[
+                Text(
+                  l10n.classPickerToolProficienciesTitle,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  formatClassProficiencies(
+                    values: classDefData.toolProficiencies,
+                    l10n: l10n,
+                    category: ClassProficiencyCategory.tool,
+                    equipmentDefinitions: equipmentDefinitions,
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+            ],
+            if (classDefData.multiclassing?.hasAbilityRequirements ?? false) ...[
+                ClassMulticlassingDetails(
+                  classDef: classDefData,
+                  abilityDefinitions: abilityDefinitions,
+                  headingStyle: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 12),
+              ],
+            if (classDefData.level1.classFeatures.isNotEmpty) ...[
+              ClassFeatureList(
+                heading: l10n.classPickerLevel1FeaturesTitle,
+                features: classDefData.level1.classFeatures,
+              ),
+              const SizedBox(height: 12),
+            ],
+            Text(
+              l10n.classSkillsChoice(
+                classDefData.level1.proficiencies.skillsChoose,
+              ),
+            ),
+            const SizedBox(height: 12),
+            _ClassStartingEquipment(
+              classDef: classDefData,
+              equipmentDefinitions: equipmentDefinitions,
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -90,200 +208,6 @@ class _ClassStep extends StatelessWidget {
       }
     }
     return _titleCase(id);
-  }
-
-  Widget _buildClassDetails({
-    required BuildContext context,
-    required AppLocalizations l10n,
-    required ClassDef? classDefData,
-    required Map<String, AbilityDef> abilityDefinitions,
-    required Map<String, EquipmentDef> equipmentDefinitions,
-  }) {
-    if (classDefData == null) {
-      return Text(l10n.noClassSelected);
-    }
-
-    final TextTheme textTheme = Theme.of(context).textTheme;
-
-    final List<Widget> details = <Widget>[
-      Text(
-        l10n.localizedCatalogLabel(classDefData.name),
-        style: textTheme.titleMedium,
-      ),
-    ];
-
-    final LocalizedText? description = classDefData.description;
-    if (description != null) {
-      details
-        ..add(const SizedBox(height: 8))
-        ..add(
-          Text(
-            l10n.localizedCatalogLabel(description),
-            style: textTheme.bodyMedium,
-          ),
-        );
-    }
-
-    details
-      ..add(const SizedBox(height: 8))
-      ..add(Text('${l10n.hitDiceLabel} : d${classDefData.hitDie}'))
-      ..add(const SizedBox(height: 12));
-
-    if (classDefData.primaryAbilities.isNotEmpty) {
-      details
-        ..add(
-          Text(
-            l10n.classPickerPrimaryAbilitiesTitle,
-            style: textTheme.titleSmall,
-          ),
-        )
-        ..add(const SizedBox(height: 4))
-        ..add(
-          Text(
-            _formatAbilities(
-              l10n,
-              abilityDefinitions,
-              classDefData.primaryAbilities,
-            ),
-          ),
-        )
-        ..add(const SizedBox(height: 12));
-    }
-
-    if (classDefData.savingThrows.isNotEmpty) {
-      details
-        ..add(
-          Text(
-            l10n.classPickerSavingThrowsTitle,
-            style: textTheme.titleSmall,
-          ),
-        )
-        ..add(const SizedBox(height: 4))
-        ..add(
-          Text(
-            _formatAbilities(
-              l10n,
-              abilityDefinitions,
-              classDefData.savingThrows,
-            ),
-          ),
-        )
-        ..add(const SizedBox(height: 12));
-    }
-
-    if (_classHasPowerInfo(classDefData)) {
-      details
-        ..add(ClassPowerDetails(classDef: classDefData))
-        ..add(const SizedBox(height: 12));
-    }
-
-    if (classDefData.weaponProficiencies.isNotEmpty) {
-      details
-        ..add(
-          Text(
-            l10n.classPickerWeaponProficienciesTitle,
-            style: textTheme.titleSmall,
-          ),
-        )
-        ..add(const SizedBox(height: 4))
-        ..add(
-          Text(
-            formatClassProficiencies(
-              values: classDefData.weaponProficiencies,
-              l10n: l10n,
-              category: ClassProficiencyCategory.weapon,
-            ),
-          ),
-        )
-        ..add(const SizedBox(height: 12));
-    }
-
-    if (classDefData.armorProficiencies.isNotEmpty) {
-      details
-        ..add(
-          Text(
-            l10n.classPickerArmorProficienciesTitle,
-            style: textTheme.titleSmall,
-          ),
-        )
-        ..add(const SizedBox(height: 4))
-        ..add(
-          Text(
-            formatClassProficiencies(
-              values: classDefData.armorProficiencies,
-              l10n: l10n,
-              category: ClassProficiencyCategory.armor,
-            ),
-          ),
-        )
-        ..add(const SizedBox(height: 12));
-    }
-
-    if (classDefData.toolProficiencies.isNotEmpty) {
-      details
-        ..add(
-          Text(
-            l10n.classPickerToolProficienciesTitle,
-            style: textTheme.titleSmall,
-          ),
-        )
-        ..add(const SizedBox(height: 4))
-        ..add(
-          Text(
-            formatClassProficiencies(
-              values: classDefData.toolProficiencies,
-              l10n: l10n,
-              category: ClassProficiencyCategory.tool,
-              equipmentDefinitions: equipmentDefinitions,
-            ),
-          ),
-        )
-        ..add(const SizedBox(height: 12));
-    }
-
-    if (classDefData.multiclassing?.hasAbilityRequirements ?? false) {
-      details
-        ..add(
-          ClassMulticlassingDetails(
-            classDef: classDefData,
-            abilityDefinitions: abilityDefinitions,
-            headingStyle: textTheme.titleSmall,
-          ),
-        )
-        ..add(const SizedBox(height: 12));
-    }
-
-    if (classDefData.level1.classFeatures.isNotEmpty) {
-      details
-        ..add(
-          ClassFeatureList(
-            heading: l10n.classPickerLevel1FeaturesTitle,
-            features: classDefData.level1.classFeatures,
-          ),
-        )
-        ..add(const SizedBox(height: 12));
-    }
-
-    details
-      ..add(
-        Text(
-          l10n.classSkillsChoice(
-            classDefData.level1.proficiencies.skillsChoose,
-          ),
-        ),
-      )
-      ..add(const SizedBox(height: 12))
-      ..add(
-        _ClassStartingEquipment(
-          classDef: classDefData,
-          equipmentDefinitions: equipmentDefinitions,
-        ),
-      );
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: details,
-    );
   }
 
 }
