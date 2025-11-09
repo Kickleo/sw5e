@@ -170,21 +170,26 @@ class _ClassStep extends StatelessWidget {
                 const SizedBox(height: 12),
               ],
             ],
-            if (classDefData.multiclassing?.hasAbilityRequirements ?? false) ...[
-              ClassMulticlassingDetails(
-                classDef: classDefData,
-                abilityDefinitions: abilityDefinitions,
-                headingStyle: Theme.of(context).textTheme.titleSmall,
-              ),
-              const SizedBox(height: 12),
-            ],
-            if (classDefData.level1.classFeatures.isNotEmpty) ...[
-              ClassFeatureList(
-                heading: l10n.classPickerLevel1FeaturesTitle,
-                features: classDefData.level1.classFeatures,
-              ),
-              const SizedBox(height: 12),
-            ],
+            ...(classDefData.multiclassing?.hasAbilityRequirements ?? false
+                ? <Widget>[
+                    ClassMulticlassingDetails(
+                      classDef: classDefData,
+                      abilityDefinitions: abilityDefinitions,
+                      headingStyle:
+                          Theme.of(context).textTheme.titleSmall,
+                    ),
+                    const SizedBox(height: 12),
+                  ]
+                : const <Widget>[]),
+            ...(classDefData.level1.classFeatures.isNotEmpty
+                ? <Widget>[
+                    ClassFeatureList(
+                      heading: l10n.classPickerLevel1FeaturesTitle,
+                      features: classDefData.level1.classFeatures,
+                    ),
+                    const SizedBox(height: 12),
+                  ]
+                : const <Widget>[]),
             Text(
               l10n.classSkillsChoice(
                 classDefData.level1.proficiencies.skillsChoose,
