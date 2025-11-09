@@ -5,6 +5,8 @@ class _AbilitiesStep extends HookWidget {
     required this.mode,
     required this.assignments,
     required this.pool,
+    required this.abilityLabel,
+    required this.abilityDefinitions,
     required this.onModeChanged,
     required this.onReroll,
     required this.onAssign,
@@ -13,6 +15,8 @@ class _AbilitiesStep extends HookWidget {
   final AbilityGenerationMode mode;
   final Map<String, int?> assignments;
   final List<int> pool;
+  final String Function(String ability) abilityLabel;
+  final Map<String, AbilityDef> abilityDefinitions;
   final ValueChanged<AbilityGenerationMode> onModeChanged;
   final VoidCallback onReroll;
   final void Function(String ability, int? value) onAssign;
@@ -22,8 +26,6 @@ class _AbilitiesStep extends HookWidget {
     final theme = Theme.of(context);
     final l10n = context.l10n;
     final abilityOrder = QuickCreateState.abilityOrder;
-    final abilityLabels = QuickCreateState.abilityLabels;
-    final abilityAbbreviations = QuickCreateState.abilityAbbreviations;
 
     final poolCounts = <int, int>{};
     for (final value in pool) {
@@ -171,9 +173,18 @@ class _AbilitiesStep extends HookWidget {
           const SizedBox(height: 16),
         ],
         ...abilityOrder.map((ability) {
-          final label = abilityLabels[ability] ?? ability.toUpperCase();
-          final abbr = abilityAbbreviations[ability] ?? ability.toUpperCase();
+          final label = abilityLabel(ability);
+          final abbr = l10n.abilityAbbreviation(ability);
           final currentValue = assignments[ability];
+          final AbilityDef? definition = abilityDefinitions[ability];
+          String? description;
+          if (definition?.description != null) {
+            final String resolved =
+                l10n.localizedCatalogLabel(definition!.description!).trim();
+            if (resolved.isNotEmpty) {
+              description = resolved;
+            }
+          }
           return Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -195,6 +206,13 @@ class _AbilitiesStep extends HookWidget {
                   ),
                   const SizedBox(height: 12),
                   buildControl(ability),
+                  if (description != null) ...[
+                    const SizedBox(height: 12),
+                    Text(
+                      description,
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ],
                 ],
               ),
             ),

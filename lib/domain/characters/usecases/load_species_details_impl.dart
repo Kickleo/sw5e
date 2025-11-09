@@ -43,10 +43,20 @@ class LoadSpeciesDetailsImpl implements LoadSpeciesDetails {
         traits.add(trait);
       }
 
+      final List<LanguageDef> languages = <LanguageDef>[];
+      for (final String languageId in species.languageIds) {
+        final LanguageDef? language = await _catalog.getLanguage(languageId);
+        if (language == null) {
+          continue;
+        }
+        languages.add(language);
+      }
+
       return appOk(
         QuickCreateSpeciesDetails(
           species: species,
           traits: List<TraitDef>.unmodifiable(traits),
+          languages: List<LanguageDef>.unmodifiable(languages),
           missingTraitIds: List<String>.unmodifiable(missingTraits),
         ),
       );

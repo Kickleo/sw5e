@@ -14,6 +14,9 @@ import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/species_picker_bloc.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/language_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/species_ability_bonuses.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/species_trait_details.dart';
 
 /// SpeciesPickerPage = écran modal permettant de choisir une espèce niveau 1.
 class SpeciesPickerPage extends StatefulWidget {
@@ -118,6 +121,7 @@ class _SpeciesPickerView extends StatelessWidget {
           child: _SpeciesList(
             speciesIds: state.speciesIds,
             selectedId: state.selectedSpeciesId,
+            speciesDefinitions: state.speciesDefinitions,
           ),
         ),
         const VerticalDivider(width: 1),
@@ -135,13 +139,19 @@ class _SpeciesPickerView extends StatelessWidget {
 }
 
 class _SpeciesList extends StatelessWidget {
-  const _SpeciesList({required this.speciesIds, required this.selectedId});
+  const _SpeciesList({
+    required this.speciesIds,
+    required this.selectedId,
+    required this.speciesDefinitions,
+  });
 
   final List<String> speciesIds;
   final String? selectedId;
+  final Map<String, SpeciesDef> speciesDefinitions;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView.builder(
       itemCount: speciesIds.length,
       itemBuilder: (BuildContext context, int index) {
@@ -149,13 +159,24 @@ class _SpeciesList extends StatelessWidget {
         final bool selected = id == selectedId;
         return ListTile(
           selected: selected,
-          title: Text(_titleCase(id)),
+          title: Text(_labelFor(l10n, id)),
           subtitle: Text(id),
           onTap: () =>
               context.read<SpeciesPickerBloc>().add(SpeciesPickerSpeciesRequested(id)),
         );
       },
     );
+  }
+
+  String _labelFor(AppLocalizations l10n, String id) {
+    final SpeciesDef? def = speciesDefinitions[id];
+    if (def != null) {
+      final String label = l10n.localizedCatalogLabel(def.name).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(id);
   }
 }
 
@@ -174,6 +195,18 @@ class _SpeciesDetails extends StatelessWidget {
       return Center(child: Text(l10n.noSpeciesSelected));
     }
 
+    final List<LanguageDef> languages = state.selectedLanguages;
+    final List<SpeciesAbilityBonus> bonuses = selected.abilityBonuses;
+    final bool showLanguages = LanguageDetailsCard.hasDisplayableContent(
+      l10n,
+      languages,
+      fallback: selected.languages,
+    );
+    final bool showAbilityBonuses =
+        SpeciesAbilityBonusesCard.hasDisplayableContent(bonuses);
+    final bool showTraitDetails = selected.traitIds.isNotEmpty ||
+        SpeciesTraitDetailsList.hasDisplayableContent(state.selectedTraits);
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: ListView(
@@ -187,23 +220,38 @@ class _SpeciesDetails extends StatelessWidget {
           const SizedBox(height: 12),
           Text(l10n.speciesSpeed(selected.speed.toString())),
           Text(l10n.speciesSize(selected.size.toString())),
+          if (showAbilityBonuses) ...<Widget>[
+            const SizedBox(height: 12),
+            SpeciesAbilityBonusesCard(bonuses: bonuses),
+          ],
+          if (showLanguages) ...<Widget>[
+            const SizedBox(height: 12),
+            LanguageDetailsCard(
+              languages: languages,
+              fallback: selected.languages,
+            ),
+          ],
+          if (selected.descriptionShort != null || selected.description != null)
+            const SizedBox(height: 16),
+          if (selected.descriptionShort != null)
+            Text(l10n.localizedCatalogLabel(selected.descriptionShort!)),
+          if (selected.description != null) ...<Widget>[
+            if (selected.descriptionShort != null)
+              const SizedBox(height: 8),
+            Text(l10n.localizedCatalogLabel(selected.description!)),
+          ],
           const SizedBox(height: 16),
           Text(
             l10n.speciesPickerTraitsTitle,
             style: theme.textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
-          if (state.selectedTraits.isEmpty)
+          if (!showTraitDetails)
             Text(l10n.speciesPickerNoTraits)
           else
-            ...state.selectedTraits.map(
-              (TraitDef trait) => Card(
-                child: ListTile(
-                  title: Text(_localizedName(l10n, trait.name)),
-                  subtitle:
-                      Text(l10n.localizedCatalogLabel(trait.description)),
-                ),
-              ),
+            SpeciesTraitDetailsList(
+              traitIds: selected.traitIds,
+              traitDefinitions: state.traitDefinitions,
             ),
         ],
       ),
@@ -217,7 +265,7 @@ String _localizedName(AppLocalizations l10n, LocalizedText text) {
 
 String _titleCase(String slug) {
   return slug
-      .split(RegExp(r'[-_]'))
+      .split(RegExp(r'[\-_.]'))
       .map((String part) =>
           part.isEmpty ? part : part[0].toUpperCase() + part.substring(1))
       .join(' ');

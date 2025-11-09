@@ -22,5 +22,53 @@
     },
     "source": { "book": "PHB SW5e", "section": "Abilities", "url": "https://sw5e.com/rules/phb/abilities" },
     "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "c3506a4a-7b70-4ad5-ae9e-531a731ac9ee",
+    "slug": "con",
+    "name": { "en": "Constitution", "fr": "Constitution" },
+    "abbr": "CON",
+    "description": {
+      "en": "Endurance, vitality, and resistance to harm.",
+      "fr": "Endurance, vitalité et résistance aux blessures."
+    },
+    "source": { "book": "PHB SW5e", "section": "Abilities", "url": "https://sw5e.com/rules/phb/abilities" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "e882e3e3-6b05-4c33-86ae-009b90aad351",
+    "slug": "int",
+    "name": { "en": "Intelligence", "fr": "Intelligence" },
+    "abbr": "INT",
+    "description": {
+      "en": "Reasoning, memory, and technical knowledge.",
+      "fr": "Raisonnement, mémoire et connaissances techniques."
+    },
+    "source": { "book": "PHB SW5e", "section": "Abilities", "url": "https://sw5e.com/rules/phb/abilities" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "e953761e-fc98-4495-aec1-bc7b475fb073",
+    "slug": "wis",
+    "name": { "en": "Wisdom", "fr": "Sagesse" },
+    "abbr": "WIS",
+    "description": {
+      "en": "Perception, intuition, and attunement to the Force.",
+      "fr": "Perception, intuition et affinité avec la Force."
+    },
+    "source": { "book": "PHB SW5e", "section": "Abilities", "url": "https://sw5e.com/rules/phb/abilities" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+  },
+  {
+    "id": "59c09290-510d-49fe-a18c-74a8a108dfc6",
+    "slug": "cha",
+    "name": { "en": "Charisma", "fr": "Charisme" },
+    "abbr": "CHA",
+    "description": {
+      "en": "Force of personality, leadership, and presence.",
+      "fr": "Force de personnalité, leadership et prestance."
+    },
+    "source": { "book": "PHB SW5e", "section": "Abilities", "url": "https://sw5e.com/rules/phb/abilities" },
+    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
   }
 ]

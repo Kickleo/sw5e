@@ -190,6 +190,10 @@ class PersistentCharacterRepository implements CharacterRepository {
       'speciesTraits': character.speciesTraits
           .map((CharacterTrait trait) => trait.id.value)
           .toList(),
+      'customizationOptions':
+          character.customizationOptionIds.toList(growable: false),
+      'forcePowers': character.forcePowerIds.toList(growable: false),
+      'techPowers': character.techPowerIds.toList(growable: false),
     };
   }
 
@@ -258,6 +262,15 @@ class PersistentCharacterRepository implements CharacterRepository {
                 id: TraitId(entry as String),
               ))
           .toSet(),
+      customizationOptionIds: Set<String>.from(
+        (record['customizationOptions'] as List<dynamic>? ?? const <dynamic>[]),
+      ),
+      forcePowerIds: Set<String>.from(
+        (record['forcePowers'] as List<dynamic>? ?? const <dynamic>[]),
+      ),
+      techPowerIds: Set<String>.from(
+        (record['techPowers'] as List<dynamic>? ?? const <dynamic>[]),
+      ),
     );
   }
 }

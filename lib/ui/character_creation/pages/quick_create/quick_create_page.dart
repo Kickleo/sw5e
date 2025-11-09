@@ -12,9 +12,11 @@ import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/core/connectivity/connectivity_providers.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
@@ -33,7 +35,15 @@ import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/class_picker_page.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/species_picker.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/character_section_divider.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_feature_list.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_multiclassing_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_power_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_proficiency_formatter.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/language_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/species_ability_bonuses.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/species_trait_details.dart';
 
 part 'quick_create_view.dart';
 part 'summary/character_summary_panel.dart';
@@ -74,6 +84,8 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
         ServiceLocator.resolve<LoadSpeciesDetails>();
     final LoadClassDetails loadClassDetails =
         ServiceLocator.resolve<LoadClassDetails>();
+    final LoadBackgroundDetails loadBackgroundDetails =
+        ServiceLocator.resolve<LoadBackgroundDetails>();
     final LoadCharacterDraft loadCharacterDraft =
         ServiceLocator.resolve<LoadCharacterDraft>();
     final FinalizeLevel1Character finalize =
@@ -103,6 +115,7 @@ class _QuickCreatePageState extends ConsumerState<QuickCreatePage> {
       loadQuickCreateCatalog: loadCatalog,
       loadSpeciesDetails: loadSpeciesDetails,
       loadClassDetails: loadClassDetails,
+      loadBackgroundDetails: loadBackgroundDetails,
       loadCharacterDraft: loadCharacterDraft,
       finalizeLevel1Character: finalize,
       logger: logger,

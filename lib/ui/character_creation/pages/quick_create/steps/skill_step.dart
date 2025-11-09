@@ -4,6 +4,7 @@ class _SkillStep extends StatelessWidget {
   const _SkillStep({
     required this.availableSkills,
     required this.skillDefinitions,
+    required this.abilityDefinitions,
     required this.chosenSkills,
     required this.requiredCount,
     required this.onToggle,
@@ -11,12 +12,13 @@ class _SkillStep extends StatelessWidget {
 
   final List<String> availableSkills;
   final Map<String, SkillDef> skillDefinitions;
+  final Map<String, AbilityDef> abilityDefinitions;
   final Set<String> chosenSkills;
   final int requiredCount;
   final ValueChanged<String> onToggle;
 
   String _titleCase(String slug) => slug
-      .split(RegExp(r'[-_]'))
+      .split(RegExp(r'[\-_.]'))
       .map(
         (part) =>
             part.isEmpty ? part : part[0].toUpperCase() + part.substring(1),
@@ -53,7 +55,17 @@ class _SkillStep extends StatelessWidget {
     }
 
     final sortedSkills = List<String>.from(availableSkills);
-    sortedSkills.sort();
+    sortedSkills.sort((String a, String b) {
+      final SkillDef? defA = skillDefinitions[a];
+      final SkillDef? defB = skillDefinitions[b];
+      final String labelA = defA != null
+          ? l10n.localizedCatalogLabel(defA.name)
+          : _titleCase(a);
+      final String labelB = defB != null
+          ? l10n.localizedCatalogLabel(defB.name)
+          : _titleCase(b);
+      return labelA.compareTo(labelB);
+    });
     final canSelectMore = chosenSkills.length < requiredCount;
 
     return ListView(
@@ -69,14 +81,24 @@ class _SkillStep extends StatelessWidget {
           final selected = chosenSkills.contains(skillId);
           final canToggle = selected || canSelectMore;
           final ability = skillDef?.ability ?? '';
+          final AbilityDef? abilityDef =
+              abilityDefinitions[ability.toLowerCase()];
           final subtitle = ability.isEmpty
               ? null
-              : Text(l10n.skillStepAbilitySubtitle(ability));
+              : Text(
+                  l10n.skillStepAbilitySubtitle(
+                    ability,
+                    catalogName: abilityDef?.name,
+                  ),
+                );
+          final String label = skillDef != null
+              ? l10n.localizedCatalogLabel(skillDef.name)
+              : _titleCase(skillId);
           return Card(
             child: CheckboxListTile(
               value: selected,
               onChanged: canToggle ? (_) => onToggle(skillId) : null,
-              title: Text(_titleCase(skillId)),
+              title: Text(label),
               subtitle: subtitle,
             ),
           );

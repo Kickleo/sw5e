@@ -65,11 +65,11 @@ class _EquipmentStep extends HookWidget {
           .where((id) {
             final def = equipmentDefinitions[id];
             if (def == null) return false;
-            final fr = def.name.fr.toLowerCase();
-            final en = def.name.en.toLowerCase();
-            return fr.contains(lower) ||
-                en.contains(lower) ||
-                id.contains(lower);
+            final Iterable<String> localizedValues = def.name.translations.values;
+            final bool matchesTranslation = localizedValues.any(
+              (value) => value.toLowerCase().contains(lower),
+            );
+            return matchesTranslation || id.contains(lower);
           })
           .toList(growable: false);
     }, [equipmentIds, equipmentDefinitions, query.value]);
@@ -87,10 +87,7 @@ class _EquipmentStep extends HookWidget {
     String equipmentLabel(String id) {
       final def = equipmentDefinitions[id];
       if (def == null) return id;
-      if (l10n.isFrench) {
-        return def.name.fr.isNotEmpty ? def.name.fr : def.name.en;
-      }
-      return def.name.en.isNotEmpty ? def.name.en : def.name.fr;
+      return l10n.localizedCatalogLabel(def.name);
     }
 
     final header = Column(
@@ -270,23 +267,100 @@ class _EquipmentStep extends HookWidget {
                     );
                   }
                   final qty = chosenEquipment[id] ?? 0;
+                  final List<Widget> subtitleLines = <Widget>[
+                    Text(
+                      l10n.equipmentStepListSubtitle(
+                        def.cost,
+                        _formatWeight(def.weightG),
+                        _titleCase(def.type),
+                      ),
+                    ),
+                  ];
+                  if (def.weaponCategory != null &&
+                      def.weaponCategory!.trim().isNotEmpty) {
+                    subtitleLines.add(
+                      Text(
+                        l10n.equipmentStepWeaponCategory(
+                          _titleCase(def.weaponCategory!),
+                        ),
+                      ),
+                    );
+                  }
+                  if (def.weaponDamage.isNotEmpty) {
+                    for (final WeaponDamage damage in def.weaponDamage) {
+                      final String dice = _formatWeaponDice(damage);
+                      final String typeLabel = damage.damageTypeName != null
+                          ? l10n.localizedCatalogLabel(damage.damageTypeName!)
+                          : _titleCase(damage.damageType);
+                      subtitleLines.add(
+                        Text(
+                          l10n.equipmentStepWeaponDamage(dice, typeLabel),
+                        ),
+                      );
+                      if (damage.damageTypeNotes != null) {
+                        final String notes =
+                            l10n.localizedCatalogLabel(damage.damageTypeNotes!);
+                        if (notes.trim().isNotEmpty) {
+                          subtitleLines.add(
+                            Text(
+                              l10n.equipmentStepDamageNotes(notes.trim()),
+                            ),
+                          );
+                        }
+                      }
+                    }
+                  }
+                  if (def.weaponRange != null &&
+                      (def.weaponRange!.primary != null ||
+                          def.weaponRange!.maximum != null)) {
+                    subtitleLines.add(
+                      Text(
+                        l10n.equipmentStepWeaponRange(
+                          def.weaponRange!.primary,
+                          def.weaponRange!.maximum,
+                        ),
+                      ),
+                    );
+                  }
+                  if (def.weaponProperties.isNotEmpty) {
+                    final String formattedProperties = def.weaponProperties
+                        .map(_titleCase)
+                        .join(', ');
+                    subtitleLines.add(
+                      Text(
+                        l10n.equipmentStepWeaponProperties(
+                          formattedProperties,
+                        ),
+                      ),
+                    );
+                  }
+                  if (def.rarity != null && def.rarity!.trim().isNotEmpty) {
+                    subtitleLines.add(
+                      Text(
+                        l10n.equipmentStepRarity(
+                          _titleCase(def.rarity!),
+                        ),
+                      ),
+                    );
+                  }
+                  if (def.description != null) {
+                    subtitleLines.add(
+                      Text(
+                        l10n.localizedCatalogLabel(def.description!),
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    );
+                  }
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ListTile(
                         title: Text(
-                          l10n.isFrench && def.name.fr.isNotEmpty
-                              ? def.name.fr
-                              : (def.name.en.isNotEmpty
-                                  ? def.name.en
-                                  : def.name.fr),
+                          l10n.localizedCatalogLabel(def.name),
                         ),
-                        subtitle: Text(
-                          l10n.equipmentStepListSubtitle(
-                            def.cost,
-                            _formatWeight(def.weightG),
-                            def.type,
-                          ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: subtitleLines,
                         ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -358,4 +432,30 @@ class _EquipmentStep extends HookWidget {
     }
     return '${kilograms.toStringAsFixed(2)} kg';
   }
+
+  String _formatWeaponDice(WeaponDamage damage) {
+    final int? count = damage.diceCount;
+    final int? die = damage.diceDie;
+    final int? modifier = damage.diceModifier;
+    if (count == null || die == null) {
+      if (modifier != null && modifier != 0) {
+        return modifier > 0 ? '+$modifier' : '$modifier';
+      }
+      return '—';
+    }
+    final String base = '${count}d$die';
+    if (modifier == null || modifier == 0) {
+      return base;
+    }
+    final String mod = modifier > 0 ? '+$modifier' : '$modifier';
+    return '$base$mod';
+  }
+
+  String _titleCase(String slug) => slug
+      .replaceAll('_', ' ')
+      .replaceAll('-', ' ')
+      .split(RegExp(r'\s+'))
+      .where((part) => part.isNotEmpty)
+      .map((part) => part[0].toUpperCase() + part.substring(1))
+      .join(' ');
 }
