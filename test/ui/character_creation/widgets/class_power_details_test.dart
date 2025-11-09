@@ -10,17 +10,17 @@ void main() {
 
   const ClassDef sentinel = ClassDef(
     id: 'sentinel',
-    name: LocalizedText(en: 'Sentinel', fr: 'Sentinelle'),
+    name: const LocalizedText(en: 'Sentinel', fr: 'Sentinelle'),
     hitDie: 10,
-    level1: ClassLevel1Data(
-      proficiencies: ClassLevel1Proficiencies(
+    level1: const ClassLevel1Data(
+      proficiencies: const ClassLevel1Proficiencies(
         skillsChoose: 2,
-        skillsFrom: <String>['perception'],
+        skillsFrom: const <String>['perception'],
       ),
-      startingEquipment: <StartingEquipmentLine>[],
+      startingEquipment: const <StartingEquipmentLine>[],
     ),
     powerSource: 'force',
-    powerList: ClassPowerList(
+    powerList: const ClassPowerList(
       forceAllowed: true,
       techAllowed: false,
       spellcastingProgression: 'half',
@@ -56,14 +56,14 @@ void main() {
       (WidgetTester tester) async {
     const ClassDef noPower = ClassDef(
       id: 'warrior',
-      name: LocalizedText(en: 'Warrior'),
+      name: const LocalizedText(en: 'Warrior'),
       hitDie: 10,
-      level1: ClassLevel1Data(
-        proficiencies: ClassLevel1Proficiencies(
+      level1: const ClassLevel1Data(
+        proficiencies: const ClassLevel1Proficiencies(
           skillsChoose: 2,
-          skillsFrom: <String>['athletics'],
+          skillsFrom: const <String>['athletics'],
         ),
-        startingEquipment: <StartingEquipmentLine>[],
+        startingEquipment: const <StartingEquipmentLine>[],
       ),
     );
 

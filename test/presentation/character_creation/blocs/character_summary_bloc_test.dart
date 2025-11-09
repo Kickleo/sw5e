@@ -329,24 +329,24 @@ void main() {
         id: 'guardian',
         name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
         hitDie: 10,
-        level1: ClassLevel1Data(
-          proficiencies: ClassLevel1Proficiencies(
+        level1: const ClassLevel1Data(
+          proficiencies: const ClassLevel1Proficiencies(
             skillsChoose: 2,
-            skillsFrom: <String>['perception'],
+            skillsFrom: const <String>['perception'],
           ),
-          startingEquipment: <StartingEquipmentLine>[],
-          classFeatures: <ClassFeature>[
-            ClassFeature(
-              name: LocalizedText(en: 'Defensive Stance', fr: 'Posture défensive'),
-              description: LocalizedText(
+          startingEquipment: const <StartingEquipmentLine>[],
+          classFeatures: const <ClassFeature>[
+            const ClassFeature(
+              name: const LocalizedText(en: 'Defensive Stance', fr: 'Posture défensive'),
+              description: const LocalizedText(
                 en: 'Adopt a stance to guard allies.',
                 fr: 'Adoptez une posture pour protéger vos alliés.',
               ),
-              effects: <CatalogFeatureEffect>[
-                CatalogFeatureEffect(
+              effects: const <CatalogFeatureEffect>[
+                const CatalogFeatureEffect(
                   id: 'effect-1',
                   kind: 'bonus',
-                  text: LocalizedText(
+                  text: const LocalizedText(
                     en: 'Gain advantage on opportunity attacks.',
                     fr: 'Gagnez l’avantage sur les attaques d’opportunité.',
                   ),
