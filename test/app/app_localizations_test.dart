@@ -299,7 +299,7 @@ void main() {
           spellcastingProgression: 'full',
         ),
         multiclassing: ClassMulticlassing(
-          abilityRequirements: const <String, int>{'wis': 13, 'cha': 13},
+          abilityRequirements: <String, int>{'wis': 13, 'cha': 13},
         ),
       );
 
@@ -364,16 +364,16 @@ void main() {
           'diplomat': diplomatBackground,
         },
         skillDefinitions: <String, SkillDef>{
-          'persuasion': SkillDef(
+          'persuasion': const SkillDef(
             id: 'persuasion',
             ability: 'cha',
-            name: const LocalizedText(en: 'Persuasion', fr: 'Persuasion (FR)'),
+            name: LocalizedText(en: 'Persuasion', fr: 'Persuasion (FR)'),
           ),
         },
         equipmentDefinitions: <String, EquipmentDef>{
-          'gravity-throne': EquipmentDef(
+          'gravity-throne': const EquipmentDef(
             id: 'gravity-throne',
-            name: const LocalizedText(
+            name: LocalizedText(
               en: 'Gravity Throne',
               fr: 'Trône gravitationnel',
             ),
@@ -381,9 +381,9 @@ void main() {
             weightG: 40000,
             cost: 5000,
           ),
-          'diplomat-kit': EquipmentDef(
+          'diplomat-kit': const EquipmentDef(
             id: 'diplomat-kit',
-            name: const LocalizedText(
+            name: LocalizedText(
               en: 'Diplomat Kit',
               fr: 'Kit diplomatique',
             ),
@@ -393,13 +393,13 @@ void main() {
           ),
         },
         traitDefinitions: <String, TraitDef>{
-          'gravity-throne-savants': TraitDef(
+          'gravity-throne-savants': const TraitDef(
             id: 'gravity-throne-savants',
-            name: const LocalizedText(
+            name: LocalizedText(
               en: 'Gravity Throne Savants',
               fr: 'Savants du trône',
             ),
-            description: const LocalizedText(
+            description: LocalizedText(
               en: 'Linked to their gravity thrones.',
               fr: 'Reliés à leurs trônes de gravité.',
             ),

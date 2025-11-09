@@ -151,9 +151,9 @@ void main() {
     );
 
     when(() => catalog.getClass('guardian')).thenAnswer(
-      (_) async => ClassDef(
+      (_) async => const ClassDef(
         id: 'guardian',
-        name: const LocalizedText(en: 'Guardian', fr: 'Gardien'),
+        name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
         hitDie: 10,
         level1: const ClassLevel1Data(
           proficiencies: ClassLevel1Proficiencies(

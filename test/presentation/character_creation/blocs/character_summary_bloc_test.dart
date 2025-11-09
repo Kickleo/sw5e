@@ -94,7 +94,7 @@ void main() {
         speed: 30,
         size: 'medium',
         languageIds: const <String>['galactic-basic'],
-        languages: LocalizedText(en: 'Basic', fr: 'Basique'),
+        languages: const LocalizedText(en: 'Basic', fr: 'Basique'),
       );
     });
 
@@ -112,7 +112,7 @@ void main() {
         id: id,
         name: LocalizedText(en: id, fr: id),
         hitDie: 8,
-        level1: ClassLevel1Data(
+        level1: const ClassLevel1Data(
           proficiencies: const ClassLevel1Proficiencies(
             skillsChoose: 0,
             skillsFrom: <String>[],
