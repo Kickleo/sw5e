@@ -10,17 +10,17 @@ void main() {
 
   const ClassDef sentinel = ClassDef(
     id: 'sentinel',
-    name: const LocalizedText(en: 'Sentinel', fr: 'Sentinelle'),
+    name: LocalizedText(en: 'Sentinel', fr: 'Sentinelle'),
     hitDie: 10,
-    level1: const ClassLevel1Data(
-      proficiencies: const ClassLevel1Proficiencies(
+    level1: ClassLevel1Data(
+      proficiencies: ClassLevel1Proficiencies(
         skillsChoose: 2,
-        skillsFrom: const <String>['perception'],
+        skillsFrom: <String>['perception'],
       ),
       startingEquipment: const <StartingEquipmentLine>[],
     ),
     powerSource: 'force',
-    powerList: const ClassPowerList(
+    powerList: ClassPowerList(
       forceAllowed: true,
       techAllowed: false,
       spellcastingProgression: 'half',
@@ -40,7 +40,7 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: ClassPowerDetails(classDef: sentinel),
+          body: const ClassPowerDetails(classDef: sentinel),
         ),
       ),
     );
@@ -56,12 +56,12 @@ void main() {
       (WidgetTester tester) async {
     const ClassDef noPower = ClassDef(
       id: 'warrior',
-      name: const LocalizedText(en: 'Warrior'),
+      name: LocalizedText(en: 'Warrior'),
       hitDie: 10,
-      level1: const ClassLevel1Data(
-        proficiencies: const ClassLevel1Proficiencies(
+      level1: ClassLevel1Data(
+        proficiencies: ClassLevel1Proficiencies(
           skillsChoose: 2,
-          skillsFrom: const <String>['athletics'],
+          skillsFrom: <String>['athletics'],
         ),
         startingEquipment: const <StartingEquipmentLine>[],
       ),
@@ -78,7 +78,7 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: ClassPowerDetails(classDef: noPower),
+          body: const ClassPowerDetails(classDef: noPower),
         ),
       ),
     );

@@ -9,17 +9,17 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   const ClassFeature guardianFocus = ClassFeature(
-    name: const LocalizedText(en: "Guardian's Focus", fr: 'Focalisation du gardien'),
-    description: const LocalizedText(
+    name: LocalizedText(en: "Guardian's Focus", fr: 'Focalisation du gardien'),
+    description: LocalizedText(
       en: 'Sharpen senses to defend allies.',
       fr: 'Affinez vos sens pour défendre vos alliés.',
     ),
-    effects: const <CatalogFeatureEffect>[
-      const CatalogFeatureEffect(
+    effects: <CatalogFeatureEffect>[
+      CatalogFeatureEffect(
         id: 'feature-effect-1',
         kind: 'grant',
         target: 'skill',
-        text: const LocalizedText(
+        text: LocalizedText(
           en: 'Gain proficiency in a sentinel skill.',
           fr: 'Gagnez la maîtrise d\'une compétence de sentinelle.',
         ),
@@ -29,64 +29,64 @@ void main() {
 
   testWidgets('renders heading, name, description and effect text',
       (WidgetTester tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('fr'),
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: const Scaffold(
-          body: ClassFeatureList(
-            heading: 'Capacités de niveau 1',
-            features: const <ClassFeature>[guardianFocus],
+      await tester.pumpWidget(
+        MaterialApp(
+          locale: const Locale('fr'),
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          home: const Scaffold(
+            body: const ClassFeatureList(
+              heading: 'Capacités de niveau 1',
+              features: <ClassFeature>[guardianFocus],
+            ),
           ),
         ),
-      ),
-    );
+      );
 
-    expect(find.text('Capacités de niveau 1'), findsOneWidget);
-    expect(find.text('Focalisation du gardien'), findsOneWidget);
-    expect(
-      find.text('Affinez vos sens pour défendre vos alliés.'),
-      findsOneWidget,
-    );
-    expect(
-      find.text("Gagnez la maîtrise d'une compétence de sentinelle."),
-      findsOneWidget,
-    );
+      expect(find.text('Capacités de niveau 1'), findsOneWidget);
+      expect(find.text('Focalisation du gardien'), findsOneWidget);
+      expect(
+        find.text('Affinez vos sens pour défendre vos alliés.'),
+        findsOneWidget,
+      );
+      expect(
+        find.text("Gagnez la maîtrise d'une compétence de sentinelle."),
+        findsOneWidget,
+      );
   });
 
   testWidgets('does not render when features have no displayable content',
       (WidgetTester tester) async {
-    const ClassFeature emptyFeature = ClassFeature(
-      name: const LocalizedText(),
-      effects: const <CatalogFeatureEffect>[],
-    );
+      const ClassFeature emptyFeature = ClassFeature(
+        name: LocalizedText(),
+        effects: <CatalogFeatureEffect>[],
+      );
 
-    await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('en'),
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: const Scaffold(
-          body: ClassFeatureList(
-            heading: 'Level 1 features',
-            features: const <ClassFeature>[emptyFeature],
+      await tester.pumpWidget(
+        MaterialApp(
+          locale: const Locale('en'),
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          home: const Scaffold(
+            body: const ClassFeatureList(
+              heading: 'Level 1 features',
+              features: <ClassFeature>[emptyFeature],
+            ),
           ),
         ),
-      ),
-    );
+      );
 
-    expect(find.text('Level 1 features'), findsNothing);
-    expect(find.byType(ClassFeatureList), findsOneWidget);
+      expect(find.text('Level 1 features'), findsNothing);
+      expect(find.byType(ClassFeatureList), findsOneWidget);
   });
 }

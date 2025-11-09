@@ -108,19 +108,19 @@ void main() {
 
     when(() => mockCatalog.getClass(any())).thenAnswer((invocation) async {
       final String id = invocation.positionalArguments.first as String;
-      return ClassDef(
-        id: id,
-        name: LocalizedText(en: id, fr: id),
-        hitDie: 8,
-        level1: ClassLevel1Data(
-          proficiencies: ClassLevel1Proficiencies(
-            skillsChoose: 0,
-            skillsFrom: <String>[],
+        return ClassDef(
+          id: id,
+          name: LocalizedText(en: id, fr: id),
+          hitDie: 8,
+          level1: const ClassLevel1Data(
+            proficiencies: ClassLevel1Proficiencies(
+              skillsChoose: 0,
+              skillsFrom: <String>[],
+            ),
+            startingEquipment: const <StartingEquipmentLine>[],
           ),
-          startingEquipment: const <StartingEquipmentLine>[],
-        ),
-      );
-    });
+        );
+      });
 
     when(() => mockCatalog.getBackground(any())).thenAnswer((invocation) async {
       final String id = invocation.positionalArguments.first as String;
@@ -329,24 +329,24 @@ void main() {
         id: 'guardian',
         name: LocalizedText(en: 'Guardian', fr: 'Gardien'),
         hitDie: 10,
-        level1: const ClassLevel1Data(
-          proficiencies: const ClassLevel1Proficiencies(
+        level1: ClassLevel1Data(
+          proficiencies: ClassLevel1Proficiencies(
             skillsChoose: 2,
-            skillsFrom: const <String>['perception'],
+            skillsFrom: <String>['perception'],
           ),
           startingEquipment: const <StartingEquipmentLine>[],
-          classFeatures: const <ClassFeature>[
-            const ClassFeature(
-              name: const LocalizedText(en: 'Defensive Stance', fr: 'Posture défensive'),
-              description: const LocalizedText(
+          classFeatures: <ClassFeature>[
+            ClassFeature(
+              name: LocalizedText(en: 'Defensive Stance', fr: 'Posture défensive'),
+              description: LocalizedText(
                 en: 'Adopt a stance to guard allies.',
                 fr: 'Adoptez une posture pour protéger vos alliés.',
               ),
-              effects: const <CatalogFeatureEffect>[
-                const CatalogFeatureEffect(
+              effects: <CatalogFeatureEffect>[
+                CatalogFeatureEffect(
                   id: 'effect-1',
                   kind: 'bonus',
-                  text: const LocalizedText(
+                  text: LocalizedText(
                     en: 'Gain advantage on opportunity attacks.',
                     fr: 'Gagnez l’avantage sur les attaques d’opportunité.',
                   ),
