@@ -170,8 +170,7 @@ class _ClassStep extends StatelessWidget {
                 const SizedBox(height: 12),
               ],
             ],
-            if (classDefData.multiclassing?.hasAbilityRequirements ?? false)
-              ...[
+            if (classDefData.multiclassing?.hasAbilityRequirements ?? false) ...[
                 ClassMulticlassingDetails(
                   classDef: classDefData,
                   abilityDefinitions: abilityDefinitions,
