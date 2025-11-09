@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_trait.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';
 
 /// Provides application-specific translations for supported locales.
 class AppLocalizations {
@@ -586,7 +588,7 @@ class AppLocalizations {
     if (maximumMeters != null) {
       return '$prefix${formatValue(maximumMeters)}';
     }
-    return '${prefix}—';
+    return '$prefix—';
   }
 
   String equipmentStepWeaponProperties(String properties) => isFrench
@@ -1219,7 +1221,7 @@ class AppLocalizations {
           .toList();
       if (grantedSkillLabels.isNotEmpty) {
         backgroundLines.add(
-          '${summaryBackgroundSkillsTitle}: ${grantedSkillLabels.join(', ')}',
+          '$summaryBackgroundSkillsTitle: ${grantedSkillLabels.join(', ')}',
         );
       }
 
@@ -1234,7 +1236,7 @@ class AppLocalizations {
           .toList();
       if (toolLabels.isNotEmpty) {
         backgroundLines.add(
-          '${summaryBackgroundToolsTitle}: ${toolLabels.join(', ')}',
+          '$summaryBackgroundToolsTitle: ${toolLabels.join(', ')}',
         );
       }
 
@@ -1243,7 +1245,7 @@ class AppLocalizations {
         final String featureName = localizedCatalogLabel(feature.name).trim();
         if (featureName.isNotEmpty) {
           backgroundLines.add(
-            '${summaryBackgroundFeatureTitle}: $featureName',
+            '$summaryBackgroundFeatureTitle: $featureName',
           );
         }
 
@@ -1356,7 +1358,7 @@ class AppLocalizations {
       }
     }
 
-    String _powerLine(PowerDef? def, String id) {
+    String powerLine(PowerDef? def, String id) {
       String label = _titleCase(id);
       if (def != null) {
         final String localized = localizedCatalogLabel(def.name).trim();
@@ -1380,12 +1382,12 @@ class AppLocalizations {
     }
 
     final List<String> forcePowerLines = character.forcePowerIds
-        .map((String id) => _powerLine(forcePowerDefinitions[id], id))
+        .map((String id) => powerLine(forcePowerDefinitions[id], id))
         .where((String value) => value.trim().isNotEmpty)
         .toList();
 
     final List<String> techPowerLines = character.techPowerIds
-        .map((String id) => _powerLine(techPowerDefinitions[id], id))
+        .map((String id) => powerLine(techPowerDefinitions[id], id))
         .where((String value) => value.trim().isNotEmpty)
         .toList();
 
@@ -1429,7 +1431,7 @@ class AppLocalizations {
         ..writeln('Initiative : ${character.initiative.value}')
         ..writeln('Crédits : ${character.credits.value}')
         ..writeln(
-          '${speciesAbilityBonusesTitle} : ${abilityBonusesText.isEmpty ? "—" : abilityBonusesText}',
+          '$speciesAbilityBonusesTitle : ${abilityBonusesText.isEmpty ? "—" : abilityBonusesText}',
         )
         ..writeln('Langues : ${languages.isEmpty ? "—" : languages}')
         ..writeln('Inventaire : $inventory')
@@ -1440,7 +1442,7 @@ class AppLocalizations {
       if (classLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryClassFeatures} :');
+          ..writeln('$summaryClassFeatures :');
         for (final String line in classLines) {
           buffer.writeln('• $line');
         }
@@ -1448,7 +1450,7 @@ class AppLocalizations {
       if (backgroundLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryBackgroundDetails} :');
+          ..writeln('$summaryBackgroundDetails :');
         for (final String line in backgroundLines) {
           buffer.writeln('• $line');
         }
@@ -1456,7 +1458,7 @@ class AppLocalizations {
       if (customizationLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryCustomizationOptionsTitle} :');
+          ..writeln('$summaryCustomizationOptionsTitle :');
         for (final String line in customizationLines) {
           buffer.writeln('• $line');
         }
@@ -1464,7 +1466,7 @@ class AppLocalizations {
       if (forcePowerLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryForcePowersTitle} :');
+          ..writeln('$summaryForcePowersTitle :');
         for (final String line in forcePowerLines) {
           buffer.writeln('• $line');
         }
@@ -1472,7 +1474,7 @@ class AppLocalizations {
       if (techPowerLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryTechPowersTitle} :');
+          ..writeln('$summaryTechPowersTitle :');
         for (final String line in techPowerLines) {
           buffer.writeln('• $line');
         }
@@ -1489,7 +1491,7 @@ class AppLocalizations {
         ..writeln('Initiative: ${character.initiative.value}')
         ..writeln('Credits: ${character.credits.value}')
         ..writeln(
-          '${speciesAbilityBonusesTitle}: ${abilityBonusesText.isEmpty ? "—" : abilityBonusesText}',
+          '$speciesAbilityBonusesTitle: ${abilityBonusesText.isEmpty ? "—" : abilityBonusesText}',
         )
         ..writeln('Languages: ${languages.isEmpty ? "—" : languages}')
         ..writeln('Inventory: $inventory')
@@ -1500,7 +1502,7 @@ class AppLocalizations {
       if (classLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryClassFeatures}:');
+          ..writeln('$summaryClassFeatures:');
         for (final String line in classLines) {
           buffer.writeln('• $line');
         }
@@ -1508,7 +1510,7 @@ class AppLocalizations {
       if (backgroundLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryBackgroundDetails}:');
+          ..writeln('$summaryBackgroundDetails:');
         for (final String line in backgroundLines) {
           buffer.writeln('• $line');
         }
@@ -1516,7 +1518,7 @@ class AppLocalizations {
       if (customizationLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryCustomizationOptionsTitle}:');
+          ..writeln('$summaryCustomizationOptionsTitle:');
         for (final String line in customizationLines) {
           buffer.writeln('• $line');
         }
@@ -1524,7 +1526,7 @@ class AppLocalizations {
       if (forcePowerLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryForcePowersTitle}:');
+          ..writeln('$summaryForcePowersTitle:');
         for (final String line in forcePowerLines) {
           buffer.writeln('• $line');
         }
@@ -1532,7 +1534,7 @@ class AppLocalizations {
       if (techPowerLines.isNotEmpty) {
         buffer
           ..writeln()
-          ..writeln('${summaryTechPowersTitle}:');
+          ..writeln('$summaryTechPowersTitle:');
         for (final String line in techPowerLines) {
           buffer.writeln('• $line');
         }

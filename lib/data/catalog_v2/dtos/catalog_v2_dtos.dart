@@ -8,7 +8,179 @@
 library;
 
 import 'package:meta/meta.dart';
-import 'package:sw5e_manager/data/catalog/dtos/catalog_dtos.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+
+@immutable
+class LocalizedTextDto {
+  const LocalizedTextDto({
+    required this.en,
+    required this.fr,
+    this.otherTranslations = const <String, String>{},
+  });
+
+  factory LocalizedTextDto.fromJson(Map<String, dynamic> json) {
+    final Map<String, String> normalized = _readLocalizedMap(json);
+    final Map<String, String> others = Map<String, String>.from(normalized)
+      ..remove('en')
+      ..remove('fr');
+
+    final String resolvedEn = _resolveLocalizedValue(
+      normalized['en'],
+      normalized['fr'],
+      others.values,
+    );
+    final String resolvedFr = _resolveLocalizedValue(
+      normalized['fr'],
+      resolvedEn,
+      others.values,
+    );
+
+    return LocalizedTextDto(
+      en: resolvedEn,
+      fr: resolvedFr,
+      otherTranslations: Map<String, String>.unmodifiable(others),
+    );
+  }
+
+  static LocalizedTextDto fromAny(dynamic raw) {
+    final LocalizedTextDto? maybe = maybeFromAny(raw);
+    if (maybe != null) {
+      return maybe;
+    }
+    throw ArgumentError('Unsupported localized value: ${raw.runtimeType}');
+  }
+
+  static LocalizedTextDto? maybeFromAny(dynamic raw) {
+    if (raw == null) {
+      return null;
+    }
+    if (raw is LocalizedTextDto) {
+      return raw;
+    }
+    if (raw is LocalizedText) {
+      return LocalizedTextDto(
+        en: raw.en,
+        fr: raw.fr,
+        otherTranslations: raw.otherTranslations,
+      );
+    }
+    if (raw is String) {
+      final String trimmed = raw.trim();
+      return LocalizedTextDto(en: trimmed, fr: trimmed);
+    }
+    if (raw is Map<String, dynamic>) {
+      return LocalizedTextDto.fromJson(raw);
+    }
+    if (raw is Map) {
+      return LocalizedTextDto.fromJson(
+        raw.map(
+          (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+        ),
+      );
+    }
+    return null;
+  }
+
+  final String en;
+  final String fr;
+  final Map<String, String> otherTranslations;
+
+  LocalizedText toDomain() => LocalizedText(
+        en: en,
+        fr: fr,
+        otherTranslations: otherTranslations,
+      );
+}
+
+String _resolveLocalizedValue(
+  String? primary,
+  String? fallback,
+  Iterable<String> additionalFallbacks,
+) {
+  final String? trimmedPrimary = primary?.trim();
+  if (trimmedPrimary != null && trimmedPrimary.isNotEmpty) {
+    return trimmedPrimary;
+  }
+  final String? trimmedFallback = fallback?.trim();
+  if (trimmedFallback != null && trimmedFallback.isNotEmpty) {
+    return trimmedFallback;
+  }
+  for (final String candidate in additionalFallbacks) {
+    final String trimmed = candidate.trim();
+    if (trimmed.isNotEmpty) {
+      return trimmed;
+    }
+  }
+  return '';
+}
+
+Map<String, String> _readLocalizedMap(dynamic raw) {
+  if (raw == null) {
+    return const <String, String>{};
+  }
+  if (raw is Map<String, dynamic>) {
+    final Map<String, String> result = <String, String>{};
+    raw.forEach((String key, dynamic value) {
+      final String? resolved = _readLocalizedScalar(value);
+      if (resolved != null && resolved.trim().isNotEmpty) {
+        result[key.toLowerCase()] = resolved.trim();
+      }
+    });
+    return result;
+  }
+  if (raw is Map) {
+    final Map<String, dynamic> converted = raw.map(
+      (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+    );
+    return _readLocalizedMap(converted);
+  }
+  final String? scalar = _readLocalizedScalar(raw);
+  if (scalar == null || scalar.trim().isEmpty) {
+    return const <String, String>{};
+  }
+  return <String, String>{'und': scalar.trim()};
+}
+
+String? _readLocalizedScalar(dynamic raw) {
+  if (raw == null) {
+    return null;
+  }
+  if (raw is String) {
+    return raw;
+  }
+  if (raw is LocalizedTextDto) {
+    return raw.en.trim().isNotEmpty ? raw.en : raw.fr;
+  }
+  if (raw is LocalizedText) {
+    return raw.en.trim().isNotEmpty ? raw.en : raw.fr;
+  }
+  if (raw is Map<String, dynamic>) {
+    for (final MapEntry<String, dynamic> entry in raw.entries) {
+      final String? nested = _readLocalizedScalar(entry.value);
+      if (nested != null && nested.trim().isNotEmpty) {
+        return nested;
+      }
+    }
+    return null;
+  }
+  if (raw is Map) {
+    return _readLocalizedScalar(
+      raw.map(
+        (dynamic key, dynamic value) => MapEntry(key.toString(), value),
+      ),
+    );
+  }
+  if (raw is Iterable) {
+    for (final dynamic value in raw) {
+      final String? nested = _readLocalizedScalar(value);
+      if (nested != null && nested.trim().isNotEmpty) {
+        return nested;
+      }
+    }
+    return null;
+  }
+  return raw.toString();
+}
 
 @immutable
 class CatalogV2AbilityDto {

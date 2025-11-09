@@ -1,4 +1,7 @@
-# Catalogue SW5e — Spécification (snapshot)
+# Catalogue SW5e — Spécification (legacy snapshot)
+
+> ℹ️ Ce dossier contient l'ancien format d'assets laissé en référence historique.
+> L'application s'appuie désormais exclusivement sur `assets/catalog_v2/`.
 
 ## Métadonnées
 - `rules_version`: "2025-10-06" (doit matcher ADR-0002)

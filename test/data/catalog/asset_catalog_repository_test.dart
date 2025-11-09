@@ -15,7 +15,7 @@ void main() {
   // Nécessaire pour accéder à rootBundle dans les tests
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('charge le catalogue depuis assets/catalog/*', () async {
+  test('charge le catalogue depuis assets/catalog_v2/*', () async {
     SpeciesEffectLocalizationCatalog.resetToDefaults();
     final repo = AssetCatalogRepository();
 
