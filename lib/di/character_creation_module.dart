@@ -33,6 +33,8 @@ import 'package:sw5e_manager/domain/characters/usecases/load_background_details.
 import 'package:sw5e_manager/domain/characters/usecases/load_background_details_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';

@@ -376,6 +376,24 @@ class _ClassStartingEquipment extends StatelessWidget {
       ],
     );
   }
+
+  bool _hasPowerInfo(ClassDef def) {
+    if (def.powerSource != null && def.powerSource!.trim().isNotEmpty) {
+      return true;
+    }
+    return def.powerList != null;
+  }
+}
+
+bool _classHasPowerInfo(ClassDef def) {
+  if (def.powerSource != null && def.powerSource!.trim().isNotEmpty) {
+    return true;
+  }
+  final ClassPowerList? powerList = def.powerList;
+  if (powerList == null) {
+    return false;
+  }
+  return powerList.forceAllowed || powerList.techAllowed;
 }
 
 bool _classHasPowerInfo(ClassDef def) {
