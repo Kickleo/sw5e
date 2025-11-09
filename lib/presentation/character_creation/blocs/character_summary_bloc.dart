@@ -21,6 +21,8 @@ import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/services/catalog_lookup_service.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';

@@ -16,6 +16,7 @@ import 'package:sw5e_manager/domain/characters/localization/species_effect_local
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
@@ -35,6 +36,7 @@ import 'package:sw5e_manager/presentation/character_creation/blocs/quick_create_
 import 'package:sw5e_manager/presentation/character_creation/states/quick_create_state.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/class_picker_page.dart';
 import 'package:sw5e_manager/ui/character_creation/pages/species_picker.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/character_section_divider.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_feature_list.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_multiclassing_details.dart';

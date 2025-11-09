@@ -18,6 +18,7 @@ import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.d
 import 'package:sw5e_manager/domain/characters/services/catalog_lookup_service.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/character_trait.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/saved_characters_bloc.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/background_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/character_section_divider.dart';

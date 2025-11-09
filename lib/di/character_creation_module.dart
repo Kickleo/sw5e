@@ -29,6 +29,8 @@ import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_characte
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters_impl.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft_impl.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';

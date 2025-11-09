@@ -13,6 +13,7 @@ import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';

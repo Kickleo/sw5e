@@ -69,8 +69,6 @@ class _ClassStep extends StatelessWidget {
         const SizedBox(height: 16),
         if (isLoadingDetails)
           const Center(child: CircularProgressIndicator())
-        else if (classDefData == null)
-          Text(l10n.noClassSelected)
         else
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,14 +186,36 @@ class _ClassStep extends StatelessWidget {
                 l10n.classSkillsChoice(
                   classDefData.level1.proficiencies.skillsChoose,
                 ),
+                const SizedBox(height: 12),
+              ],
+            ],
+            if (classDefData.multiclassing?.hasAbilityRequirements ?? false) ...[
+                ClassMulticlassingDetails(
+                  classDef: classDefData,
+                  abilityDefinitions: abilityDefinitions,
+                  headingStyle: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 12),
+              ],
+            if (classDefData.level1.classFeatures.isNotEmpty) ...[
+              ClassFeatureList(
+                heading: l10n.classPickerLevel1FeaturesTitle,
+                features: classDefData.level1.classFeatures,
               ),
               const SizedBox(height: 12),
-              _ClassStartingEquipment(
-                classDef: classDefData,
-                equipmentDefinitions: equipmentDefinitions,
-              ),
             ],
-          ),
+            Text(
+              l10n.classSkillsChoice(
+                classDefData.level1.proficiencies.skillsChoose,
+              ),
+            ),
+            const SizedBox(height: 12),
+            _ClassStartingEquipment(
+              classDef: classDefData,
+              equipmentDefinitions: equipmentDefinitions,
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -308,4 +328,15 @@ class _ClassStartingEquipment extends StatelessWidget {
     }
     return def.powerList != null;
   }
+}
+
+bool _classHasPowerInfo(ClassDef def) {
+  if (def.powerSource != null && def.powerSource!.trim().isNotEmpty) {
+    return true;
+  }
+  final ClassPowerList? powerList = def.powerList;
+  if (powerList == null) {
+    return false;
+  }
+  return powerList.forceAllowed || powerList.techAllowed;
 }
