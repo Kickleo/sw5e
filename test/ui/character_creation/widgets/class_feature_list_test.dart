@@ -40,9 +40,9 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: ClassFeatureList(
+          body: const ClassFeatureList(
             heading: 'Capacités de niveau 1',
-            features: <ClassFeature>[guardianFocus],
+            features: const <ClassFeature>[guardianFocus],
           ),
         ),
       ),
@@ -78,9 +78,9 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: ClassFeatureList(
+          body: const ClassFeatureList(
             heading: 'Level 1 features',
-            features: <ClassFeature>[emptyFeature],
+            features: const <ClassFeature>[emptyFeature],
           ),
         ),
       ),

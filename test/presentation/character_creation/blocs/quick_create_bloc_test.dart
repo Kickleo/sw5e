@@ -221,7 +221,7 @@ void main() {
         .thenAnswer((_) async => appOk(CharacterDraft()));
     when(() => loadBackgroundDetails.call(any())).thenAnswer(
       (_) async => appOk(
-        QuickCreateBackgroundDetails(
+        const QuickCreateBackgroundDetails(
           background: const BackgroundDef(
             id: 'outlaw',
             name: LocalizedText(en: 'Outlaw'),
@@ -831,7 +831,7 @@ void main() {
               'acrobatics': SkillDef(
                 id: 'acrobatics',
                 ability: 'dex',
-                name: const LocalizedText(
+                name: LocalizedText(
                   en: 'Acrobatics',
                   fr: 'Acrobaties',
                 ),
@@ -839,7 +839,7 @@ void main() {
               'athletics': SkillDef(
                 id: 'athletics',
                 ability: 'str',
-                name: const LocalizedText(
+                name: LocalizedText(
                   en: 'Athletics',
                   fr: 'Athlétisme',
                 ),

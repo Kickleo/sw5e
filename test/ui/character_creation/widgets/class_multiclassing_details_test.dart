@@ -49,7 +49,7 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: Scaffold(
-          body: ClassMulticlassingDetails(
+          body: const ClassMulticlassingDetails(
             classDef: sentinel,
             abilityDefinitions: abilityDefinitions,
           ),
@@ -87,9 +87,9 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: ClassMulticlassingDetails(
+          body: const ClassMulticlassingDetails(
             classDef: noRequirements,
-            abilityDefinitions: <String, AbilityDef>{},
+            abilityDefinitions: const <String, AbilityDef>{},
           ),
         ),
       ),

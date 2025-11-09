@@ -19,7 +19,6 @@ import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_characte
 import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
-import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores.dart';
