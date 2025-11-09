@@ -10,30 +10,30 @@ void main() {
 
   const ClassDef sentinel = ClassDef(
     id: 'sentinel',
-    name: LocalizedText(en: 'Sentinel', fr: 'Sentinelle'),
+    name: const LocalizedText(en: 'Sentinel', fr: 'Sentinelle'),
     hitDie: 10,
-    level1: ClassLevel1Data(
-      proficiencies: ClassLevel1Proficiencies(
+    level1: const ClassLevel1Data(
+      proficiencies: const ClassLevel1Proficiencies(
         skillsChoose: 2,
-        skillsFrom: <String>['perception'],
+        skillsFrom: const <String>['perception'],
       ),
-      startingEquipment: <StartingEquipmentLine>[],
+      startingEquipment: const <StartingEquipmentLine>[],
     ),
-    multiclassing: ClassMulticlassing(
-      abilityRequirements: <String, int>{'dex': 13, 'wis': 13},
+    multiclassing: const ClassMulticlassing(
+      abilityRequirements: const <String, int>{'dex': 13, 'wis': 13},
     ),
   );
 
   const Map<String, AbilityDef> abilityDefinitions = <String, AbilityDef>{
-    'dex': const AbilityDef(
+    'dex': AbilityDef(
       id: 'dex',
       abbreviation: 'DEX',
-      name: LocalizedText(en: 'Dexterity', fr: 'Dextérité'),
+      name: const LocalizedText(en: 'Dexterity', fr: 'Dextérité'),
     ),
-    'wis': const AbilityDef(
+    'wis': AbilityDef(
       id: 'wis',
       abbreviation: 'WIS',
-      name: LocalizedText(en: 'Wisdom', fr: 'Sagesse'),
+      name: const LocalizedText(en: 'Wisdom', fr: 'Sagesse'),
     ),
   };
 
@@ -65,14 +65,14 @@ void main() {
       (WidgetTester tester) async {
     const ClassDef noRequirements = ClassDef(
       id: 'warrior',
-      name: LocalizedText(en: 'Warrior'),
+      name: const LocalizedText(en: 'Warrior'),
       hitDie: 10,
-      level1: ClassLevel1Data(
-        proficiencies: ClassLevel1Proficiencies(
+      level1: const ClassLevel1Data(
+        proficiencies: const ClassLevel1Proficiencies(
           skillsChoose: 2,
-          skillsFrom: <String>['athletics'],
+          skillsFrom: const <String>['athletics'],
         ),
-        startingEquipment: <StartingEquipmentLine>[],
+        startingEquipment: const <StartingEquipmentLine>[],
       ),
     );
 

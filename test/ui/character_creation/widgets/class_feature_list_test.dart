@@ -9,17 +9,17 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   const ClassFeature guardianFocus = ClassFeature(
-    name: LocalizedText(en: "Guardian's Focus", fr: 'Focalisation du gardien'),
-    description: LocalizedText(
+    name: const LocalizedText(en: "Guardian's Focus", fr: 'Focalisation du gardien'),
+    description: const LocalizedText(
       en: 'Sharpen senses to defend allies.',
       fr: 'Affinez vos sens pour défendre vos alliés.',
     ),
-    effects: <CatalogFeatureEffect>[
-      CatalogFeatureEffect(
+    effects: const <CatalogFeatureEffect>[
+      const CatalogFeatureEffect(
         id: 'feature-effect-1',
         kind: 'grant',
         target: 'skill',
-        text: LocalizedText(
+        text: const LocalizedText(
           en: 'Gain proficiency in a sentinel skill.',
           fr: 'Gagnez la maîtrise d\'une compétence de sentinelle.',
         ),
@@ -42,7 +42,7 @@ void main() {
         home: const Scaffold(
           body: ClassFeatureList(
             heading: 'Capacités de niveau 1',
-            features: <ClassFeature>[guardianFocus],
+            features: const <ClassFeature>[guardianFocus],
           ),
         ),
       ),
@@ -63,8 +63,8 @@ void main() {
   testWidgets('does not render when features have no displayable content',
       (WidgetTester tester) async {
     const ClassFeature emptyFeature = ClassFeature(
-      name: LocalizedText(),
-      effects: <CatalogFeatureEffect>[],
+      name: const LocalizedText(),
+      effects: const <CatalogFeatureEffect>[],
     );
 
     await tester.pumpWidget(
@@ -80,7 +80,7 @@ void main() {
         home: const Scaffold(
           body: ClassFeatureList(
             heading: 'Level 1 features',
-            features: <ClassFeature>[emptyFeature],
+            features: const <ClassFeature>[emptyFeature],
           ),
         ),
       ),
