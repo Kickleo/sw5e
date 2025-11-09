@@ -8,7 +8,7 @@ import 'package:sw5e_manager/ui/character_creation/widgets/species_ability_bonus
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  Widget _buildApp(Widget child, {Locale locale = const Locale('en')}) {
+  Widget buildTestApp(Widget child, {Locale locale = const Locale('en')}) {
     return MaterialApp(
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -24,7 +24,7 @@ void main() {
 
   testWidgets('renders localized ability bonuses', (WidgetTester tester) async {
     await tester.pumpWidget(
-      _buildApp(
+      buildTestApp(
         const SpeciesAbilityBonusesCard(
           bonuses: <SpeciesAbilityBonus>[
             SpeciesAbilityBonus(ability: 'int', amount: 2),
@@ -43,7 +43,7 @@ void main() {
   testWidgets('collapses when there are no displayable bonuses',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      _buildApp(
+      buildTestApp(
         const SpeciesAbilityBonusesCard(
           bonuses: <SpeciesAbilityBonus>[],
         ),

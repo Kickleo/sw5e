@@ -33,6 +33,7 @@ Exemple d'usage : Consulter ce document pour comprendre où ajouter une nouvelle
 | `lib/domain/characters/` | Sous-domaine Personnages (entités, VO, use cases, ports) | Value Objects + AppResult |
 | `lib/domain/characters/usecases/load_quick_create_catalog.dart` | Contrat `LoadQuickCreateCatalog` (snapshot listes/équipements) | `AppResult`, `CatalogRepository` |
 | `lib/domain/characters/usecases/load_quick_create_catalog_impl.dart` | Implémentation du snapshot catalogue | `CatalogRepository`, `DomainError` |
+| `lib/domain/characters/services/catalog_lookup_service.dart` | Agrège les définitions catalogues (espèces, classes, options, pouvoirs) pour l'UI | `CatalogRepository`, `AppLogger` |
 | `lib/domain/characters/usecases/load_species_details.dart` | Contrat pour récupérer traits d'espèce | `AppResult`, `CatalogRepository` |
 | `lib/domain/characters/usecases/load_species_details_impl.dart` | Implémentation (résout les traits + ids manquants) | `CatalogRepository`, `DomainError` |
 | `lib/domain/characters/usecases/load_class_details.dart` | Contrat pour charger la classe + compétences | `AppResult`, `CatalogRepository` |
@@ -58,6 +59,10 @@ Exemple d'usage : Consulter ce document pour comprendre où ajouter une nouvelle
 | `lib/ui/character_creation/pages/character_summary_page.dart` | Vue Flutter résumé branchée sur CharacterSummaryBloc + partage | `flutter_bloc`, `share_plus`, `ServiceLocator` |
 | `lib/ui/character_creation/pages/saved_characters_page.dart` | Vue Flutter listant les personnages sauvegardés | `flutter_bloc`, `ServiceLocator` |
 | `lib/ui/character_creation/widgets/README.md` | Guide des widgets partagés du module création | Flutter Material |
+| `lib/ui/character_creation/widgets/catalog_details.dart` | Mise en forme des données catalogue (traits, options, pouvoirs) | Flutter Material |
+| `lib/ui/character_creation/widgets/language_details.dart` | Carte détaillant les langues (description, script, locuteurs) | Flutter Material |
+| `lib/ui/character_creation/widgets/species_ability_bonuses.dart` | Carte des bonus de caractéristiques d'espèce | Flutter Material |
+| `lib/ui/character_creation/widgets/species_trait_details.dart` | Liste détaillée des traits d'espèce localisés | Flutter Material |
 | `lib/ui/character_creation/widgets/character_section_divider.dart` | Séparateur accessible partagé | Flutter Material |
 | `lib/presentation/README.md` | Guide de la couche Presentation | Aucune |
 | `lib/ui/README.md` | Guide de la couche UI | Aucune |

@@ -1356,6 +1356,9 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
         final Map<String, EquipmentDef> mergedEquipment =
             Map<String, EquipmentDef>.from(state.equipmentDefinitions)
               ..addAll(details.equipmentDefinitions);
+        final Map<String, BackgroundDef> mergedBackgrounds =
+            Map<String, BackgroundDef>.from(state.backgroundDefinitions)
+              ..[details.background.id] = details.background;
 
         emit(
           state.copyWith(
@@ -1363,6 +1366,7 @@ class QuickCreateBloc extends Bloc<QuickCreateEvent, QuickCreateState> {
             backgroundSkillDefinitions: details.skillDefinitions,
             backgroundEquipmentDefinitions: details.equipmentDefinitions,
             equipmentDefinitions: mergedEquipment,
+            backgroundDefinitions: mergedBackgrounds,
             statusMessage: null,
             failure: null,
           ),

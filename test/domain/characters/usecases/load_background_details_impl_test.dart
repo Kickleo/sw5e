@@ -60,7 +60,12 @@ void main() {
     final AppResult<QuickCreateBackgroundDetails> result = await useCase('outlaw');
 
     expect(result.isOk, isTrue);
-    final QuickCreateBackgroundDetails details = result.okOrThrow();
+    final QuickCreateBackgroundDetails details = result.match(
+      ok: (QuickCreateBackgroundDetails value) => value,
+      err: (DomainError error) {
+        fail('Expected success but received error: ${error.code}');
+      },
+    );
     expect(details.background.id, 'outlaw');
     expect(details.skillDefinitions.containsKey('stealth'), isTrue);
     expect(details.equipmentDefinitions.containsKey('comlink'), isTrue);
@@ -74,7 +79,12 @@ void main() {
     final AppResult<QuickCreateBackgroundDetails> result = await useCase('unknown');
 
     expect(result.isErr, isTrue);
-    final DomainError error = result.errOrThrow();
+    final DomainError error = result.match(
+      ok: (_) {
+        fail('Expected error but received success');
+      },
+      err: (DomainError value) => value,
+    );
     expect(error.code, 'UnknownBackground');
   });
 }

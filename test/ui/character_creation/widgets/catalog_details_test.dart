@@ -36,7 +36,7 @@ void main() {
     ),
   );
 
-  Widget _buildApp(Widget child, {Locale locale = const Locale('en')}) {
+  Widget buildTestApp(Widget child, {Locale locale = const Locale('en')}) {
     return MaterialApp(
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -53,7 +53,7 @@ void main() {
   testWidgets('renders customization option names and effects using localization',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      _buildApp(
+      buildTestApp(
         const CustomizationOptionDetailsList(
           optionIds: <String>['form-ii-makashi'],
           optionDefinitions: <String, CustomizationOptionDef>{
@@ -74,7 +74,7 @@ void main() {
   testWidgets('falls back to title case when option definition is missing',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      _buildApp(
+      buildTestApp(
         const CustomizationOptionDetailsList(
           optionIds: <String>['unknown-option'],
           optionDefinitions: <String, CustomizationOptionDef>{},
@@ -88,7 +88,7 @@ void main() {
   testWidgets('renders power names and descriptions from catalog definitions',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      _buildApp(
+      buildTestApp(
         const PowerDetailsList(
           powerIds: <String>['battle-meditation'],
           powerDefinitions: <String, PowerDef>{

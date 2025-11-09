@@ -1323,7 +1323,7 @@ class AppLocalizations {
         }
         if (equipmentLines.isNotEmpty) {
           backgroundLines.add(
-            '${summaryBackgroundEquipmentTitle}: ${equipmentLines.join(', ')}',
+            '$summaryBackgroundEquipmentTitle: ${equipmentLines.join(', ')}',
           );
         }
       }
@@ -1344,14 +1344,16 @@ class AppLocalizations {
       if (label.isEmpty) {
         continue;
       }
-      final Iterable<String>? localizedEffects = option?.effects?.map(
-        (CatalogFeatureEffect effect) =>
-            _localizedOptional(effect.text).trim(),
-      );
-      final List<String> effectTexts = localizedEffects
-              ?.where((String value) => value.isNotEmpty)
-              .toList() ??
-          const <String>[];
+      final List<String> effectTexts;
+      if (option != null) {
+        effectTexts = option.effects
+            .map((CatalogFeatureEffect effect) =>
+                _localizedOptional(effect.text).trim())
+            .where((String value) => value.isNotEmpty)
+            .toList();
+      } else {
+        effectTexts = const <String>[];
+      }
       if (effectTexts.isNotEmpty) {
         final String details = effectTexts.join(isFrench ? ' ; ' : '; ');
         customizationLines.add('$label: $details');

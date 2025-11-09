@@ -17,19 +17,17 @@ import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
-import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';
-import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/character_summary_bloc.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/background_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/language_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/species_ability_bonuses.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/species_trait_details.dart';
-import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
 class CharacterSummaryPage extends StatefulWidget {
   /// Constructeur par défaut.
   const CharacterSummaryPage({super.key});
@@ -683,7 +681,7 @@ class _AbilitiesTable extends StatelessWidget {
             : key.toUpperCase();
       }
       final Widget labelWidget = abilityDescription != null
-          ? Tooltip(message: abilityDescription!, child: Text(abilityLabel))
+          ? Tooltip(message: abilityDescription, child: Text(abilityLabel))
           : Text(abilityLabel);
       rows.add(
         DataRow(

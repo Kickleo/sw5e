@@ -35,7 +35,7 @@ void main() {
     name: LocalizedText(en: 'Bothese', fr: 'Bothese'),
   );
 
-  Widget _buildApp(Widget child, {Locale locale = const Locale('en')}) {
+  Widget buildTestApp(Widget child, {Locale locale = const Locale('en')}) {
     return MaterialApp(
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -52,7 +52,7 @@ void main() {
   testWidgets('renders localized names and descriptions when available',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      _buildApp(
+      buildTestApp(
         const LanguageDetailsCard(
           languages: <LanguageDef>[basic, bothese],
         ),
@@ -77,7 +77,7 @@ void main() {
   testWidgets('falls back to narrative text when no structured languages',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      _buildApp(
+      buildTestApp(
         const LanguageDetailsCard(
           languages: <LanguageDef>[],
           fallback: LocalizedText(
@@ -97,7 +97,7 @@ void main() {
   testWidgets('renders nothing when there is no displayable content',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      _buildApp(
+      buildTestApp(
         const LanguageDetailsCard(
           languages: <LanguageDef>[],
           fallback: LocalizedText(),

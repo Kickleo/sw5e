@@ -112,9 +112,12 @@ class AssetBundleCatalogV2DataSource {
     if (json is! List) {
       throw StateError('$path must decode to a JSON array');
     }
-    return List<Map<String, dynamic>>.from(
-      json.map((dynamic e) => Map<String, dynamic>.from(e as Map)),
-    );
+    return json.map<Map<String, dynamic>>((dynamic entry) {
+      if (entry is! Map) {
+        throw StateError('$path must contain only JSON objects');
+      }
+      return Map<String, dynamic>.from(entry);
+    }).toList(growable: false);
   }
 
   Future<Map<String, dynamic>> _loadObject(String path) async {
@@ -123,6 +126,6 @@ class AssetBundleCatalogV2DataSource {
     if (json is! Map) {
       throw StateError('$path must decode to a JSON object');
     }
-    return Map<String, dynamic>.from(json as Map);
+    return Map<String, dynamic>.from(json);
   }
 }
