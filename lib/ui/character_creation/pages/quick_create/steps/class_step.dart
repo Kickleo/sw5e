@@ -117,7 +117,7 @@ class _ClassStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
               ],
-              if (_classHasPowerInfo(classDefData)) ...[
+              if (_hasPowerInfo(classDefData)) ...[
                 ClassPowerDetails(classDef: classDefData),
                 const SizedBox(height: 12),
               ],
@@ -164,6 +164,27 @@ class _ClassStep extends StatelessWidget {
                     category: ClassProficiencyCategory.tool,
                     equipmentDefinitions: equipmentDefinitions,
                   ),
+              ),
+              const SizedBox(height: 12),
+            ],
+            if (classDefData.multiclassing?.hasAbilityRequirements ?? false) ...[
+              ClassMulticlassingDetails(
+                classDef: classDefData,
+                abilityDefinitions: abilityDefinitions,
+                headingStyle: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(height: 12),
+            ],
+            if (classDefData.level1.classFeatures.isNotEmpty) ...[
+              ClassFeatureList(
+                heading: l10n.classPickerLevel1FeaturesTitle,
+                features: classDefData.level1.classFeatures,
+              ),
+                const SizedBox(height: 12),
+              ],
+              Text(
+                l10n.classSkillsChoice(
+                  classDefData.level1.proficiencies.skillsChoose,
                 ),
                 const SizedBox(height: 12),
               ],
@@ -299,6 +320,13 @@ class _ClassStartingEquipment extends StatelessWidget {
         ],
       ],
     );
+  }
+
+  bool _hasPowerInfo(ClassDef def) {
+    if (def.powerSource != null && def.powerSource!.trim().isNotEmpty) {
+      return true;
+    }
+    return def.powerList != null;
   }
 }
 

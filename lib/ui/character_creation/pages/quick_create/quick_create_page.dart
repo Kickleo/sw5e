@@ -40,8 +40,9 @@ import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart'
 import 'package:sw5e_manager/ui/character_creation/widgets/character_section_divider.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_feature_list.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_multiclassing_details.dart';
-import 'package:sw5e_manager/ui/character_creation/widgets/class_power_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_proficiency_formatter.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_power_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/language_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/species_ability_bonuses.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/species_trait_details.dart';

@@ -43,7 +43,6 @@ class QuickCreateState {
   final Map<String, LocalizedText> speciesLabels;
   final Map<String, LocalizedText> classLabels;
   final Map<String, LocalizedText> backgroundLabels;
-  final Map<String, BackgroundDef> backgroundDefinitions;
   final Map<String, AbilityDef> abilityDefinitions;
   final Map<String, LanguageDef> languageDefinitions;
   final Map<String, CustomizationOptionDef> customizationOptionDefinitions;
@@ -96,7 +95,6 @@ class QuickCreateState {
     required this.speciesLabels,
     required this.classLabels,
     required this.backgroundLabels,
-    required this.backgroundDefinitions,
     required this.abilityDefinitions,
     required this.languageDefinitions,
     required this.customizationOptionDefinitions,
@@ -146,7 +144,6 @@ class QuickCreateState {
         speciesLabels: <String, LocalizedText>{},
         classLabels: <String, LocalizedText>{},
         backgroundLabels: <String, LocalizedText>{},
-        backgroundDefinitions: <String, BackgroundDef>{},
         abilityDefinitions: <String, AbilityDef>{},
         languageDefinitions: <String, LanguageDef>{},
         customizationOptionDefinitions: <String, CustomizationOptionDef>{},
@@ -207,7 +204,6 @@ class QuickCreateState {
     Map<String, LocalizedText>? speciesLabels,
     Map<String, LocalizedText>? classLabels,
     Map<String, LocalizedText>? backgroundLabels,
-    Map<String, BackgroundDef>? backgroundDefinitions,
     Map<String, AbilityDef>? abilityDefinitions,
     Map<String, LanguageDef>? languageDefinitions,
     Map<String, CustomizationOptionDef>? customizationOptionDefinitions,
@@ -256,8 +252,6 @@ class QuickCreateState {
       speciesLabels: speciesLabels ?? this.speciesLabels,
       classLabels: classLabels ?? this.classLabels,
       backgroundLabels: backgroundLabels ?? this.backgroundLabels,
-      backgroundDefinitions:
-          backgroundDefinitions ?? this.backgroundDefinitions,
       abilityDefinitions: abilityDefinitions ?? this.abilityDefinitions,
       languageDefinitions: languageDefinitions ?? this.languageDefinitions,
       customizationOptionDefinitions:

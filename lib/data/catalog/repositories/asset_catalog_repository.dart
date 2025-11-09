@@ -593,10 +593,10 @@ class AssetCatalogRepository implements CatalogRepository {
       final List<WeaponDamage> damages = <WeaponDamage>[];
       for (final CatalogV2WeaponDamageDto damageDto in dto.damage) {
         final String? typeSlug = _damageTypeIdToSlug?[damageDto.typeRef];
-        DamageTypeDef? damageDef;
-        if (typeSlug != null && _damageTypes != null) {
-          damageDef = _damageTypes![typeSlug];
-        }
+        final DamageTypeDef? damageDef =
+            typeSlug != null && _damageTypes != null
+                ? _damageTypes![typeSlug]
+                : null;
         damages.add(
           WeaponDamage(
             damageType: typeSlug ?? damageDto.typeRef.toLowerCase(),
@@ -958,25 +958,23 @@ class AssetCatalogRepository implements CatalogRepository {
 
   PowerDef _mapPowerDto(CatalogV2PowerDto dto, String powerType) {
     CatalogPowerRange? range;
-    final CatalogV2PowerRangeDto? dtoRange = dto.range;
-    if (dtoRange != null) {
-      final double? meters = dtoRange.distanceMeters;
+    if (dto.range != null) {
+      final double? meters = dto.range?.distanceMeters;
       final int? metersRounded = meters?.round();
       final int? feet = meters != null ? _metersToFeet(meters) : null;
       range = CatalogPowerRange(
-        type: dtoRange.type,
+        type: dto.range!.type,
         distanceMeters: metersRounded,
         distanceFeet: feet,
       );
     }
 
     CatalogPowerDuration? duration;
-    final CatalogV2PowerDurationDto? dtoDuration = dto.duration;
-    if (dtoDuration != null) {
+    if (dto.duration != null) {
       duration = CatalogPowerDuration(
-        unit: dtoDuration.unit,
-        value: dtoDuration.value,
-        concentration: dtoDuration.concentration,
+        unit: dto.duration!.unit,
+        value: dto.duration!.value,
+        concentration: dto.duration!.concentration,
       );
     }
 

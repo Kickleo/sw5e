@@ -144,7 +144,7 @@ class LanguageDetailsCard extends StatelessWidget {
     if (script == null) {
       return null;
     }
-    final String? resolved = _normalizeText(l10n.localizedCatalogLabel(script));
+    final String resolved = _normalizeText(l10n.localizedCatalogLabel(script));
     if (resolved == null || resolved.isEmpty) {
       return null;
     }

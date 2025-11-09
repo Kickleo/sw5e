@@ -14,18 +14,18 @@ import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
-import 'package:sw5e_manager/domain/characters/services/catalog_lookup_service.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/services/catalog_lookup_service.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_trait.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/saved_characters_bloc.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/background_details.dart';
-import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/character_section_divider.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_feature_list.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_multiclassing_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_power_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/language_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/species_ability_bonuses.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/species_trait_details.dart';
@@ -763,7 +763,7 @@ class _AbilitiesTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final l10n = context.l10n;
-    String abilityLabel(String ability) {
+    String _abilityLabel(String ability) {
       final AbilityDef? def = abilityDefinitions[ability];
       final String abbreviation = l10n.abilityAbbreviation(ability);
       if (def != null) {
@@ -785,9 +785,9 @@ class _AbilitiesTable extends StatelessWidget {
       return ability.toUpperCase();
     }
 
-    Widget abilityCell(String ability) {
+    Widget _abilityCell(String ability) {
       final AbilityDef? def = abilityDefinitions[ability];
-      final String label = abilityLabel(ability);
+      final String label = _abilityLabel(ability);
       final String? description = def?.description != null
           ? l10n.localizedCatalogLabel(def!.description!).trim()
           : null;
@@ -804,7 +804,7 @@ class _AbilitiesTable extends StatelessWidget {
       return text;
     }
 
-    String scoreWithModifier(AbilityScore score) {
+    String _scoreWithModifier(AbilityScore score) {
       final String modifier = score.modifier >= 0
           ? '+${score.modifier}'
           : score.modifier.toString();
@@ -822,12 +822,12 @@ class _AbilitiesTable extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
-              child: abilityCell(ability),
+              child: _abilityCell(ability),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: Text(
-                scoreWithModifier(score),
+                _scoreWithModifier(score),
                 style: theme.textTheme.bodyMedium,
                 textAlign: TextAlign.right,
               ),

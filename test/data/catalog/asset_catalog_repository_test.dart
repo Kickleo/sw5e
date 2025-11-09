@@ -81,6 +81,7 @@ void main() {
     expect(blaster.description?.en, contains('Reliable sidearm'));
 
     // Background
+    final outlaw = await repo.getBackground('outlaw');
     final outlander = await repo.getBackground('outlander');
     expect(outlander, isNotNull);
     expect(outlander!.grantedSkills, contains('athletics'));

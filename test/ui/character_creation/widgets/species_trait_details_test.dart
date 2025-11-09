@@ -25,7 +25,7 @@ void main() {
     ),
   );
 
-  Widget buildTestApp(Widget child, {Locale locale = const Locale('en')}) {
+  Widget _buildApp(Widget child, {Locale locale = const Locale('en')}) {
     return MaterialApp(
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -42,7 +42,7 @@ void main() {
   testWidgets('renders localized trait names and descriptions',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      buildTestApp(
+      _buildApp(
         SpeciesTraitDetailsList.fromDefinitions(
           traits: const <TraitDef>[keenSenses],
         ),
@@ -60,7 +60,7 @@ void main() {
   testWidgets('falls back to slug title case when translation missing',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      buildTestApp(
+      _buildApp(
         SpeciesTraitDetailsList.fromDefinitions(
           traits: const <TraitDef>[nimbleEscape],
         ),
@@ -78,7 +78,7 @@ void main() {
   testWidgets('renders nothing when no traits are provided',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      buildTestApp(
+      _buildApp(
         const SpeciesTraitDetailsList.fromDefinitions(traits: <TraitDef>[]),
       ),
     );
