@@ -16,8 +16,8 @@ import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.d
 import 'package:sw5e_manager/presentation/character_creation/blocs/class_picker_bloc.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_feature_list.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_multiclassing_details.dart';
-import 'package:sw5e_manager/ui/character_creation/widgets/class_proficiency_formatter.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/class_power_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_proficiency_formatter.dart';
 
 /// ClassPickerPage = écran modal permettant de choisir une classe niveau 1.
 class ClassPickerPage extends StatefulWidget {
@@ -387,7 +387,9 @@ String _formatEquipment(
 ) {
   final EquipmentDef? def = state.equipmentDefinitions[id];
   if (def == null) {
-  return _titleCase(id);
+    return _titleCase(id);
+  }
+  return l10n.localizedCatalogLabel(def.name);
 }
 
 bool _hasPowerInfo(ClassDef def) {
@@ -395,8 +397,6 @@ bool _hasPowerInfo(ClassDef def) {
     return true;
   }
   return def.powerList != null;
-}
-  return l10n.localizedCatalogLabel(def.name);
 }
 
 String _formatAbilities(

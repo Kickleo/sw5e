@@ -1344,10 +1344,12 @@ class AppLocalizations {
       if (label.isEmpty) {
         continue;
       }
-      final List<String> effectTexts = option?.effects
-              .map((CatalogFeatureEffect effect) =>
-                  _localizedOptional(effect.text).trim())
-              .where((String value) => value.isNotEmpty)
+      final Iterable<String>? localizedEffects = option?.effects?.map(
+        (CatalogFeatureEffect effect) =>
+            _localizedOptional(effect.text).trim(),
+      );
+      final List<String> effectTexts = localizedEffects
+              ?.where((String value) => value.isNotEmpty)
               .toList() ??
           const <String>[];
       if (effectTexts.isNotEmpty) {

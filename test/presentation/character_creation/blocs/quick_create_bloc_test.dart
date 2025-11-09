@@ -14,9 +14,9 @@ import 'package:sw5e_manager/domain/characters/entities/character_draft.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
-import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores.dart';
@@ -323,6 +323,10 @@ void main() {
               ),
             ),
           },
+          customizationOptionDefinitions:
+              const <String, CustomizationOptionDef>{},
+          forcePowerDefinitions: const <String, PowerDef>{},
+          techPowerDefinitions: const <String, PowerDef>{},
           defaultSpeciesId: 'human',
           defaultClassId: 'guardian',
           defaultBackgroundId: 'outlaw',
@@ -534,6 +538,10 @@ void main() {
                 ),
               ),
             },
+            customizationOptionDefinitions:
+                const <String, CustomizationOptionDef>{},
+            forcePowerDefinitions: const <String, PowerDef>{},
+            techPowerDefinitions: const <String, PowerDef>{},
             defaultSpeciesId: 'human',
             defaultClassId: 'guardian',
             defaultBackgroundId: 'outlaw',
@@ -770,6 +778,10 @@ void main() {
                 ),
               ),
             },
+            customizationOptionDefinitions:
+                const <String, CustomizationOptionDef>{},
+            forcePowerDefinitions: const <String, PowerDef>{},
+            techPowerDefinitions: const <String, PowerDef>{},
             defaultSpeciesId: 'human',
             defaultClassId: 'guardian',
             defaultBackgroundId: 'outlaw',

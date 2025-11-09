@@ -594,7 +594,9 @@ class AssetCatalogRepository implements CatalogRepository {
       for (final CatalogV2WeaponDamageDto damageDto in dto.damage) {
         final String? typeSlug = _damageTypeIdToSlug?[damageDto.typeRef];
         final DamageTypeDef? damageDef =
-            typeSlug != null ? _damageTypes?[typeSlug] : null;
+            typeSlug != null && _damageTypes != null
+                ? _damageTypes![typeSlug]
+                : null;
         damages.add(
           WeaponDamage(
             damageType: typeSlug ?? damageDto.typeRef.toLowerCase(),
@@ -957,9 +959,9 @@ class AssetCatalogRepository implements CatalogRepository {
   PowerDef _mapPowerDto(CatalogV2PowerDto dto, String powerType) {
     CatalogPowerRange? range;
     if (dto.range != null) {
-      final double? meters = dto.range!.distanceMeters;
-      final int? metersRounded = meters == null ? null : meters.round();
-      final int? feet = meters == null ? null : _metersToFeet(meters);
+      final double? meters = dto.range?.distanceMeters;
+      final int? metersRounded = meters?.round();
+      final int? feet = meters != null ? _metersToFeet(meters) : null;
       range = CatalogPowerRange(
         type: dto.range!.type,
         distanceMeters: metersRounded,
