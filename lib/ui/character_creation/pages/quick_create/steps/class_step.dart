@@ -69,8 +69,6 @@ class _ClassStep extends StatelessWidget {
         const SizedBox(height: 16),
         if (isLoadingDetails)
           const Center(child: CircularProgressIndicator())
-        else if (classDefData == null)
-          Text(l10n.noClassSelected)
         else
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
