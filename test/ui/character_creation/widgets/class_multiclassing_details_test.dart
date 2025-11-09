@@ -10,17 +10,17 @@ void main() {
 
   const ClassDef sentinel = ClassDef(
     id: 'sentinel',
-    name: const LocalizedText(en: 'Sentinel', fr: 'Sentinelle'),
+    name: LocalizedText(en: 'Sentinel', fr: 'Sentinelle'),
     hitDie: 10,
-    level1: const ClassLevel1Data(
-      proficiencies: const ClassLevel1Proficiencies(
+    level1: ClassLevel1Data(
+      proficiencies: ClassLevel1Proficiencies(
         skillsChoose: 2,
-        skillsFrom: const <String>['perception'],
+        skillsFrom: <String>['perception'],
       ),
       startingEquipment: const <StartingEquipmentLine>[],
     ),
-    multiclassing: const ClassMulticlassing(
-      abilityRequirements: const <String, int>{'dex': 13, 'wis': 13},
+    multiclassing: ClassMulticlassing(
+      abilityRequirements: <String, int>{'dex': 13, 'wis': 13},
     ),
   );
 
@@ -28,12 +28,12 @@ void main() {
     'dex': AbilityDef(
       id: 'dex',
       abbreviation: 'DEX',
-      name: const LocalizedText(en: 'Dexterity', fr: 'Dextérité'),
+      name: LocalizedText(en: 'Dexterity', fr: 'Dextérité'),
     ),
     'wis': AbilityDef(
       id: 'wis',
       abbreviation: 'WIS',
-      name: const LocalizedText(en: 'Wisdom', fr: 'Sagesse'),
+      name: LocalizedText(en: 'Wisdom', fr: 'Sagesse'),
     ),
   };
 
@@ -49,7 +49,7 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: ClassMulticlassingDetails(
+          body: const ClassMulticlassingDetails(
             classDef: sentinel,
             abilityDefinitions: abilityDefinitions,
           ),
@@ -65,12 +65,12 @@ void main() {
       (WidgetTester tester) async {
     const ClassDef noRequirements = ClassDef(
       id: 'warrior',
-      name: const LocalizedText(en: 'Warrior'),
+      name: LocalizedText(en: 'Warrior'),
       hitDie: 10,
-      level1: const ClassLevel1Data(
-        proficiencies: const ClassLevel1Proficiencies(
+      level1: ClassLevel1Data(
+        proficiencies: ClassLevel1Proficiencies(
           skillsChoose: 2,
-          skillsFrom: const <String>['athletics'],
+          skillsFrom: <String>['athletics'],
         ),
         startingEquipment: const <StartingEquipmentLine>[],
       ),
@@ -87,7 +87,7 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: ClassMulticlassingDetails(
+          body: const ClassMulticlassingDetails(
             classDef: noRequirements,
             abilityDefinitions: <String, AbilityDef>{},
           ),
