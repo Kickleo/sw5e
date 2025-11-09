@@ -17,9 +17,18 @@ import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';
+import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/character_summary_bloc.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/background_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/language_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/species_ability_bonuses.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/species_trait_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
 class CharacterSummaryPage extends StatefulWidget {
   /// Constructeur par défaut.
   const CharacterSummaryPage({super.key});
@@ -40,8 +49,11 @@ class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
     _logger = ServiceLocator.resolve<AppLogger>();
     final ListSavedCharacters listSavedCharacters =
         ServiceLocator.resolve<ListSavedCharacters>();
+    final CatalogRepository catalog =
+        ServiceLocator.resolve<CatalogRepository>();
     _bloc = CharacterSummaryBloc(
       listSavedCharacters: listSavedCharacters,
+      catalog: catalog,
       logger: _logger,
     )..add(const CharacterSummaryStarted());
   }
@@ -130,7 +142,7 @@ class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
                         ? null
                         : () => context
                             .read<CharacterSummaryBloc>()
-                            .add(const CharacterSummaryShareRequested()),
+                            .add(CharacterSummaryShareRequested(context.l10n)),
                     tooltip: context.l10n.shareTooltip,
                     icon: const Icon(Icons.share),
                   );
@@ -184,7 +196,10 @@ class _CharacterSummaryPageState extends State<CharacterSummaryPage> {
                       ),
                       const SizedBox(height: 16),
                       if (selected != null)
-                        _CharacterSummaryCard(character: selected),
+                        _CharacterSummaryCard(
+                          character: selected,
+                          state: state,
+                        ),
                     ],
                   ),
                 ),
@@ -230,16 +245,180 @@ class _CharacterSelector extends StatelessWidget {
 }
 
 class _CharacterSummaryCard extends StatelessWidget {
-  const _CharacterSummaryCard({required this.character});
+  const _CharacterSummaryCard({
+    required this.character,
+    required this.state,
+  });
 
   final Character character;
+  final CharacterSummaryState state;
 
   String _fmtSigned(int value) => value >= 0 ? '+$value' : '$value';
+
+  String _catalogLabel(
+    AppLocalizations l10n,
+    LocalizedText? text,
+    String fallback,
+  ) {
+    if (text != null) {
+      final String label = l10n.localizedCatalogLabel(text).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(fallback);
+  }
+
+  String _skillChipLabel(AppLocalizations l10n, SkillProficiency skill) {
+    final String label = _catalogLabel(
+      l10n,
+      state.skillDefinitions[skill.skillId]?.name,
+      skill.skillId,
+    );
+    if (skill.sources.isEmpty) {
+      return label;
+    }
+    final String sources =
+        skill.sources.map((source) => _titleCase(source.name)).join('+');
+    return '$label ($sources)';
+  }
+
+  String _equipmentLabel(AppLocalizations l10n, String id) {
+    final EquipmentDef? def = state.equipmentDefinitions[id];
+    if (def != null) {
+      final String label = l10n.localizedCatalogLabel(def.name).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(id);
+  }
+
+  List<String> _equipmentMetadata(AppLocalizations l10n, String id) {
+    final EquipmentDef? def = state.equipmentDefinitions[id];
+    if (def == null) {
+      return const <String>[];
+    }
+    return l10n.equipmentMetadataLines(def);
+  }
+
+  Widget _inventoryEntry(
+    ThemeData theme,
+    AppLocalizations l10n,
+    InventoryLine line,
+  ) {
+    final String label = _equipmentLabel(l10n, line.itemId.value);
+    final List<String> metadata =
+        _equipmentMetadata(l10n, line.itemId.value);
+    if (metadata.isEmpty) {
+      return Text(l10n.inventoryLine(label, line.quantity.value));
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.inventoryLine(label, line.quantity.value)),
+        Padding(
+          padding: const EdgeInsets.only(left: 16, top: 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: metadata
+                .map(
+                  (entry) => Text(
+                    entry,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                )
+                .toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _titleCase(String slug) {
+    return slug
+        .split(RegExp(r'[\-_.]'))
+        .map((part) =>
+            part.isEmpty ? part : '${part[0].toUpperCase()}${part.substring(1)}')
+        .join(' ');
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final l10n = context.l10n;
+    final String speciesLabel = _catalogLabel(
+      l10n,
+      state.speciesNames[character.speciesId.value],
+      character.speciesId.value,
+    );
+    final String classLabel = _catalogLabel(
+      l10n,
+      state.classNames[character.classId.value],
+      character.classId.value,
+    );
+    final String backgroundLabel = _catalogLabel(
+      l10n,
+      state.backgroundNames[character.backgroundId.value],
+      character.backgroundId.value,
+    );
+    final List<String> customizationOptionIds =
+        character.customizationOptionIds.toList()..sort();
+    final bool showCustomizationOptions =
+        CustomizationOptionDetailsList.hasDisplayableContent(
+      customizationOptionIds,
+    );
+    final Widget customizationDetails = CustomizationOptionDetailsList(
+      optionIds: customizationOptionIds,
+      optionDefinitions: state.customizationOptionDefinitions,
+    );
+    final List<String> forcePowerIds = character.forcePowerIds.toList()..sort();
+    final bool showForcePowers =
+        PowerDetailsList.hasDisplayableContent(forcePowerIds);
+    final Widget forcePowerDetails = PowerDetailsList(
+      powerIds: forcePowerIds,
+      powerDefinitions: state.forcePowerDefinitions,
+    );
+    final List<String> techPowerIds = character.techPowerIds.toList()..sort();
+    final bool showTechPowers =
+        PowerDetailsList.hasDisplayableContent(techPowerIds);
+    final Widget techPowerDetails = PowerDetailsList(
+      powerIds: techPowerIds,
+      powerDefinitions: state.techPowerDefinitions,
+    );
+    final SpeciesDef? speciesDef =
+        state.speciesDefinitions[character.speciesId.value];
+    final List<LanguageDef> speciesLanguages = <LanguageDef>[];
+    if (speciesDef != null) {
+      for (final String languageId in speciesDef.languageIds) {
+        final LanguageDef? language = state.languageDefinitions[languageId];
+        if (language != null) {
+          speciesLanguages.add(language);
+        }
+      }
+    }
+    final LocalizedText? speciesLanguageFallback = speciesDef?.languages;
+    final List<SpeciesAbilityBonus> speciesAbilityBonuses =
+        speciesDef?.abilityBonuses ?? const <SpeciesAbilityBonus>[];
+    final bool showAbilityBonuses =
+        SpeciesAbilityBonusesCard.hasDisplayableContent(speciesAbilityBonuses);
+    final bool showLanguageDetails = LanguageDetailsCard.hasDisplayableContent(
+      l10n,
+      speciesLanguages,
+      fallback: speciesLanguageFallback,
+    );
+    final BackgroundDef? backgroundDef =
+        state.backgroundDefinitions[character.backgroundId.value];
+    final List<Widget> backgroundDetails = backgroundDef == null
+        ? const <Widget>[]
+        : buildBackgroundDetails(
+            l10n: l10n,
+            theme: theme,
+            background: backgroundDef,
+            skillDefinitions: state.skillDefinitions,
+            equipmentDefinitions: state.equipmentDefinitions,
+          );
+
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Padding(
@@ -252,11 +431,25 @@ class _CharacterSummaryCard extends StatelessWidget {
               style: theme.textTheme.headlineSmall,
             ),
             const SizedBox(height: 4),
+            Text('$speciesLabel • $classLabel',
+                style: theme.textTheme.bodyMedium),
+            const SizedBox(height: 4),
             Text(
-              l10n.speciesIdentifier(character.id.value),
+              l10n.savedCharactersBackground(backgroundLabel),
               style: theme.textTheme.bodySmall,
             ),
-            const SizedBox(height: 12),
+            if (showAbilityBonuses) ...[
+              const SizedBox(height: 12),
+              SpeciesAbilityBonusesCard(bonuses: speciesAbilityBonuses),
+            ],
+            if (showLanguageDetails) ...[
+              const SizedBox(height: 12),
+              LanguageDetailsCard(
+                languages: speciesLanguages,
+                fallback: speciesLanguageFallback,
+              ),
+            ] else
+              const SizedBox(height: 12),
             Wrap(
               spacing: 12,
               runSpacing: 8,
@@ -285,10 +478,8 @@ class _CharacterSummaryCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(l10n.savedCharactersHeader(
-                      character.speciesId.value, character.classId.value)),
-                  Text(l10n.savedCharactersBackground(
-                      character.backgroundId.value)),
+                  Text(l10n.savedCharactersHeader(speciesLabel, classLabel)),
+                  Text(l10n.savedCharactersBackground(backgroundLabel)),
                   if (character.speciesTraits.isNotEmpty) ...[
                     const SizedBox(height: 8),
                     Text(
@@ -296,21 +487,54 @@ class _CharacterSummaryCard extends StatelessWidget {
                       style: theme.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: character.speciesTraits
-                          .map((trait) => Chip(label: Text(trait.id.value)))
-                          .toList(),
+                    const SizedBox(height: 8),
+                    SpeciesTraitDetailsList(
+                      traitIds: character.speciesTraits
+                          .map((trait) => trait.id.value),
+                      traitDefinitions: state.traitDefinitions,
                     ),
                   ],
                 ],
               ),
             ),
+            if (showCustomizationOptions) ...[
+              const SizedBox(height: 16),
+              _Section(
+                title: l10n.characterCustomizationOptionsTitle,
+                child: customizationDetails,
+              ),
+            ],
+            if (showForcePowers) ...[
+              const SizedBox(height: 16),
+              _Section(
+                title: l10n.characterForcePowersTitle,
+                child: forcePowerDetails,
+              ),
+            ],
+            if (showTechPowers) ...[
+              const SizedBox(height: 16),
+              _Section(
+                title: l10n.characterTechPowersTitle,
+                child: techPowerDetails,
+              ),
+            ],
             const SizedBox(height: 16),
+            if (backgroundDetails.isNotEmpty) ...[
+              _Section(
+                title: l10n.summaryBackgroundDetails,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: backgroundDetails,
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
             _Section(
               title: l10n.characterAbilitiesTitle,
-              child: _AbilitiesTable(abilities: character.abilities),
+              child: _AbilitiesTable(
+                abilities: character.abilities,
+                abilityDefinitions: state.abilityDefinitions,
+              ),
             ),
             const SizedBox(height: 16),
             _Section(
@@ -324,7 +548,7 @@ class _CharacterSummaryCard extends StatelessWidget {
                           .map(
                             (skill) => Chip(
                               label: Text(
-                                '${skill.skillId} (${skill.sources.map((source) => source.name).join('+')})',
+                                _skillChipLabel(l10n, skill),
                               ),
                             ),
                           )
@@ -340,11 +564,9 @@ class _CharacterSummaryCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: character.inventory
                           .map(
-                            (line) => Text(
-                              l10n.inventoryLine(
-                                line.itemId.value,
-                                line.quantity.value,
-                              ),
+                            (line) => Padding(
+                              padding: const EdgeInsets.only(bottom: 4),
+                              child: _inventoryEntry(theme, l10n, line),
                             ),
                           )
                           .toList(),
@@ -410,9 +632,13 @@ class _Section extends StatelessWidget {
 }
 
 class _AbilitiesTable extends StatelessWidget {
-  const _AbilitiesTable({required this.abilities});
+  const _AbilitiesTable({
+    required this.abilities,
+    required this.abilityDefinitions,
+  });
 
-  final Map<String, dynamic> abilities;
+  final Map<String, AbilityScore> abilities;
+  final Map<String, AbilityDef> abilityDefinitions;
 
   static const List<String> _order = <String>['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
@@ -423,11 +649,45 @@ class _AbilitiesTable extends StatelessWidget {
     final l10n = context.l10n;
     final List<DataRow> rows = <DataRow>[];
     for (final String key in _order) {
-      final dynamic score = abilities[key]!;
+      final AbilityScore? score = abilities[key];
+      if (score == null) {
+        continue;
+      }
+      final AbilityDef? def = abilityDefinitions[key];
+      final String abbreviation = l10n.abilityAbbreviation(key);
+      String abilityLabel;
+      String? abilityDescription;
+      if (def != null) {
+        final String localized = l10n.localizedCatalogLabel(def.name).trim();
+        if (def.description != null) {
+          final String description =
+              l10n.localizedCatalogLabel(def.description!).trim();
+          if (description.isNotEmpty) {
+            abilityDescription = description;
+          }
+        }
+        if (localized.isNotEmpty) {
+          final String suffix = abbreviation.trim().isNotEmpty
+              ? abbreviation
+              : def.abbreviation.trim();
+          abilityLabel = suffix.isNotEmpty ? '$localized ($suffix)' : localized;
+        } else {
+          abilityLabel = abbreviation.trim().isNotEmpty
+              ? abbreviation
+              : key.toUpperCase();
+        }
+      } else {
+        abilityLabel = abbreviation.trim().isNotEmpty
+            ? abbreviation
+            : key.toUpperCase();
+      }
+      final Widget labelWidget = abilityDescription != null
+          ? Tooltip(message: abilityDescription!, child: Text(abilityLabel))
+          : Text(abilityLabel);
       rows.add(
         DataRow(
           cells: [
-            DataCell(Text(l10n.abilityAbbreviation(key))),
+            DataCell(labelWidget),
             DataCell(Text('${score.value}')),
             DataCell(Text(_fmtMod(score.modifier))),
           ],

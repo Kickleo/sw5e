@@ -40,13 +40,29 @@ class QuickCreateState {
   final List<String> species;
   final List<String> classes;
   final List<String> backgrounds;
+  final Map<String, LocalizedText> speciesLabels;
+  final Map<String, LocalizedText> classLabels;
+  final Map<String, LocalizedText> backgroundLabels;
+  final Map<String, AbilityDef> abilityDefinitions;
+  final Map<String, LanguageDef> languageDefinitions;
+  final Map<String, CustomizationOptionDef> customizationOptionDefinitions;
+  final Map<String, PowerDef> forcePowerDefinitions;
+  final Map<String, PowerDef> techPowerDefinitions;
+  final BackgroundDef? selectedBackgroundDef;
+  final Map<String, SkillDef> backgroundSkillDefinitions;
+  final Map<String, EquipmentDef> backgroundEquipmentDefinitions;
+  final SpeciesDef? selectedSpeciesDef;
   final ClassDef? selectedClassDef;
   final List<TraitDef> selectedSpeciesTraits;
   final List<CharacterEffect> selectedSpeciesEffects;
+  final List<LanguageDef> selectedSpeciesLanguages;
   final List<String> availableSkills;
   final Map<String, SkillDef> skillDefinitions;
   final Map<String, EquipmentDef> equipmentDefinitions;
   final List<String> equipmentList;
+  final Set<String> selectedCustomizationOptions;
+  final Set<String> selectedForcePowers;
+  final Set<String> selectedTechPowers;
 
   // --- Choix utilisateur ----------------------------------------------------------
   final String? selectedSpecies;
@@ -76,18 +92,34 @@ class QuickCreateState {
     required this.species,
     required this.classes,
     required this.backgrounds,
+    required this.speciesLabels,
+    required this.classLabels,
+    required this.backgroundLabels,
+    required this.abilityDefinitions,
+    required this.languageDefinitions,
+    required this.customizationOptionDefinitions,
+    required this.forcePowerDefinitions,
+    required this.techPowerDefinitions,
+    required this.selectedBackgroundDef,
+    required this.backgroundSkillDefinitions,
+    required this.backgroundEquipmentDefinitions,
+    required this.selectedSpeciesDef,
     required this.selectedSpecies,
     required this.selectedClass,
     required this.selectedBackground,
     required this.selectedClassDef,
     required this.selectedSpeciesTraits,
     required this.selectedSpeciesEffects,
+    required this.selectedSpeciesLanguages,
     required this.availableSkills,
     required this.skillDefinitions,
     required this.chosenSkills,
     required this.skillChoicesRequired,
     required this.equipmentDefinitions,
     required this.equipmentList,
+    required this.selectedCustomizationOptions,
+    required this.selectedForcePowers,
+    required this.selectedTechPowers,
     required this.chosenEquipment,
     required this.useStartingEquipment,
     required this.stepIndex,
@@ -109,18 +141,34 @@ class QuickCreateState {
         species: <String>[],
         classes: <String>[],
         backgrounds: <String>[],
+        speciesLabels: <String, LocalizedText>{},
+        classLabels: <String, LocalizedText>{},
+        backgroundLabels: <String, LocalizedText>{},
+        abilityDefinitions: <String, AbilityDef>{},
+        languageDefinitions: <String, LanguageDef>{},
+        customizationOptionDefinitions: <String, CustomizationOptionDef>{},
+        forcePowerDefinitions: <String, PowerDef>{},
+        techPowerDefinitions: <String, PowerDef>{},
+        selectedBackgroundDef: null,
+        backgroundSkillDefinitions: <String, SkillDef>{},
+        backgroundEquipmentDefinitions: <String, EquipmentDef>{},
+        selectedSpeciesDef: null,
         selectedSpecies: null,
         selectedClass: null,
         selectedBackground: null,
         selectedClassDef: null,
         selectedSpeciesTraits: <TraitDef>[],
         selectedSpeciesEffects: <CharacterEffect>[],
+        selectedSpeciesLanguages: <LanguageDef>[],
         availableSkills: <String>[],
         skillDefinitions: <String, SkillDef>{},
         chosenSkills: <String>{},
         skillChoicesRequired: 0,
         equipmentDefinitions: <String, EquipmentDef>{},
         equipmentList: <String>[],
+        selectedCustomizationOptions: <String>{},
+        selectedForcePowers: <String>{},
+        selectedTechPowers: <String>{},
         chosenEquipment: <String, int>{},
         useStartingEquipment: true,
         stepIndex: 0,
@@ -153,18 +201,34 @@ class QuickCreateState {
     List<String>? species,
     List<String>? classes,
     List<String>? backgrounds,
+    Map<String, LocalizedText>? speciesLabels,
+    Map<String, LocalizedText>? classLabels,
+    Map<String, LocalizedText>? backgroundLabels,
+    Map<String, AbilityDef>? abilityDefinitions,
+    Map<String, LanguageDef>? languageDefinitions,
+    Map<String, CustomizationOptionDef>? customizationOptionDefinitions,
+    Map<String, PowerDef>? forcePowerDefinitions,
+    Map<String, PowerDef>? techPowerDefinitions,
+    Object? selectedBackgroundDef = _sentinel,
+    Map<String, SkillDef>? backgroundSkillDefinitions,
+    Map<String, EquipmentDef>? backgroundEquipmentDefinitions,
+    Object? selectedSpeciesDef = _sentinel,
     Object? selectedSpecies = _sentinel,
     Object? selectedClass = _sentinel,
     Object? selectedBackground = _sentinel,
     Object? selectedClassDef = _sentinel,
     List<TraitDef>? selectedSpeciesTraits,
     List<CharacterEffect>? selectedSpeciesEffects,
+    List<LanguageDef>? selectedSpeciesLanguages,
     List<String>? availableSkills,
     Map<String, SkillDef>? skillDefinitions,
     Set<String>? chosenSkills,
     int? skillChoicesRequired,
     Map<String, EquipmentDef>? equipmentDefinitions,
     List<String>? equipmentList,
+    Set<String>? selectedCustomizationOptions,
+    Set<String>? selectedForcePowers,
+    Set<String>? selectedTechPowers,
     Map<String, int>? chosenEquipment,
     bool? useStartingEquipment,
     int? stepIndex,
@@ -185,6 +249,27 @@ class QuickCreateState {
       species: species ?? this.species,
       classes: classes ?? this.classes,
       backgrounds: backgrounds ?? this.backgrounds,
+      speciesLabels: speciesLabels ?? this.speciesLabels,
+      classLabels: classLabels ?? this.classLabels,
+      backgroundLabels: backgroundLabels ?? this.backgroundLabels,
+      abilityDefinitions: abilityDefinitions ?? this.abilityDefinitions,
+      languageDefinitions: languageDefinitions ?? this.languageDefinitions,
+      customizationOptionDefinitions:
+          customizationOptionDefinitions ?? this.customizationOptionDefinitions,
+      forcePowerDefinitions:
+          forcePowerDefinitions ?? this.forcePowerDefinitions,
+      techPowerDefinitions: techPowerDefinitions ?? this.techPowerDefinitions,
+      selectedBackgroundDef: selectedBackgroundDef == _sentinel
+          ? this.selectedBackgroundDef
+          : selectedBackgroundDef as BackgroundDef?,
+      backgroundSkillDefinitions:
+          backgroundSkillDefinitions ?? this.backgroundSkillDefinitions,
+      backgroundEquipmentDefinitions:
+          backgroundEquipmentDefinitions ??
+              this.backgroundEquipmentDefinitions,
+      selectedSpeciesDef: selectedSpeciesDef == _sentinel
+          ? this.selectedSpeciesDef
+          : selectedSpeciesDef as SpeciesDef?,
       selectedSpecies: selectedSpecies == _sentinel
           ? this.selectedSpecies
           : selectedSpecies as String?,
@@ -199,12 +284,19 @@ class QuickCreateState {
       selectedSpeciesTraits: selectedSpeciesTraits ?? this.selectedSpeciesTraits,
       selectedSpeciesEffects:
           selectedSpeciesEffects ?? this.selectedSpeciesEffects,
+      selectedSpeciesLanguages:
+          selectedSpeciesLanguages ?? this.selectedSpeciesLanguages,
       availableSkills: availableSkills ?? this.availableSkills,
       skillDefinitions: skillDefinitions ?? this.skillDefinitions,
       chosenSkills: chosenSkills ?? this.chosenSkills,
       skillChoicesRequired: skillChoicesRequired ?? this.skillChoicesRequired,
       equipmentDefinitions: equipmentDefinitions ?? this.equipmentDefinitions,
       equipmentList: equipmentList ?? this.equipmentList,
+      selectedCustomizationOptions:
+          selectedCustomizationOptions ?? this.selectedCustomizationOptions,
+      selectedForcePowers:
+          selectedForcePowers ?? this.selectedForcePowers,
+      selectedTechPowers: selectedTechPowers ?? this.selectedTechPowers,
       chosenEquipment: chosenEquipment ?? this.chosenEquipment,
       useStartingEquipment: useStartingEquipment ?? this.useStartingEquipment,
       stepIndex: stepIndex ?? this.stepIndex,
@@ -376,23 +468,43 @@ class QuickCreateState {
 
   static const List<String> abilityOrder = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
-  static const Map<String, String> abilityLabels = {
-    'str': 'Force',
-    'dex': 'Dextérité',
-    'con': 'Constitution',
-    'int': 'Intelligence',
-    'wis': 'Sagesse',
-    'cha': 'Charisme',
-  };
+  String resolveAbilityLabel(
+    String ability, {
+    String? locale,
+    String fallbackLocale = 'en',
+  }) {
+    final String normalized = ability.toLowerCase();
+    final AbilityDef? def = abilityDefinitions[normalized];
+    final String? language = locale?.toLowerCase();
+    if (def != null) {
+      if (language != null) {
+        final String? localized = def.name.maybeResolve(
+          language,
+          fallbackLanguageCode: fallbackLocale,
+        );
+        if (localized != null && localized.trim().isNotEmpty) {
+          return localized.trim();
+        }
+      }
+      final String fallback = def.name.resolve(fallbackLocale).trim();
+      if (fallback.isNotEmpty) {
+        return fallback;
+      }
+    }
 
-  static const Map<String, String> abilityAbbreviations = {
-    'str': 'FOR',
-    'dex': 'DEX',
-    'con': 'CON',
-    'int': 'INT',
-    'wis': 'SAG',
-    'cha': 'CHA',
-  };
+    final String resolvedLocale = language ?? fallbackLocale;
+    final String? defaultLabel =
+        _defaultAbilityLabels[resolvedLocale]?[normalized];
+    if (defaultLabel != null && defaultLabel.trim().isNotEmpty) {
+      return defaultLabel;
+    }
+    final String? fallbackDefault =
+        _defaultAbilityLabels[fallbackLocale]?[normalized];
+    if (fallbackDefault != null && fallbackDefault.trim().isNotEmpty) {
+      return fallbackDefault;
+    }
+    return ability.toUpperCase();
+  }
 }
 
 /// QuickCreateCompletion = résultat final du wizard (succès ou erreur).
@@ -420,3 +532,22 @@ final class QuickCreateFailure extends QuickCreateCompletion {
 }
 
 const Object _sentinel = Object();
+
+const Map<String, Map<String, String>> _defaultAbilityLabels = {
+  'en': {
+    'str': 'Strength',
+    'dex': 'Dexterity',
+    'con': 'Constitution',
+    'int': 'Intelligence',
+    'wis': 'Wisdom',
+    'cha': 'Charisma',
+  },
+  'fr': {
+    'str': 'Force',
+    'dex': 'Dextérité',
+    'con': 'Constitution',
+    'int': 'Intelligence',
+    'wis': 'Sagesse',
+    'cha': 'Charisme',
+  },
+};

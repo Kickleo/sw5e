@@ -144,6 +144,8 @@ class SpeciesDto {
   final LocalizedTextDto? sizeText; // Texte détaillant la taille.
   final LocalizedTextDto? speedText; // Texte détaillant la vitesse.
   final LocalizedTextDto? languages; // Langues connues.
+  final LocalizedTextDto? descriptionShort; // Résumé narratif (catalogue v2).
+  final LocalizedTextDto? description; // Description longue (catalogue v2).
 
   const SpeciesDto({
     required this.id,
@@ -157,6 +159,8 @@ class SpeciesDto {
     required this.sizeText,
     required this.speedText,
     required this.languages,
+    required this.descriptionShort,
+    required this.description,
   });
 
   factory SpeciesDto.fromJson(Map<String, dynamic> json) {
@@ -177,6 +181,8 @@ class SpeciesDto {
       sizeText: LocalizedTextDto.maybeFromAny(json['size_text']),
       speedText: LocalizedTextDto.maybeFromAny(json['speed_text']),
       languages: LocalizedTextDto.maybeFromAny(json['languages']),
+      descriptionShort: LocalizedTextDto.maybeFromAny(json['description_short']),
+      description: LocalizedTextDto.maybeFromAny(json['description']),
     );
   }
 
@@ -193,6 +199,8 @@ class SpeciesDto {
         sizeText: sizeText?.toDomain(),
         speedText: speedText?.toDomain(),
         languages: languages?.toDomain(),
+        descriptionShort: descriptionShort?.toDomain(),
+        description: description?.toDomain(),
       ); // Crée l'entité de domaine immuable correspondante.
 }
 
@@ -389,6 +397,7 @@ class ClassLevel1Dto {
         startingEquipmentOptions: startingEquipmentOptions
             .map((dto) => dto.toDomain())
             .toList(growable: false),
+        classFeatures: const <ClassFeature>[],
       ); // Construit la structure métier consommée par la logique de création.
 }
 
@@ -434,6 +443,11 @@ class ClassDto {
         description: description?.toDomain(),
         hitDie: hitDie,
         level1: level1.toDomain(),
+        primaryAbilities: const <String>[],
+        savingThrows: const <String>[],
+        weaponProficiencies: const <String>[],
+        armorProficiencies: const <String>[],
+        toolProficiencies: const <String>[],
       ); // Produit la représentation métier utilisée dans les use cases.
 }
 
@@ -486,8 +500,24 @@ class SkillDto {
     );
   }
 
-  SkillDef toDomain() =>
-      SkillDef(id: id, ability: ability); // Conversion directe vers le domaine.
+  SkillDef toDomain() => SkillDef(
+        id: id,
+        ability: ability,
+        name: LocalizedText(
+          en: _titleCase(id),
+          fr: _titleCase(id),
+        ),
+      ); // Conversion directe vers le domaine.
+}
+
+String _titleCase(String slug) {
+  return slug
+      .split(RegExp(r'[\-_.]'))
+      .map(
+        (String part) =>
+            part.isEmpty ? part : part[0].toUpperCase() + part.substring(1),
+      )
+      .join(' ');
 }
 
 /// EquipmentDto = DTO du matériel.
@@ -558,6 +588,10 @@ class FormulasDto {
   final String initiative; // Expression de calcul de l'initiative.
   final Map<String, SuperiorityDiceRuleDto>
       superiorityDiceByClass; // Règles par identifiant de classe.
+  final String?
+      attackBonus; // Formule optionnelle du bonus d'attaque (catalogue v2).
+  final String?
+      powerSaveDc; // Formule optionnelle du DD de sauvegarde (catalogue v2).
 
   const FormulasDto({
     required this.rulesVersion,
@@ -565,11 +599,14 @@ class FormulasDto {
     required this.defenseBase,
     required this.initiative,
     required this.superiorityDiceByClass,
+    this.attackBonus,
+    this.powerSaveDc,
   });
 
   factory FormulasDto.fromJson(Map<String, dynamic> json) {
-    final rawDice = Map<String, dynamic>.from(
-        json['superiority_dice'] as Map); // Map brute "classe" -> définition.
+    final Map<String, dynamic> rawDice = json['superiority_dice'] is Map
+        ? Map<String, dynamic>.from(json['superiority_dice'] as Map)
+        : <String, dynamic>{};
     return FormulasDto(
       rulesVersion: json['rules_version'] as String,
       hpLevel1: json['hp_level1'] as String,
@@ -583,6 +620,8 @@ class FormulasDto {
           ),
         ),
       ),
+      attackBonus: json['attack_bonus'] as String?,
+      powerSaveDc: json['power_save_dc'] as String?,
     );
   }
 
@@ -591,9 +630,13 @@ class FormulasDto {
         hpLevel1: hpLevel1,
         defenseBase: defenseBase,
         initiative: initiative,
-        superiorityDiceByClass: superiorityDiceByClass.map(
-          (key, value) => MapEntry(key, value.toDomain()),
+        superiorityDiceByClass: Map<String, SuperiorityDiceRule>.unmodifiable(
+          superiorityDiceByClass.map(
+            (key, value) => MapEntry(key, value.toDomain()),
+          ),
         ),
+        attackBonus: attackBonus,
+        powerSaveDc: powerSaveDc,
       ); // Retourne une map immuable de règles métiers exploitables.
 }
 

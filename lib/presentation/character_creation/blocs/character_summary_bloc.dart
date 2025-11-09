@@ -7,6 +7,7 @@
 /// Exemple d'usage :
 ///   final bloc = CharacterSummaryBloc(
 ///     listSavedCharacters: useCase,
+///     catalog: catalogRepository,
 ///     logger: logger,
 ///   )..add(const CharacterSummaryStarted());
 /// ---------------------------------------------------------------------------
@@ -15,6 +16,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/errors/app_failure.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/common/result/app_result.dart';
@@ -22,6 +24,8 @@ import 'package:sw5e_manager/domain/characters/entities/character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/character_id.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/skill_proficiency.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/services/catalog_lookup_service.dart';
 
 /// CharacterSummaryEvent = intention utilisateur/système pour faire évoluer
 /// l'état de la vue.
@@ -60,7 +64,13 @@ class CharacterSummaryCharacterSelected extends CharacterSummaryEvent {
 /// CharacterSummaryShareRequested = intention de partager le personnage courant.
 class CharacterSummaryShareRequested extends CharacterSummaryEvent {
   /// Constructeur const.
-  const CharacterSummaryShareRequested();
+  const CharacterSummaryShareRequested(this.l10n);
+
+  /// Localisation utilisée pour formater le message de partage.
+  final AppLocalizations l10n;
+
+  @override
+  List<Object?> get props => <Object?>[l10n.languageCode];
 }
 
 /// CharacterSummaryShareAcknowledged = notification UI indiquant que le partage
@@ -96,6 +106,20 @@ class CharacterSummaryState extends Equatable {
     required this.hasLoadedOnce,
     required this.isSharing,
     required this.shareIntent,
+    required this.speciesDefinitions,
+    required this.speciesNames,
+    required this.classNames,
+    required this.classDefinitions,
+    required this.backgroundNames,
+    required this.backgroundDefinitions,
+    required this.skillDefinitions,
+    required this.equipmentDefinitions,
+    required this.traitDefinitions,
+    required this.languageDefinitions,
+    required this.abilityDefinitions,
+    required this.customizationOptionDefinitions,
+    required this.forcePowerDefinitions,
+    required this.techPowerDefinitions,
   });
 
   /// Fabrique initiale (aucun chargement effectué).
@@ -107,6 +131,21 @@ class CharacterSummaryState extends Equatable {
         hasLoadedOnce: false,
         isSharing: false,
         shareIntent: null,
+        speciesDefinitions: <String, SpeciesDef>{},
+        speciesNames: <String, LocalizedText>{},
+        classNames: <String, LocalizedText>{},
+        classDefinitions: <String, ClassDef>{},
+        backgroundNames: <String, LocalizedText>{},
+        backgroundDefinitions: <String, BackgroundDef>{},
+        skillDefinitions: <String, SkillDef>{},
+        equipmentDefinitions: <String, EquipmentDef>{},
+        traitDefinitions: <String, TraitDef>{},
+        languageDefinitions: <String, LanguageDef>{},
+        abilityDefinitions: <String, AbilityDef>{},
+        customizationOptionDefinitions:
+            <String, CustomizationOptionDef>{},
+        forcePowerDefinitions: <String, PowerDef>{},
+        techPowerDefinitions: <String, PowerDef>{},
       );
 
   /// Indique si un chargement est en cours.
@@ -129,6 +168,48 @@ class CharacterSummaryState extends Equatable {
 
   /// Éventuelle intention de partage à exécuter par la vue.
   final CharacterSummaryShareIntent? shareIntent;
+
+  /// Définitions complètes des espèces référencées (langues, vitesse, etc.).
+  final Map<String, SpeciesDef> speciesDefinitions;
+
+  /// Libellés localisés des espèces référencées par les personnages.
+  final Map<String, LocalizedText> speciesNames;
+
+  /// Libellés localisés des classes référencées par les personnages.
+  final Map<String, LocalizedText> classNames;
+
+  /// Définitions complètes des classes référencées (niveau 1, maîtrises, traits).
+  final Map<String, ClassDef> classDefinitions;
+
+  /// Libellés localisés des historiques référencés par les personnages.
+  final Map<String, LocalizedText> backgroundNames;
+
+  /// Définitions complètes des historiques référencés (caractéristiques, équipement).
+  final Map<String, BackgroundDef> backgroundDefinitions;
+
+  /// Définitions des compétences utilisées par les personnages.
+  final Map<String, SkillDef> skillDefinitions;
+
+  /// Définitions d'équipement présentes dans les inventaires sauvegardés.
+  final Map<String, EquipmentDef> equipmentDefinitions;
+
+  /// Définitions des traits d'espèce possédés par les personnages.
+  final Map<String, TraitDef> traitDefinitions;
+
+  /// Définitions des langues référencées par les espèces des personnages.
+  final Map<String, LanguageDef> languageDefinitions;
+
+  /// Définitions des caractéristiques référencées par les personnages.
+  final Map<String, AbilityDef> abilityDefinitions;
+
+  /// Définitions des options de personnalisation référencées.
+  final Map<String, CustomizationOptionDef> customizationOptionDefinitions;
+
+  /// Définitions des pouvoirs de Force référencés par les personnages.
+  final Map<String, PowerDef> forcePowerDefinitions;
+
+  /// Définitions des pouvoirs technologiques référencés par les personnages.
+  final Map<String, PowerDef> techPowerDefinitions;
 
   /// Renvoie le personnage actuellement sélectionné (ou le dernier connu en fallback).
   Character? get selectedCharacter {
@@ -164,6 +245,20 @@ class CharacterSummaryState extends Equatable {
     bool? isSharing,
     CharacterSummaryShareIntent? shareIntent,
     bool resetShareIntent = false,
+    Map<String, SpeciesDef>? speciesDefinitions,
+    Map<String, LocalizedText>? speciesNames,
+    Map<String, LocalizedText>? classNames,
+    Map<String, ClassDef>? classDefinitions,
+    Map<String, LocalizedText>? backgroundNames,
+    Map<String, BackgroundDef>? backgroundDefinitions,
+    Map<String, SkillDef>? skillDefinitions,
+    Map<String, EquipmentDef>? equipmentDefinitions,
+    Map<String, TraitDef>? traitDefinitions,
+    Map<String, LanguageDef>? languageDefinitions,
+    Map<String, AbilityDef>? abilityDefinitions,
+    Map<String, CustomizationOptionDef>? customizationOptionDefinitions,
+    Map<String, PowerDef>? forcePowerDefinitions,
+    Map<String, PowerDef>? techPowerDefinitions,
   }) {
     return CharacterSummaryState(
       isLoading: isLoading ?? this.isLoading,
@@ -178,6 +273,23 @@ class CharacterSummaryState extends Equatable {
       isSharing: isSharing ?? this.isSharing,
       shareIntent:
           resetShareIntent ? null : (shareIntent ?? this.shareIntent),
+      speciesDefinitions: speciesDefinitions ?? this.speciesDefinitions,
+      speciesNames: speciesNames ?? this.speciesNames,
+      classNames: classNames ?? this.classNames,
+      classDefinitions: classDefinitions ?? this.classDefinitions,
+      backgroundNames: backgroundNames ?? this.backgroundNames,
+      backgroundDefinitions:
+          backgroundDefinitions ?? this.backgroundDefinitions,
+      skillDefinitions: skillDefinitions ?? this.skillDefinitions,
+      equipmentDefinitions: equipmentDefinitions ?? this.equipmentDefinitions,
+      traitDefinitions: traitDefinitions ?? this.traitDefinitions,
+      languageDefinitions: languageDefinitions ?? this.languageDefinitions,
+      abilityDefinitions: abilityDefinitions ?? this.abilityDefinitions,
+      customizationOptionDefinitions: customizationOptionDefinitions ??
+          this.customizationOptionDefinitions,
+      forcePowerDefinitions:
+          forcePowerDefinitions ?? this.forcePowerDefinitions,
+      techPowerDefinitions: techPowerDefinitions ?? this.techPowerDefinitions,
     );
   }
 
@@ -190,6 +302,20 @@ class CharacterSummaryState extends Equatable {
         hasLoadedOnce,
         isSharing,
         shareIntent,
+      speciesDefinitions,
+      speciesNames,
+      classNames,
+      classDefinitions,
+      backgroundNames,
+      backgroundDefinitions,
+      skillDefinitions,
+        equipmentDefinitions,
+        traitDefinitions,
+        languageDefinitions,
+        abilityDefinitions,
+        customizationOptionDefinitions,
+        forcePowerDefinitions,
+        techPowerDefinitions,
       ];
 }
 
@@ -199,10 +325,14 @@ class CharacterSummaryBloc
   /// Construit le bloc avec ses dépendances métier/logging.
   CharacterSummaryBloc({
     required ListSavedCharacters listSavedCharacters,
+    required CatalogRepository catalog,
     AppLogger? logger,
+    CatalogLookupService? catalogLookupService,
   })  : _listSavedCharacters = listSavedCharacters,
         _logger = logger ?? _NoopAppLogger(),
         super(CharacterSummaryState.initial()) {
+    _catalogLookupService =
+        catalogLookupService ?? CatalogLookupService(catalog: catalog, logger: _logger);
     on<CharacterSummaryStarted>(_onStarted);
     on<CharacterSummaryRefreshRequested>(_onRefreshRequested);
     on<CharacterSummaryCharacterSelected>(_onCharacterSelected);
@@ -212,6 +342,7 @@ class CharacterSummaryBloc
 
   final ListSavedCharacters _listSavedCharacters;
   final AppLogger _logger;
+  late final CatalogLookupService _catalogLookupService;
 
   Future<void> _onStarted(
     CharacterSummaryStarted event,
@@ -265,12 +396,43 @@ class CharacterSummaryBloc
       return;
     }
 
+    final SpeciesDef? speciesDef =
+        state.speciesDefinitions[character.speciesId.value];
+    final List<LanguageDef> speciesLanguages = <LanguageDef>[];
+    if (speciesDef != null) {
+      for (final String languageId in speciesDef.languageIds) {
+        final LanguageDef? def = state.languageDefinitions[languageId];
+        if (def != null) {
+          speciesLanguages.add(def);
+        }
+      }
+    }
+
+    final String message = event.l10n.quickCreateCharacterSummary(
+      character,
+      speciesNames: state.speciesNames,
+      classNames: state.classNames,
+      classDefinitions: state.classDefinitions,
+      backgroundNames: state.backgroundNames,
+      backgroundDefinitions: state.backgroundDefinitions,
+      skillDefinitions: state.skillDefinitions,
+      equipmentDefinitions: state.equipmentDefinitions,
+      traitDefinitions: state.traitDefinitions,
+      abilityDefinitions: state.abilityDefinitions,
+      customizationOptionDefinitions: state.customizationOptionDefinitions,
+      forcePowerDefinitions: state.forcePowerDefinitions,
+      techPowerDefinitions: state.techPowerDefinitions,
+      speciesDefinition: speciesDef,
+      speciesLanguages: speciesLanguages,
+    );
+
     emit(
       state.copyWith(
         isSharing: true,
         shareIntent: CharacterSummaryShareIntent(
-          subject: 'Personnage SW5e : ${character.name.value}',
-          message: _buildShareMessage(character),
+          subject:
+              event.l10n.savedCharacterShareSubject(character.name.value),
+          message: message,
         ),
       ),
     );
@@ -327,12 +489,14 @@ class CharacterSummaryBloc
       return;
     }
 
-    result.match(
-      ok: (List<Character> characters) {
+    await result.match<Future<void>>(
+      ok: (List<Character> characters) async {
         final CharacterId? nextSelectedId = _resolveSelection(
           characters,
           state.selectedId,
         );
+        final CatalogLookupResult lookups =
+            await _catalogLookupService.buildForCharacters(characters: characters);
         emit(
           state.copyWith(
             isLoading: false,
@@ -342,10 +506,25 @@ class CharacterSummaryBloc
             clearFailure: true,
             resetShareIntent: true,
             isSharing: false,
+            speciesDefinitions: lookups.speciesDefinitions,
+            speciesNames: lookups.speciesNames,
+            classNames: lookups.classNames,
+            classDefinitions: lookups.classDefinitions,
+            backgroundNames: lookups.backgroundNames,
+            backgroundDefinitions: lookups.backgroundDefinitions,
+            skillDefinitions: lookups.skillDefinitions,
+            equipmentDefinitions: lookups.equipmentDefinitions,
+            traitDefinitions: lookups.traitDefinitions,
+            languageDefinitions: lookups.languageDefinitions,
+            abilityDefinitions: lookups.abilityDefinitions,
+            customizationOptionDefinitions:
+                lookups.customizationOptionDefinitions,
+            forcePowerDefinitions: lookups.forcePowerDefinitions,
+            techPowerDefinitions: lookups.techPowerDefinitions,
           ),
         );
       },
-      err: (DomainError error) {
+      err: (DomainError error) async {
         _logger.error(
           'CharacterSummaryBloc.load: erreur domaine',
           error: error,
@@ -382,24 +561,6 @@ class CharacterSummaryBloc
     return characters.last.id;
   }
 
-  static String _buildShareMessage(Character character) {
-    final StringBuffer buffer = StringBuffer()
-      ..writeln('Nom : ${character.name.value}')
-      ..writeln('Espèce : ${character.speciesId.value}')
-      ..writeln('Classe : ${character.classId.value}')
-      ..writeln('Historique : ${character.backgroundId.value}')
-      ..writeln('PV : ${character.hitPoints.value}')
-      ..writeln('Défense : ${character.defense.value}')
-      ..writeln('Initiative : ${character.initiative.value}')
-      ..writeln('Crédits : ${character.credits.value}')
-      ..writeln(
-        'Compétences : ${character.skills.map((SkillProficiency s) => s.skillId).join(', ')}',
-      )
-      ..writeln(
-        'Inventaire : ${character.inventory.map((InventoryLine line) => "${line.itemId.value} x${line.quantity.value}").join(', ')}',
-      );
-    return buffer.toString();
-  }
 }
 
 class _NoopAppLogger implements AppLogger {

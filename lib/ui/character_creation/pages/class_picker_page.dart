@@ -14,6 +14,10 @@ import 'package:sw5e_manager/common/di/service_locator.dart';
 import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/class_picker_bloc.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_feature_list.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_multiclassing_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_proficiency_formatter.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_power_details.dart';
 
 /// ClassPickerPage = écran modal permettant de choisir une classe niveau 1.
 class ClassPickerPage extends StatefulWidget {
@@ -118,6 +122,7 @@ class _ClassPickerView extends StatelessWidget {
           child: _ClassList(
             classIds: state.classIds,
             selectedId: state.selectedClassId,
+            classDefinitions: state.classDefinitions,
           ),
         ),
         const VerticalDivider(width: 1),
@@ -135,13 +140,19 @@ class _ClassPickerView extends StatelessWidget {
 }
 
 class _ClassList extends StatelessWidget {
-  const _ClassList({required this.classIds, required this.selectedId});
+  const _ClassList({
+    required this.classIds,
+    required this.selectedId,
+    required this.classDefinitions,
+  });
 
   final List<String> classIds;
   final String? selectedId;
+  final Map<String, ClassDef> classDefinitions;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ListView.builder(
       itemCount: classIds.length,
       itemBuilder: (BuildContext context, int index) {
@@ -149,13 +160,24 @@ class _ClassList extends StatelessWidget {
         final bool selected = id == selectedId;
         return ListTile(
           selected: selected,
-          title: Text(_titleCase(id)),
+          title: Text(_labelFor(l10n, id)),
           subtitle: Text(id),
           onTap: () =>
               context.read<ClassPickerBloc>().add(ClassPickerClassRequested(id)),
         );
       },
     );
+  }
+
+  String _labelFor(AppLocalizations l10n, String id) {
+    final ClassDef? def = classDefinitions[id];
+    if (def != null) {
+      final String label = l10n.localizedCatalogLabel(def.name).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(id);
   }
 }
 
@@ -178,7 +200,7 @@ class _ClassDetails extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           Text(
-            _localizedName(l10n, selected.name),
+            l10n.localizedCatalogLabel(selected.name),
             style: theme.textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
@@ -186,6 +208,93 @@ class _ClassDetails extends StatelessWidget {
           const SizedBox(height: 12),
           Text(l10n.classPickerHitDie(selected.hitDie)),
           const SizedBox(height: 12),
+          if (selected.primaryAbilities.isNotEmpty) ...<Widget>[
+            Text(
+              l10n.classPickerPrimaryAbilitiesTitle,
+              style: theme.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              _formatAbilities(selected.primaryAbilities, state, l10n),
+            ),
+            const SizedBox(height: 12),
+          ],
+          if (selected.savingThrows.isNotEmpty) ...<Widget>[
+            Text(
+              l10n.classPickerSavingThrowsTitle,
+              style: theme.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              _formatAbilities(selected.savingThrows, state, l10n),
+            ),
+            const SizedBox(height: 12),
+          ],
+          if (selected.multiclassing?.hasAbilityRequirements ?? false) ...<Widget>[
+            ClassMulticlassingDetails(
+              classDef: selected,
+              abilityDefinitions: state.abilityDefinitions,
+            ),
+            const SizedBox(height: 12),
+          ],
+          if (_hasPowerInfo(selected)) ...<Widget>[
+            ClassPowerDetails(classDef: selected),
+            const SizedBox(height: 12),
+          ],
+          if (selected.weaponProficiencies.isNotEmpty) ...<Widget>[
+            Text(
+              l10n.classPickerWeaponProficienciesTitle,
+              style: theme.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              formatClassProficiencies(
+                values: selected.weaponProficiencies,
+                l10n: l10n,
+                category: ClassProficiencyCategory.weapon,
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
+          if (selected.armorProficiencies.isNotEmpty) ...<Widget>[
+            Text(
+              l10n.classPickerArmorProficienciesTitle,
+              style: theme.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              formatClassProficiencies(
+                values: selected.armorProficiencies,
+                l10n: l10n,
+                category: ClassProficiencyCategory.armor,
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
+          if (selected.toolProficiencies.isNotEmpty) ...<Widget>[
+            Text(
+              l10n.classPickerToolProficienciesTitle,
+              style: theme.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              formatClassProficiencies(
+                values: selected.toolProficiencies,
+                l10n: l10n,
+                category: ClassProficiencyCategory.tool,
+                equipmentDefinitions: state.equipmentDefinitions,
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
+          if (selected.level1.classFeatures.isNotEmpty) ...<Widget>[
+            ClassFeatureList(
+              heading: l10n.classPickerLevel1FeaturesTitle,
+              features: selected.level1.classFeatures,
+              headingStyle: theme.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 12),
+          ],
           Text(
             l10n.classPickerSkillsHeading(
               selected.level1.proficiencies.skillsChoose,
@@ -235,13 +344,6 @@ class _ClassDetails extends StatelessWidget {
   }
 }
 
-String _localizedName(AppLocalizations l10n, LocalizedText text) {
-  if (l10n.isFrench) {
-    return text.fr.isNotEmpty ? text.fr : text.en;
-  }
-  return text.en.isNotEmpty ? text.en : text.fr;
-}
-
 String _formatSkill(String id, ClassPickerState state, AppLocalizations l10n) {
   if (id == 'any') {
     return l10n.classPickerAnySkill;
@@ -250,7 +352,7 @@ String _formatSkill(String id, ClassPickerState state, AppLocalizations l10n) {
   if (def == null) {
     return _titleCase(id);
   }
-  return _titleCase(id);
+  return l10n.localizedCatalogLabel(def.name);
 }
 
 String _skillAbility(String id, ClassPickerState state, AppLocalizations l10n) {
@@ -260,6 +362,20 @@ String _skillAbility(String id, ClassPickerState state, AppLocalizations l10n) {
   final SkillDef? def = state.skillDefinitions[id];
   if (def == null) {
     return '';
+  }
+  final AbilityDef? ability = state.abilityDefinitions[def.ability];
+  if (ability != null) {
+    final String name = l10n.localizedCatalogLabel(ability.name).trim();
+    final String abbr = ability.abbreviation.trim();
+    if (name.isNotEmpty) {
+      if (abbr.isNotEmpty && !name.toLowerCase().contains(abbr.toLowerCase())) {
+        return '$name (${abbr.toUpperCase()})';
+      }
+      return name;
+    }
+    if (abbr.isNotEmpty) {
+      return abbr.toUpperCase();
+    }
   }
   return l10n.abilityAbbreviation(def.ability);
 }
@@ -271,17 +387,55 @@ String _formatEquipment(
 ) {
   final EquipmentDef? def = state.equipmentDefinitions[id];
   if (def == null) {
-    return _titleCase(id);
+  return _titleCase(id);
+}
+
+bool _hasPowerInfo(ClassDef def) {
+  if (def.powerSource != null && def.powerSource!.trim().isNotEmpty) {
+    return true;
   }
-  if (l10n.isFrench) {
-    return def.name.fr.isNotEmpty ? def.name.fr : def.name.en;
+  return def.powerList != null;
+}
+  return l10n.localizedCatalogLabel(def.name);
+}
+
+String _formatAbilities(
+  List<String> slugs,
+  ClassPickerState state,
+  AppLocalizations l10n,
+) {
+  final Iterable<String> labels = slugs.map(
+    (String slug) => _abilityLabel(slug, state, l10n),
+  ).where((String label) => label.isNotEmpty);
+  return labels.isEmpty ? '' : labels.join(', ');
+}
+
+String _abilityLabel(
+  String slug,
+  ClassPickerState state,
+  AppLocalizations l10n,
+) {
+  final AbilityDef? ability = state.abilityDefinitions[slug];
+  if (ability != null) {
+    final String name = l10n.localizedCatalogLabel(ability.name).trim();
+    final String abbr = ability.abbreviation.trim();
+    if (name.isNotEmpty) {
+      if (abbr.isNotEmpty &&
+          !name.toLowerCase().contains(abbr.toLowerCase())) {
+        return '$name (${abbr.toUpperCase()})';
+      }
+      return name;
+    }
+    if (abbr.isNotEmpty) {
+      return abbr.toUpperCase();
+    }
   }
-  return def.name.en.isNotEmpty ? def.name.en : def.name.fr;
+  return l10n.abilityAbbreviation(slug);
 }
 
 String _titleCase(String slug) {
   return slug
-      .split(RegExp(r'[-_]'))
+      .split(RegExp(r'[\-_.]'))
       .map(
         (String part) => part.isEmpty
             ? part

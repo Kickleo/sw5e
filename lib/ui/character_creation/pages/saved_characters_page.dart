@@ -12,11 +12,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sw5e_manager/app/locale/app_localizations.dart';
 import 'package:sw5e_manager/common/di/service_locator.dart';
+import 'package:sw5e_manager/common/logging/app_logger.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
+import 'package:sw5e_manager/domain/characters/services/catalog_lookup_service.dart';
 import 'package:sw5e_manager/domain/characters/usecases/list_saved_characters.dart';
 import 'package:sw5e_manager/domain/characters/value_objects/ability_score.dart';
 import 'package:sw5e_manager/presentation/character_creation/blocs/saved_characters_bloc.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/background_details.dart';
 import 'package:sw5e_manager/ui/character_creation/widgets/character_section_divider.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_feature_list.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_multiclassing_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/class_power_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/catalog_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/language_details.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/species_ability_bonuses.dart';
+import 'package:sw5e_manager/ui/character_creation/widgets/species_trait_details.dart';
 
 class SavedCharactersPage extends StatefulWidget {
   const SavedCharactersPage({super.key});
@@ -30,6 +41,9 @@ class SavedCharactersPage extends StatefulWidget {
 class _SavedCharactersPageState extends State<SavedCharactersPage> {
   late final ScrollController _scrollController;
   late final SavedCharactersBloc _bloc;
+  late final CatalogLookupService _catalogLookupService;
+  CatalogLookupResult _catalogLookups = const CatalogLookupResult.empty();
+  int _catalogLookupRequestId = 0;
 
   @override
   void initState() {
@@ -37,9 +51,41 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
     _scrollController = ScrollController();
     final ListSavedCharacters listSavedCharacters =
         ServiceLocator.resolve<ListSavedCharacters>();
+    final CatalogRepository catalog =
+        ServiceLocator.resolve<CatalogRepository>();
+    final AppLogger logger = ServiceLocator.resolve<AppLogger>();
+    _catalogLookupService =
+        CatalogLookupService(catalog: catalog, logger: logger);
     _bloc = SavedCharactersBloc(
       listSavedCharacters: listSavedCharacters,
     )..add(const SavedCharactersRequested());
+  }
+
+  Future<void> _loadCatalogLookups(List<Character> characters) async {
+    _catalogLookupRequestId += 1;
+    final int requestId = _catalogLookupRequestId;
+
+    if (characters.isEmpty) {
+      setState(() {
+        _catalogLookups = const CatalogLookupResult.empty();
+      });
+      return;
+    }
+
+    try {
+      final CatalogLookupResult result = await _catalogLookupService
+          .buildForCharacters(characters: characters);
+      if (!mounted || requestId != _catalogLookupRequestId) {
+        return;
+      }
+      setState(() {
+        _catalogLookups = result;
+      });
+    } catch (_) {
+      if (!mounted || requestId != _catalogLookupRequestId) {
+        return;
+      }
+    }
   }
 
   @override
@@ -53,12 +99,16 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
   Widget build(BuildContext context) {
     return BlocProvider<SavedCharactersBloc>.value(
       value: _bloc,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(context.l10n.savedCharactersTitle),
-          leading: IconButton(
-            icon: const Icon(Icons.home_outlined),
-            tooltip: context.l10n.backToHomeTooltip,
+      child: BlocListener<SavedCharactersBloc, SavedCharactersState>(
+        listenWhen: (previous, current) =>
+            previous.characters != current.characters,
+        listener: (context, state) => _loadCatalogLookups(state.characters),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(context.l10n.savedCharactersTitle),
+            leading: IconButton(
+              icon: const Icon(Icons.home_outlined),
+              tooltip: context.l10n.backToHomeTooltip,
             onPressed: () => context.go('/'),
           ),
           actions: [
@@ -128,15 +178,22 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
                       );
                     }
                     final Character character = state.characters[index - 1];
-                    return _CharacterCard(character: character);
+                    return _CharacterCard(
+                      character: character,
+                      lookups: _catalogLookups,
+                    );
                   }
-                    final Character character = state.characters[index];
-                    return _CharacterCard(character: character);
-                  },
+                  final Character character = state.characters[index];
+                  return _CharacterCard(
+                    character: character,
+                    lookups: _catalogLookups,
+                  );
+                },
                 ),
               ),
             );
           },
+        ),
         ),
       ),
     );
@@ -144,16 +201,249 @@ class _SavedCharactersPageState extends State<SavedCharactersPage> {
 }
 
 class _CharacterCard extends StatelessWidget {
-  const _CharacterCard({required this.character});
+  const _CharacterCard({required this.character, required this.lookups});
 
   final Character character;
+  final CatalogLookupResult lookups;
 
   String _fmtSigned(int value) => value >= 0 ? '+$value' : '$value';
+
+  String _titleCase(String slug) {
+    return slug
+        .split(RegExp(r'[\-_.]'))
+        .map(
+          (String part) =>
+              part.isEmpty ? part : '${part[0].toUpperCase()}${part.substring(1)}',
+        )
+        .join(' ');
+  }
+
+  String _resolveLocalizedLabel(
+    AppLocalizations l10n,
+    Map<String, LocalizedText> labels,
+    String id,
+  ) {
+    final LocalizedText? text = labels[id];
+    if (text != null) {
+      final String value = l10n.localizedCatalogLabel(text).trim();
+      if (value.isNotEmpty) {
+        return value;
+      }
+    }
+    return _titleCase(id);
+  }
+
+  String _resolveSkillLabel(AppLocalizations l10n, String id) {
+    final SkillDef? def = lookups.skillDefinitions[id];
+    if (def != null) {
+      final String value = l10n.localizedCatalogLabel(def.name).trim();
+      if (value.isNotEmpty) {
+        return value;
+      }
+    }
+    return _titleCase(id);
+  }
+
+  String _resolveEquipmentLabel(AppLocalizations l10n, String id) {
+    final EquipmentDef? def = lookups.equipmentDefinitions[id];
+    if (def != null) {
+      final String value = l10n.localizedCatalogLabel(def.name).trim();
+      if (value.isNotEmpty) {
+        return value;
+      }
+    }
+    return _titleCase(id);
+  }
+
+  List<String> _resolveEquipmentMetadata(AppLocalizations l10n, String id) {
+    final EquipmentDef? def = lookups.equipmentDefinitions[id];
+    if (def == null) {
+      return const <String>[];
+    }
+    return l10n.equipmentMetadataLines(def);
+  }
+
+  Widget _inventoryEntry(
+    ThemeData theme,
+    AppLocalizations l10n,
+    InventoryLine line,
+  ) {
+    final String label =
+        _resolveEquipmentLabel(l10n, line.itemId.value);
+    final List<String> metadata =
+        _resolveEquipmentMetadata(l10n, line.itemId.value);
+    if (metadata.isEmpty) {
+      return Text(l10n.inventoryLine(label, line.quantity.value));
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.inventoryLine(label, line.quantity.value)),
+        Padding(
+          padding: const EdgeInsets.only(left: 16, top: 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: metadata
+                .map(
+                  (entry) => Text(
+                    entry,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                )
+                .toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget? _buildClassSection(AppLocalizations l10n, ThemeData theme) {
+    final ClassDef? classDef = lookups.classDefinitions[character.classId.value];
+    if (classDef == null) {
+      return null;
+    }
+
+    final List<Widget> children = <Widget>[];
+    if (classDef.multiclassing?.hasAbilityRequirements ?? false) {
+      children
+        ..add(
+          ClassMulticlassingDetails(
+            classDef: classDef,
+            abilityDefinitions: lookups.abilityDefinitions,
+            headingStyle:
+                theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+          ),
+        )
+        ..add(const SizedBox(height: 8));
+    }
+    if (_hasPowerInfo(classDef)) {
+      children
+        ..add(ClassPowerDetails(classDef: classDef))
+        ..add(const SizedBox(height: 8));
+    }
+
+    if (classDef.level1.classFeatures.isNotEmpty) {
+      children.add(
+        ClassFeatureList(
+          heading: l10n.summaryClassLevel1FeaturesTitle,
+          headingStyle:
+              theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+          features: classDef.level1.classFeatures,
+        ),
+      );
+    }
+
+    if (children.isEmpty) {
+      return null;
+    }
+
+    return _Section(
+      title: l10n.summaryClassFeatures,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: children,
+      ),
+    );
+  }
+
+  Widget? _buildBackgroundSection(AppLocalizations l10n, ThemeData theme) {
+    final BackgroundDef? backgroundDef =
+        lookups.backgroundDefinitions[character.backgroundId.value];
+    if (backgroundDef == null) {
+      return null;
+    }
+
+    final List<Widget> children = buildBackgroundDetails(
+      l10n: l10n,
+      theme: theme,
+      background: backgroundDef,
+      skillDefinitions: lookups.skillDefinitions,
+      equipmentDefinitions: lookups.equipmentDefinitions,
+    );
+
+    if (children.isEmpty) {
+      return null;
+    }
+
+    return _Section(
+      title: l10n.summaryBackgroundDetails,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: children,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final l10n = context.l10n;
+    final String speciesLabel = _resolveLocalizedLabel(
+      l10n,
+      lookups.speciesNames,
+      character.speciesId.value,
+    );
+    final String classLabel = _resolveLocalizedLabel(
+      l10n,
+      lookups.classNames,
+      character.classId.value,
+    );
+    final String backgroundLabel = _resolveLocalizedLabel(
+      l10n,
+      lookups.backgroundNames,
+      character.backgroundId.value,
+    );
+    final SpeciesDef? speciesDef =
+        lookups.speciesDefinitions[character.speciesId.value];
+    final List<LanguageDef> speciesLanguages = <LanguageDef>[];
+    if (speciesDef != null) {
+      for (final String languageId in speciesDef.languageIds) {
+        final LanguageDef? language = lookups.languageDefinitions[languageId];
+        if (language != null) {
+          speciesLanguages.add(language);
+        }
+      }
+    }
+    final LocalizedText? speciesLanguageFallback = speciesDef?.languages;
+    final List<SpeciesAbilityBonus> speciesAbilityBonuses =
+        speciesDef?.abilityBonuses ?? const <SpeciesAbilityBonus>[];
+    final bool showAbilityBonuses =
+        SpeciesAbilityBonusesCard.hasDisplayableContent(speciesAbilityBonuses);
+    final bool showLanguageDetails = LanguageDetailsCard.hasDisplayableContent(
+      l10n,
+      speciesLanguages,
+      fallback: speciesLanguageFallback,
+    );
+    final List<String> speciesTraitIds = character.speciesTraits
+        .map((CharacterTrait trait) => trait.id.value)
+        .toList(growable: false);
+    final bool showTraitDetails = speciesTraitIds.isNotEmpty;
+    final Widget? classSection = _buildClassSection(l10n, theme);
+    final Widget? backgroundSection = _buildBackgroundSection(l10n, theme);
+    final List<String> customizationOptionIds =
+        character.customizationOptionIds.toList()..sort();
+    final bool showCustomizationOptions =
+        CustomizationOptionDetailsList.hasDisplayableContent(
+      customizationOptionIds,
+    );
+    final Widget customizationDetails = CustomizationOptionDetailsList(
+      optionIds: customizationOptionIds,
+      optionDefinitions: lookups.customizationOptionDefinitions,
+    );
+    final List<String> forcePowerIds = character.forcePowerIds.toList()..sort();
+    final bool showForcePowers =
+        PowerDetailsList.hasDisplayableContent(forcePowerIds);
+    final Widget forcePowerDetails = PowerDetailsList(
+      powerIds: forcePowerIds,
+      powerDefinitions: lookups.forcePowerDefinitions,
+    );
+    final List<String> techPowerIds = character.techPowerIds.toList()..sort();
+    final bool showTechPowers =
+        PowerDetailsList.hasDisplayableContent(techPowerIds);
+    final Widget techPowerDetails = PowerDetailsList(
+      powerIds: techPowerIds,
+      powerDefinitions: lookups.techPowerDefinitions,
+    );
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Padding(
@@ -175,18 +465,42 @@ class _CharacterCard extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         l10n.savedCharactersHeader(
-                          character.speciesId.value,
-                          character.classId.value,
+                          speciesLabel,
+                          classLabel,
                         ),
                         style: theme.textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        l10n.savedCharactersBackground(
-                          character.backgroundId.value,
-                        ),
+                        l10n.savedCharactersBackground(backgroundLabel),
                         style: theme.textTheme.bodySmall,
                       ),
+                      if (showAbilityBonuses) ...[
+                        const SizedBox(height: 12),
+                        SpeciesAbilityBonusesCard(
+                          bonuses: speciesAbilityBonuses,
+                        ),
+                      ],
+                      if (showLanguageDetails) ...[
+                        const SizedBox(height: 12),
+                        LanguageDetailsCard(
+                          languages: speciesLanguages,
+                          fallback: speciesLanguageFallback,
+                        ),
+                      ],
+                      if (showTraitDetails) ...[
+                        const SizedBox(height: 12),
+                        Text(
+                          l10n.characterSpeciesTraitsHeading,
+                          style: theme.textTheme.bodyMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 8),
+                        SpeciesTraitDetailsList(
+                          traitIds: speciesTraitIds,
+                          traitDefinitions: lookups.traitDefinitions,
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -206,6 +520,35 @@ class _CharacterCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
+            if (classSection != null) ...[
+              classSection,
+              const SizedBox(height: 16),
+            ],
+            if (backgroundSection != null) ...[
+              backgroundSection,
+              const SizedBox(height: 16),
+            ],
+            if (showCustomizationOptions) ...[
+              _Section(
+                title: l10n.characterCustomizationOptionsTitle,
+                child: customizationDetails,
+              ),
+              const SizedBox(height: 16),
+            ],
+            if (showForcePowers) ...[
+              _Section(
+                title: l10n.characterForcePowersTitle,
+                child: forcePowerDetails,
+              ),
+              const SizedBox(height: 16),
+            ],
+            if (showTechPowers) ...[
+              _Section(
+                title: l10n.characterTechPowersTitle,
+                child: techPowerDetails,
+              ),
+              const SizedBox(height: 16),
+            ],
             Wrap(
               spacing: 12,
               runSpacing: 8,
@@ -226,7 +569,10 @@ class _CharacterCard extends StatelessWidget {
             const SizedBox(height: 16),
             _Section(
               title: l10n.savedCharactersCharacteristicsTitle,
-              child: _AbilitiesTable(abilities: character.abilities),
+              child: _AbilitiesTable(
+                abilities: character.abilities,
+                abilityDefinitions: lookups.abilityDefinitions,
+              ),
             ),
             if (character.skills.isNotEmpty) ...[
               const SizedBox(height: 16),
@@ -236,10 +582,13 @@ class _CharacterCard extends StatelessWidget {
                   spacing: 8,
                   runSpacing: 8,
                   children: character.skills
-                      .map((skill) => Chip(
-                            label: Text(
-                                '${skill.skillId} (${skill.sources.map((source) => source.name).join('+')})'),
-                          ))
+                      .map(
+                        (skill) => Chip(
+                          label: Text(
+                            '${_resolveSkillLabel(l10n, skill.skillId)} (${skill.sources.map((source) => source.name).join('+')})',
+                          ),
+                        ),
+                      )
                       .toList(),
                 ),
               ),
@@ -252,11 +601,9 @@ class _CharacterCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: character.inventory
                       .map(
-                        (line) => Text(
-                          l10n.inventoryLine(
-                            line.itemId.value,
-                            line.quantity.value,
-                          ),
+                        (line) => Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: _inventoryEntry(theme, l10n, line),
                         ),
                       )
                       .toList(),
@@ -267,6 +614,13 @@ class _CharacterCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool _hasPowerInfo(ClassDef def) {
+    if (def.powerSource != null && def.powerSource!.trim().isNotEmpty) {
+      return true;
+    }
+    return def.powerList != null;
   }
 }
 
@@ -394,38 +748,100 @@ class _ChipStat extends StatelessWidget {
 }
 
 class _AbilitiesTable extends StatelessWidget {
-  const _AbilitiesTable({required this.abilities});
+  const _AbilitiesTable({
+    required this.abilities,
+    required this.abilityDefinitions,
+  });
 
   final Map<String, AbilityScore> abilities;
+  final Map<String, AbilityDef> abilityDefinitions;
+
+  static const List<String> _order = <String>['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final l10n = context.l10n;
+    String _abilityLabel(String ability) {
+      final AbilityDef? def = abilityDefinitions[ability];
+      final String abbreviation = l10n.abilityAbbreviation(ability);
+      if (def != null) {
+        final String localized =
+            l10n.localizedCatalogLabel(def.name).trim();
+        if (localized.isNotEmpty) {
+          final String suffix = abbreviation.trim().isNotEmpty
+              ? abbreviation
+              : def.abbreviation.trim();
+          if (suffix.isNotEmpty) {
+            return '$localized ($suffix)';
+          }
+          return localized;
+        }
+      }
+      if (abbreviation.trim().isNotEmpty) {
+        return abbreviation;
+      }
+      return ability.toUpperCase();
+    }
+
+    Widget _abilityCell(String ability) {
+      final AbilityDef? def = abilityDefinitions[ability];
+      final String label = _abilityLabel(ability);
+      final String? description = def?.description != null
+          ? l10n.localizedCatalogLabel(def!.description!).trim()
+          : null;
+      final Text text = Text(
+        label,
+        style: theme.textTheme.bodyMedium,
+      );
+      if (description != null && description.isNotEmpty) {
+        return Tooltip(
+          message: description,
+          child: text,
+        );
+      }
+      return text;
+    }
+
+    String _scoreWithModifier(AbilityScore score) {
+      final String modifier = score.modifier >= 0
+          ? '+${score.modifier}'
+          : score.modifier.toString();
+      return '${score.value} ($modifier)';
+    }
+
+    final List<TableRow> rows = <TableRow>[];
+    for (final String ability in _order) {
+      final AbilityScore? score = abilities[ability];
+      if (score == null) {
+        continue;
+      }
+      rows.add(
+        TableRow(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: _abilityCell(ability),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Text(
+                _scoreWithModifier(score),
+                style: theme.textTheme.bodyMedium,
+                textAlign: TextAlign.right,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Table(
       columnWidths: const {
         0: FlexColumnWidth(2),
         1: FlexColumnWidth(1),
       },
-      children: abilities.entries
-          .map(
-            (entry) => TableRow(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Text(entry.key, style: theme.textTheme.bodyMedium),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Text(
-                    entry.value.toString(),
-                    style: theme.textTheme.bodyMedium,
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-              ],
-            ),
-          )
-          .toList(),
+      children: rows,
     );
   }
 }

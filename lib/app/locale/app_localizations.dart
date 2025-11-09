@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:sw5e_manager/domain/characters/entities/character.dart';
+import 'package:sw5e_manager/domain/characters/localization/species_effect_localization.dart';
 import 'package:sw5e_manager/domain/characters/repositories/catalog_repository.dart';
 
 /// Provides application-specific translations for supported locales.
@@ -137,6 +138,62 @@ class AppLocalizations {
   String classPickerHitDie(int hitDie) =>
       isFrench ? 'Dé de vie : d$hitDie' : 'Hit die: d$hitDie';
 
+  String get classPickerPrimaryAbilitiesTitle =>
+      isFrench ? 'Caractéristiques principales' : 'Primary abilities';
+
+  String get classPickerSavingThrowsTitle =>
+      isFrench ? 'Jets de sauvegarde' : 'Saving throws';
+
+  String get classPickerWeaponProficienciesTitle =>
+      isFrench ? 'Maîtrises d’armes' : 'Weapon proficiencies';
+
+  String get classPickerArmorProficienciesTitle =>
+      isFrench ? 'Maîtrises d’armures' : 'Armor proficiencies';
+
+  String get classPickerToolProficienciesTitle =>
+      isFrench ? 'Maîtrises d’outils' : 'Tool proficiencies';
+
+  String get classPickerLevel1FeaturesTitle =>
+      isFrench ? 'Capacités de niveau 1' : 'Level 1 features';
+
+  String get classMulticlassRequirementsTitle =>
+      isFrench ? 'Prérequis de multi-classe' : 'Multiclass requirements';
+
+  String classMulticlassRequirementValue(String abilityLabel, int score) =>
+      '$abilityLabel $score';
+
+  String classMulticlassRequirementsLine(String details) => isFrench
+      ? 'Prérequis multi-classe : $details'
+      : 'Multiclass requirements: $details';
+
+  String get classPowerSectionTitle =>
+      isFrench ? 'Pouvoirs' : 'Powers';
+
+  String classPowerSourceLine(String sourceSlug) {
+    final String label = _localizedPowerSource(sourceSlug);
+    return isFrench
+        ? 'Source de pouvoirs : $label'
+        : 'Power source: $label';
+  }
+
+  String classPowerForceLine(bool allowed) => isFrench
+      ? 'Pouvoirs de la Force : ${allowed ? 'autorisés' : 'interdits'}'
+      : 'Force powers: ${allowed ? 'allowed' : 'not allowed'}';
+
+  String classPowerTechLine(bool allowed) => isFrench
+      ? 'Pouvoirs technologiques : ${allowed ? 'autorisés' : 'interdits'}'
+      : 'Tech powers: ${allowed ? 'allowed' : 'not allowed'}';
+
+  String classPowerProgressionLine(String? progressionSlug) {
+    if (progressionSlug == null || progressionSlug.trim().isEmpty) {
+      return '';
+    }
+    final String label = _localizedSpellcastingProgression(progressionSlug);
+    return isFrench
+        ? 'Progression de lanceur : $label'
+        : 'Casting progression: $label';
+  }
+
   String classPickerSkillsHeading(int choose) => isFrench
       ? 'Compétences : choisir $choose parmi :'
       : 'Skills: choose $choose from:';
@@ -162,6 +219,10 @@ class AppLocalizations {
 
   String get speciesEffectsTitle =>
       isFrench ? 'Effets d’espèce' : 'Species effects';
+
+  String get speciesAbilityBonusesTitle => isFrench
+      ? 'Augmentation de caractéristiques'
+      : 'Ability score increases';
 
   String get speciesTraitsTitle =>
       isFrench ? 'Traits d’espèce' : 'Species traits';
@@ -253,6 +314,139 @@ class AppLocalizations {
     }
   }
 
+  static const Map<String, String> _abilityLabelsEn = <String, String>{
+    'str': 'Strength',
+    'dex': 'Dexterity',
+    'con': 'Constitution',
+    'int': 'Intelligence',
+    'wis': 'Wisdom',
+    'cha': 'Charisma',
+  };
+
+  static const Map<String, String> _abilityLabelsFr = <String, String>{
+    'str': 'Force',
+    'dex': 'Dextérité',
+    'con': 'Constitution',
+    'int': 'Intelligence',
+    'wis': 'Sagesse',
+    'cha': 'Charisme',
+  };
+
+  static const Map<String, String> _weaponCategoryLabelsEn = <String, String>{
+    'simple': 'Simple weapons',
+    'martial': 'Martial weapons',
+    'simple-blasters': 'Simple blasters',
+    'martial-blasters': 'Martial blasters',
+  };
+
+  static const Map<String, String> _weaponCategoryLabelsFr = <String, String>{
+    'simple': 'Armes simples',
+    'martial': 'Armes martiales',
+    'simple-blasters': 'Blasters simples',
+    'martial-blasters': 'Blasters martiaux',
+  };
+
+  static const Map<String, String> _armorCategoryLabelsEn = <String, String>{
+    'light': 'Light armor',
+    'medium': 'Medium armor',
+    'heavy': 'Heavy armor',
+    'shields': 'Shields',
+  };
+
+  static const Map<String, String> _armorCategoryLabelsFr = <String, String>{
+    'light': 'Armure légère',
+    'medium': 'Armure intermédiaire',
+    'heavy': 'Armure lourde',
+    'shields': 'Boucliers',
+  };
+
+  static const Map<String, String> _toolCategoryLabelsEn = <String, String>{
+    'artisan-tools': "Artisan's tools",
+    'musical-instrument': 'Musical instrument',
+    'gaming-set': 'Gaming set',
+    'vehicles-land': 'Land vehicles',
+    'vehicles-air': 'Air vehicles',
+    'vehicles-space': 'Space vehicles',
+    'vehicles-sea': 'Water vehicles',
+    'disguise-kit': 'Disguise kit',
+    'forgery-kit': 'Forgery kit',
+    'poisoners-kit': "Poisoner's kit",
+    'hacking-kit': 'Hacking kit',
+    'breathing-gear': 'Breathing gear',
+  };
+
+  static const Map<String, String> _toolCategoryLabelsFr = <String, String>{
+    'artisan-tools': "Outils d'artisan",
+    'musical-instrument': 'Instrument de musique',
+    'gaming-set': 'Jeu de société',
+    'vehicles-land': 'Véhicules terrestres',
+    'vehicles-air': 'Véhicules aériens',
+    'vehicles-space': 'Véhicules spatiaux',
+    'vehicles-sea': 'Véhicules marins',
+    'disguise-kit': 'Trousse de déguisement',
+    'forgery-kit': 'Trousse de contrefaçon',
+    'poisoners-kit': 'Trousse de poisonnier',
+    'hacking-kit': 'Trousse de piratage',
+    'breathing-gear': 'Équipement respiratoire',
+  };
+
+  String abilityLabel(
+    String ability, {
+    LocalizedText? catalogName,
+  }) {
+    if (catalogName != null) {
+      final String resolved = localizedCatalogLabel(catalogName).trim();
+      if (resolved.isNotEmpty) {
+        return resolved;
+      }
+    }
+    final String lower = ability.toLowerCase();
+    final Map<String, String> defaults =
+        isFrench ? _abilityLabelsFr : _abilityLabelsEn;
+    final String? label = defaults[lower];
+    if (label != null && label.trim().isNotEmpty) {
+      return label;
+    }
+    final String? englishFallback = _abilityLabelsEn[lower];
+    if (englishFallback != null && englishFallback.trim().isNotEmpty) {
+      return englishFallback;
+    }
+    return ability.toUpperCase();
+  }
+
+  String classWeaponCategoryLabel(String slug) {
+    final String lower = slug.toLowerCase();
+    final Map<String, String> labels =
+        isFrench ? _weaponCategoryLabelsFr : _weaponCategoryLabelsEn;
+    final String? label = labels[lower];
+    if (label != null && label.isNotEmpty) {
+      return label;
+    }
+    return _titleCase(slug);
+  }
+
+  String classArmorCategoryLabel(String slug) {
+    final String lower = slug.toLowerCase();
+    final Map<String, String> labels =
+        isFrench ? _armorCategoryLabelsFr : _armorCategoryLabelsEn;
+    final String? label = labels[lower];
+    if (label != null && label.isNotEmpty) {
+      return label;
+    }
+    return _titleCase(slug);
+  }
+
+  String classToolCategoryLabel(String slug) {
+    final String lower = slug.toLowerCase();
+    final Map<String, String> labels =
+        isFrench ? _toolCategoryLabelsFr : _toolCategoryLabelsEn;
+    final String? label = labels[lower];
+    if (label != null && label.isNotEmpty) {
+      return label;
+    }
+    return _titleCase(slug);
+  }
+
   String get skillStepNoAdditionalChoices => isFrench
       ? 'La classe sélectionnée n’offre aucun choix de compétence supplémentaire.'
       : 'The selected class does not grant additional skill choices.';
@@ -273,9 +467,16 @@ class AppLocalizations {
     }
   }
 
-  String skillStepAbilitySubtitle(String ability) => isFrench
-      ? 'Basée sur ${abilityAbbreviation(ability)}'
-      : 'Based on ${abilityAbbreviation(ability)}';
+  String skillStepAbilitySubtitle(
+    String ability, {
+    LocalizedText? catalogName,
+  }) {
+    final String label = abilityLabel(ability, catalogName: catalogName);
+    final String abbreviation = abilityAbbreviation(ability);
+    return isFrench
+        ? 'Basée sur $label ($abbreviation)'
+        : 'Based on $label ($abbreviation)';
+  }
 
   String get skillStepLimitReached => isFrench
       ? 'Vous avez atteint le nombre maximum de compétences sélectionnées. Décochez-en une pour en choisir une autre.'
@@ -357,6 +558,118 @@ class AppLocalizations {
   String equipmentStepListSubtitle(int cost, String weight, String type) => isFrench
       ? '${cost}cr · $weight · $type'
       : '${cost}cr · $weight · $type';
+
+  String equipmentStepWeaponCategory(String category) => isFrench
+      ? 'Catégorie : $category'
+      : 'Category: $category';
+
+  String equipmentStepWeaponDamage(String dice, String damageType) => isFrench
+      ? 'Dégâts : $dice $damageType'
+      : 'Damage: $dice $damageType';
+
+  String equipmentStepDamageNotes(String notes) => isFrench
+      ? 'Notes de dégâts : $notes'
+      : 'Damage notes: $notes';
+
+  String equipmentStepWeaponRange(int? primaryMeters, int? maximumMeters) {
+    String formatValue(int meters) => '$meters m';
+    final String prefix = isFrench ? 'Portée : ' : 'Range: ';
+    if (primaryMeters != null && maximumMeters != null) {
+      if (primaryMeters == maximumMeters) {
+        return '$prefix${formatValue(primaryMeters)}';
+      }
+      return '$prefix${formatValue(primaryMeters)} / ${formatValue(maximumMeters)}';
+    }
+    if (primaryMeters != null) {
+      return '$prefix${formatValue(primaryMeters)}';
+    }
+    if (maximumMeters != null) {
+      return '$prefix${formatValue(maximumMeters)}';
+    }
+    return '${prefix}—';
+  }
+
+  String equipmentStepWeaponProperties(String properties) => isFrench
+      ? 'Propriétés : $properties'
+      : 'Properties: $properties';
+
+  String equipmentStepRarity(String rarity) => isFrench
+      ? 'Rareté : $rarity'
+      : 'Rarity: $rarity';
+
+  String equipmentDetailsWeight(String weight) => isFrench
+      ? 'Poids : $weight'
+      : 'Weight: $weight';
+
+  List<String> equipmentMetadataLines(EquipmentDef def) {
+    final List<String> lines = <String>[];
+
+    if (def.weightG > 0) {
+      lines.add(equipmentDetailsWeight(_formatWeight(def.weightG)));
+    }
+
+    if (def.weaponDamage.isNotEmpty) {
+      final List<String> segments = def.weaponDamage
+          .map((WeaponDamage damage) {
+            final String dice = _formatWeaponDice(damage);
+            final String typeLabel = damage.damageTypeName != null
+                ? localizedCatalogLabel(damage.damageTypeName!).trim()
+                : _titleCase(damage.damageType);
+            if (dice.trim().isEmpty && typeLabel.isEmpty) {
+              return '';
+            }
+            if (typeLabel.isEmpty) {
+              return dice;
+            }
+            if (dice.trim().isEmpty) {
+              return typeLabel;
+            }
+            return '$dice $typeLabel';
+          })
+          .where((String value) => value.trim().isNotEmpty)
+          .toList(growable: false);
+      if (segments.isNotEmpty) {
+        final String joined = segments.join(', ');
+        lines.add(isFrench ? 'Dégâts : $joined' : 'Damage: $joined');
+      }
+    }
+
+    for (final WeaponDamage damage in def.weaponDamage) {
+      final LocalizedText? notes = damage.damageTypeNotes;
+      if (notes == null) {
+        continue;
+      }
+      final String label = localizedCatalogLabel(notes).trim();
+      if (label.isNotEmpty) {
+        lines.add(equipmentStepDamageNotes(label));
+      }
+    }
+
+    if (def.weaponRange != null) {
+      lines.add(
+        equipmentStepWeaponRange(
+          def.weaponRange!.primary,
+          def.weaponRange!.maximum,
+        ),
+      );
+    }
+
+    if (def.weaponProperties.isNotEmpty) {
+      final String properties = def.weaponProperties
+          .map(_titleCase)
+          .where((String value) => value.trim().isNotEmpty)
+          .join(', ');
+      if (properties.isNotEmpty) {
+        lines.add(equipmentStepWeaponProperties(properties));
+      }
+    }
+
+    if (def.rarity != null && def.rarity!.trim().isNotEmpty) {
+      lines.add(equipmentStepRarity(_titleCase(def.rarity!)));
+    }
+
+    return lines;
+  }
 
   String navigationErrorMessage(Object? error) => isFrench
       ? 'Erreur de navigation : $error'
@@ -447,6 +760,16 @@ class AppLocalizations {
       ? 'Traits d’espèce :'
       : 'Species traits:';
 
+  String get characterCustomizationOptionsTitle => isFrench
+      ? 'Options de personnalisation'
+      : 'Customization options';
+
+  String get characterForcePowersTitle =>
+      isFrench ? 'Pouvoirs de la Force' : 'Force powers';
+
+  String get characterTechPowersTitle =>
+      isFrench ? 'Pouvoirs technologiques' : 'Tech powers';
+
   String get characterAbilitiesTitle =>
       isFrench ? 'Caractéristiques' : 'Abilities';
 
@@ -533,6 +856,39 @@ class AppLocalizations {
       isFrench ? 'Identité' : 'Identity';
   String get summaryClassFeatures =>
       isFrench ? 'Caractéristiques de classe' : 'Class features';
+  String get summaryCustomizationOptionsTitle => isFrench
+      ? 'Options de personnalisation'
+      : 'Customization options';
+  String get summaryForcePowersTitle =>
+      isFrench ? 'Pouvoirs de la Force' : 'Force powers';
+  String get summaryTechPowersTitle =>
+      isFrench ? 'Pouvoirs technologiques' : 'Tech powers';
+  String get summaryClassLevel1FeaturesTitle =>
+      isFrench ? 'Capacités de niveau 1' : 'Level 1 features';
+  String get summaryBackgroundDetails =>
+      isFrench ? 'Historique' : 'Background';
+  String get summaryNoBackgroundSelected => isFrench
+      ? 'Aucun historique sélectionné.'
+      : 'No background selected.';
+  String get summaryBackgroundSkillsTitle =>
+      isFrench ? 'Compétences accordées' : 'Granted skills';
+  String summaryBackgroundLanguagesPick(int count) => isFrench
+      ? 'Langues supplémentaires à choisir : $count'
+      : 'Additional languages to choose: $count';
+  String get summaryBackgroundToolsTitle =>
+      isFrench ? 'Maîtrises d’outils' : 'Tool proficiencies';
+  String get summaryBackgroundFeatureTitle =>
+      isFrench ? 'Capacité d’historique' : 'Background feature';
+  String get summaryBackgroundPersonalityTraits =>
+      isFrench ? 'Traits de personnalité' : 'Personality traits';
+  String get summaryBackgroundPersonalityIdeals =>
+      isFrench ? 'Idéaux' : 'Ideals';
+  String get summaryBackgroundPersonalityBonds =>
+      isFrench ? 'Liens' : 'Bonds';
+  String get summaryBackgroundPersonalityFlaws =>
+      isFrench ? 'Défauts' : 'Flaws';
+  String get summaryBackgroundEquipmentTitle =>
+      isFrench ? 'Équipement associé' : 'Background equipment';
   String get summarySpecies => isFrench ? 'Espèce' : 'Species';
   String get summaryAbilities => isFrench ? 'Caractéristiques' : 'Abilities';
   String get summarySkills => isFrench ? 'Compétences' : 'Skills';
@@ -645,40 +1001,675 @@ class AppLocalizations {
       ? 'Pensez à vérifier votre équipement avant de finaliser la création.'
       : 'Make sure to review your gear before finalizing the character.';
 
+  String get quickCreateBackgroundSkillsTitle =>
+      isFrench ? 'Compétences accordées' : 'Granted skills';
+
+  String quickCreateBackgroundLanguagesPick(int count) {
+    final bool plural = count > 1;
+    final String suffix = plural ? 's' : '';
+    return isFrench
+        ? 'Choisissez $count langue$suffix supplémentaire$suffix.'
+        : 'Choose $count additional language$suffix.';
+  }
+
+  String get quickCreateBackgroundToolsTitle =>
+      isFrench ? 'Maîtrises d’outils' : 'Tool proficiencies';
+
+  String get quickCreateBackgroundFeatureTitle =>
+      isFrench ? 'Capacité d’historique' : 'Background feature';
+
+  String get quickCreateBackgroundPersonalityTraitsTitle =>
+      isFrench ? 'Traits de personnalité' : 'Personality traits';
+
+  String get quickCreateBackgroundPersonalityIdealsTitle =>
+      isFrench ? 'Idéaux' : 'Ideals';
+
+  String get quickCreateBackgroundPersonalityBondsTitle =>
+      isFrench ? 'Liens' : 'Bonds';
+
+  String get quickCreateBackgroundPersonalityFlawsTitle =>
+      isFrench ? 'Défauts' : 'Flaws';
+
+  String get quickCreateBackgroundEquipmentTitle =>
+      isFrench ? 'Équipement associé' : 'Background equipment';
+
   String get quickCreateCharacterCreated =>
       isFrench ? 'Personnage créé'
       : 'Character created';
 
-  String quickCreateCharacterSummary(Character character) {
+  String get languagesTitle => isFrench ? 'Langues' : 'Languages';
+
+  String languageScriptLabel(String script) =>
+      isFrench ? 'Alphabet : $script' : 'Script: $script';
+
+  String languageTypicalSpeakersLabel(String speakers) => isFrench
+      ? 'Locuteurs typiques : $speakers'
+      : 'Typical speakers: $speakers';
+
+  String quickCreateCharacterSummary(
+    Character character, {
+    Map<String, LocalizedText> speciesNames = const <String, LocalizedText>{},
+    Map<String, LocalizedText> classNames = const <String, LocalizedText>{},
+    Map<String, ClassDef> classDefinitions = const <String, ClassDef>{},
+    Map<String, LocalizedText> backgroundNames =
+        const <String, LocalizedText>{},
+    Map<String, BackgroundDef> backgroundDefinitions =
+        const <String, BackgroundDef>{},
+    Map<String, SkillDef> skillDefinitions = const <String, SkillDef>{},
+    Map<String, EquipmentDef> equipmentDefinitions =
+        const <String, EquipmentDef>{},
+    Map<String, TraitDef> traitDefinitions = const <String, TraitDef>{},
+    Map<String, AbilityDef> abilityDefinitions = const <String, AbilityDef>{},
+    Map<String, CustomizationOptionDef> customizationOptionDefinitions =
+        const <String, CustomizationOptionDef>{},
+    Map<String, PowerDef> forcePowerDefinitions = const <String, PowerDef>{},
+    Map<String, PowerDef> techPowerDefinitions = const <String, PowerDef>{},
+    SpeciesDef? speciesDefinition,
+    List<LanguageDef> speciesLanguages = const <LanguageDef>[],
+  }) {
+    final String species =
+        _resolveCatalogName(speciesNames, character.speciesId.value);
+    final String className =
+        _resolveCatalogName(classNames, character.classId.value);
+    final String background =
+        _resolveCatalogName(backgroundNames, character.backgroundId.value);
+
+    final ClassDef? classDefinition =
+        classDefinitions[character.classId.value];
+
+    final BackgroundDef? backgroundDefinition =
+        backgroundDefinitions[character.backgroundId.value];
+
+    final List<String> abilityBonusLines = <String>[];
+    if (speciesDefinition != null &&
+        speciesDefinition.abilityBonuses.isNotEmpty) {
+      final SpeciesAbilityBonusFormatter formatter = SpeciesAbilityBonusFormatter(
+        SpeciesEffectLocalizationCatalog.forLanguage(languageCode),
+      );
+      abilityBonusLines.addAll(
+        speciesDefinition.abilityBonuses
+            .where((SpeciesAbilityBonus bonus) => bonus.amount != 0)
+            .map(formatter.format)
+            .map((String value) => value.trim())
+            .where((String value) => value.isNotEmpty),
+      );
+    }
+
+    final String skills = character.skills
+        .map((SkillProficiency skill) =>
+            _resolveSkillName(skillDefinitions, skill.skillId))
+        .join(', ');
+
+    final String inventory = character.inventory.map((InventoryLine line) {
+      final EquipmentDef? def = equipmentDefinitions[line.itemId.value];
+      final String label;
+      if (def != null) {
+        final String resolved = localizedCatalogLabel(def.name).trim();
+        label = resolved.isNotEmpty
+            ? resolved
+            : _resolveEquipmentName(equipmentDefinitions, line.itemId.value);
+      } else {
+        label = _resolveEquipmentName(equipmentDefinitions, line.itemId.value);
+      }
+      final String base = '$label x${line.quantity.value}';
+      if (def == null) {
+        return base;
+      }
+      final List<String> metadata = equipmentMetadataLines(def);
+      if (metadata.isEmpty) {
+        return base;
+      }
+      final String details = metadata.join(isFrench ? ' ; ' : '; ');
+      return '$base — $details';
+    }).join(', ');
+
+    final String traits = character.speciesTraits
+        .map(
+          (CharacterTrait trait) =>
+              _resolveTraitName(traitDefinitions, trait.id.value),
+        )
+        .where((String label) => label.isNotEmpty)
+        .join(', ');
+
+    final List<String> classLines = <String>[];
+    if (classDefinition != null) {
+      if (classDefinition.powerSource != null &&
+          classDefinition.powerSource!.trim().isNotEmpty) {
+        classLines.add(classPowerSourceLine(classDefinition.powerSource!));
+      }
+      final ClassPowerList? powerList = classDefinition.powerList;
+      if (powerList != null) {
+        classLines.add(classPowerForceLine(powerList.forceAllowed));
+        classLines.add(classPowerTechLine(powerList.techAllowed));
+        final String progressionLine =
+            classPowerProgressionLine(powerList.spellcastingProgression);
+        if (progressionLine.isNotEmpty) {
+          classLines.add(progressionLine);
+        }
+      }
+
+      final ClassMulticlassing? multiclassing = classDefinition.multiclassing;
+      if (multiclassing != null &&
+          multiclassing.hasAbilityRequirements) {
+        final List<MapEntry<String, int>> requirements =
+            multiclassing.abilityRequirements.entries.toList()
+              ..sort((MapEntry<String, int> a, MapEntry<String, int> b) =>
+                  a.key.compareTo(b.key));
+        final List<String> requirementLabels = <String>[];
+        for (final MapEntry<String, int> entry in requirements) {
+          final AbilityDef? ability = abilityDefinitions[entry.key];
+          final String abilityLabel;
+          if (ability != null) {
+            final String localized =
+                localizedCatalogLabel(ability.name).trim();
+            if (localized.isNotEmpty) {
+              abilityLabel = localized;
+            } else if (ability.abbreviation.trim().isNotEmpty) {
+              abilityLabel = ability.abbreviation.trim();
+            } else {
+              abilityLabel = entry.key.toUpperCase();
+            }
+          } else {
+            abilityLabel = entry.key.toUpperCase();
+          }
+          requirementLabels.add(
+            classMulticlassRequirementValue(abilityLabel, entry.value),
+          );
+        }
+        if (requirementLabels.isNotEmpty) {
+          classLines.add(
+            classMulticlassRequirementsLine(requirementLabels.join(', ')),
+          );
+        }
+      }
+
+      final List<ClassFeature> features = classDefinition.level1.classFeatures;
+      if (features.isNotEmpty) {
+        for (final ClassFeature feature in features) {
+          final String name = localizedCatalogLabel(feature.name).trim();
+          final List<String> details = <String>[];
+          final String description =
+              _localizedOptional(feature.description).trim();
+          if (description.isNotEmpty) {
+            details.add(description);
+          }
+          final List<String> effectTexts = feature.effects
+              .map((CatalogFeatureEffect effect) =>
+                  _localizedOptional(effect.text))
+              .where((String value) => value.isNotEmpty)
+              .toList();
+          details.addAll(effectTexts);
+
+          if (name.isNotEmpty && details.isNotEmpty) {
+            classLines.add('$name: ${details.join(' ')}');
+          } else if (name.isNotEmpty) {
+            classLines.add(name);
+          } else if (details.isNotEmpty) {
+            classLines.add(details.join(' '));
+          }
+        }
+      }
+    }
+
+    final List<String> backgroundLines = <String>[];
+    if (backgroundDefinition != null) {
+      final List<String> grantedSkillLabels = backgroundDefinition.grantedSkills
+          .map((String id) => _resolveSkillName(skillDefinitions, id))
+          .where((String label) => label.isNotEmpty)
+          .toList();
+      if (grantedSkillLabels.isNotEmpty) {
+        backgroundLines.add(
+          '${summaryBackgroundSkillsTitle}: ${grantedSkillLabels.join(', ')}',
+        );
+      }
+
+      if (backgroundDefinition.languagesPick > 0) {
+        backgroundLines
+            .add(summaryBackgroundLanguagesPick(backgroundDefinition.languagesPick));
+      }
+
+      final List<String> toolLabels = backgroundDefinition.toolProficiencies
+          .map((String id) => _resolveEquipmentName(equipmentDefinitions, id))
+          .where((String label) => label.isNotEmpty)
+          .toList();
+      if (toolLabels.isNotEmpty) {
+        backgroundLines.add(
+          '${summaryBackgroundToolsTitle}: ${toolLabels.join(', ')}',
+        );
+      }
+
+      final BackgroundFeature? feature = backgroundDefinition.feature;
+      if (feature != null) {
+        final String featureName = localizedCatalogLabel(feature.name).trim();
+        if (featureName.isNotEmpty) {
+          backgroundLines.add(
+            '${summaryBackgroundFeatureTitle}: $featureName',
+          );
+        }
+
+        final List<String> effectTexts = feature.effects
+            .map((CatalogFeatureEffect effect) =>
+                _localizedOptional(effect.text))
+            .where((String text) => text.isNotEmpty)
+            .toList();
+        backgroundLines.addAll(effectTexts);
+      }
+
+      final BackgroundPersonality? personality = backgroundDefinition.personality;
+      if (personality != null) {
+        void addPersonalitySection(
+          String title,
+          List<LocalizedText> values,
+        ) {
+          if (values.isEmpty) {
+            return;
+          }
+          final List<String> labels = values
+              .map(localizedCatalogLabel)
+              .map((String value) => value.trim())
+              .where((String value) => value.isNotEmpty)
+              .toList();
+          if (labels.isEmpty) {
+            return;
+          }
+          backgroundLines.add('$title: ${labels.join(', ')}');
+        }
+
+        addPersonalitySection(
+          summaryBackgroundPersonalityTraits,
+          personality.traits,
+        );
+        addPersonalitySection(
+          summaryBackgroundPersonalityIdeals,
+          personality.ideals,
+        );
+        addPersonalitySection(
+          summaryBackgroundPersonalityBonds,
+          personality.bonds,
+        );
+        addPersonalitySection(
+          summaryBackgroundPersonalityFlaws,
+          personality.flaws,
+        );
+      }
+
+      if (backgroundDefinition.equipment.isNotEmpty) {
+        final List<String> equipmentLines = <String>[];
+        for (final BackgroundEquipmentGrant grant
+            in backgroundDefinition.equipment) {
+          final EquipmentDef? def = equipmentDefinitions[grant.itemId];
+          final String resolved = def != null
+              ? localizedCatalogLabel(def.name).trim()
+              : '';
+          final String label = resolved.isNotEmpty
+              ? resolved
+              : _resolveEquipmentName(equipmentDefinitions, grant.itemId);
+          if (label.isEmpty) {
+            continue;
+          }
+          if (def == null) {
+            equipmentLines.add('$label x${grant.quantity}');
+            continue;
+          }
+          final List<String> metadata = equipmentMetadataLines(def);
+          if (metadata.isEmpty) {
+            equipmentLines.add('$label x${grant.quantity}');
+            continue;
+          }
+          final String details = metadata.join(isFrench ? ' ; ' : '; ');
+          equipmentLines.add('$label x${grant.quantity} — $details');
+        }
+        if (equipmentLines.isNotEmpty) {
+          backgroundLines.add(
+            '${summaryBackgroundEquipmentTitle}: ${equipmentLines.join(', ')}',
+          );
+        }
+      }
+    }
+
+    final List<String> customizationLines = <String>[];
+    for (final String optionId in character.customizationOptionIds) {
+      final CustomizationOptionDef? option =
+          customizationOptionDefinitions[optionId];
+      String label = _titleCase(optionId);
+      if (option != null) {
+        final String localized = localizedCatalogLabel(option.name).trim();
+        if (localized.isNotEmpty) {
+          label = localized;
+        }
+      }
+      label = label.trim();
+      if (label.isEmpty) {
+        continue;
+      }
+      final List<String> effectTexts = option?.effects
+              .map((CatalogFeatureEffect effect) =>
+                  _localizedOptional(effect.text).trim())
+              .where((String value) => value.isNotEmpty)
+              .toList() ??
+          const <String>[];
+      if (effectTexts.isNotEmpty) {
+        final String details = effectTexts.join(isFrench ? ' ; ' : '; ');
+        customizationLines.add('$label: $details');
+      } else {
+        customizationLines.add(label);
+      }
+    }
+
+    String _powerLine(PowerDef? def, String id) {
+      String label = _titleCase(id);
+      if (def != null) {
+        final String localized = localizedCatalogLabel(def.name).trim();
+        if (localized.isNotEmpty) {
+          label = localized;
+        }
+      }
+      label = label.trim();
+      if (label.isEmpty) {
+        return '';
+      }
+      if (def == null) {
+        return label;
+      }
+      final String description =
+          localizedCatalogLabel(def.description).trim();
+      if (description.isEmpty) {
+        return label;
+      }
+      return '$label: $description';
+    }
+
+    final List<String> forcePowerLines = character.forcePowerIds
+        .map((String id) => _powerLine(forcePowerDefinitions[id], id))
+        .where((String value) => value.trim().isNotEmpty)
+        .toList();
+
+    final List<String> techPowerLines = character.techPowerIds
+        .map((String id) => _powerLine(techPowerDefinitions[id], id))
+        .where((String value) => value.trim().isNotEmpty)
+        .toList();
+
+    final List<String> languageLabels = <String>[];
+    final Set<String> normalizedLanguages = <String>{};
+    for (final LanguageDef language in speciesLanguages) {
+      final String label = localizedCatalogLabel(language.name).trim();
+      if (label.isEmpty) {
+        continue;
+      }
+      final String normalized = label.toLowerCase();
+      if (!normalizedLanguages.add(normalized)) {
+        continue;
+      }
+      languageLabels.add(label);
+    }
+
+    String languages;
+    if (languageLabels.isNotEmpty) {
+      languages = languageLabels.join(', ');
+    } else if (speciesDefinition?.languages != null) {
+      languages =
+          localizedCatalogLabel(speciesDefinition!.languages!).trim();
+    } else {
+      languages = '';
+    }
+
+    final String abilityBonusesText =
+        abilityBonusLines.isNotEmpty ? abilityBonusLines.join(', ') : '';
+
     final buffer = StringBuffer();
     if (isFrench) {
       buffer
-        ..writeln('Nom: ${character.name.value}')
-        ..writeln('Espèce: ${character.speciesId.value}')
-        ..writeln('Classe: ${character.classId.value}')
-        ..writeln('BG: ${character.backgroundId.value}')
+        ..writeln('Nom : ${character.name.value}')
+        ..writeln('Espèce : $species')
+        ..writeln('Classe : $className')
+        ..writeln('Historique : $background')
         ..writeln()
-        ..writeln('HP: ${character.hitPoints.value}')
-        ..writeln('Défense: ${character.defense.value}')
-        ..writeln('Initiative: ${character.initiative.value}')
-        ..writeln('Crédits: ${character.credits.value}')
-        ..writeln('Inventaire: ${character.inventory.map((line) => "${line.itemId.value} x${line.quantity.value}").join(', ')}')
-        ..write('Compétences: ${character.skills.map((skill) => skill.skillId).join(', ')}');
+        ..writeln('PV : ${character.hitPoints.value}')
+        ..writeln('Défense : ${character.defense.value}')
+        ..writeln('Initiative : ${character.initiative.value}')
+        ..writeln('Crédits : ${character.credits.value}')
+        ..writeln(
+          '${speciesAbilityBonusesTitle} : ${abilityBonusesText.isEmpty ? "—" : abilityBonusesText}',
+        )
+        ..writeln('Langues : ${languages.isEmpty ? "—" : languages}')
+        ..writeln('Inventaire : $inventory')
+        ..writeln('Compétences : $skills');
+      if (traits.isNotEmpty) {
+        buffer.writeln('Traits : $traits');
+      }
+      if (classLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryClassFeatures} :');
+        for (final String line in classLines) {
+          buffer.writeln('• $line');
+        }
+      }
+      if (backgroundLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryBackgroundDetails} :');
+        for (final String line in backgroundLines) {
+          buffer.writeln('• $line');
+        }
+      }
+      if (customizationLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryCustomizationOptionsTitle} :');
+        for (final String line in customizationLines) {
+          buffer.writeln('• $line');
+        }
+      }
+      if (forcePowerLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryForcePowersTitle} :');
+        for (final String line in forcePowerLines) {
+          buffer.writeln('• $line');
+        }
+      }
+      if (techPowerLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryTechPowersTitle} :');
+        for (final String line in techPowerLines) {
+          buffer.writeln('• $line');
+        }
+      }
     } else {
       buffer
         ..writeln('Name: ${character.name.value}')
-        ..writeln('Species: ${character.speciesId.value}')
-        ..writeln('Class: ${character.classId.value}')
-        ..writeln('Background: ${character.backgroundId.value}')
+        ..writeln('Species: $species')
+        ..writeln('Class: $className')
+        ..writeln('Background: $background')
         ..writeln()
         ..writeln('HP: ${character.hitPoints.value}')
         ..writeln('Defense: ${character.defense.value}')
         ..writeln('Initiative: ${character.initiative.value}')
         ..writeln('Credits: ${character.credits.value}')
-        ..writeln('Inventory: ${character.inventory.map((line) => "${line.itemId.value} x${line.quantity.value}").join(', ')}')
-        ..write('Skills: ${character.skills.map((skill) => skill.skillId).join(', ')}');
+        ..writeln(
+          '${speciesAbilityBonusesTitle}: ${abilityBonusesText.isEmpty ? "—" : abilityBonusesText}',
+        )
+        ..writeln('Languages: ${languages.isEmpty ? "—" : languages}')
+        ..writeln('Inventory: $inventory')
+        ..writeln('Skills: $skills');
+      if (traits.isNotEmpty) {
+        buffer.writeln('Traits: $traits');
+      }
+      if (classLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryClassFeatures}:');
+        for (final String line in classLines) {
+          buffer.writeln('• $line');
+        }
+      }
+      if (backgroundLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryBackgroundDetails}:');
+        for (final String line in backgroundLines) {
+          buffer.writeln('• $line');
+        }
+      }
+      if (customizationLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryCustomizationOptionsTitle}:');
+        for (final String line in customizationLines) {
+          buffer.writeln('• $line');
+        }
+      }
+      if (forcePowerLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryForcePowersTitle}:');
+        for (final String line in forcePowerLines) {
+          buffer.writeln('• $line');
+        }
+      }
+      if (techPowerLines.isNotEmpty) {
+        buffer
+          ..writeln()
+          ..writeln('${summaryTechPowersTitle}:');
+        for (final String line in techPowerLines) {
+          buffer.writeln('• $line');
+        }
+      }
     }
     return buffer.toString();
+  }
+
+  String savedCharacterShareSubject(String name) =>
+      isFrench ? 'Personnage SW5e : $name' : 'SW5e character: $name';
+
+  String _resolveCatalogName(
+    Map<String, LocalizedText> names,
+    String id,
+  ) {
+    final LocalizedText? text = names[id];
+    if (text != null) {
+      final String label = localizedCatalogLabel(text).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(id);
+  }
+
+  String _resolveSkillName(Map<String, SkillDef> defs, String id) {
+    final SkillDef? def = defs[id];
+    if (def != null) {
+      final String label = localizedCatalogLabel(def.name).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(id);
+  }
+
+  String _resolveEquipmentName(Map<String, EquipmentDef> defs, String id) {
+    final EquipmentDef? def = defs[id];
+    if (def != null) {
+      final String label = localizedCatalogLabel(def.name).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(id);
+  }
+
+  String _resolveTraitName(Map<String, TraitDef> defs, String id) {
+    final TraitDef? def = defs[id];
+    if (def != null) {
+      final String label = localizedCatalogLabel(def.name).trim();
+      if (label.isNotEmpty) {
+        return label;
+      }
+    }
+    return _titleCase(id);
+  }
+
+  String _localizedPowerSource(String slug) {
+    final String normalized = slug.trim().toLowerCase();
+    switch (normalized) {
+      case 'force':
+        return isFrench ? 'Force' : 'Force';
+      case 'tech':
+        return isFrench ? 'Technologie' : 'Tech';
+      case 'martial':
+        return isFrench ? 'Martiale' : 'Martial';
+      case 'primal':
+        return isFrench ? 'Primale' : 'Primal';
+      default:
+        return _titleCase(normalized);
+    }
+  }
+
+  String _localizedSpellcastingProgression(String slug) {
+    final String normalized = slug.trim().toLowerCase();
+    switch (normalized) {
+      case 'full':
+        return isFrench ? 'Lanceur complet' : 'Full caster';
+      case 'half':
+        return isFrench ? 'Lanceur moitié' : 'Half caster';
+      case 'third':
+        return isFrench ? 'Lanceur tiers' : 'Third caster';
+      case 'quarter':
+        return isFrench ? 'Lanceur quart' : 'Quarter caster';
+      case 'artificer':
+        return isFrench ? 'Progression artificier' : 'Artificer progression';
+      case 'none':
+        return isFrench ? 'Aucune' : 'None';
+      default:
+        return _titleCase(normalized);
+    }
+  }
+
+  String _localizedOptional(LocalizedText? text) {
+    if (text == null) {
+      return '';
+    }
+    final String label = localizedCatalogLabel(text).trim();
+    return label;
+  }
+
+  String _formatWeaponDice(WeaponDamage damage) {
+    final int? count = damage.diceCount;
+    final int? die = damage.diceDie;
+    final int? modifier = damage.diceModifier;
+    if (count == null || die == null) {
+      if (modifier != null && modifier != 0) {
+        return modifier > 0 ? '+$modifier' : '$modifier';
+      }
+      return '';
+    }
+    final String base = '${count}d$die';
+    if (modifier == null || modifier == 0) {
+      return base;
+    }
+    final String mod = modifier > 0 ? '+$modifier' : '$modifier';
+    return '$base$mod';
+  }
+
+  String _formatWeight(int grams) {
+    final double kilograms = grams / 1000;
+    if (kilograms >= 10 || kilograms <= -10) {
+      return '${kilograms.toStringAsFixed(1)} kg';
+    }
+    return '${kilograms.toStringAsFixed(2)} kg';
+  }
+
+  String _titleCase(String slug) {
+    return slug
+        .split(RegExp(r'[\-_.]'))
+        .where((String part) => part.isNotEmpty)
+        .map(
+          (String part) =>
+              part[0].toUpperCase() + part.substring(1).toLowerCase(),
+        )
+        .join(' ');
   }
 
   String get loadingLabel =>

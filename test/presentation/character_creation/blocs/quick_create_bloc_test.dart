@@ -16,6 +16,7 @@ import 'package:sw5e_manager/domain/characters/usecases/clear_character_draft.da
 import 'package:sw5e_manager/domain/characters/usecases/finalize_level1_character.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_character_draft.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_class_details.dart';
+import 'package:sw5e_manager/domain/characters/usecases/load_background_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_quick_create_catalog.dart';
 import 'package:sw5e_manager/domain/characters/usecases/load_species_details.dart';
 import 'package:sw5e_manager/domain/characters/usecases/persist_character_draft_ability_scores.dart';
@@ -52,6 +53,9 @@ class _MockLoadQuickCreateCatalog extends Mock
 class _MockLoadSpeciesDetails extends Mock implements LoadSpeciesDetails {}
 
 class _MockLoadClassDetails extends Mock implements LoadClassDetails {}
+
+class _MockLoadBackgroundDetails extends Mock
+    implements LoadBackgroundDetails {}
 
 class _MockLoadCharacterDraft extends Mock implements LoadCharacterDraft {}
 
@@ -119,6 +123,7 @@ void main() {
   late _MockLoadQuickCreateCatalog loadCatalog;
   late _MockLoadSpeciesDetails loadSpeciesDetails;
   late _MockLoadClassDetails loadClassDetails;
+  late _MockLoadBackgroundDetails loadBackgroundDetails;
   late _MockLoadCharacterDraft loadCharacterDraft;
   late _MockFinalizeLevel1Character finalize;
   late _MockAppLogger logger;
@@ -171,6 +176,7 @@ void main() {
     loadCatalog = _MockLoadQuickCreateCatalog();
     loadSpeciesDetails = _MockLoadSpeciesDetails();
     loadClassDetails = _MockLoadClassDetails();
+    loadBackgroundDetails = _MockLoadBackgroundDetails();
     loadCharacterDraft = _MockLoadCharacterDraft();
     finalize = _MockFinalizeLevel1Character();
     logger = _MockAppLogger();
@@ -213,6 +219,17 @@ void main() {
         .thenAnswer((_) async => appOk(CharacterDraft()));
     when(() => persistDraftStep.call(any()))
         .thenAnswer((_) async => appOk(CharacterDraft()));
+    when(() => loadBackgroundDetails.call(any())).thenAnswer(
+      (_) async => appOk(
+        QuickCreateBackgroundDetails(
+          background: const BackgroundDef(
+            id: 'outlaw',
+            name: LocalizedText(en: 'Outlaw'),
+            grantedSkills: <String>[],
+          ),
+        ),
+      ),
+    );
     when(() => clearDraft())
         .thenAnswer((_) async => appOk<void>(null));
     when(() => loadCharacterDraft()).thenAnswer((_) async => appOk(null));
@@ -223,6 +240,7 @@ void main() {
       loadQuickCreateCatalog: loadCatalog,
       loadSpeciesDetails: loadSpeciesDetails,
       loadClassDetails: loadClassDetails,
+      loadBackgroundDetails: loadBackgroundDetails,
       loadCharacterDraft: loadCharacterDraft,
       finalizeLevel1Character: finalize,
       logger: logger,
@@ -251,10 +269,60 @@ void main() {
       (_) async => appOk(
         QuickCreateCatalogSnapshot(
           speciesIds: const <String>['human'],
+          speciesNames: const <String, LocalizedText>{
+            'human': LocalizedText(en: 'Human', fr: 'Humain'),
+          },
           classIds: const <String>['guardian'],
+          classNames: const <String, LocalizedText>{
+            'guardian': LocalizedText(en: 'Guardian', fr: 'Gardien'),
+          },
           backgroundIds: const <String>['outlaw'],
+          backgroundNames: const <String, LocalizedText>{
+            'outlaw': LocalizedText(en: 'Outlaw', fr: 'Hors-la-loi'),
+          },
           equipmentById: <String, EquipmentDef>{'comlink': equipment},
           sortedEquipmentIds: const <String>['comlink'],
+          abilityDefinitions: const <String, AbilityDef>{
+            'str': AbilityDef(
+              id: 'str',
+              abbreviation: 'STR',
+              name: LocalizedText(en: 'Strength', fr: 'Force'),
+            ),
+            'dex': AbilityDef(
+              id: 'dex',
+              abbreviation: 'DEX',
+              name: LocalizedText(en: 'Dexterity', fr: 'Dextérité'),
+            ),
+            'con': AbilityDef(
+              id: 'con',
+              abbreviation: 'CON',
+              name: LocalizedText(en: 'Constitution', fr: 'Constitution'),
+            ),
+            'int': AbilityDef(
+              id: 'int',
+              abbreviation: 'INT',
+              name: LocalizedText(en: 'Intelligence', fr: 'Intelligence'),
+            ),
+            'wis': AbilityDef(
+              id: 'wis',
+              abbreviation: 'WIS',
+              name: LocalizedText(en: 'Wisdom', fr: 'Sagesse'),
+            ),
+            'cha': AbilityDef(
+              id: 'cha',
+              abbreviation: 'CHA',
+              name: LocalizedText(en: 'Charisma', fr: 'Charisme'),
+            ),
+          },
+          languageDefinitions: const <String, LanguageDef>{
+            'basic': LanguageDef(
+              id: 'basic',
+              name: LocalizedText(
+                en: 'Galactic Basic',
+                fr: 'Basic galactique',
+              ),
+            ),
+          },
           defaultSpeciesId: 'human',
           defaultClassId: 'guardian',
           defaultBackgroundId: 'outlaw',
@@ -278,6 +346,12 @@ void main() {
               name: LocalizedText(en: 'Adaptive', fr: 'Adaptable'),
               description:
                   LocalizedText(en: 'Versatile.', fr: 'Polyvalent.'),
+            ),
+          ],
+          languages: <LanguageDef>[
+            LanguageDef(
+              id: 'basic',
+              name: LocalizedText(en: 'Galactic Basic', fr: 'Basic galactique'),
             ),
           ],
         ),
@@ -361,6 +435,7 @@ void main() {
       expect(state.selectedSpecies, 'human');
       expect(state.selectedClass, 'guardian');
       expect(state.selectedBackground, 'outlaw');
+      expect(state.selectedBackgroundDef, isNotNull);
       expect(state.equipmentList, contains('comlink'));
       expect(state.selectedSpeciesTraits, isNotEmpty);
       expect(state.selectedSpeciesEffects, isNotEmpty);
@@ -404,10 +479,61 @@ void main() {
         (_) async => appOk(
           QuickCreateCatalogSnapshot(
             speciesIds: const <String>['human', 'bith'],
+            speciesNames: const <String, LocalizedText>{
+              'human': LocalizedText(en: 'Human', fr: 'Humain'),
+              'bith': LocalizedText(en: 'Bith', fr: 'Bith'),
+            },
             classIds: const <String>['guardian'],
+            classNames: const <String, LocalizedText>{
+              'guardian': LocalizedText(en: 'Guardian', fr: 'Gardien'),
+            },
             backgroundIds: const <String>['outlaw'],
+            backgroundNames: const <String, LocalizedText>{
+              'outlaw': LocalizedText(en: 'Outlaw', fr: 'Hors-la-loi'),
+            },
             equipmentById: <String, EquipmentDef>{'comlink': equipment},
             sortedEquipmentIds: const <String>['comlink'],
+            abilityDefinitions: const <String, AbilityDef>{
+              'str': AbilityDef(
+                id: 'str',
+                abbreviation: 'STR',
+                name: LocalizedText(en: 'Strength', fr: 'Force'),
+              ),
+              'dex': AbilityDef(
+                id: 'dex',
+                abbreviation: 'DEX',
+                name: LocalizedText(en: 'Dexterity', fr: 'Dextérité'),
+              ),
+              'con': AbilityDef(
+                id: 'con',
+                abbreviation: 'CON',
+                name: LocalizedText(en: 'Constitution', fr: 'Constitution'),
+              ),
+              'int': AbilityDef(
+                id: 'int',
+                abbreviation: 'INT',
+                name: LocalizedText(en: 'Intelligence', fr: 'Intelligence'),
+              ),
+              'wis': AbilityDef(
+                id: 'wis',
+                abbreviation: 'WIS',
+                name: LocalizedText(en: 'Wisdom', fr: 'Sagesse'),
+              ),
+              'cha': AbilityDef(
+                id: 'cha',
+                abbreviation: 'CHA',
+                name: LocalizedText(en: 'Charisma', fr: 'Charisme'),
+              ),
+            },
+            languageDefinitions: const <String, LanguageDef>{
+              'basic': LanguageDef(
+                id: 'basic',
+                name: LocalizedText(
+                  en: 'Galactic Basic',
+                  fr: 'Basic galactique',
+                ),
+              ),
+            },
             defaultSpeciesId: 'human',
             defaultClassId: 'guardian',
             defaultBackgroundId: 'outlaw',
@@ -434,6 +560,16 @@ void main() {
                   fr:
                       'Vous avez l\'avantage aux tests d\'Investigation effectués dans un rayon de 1,50 mètre autour de vous.',
                 ),
+              ),
+            ],
+            languages: <LanguageDef>[
+              LanguageDef(
+                id: 'basic',
+                name: LocalizedText(en: 'Galactic Basic', fr: 'Basic galactique'),
+              ),
+              LanguageDef(
+                id: 'bith',
+                name: LocalizedText(en: 'Bith', fr: 'Bith'),
               ),
             ],
           ),
@@ -580,10 +716,60 @@ void main() {
         (_) async => appOk(
           QuickCreateCatalogSnapshot(
             speciesIds: const <String>['human'],
+            speciesNames: const <String, LocalizedText>{
+              'human': LocalizedText(en: 'Human', fr: 'Humain'),
+            },
             classIds: const <String>['guardian'],
+            classNames: const <String, LocalizedText>{
+              'guardian': LocalizedText(en: 'Guardian', fr: 'Gardien'),
+            },
             backgroundIds: const <String>['outlaw'],
+            backgroundNames: const <String, LocalizedText>{
+              'outlaw': LocalizedText(en: 'Outlaw', fr: 'Hors-la-loi'),
+            },
             equipmentById: <String, EquipmentDef>{'comlink': equipment},
             sortedEquipmentIds: const <String>['comlink'],
+            abilityDefinitions: const <String, AbilityDef>{
+              'str': AbilityDef(
+                id: 'str',
+                abbreviation: 'STR',
+                name: LocalizedText(en: 'Strength', fr: 'Force'),
+              ),
+              'dex': AbilityDef(
+                id: 'dex',
+                abbreviation: 'DEX',
+                name: LocalizedText(en: 'Dexterity', fr: 'Dextérité'),
+              ),
+              'con': AbilityDef(
+                id: 'con',
+                abbreviation: 'CON',
+                name: LocalizedText(en: 'Constitution', fr: 'Constitution'),
+              ),
+              'int': AbilityDef(
+                id: 'int',
+                abbreviation: 'INT',
+                name: LocalizedText(en: 'Intelligence', fr: 'Intelligence'),
+              ),
+              'wis': AbilityDef(
+                id: 'wis',
+                abbreviation: 'WIS',
+                name: LocalizedText(en: 'Wisdom', fr: 'Sagesse'),
+              ),
+              'cha': AbilityDef(
+                id: 'cha',
+                abbreviation: 'CHA',
+                name: LocalizedText(en: 'Charisma', fr: 'Charisme'),
+              ),
+            },
+            languageDefinitions: const <String, LanguageDef>{
+              'basic': LanguageDef(
+                id: 'basic',
+                name: LocalizedText(
+                  en: 'Galactic Basic',
+                  fr: 'Basic galactique',
+                ),
+              ),
+            },
             defaultSpeciesId: 'human',
             defaultClassId: 'guardian',
             defaultBackgroundId: 'outlaw',
@@ -602,6 +788,12 @@ void main() {
               traitIds: <String>['adaptive'],
             ),
             traits: <TraitDef>[],
+            languages: <LanguageDef>[
+              LanguageDef(
+                id: 'basic',
+                name: LocalizedText(en: 'Galactic Basic', fr: 'Basic galactique'),
+              ),
+            ],
           ),
         ),
       );
@@ -627,10 +819,18 @@ void main() {
               'acrobatics': SkillDef(
                 id: 'acrobatics',
                 ability: 'dex',
+                name: const LocalizedText(
+                  en: 'Acrobatics',
+                  fr: 'Acrobaties',
+                ),
               ),
               'athletics': SkillDef(
                 id: 'athletics',
                 ability: 'str',
+                name: const LocalizedText(
+                  en: 'Athletics',
+                  fr: 'Athlétisme',
+                ),
               ),
             },
             skillChoicesRequired: 2,

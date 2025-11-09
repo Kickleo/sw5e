@@ -91,6 +91,15 @@ class Character {
   /// Traits raciaux conférés par l'espèce.
   final Set<CharacterTrait> speciesTraits;
 
+  /// Options de personnalisation sélectionnées (feats, styles...).
+  final Set<String> customizationOptionIds;
+
+  /// Pouvoirs de la Force connus au niveau actuel.
+  final Set<String> forcePowerIds;
+
+  /// Pouvoirs technologiques connus au niveau actuel.
+  final Set<String> techPowerIds;
+
   /// Construit un personnage en s'assurant que les invariants métiers sont
   /// respectés. L'utilisation d'objets valeur pour chaque champ évite de devoir
   /// répéter les validations dans les couches supérieures.
@@ -113,7 +122,14 @@ class Character {
     required this.maneuversKnown,
     required this.superiorityDice,
     this.speciesTraits = const <CharacterTrait>{},
-  })  : assert(level.value == 1, 'MVP: level doit être 1'),
+    Set<String> customizationOptionIds = const <String>{},
+    Set<String> forcePowerIds = const <String>{},
+    Set<String> techPowerIds = const <String>{},
+  })  : customizationOptionIds =
+            Set<String>.unmodifiable(customizationOptionIds),
+        forcePowerIds = Set<String>.unmodifiable(forcePowerIds),
+        techPowerIds = Set<String>.unmodifiable(techPowerIds),
+        assert(level.value == 1, 'MVP: level doit être 1'),
         // Vérifie que les six caractéristiques de base sont bien présentes.
         assert(
           _hasAllSixAbilities(abilities),
