@@ -30,17 +30,17 @@ void main() {
   testWidgets('renders heading, name, description and effect text',
       (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          locale: const Locale('fr'),
+        const MaterialApp(
+          locale: Locale('fr'),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+          localizationsDelegates: <LocalizationsDelegate<dynamic>>[
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: const Scaffold(
-            body: const ClassFeatureList(
+          home: Scaffold(
+            body: ClassFeatureList(
               heading: 'Capacités de niveau 1',
               features: <ClassFeature>[guardianFocus],
             ),
@@ -68,17 +68,17 @@ void main() {
       );
 
       await tester.pumpWidget(
-        MaterialApp(
-          locale: const Locale('en'),
+        const MaterialApp(
+          locale: Locale('en'),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+          localizationsDelegates: <LocalizationsDelegate<dynamic>>[
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: const Scaffold(
-            body: const ClassFeatureList(
+          home: Scaffold(
+            body: ClassFeatureList(
               heading: 'Level 1 features',
               features: <ClassFeature>[emptyFeature],
             ),

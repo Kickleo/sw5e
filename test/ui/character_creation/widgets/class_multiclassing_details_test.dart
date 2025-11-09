@@ -17,7 +17,7 @@ void main() {
         skillsChoose: 2,
         skillsFrom: <String>['perception'],
       ),
-      startingEquipment: const <StartingEquipmentLine>[],
+      startingEquipment: <StartingEquipmentLine>[],
     ),
     multiclassing: ClassMulticlassing(
       abilityRequirements: <String, int>{'dex': 13, 'wis': 13},
@@ -39,17 +39,17 @@ void main() {
 
   testWidgets('renders localized requirement labels', (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('fr'),
+      const MaterialApp(
+        locale: Locale('fr'),
         supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>[
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        home: const Scaffold(
-          body: const ClassMulticlassingDetails(
+        home: Scaffold(
+          body: ClassMulticlassingDetails(
             classDef: sentinel,
             abilityDefinitions: abilityDefinitions,
           ),
@@ -72,22 +72,22 @@ void main() {
           skillsChoose: 2,
           skillsFrom: <String>['athletics'],
         ),
-        startingEquipment: const <StartingEquipmentLine>[],
+        startingEquipment: <StartingEquipmentLine>[],
       ),
     );
 
     await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('en'),
+      const MaterialApp(
+        locale: Locale('en'),
         supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>[
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        home: const Scaffold(
-          body: const ClassMulticlassingDetails(
+        home: Scaffold(
+          body: ClassMulticlassingDetails(
             classDef: noRequirements,
             abilityDefinitions: <String, AbilityDef>{},
           ),

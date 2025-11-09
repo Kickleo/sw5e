@@ -117,7 +117,7 @@ void main() {
               skillsChoose: 0,
               skillsFrom: <String>[],
             ),
-            startingEquipment: const <StartingEquipmentLine>[],
+            startingEquipment: <StartingEquipmentLine>[],
           ),
         );
       });
@@ -334,7 +334,7 @@ void main() {
             skillsChoose: 2,
             skillsFrom: <String>['perception'],
           ),
-          startingEquipment: const <StartingEquipmentLine>[],
+          startingEquipment: <StartingEquipmentLine>[],
           classFeatures: <ClassFeature>[
             ClassFeature(
               name: LocalizedText(en: 'Defensive Stance', fr: 'Posture défensive'),
