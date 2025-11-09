@@ -39,8 +39,8 @@ Exemple d'usage : Consulter ce document pour comprendre où ajouter une nouvelle
 | `lib/domain/characters/usecases/load_class_details_impl.dart` | Implémentation (tri compétences + définitions) | `CatalogRepository`, `DomainError` |
 | `lib/data/README.md` | Guide de la couche Data | Aucune |
 | `lib/data/catalog/README.md` | Diagramme module catalogue | AssetBundle |
-| `lib/data/catalog/dtos/catalog_dtos.dart` | DTO + mapping JSON → domaine pour le catalogue | `CatalogRepository` |
-| `lib/data/catalog/data_sources/asset_bundle_catalog_data_source.dart` | Chargement JSON via AssetBundle | Flutter AssetBundle |
+| `lib/data/catalog_v2/dtos/catalog_v2_dtos.dart` | DTO + mapping JSON → domaine pour le catalogue v2 | `CatalogRepository` |
+| `lib/data/catalog_v2/data_sources/asset_bundle_catalog_v2_data_source.dart` | Chargement JSON via AssetBundle (catalogue v2) | Flutter AssetBundle |
 | `lib/data/catalog/repositories/asset_catalog_repository.dart` | Adapter CatalogRepository basé assets | DTO + data source |
 | `lib/data/characters/repositories/in_memory_character_repository.dart` | Implémentation volatile de `CharacterRepository` | Entité `Character` |
 | `lib/presentation/character_creation/blocs/class_picker_bloc.dart` | ViewModel BLoC du sélecteur de classe | `CatalogRepository`, `AppLogger`, `AppFailure` |

@@ -124,16 +124,36 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
       ),
     );
 
-    final String? languagesDescription = l10n.maybeLocalized(species.languages);
-    if (languagesDescription != null) {
+    final List<String> languageLabels = <String>[];
+    for (final LanguageDef language in details.languages) {
+      final String label = l10n.localizedLabel(language.name).trim();
+      if (label.isEmpty) {
+        continue;
+      }
+      languageLabels.add(label);
+    }
+
+    if (languageLabels.isNotEmpty) {
       effects.add(
         CharacterEffect(
           source: 'species:${species.id}:languages',
           title: l10n.languagesTitle,
-          description: languagesDescription,
+          description: languageLabels.join(l10n.listSeparator),
           category: CharacterEffectCategory.passive,
         ),
       );
+    } else {
+      final String? languagesDescription = l10n.maybeLocalized(species.languages);
+      if (languagesDescription != null) {
+        effects.add(
+          CharacterEffect(
+            source: 'species:${species.id}:languages',
+            title: l10n.languagesTitle,
+            description: languagesDescription,
+            category: CharacterEffectCategory.passive,
+          ),
+        );
+      }
     }
 
     for (final TraitDef trait in details.traits) {
@@ -174,10 +194,13 @@ class PersistCharacterDraftSpeciesImpl implements PersistCharacterDraftSpecies {
 class _SpeciesEffectLocalizer {
   _SpeciesEffectLocalizer({required this.languageCode})
       : bundle =
-            SpeciesEffectLocalizationCatalog.forLanguage(languageCode);
+            SpeciesEffectLocalizationCatalog.forLanguage(languageCode) {
+    _bonusFormatter = SpeciesAbilityBonusFormatter(bundle);
+  }
 
   final String languageCode;
   final SpeciesEffectLanguageBundle bundle;
+  late final SpeciesAbilityBonusFormatter _bonusFormatter;
 
   String get listSeparator => bundle.listSeparator;
   String get abilityScoreIncreaseTitle => bundle.abilityScoreIncreaseTitle;
@@ -207,46 +230,11 @@ class _SpeciesEffectLocalizer {
     return trimmed.isEmpty ? null : trimmed;
   }
 
-  String formatAbilityBonus(SpeciesAbilityBonus bonus) {
-    final String sign = bonus.amount >= 0 ? '+' : '';
-    final String amount = '$sign${bonus.amount}';
-    final String alternativePrefix =
-        bonus.isAlternative ? bundle.alternativePrefix : '';
-
-    if (bonus.isChoice) {
-      final int choose = bonus.choose ?? 1;
-      final String options = _formatAbilityOptions(bonus.options);
-      final String chooseSuffix = bundle.abilityChoiceSuffix(choose);
-      final String preposition = bundle.abilityChoicePreposition;
-      final String formatted =
-          '$alternativePrefix$amount $preposition $options $chooseSuffix';
-      return formatted.trim();
-    }
-
-    final String ability = bundle.abilityName(bonus.ability ?? 'any');
-    return ('$alternativePrefix$amount $ability').trim();
-  }
+  String formatAbilityBonus(SpeciesAbilityBonus bonus) =>
+      _bonusFormatter.format(bonus);
 
   String speedFallback(int speed) => bundle.speedFallback(speed);
 
   String sizeFallback(String size) => bundle.sizeFallback(size);
 
-  String _formatAbilityOptions(List<String> options) {
-    if (options.isEmpty) {
-      return bundle.abilityChoiceDefaultOptions;
-    }
-
-    final List<String> labels =
-        options.map((String option) => bundle.abilityName(option)).toList();
-    if (labels.length == 1) {
-      return labels.first;
-    }
-    if (labels.length == 2) {
-      return '${labels[0]}${bundle.twoOptionSeparator}${labels[1]}';
-    }
-
-    final String penultimate =
-        labels.sublist(0, labels.length - 1).join(bundle.listSeparator);
-    return '$penultimate${bundle.finalOptionSeparator}${labels.last}';
-  }
 }

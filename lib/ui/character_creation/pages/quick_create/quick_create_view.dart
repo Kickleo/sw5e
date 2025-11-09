@@ -21,11 +21,39 @@ class _QuickCreateView extends StatelessWidget {
     final l10n = context.l10n;
     switch (completion) {
       case QuickCreateSuccess(:final Character character):
+        final Map<String, TraitDef> traitDefinitions = <String, TraitDef>{
+          for (final TraitDef trait in state.selectedSpeciesTraits)
+            trait.id: trait,
+        };
         showDialog<void>(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(l10n.quickCreateCharacterCreated),
-            content: Text(l10n.quickCreateCharacterSummary(character)),
+            content: Text(
+              l10n.quickCreateCharacterSummary(
+                character,
+                speciesNames: state.speciesLabels,
+                classNames: state.classLabels,
+                classDefinitions: state.selectedClassDef != null &&
+                        state.selectedClass != null
+                    ? <String, ClassDef>{
+                        state.selectedClass!: state.selectedClassDef!,
+                      }
+                    : const <String, ClassDef>{},
+                backgroundNames: state.backgroundLabels,
+                backgroundDefinitions: state.backgroundDefinitions,
+                skillDefinitions: state.skillDefinitions,
+                equipmentDefinitions: state.equipmentDefinitions,
+                traitDefinitions: traitDefinitions,
+                abilityDefinitions: state.abilityDefinitions,
+                customizationOptionDefinitions:
+                    state.customizationOptionDefinitions,
+                forcePowerDefinitions: state.forcePowerDefinitions,
+                techPowerDefinitions: state.techPowerDefinitions,
+                speciesDefinition: state.selectedSpeciesDef,
+                speciesLanguages: state.selectedSpeciesLanguages,
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
@@ -153,7 +181,10 @@ class _QuickCreateView extends StatelessWidget {
                                 children: [
                                   _SpeciesStep(
                                     species: state.species,
+                                    speciesLabels: state.speciesLabels,
                                     selectedSpecies: state.selectedSpecies,
+                                    selectedSpeciesDef: state.selectedSpeciesDef,
+                                    selectedLanguages: state.selectedSpeciesLanguages,
                                     traits: state.selectedSpeciesTraits,
                                     effects: state.selectedSpeciesEffects,
                                     onSelect: (value) {
@@ -176,6 +207,13 @@ class _QuickCreateView extends StatelessWidget {
                                     mode: state.abilityMode,
                                     assignments: state.abilityAssignments,
                                     pool: state.abilityPool,
+                                    abilityLabel: (ability) => state.resolveAbilityLabel(
+                                      ability,
+                                      locale: l10n.languageCode,
+                                      fallbackLocale: 'en',
+                                    ),
+                                    abilityDefinitions:
+                                        state.abilityDefinitions,
                                     onModeChanged: (mode) => bloc.add(
                                       QuickCreateAbilityModeChanged(mode),
                                     ),
@@ -188,9 +226,11 @@ class _QuickCreateView extends StatelessWidget {
                                   ),
                                   _ClassStep(
                                     classes: state.classes,
+                                    classLabels: state.classLabels,
                                     selectedClass: state.selectedClass,
                                     classDef: state.selectedClassDef,
                                     isLoadingDetails: state.isLoadingClassDetails,
+                                    abilityDefinitions: state.abilityDefinitions,
                                     equipmentDefinitions:
                                         state.equipmentDefinitions,
                                     onSelect: (value) {
@@ -212,6 +252,7 @@ class _QuickCreateView extends StatelessWidget {
                                   _SkillStep(
                                     availableSkills: state.availableSkills,
                                     skillDefinitions: state.skillDefinitions,
+                                    abilityDefinitions: state.abilityDefinitions,
                                     chosenSkills: state.chosenSkills,
                                     requiredCount: state.skillChoicesRequired,
                                     onToggle: (skillId) => bloc.add(
@@ -245,7 +286,15 @@ class _QuickCreateView extends StatelessWidget {
                                   ),
                                   _BackgroundStep(
                                     backgrounds: state.backgrounds,
+                                    backgroundLabels: state.backgroundLabels,
                                     selectedBackground: state.selectedBackground,
+                                    backgroundDef: state.selectedBackgroundDef,
+                                    backgroundSkillDefinitions:
+                                        state.backgroundSkillDefinitions,
+                                    backgroundEquipmentDefinitions:
+                                        state.backgroundEquipmentDefinitions,
+                                    equipmentDefinitions:
+                                        state.equipmentDefinitions,
                                     nameController: nameController,
                                     onBackgroundChanged: (value) {
                                       if (value != null) {

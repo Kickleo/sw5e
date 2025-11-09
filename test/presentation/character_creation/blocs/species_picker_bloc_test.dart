@@ -48,13 +48,19 @@ void main() {
     ).thenReturn(null);
   });
 
-  SpeciesDef buildSpecies({required String id, List<String> traitIds = const <String>[]}) {
+  SpeciesDef buildSpecies({
+    required String id,
+    List<String> traitIds = const <String>[],
+    List<String> languageIds = const <String>['galactic-basic'],
+  }) {
     return SpeciesDef(
       id: id,
       name: const LocalizedText(en: 'Human', fr: 'Humain'),
       speed: 30,
       size: 'medium',
       traitIds: traitIds,
+      languageIds: languageIds,
+      languages: const LocalizedText(en: 'Basic', fr: 'Basique'),
     );
   }
 
@@ -64,6 +70,14 @@ void main() {
       name: const LocalizedText(en: 'Trait', fr: 'Trait'),
       description:
           const LocalizedText(en: 'Description', fr: 'Description'),
+    );
+  }
+
+  LanguageDef buildLanguage(String id) {
+    return LanguageDef(
+      id: id,
+      name: const LocalizedText(en: 'Basic', fr: 'Basique'),
+      description: null,
     );
   }
 
@@ -83,6 +97,9 @@ void main() {
       when(() => catalog.getTrait('trait-1')).thenAnswer(
         (_) async => buildTrait('trait-1'),
       );
+      when(() => catalog.getLanguage('galactic-basic')).thenAnswer(
+        (_) async => buildLanguage('galactic-basic'),
+      );
       return SpeciesPickerBloc(catalog: catalog, logger: logger);
     },
     act: (SpeciesPickerBloc bloc) => bloc.add(const SpeciesPickerStarted()),
@@ -96,7 +113,13 @@ void main() {
           .having((SpeciesPickerState state) => state.speciesIds, 'speciesIds', <String>['human'])
           .having((SpeciesPickerState state) => state.selectedSpeciesId, 'selectedSpeciesId', 'human')
           .having((SpeciesPickerState state) => state.selectedSpecies?.id, 'selectedSpecies.id', 'human')
+          .having(
+            (SpeciesPickerState state) => state.selectedSpecies?.languages?.en,
+            'selectedSpecies.languages.en',
+            'Basic',
+          )
           .having((SpeciesPickerState state) => state.selectedTraits.length, 'traits count', 1)
+          .having((SpeciesPickerState state) => state.selectedLanguages.length, 'languages count', 1)
           .having((SpeciesPickerState state) => state.failure, 'failure', isNull),
     ],
     verify: (_) {
@@ -122,6 +145,9 @@ void main() {
       when(() => catalog.getTrait('trait-1')).thenAnswer(
         (_) async => buildTrait('trait-1'),
       );
+      when(() => catalog.getLanguage('galactic-basic')).thenAnswer(
+        (_) async => buildLanguage('galactic-basic'),
+      );
       return SpeciesPickerBloc(catalog: catalog, logger: logger);
     },
     act: (SpeciesPickerBloc bloc) async {
@@ -140,7 +166,8 @@ void main() {
       isA<SpeciesPickerState>()
           .having((SpeciesPickerState state) => state.selectedSpeciesId, 'selectedSpeciesId', 'bothan')
           .having((SpeciesPickerState state) => state.isLoadingDetails, 'isLoadingDetails', false)
-          .having((SpeciesPickerState state) => state.selectedTraits.length, 'traits count', 1),
+          .having((SpeciesPickerState state) => state.selectedTraits.length, 'traits count', 1)
+          .having((SpeciesPickerState state) => state.selectedLanguages.length, 'languages count', 1),
     ],
     verify: (_) {
       verify(() => catalog.getSpecies('bothan')).called(1);

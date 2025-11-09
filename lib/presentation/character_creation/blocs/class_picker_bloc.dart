@@ -53,9 +53,11 @@ class ClassPickerState extends Equatable {
     required this.isLoadingList,
     required this.isLoadingDetails,
     required this.classIds,
+    required this.classDefinitions,
     required this.selectedClassId,
     required this.selectedClass,
     required this.skillDefinitions,
+    required this.abilityDefinitions,
     required this.equipmentDefinitions,
     required this.failure,
     required this.hasLoadedOnce,
@@ -66,9 +68,11 @@ class ClassPickerState extends Equatable {
         isLoadingList: false,
         isLoadingDetails: false,
         classIds: <String>[],
+        classDefinitions: <String, ClassDef>{},
         selectedClassId: null,
         selectedClass: null,
         skillDefinitions: <String, SkillDef>{},
+        abilityDefinitions: <String, AbilityDef>{},
         equipmentDefinitions: <String, EquipmentDef>{},
         failure: null,
         hasLoadedOnce: false,
@@ -77,9 +81,11 @@ class ClassPickerState extends Equatable {
   final bool isLoadingList;
   final bool isLoadingDetails;
   final List<String> classIds;
+  final Map<String, ClassDef> classDefinitions;
   final String? selectedClassId;
   final ClassDef? selectedClass;
   final Map<String, SkillDef> skillDefinitions;
+  final Map<String, AbilityDef> abilityDefinitions;
   final Map<String, EquipmentDef> equipmentDefinitions;
   final AppFailure? failure;
   final bool hasLoadedOnce;
@@ -93,9 +99,11 @@ class ClassPickerState extends Equatable {
     bool? isLoadingList,
     bool? isLoadingDetails,
     List<String>? classIds,
+    Map<String, ClassDef>? classDefinitions,
     String? selectedClassId,
     ClassDef? selectedClass,
     Map<String, SkillDef>? skillDefinitions,
+    Map<String, AbilityDef>? abilityDefinitions,
     Map<String, EquipmentDef>? equipmentDefinitions,
     AppFailure? failure,
     bool clearFailure = false,
@@ -105,9 +113,11 @@ class ClassPickerState extends Equatable {
       isLoadingList: isLoadingList ?? this.isLoadingList,
       isLoadingDetails: isLoadingDetails ?? this.isLoadingDetails,
       classIds: classIds ?? this.classIds,
+      classDefinitions: classDefinitions ?? this.classDefinitions,
       selectedClassId: selectedClassId ?? this.selectedClassId,
       selectedClass: selectedClass ?? this.selectedClass,
       skillDefinitions: skillDefinitions ?? this.skillDefinitions,
+      abilityDefinitions: abilityDefinitions ?? this.abilityDefinitions,
       equipmentDefinitions:
           equipmentDefinitions ?? this.equipmentDefinitions,
       failure: clearFailure ? null : (failure ?? this.failure),
@@ -120,9 +130,11 @@ class ClassPickerState extends Equatable {
         isLoadingList,
         isLoadingDetails,
         classIds,
+        classDefinitions,
         selectedClassId,
         selectedClass,
         skillDefinitions,
+        abilityDefinitions,
         equipmentDefinitions,
         failure,
         hasLoadedOnce,
@@ -175,18 +187,34 @@ class ClassPickerBloc extends Bloc<ClassPickerEvent, ClassPickerState> {
 
       final _SelectionResult selection = await _loadSelection(
         targetId,
+        existingClasses: state.classDefinitions,
         existingSkills: state.skillDefinitions,
+        existingAbilities: state.abilityDefinitions,
         existingEquipment: state.equipmentDefinitions,
       );
+
+      final Map<String, ClassDef> classDefinitions =
+          Map<String, ClassDef>.from(selection.classDefinitions);
+      for (final String id in ids) {
+        if (classDefinitions.containsKey(id)) {
+          continue;
+        }
+        final ClassDef? def = await _catalog.getClass(id);
+        if (def != null) {
+          classDefinitions[id] = def;
+        }
+      }
 
       emit(
         state.copyWith(
           isLoadingList: false,
           isLoadingDetails: false,
           classIds: List<String>.unmodifiable(ids),
+          classDefinitions: Map<String, ClassDef>.unmodifiable(classDefinitions),
           selectedClassId: targetId,
           selectedClass: selection.classDef,
           skillDefinitions: selection.skillDefinitions,
+          abilityDefinitions: selection.abilityDefinitions,
           equipmentDefinitions: selection.equipmentDefinitions,
           clearFailure: true,
           hasLoadedOnce: true,
@@ -232,7 +260,9 @@ class ClassPickerBloc extends Bloc<ClassPickerEvent, ClassPickerState> {
     try {
       final _SelectionResult selection = await _loadSelection(
         event.classId,
+        existingClasses: state.classDefinitions,
         existingSkills: state.skillDefinitions,
+        existingAbilities: state.abilityDefinitions,
         existingEquipment: state.equipmentDefinitions,
       );
 
@@ -240,7 +270,10 @@ class ClassPickerBloc extends Bloc<ClassPickerEvent, ClassPickerState> {
         state.copyWith(
           isLoadingDetails: false,
           selectedClass: selection.classDef,
+          classDefinitions:
+              Map<String, ClassDef>.unmodifiable(selection.classDefinitions),
           skillDefinitions: selection.skillDefinitions,
+          abilityDefinitions: selection.abilityDefinitions,
           equipmentDefinitions: selection.equipmentDefinitions,
           clearFailure: true,
         ),
@@ -266,25 +299,59 @@ class ClassPickerBloc extends Bloc<ClassPickerEvent, ClassPickerState> {
 
   Future<_SelectionResult> _loadSelection(
     String classId, {
+    required Map<String, ClassDef> existingClasses,
     required Map<String, SkillDef> existingSkills,
+    required Map<String, AbilityDef> existingAbilities,
     required Map<String, EquipmentDef> existingEquipment,
   }) async {
-    final ClassDef? classDef = await _catalog.getClass(classId);
+    final Map<String, ClassDef> classDefs = Map<String, ClassDef>.from(existingClasses);
+    ClassDef? classDef = classDefs[classId];
+    if (classDef == null) {
+      classDef = await _catalog.getClass(classId);
+      if (classDef != null) {
+        classDefs[classId] = classDef;
+      }
+    }
+
     if (classDef == null) {
       throw StateError('Classe "$classId" introuvable');
     }
 
     final Map<String, SkillDef> skillDefs = Map<String, SkillDef>.from(existingSkills);
+    final Map<String, AbilityDef> abilityDefs =
+        Map<String, AbilityDef>.from(existingAbilities);
     final Map<String, EquipmentDef> equipmentDefs =
         Map<String, EquipmentDef>.from(existingEquipment);
 
     final Iterable<String> skillIds = classDef.level1.proficiencies.skillsFrom;
     for (final String skillId in skillIds) {
       if (skillId == 'any') continue;
-      if (skillDefs.containsKey(skillId)) continue;
-      final SkillDef? def = await _catalog.getSkill(skillId);
+      SkillDef? def = skillDefs[skillId];
+      def ??= await _catalog.getSkill(skillId);
       if (def != null) {
         skillDefs[skillId] = def;
+        final String abilitySlug = def.ability;
+        if (!abilityDefs.containsKey(abilitySlug)) {
+          final AbilityDef? ability = await _catalog.getAbility(abilitySlug);
+          if (ability != null) {
+            abilityDefs[abilitySlug] = ability;
+          }
+        }
+      }
+    }
+
+    final Set<String> extraAbilitySlugs = <String>{
+      ...classDef.primaryAbilities,
+      ...classDef.savingThrows,
+      ...?classDef.multiclassing?.abilityRequirements.keys,
+    };
+    for (final String slug in extraAbilitySlugs) {
+      if (abilityDefs.containsKey(slug)) {
+        continue;
+      }
+      final AbilityDef? ability = await _catalog.getAbility(slug);
+      if (ability != null) {
+        abilityDefs[slug] = ability;
       }
     }
 
@@ -300,7 +367,9 @@ class ClassPickerBloc extends Bloc<ClassPickerEvent, ClassPickerState> {
 
     return _SelectionResult(
       classDef: classDef,
+      classDefinitions: Map<String, ClassDef>.unmodifiable(classDefs),
       skillDefinitions: Map<String, SkillDef>.unmodifiable(skillDefs),
+      abilityDefinitions: Map<String, AbilityDef>.unmodifiable(abilityDefs),
       equipmentDefinitions: Map<String, EquipmentDef>.unmodifiable(equipmentDefs),
     );
   }
@@ -310,11 +379,15 @@ class ClassPickerBloc extends Bloc<ClassPickerEvent, ClassPickerState> {
 class _SelectionResult {
   const _SelectionResult({
     required this.classDef,
+    required this.classDefinitions,
     required this.skillDefinitions,
+    required this.abilityDefinitions,
     required this.equipmentDefinitions,
   });
 
   final ClassDef classDef;
+  final Map<String, ClassDef> classDefinitions;
   final Map<String, SkillDef> skillDefinitions;
+  final Map<String, AbilityDef> abilityDefinitions;
   final Map<String, EquipmentDef> equipmentDefinitions;
 }
