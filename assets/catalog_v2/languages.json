@@ -2,16 +2,5962 @@
   {
     "id": "c07e82f8-f9bd-5a74-83e7-419c2303ad24",
     "slug": "galactic-basic",
-    "name": { "en": "Galactic Basic", "fr": "Basic galactique" },
-    "script": { "en": "Aurebesh", "fr": "Aurebesh" },
+    "name": {
+      "en": "Galactic Basic",
+      "fr": "Basic galactique"
+    },
+    "script": {
+      "en": "Aurebesh",
+      "fr": "Aurebesh"
+    },
     "typical_speakers": [
-      { "type": "species", "id": "8db5b325-643a-5d32-bd3e-483550e4be09", "name": { "en": "Twi'lek", "fr": "Twi'lek" } }
+      {
+        "type": "species",
+        "id": "8db5b325-643a-5d32-bd3e-483550e4be09",
+        "name": {
+          "en": "Twi'lek",
+          "fr": "Twi'lek"
+        }
+      },
+      {
+        "type": "species",
+        "id": "af429e3e-d6e0-42d3-b5d1-b9fe401d9f21",
+        "name": {
+          "en": "Mirialan",
+          "fr": "Mirialan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "ebbd22a7-3d5a-42f2-a330-79f873e5f7b9",
+        "name": {
+          "en": "Zabrak",
+          "fr": "Zabrak"
+        }
+      },
+      {
+        "type": "species",
+        "id": "b84654f9-1bb5-4d79-b81a-cf7b99ebf7f1",
+        "name": {
+          "en": "Nautolan",
+          "fr": "Nautolan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "3a27b353-e9e0-4e74-8cf2-bfcc27bf148b",
+        "name": {
+          "en": "Bothan",
+          "fr": "Bothan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "0cc14d5e-83dd-44c9-b862-4cf410afb170",
+        "name": {
+          "en": "Togruta",
+          "fr": "Togruta"
+        }
+      },
+      {
+        "type": "species",
+        "id": "6d9b9953-64e1-462c-8837-3cfcc8336d31",
+        "name": {
+          "en": "Rodian",
+          "fr": "Rodien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "041cd8db-5df7-4964-b8d8-6e181a9d7e05",
+        "name": {
+          "en": "Duros",
+          "fr": "Duros"
+        }
+      },
+      {
+        "type": "species",
+        "id": "16c50de8-bd3a-4909-86a0-45a6cd923acc",
+        "name": {
+          "en": "Theelin",
+          "fr": "Theelin"
+        }
+      },
+      {
+        "type": "species",
+        "id": "7db5b24e-8a5f-47d3-91b2-4c32bd0aa92a",
+        "name": {
+          "en": "Chiss",
+          "fr": "Chiss"
+        }
+      },
+      {
+        "type": "species",
+        "id": "9deed49e-95cc-4aef-9ddf-104bc1481b4a",
+        "name": {
+          "en": "Mon Calamari",
+          "fr": "Mon Calamari"
+        }
+      },
+      {
+        "type": "species",
+        "id": "63c3b3a9-63dc-4e86-8bf5-1b0e80396cee",
+        "name": {
+          "en": "Gran",
+          "fr": "Gran"
+        }
+      },
+      {
+        "type": "species",
+        "id": "ec853149-c285-4d97-8c54-a56b61f070b1",
+        "name": {
+          "en": "Kel Dor",
+          "fr": "Kel Dor"
+        }
+      },
+      {
+        "type": "species",
+        "id": "4131f873-8510-4fd7-a93e-d866e10b5c20",
+        "name": {
+          "en": "Cathar",
+          "fr": "Cathar"
+        }
+      },
+      {
+        "type": "species",
+        "id": "17911d70-9c1d-4e90-a5cc-f42a38e0dabf",
+        "name": {
+          "en": "Chagrian",
+          "fr": "Chagrien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "bed5fb52-fb4e-49ed-b36d-6453481e3046",
+        "name": {
+          "en": "Trandoshan",
+          "fr": "Trandoshan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "a2d19cea-07e6-40e3-a16a-3b5aa079f603",
+        "name": {
+          "en": "Sullustan",
+          "fr": "Sullustéen"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c19adff2-b5ff-465b-ba16-92e0faa7bd91",
+        "name": {
+          "en": "Pantoran",
+          "fr": "Pantoran"
+        }
+      },
+      {
+        "type": "species",
+        "id": "f5c2a4f1-61af-4c52-a019-1adbb40b7b76",
+        "name": {
+          "en": "Miraluka",
+          "fr": "Miraluka"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c6d1bdf6-9081-4e73-b2da-987c4d5ad892",
+        "name": {
+          "en": "Falleen",
+          "fr": "Falleen"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c0cce1c2-61f1-4f07-a2d3-4c4ad25aefb6",
+        "name": {
+          "en": "Devaronian",
+          "fr": "Dévaronien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "39996b55-f03f-4487-836f-5d66edd66227",
+        "name": {
+          "en": "Ithorian",
+          "fr": "Ithorien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "6bd90e47-2385-4efd-8575-9b13cf691a14",
+        "name": {
+          "en": "Quarren",
+          "fr": "Quarren"
+        }
+      },
+      {
+        "type": "species",
+        "id": "b744077e-de1a-4ae7-a3cb-699072d7f091",
+        "name": {
+          "en": "Weequay",
+          "fr": "Weequay"
+        }
+      },
+      {
+        "type": "species",
+        "id": "e78802f9-2ace-40b3-97b6-cf13813bacae",
+        "name": {
+          "en": "Human",
+          "fr": "Humain"
+        }
+      },
+      {
+        "type": "species",
+        "id": "e9433ffe-3172-4479-99ea-35c164d7228f",
+        "name": {
+          "en": "Gungan",
+          "fr": "Gungan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "9875be80-37d5-4386-a9fa-3c9b0010c46e",
+        "name": {
+          "en": "Toydarian",
+          "fr": "Toydarien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c3f839e2-456f-44e3-b352-7fb4ef2e1a2f",
+        "name": {
+          "en": "Kaminoan",
+          "fr": "Kaminoan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "f55d87ee-c4fe-4056-8a1d-33f1d19706c0",
+        "name": {
+          "en": "Jawa",
+          "fr": "Jawa"
+        }
+      },
+      {
+        "type": "species",
+        "id": "3b946d34-b489-4ef2-9665-5eb750ad20f0",
+        "name": {
+          "en": "Ewok",
+          "fr": "Ewok"
+        }
+      },
+      {
+        "type": "species",
+        "id": "5adf3793-a759-4d3a-8c3f-3dbe121f4cb0",
+        "name": {
+          "en": "Kiffar",
+          "fr": "Kiffar"
+        }
+      },
+      {
+        "type": "species",
+        "id": "8df03a7c-70ed-4fad-a7ac-77f75dd6893f",
+        "name": {
+          "en": "Ubese",
+          "fr": "Ubese"
+        }
+      },
+      {
+        "type": "species",
+        "id": "f003d4e5-9732-485d-afe6-94984e290362",
+        "name": {
+          "en": "Nikto",
+          "fr": "Nikto"
+        }
+      },
+      {
+        "type": "species",
+        "id": "79c71215-ee7c-4428-8c96-fc0da173852b",
+        "name": {
+          "en": "Bith",
+          "fr": "Bith"
+        }
+      },
+      {
+        "type": "species",
+        "id": "62ab7335-0b8a-4d02-844d-120a91298526",
+        "name": {
+          "en": "Aqualish",
+          "fr": "Aqualish"
+        }
+      },
+      {
+        "type": "species",
+        "id": "bebff5de-51a4-4cac-8761-1dc70d6ca310",
+        "name": {
+          "en": "Neimoidian",
+          "fr": "Neimoidien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "5476a9e3-83b1-4f5c-b583-19d3848106e8",
+        "name": {
+          "en": "Iktotchi",
+          "fr": "Iktotchi"
+        }
+      },
+      {
+        "type": "species",
+        "id": "cb3d7eeb-3f97-475d-a286-8f60ba9c3ec7",
+        "name": {
+          "en": "Kaleesh",
+          "fr": "Kaleesh"
+        }
+      },
+      {
+        "type": "species",
+        "id": "d285dbe4-dffd-43ff-a90e-12cf683b5105",
+        "name": {
+          "en": "Selkath",
+          "fr": "Selkath"
+        }
+      },
+      {
+        "type": "species",
+        "id": "24e7e1f9-06b5-4272-a56f-01d163b3cf07",
+        "name": {
+          "en": "Cerean",
+          "fr": "Céréen"
+        }
+      },
+      {
+        "type": "species",
+        "id": "da26878e-c2cb-4330-b8ba-59c3e76f33e2",
+        "name": {
+          "en": "Zeltron",
+          "fr": "Zeltron"
+        }
+      },
+      {
+        "type": "species",
+        "id": "779295cf-380d-415e-9560-f9ae9cabeead",
+        "name": {
+          "en": "Barabel",
+          "fr": "Barabel"
+        }
+      },
+      {
+        "type": "species",
+        "id": "049fc3f0-45c8-43d1-9a90-dd14e300c2e2",
+        "name": {
+          "en": "Gamorrean",
+          "fr": "Gamorréen"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c6a5b00b-0483-49ee-a473-585cda2ef9d4",
+        "name": {
+          "en": "Ugnaught",
+          "fr": "Ugnaught"
+        }
+      },
+      {
+        "type": "species",
+        "id": "ef75da55-e5a2-4f5d-a0bf-584812c7574c",
+        "name": {
+          "en": "Klatooinian",
+          "fr": "Klatooinien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "9cd2b693-fe65-4c5f-bb07-f03f1c631bf6",
+        "name": {
+          "en": "Arkanian",
+          "fr": "Arkanien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "a1875aa4-3a55-4767-bb87-5cea6a2dcc1e",
+        "name": {
+          "en": "Gand",
+          "fr": "Gand"
+        }
+      },
+      {
+        "type": "species",
+        "id": "6c37a4f2-f456-4d97-9c8b-429879818504",
+        "name": {
+          "en": "Muun",
+          "fr": "Muun"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c08ce08a-15fb-4e02-bb93-b594f0a1a565",
+        "name": {
+          "en": "Besalisk",
+          "fr": "Besalisk"
+        }
+      },
+      {
+        "type": "species",
+        "id": "b8d7b093-6763-41b2-9bf7-9547bf887e99",
+        "name": {
+          "en": "Dug",
+          "fr": "Dug"
+        }
+      },
+      {
+        "type": "species",
+        "id": "a1cb04b7-0c5e-47c3-a8b4-4861c244b22a",
+        "name": {
+          "en": "Caamasi",
+          "fr": "Caamasi"
+        }
+      },
+      {
+        "type": "species",
+        "id": "8ba1137e-3996-42df-8dd9-ae018aa6e20f",
+        "name": {
+          "en": "Feeorin",
+          "fr": "Feeorin"
+        }
+      },
+      {
+        "type": "species",
+        "id": "505853e2-b2fd-463f-925d-b052e410669c",
+        "name": {
+          "en": "Kubaz",
+          "fr": "Kubaz"
+        }
+      },
+      {
+        "type": "species",
+        "id": "efb020e9-f5ad-4ecc-a7f5-2e6dadeee0af",
+        "name": {
+          "en": "Selonian",
+          "fr": "Selonien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "e8551ce3-4e27-4b7b-ad5b-e95159862157",
+        "name": {
+          "en": "Talz",
+          "fr": "Talz"
+        }
+      },
+      {
+        "type": "species",
+        "id": "da302628-f092-4676-99be-f29e27fb92c8",
+        "name": {
+          "en": "Chadra-Fan",
+          "fr": "Chadra-Fan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "55db76aa-db3b-4c1b-9f01-be1706c9fb72",
+        "name": {
+          "en": "Ishi Tib",
+          "fr": "Ishi Tib"
+        }
+      },
+      {
+        "type": "species",
+        "id": "782f3bbe-31fb-489a-ba04-405d74052f28",
+        "name": {
+          "en": "Anomid",
+          "fr": "Anomid"
+        }
+      },
+      {
+        "type": "species",
+        "id": "a90fa4b0-fd58-4af4-92ec-4ccc137c404d",
+        "name": {
+          "en": "Verpine",
+          "fr": "Verpine"
+        }
+      },
+      {
+        "type": "species",
+        "id": "350b1a73-4e58-4887-af22-29425996a5ae",
+        "name": {
+          "en": "Shistavanen",
+          "fr": "Shistavanen"
+        }
+      },
+      {
+        "type": "species",
+        "id": "ebcde699-8f19-4965-a226-abb086c7d800",
+        "name": {
+          "en": "Pau'an",
+          "fr": "Pau'an"
+        }
+      },
+      {
+        "type": "species",
+        "id": "a3727349-08cd-4a2e-9983-32794f771c8b",
+        "name": {
+          "en": "Umbaran",
+          "fr": "Umbaran"
+        }
+      },
+      {
+        "type": "species",
+        "id": "fd2ee761-73c5-4e17-bd1f-e7c5ddd3cea9",
+        "name": {
+          "en": "Whiphid",
+          "fr": "Whiphid"
+        }
+      },
+      {
+        "type": "species",
+        "id": "379c9922-d744-4a78-99c8-9f9330b6cf5c",
+        "name": {
+          "en": "Geonosian",
+          "fr": "Géonosien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "e5c23428-9b73-455c-8678-147a4fdbb819",
+        "name": {
+          "en": "Hutt",
+          "fr": "Hutt"
+        }
+      },
+      {
+        "type": "species",
+        "id": "5750ab85-6acb-4352-b553-715bda35bc6f",
+        "name": {
+          "en": "Lasat",
+          "fr": "Lasat"
+        }
+      },
+      {
+        "type": "species",
+        "id": "4f08da94-8608-4e4b-8656-2257d99a4549",
+        "name": {
+          "en": "Gotal",
+          "fr": "Gotal"
+        }
+      },
+      {
+        "type": "species",
+        "id": "aee7c89a-dfaa-4808-8bd4-82390ae8217f",
+        "name": {
+          "en": "Quermian",
+          "fr": "Quermien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "3262cd2a-342f-442e-8d71-e65906dbcf30",
+        "name": {
+          "en": "Fosh",
+          "fr": "Fosh"
+        }
+      },
+      {
+        "type": "species",
+        "id": "a4d8acd5-26d7-451e-a54c-82270ef9d4a1",
+        "name": {
+          "en": "Givin",
+          "fr": "Givin"
+        }
+      },
+      {
+        "type": "species",
+        "id": "ce8ae4e4-7de6-4121-aa5f-eeb2accca283",
+        "name": {
+          "en": "Dashade",
+          "fr": "Dashade"
+        }
+      },
+      {
+        "type": "species",
+        "id": "72c75da9-b3f3-4bd7-9127-120a8eb91614",
+        "name": {
+          "en": "Noghri",
+          "fr": "Noghri"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c5156b74-3a4b-4a0a-a6bc-4a4f4a9edc3f",
+        "name": {
+          "en": "Anzati",
+          "fr": "Anzati"
+        }
+      },
+      {
+        "type": "species",
+        "id": "4f5cb918-8a62-4f7a-9dcd-0daac2c58e4d",
+        "name": {
+          "en": "Sakiyan",
+          "fr": "Sakiyan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "b3077c7c-4a75-4e7d-9475-6fa0fe58f3d0",
+        "name": {
+          "en": "Xexto",
+          "fr": "Xexto"
+        }
+      },
+      {
+        "type": "species",
+        "id": "4625996b-c75c-4fbb-8956-cbe805ff446b",
+        "name": {
+          "en": "Ortolan",
+          "fr": "Ortolan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "0a5eb810-742b-4fb5-8cea-0eb3fe7f245a",
+        "name": {
+          "en": "Mustafarian",
+          "fr": "Mustafarien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "0568e219-99de-49ca-b363-19ffb6d52e4e",
+        "name": {
+          "en": "Squib",
+          "fr": "Squib"
+        }
+      },
+      {
+        "type": "species",
+        "id": "fd72ed80-e8e0-4b3c-bf75-508f47450d20",
+        "name": {
+          "en": "Arcona",
+          "fr": "Arconien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "17439d0e-f911-4c08-8834-45e607691366",
+        "name": {
+          "en": "Dressellian",
+          "fr": "Dressellien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c1512fe6-3bf8-48f8-84fd-2127f16a0851",
+        "name": {
+          "en": "Sluissi",
+          "fr": "Sluissi"
+        }
+      },
+      {
+        "type": "species",
+        "id": "de9ba976-d684-4c34-b80a-14ea7ba219c5",
+        "name": {
+          "en": "Drall",
+          "fr": "Drall"
+        }
+      },
+      {
+        "type": "species",
+        "id": "0a520c29-0c91-4644-899c-8fd2cffcc0e0",
+        "name": {
+          "en": "Skakoan",
+          "fr": "Skakoan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "094bab97-ec7a-46ad-ab14-255efb3f8701",
+        "name": {
+          "en": "Clawdite",
+          "fr": "Clawdite"
+        }
+      },
+      {
+        "type": "species",
+        "id": "3ec977b7-584b-4a8e-96ef-bab4d1cd0530",
+        "name": {
+          "en": "Aleena",
+          "fr": "Alénéen"
+        }
+      },
+      {
+        "type": "species",
+        "id": "0d1322b4-8fe1-4041-a2e7-a6b532631a8d",
+        "name": {
+          "en": "Balosar",
+          "fr": "Balosarien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "cc973bdd-0040-4d0c-8e98-d8ebd9f96149",
+        "name": {
+          "en": "Zygerrian",
+          "fr": "Zygerrien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "ac25a75a-4325-4ee9-bbb6-a0a06c4361ce",
+        "name": {
+          "en": "Ardennian",
+          "fr": "Ardénien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "a9e516c1-dec7-4b77-942e-22034f4a12e2",
+        "name": {
+          "en": "Bardottan",
+          "fr": "Bardottan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "851387cb-abf4-40ae-994b-2af7b5638149",
+        "name": {
+          "en": "Cosian",
+          "fr": "Cosian"
+        }
+      },
+      {
+        "type": "species",
+        "id": "b4558475-fbbf-4b59-abc3-9c2936881d50",
+        "name": {
+          "en": "Elom",
+          "fr": "Elom"
+        }
+      },
+      {
+        "type": "species",
+        "id": "dbf64acd-131f-44e6-ac82-29ace8118070",
+        "name": {
+          "en": "Elomin",
+          "fr": "Elomin"
+        }
+      },
+      {
+        "type": "species",
+        "id": "46cefbcc-bb0c-446d-b36d-22a56a813197",
+        "name": {
+          "en": "Draethos",
+          "fr": "Draethos"
+        }
+      },
+      {
+        "type": "species",
+        "id": "00e79c43-b245-4bd4-a0a0-ba710bd05985",
+        "name": {
+          "en": "Herglic",
+          "fr": "Herglic"
+        }
+      },
+      {
+        "type": "species",
+        "id": "d67bddd5-edf7-4197-9444-f6a50af070a0",
+        "name": {
+          "en": "Anx",
+          "fr": "Anx"
+        }
+      },
+      {
+        "type": "species",
+        "id": "0931cdca-9856-4812-8f7e-a08f331df523",
+        "name": {
+          "en": "Lannik",
+          "fr": "Lannik"
+        }
+      },
+      {
+        "type": "species",
+        "id": "e3d78e8f-88c7-4f16-912c-46a948e60ad3",
+        "name": {
+          "en": "Gossam",
+          "fr": "Gossam"
+        }
+      },
+      {
+        "type": "species",
+        "id": "d9db6943-f4de-431c-b3c2-d2966a3206c9",
+        "name": {
+          "en": "Nosaurian",
+          "fr": "Nosaurien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "8d47d468-43a2-4cdb-b8eb-70361530729d",
+        "name": {
+          "en": "Karkarodon",
+          "fr": "Karkarodon"
+        }
+      },
+      {
+        "type": "species",
+        "id": "8f7be403-b08a-429b-9984-1e5c29baea7e",
+        "name": {
+          "en": "Ongree",
+          "fr": "Ongrée"
+        }
+      },
+      {
+        "type": "species",
+        "id": "f384143e-d11d-4e8f-96cb-5425e2a1fcd5",
+        "name": {
+          "en": "Kyuzo",
+          "fr": "Kyuzo"
+        }
+      },
+      {
+        "type": "species",
+        "id": "4095d241-51c3-411b-8b41-9d85f9ffacd2",
+        "name": {
+          "en": "Lepi",
+          "fr": "Lepi"
+        }
+      },
+      {
+        "type": "species",
+        "id": "78c8e151-e467-4414-b1d0-e739c3866054",
+        "name": {
+          "en": "Lurmen",
+          "fr": "Lurmen"
+        }
+      },
+      {
+        "type": "species",
+        "id": "69e54bcd-de96-4343-90e6-9ba2e492dddf",
+        "name": {
+          "en": "Snivvian",
+          "fr": "Snivvien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c76b61ec-9ec3-4b28-b377-7d7d12a6b87a",
+        "name": {
+          "en": "Tarasin",
+          "fr": "Tarasin"
+        }
+      },
+      {
+        "type": "species",
+        "id": "3ae673d8-c5ab-417f-8041-01de657fcfe2",
+        "name": {
+          "en": "Defel",
+          "fr": "Défel"
+        }
+      },
+      {
+        "type": "species",
+        "id": "40fcfe8f-bd03-4e3d-9464-7606e5a1e19e",
+        "name": {
+          "en": "Thisspiasian",
+          "fr": "Thisspiasian"
+        }
+      },
+      {
+        "type": "species",
+        "id": "3f41d72d-cbcc-417e-8840-1f528fdaf2e0",
+        "name": {
+          "en": "Vurk",
+          "fr": "Vurk"
+        }
+      },
+      {
+        "type": "species",
+        "id": "3a01c3a4-1f72-40bb-a1ac-f28803eadb2d",
+        "name": {
+          "en": "Togorian",
+          "fr": "Togorien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "abe8b3c0-e9ae-4033-b14c-5dd5c8de398e",
+        "name": {
+          "en": "Nagai",
+          "fr": "Nagaï"
+        }
+      },
+      {
+        "type": "species",
+        "id": "79cfbcb5-6976-482a-b04d-f7a6e8688454",
+        "name": {
+          "en": "Rakata",
+          "fr": "Rakata"
+        }
+      },
+      {
+        "type": "species",
+        "id": "4d82b2e0-9ca2-4da9-bbb1-dca0b5f1b2e8",
+        "name": {
+          "en": "Tholothian",
+          "fr": "Tholothien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c764feba-a8d4-4def-9519-88ccfd23ba2e",
+        "name": {
+          "en": "Ssi-ruu",
+          "fr": "Ssi-ruu"
+        }
+      },
+      {
+        "type": "species",
+        "id": "70d49539-4111-4a41-87bd-f42be8c037d5",
+        "name": {
+          "en": "Kowakian Monkey-Lizard",
+          "fr": "Singe-lézard kowakien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "06d0d9e3-2884-4f7a-b7af-7847f772bf47",
+        "name": {
+          "en": "Tusken",
+          "fr": "Tusken"
+        }
+      },
+      {
+        "type": "species",
+        "id": "59ed0294-2b14-4997-ac7e-c0c009084cfd",
+        "name": {
+          "en": "Sith Pureblood",
+          "fr": "Sith de sang pur"
+        }
+      },
+      {
+        "type": "species",
+        "id": "9ac5dbf7-e0f7-45d7-ad65-43bac824acde",
+        "name": {
+          "en": "Yarkora",
+          "fr": "Yarkora"
+        }
+      },
+      {
+        "type": "species",
+        "id": "ab31eb0b-5990-4d0d-8cb3-42192d1474ee",
+        "name": {
+          "en": "Dowutin",
+          "fr": "Dowutin"
+        }
+      },
+      {
+        "type": "species",
+        "id": "d498f3ca-e0bd-485b-a790-335044717a0c",
+        "name": {
+          "en": "Pyke",
+          "fr": "Pyke"
+        }
+      },
+      {
+        "type": "species",
+        "id": "0bedac08-fdf7-4281-9753-4a987b54abbb",
+        "name": {
+          "en": "Ryn",
+          "fr": "Ryn"
+        }
+      },
+      {
+        "type": "species",
+        "id": "100a1398-f10b-4bb0-a7e9-d97b42c0c860",
+        "name": {
+          "en": "Gen'Dai",
+          "fr": "Gen'Daï"
+        }
+      },
+      {
+        "type": "species",
+        "id": "069df486-ee8a-48c6-800b-a27242a7e96b",
+        "name": {
+          "en": "Harch",
+          "fr": "Harch"
+        }
+      },
+      {
+        "type": "species",
+        "id": "e20323ba-9694-41e0-b392-78cfdcd4035f",
+        "name": {
+          "en": "Yuzzem",
+          "fr": "Yuzzem"
+        }
+      },
+      {
+        "type": "species",
+        "id": "9b4ecc18-b130-4577-bc41-daa8d0d0fd03",
+        "name": {
+          "en": "Echani",
+          "fr": "Echani"
+        }
+      },
+      {
+        "type": "species",
+        "id": "24442847-5a0c-49b5-a4f1-551d64a87830",
+        "name": {
+          "en": "Lorrdian",
+          "fr": "Lorrdien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "80bb3d7b-e194-4c43-b762-89c9c20e6d99",
+        "name": {
+          "en": "Chistori",
+          "fr": "Chistori"
+        }
+      },
+      {
+        "type": "species",
+        "id": "c0f997d3-1cfd-40cd-a599-8c1f1d152474",
+        "name": {
+          "en": "Voss",
+          "fr": "Voss"
+        }
+      },
+      {
+        "type": "species",
+        "id": "167f4e25-6879-4ef0-bd37-7a4186d37bcf",
+        "name": {
+          "en": "Gormak",
+          "fr": "Gormak"
+        }
+      },
+      {
+        "type": "species",
+        "id": "b319a03d-ce7f-4f5f-9c0f-fa13ba31842d",
+        "name": {
+          "en": "Drabatan",
+          "fr": "Drabatan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "6612d587-1b0b-488e-8f4b-263c8f781fc5",
+        "name": {
+          "en": "Yevetha",
+          "fr": "Yevetha"
+        }
+      },
+      {
+        "type": "species",
+        "id": "f48796cc-1485-4dcc-ad2e-e8791dca61f5",
+        "name": {
+          "en": "Firrerreo",
+          "fr": "Firrerreo"
+        }
+      },
+      {
+        "type": "species",
+        "id": "18bf05fa-9163-409e-a1b9-40555548868e",
+        "name": {
+          "en": "Sanyassan",
+          "fr": "Sanyassan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "1274d904-68e0-4c61-835b-94a66f326ff6",
+        "name": {
+          "en": "Columi",
+          "fr": "Columi"
+        }
+      },
+      {
+        "type": "species",
+        "id": "4ac92419-6f29-403c-a512-ef29dfe221e4",
+        "name": {
+          "en": "Hapan",
+          "fr": "Hapan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "e57e9542-95a4-4e29-a521-fa49c1d02e13",
+        "name": {
+          "en": "Celegian",
+          "fr": "Celegien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "89928369-bdfe-4846-bd0a-f4847caac77c",
+        "name": {
+          "en": "Felucian",
+          "fr": "Felucien"
+        }
+      },
+      {
+        "type": "species",
+        "id": "5f819900-4c18-4cd1-9bf6-859b88b5a693",
+        "name": {
+          "en": "Polis Massan",
+          "fr": "Polis Massan"
+        }
+      },
+      {
+        "type": "species",
+        "id": "135a3e35-e99c-4046-8e0f-f48a55c7c380",
+        "name": {
+          "en": "Vulptereen",
+          "fr": "Vulptérien"
+        }
+      }
     ],
     "description": {
       "en": "Common interstellar trade tongue.",
       "fr": "Langue interstellaire la plus répandue."
     },
-    "source": { "book": "PHB SW5e", "section": "Languages", "url": "https://sw5e.com/rules/phb/backgrounds" },
-    "version": { "semver": "0.1.0", "last_updated": "2024-05-01" }
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "3a14f507-3121-48ef-9b42-fe87622e9e73",
+    "slug": "bothese",
+    "name": {
+      "en": "Bothese",
+      "fr": "Bothéen"
+    },
+    "script": {
+      "en": "Glyphic trade cant",
+      "fr": "Cant commercial glyphique"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "3a27b353-e9e0-4e74-8cf2-bfcc27bf148b",
+        "name": {
+          "en": "Bothan",
+          "fr": "Bothan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Intricate tone shifts suited to covert transmissions and coded gossip.",
+      "fr": "Modulations complexes adaptées aux transmissions discrètes et aux rumeurs codées."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "2feceae7-ca0e-4e87-9763-324a2d74ea58",
+    "slug": "mirialan",
+    "name": {
+      "en": "Mirialan",
+      "fr": "Mirialan"
+    },
+    "script": {
+      "en": "Mirialan glyphs",
+      "fr": "Glyphes mirialans"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "af429e3e-d6e0-42d3-b5d1-b9fe401d9f21",
+        "name": {
+          "en": "Mirialan",
+          "fr": "Mirialan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Meditative language rich with ceremonial chants.",
+      "fr": "Langue méditative riche en chants cérémoniels."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "0a3a4ea1-ce74-4e81-b135-e31d9b072054",
+    "slug": "zabraki",
+    "name": {
+      "en": "Zabraki",
+      "fr": "Zabraki"
+    },
+    "script": {
+      "en": "Zabraki runes",
+      "fr": "Runes zabrak"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "ebbd22a7-3d5a-42f2-a330-79f873e5f7b9",
+        "name": {
+          "en": "Zabrak",
+          "fr": "Zabrak"
+        }
+      }
+    ],
+    "description": {
+      "en": "Harsh phonetics honed for rallying warriors and enduring rites.",
+      "fr": "Phonétique rude adaptée pour rallier les guerriers et supporter les rites d'endurance."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "0d25f98f-9167-499f-b404-4cdb463fa784",
+    "slug": "nautila",
+    "name": {
+      "en": "Nautila",
+      "fr": "Nautila"
+    },
+    "script": {
+      "en": "Chorded waves",
+      "fr": "Ondes accordées"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "b84654f9-1bb5-4d79-b81a-cf7b99ebf7f1",
+        "name": {
+          "en": "Nautolan",
+          "fr": "Nautolan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Fluid clicks and tonal pulses optimized for underwater communication.",
+      "fr": "Cliquets fluides et impulsions tonales optimisées pour la communication sous-marine."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "8084ee66-f232-4f6f-ac30-ed64bfec0bf0",
+    "slug": "togruti",
+    "name": {
+      "en": "Togruti",
+      "fr": "Togruti"
+    },
+    "script": {
+      "en": "Harmonic glyphs",
+      "fr": "Glyphes harmoniques"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "0cc14d5e-83dd-44c9-b862-4cf410afb170",
+        "name": {
+          "en": "Togruta",
+          "fr": "Togruta"
+        }
+      }
+    ],
+    "description": {
+      "en": "Layered tonal patterns synchronized with communal hunting chants.",
+      "fr": "Motifs tonals superposés synchronisés aux chants de chasse communautaires."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "bfbe5d57-69ae-49f9-b98f-f79f44005074",
+    "slug": "rodese",
+    "name": {
+      "en": "Rodese",
+      "fr": "Rodien"
+    },
+    "script": {
+      "en": "Ultrasonic chirps",
+      "fr": "Gazouillis ultrasoniques"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "6d9b9953-64e1-462c-8837-3cfcc8336d31",
+        "name": {
+          "en": "Rodian",
+          "fr": "Rodien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rapid-fire chirps and nasal consonants favored by competitive hunters.",
+      "fr": "Rafales de gazouillis et consonnes nasales prisées des chasseurs chevronnés."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "0dc2b5a9-b528-4b2a-aabb-28fa5d479566",
+    "slug": "ryl",
+    "name": {
+      "en": "Ryl",
+      "fr": "Ryl"
+    },
+    "script": {
+      "en": "Lekku gesture cues with flowing glyphs",
+      "fr": "Signes de lekkus accompagnés de glyphes fluides"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "8db5b325-643a-5d32-bd3e-483550e4be09",
+        "name": {
+          "en": "Twi'lek",
+          "fr": "Twi'lek"
+        }
+      }
+    ],
+    "description": {
+      "en": "Combines lekku movements with melodic vowels to convey nuance and secrecy.",
+      "fr": "Allie mouvements de lekkus et voyelles mélodiques pour transmettre nuances et secrets."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "beb16973-207e-4e4d-b187-1bb932b3dd35",
+    "slug": "shyriiwook",
+    "name": {
+      "en": "Shyriiwook",
+      "fr": "Shyriiwook"
+    },
+    "script": {
+      "en": "Bellowed growls and roaring syllables",
+      "fr": "Grognements puissants et syllabes rugissantes"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "eb8baa07-2dd4-497f-a79d-9f2749c3c5d3",
+        "name": {
+          "en": "Wookiee",
+          "fr": "Wookiee"
+        }
+      }
+    ],
+    "description": {
+      "en": "Resonant roars layered with subtle intonation only fellow Wookiees decipher.",
+      "fr": "Rugissements résonants ornés d'intonations subtiles que seuls les Wookiees déchiffrent."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "19bdd80a-bc1c-49a1-91a4-83a44f6f07ab",
+    "slug": "durese",
+    "name": {
+      "en": "Durese",
+      "fr": "Duro"
+    },
+    "script": {
+      "en": "Sibilant syllables traced in star-charts",
+      "fr": "Syllabes sifflantes tracées sur des cartes stellaires"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "041cd8db-5df7-4964-b8d8-6e181a9d7e05",
+        "name": {
+          "en": "Duros",
+          "fr": "Duros"
+        }
+      }
+    ],
+    "description": {
+      "en": "Star-faring idiom optimized for astrogation formulae and spacer slang.",
+      "fr": "Idiome stellaire optimisé pour les formules d'astrogation et l'argot des spationautes."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "f6f3a2dd-3dc3-4c2d-9b4e-6fa8c904f5bc",
+    "slug": "cheunh",
+    "name": {
+      "en": "Cheunh",
+      "fr": "Cheunh"
+    },
+    "script": {
+      "en": "Angular glyphs encoded for rapid tactical notation",
+      "fr": "Glyphes angulaires codés pour les notations tactiques rapides"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "7db5b24e-8a5f-47d3-91b2-4c32bd0aa92a",
+        "name": {
+          "en": "Chiss",
+          "fr": "Chiss"
+        }
+      }
+    ],
+    "description": {
+      "en": "Precision language used by Chiss officers to relay battle calculus and familial lineage.",
+      "fr": "Langue précise utilisée par les officiers chiss pour transmettre calculs de bataille et lignées familiales."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "9f5afbd7-6d3f-4a0f-a9d2-7610e6f59d74",
+    "slug": "mon-calamari",
+    "name": {
+      "en": "Mon Calamarian",
+      "fr": "Mon calamari"
+    },
+    "script": {
+      "en": "Flowing cursive paired with harmonic sonar tones",
+      "fr": "Cursive fluide associée à des tonalités sonar harmoniques"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "9deed49e-95cc-4aef-9ddf-104bc1481b4a",
+        "name": {
+          "en": "Mon Calamari",
+          "fr": "Mon Calamari"
+        }
+      }
+    ],
+    "description": {
+      "en": "Aquatic language tuned for shipwright collaboration and deepwater diplomacy.",
+      "fr": "Langue aquatique adaptée à la coopération des ingénieurs navals et à la diplomatie abyssale."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "2f8d9f89-421e-4f5a-8d9a-3f4a0a4c0c0b",
+    "slug": "gran",
+    "name": {
+      "en": "Gran",
+      "fr": "Gran"
+    },
+    "script": {
+      "en": "Triocular pictograms with layered pheromone markers",
+      "fr": "Pictogrammes trioculaires agrémentés de marqueurs phéromonaux"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "63c3b3a9-63dc-4e86-8bf5-1b0e80396cee",
+        "name": {
+          "en": "Gran",
+          "fr": "Gran"
+        }
+      }
+    ],
+    "description": {
+      "en": "Pastoral idiom rich with communal farming terms and empathic cues.",
+      "fr": "Idiome pastoral riche en termes agricoles communautaires et en signaux empathiques."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "4347e81b-6c8c-4d67-a8a8-e00ef28a7a45",
+    "slug": "kel-dor",
+    "name": {
+      "en": "Kel Dor",
+      "fr": "Kel Dor"
+    },
+    "script": {
+      "en": "Kel Dor logographs",
+      "fr": "Logographes kel dor"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "ec853149-c285-4d97-8c54-a56b61f070b1",
+        "name": {
+          "en": "Kel Dor",
+          "fr": "Kel Dor"
+        }
+      }
+    ],
+    "description": {
+      "en": "Whistled and signed phrases shaped around breath mask vocabularies.",
+      "fr": "Phrases sifflées et signées adaptées aux vocabulaires des masques respiratoires."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "23f98ba3-4c4d-4ad8-b1b5-439343746f02",
+    "slug": "catharese",
+    "name": {
+      "en": "Catharese",
+      "fr": "Cathare"
+    },
+    "script": {
+      "en": "Sharp runic glyphs",
+      "fr": "Glyphes runiques acérés"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "4131f873-8510-4fd7-a93e-d866e10b5c20",
+        "name": {
+          "en": "Cathar",
+          "fr": "Cathar"
+        }
+      }
+    ],
+    "description": {
+      "en": "Staccato growls and trilled consonants used by Cathar clans.",
+      "fr": "Grognements saccadés et consonnes roulées utilisées par les clans cathar."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "cacf9888-ca82-4859-b2c6-90c61ecb7e4a",
+    "slug": "chagri",
+    "name": {
+      "en": "Chagri",
+      "fr": "Chagri"
+    },
+    "script": {
+      "en": "Flowing diplomatic script",
+      "fr": "Écriture diplomatique fluide"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "17911d70-9c1d-4e90-a5cc-f42a38e0dabf",
+        "name": {
+          "en": "Chagrian",
+          "fr": "Chagrien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured tones favored in Champalan senate delegations.",
+      "fr": "Tons mesurés prisés des délégations sénatoriales de Champala."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "e2870a4e-5e82-4d7e-93b9-4daa6872cd4e",
+    "slug": "dosh",
+    "name": {
+      "en": "Dosh",
+      "fr": "Dosh"
+    },
+    "script": {
+      "en": "Hissing consonants punctuated by guttural pauses",
+      "fr": "Consonnes sifflantes ponctuées de pauses gutturales"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "bed5fb52-fb4e-49ed-b36d-6453481e3046",
+        "name": {
+          "en": "Trandoshan",
+          "fr": "Trandoshan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Hunting chants layered with ritual threats and honorifics earned through captured prey.",
+      "fr": "Chants de chasse mêlant menaces rituelles et honorifiques gagnés grâce aux proies capturées."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "81aa2005-54b7-4fe7-9ced-21b07f22b621",
+    "slug": "sullustese",
+    "name": {
+      "en": "Sullustese",
+      "fr": "Sullustéen"
+    },
+    "script": {
+      "en": "Rapid-fire glyphs adapted for echo-rich caverns",
+      "fr": "Glyphes rapides adaptés aux cavernes riches en échos"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "a2d19cea-07e6-40e3-a16a-3b5aa079f603",
+        "name": {
+          "en": "Sullustan",
+          "fr": "Sullustéen"
+        }
+      }
+    ],
+    "description": {
+      "en": "Clicking syllables optimized for sonar mapping chatter and tunnel navigation jargon.",
+      "fr": "Syllabes cliquetantes optimisées pour les échanges de cartographie sonar et le jargon de navigation souterraine."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "58627b40-da31-42c4-a943-bde50d0c920b",
+    "slug": "pantoran",
+    "name": {
+      "en": "Pantoran",
+      "fr": "Pantoran"
+    },
+    "script": {
+      "en": "Flourished calligraphy blending Pantoran pictographs with Core Worlds ligatures",
+      "fr": "Calligraphie ornée mêlant pictogrammes pantorans et ligatures des Mondes du Noyau"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c19adff2-b5ff-465b-ba16-92e0faa7bd91",
+        "name": {
+          "en": "Pantoran",
+          "fr": "Pantoran"
+        }
+      }
+    ],
+    "description": {
+      "en": "Diplomatic register rich with ceremonial honorifics and senate procedural shorthand.",
+      "fr": "Registre diplomatique riche en honorifiques cérémoniels et en abréviations des procédures sénatoriales."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6c51fefd-6dde-4c11-82b8-d643a99f2503",
+    "slug": "miralukese",
+    "name": {
+      "en": "Miralukese",
+      "fr": "Miralukese"
+    },
+    "script": {
+      "en": "Flowing tactile script traced across lacquered reed panels",
+      "fr": "Écriture tactile fluide tracée sur des panneaux de roseaux laqués"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "f5c2a4f1-61af-4c52-a019-1adbb40b7b76",
+        "name": {
+          "en": "Miraluka",
+          "fr": "Miraluka"
+        }
+      }
+    ],
+    "description": {
+      "en": "Whispered language conveyed through subtle vibrations and Force-attuned cadence.",
+      "fr": "Langue murmurée transmise par de subtiles vibrations et un rythme accordé à la Force."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "bfe30b80-6b7a-49bb-9f7c-4a842f8dd1e8",
+    "slug": "falleen",
+    "name": {
+      "en": "Falleen",
+      "fr": "Falleen"
+    },
+    "script": {
+      "en": "Perfumed calligraphy inked with pheromone-reactive dyes",
+      "fr": "Calligraphie parfumée tracée avec des encres réagissant aux phéromones"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c6d1bdf6-9081-4e73-b2da-987c4d5ad892",
+        "name": {
+          "en": "Falleen",
+          "fr": "Falleen"
+        }
+      }
+    ],
+    "description": {
+      "en": "Layered tones accompanied by scent cues that convey nuance in social standing.",
+      "fr": "Tons superposés accompagnés d'indices olfactifs exprimant des nuances de statut social."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "c96e3477-f594-4db2-937c-5d0b62f347c7",
+    "slug": "devaronese",
+    "name": {
+      "en": "Devaronese",
+      "fr": "Dévaronien"
+    },
+    "script": {
+      "en": "Bold glyphs carved into leather scrolls and clan totems",
+      "fr": "Glyphes audacieux gravés sur des parchemins de cuir et des totems de clan"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c0cce1c2-61f1-4f07-a2d3-4c4ad25aefb6",
+        "name": {
+          "en": "Devaronian",
+          "fr": "Dévaronien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Resonant proclamations steeped in ritual boasts and travel oaths.",
+      "fr": "Proclamations résonantes imprégnées de fanfaronnades rituelles et de serments de voyage."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "a8a2d759-cac1-469c-952d-8d9c9494fc28",
+    "slug": "ithorese",
+    "name": {
+      "en": "Ithorese",
+      "fr": "Ithorien"
+    },
+    "script": {
+      "en": "Resonant harmonics sung through layered throats and refracting halls",
+      "fr": "Harmoniques résonantes chantées par des gorges multiples dans des halls réfléchissants"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "39996b55-f03f-4487-836f-5d66edd66227",
+        "name": {
+          "en": "Ithorian",
+          "fr": "Ithorien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Melodic speech weaving environmental metaphors into flowing, stereo tones.",
+      "fr": "Parole mélodique mêlant des métaphores environnementales à des tonalités stéréophoniques fluides."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "aec1b8d5-4f9c-44f2-9937-04969d0f56c7",
+    "slug": "quarrenese",
+    "name": {
+      "en": "Quarrenese",
+      "fr": "Quarrenais"
+    },
+    "script": {
+      "en": "Fluid glyphs etched with tidal curves and pressure gradients",
+      "fr": "Glyphes fluides gravés de courbes de marée et de gradients de pression"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "6bd90e47-2385-4efd-8575-9b13cf691a14",
+        "name": {
+          "en": "Quarren",
+          "fr": "Quarren"
+        }
+      }
+    ],
+    "description": {
+      "en": "Pragmatic cadence adapted for underwater communication and hull maintenance jargon.",
+      "fr": "Cadence pragmatique adaptée à la communication sous-marine et au jargon de maintenance des coques."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b61d2f85-8920-4d43-95fc-9f5286bb2700",
+    "slug": "sriluurian",
+    "name": {
+      "en": "Sriluurian",
+      "fr": "Sriluurien"
+    },
+    "script": {
+      "en": "Carved knotwork brands burned into leather cords and driftwood idols",
+      "fr": "Marques noueuses gravées et brûlées sur des cordons de cuir et des idoles de bois flotté"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "b744077e-de1a-4ae7-a3cb-699072d7f091",
+        "name": {
+          "en": "Weequay",
+          "fr": "Weequay"
+        }
+      }
+    ],
+    "description": {
+      "en": "Gravelly speech punctuated by ritual oaths and clan battle-cant.",
+      "fr": "Parole rocailleuse ponctuée de serments rituels et de chants de bataille de clan."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "8933fbd8-1f64-4015-8331-18da4046f41e",
+    "slug": "gunganese",
+    "name": {
+      "en": "Gunganese",
+      "fr": "Gungan"
+    },
+    "script": {
+      "en": "Flowing Naboo glyphs painted with reedbrush across shell and shield",
+      "fr": "Glyphes fluides de Naboo peints au pinceau de roseau sur carapaces et boucliers"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "e9433ffe-3172-4479-99ea-35c164d7228f",
+        "name": {
+          "en": "Gungan",
+          "fr": "Gungan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Buoyant speech full of lilting vowels and percussive clicks suited to underwater resonance.",
+      "fr": "Langage flottant empli de voyelles chantantes et de claquements percussifs adaptés à la résonance sous-marine."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "35783fa3-4e12-4181-9a0f-3aab0508dd8f",
+    "slug": "toydarian",
+    "name": {
+      "en": "Toydarian",
+      "fr": "Toydarien"
+    },
+    "script": {
+      "en": "Hovering sigils inked on leathery banners that sway in market breezes",
+      "fr": "Sigils flottants encrés sur des bannières de cuir ondulant dans les brises du marché"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "9875be80-37d5-4386-a9fa-3c9b0010c46e",
+        "name": {
+          "en": "Toydarian",
+          "fr": "Toydarien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rapid-fire bartering cant peppered with nasal trills and clipped consonants.",
+      "fr": "Argot de négoce mitraillé, ponctué de trilles nasales et de consonnes tranchées."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "44e19134-d7d0-4fb0-8f8a-a0f7f21d3c19",
+    "slug": "high-galactic",
+    "name": {
+      "en": "High Galactic",
+      "fr": "Haut galactique"
+    },
+    "script": {
+      "en": "Elegant aurebesh calligraphy etched into marble plinths and diplomatic charters",
+      "fr": "Calligraphie aurebesh élégante gravée sur des plinthes de marbre et des chartes diplomatiques"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "e78802f9-2ace-40b3-97b6-cf13813bacae",
+        "name": {
+          "en": "Human",
+          "fr": "Humain"
+        }
+      }
+    ],
+    "description": {
+      "en": "Prestigious dialect favored by Core World nobility and senate envoys.",
+      "fr": "Dialecte prestigieux prisé par la noblesse des Mondes du Noyau et les émissaires du Sénat."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6fcf4044-0d72-4ba9-96d3-9d63ab3e69c2",
+    "slug": "kaminoan",
+    "name": {
+      "en": "Kaminoan",
+      "fr": "Kaminoan"
+    },
+    "script": {
+      "en": "Fluid glyphs traced with hydrographic projectors across storm-swept platforms",
+      "fr": "Glyphes fluides tracés par des projecteurs hydrographiques sur des plateformes battues par la tempête"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c3f839e2-456f-44e3-b352-7fb4ef2e1a2f",
+        "name": {
+          "en": "Kaminoan",
+          "fr": "Kaminoan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Clinical cadence used by Kaminoan cloners to coordinate laboratories and diplomacy.",
+      "fr": "Cadence clinique utilisée par les cloneurs kaminoans pour coordonner laboratoires et diplomatie."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "fb10b2d4-f952-41e7-8866-0c2060bb0e5e",
+    "slug": "jawaese",
+    "name": {
+      "en": "Jawaese",
+      "fr": "Jawais"
+    },
+    "script": {
+      "en": "Fast staccato clicks and squeals encoded through scavenged vocabulator whistles",
+      "fr": "Cliquets et couinements staccato transmis via des sifflets de vocabulaires récupérés"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "f55d87ee-c4fe-4056-8a1d-33f1d19706c0",
+        "name": {
+          "en": "Jawa",
+          "fr": "Jawa"
+        }
+      }
+    ],
+    "description": {
+      "en": "Bargaining language Jawas use to haggle over scrap and coordinate sandcrawlers.",
+      "fr": "Langue de négoce que les Jawas utilisent pour marchander la ferraille et coordonner leurs sandcrawlers."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "e8cd85ff-8b3b-41f7-837b-7f390bbb75f3",
+    "slug": "ewokese",
+    "name": {
+      "en": "Ewokese",
+      "fr": "Ewokien"
+    },
+    "script": {
+      "en": "Pictograms carved into village totems alongside rhythmic drum codes",
+      "fr": "Pictogrammes gravés sur les totems du village accompagnés de codes rythmiques au tambour"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "3b946d34-b489-4ef2-9665-5eb750ad20f0",
+        "name": {
+          "en": "Ewok",
+          "fr": "Ewok"
+        }
+      }
+    ],
+    "description": {
+      "en": "Tribal tongue of Endor's forest dwellers, rich with ritual phrases and hunting calls.",
+      "fr": "Langue tribale des habitants forestiers d'Endor, riche en phrases rituelles et appels de chasse."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "d8937e43-a05c-428e-a8d0-137cfc937576",
+    "slug": "kiffar",
+    "name": {
+      "en": "Kiffar",
+      "fr": "Kiffar"
+    },
+    "script": {
+      "en": "Bold sigils etched into clan totems with mnemonic color bands",
+      "fr": "Signes audacieux gravés sur les totems de clan avec des bandes mnémotechniques colorées"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "5adf3793-a759-4d3a-8c3f-3dbe121f4cb0",
+        "name": {
+          "en": "Kiffar",
+          "fr": "Kiffar"
+        }
+      }
+    ],
+    "description": {
+      "en": "Clan language that encodes ancestral lineages and psychometric rites.",
+      "fr": "Langue clanique qui encode lignées ancestrales et rites psychométriques."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "e974d749-eee1-4dd2-ad03-a8020738d997",
+    "slug": "ubese",
+    "name": {
+      "en": "Ubese",
+      "fr": "Ubese"
+    },
+    "script": {
+      "en": "Hushed consonants transmitted through encoded mask-click patterns",
+      "fr": "Consonnes feutrées transmises par des claquements de masque codés"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "8df03a7c-70ed-4fad-a7ac-77f75dd6893f",
+        "name": {
+          "en": "Ubese",
+          "fr": "Ubese"
+        }
+      }
+    ],
+    "description": {
+      "en": "Stealth-operatives' tongue optimized for whisper nets and secure comms.",
+      "fr": "Langue des agents furtifs, optimisée pour les réseaux murmurés et les communications sécurisées."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "a626d438-0388-4480-b7dd-7e395138eaea",
+    "slug": "nikto",
+    "name": {
+      "en": "Nikto",
+      "fr": "Nikto"
+    },
+    "script": {
+      "en": "Gravelly syllables paired with ridge-mark carvings denoting desert clans",
+      "fr": "Syllabes rocailleuses associées à des marques gravées indiquant les clans du désert"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "f003d4e5-9732-485d-afe6-94984e290362",
+        "name": {
+          "en": "Nikto",
+          "fr": "Nikto"
+        }
+      }
+    ],
+    "description": {
+      "en": "Harsh desert dialect layered with survival codes and cartel oaths.",
+      "fr": "Dialecte désertique rude chargé de codes de survie et de serments de cartel."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "9e75e39c-e546-40fa-a990-8e7e9e6eb649",
+    "slug": "bith",
+    "name": {
+      "en": "Bith",
+      "fr": "Bith"
+    },
+    "script": {
+      "en": "Harmonic notation encoded as concentric waveforms",
+      "fr": "Notation harmonique codée en ondes concentriques"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "79c71215-ee7c-4428-8c96-fc0da173852b",
+        "name": {
+          "en": "Bith",
+          "fr": "Bith"
+        }
+      }
+    ],
+    "description": {
+      "en": "Mathematically precise tones conveying nuance through frequency modulation.",
+      "fr": "Tons mathématiquement précis transmettant des nuances par modulation de fréquence."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "101c9390-ae33-4e84-97ce-8ab4e553c361",
+    "slug": "aqualish",
+    "name": {
+      "en": "Aqualish",
+      "fr": "Aqualish"
+    },
+    "script": {
+      "en": "Jagged tusk marks paired with guttural trills",
+      "fr": "Marques dentelées de défenses accompagnées de trilles gutturaux"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "62ab7335-0b8a-4d02-844d-120a91298526",
+        "name": {
+          "en": "Aqualish",
+          "fr": "Aqualish"
+        }
+      }
+    ],
+    "description": {
+      "en": "Gruff dialect favored by polar dockworkers, harpoon crews, and spacer gangs.",
+      "fr": "Dialecte rugueux prisé par les dockers polaires, les équipages au harpon et les gangs spatiaux."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "648fde53-4d50-49e3-9c99-db2f473a9272",
+    "slug": "neimoidian",
+    "name": {
+      "en": "Neimoidian",
+      "fr": "Neimoidien"
+    },
+    "script": {
+      "en": "Elegant ledger glyphs traced in flowing trade script",
+      "fr": "Glyphes de registres élégants tracés dans une écriture commerciale fluide"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "bebff5de-51a4-4cac-8761-1dc70d6ca310",
+        "name": {
+          "en": "Neimoidian",
+          "fr": "Neimoidien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured phrasing layered with legal nuance and negotiator code phrases.",
+      "fr": "Phrases mesurées chargées de nuances juridiques et de codes de négociateurs."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "063e7668-342c-465a-b769-7aeb11f2e60e",
+    "slug": "iktotchese",
+    "name": {
+      "en": "Iktotchese",
+      "fr": "Iktotchese"
+    },
+    "script": {
+      "en": "Angular temple glyphs etched with meditative precision",
+      "fr": "Glyphes anguleux de temple gravés avec une précision méditative"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "5476a9e3-83b1-4f5c-b583-19d3848106e8",
+        "name": {
+          "en": "Iktotchi",
+          "fr": "Iktotchi"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured tones layered with omen-laden harmonics shared among Iktotchi seers.",
+      "fr": "Tons mesurés chargés d’harmoniques de présages partagés entre les voyants iktotchi."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "da7cb290-d84f-4462-94f7-2254b379146c",
+    "slug": "kaleesh",
+    "name": {
+      "en": "Kaleesh",
+      "fr": "Kaleesh"
+    },
+    "script": {
+      "en": "Jagged battle sigils carved into bone masks",
+      "fr": "Sceaux de bataille dentelés gravés sur des masques d’os"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "cb3d7eeb-3f97-475d-a286-8f60ba9c3ec7",
+        "name": {
+          "en": "Kaleesh",
+          "fr": "Kaleesh"
+        }
+      }
+    ],
+    "description": {
+      "en": "Harsh consonants and drumlike emphasis recounting ancestral campaigns.",
+      "fr": "Consonnes rudes et accents martelés relatant les campagnes ancestrales."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "ef77d262-31f2-404e-ac13-c067ca06838a",
+    "slug": "selkatha",
+    "name": {
+      "en": "Selkatha",
+      "fr": "Selkatha"
+    },
+    "script": {
+      "en": "Flowing kolto infusions recorded as shimmering waveforms",
+      "fr": "Infusions de kolto fluides consignées en ondes chatoyantes"
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "d285dbe4-dffd-43ff-a90e-12cf683b5105",
+        "name": {
+          "en": "Selkath",
+          "fr": "Selkath"
+        }
+      }
+    ],
+    "description": {
+      "en": "Gurgling syllables accompanied by scent markers describing tides and trade.",
+      "fr": "Syllabes gargouillantes accompagnées de marqueurs olfactifs décrivant marées et échanges."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "67834e74-fc69-437a-b162-a99c2e6ca740",
+    "slug": "cerean",
+    "name": {
+      "en": "Cerean",
+      "fr": "Céréen"
+    },
+    "script": {
+      "en": "Twin-column calligraphy mirroring dual-mind cadence.",
+      "fr": "Calligraphie à deux colonnes reflétant la cadence des esprits jumeaux."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "24e7e1f9-06b5-4272-a56f-01d163b3cf07",
+        "name": {
+          "en": "Cerean",
+          "fr": "Céréen"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured tones and layered harmonics keep pace with Cerean binary thought.",
+      "fr": "Des tons mesurés et des harmoniques superposées suivent la pensée binaire des Céréens."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "a8d222f0-7aea-476b-8c29-5d49387ad90d",
+    "slug": "zeltronese",
+    "name": {
+      "en": "Zeltronese",
+      "fr": "Zeltronien"
+    },
+    "script": {
+      "en": "Chromatic glyphs infused with pheromone cues and rhythmic pulse.",
+      "fr": "Glyphes chromatiques imprégnés de signaux phéromonaux et de pulsations rythmiques."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "da26878e-c2cb-4330-b8ba-59c3e76f33e2",
+        "name": {
+          "en": "Zeltron",
+          "fr": "Zeltron"
+        }
+      }
+    ],
+    "description": {
+      "en": "Expressive syllables ride waves of empathy-laced resonance and celebration.",
+      "fr": "Des syllabes expressives surfent sur des vagues de résonance emplie d’empathie et de fête."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "5d4f5f27-feea-4f72-a282-8bf8aafe231b",
+    "slug": "barabel",
+    "name": {
+      "en": "Barabel",
+      "fr": "Barabel"
+    },
+    "script": {
+      "en": "Jagged heat-baked sigils etched into volcanic glass.",
+      "fr": "Sigils dentelés cuits par la chaleur et gravés dans le verre volcanique."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "779295cf-380d-415e-9560-f9ae9cabeead",
+        "name": {
+          "en": "Barabel",
+          "fr": "Barabel"
+        }
+      }
+    ],
+    "description": {
+      "en": "Hissing consonants and rumbling bass warn of predators born under twin suns.",
+      "fr": "Des consonnes sifflantes et des basses grondantes avertissent des prédateurs nés sous deux soleils."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "39d1db8e-3c48-47cd-99d4-7bde5cd0f234",
+    "slug": "gamorrese",
+    "name": {
+      "en": "Gamorrese",
+      "fr": "Gamorréen"
+    },
+    "script": {
+      "en": "Carved tusk glyphs hammered into battered durasteel plaques.",
+      "fr": "Glyphes sculptés dans des défenses et martelés sur des plaques de duracier cabossées."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "049fc3f0-45c8-43d1-9a90-dd14e300c2e2",
+        "name": {
+          "en": "Gamorrean",
+          "fr": "Gamorréen"
+        }
+      }
+    ],
+    "description": {
+      "en": "Guttural grunts and snorts that broadcast threats and bargaining stances.",
+      "fr": "Grognements gutturaux et reniflements qui annoncent menaces et positions de négociation."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "060694ec-a038-4d73-b453-896318ada0f5",
+    "slug": "ugnaughtese",
+    "name": {
+      "en": "Ugnaughtese",
+      "fr": "Ugnaught"
+    },
+    "script": {
+      "en": "Grease-stained runes scratched into datapads and hydrospanners.",
+      "fr": "Runes tachées de graisse gravées sur des datapads et des hydroclés."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c6a5b00b-0483-49ee-a473-585cda2ef9d4",
+        "name": {
+          "en": "Ugnaught",
+          "fr": "Ugnaught"
+        }
+      }
+    ],
+    "description": {
+      "en": "Staccato chatter layered with tool clicks describing schematics and trades.",
+      "fr": "Un bavardage saccadé ponctué de cliquetis d’outils décrivant plans et échanges."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b19775e1-0d25-477a-b643-dacc96148b80",
+    "slug": "klatooinian",
+    "name": {
+      "en": "Klatooinian",
+      "fr": "Klatooinien"
+    },
+    "script": {
+      "en": "Flowing sigils etched into stone tablets during oath rituals.",
+      "fr": "Sigils fluides gravés sur des tablettes de pierre durant les rituels de serment."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "ef75da55-e5a2-4f5d-a0bf-584812c7574c",
+        "name": {
+          "en": "Klatooinian",
+          "fr": "Klatooinien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured cadences reciting vows and tactical observations in equal measure.",
+      "fr": "Cadences mesurées qui récitent serments et observations tactiques avec le même soin."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "e2d18353-43f2-4e3b-8446-0e534d102825",
+    "slug": "arkanian",
+    "name": {
+      "en": "Arkanian",
+      "fr": "Arkanien"
+    },
+    "script": {
+      "en": "Precision glyphs projected as cold-white holoscripts.",
+      "fr": "Glyphes précis projetés en holoscripts blanc glacé."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "9cd2b693-fe65-4c5f-bb07-f03f1c631bf6",
+        "name": {
+          "en": "Arkanian",
+          "fr": "Arkanien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Technical dialect tuned for gene-sequencing labs and corporate negotiation rooms.",
+      "fr": "Dialecte technique adapté aux laboratoires de séquençage génétique et aux salles de négociation corporatives."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6a321bb5-d290-4a4d-b4ff-99e0dd768b6a",
+    "slug": "gandese",
+    "name": {
+      "en": "Gandese",
+      "fr": "Gandéen"
+    },
+    "script": {
+      "en": "Hissing syllables etched as condensation trails across visor slates.",
+      "fr": "Syllabes sifflantes gravées en traînées de condensation sur les visières."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "a1875aa4-3a55-4767-bb87-5cea6a2dcc1e",
+        "name": {
+          "en": "Gand",
+          "fr": "Gand"
+        }
+      }
+    ],
+    "description": {
+      "en": "Quiet breaths and respectful honorifics codified for ritual hunts and meditation.",
+      "fr": "Souffles feutrés et honorifiques codifiés pour les chasses rituelles et la méditation."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b78b9d3b-60ae-405f-9a35-32ba7b7edfd3",
+    "slug": "muunes",
+    "name": {
+      "en": "Muunes",
+      "fr": "Muunes"
+    },
+    "script": {
+      "en": "Elegant vertical ledger strokes impressed onto translucent dataparchment.",
+      "fr": "Traits verticaux élégants de registre imprimés sur un dataparchment translucide."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "6c37a4f2-f456-4d97-9c8b-429879818504",
+        "name": {
+          "en": "Muun",
+          "fr": "Muun"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured cadence steeped in finance law, interest rates, and corporate etiquette.",
+      "fr": "Cadence mesurée imprégnée de droit financier, de taux d’intérêt et d’étiquette corporative."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "f828f036-2c68-412d-82ac-f6aeaba55b2e",
+    "slug": "besalisk",
+    "name": {
+      "en": "Besalisk",
+      "fr": "Besalisk"
+    },
+    "script": {
+      "en": "Flowing loops traced by four-fingered grips across heat-proof slates.",
+      "fr": "Boucles fluides tracées par des mains à quatre doigts sur des dalles résistantes à la chaleur."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c08ce08a-15fb-4e02-bb93-b594f0a1a565",
+        "name": {
+          "en": "Besalisk",
+          "fr": "Besalisk"
+        }
+      }
+    ],
+    "description": {
+      "en": "Hearty syllables punctuated by kitchen slang and workshop shorthand.",
+      "fr": "Syllabes robustes ponctuées d’argot de cuisine et de sténographie d’atelier."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "74c0cab2-60f1-487e-99b3-834c5407640c",
+    "slug": "dugese",
+    "name": {
+      "en": "Dugese",
+      "fr": "Dugese"
+    },
+    "script": {
+      "en": "Sharp angular glyphs scratched in quick strokes fit for race banners.",
+      "fr": "Glyphes anguleux et acérés tracés rapidement pour orner les bannières de course."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "b8d7b093-6763-41b2-9bf7-9547bf887e99",
+        "name": {
+          "en": "Dug",
+          "fr": "Dug"
+        }
+      }
+    ],
+    "description": {
+      "en": "Snapping consonants delivered in rapid-fire boasts and wagers.",
+      "fr": "Consonnes claquantes lancées en vantardises et paris à toute vitesse."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "69897484-6d81-4f83-ae58-605551f5cf6e",
+    "slug": "caamasi",
+    "name": {
+      "en": "Caamasi",
+      "fr": "Caamasi"
+    },
+    "script": {
+      "en": "Soft ribbon-like script practiced as meditative calligraphy.",
+      "fr": "Écriture douce en rubans, pratiquée comme une calligraphie méditative."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "a1cb04b7-0c5e-47c3-a8b4-4861c244b22a",
+        "name": {
+          "en": "Caamasi",
+          "fr": "Caamasi"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured tones layered with empathic pauses and shared-memory cues.",
+      "fr": "Tonalités mesurées rythmées de pauses empathiques et d’indices de mémoire partagée."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6d4bc526-c454-49dd-b7bd-b4043eb8924c",
+    "slug": "feeorin",
+    "name": {
+      "en": "Feeorin",
+      "fr": "Feeorin"
+    },
+    "script": {
+      "en": "Spiraling brushstrokes painted across storm-hardened sailcloth.",
+      "fr": "Traits spiralés peints sur des toiles de voile durcies par les tempêtes."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "8ba1137e-3996-42df-8dd9-ae018aa6e20f",
+        "name": {
+          "en": "Feeorin",
+          "fr": "Feeorin"
+        }
+      }
+    ],
+    "description": {
+      "en": "Booming commands and tidal cadences tailored for shipboard crews riding violent seas.",
+      "fr": "Commandements tonitruants et cadences maritimes adaptées aux équipages affrontant des mers déchaînées."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "484eab7a-f860-490b-a0f4-6a05131e7d72",
+    "slug": "kubazian",
+    "name": {
+      "en": "Kubazian",
+      "fr": "Kubazien"
+    },
+    "script": {
+      "en": "Tight cipher glyphs etched with styluses suited for microfiche dossiers.",
+      "fr": "Glyphes serrés chiffrés gravés au stylet pour des dossiers sur microfiches."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "505853e2-b2fd-463f-925d-b052e410669c",
+        "name": {
+          "en": "Kubaz",
+          "fr": "Kubaz"
+        }
+      }
+    ],
+    "description": {
+      "en": "Whispered consonants and nasal trills optimized for hushed surveillance reports.",
+      "fr": "Consonnes murmurées et trilles nasales optimisées pour des rapports de surveillance chuchotés."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "c7496bf8-047d-45a8-95e1-9c751ddf519d",
+    "slug": "selonian",
+    "name": {
+      "en": "Selonian",
+      "fr": "Selonien"
+    },
+    "script": {
+      "en": "Flowing burrow-calligraphy carved along tunnel support pillars.",
+      "fr": "Calligraphie fluide des terriers gravée le long des piliers de soutien."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "efb020e9-f5ad-4ecc-a7f5-2e6dadeee0af",
+        "name": {
+          "en": "Selonian",
+          "fr": "Selonien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Staccato clicks and rolling rumbles tuned to echo through subterranean chambers.",
+      "fr": "Claquements saccadés et grondements roulants conçus pour résonner dans les cavernes souterraines."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "126cd1ea-20a0-4e5d-beae-e49ccdac69da",
+    "slug": "talzic",
+    "name": {
+      "en": "Talzic",
+      "fr": "Talzique"
+    },
+    "script": {
+      "en": "Dense braids of fur knots and etched clan glyphs woven into garments.",
+      "fr": "Nœuds de fourrure serrés et glyphes de clan gravés tissés dans les vêtements."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "e8551ce3-4e27-4b7b-ad5b-e95159862157",
+        "name": {
+          "en": "Talz",
+          "fr": "Talz"
+        }
+      }
+    ],
+    "description": {
+      "en": "Low growls layered with rhythmic clicks carried through the icy winds of Orto Plutonia.",
+      "fr": "Grognements graves ponctués de clics rythmiques portés par les vents glacés d’Orto Plutonia."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "df6954c3-71ff-4e6b-83a0-8c27db5f7d23",
+    "slug": "chadra-fani",
+    "name": {
+      "en": "Chadra-Fani",
+      "fr": "Chadra-fani"
+    },
+    "script": {
+      "en": "Color-coded resonance rods etched with whistled data bursts.",
+      "fr": "Baguettes de résonance codées par couleur, gravées de salves sifflées de données."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "da302628-f092-4676-99be-f29e27fb92c8",
+        "name": {
+          "en": "Chadra-Fan",
+          "fr": "Chadra-Fan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rapid squeaks, trills, and breathy whistles used to trade schematics in crowded bazaars.",
+      "fr": "Couinements rapides, trilles et sifflements soufflés pour échanger des schémas dans les bazars bondés."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "7cd62cdb-ae90-4e7c-8d57-f9357f58d90d",
+    "slug": "ishi-tib",
+    "name": {
+      "en": "Ishi Tib",
+      "fr": "Ishi tib"
+    },
+    "script": {
+      "en": "Flowing tidal glyphs painted in layered algae dyes across sailcloth.",
+      "fr": "Glyphes de marées fluides peints en teintures d’algues superposées sur des voiles."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "55db76aa-db3b-4c1b-9f01-be1706c9fb72",
+        "name": {
+          "en": "Ishi Tib",
+          "fr": "Ishi Tib"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured croaks and gurgling consonants paced like the rise and fall of Mon Cala's tides.",
+      "fr": "Coassements mesurés et consonnes gargouillantes scandés comme la montée et la descente des marées de Mon Cala."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "dabc2c74-445a-4a19-9625-562041c26781",
+    "slug": "anomid",
+    "name": {
+      "en": "Anomid",
+      "fr": "Anomid"
+    },
+    "script": {
+      "en": "Intricate filigree codes engraved onto breath masks and ledger sticks.",
+      "fr": "Codes filigranés complexes gravés sur les masques respiratoires et les baguettes de comptes."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "782f3bbe-31fb-489a-ba04-405d74052f28",
+        "name": {
+          "en": "Anomid",
+          "fr": "Anomid"
+        }
+      }
+    ],
+    "description": {
+      "en": "Soft multi-tonal murmurs layered with vocoder harmonics tuned for negotiation chambers.",
+      "fr": "Murmures doux et multitonaux superposés d’harmoniques de vocodeur adaptés aux salles de négociation."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "8a2ca88b-8cb0-47f2-a174-136d8403b0b7",
+    "slug": "verpine",
+    "name": {
+      "en": "Verpine",
+      "fr": "Verpine"
+    },
+    "script": {
+      "en": "Vibrating antenna glyphs etched along resonant carapace struts.",
+      "fr": "Glyphes d’antennes vibrantes gravés le long des arêtes résonantes de la carapace."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "a90fa4b0-fd58-4af4-92ec-4ccc137c404d",
+        "name": {
+          "en": "Verpine",
+          "fr": "Verpine"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rapid clicks and ultrasonic whistles transmitted across hive radio relays.",
+      "fr": "Cliquètements rapides et sifflements ultrasoniques transmis par les relais radio de la ruche."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "8a592f99-d589-4513-a6ec-151629348d08",
+    "slug": "shistavanen",
+    "name": {
+      "en": "Shistavanen",
+      "fr": "Shistavanen"
+    },
+    "script": {
+      "en": "Clawed runes carved along hunting totems charting lunar phases and quarry routes.",
+      "fr": "Runes griffées sculptées sur des totems de chasse traçant les phases lunaires et les pistes du gibier."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "350b1a73-4e58-4887-af22-29425996a5ae",
+        "name": {
+          "en": "Shistavanen",
+          "fr": "Shistavanen"
+        }
+      }
+    ],
+    "description": {
+      "en": "Gravelled growls and low howls timed with packmates’ heartbeats to guide the hunt.",
+      "fr": "Grogne rauque et hurlements feutrés calés sur les battements de cœur de la meute pour guider la chasse."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b8407d86-2cdc-45fa-8858-5fe2232291cf",
+    "slug": "utapaun",
+    "name": {
+      "en": "Utapaun",
+      "fr": "Utapaun"
+    },
+    "script": {
+      "en": "Concentric glyphs etched into sinkhole walls to chart wind tunnels and trade lanes.",
+      "fr": "Glyphes concentriques gravés dans les parois des dolines pour cartographier tunnels de vent et routes commerciales."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "ebcde699-8f19-4965-a226-abb086c7d800",
+        "name": {
+          "en": "Pau'an",
+          "fr": "Pau'an"
+        }
+      }
+    ],
+    "description": {
+      "en": "Soft whistles and elongated vowels that echo through Utapau's vertical sanctums.",
+      "fr": "Sifflements doux et voyelles prolongées qui résonnent dans les sanctuaires verticaux d'Utapau."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "f5f5b69d-e732-4ce5-9d50-da1064ebe28a",
+    "slug": "umbaran",
+    "name": {
+      "en": "Umbaran",
+      "fr": "Umbaran"
+    },
+    "script": {
+      "en": "Bioluminescent sigils sewn into shadow-cloaks that pulse covert directives.",
+      "fr": "Sceaux bioluminescents cousus dans des manteaux d'ombre diffusant des directives secrètes."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "a3727349-08cd-4a2e-9983-32794f771c8b",
+        "name": {
+          "en": "Umbaran",
+          "fr": "Umbaran"
+        }
+      }
+    ],
+    "description": {
+      "en": "Breathy undertones filtered through vocal dampeners to mislead offworlders.",
+      "fr": "Souffles feutrés filtrés par des modérateurs vocaux pour dérouter les étrangers."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "98ce0cc8-889b-4634-affd-61ce8d3796a2",
+    "slug": "whiphidese",
+    "name": {
+      "en": "Whiphidese",
+      "fr": "Whiphidien"
+    },
+    "script": {
+      "en": "Jagged tusk runes carved into bone totems marking clan hunts across the tundra.",
+      "fr": "Runes dentelées gravées dans des totems d'os retraçant les chasses des clans sur la toundra."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "fd2ee761-73c5-4e17-bd1f-e7c5ddd3cea9",
+        "name": {
+          "en": "Whiphid",
+          "fr": "Whiphid"
+        }
+      }
+    ],
+    "description": {
+      "en": "Deep growls and rumbling trills carried over icy plains to signal the hunt.",
+      "fr": "Grogne grave et trilles grondants portés sur les plaines glacées pour signaler la chasse."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "7e18c2be-ab19-4942-a025-88e0d3f0bba6",
+    "slug": "geonosian",
+    "name": {
+      "en": "Geonosian",
+      "fr": "Géonosien"
+    },
+    "script": {
+      "en": "Resonant chitter marks carved into hive spires with vibro-blades.",
+      "fr": "Marques stridulantes gravées au vibrolame dans les flèches de la ruche."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "379c9922-d744-4a78-99c8-9f9330b6cf5c",
+        "name": {
+          "en": "Geonosian",
+          "fr": "Géonosien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Staccato clicks layered with droning harmonics to coordinate foundry assemblies.",
+      "fr": "Cliquètements saccadés superposés à des harmoniques vibrantes pour coordonner les fonderies."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "3b5016dc-850e-4968-a4ba-742d8c6727b4",
+    "slug": "huttese",
+    "name": {
+      "en": "Huttese",
+      "fr": "Huttese"
+    },
+    "script": {
+      "en": "Flowing cartouches stamped across palace murals and trade ledgers.",
+      "fr": "Cartouches fluides estampées sur les fresques palatiales et les registres commerciaux."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "e5c23428-9b73-455c-8678-147a4fdbb819",
+        "name": {
+          "en": "Hutt",
+          "fr": "Hutt"
+        }
+      }
+    ],
+    "description": {
+      "en": "Guttural vowels and elongated consonants that command trade routes and cartel courts.",
+      "fr": "Voyelles gutturales et consonnes allongées qui dominent routes commerciales et tribunaux des cartels."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b5f7df25-5448-491f-a5e5-cedea8d60c15",
+    "slug": "lasat",
+    "name": {
+      "en": "Lasat",
+      "fr": "Lasat"
+    },
+    "script": {
+      "en": "Angular honor glyphs etched along bo-rifles and cliff monasteries.",
+      "fr": "Glyphes d'honneur anguleux gravés sur les bo-fusils et les monastères perchés."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "5750ab85-6acb-4352-b553-715bda35bc6f",
+        "name": {
+          "en": "Lasat",
+          "fr": "Lasat"
+        }
+      }
+    ],
+    "description": {
+      "en": "Ritual chants that swell into rhythmic battle cries guiding honor guards.",
+      "fr": "Chants rituels qui gonflent en cris de bataille rythmiques guidant les gardes d'honneur."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "e64df515-dffc-422f-aa8c-4d69e357ab92",
+    "slug": "gotalese",
+    "name": {
+      "en": "Gotalese",
+      "fr": "Gotal"
+    },
+    "script": {
+      "en": "Concentric cone etchings that pulse with electromagnetic readings.",
+      "fr": "Gravures coniques concentriques vibrant des relevés électromagnétiques."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "4f08da94-8608-4e4b-8656-2257d99a4549",
+        "name": {
+          "en": "Gotal",
+          "fr": "Gotal"
+        }
+      }
+    ],
+    "description": {
+      "en": "Harmonic hums traded between cranial cones to share emotional landscapes.",
+      "fr": "Bourdonnements harmoniques échangés entre cônes crâniens pour partager des paysages émotionnels."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "db139e61-975d-4ad2-b102-7157532ecbe0",
+    "slug": "quermian",
+    "name": {
+      "en": "Quermian",
+      "fr": "Quermien"
+    },
+    "script": {
+      "en": "Elongated flowing script penned in mirrored dual columns.",
+      "fr": "Écriture allongée et fluide tracée en colonnes jumelles inversées."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "aee7c89a-dfaa-4808-8bd4-82390ae8217f",
+        "name": {
+          "en": "Quermian",
+          "fr": "Quermien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured debates layered with simultaneous counterpoints from dual minds.",
+      "fr": "Débats mesurés ponctués de contrepoints simultanés issus de leurs esprits jumeaux."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b5c5f453-f43f-4e0c-93e2-183474fcb688",
+    "slug": "fosh",
+    "name": {
+      "en": "Fosh",
+      "fr": "Fosh"
+    },
+    "script": {
+      "en": "Iridescent feather-lines traced in sweeping arbiter sigils.",
+      "fr": "Lignes irisées en plumes traçant de larges sigilles d'arbitres."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "3262cd2a-342f-442e-8d71-e65906dbcf30",
+        "name": {
+          "en": "Fosh",
+          "fr": "Fosh"
+        }
+      }
+    ],
+    "description": {
+      "en": "Melodic glides of tone used to calm disputes before councils.",
+      "fr": "Glissandos mélodiques utilisés pour apaiser les différends devant les conseils."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "ca912058-08ed-48cb-92af-c4f2a81943b4",
+    "slug": "givese",
+    "name": {
+      "en": "Givese",
+      "fr": "Givese"
+    },
+    "script": {
+      "en": "Matrixed glyphs etched as precise vacuum-calculus equations.",
+      "fr": "Glyphes matriciels gravés comme des équations précises de calcul du vide."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "a4d8acd5-26d7-451e-a54c-82270ef9d4a1",
+        "name": {
+          "en": "Givin",
+          "fr": "Givin"
+        }
+      }
+    ],
+    "description": {
+      "en": "Clicking tones punctuated by hissing pauses used to relay structural formulae across sealed halls.",
+      "fr": "Des clics ponctués de sifflements transmettent des formules structurelles à travers des salles scellées."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "fda454c1-63ae-4b28-b52e-8d2eeae7f220",
+    "slug": "dashadi",
+    "name": {
+      "en": "Dashadi",
+      "fr": "Dashadi"
+    },
+    "script": {
+      "en": "Shadow-carved runes hammered into obsidian tablets.",
+      "fr": "Runes sculptées dans l'ombre et martelées sur des tablettes d'obsidienne."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "ce8ae4e4-7de6-4121-aa5f-eeb2accca283",
+        "name": {
+          "en": "Dashade",
+          "fr": "Dashade"
+        }
+      }
+    ],
+    "description": {
+      "en": "Low growls that slip into subsonic whispers when plotting ambushes far from the light.",
+      "fr": "Des grondements graves glissent vers des chuchotements infrasoniques lorsqu'ils préparent des embuscades loin de la lumière."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "1688b3f4-f876-4987-b128-9594a0c402ad",
+    "slug": "noghri",
+    "name": {
+      "en": "Noghri",
+      "fr": "Noghri"
+    },
+    "script": {
+      "en": "Jagged claw marks spiraled into clan-oath sigils.",
+      "fr": "Entailles acérées en spirale formant des sigilles de serment clanique."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "72c75da9-b3f3-4bd7-9127-120a8eb91614",
+        "name": {
+          "en": "Noghri",
+          "fr": "Noghri"
+        }
+      }
+    ],
+    "description": {
+      "en": "Breathy consonants broken by abrupt stops to swear fealty before matriarchs.",
+      "fr": "Des consonnes soufflées interrompues par des arrêts brusques pour prêter allégeance devant les matriarches."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "1f7db357-7642-467a-86e3-29a4962814ab",
+    "slug": "anzat",
+    "name": {
+      "en": "Anzat",
+      "fr": "Anzat"
+    },
+    "script": {
+      "en": "Fluid inkblots that swirl into predatory sigils.",
+      "fr": "Taches d'encre fluides qui tourbillonnent en sigilles de prédateur."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c5156b74-3a4b-4a0a-a6bc-4a4f4a9edc3f",
+        "name": {
+          "en": "Anzati",
+          "fr": "Anzati"
+        }
+      }
+    ],
+    "description": {
+      "en": "Breathy whispers layered over wet consonants, reserved for stalking a victim's living soup.",
+      "fr": "Des chuchotements soufflés mêlés à des consonnes humides, réservés à la traque de la soupe vivante d'une victime."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "87cd93d5-3f23-47f3-bb84-35697b2d3a08",
+    "slug": "sakiyan",
+    "name": {
+      "en": "Sakiyan",
+      "fr": "Sakiyan"
+    },
+    "script": {
+      "en": "Raised relief carvings etched to be read by fingertip.",
+      "fr": "Reliefs sculptés en surimpression, gravés pour être lus du bout des doigts."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "4f5cb918-8a62-4f7a-9dcd-0daac2c58e4d",
+        "name": {
+          "en": "Sakiyan",
+          "fr": "Sakiyan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Low thrumming tones punctuated by silence, mirroring the patience of Sakiyan hunters.",
+      "fr": "Des sons graves et vibrants ponctués de silences, reflétant la patience des chasseurs sakiyans."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "0f8e85ce-0ee8-4e78-8cde-5a5b4afc1f1d",
+    "slug": "xextese",
+    "name": {
+      "en": "Xextese",
+      "fr": "Xextèse"
+    },
+    "script": {
+      "en": "Parallel columns of notation aligned for four simultaneous hands.",
+      "fr": "Colonnes parallèles de notation alignées pour quatre mains simultanées."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "b3077c7c-4a75-4e7d-9475-6fa0fe58f3d0",
+        "name": {
+          "en": "Xexto",
+          "fr": "Xexto"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rapid staccato chirps layered with multitonal clicks that keep pace with racing pit crews.",
+      "fr": "Des gazouillis saccadés rapides mêlés de clics multitonaux qui suivent le rythme des équipes de modules de course."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "60a7a917-0011-4dd0-a7e8-303c082e348a",
+    "slug": "ortolese",
+    "name": {
+      "en": "Ortolese",
+      "fr": "Ortolese"
+    },
+    "script": {
+      "en": "Rounded notation embossed onto pliant hides for finger drums and horns.",
+      "fr": "Une notation arrondie embossée sur des peaux souples pour tambours digitaux et cors."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "4625996b-c75c-4fbb-8956-cbe805ff446b",
+        "name": {
+          "en": "Ortolan",
+          "fr": "Ortolan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Harmonic chords sung through inflatable cheeks while percussionists keep time with padded palms.",
+      "fr": "Des accords harmoniques chantés avec des joues gonflées tandis que des percussionnistes marquent le rythme du plat de la main."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "7f473357-51c1-41fa-b184-0c02a0bf5b54",
+    "slug": "mustafarian",
+    "name": {
+      "en": "Mustafarian",
+      "fr": "Mustafarien"
+    },
+    "script": {
+      "en": "Jagged glyphs carved into heat-tempered basalt slabs that glow from magma light.",
+      "fr": "Des glyphes anguleux gravés dans des dalles de basalte trempées à la chaleur, luisant sous la lumière de la lave."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "0a5eb810-742b-4fb5-8cea-0eb3fe7f245a",
+        "name": {
+          "en": "Mustafarian",
+          "fr": "Mustafarien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Chittered consonants clipped by hissing breaths to coordinate work above molten flows.",
+      "fr": "Des consonnes stridulées, coupées de souffles sifflants pour coordonner le travail au-dessus des coulées de lave."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6a2e576b-a923-4fc5-ad71-ebc18c91f22c",
+    "slug": "squibbian",
+    "name": {
+      "en": "Squibbian",
+      "fr": "Squibbien"
+    },
+    "script": {
+      "en": "Color-shifting trade sigils scribbled across scavenged plastisheets.",
+      "fr": "Des sigilles commerciaux changeant de couleur, griffonnés sur des feuilles de plastique récupérées."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "0568e219-99de-49ca-b363-19ffb6d52e4e",
+        "name": {
+          "en": "Squib",
+          "fr": "Squib"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rapid-fire bargaining squeaks peppered with celebratory chirps when a deal lands.",
+      "fr": "Des couinements de marchandage rapides ponctués de pépiements de célébration lorsqu'un marché aboutit."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "c0dcc59e-6ceb-46ec-9e45-20f2e8480727",
+    "slug": "conanese",
+    "name": {
+      "en": "Conanese",
+      "fr": "Conanais"
+    },
+    "script": {
+      "en": "Flowing scent-code traced in crystalline dust across basalt tablets.",
+      "fr": "Un code olfactif fluide tracé en poussière cristalline sur des tablettes de basalte."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "fd72ed80-e8e0-4b3c-bf75-508f47450d20",
+        "name": {
+          "en": "Arcona",
+          "fr": "Arconien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Soft whistles layered with scent cues conveying nuance about heat, distance, and intent.",
+      "fr": "De doux sifflements mêlés de signaux odorants, indiquant chaleur, distance et intentions."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "5fd1c4ae-14fc-490d-9d06-a1ce09e17f4e",
+    "slug": "dressellese",
+    "name": {
+      "en": "Dressellese",
+      "fr": "Dressellien"
+    },
+    "script": {
+      "en": "Hand-braided cords knotted with tactical shorthand passed between clans.",
+      "fr": "Des cordelettes tressées à la main, nouées de signes tactiques transmis entre clans."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "17439d0e-f911-4c08-8834-45e607691366",
+        "name": {
+          "en": "Dressellian",
+          "fr": "Dressellien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Guttural whispers punctuated by birdlike chirps to coordinate resistance cells.",
+      "fr": "Des murmures gutturaux ponctués de pépiements rappelant les oiseaux pour coordonner les cellules de résistance."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "c5fb9f42-6738-4004-9c4b-513d1fafd9da",
+    "slug": "sluissese",
+    "name": {
+      "en": "Sluissese",
+      "fr": "Sluissien"
+    },
+    "script": {
+      "en": "Slow, looping pictograms etched into polished durasteel panels.",
+      "fr": "De lents pictogrammes sinueux gravés sur des panneaux de duracier polis."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c1512fe6-3bf8-48f8-84fd-2127f16a0851",
+        "name": {
+          "en": "Sluissi",
+          "fr": "Sluissi"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured hisses and clicks paced like carefully planned maintenance cycles.",
+      "fr": "Des sifflements et cliquetis mesurés, rythmés comme des cycles de maintenance soigneusement planifiés."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "916d58f5-1579-4f2c-a50d-55c6b49bcd55",
+    "slug": "drallish",
+    "name": {
+      "en": "Drallish",
+      "fr": "Drallien"
+    },
+    "script": {
+      "en": "Curving glyphs inked on fine parchment and meticulously illuminated datapads.",
+      "fr": "Des glyphes courbes tracés sur de fins parchemins et sur des datapads méticuleusement enluminés."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "de9ba976-d684-4c34-b80a-14ea7ba219c5",
+        "name": {
+          "en": "Drall",
+          "fr": "Drall"
+        }
+      }
+    ],
+    "description": {
+      "en": "Precise honorifics and layered citations suited to scholarly debate.",
+      "fr": "Des honorifiques précis et des citations superposées adaptées aux débats savants."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "9a674a08-1241-4534-b6af-bdaacfd97e30",
+    "slug": "skakoan",
+    "name": {
+      "en": "Skakoan",
+      "fr": "Skakoan"
+    },
+    "script": {
+      "en": "Compressed clicks transmitted through pressure-sealed vocoders.",
+      "fr": "Des cliquetis compressés transmis par des vocodeurs hermétiques."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "0a520c29-0c91-4644-899c-8fd2cffcc0e0",
+        "name": {
+          "en": "Skakoan",
+          "fr": "Skakoan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Precision-coded statements optimized for technical directives and negotiations.",
+      "fr": "Des énoncés codés avec précision, optimisés pour les directives techniques et les négociations."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "bb318070-ea60-4383-abfc-5fa9ef01cb07",
+    "slug": "clawdite",
+    "name": {
+      "en": "Clawdite",
+      "fr": "Clawdite"
+    },
+    "script": {
+      "en": "Soft consonants and flowing cadence designed to mask distinctive accents.",
+      "fr": "Des consonnes douces et une cadence fluide conçues pour masquer les accents distinctifs."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "094bab97-ec7a-46ad-ab14-255efb3f8701",
+        "name": {
+          "en": "Clawdite",
+          "fr": "Clawdite"
+        }
+      }
+    ],
+    "description": {
+      "en": "Flexible phrasing and idioms that adapt to assumed identities.",
+      "fr": "Des tournures et idiomes flexibles qui s'adaptent aux identités empruntées."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b350dc76-ef9e-4197-b598-8ec427fcd842",
+    "slug": "aleena",
+    "name": {
+      "en": "Aleena",
+      "fr": "Alénéen"
+    },
+    "script": {
+      "en": "Rapid chirps layered with percussive footfalls to map twisting warrens.",
+      "fr": "Des piaillements rapides mêlés à des frappes de pieds pour cartographier les terriers sinueux."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "3ec977b7-584b-4a8e-96ef-bab4d1cd0530",
+        "name": {
+          "en": "Aleena",
+          "fr": "Alénéen"
+        }
+      }
+    ],
+    "description": {
+      "en": "High-pitched calls coordinating communal defense in labyrinthine tunnels.",
+      "fr": "Des appels aigus coordonnant la défense communautaire dans des tunnels labyrinthiques."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "e46277f8-ccc7-4ad3-b891-9802b60e1c05",
+    "slug": "balosar",
+    "name": {
+      "en": "Balosar",
+      "fr": "Balosarien"
+    },
+    "script": {
+      "en": "Low murmurs laced with antennae pulses carrying emotional nuance.",
+      "fr": "De faibles murmures traversés d'impulsions d'antennes qui véhiculent les nuances émotionnelles."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "0d1322b4-8fe1-4041-a2e7-a6b532631a8d",
+        "name": {
+          "en": "Balosar",
+          "fr": "Balosarien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Sinuous phrases suited to discreet negotiations in smog-filled bazaars.",
+      "fr": "Des phrases sinueuses adaptées aux négociations discrètes dans les bazars enfumés."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "eb27cc00-de5e-4868-88ba-1ac11fa9535c",
+    "slug": "zygerrian",
+    "name": {
+      "en": "Zygerrian",
+      "fr": "Zygerrien"
+    },
+    "script": {
+      "en": "Clipped commands reinforced by crackling whip-crack inflections.",
+      "fr": "Des ordres secs renforcés par des inflexions claquant comme un fouet."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "cc973bdd-0040-4d0c-8e98-d8ebd9f96149",
+        "name": {
+          "en": "Zygerrian",
+          "fr": "Zygerrien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Authoritative cadences used to marshal slaves and intimidate rivals.",
+      "fr": "Des cadences autoritaires utilisées pour diriger les esclaves et intimider les rivaux."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "d6ce9456-64d7-45c0-8a31-53b6cf46b677",
+    "slug": "ardennese",
+    "name": {
+      "en": "Ardennese",
+      "fr": "Ardénien"
+    },
+    "script": {
+      "en": "Rapid staccato bursts punctuated by chirping consonants.",
+      "fr": "Des rafales staccato rapides ponctuées de consonnes gazouillantes."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "ac25a75a-4325-4ee9-bbb6-a0a06c4361ce",
+        "name": {
+          "en": "Ardennian",
+          "fr": "Ardénien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Favored by starship riggers and smugglers swinging through tight maintenance shafts.",
+      "fr": "Appréciée des gréeurs et des contrebandiers qui se faufilent dans les conduits d’entretien."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "185e9499-4f4a-4738-b9df-ccc48d280512",
+    "slug": "bardottan",
+    "name": {
+      "en": "Bardottan",
+      "fr": "Bardottan"
+    },
+    "script": {
+      "en": "Measured tones layered with harmonic chants used in temple meditations.",
+      "fr": "Des tons mesurés superposés à des chants harmoniques utilisés lors des méditations du temple."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "a9e516c1-dec7-4b77-942e-22034f4a12e2",
+        "name": {
+          "en": "Bardottan",
+          "fr": "Bardottan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Diplomats weave ancestral parables through each phrase to calm tense negotiations.",
+      "fr": "Les diplomates y glissent des paraboles ancestrales pour apaiser les négociations tendues."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "da6979a9-338d-4468-bcbc-58d6b720c3de",
+    "slug": "cosian",
+    "name": {
+      "en": "Cosian",
+      "fr": "Cosian"
+    },
+    "script": {
+      "en": "Gentle lilting cadence with elongated vowels suited to patient instruction.",
+      "fr": "Une cadence douce et chantante aux voyelles allongées, propice à l’enseignement patient."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "851387cb-abf4-40ae-994b-2af7b5638149",
+        "name": {
+          "en": "Cosian",
+          "fr": "Cosian"
+        }
+      }
+    ],
+    "description": {
+      "en": "Archivists annotate case studies and cooperative strategies in deliberate, precise phrasing.",
+      "fr": "Les archivistes y consignent études de cas et stratégies coopératives avec une phraséologie précise."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "5c3994fa-5fb2-47ed-aa24-b8176cff59b2",
+    "slug": "elom",
+    "name": {
+      "en": "Elom",
+      "fr": "Elom"
+    },
+    "script": {
+      "en": "Deep resonant growls punctuated by gentle clicks shaped in subterranean caverns.",
+      "fr": "Des grondements profonds ponctués de légers clics, façonnés dans les cavernes souterraines."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "b4558475-fbbf-4b59-abc3-9c2936881d50",
+        "name": {
+          "en": "Elom",
+          "fr": "Elom"
+        }
+      }
+    ],
+    "description": {
+      "en": "Burrowing clans record tunnel maps and spiritual meditations in methodical repetitions.",
+      "fr": "Les clans fouisseurs y consignent des cartes de tunnels et des méditations spirituelles dans des répétitions méthodiques."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "02e0f591-73f6-4061-b750-5b55e9c78306",
+    "slug": "elomin",
+    "name": {
+      "en": "Elomin",
+      "fr": "Elomin"
+    },
+    "script": {
+      "en": "Clipped consonants and precise tonal inflections tailored to bureaucratic debate.",
+      "fr": "Des consonnes sèches et des inflexions précises adaptées aux débats bureaucratiques."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "dbf64acd-131f-44e6-ac82-29ace8118070",
+        "name": {
+          "en": "Elomin",
+          "fr": "Elomin"
+        }
+      }
+    ],
+    "description": {
+      "en": "Administrators codify legal precedents and diplomatic protocols with surgical vocabulary.",
+      "fr": "Les administrateurs y codifient des précédents juridiques et des protocoles diplomatiques avec un vocabulaire chirurgical."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b8ed3b27-89f2-4500-a785-4a7d33c0e858",
+    "slug": "draethos",
+    "name": {
+      "en": "Draethos",
+      "fr": "Draethos"
+    },
+    "script": {
+      "en": "Low hisses and throat-born pulses felt as much as heard through resonance chambers.",
+      "fr": "Des sifflements graves et des pulsations gutturales autant ressenties qu’entendues dans des chambres de résonance."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "46cefbcc-bb0c-446d-b36d-22a56a813197",
+        "name": {
+          "en": "Draethos",
+          "fr": "Draethos"
+        }
+      }
+    ],
+    "description": {
+      "en": "Hunters recount patient stalking tales and battlefield oaths in austere phrasing.",
+      "fr": "Les chasseurs y relatent des récits de traque patiente et des serments de bataille dans une phraséologie austère."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6c474286-2702-4a5e-8ac0-c79411a3ddbd",
+    "slug": "herglic",
+    "name": {
+      "en": "Herglic",
+      "fr": "Herglic"
+    },
+    "script": {
+      "en": "Rounded glyphs inked in broad strokes that resemble cresting waves.",
+      "fr": "Des glyphes arrondis tracés en larges traits rappelant des vagues déferlantes."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "00e79c43-b245-4bd4-a0a0-ba710bd05985",
+        "name": {
+          "en": "Herglic",
+          "fr": "Herglic"
+        }
+      }
+    ],
+    "description": {
+      "en": "Traders mix deep, bubbling vowels with friendly clicks to welcome partners aboard floating bazaars.",
+      "fr": "Les marchands mêlent des voyelles graves et bouillonnantes à des claquements amicaux pour accueillir leurs partenaires dans les bazars flottants."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "bc86ca93-b456-4691-888f-c120124294ca",
+    "slug": "anx",
+    "name": {
+      "en": "Anx",
+      "fr": "Anx"
+    },
+    "script": {
+      "en": "Tiered columns of crest-marks and resonant bellows etched onto vertical tablets.",
+      "fr": "Des colonnes étagées de marques de crête et de mugissements résonants gravées sur des tablettes verticales."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "d67bddd5-edf7-4197-9444-f6a50af070a0",
+        "name": {
+          "en": "Anx",
+          "fr": "Anx"
+        }
+      }
+    ],
+    "description": {
+      "en": "Communal hymns recount ancestral duties and the emotional cadence of their towering gatherings.",
+      "fr": "Les hymnes communautaires relatent les devoirs ancestraux et la cadence émotionnelle de leurs assemblées imposantes."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "913f9ed7-bf61-4377-89a2-1beaeb5d76ca",
+    "slug": "lannik",
+    "name": {
+      "en": "Lannik",
+      "fr": "Lannik"
+    },
+    "script": {
+      "en": "Compact sigils scribed in quick, angular strokes for battlefield brevity.",
+      "fr": "Des sigilles compacts tracés en traits anguleux et rapides pour la concision sur le champ de bataille."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "0931cdca-9856-4812-8f7e-a08f331df523",
+        "name": {
+          "en": "Lannik",
+          "fr": "Lannik"
+        }
+      }
+    ],
+    "description": {
+      "en": "Clipped consonants and low whistles pass stealthy orders between guerrilla cells.",
+      "fr": "Des consonnes coupées et de faibles sifflements transmettent des ordres furtifs entre cellules de guérilla."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "cb507b5e-0490-4081-8f2f-dcf6a0e9e2d6",
+    "slug": "gossamite",
+    "name": {
+      "en": "Gossamite",
+      "fr": "Gossami"
+    },
+    "script": {
+      "en": "Spiraled trade sigils etched with meticulous loops to prevent forgeries.",
+      "fr": "Des sigilles commerciaux en spirale tracés avec des boucles méticuleuses pour empêcher les falsifications."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "e3d78e8f-88c7-4f16-912c-46a948e60ad3",
+        "name": {
+          "en": "Gossam",
+          "fr": "Gossam"
+        }
+      }
+    ],
+    "description": {
+      "en": "Polite lilting tones hide razor-edged negotiations refined on Castell.",
+      "fr": "Des intonations polies et chantantes dissimulent des négociations acérées perfectionnées sur Castell."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "7be2ca56-4a78-45ff-851e-5e5ca6266271",
+    "slug": "nosaurian",
+    "name": {
+      "en": "Nosaurian",
+      "fr": "Nosaure"
+    },
+    "script": {
+      "en": "Sun-bleached runes carved into hide drums and lance pennants.",
+      "fr": "Des runes blanchies par le soleil gravées sur des tambours de cuir et des étendards de lance."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "d9db6943-f4de-431c-b3c2-d2966a3206c9",
+        "name": {
+          "en": "Nosaurian",
+          "fr": "Nosaurien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Staccato bursts and rumbling bellows coordinate migration columns across scorched plains.",
+      "fr": "Des éclats saccadés et des grondements coordonnent les colonnes migratoires à travers les plaines brûlées."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "4360d7eb-8f66-42d1-985a-983eb58d2231",
+    "slug": "karkarodon",
+    "name": {
+      "en": "Karkarodon",
+      "fr": "Karkarodon"
+    },
+    "script": {
+      "en": "Jagged waveforms scratched into coral slabs that endure abyssal pressure.",
+      "fr": "Des ondes dentelées gravées sur des dalles de corail capables de résister à la pression abyssale."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "8d47d468-43a2-4cdb-b8eb-70361530729d",
+        "name": {
+          "en": "Karkarodon",
+          "fr": "Karkarodon"
+        }
+      }
+    ],
+    "description": {
+      "en": "Subsonic growls and tooth-click bursts carry through crushing depths to signal the hunt.",
+      "fr": "Des grondements infrasons et des claquements de dents traversent les profondeurs écrasantes pour signaler la chasse."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "7a50c5e2-19c8-485f-a64f-3c36c169a1cf",
+    "slug": "ongree",
+    "name": {
+      "en": "Ongree",
+      "fr": "Ongrée"
+    },
+    "script": {
+      "en": "Raised relief glyphs etched into cavern walls with miner's chisels and survey-laser burns.",
+      "fr": "Des glyphes en relief gravés sur les parois des cavernes à l’aide de ciseaux de mineurs et de brûlures de lasers d’arpentage."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "8f7be403-b08a-429b-9984-1e5c29baea7e",
+        "name": {
+          "en": "Ongree",
+          "fr": "Ongrée"
+        }
+      }
+    ],
+    "description": {
+      "en": "Layered clicks and sonorous hums ripple through the tunnels of Skako Minor as guilds coordinate subterranean projects.",
+      "fr": "Des cliquetis superposés et des bourdonnements sonores se propagent dans les tunnels de Skako Mineure tandis que les guildes coordonnent leurs projets souterrains."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "9050116b-5e0d-4103-9b69-8055856aee62",
+    "slug": "kyuzo",
+    "name": {
+      "en": "Kyuzo",
+      "fr": "Kyuzo"
+    },
+    "script": {
+      "en": "Layered pennant-knots and breezecarved sigils clipped to wide-brimmed hats.",
+      "fr": "Des nœuds d’étendards superposés et des sigilles sculptés par la brise accrochés à de larges chapeaux."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "f384143e-d11d-4e8f-96cb-5425e2a1fcd5",
+        "name": {
+          "en": "Kyuzo",
+          "fr": "Kyuzo"
+        }
+      }
+    ],
+    "description": {
+      "en": "Sharp staccato syllables cut through windstorms so clans can coordinate their vertical duels and harvests.",
+      "fr": "Des syllabes tranchantes et saccadées percent les tempêtes de vent afin que les clans puissent coordonner leurs duels verticaux et leurs récoltes."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6e98024f-aedc-4d5b-84d7-28e982a6c604",
+    "slug": "lepese",
+    "name": {
+      "en": "Lepese",
+      "fr": "Lépien"
+    },
+    "script": {
+      "en": "Chalk streaks and knot-coded cords tied across burrow entrances to mark trade routes.",
+      "fr": "Des traces de craie et des cordes à nœuds codés nouées aux entrées des terriers pour marquer les routes commerciales."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "4095d241-51c3-411b-8b41-9d85f9ffacd2",
+        "name": {
+          "en": "Lepi",
+          "fr": "Lepi"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rapid-fire chatter and emphatic ear-flick whistles punctuate every bargain struck in wandering warrens.",
+      "fr": "Un bavardage rapide et des sifflements appuyés accompagnés de battements d’oreilles ponctuent chaque marché conclu dans les terriers nomades."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "493d994c-e3ee-4e6a-be1f-cde6df64daa9",
+    "slug": "lurmen",
+    "name": {
+      "en": "Lurmen",
+      "fr": "Lurmen"
+    },
+    "script": {
+      "en": "Painted clan spirals on village gourds combined with rhythmic drumbeats to relay warnings.",
+      "fr": "Des spirales de clan peintes sur des calebasses villageoises combinées à des battements de tambour rythmiques pour relayer les alertes."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "78c8e151-e467-4414-b1d0-e739c3866054",
+        "name": {
+          "en": "Lurmen",
+          "fr": "Lurmen"
+        }
+      }
+    ],
+    "description": {
+      "en": "Soft chittering syllables roll together with drum-coded pulses when Lurmen sentinels signal danger.",
+      "fr": "Des syllabes douces et cliquetantes se mêlent à des pulsations codées au tambour lorsque les sentinelles lurmen signalent un danger."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "bcb9acc6-a00d-47aa-ac30-2cd5dba8ca9b",
+    "slug": "snivvian",
+    "name": {
+      "en": "Snivvian",
+      "fr": "Snivvien"
+    },
+    "script": {
+      "en": "Contracts etched into wax tablets and annotated with scent-coded seals to memorialize trades.",
+      "fr": "Des contrats gravés sur des tablettes de cire et annotés de sceaux parfumés codés pour immortaliser les accords commerciaux."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "69e54bcd-de96-4343-90e6-9ba2e492dddf",
+        "name": {
+          "en": "Snivvian",
+          "fr": "Snivvien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Guttural consonants and carefully modulated sighs let Snivvians bargain without revealing their doubts.",
+      "fr": "Des consonnes gutturales et des soupirs modulés avec soin permettent aux Snivviens de marchander sans dévoiler leurs doutes."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "16a05d45-9933-404e-8e65-ce2692478b01",
+    "slug": "tarasinese",
+    "name": {
+      "en": "Tarasinese",
+      "fr": "Tarrasini"
+    },
+    "script": {
+      "en": "Braided reed charms inscribed with clan sigils and arranged to harmonize in the breeze.",
+      "fr": "Des breloques en roseaux tressés, gravées de sigilles de clan et disposées pour harmoniser leurs tintements au gré du vent."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c76b61ec-9ec3-4b28-b377-7d7d12a6b87a",
+        "name": {
+          "en": "Tarasin",
+          "fr": "Tarasin"
+        }
+      }
+    ],
+    "description": {
+      "en": "Melodic trills and empathic overtones let Tarasin leaders convey emotion as clearly as words.",
+      "fr": "Des trilles mélodiques et des harmoniques empathiques permettent aux chefs tarasins de transmettre les émotions aussi clairement que les mots."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "ec696ab4-3ecd-4be1-8aca-caca82a63871",
+    "slug": "defel",
+    "name": {
+      "en": "Defel",
+      "fr": "Défel"
+    },
+    "script": {
+      "en": "Shadow-polarized glyphs etched into ultraviolet-reactive alloy slates.",
+      "fr": "Des glyphes polarisés par les ombres, gravés sur des plaques d’alliage réagissant aux ultraviolets."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "3ae673d8-c5ab-417f-8041-01de657fcfe2",
+        "name": {
+          "en": "Defel",
+          "fr": "Défel"
+        }
+      }
+    ],
+    "description": {
+      "en": "Harsh consonants disappear into subsonic undertones, so Defel clans rely on ultraviolet inflection to carry nuance in the dark.",
+      "fr": "Des consonnes âpres se fondent dans des infrasons, et les clans défels s’appuient sur des inflexions ultraviolettes pour porter les nuances dans l’obscurité."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "679f4427-3bbe-468d-b27c-f577d79ab0ea",
+    "slug": "thisspiasian",
+    "name": {
+      "en": "Thisspiasian",
+      "fr": "Thisspiasian"
+    },
+    "script": {
+      "en": "Flowing ribbon-calligraphy woven into layered silk banners that unfurl during council sessions.",
+      "fr": "Une calligraphie en rubans fluides, tissée dans des bannières de soie superposées déroulées lors des conseils."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "40fcfe8f-bd03-4e3d-9464-7606e5a1e19e",
+        "name": {
+          "en": "Thisspiasian",
+          "fr": "Thisspiasian"
+        }
+      }
+    ],
+    "description": {
+      "en": "Layered hisses and resonant chords allow Thisspiasian delegates to speak in harmonized committees even when one mouth pauses to consider.",
+      "fr": "Des sifflements superposés et des accords résonnants permettent aux délégués thisspiasiens de s’exprimer en comité harmonisé, même lorsqu’une bouche se tait pour réfléchir."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "78572529-1223-421c-b193-7c5a0ddb8e01",
+    "slug": "vurki",
+    "name": {
+      "en": "Vurki",
+      "fr": "Vurki"
+    },
+    "script": {
+      "en": "Braided shell cords whose knots are dipped in tidal pigments to mark tides and promises.",
+      "fr": "Des cordons de coquillages tressés dont les nœuds, trempés dans des pigments de marée, consignent marées et promesses."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "3f41d72d-cbcc-417e-8840-1f528fdaf2e0",
+        "name": {
+          "en": "Vurk",
+          "fr": "Vurk"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rolling vowels crest like waves, and communal chants track migrations across Sembla’s shoals.",
+      "fr": "Des voyelles roulantes déferlent comme les vagues, et des chants communautaires suivent les migrations à travers les hauts-fonds de Sembla."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "c3485e80-b7b0-43de-b6c2-ba89c0166505",
+    "slug": "togorian",
+    "name": {
+      "en": "Togorian",
+      "fr": "Togorien"
+    },
+    "script": {
+      "en": "Jagged claw glyphs scratched into tanned hides and etched along glider wings.",
+      "fr": "Des glyphes de griffes acérées gravés sur des peaux tannées et tracés sur les ailes des planeurs."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "3a01c3a4-1f72-40bb-a1ac-f28803eadb2d",
+        "name": {
+          "en": "Togorian",
+          "fr": "Togorien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rumbling consonants and soaring war yowls carry clan oaths from aerie to aerie.",
+      "fr": "Des consonnes grondantes et des hurlements guerriers transportent les serments de clan d'un nid à l'autre."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "e19726b1-9b4f-464f-88e7-2f7bd615748e",
+    "slug": "nagai",
+    "name": {
+      "en": "Nagai",
+      "fr": "Nagaï"
+    },
+    "script": {
+      "en": "Ink-brushed sigils penned in stark black strokes across rice-paper scrolls.",
+      "fr": "Des sigilles tracés à l'encre noire sur des parchemins de papier de riz."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "abe8b3c0-e9ae-4033-b14c-5dd5c8de398e",
+        "name": {
+          "en": "Nagai",
+          "fr": "Nagaï"
+        }
+      }
+    ],
+    "description": {
+      "en": "Whispered cadences mask razor-edged threats during the Nagai’s ritual negotiations.",
+      "fr": "Des cadences chuchotées dissimulent des menaces acérées lors des négociations rituelles des Nagaï."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "e13775e9-053b-47a8-af94-72fac7d85d3e",
+    "slug": "rakatan",
+    "name": {
+      "en": "Rakatan",
+      "fr": "Rakatane"
+    },
+    "script": {
+      "en": "Spiraling shell-like glyphs carved into obsidian tablets and coral pillars.",
+      "fr": "Des glyphes en spirale rappelant des coquillages, gravés sur des tablettes d'obsidienne et des piliers de corail."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "79cfbcb5-6976-482a-b04d-f7a6e8688454",
+        "name": {
+          "en": "Rakata",
+          "fr": "Rakata"
+        }
+      }
+    ],
+    "description": {
+      "en": "Resonant tones interlace with harmonic clicks used to guide Force-attuned forges of the Infinite Empire.",
+      "fr": "Des tons résonnants se mêlent à des clics harmoniques pour guider les forges imprégnées de Force de l'Empire Infini."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "ec753306-a1f0-4543-9025-6affbfce37c7",
+    "slug": "tholothian",
+    "name": {
+      "en": "Tholothian",
+      "fr": "Tholothien"
+    },
+    "script": {
+      "en": "Flowing calligraphic glyphs braided with meditation cords.",
+      "fr": "Des glyphes calligraphiques fluides, tressés de cordons de méditation."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "4d82b2e0-9ca2-4da9-bbb1-dca0b5f1b2e8",
+        "name": {
+          "en": "Tholothian",
+          "fr": "Tholothien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured chants weave communal prayers and tactical mantras shared among Order enclaves.",
+      "fr": "Des chants mesurés mêlent prières communautaires et mantras tactiques transmis dans les enclaves de l’Ordre."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "98be803d-0747-4412-8819-916055257646",
+    "slug": "ssi-ruuvi",
+    "name": {
+      "en": "Ssi-ruuvi",
+      "fr": "Ssi-ruuvi"
+    },
+    "script": {
+      "en": "Trilling hisses etched as interlocking fractal slashes.",
+      "fr": "Des sifflements modulés gravés sous forme d’entrelacs fractals."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c764feba-a8d4-4def-9519-88ccfd23ba2e",
+        "name": {
+          "en": "Ssi-ruu",
+          "fr": "Ssi-ruu"
+        }
+      }
+    ],
+    "description": {
+      "en": "Hierarchical hissing phrases used to relay energy harvest directives and ritual decrees.",
+      "fr": "Des phrases sifflantes hiérarchisées servant à relayer directives de récolte énergétique et décrets rituels."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "2ae2fc64-23cc-4919-a6bd-f0e324e34b53",
+    "slug": "kowakian",
+    "name": {
+      "en": "Kowakian",
+      "fr": "Kowakien"
+    },
+    "script": {
+      "en": "Shrill whistles rendered as stacked accent marks and looping doodles.",
+      "fr": "Des sifflements stridents retranscrits en accents empilés et en gribouillages bouclés."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "70d49539-4111-4a41-87bd-f42be8c037d5",
+        "name": {
+          "en": "Kowakian Monkey-Lizard",
+          "fr": "Singe-lézard kowakien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rapid-fire cackles layered with playful insults and coded warnings for troupe-mates.",
+      "fr": "Des gloussements rapides mêlant moqueries enjouées et avertissements codés pour les membres de la troupe."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6406a84d-e9a4-4e5a-a582-0a3ed8e06c98",
+    "slug": "tusken",
+    "name": {
+      "en": "Tusken",
+      "fr": "Tusken"
+    },
+    "script": {
+      "en": "Jagged Tusken glyphs carved into bone or etched along gaderffii shafts.",
+      "fr": "Des glyphes tusken dentelés gravés dans l'os ou tracés le long des hampes de gaderffii."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "06d0d9e3-2884-4f7a-b7af-7847f772bf47",
+        "name": {
+          "en": "Tusken",
+          "fr": "Tusken"
+        }
+      }
+    ],
+    "description": {
+      "en": "Harsh guttural barks punctuated by sweeping gestures that coordinate dune-stalking war bands.",
+      "fr": "Des aboiements gutturaux rudes ponctués de grands gestes qui coordonnent les bandes de guerre sillonnant les dunes."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "4a2b09cb-8cbd-4a94-b56c-93bea8fda346",
+    "slug": "sith",
+    "name": {
+      "en": "Sith",
+      "fr": "Sith"
+    },
+    "script": {
+      "en": "Angular runes etched into obsidian holocrons and temple walls.",
+      "fr": "Des runes anguleuses gravées sur des holocrons d'obsidienne et les murs des temples."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "59ed0294-2b14-4997-ac7e-c0c009084cfd",
+        "name": {
+          "en": "Sith Pureblood",
+          "fr": "Sith de sang pur"
+        }
+      }
+    ],
+    "description": {
+      "en": "Ancient intonations that blend harsh consonants with thrumming undertones to empower dark rites.",
+      "fr": "De vieilles intonations mêlant consonnes dures et grondements sourds pour renforcer les rites obscurs."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "fb501a9f-b760-4e9d-9544-2c75779ec9e1",
+    "slug": "yarkoran",
+    "name": {
+      "en": "Yarkoran",
+      "fr": "Yarkoran"
+    },
+    "script": {
+      "en": "Elegant ledger strokes paired with coded whistle marks for clandestine contracts.",
+      "fr": "Des pleins et déliés élégants assortis de marques sifflées codées pour des contrats clandestins."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "9ac5dbf7-e0f7-45d7-ad65-43bac824acde",
+        "name": {
+          "en": "Yarkora",
+          "fr": "Yarkora"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured phrases softened by trilling codas as merchants hedge every hyperspace deal.",
+      "fr": "Des phrases mesurées adoucies par des codas roulées, tandis que les marchands couvrent chaque accord hyperspatial."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "11b3da63-8e8a-4315-a007-5abeced2987c",
+    "slug": "dowutese",
+    "name": {
+      "en": "Dowutese",
+      "fr": "Dowutes"
+    },
+    "script": {
+      "en": "Clan scars carved across glacial obsidian tablets and braided into hide standards.",
+      "fr": "Des cicatrices de clan gravées sur des tablettes d'obsidienne glacée et tressées dans des étendards en cuir."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "ab31eb0b-5990-4d0d-8cb3-42192d1474ee",
+        "name": {
+          "en": "Dowutin",
+          "fr": "Dowutin"
+        }
+      }
+    ],
+    "description": {
+      "en": "Resonant bellows and grinding consonants that roll across frozen hunting grounds.",
+      "fr": "Des mugissements résonants et des consonnes grondantes qui roulent sur les terrains de chasse gelés."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "2f3b4371-fba9-4bd4-aec2-c8a69a6fcf5b",
+    "slug": "pyke",
+    "name": {
+      "en": "Pyke",
+      "fr": "Pyke"
+    },
+    "script": {
+      "en": "Ledger sigils etched in luminescent ink along articulated rebreather plates.",
+      "fr": "Des sigles de registre gravés en encre luminescente sur des plaques de respirateur articulées."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "d498f3ca-e0bd-485b-a790-335044717a0c",
+        "name": {
+          "en": "Pyke",
+          "fr": "Pyke"
+        }
+      }
+    ],
+    "description": {
+      "en": "Sibilant murmurs clipped by respirator clicks, perfect for veiled syndicate bargains.",
+      "fr": "Des murmures sifflants hachés par les claquements de respirateurs, parfaits pour les marchés voilés du syndicat."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "6f8f6104-a0de-41aa-93eb-7af97ec3fd75",
+    "slug": "ryn",
+    "name": {
+      "en": "Ryn",
+      "fr": "Ryn"
+    },
+    "script": {
+      "en": "Flowing knotwork scored into travel drums and painted across caravan sails.",
+      "fr": "Des entrelacs fluides gravés sur des tambours de voyage et peints sur les voiles des caravanes."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "0bedac08-fdf7-4281-9753-4a987b54abbb",
+        "name": {
+          "en": "Ryn",
+          "fr": "Ryn"
+        }
+      }
+    ],
+    "description": {
+      "en": "Melodic trills that weave song and story into a single wandering tongue.",
+      "fr": "Des trilles mélodiques qui entremêlent chant et récit en une seule langue errante."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "f7cb6b7b-ff65-4c00-b3c4-c8e908af088e",
+    "slug": "gendai",
+    "name": {
+      "en": "Gen'Dai",
+      "fr": "Gen'Daï"
+    },
+    "script": {
+      "en": "Flowing calligraphy tattooed across layered bandage wraps.",
+      "fr": "Une calligraphie fluide tatouée sur des bandelettes superposées."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "100a1398-f10b-4bb0-a7e9-d97b42c0c860",
+        "name": {
+          "en": "Gen'Dai",
+          "fr": "Gen'Daï"
+        }
+      }
+    ],
+    "description": {
+      "en": "A resonant tongue of sustained chords and layered heartbeats shared through communal meditation.",
+      "fr": "Une langue résonnante faite d'accords prolongés et de battements superposés partagés lors de méditations collectives."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "cdc0b2da-63ed-4f4f-a08a-bf983261486a",
+    "slug": "harchese",
+    "name": {
+      "en": "Harchese",
+      "fr": "Harch"
+    },
+    "script": {
+      "en": "Radial glyphs woven like webs across silken war banners.",
+      "fr": "Des glyphes radiaux tissés tel une toile sur des bannières de guerre en soie."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "069df486-ee8a-48c6-800b-a27242a7e96b",
+        "name": {
+          "en": "Harch",
+          "fr": "Harch"
+        }
+      }
+    ],
+    "description": {
+      "en": "A rapid blend of mandible clicks and silk-snapping cues used to relay battle plans through overlapping channels.",
+      "fr": "Un mélange rapide de claquements de mandibules et de signaux de soie claquante pour transmettre des plans de bataille sur des canaux superposés."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "462fea7f-d064-4757-a0cb-62d82bc4eece",
+    "slug": "yuzzemi",
+    "name": {
+      "en": "Yuzzemi",
+      "fr": "Yuzzem"
+    },
+    "script": {
+      "en": "Deep gouges etched into tree trunks and resonant horn calls echoing through valleys.",
+      "fr": "De profondes entailles gravées dans les troncs et des appels de cor retentissants résonnant dans les vallées."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "e20323ba-9694-41e0-b392-78cfdcd4035f",
+        "name": {
+          "en": "Yuzzem",
+          "fr": "Yuzzem"
+        }
+      }
+    ],
+    "description": {
+      "en": "A booming language of roaring vowels and percussive stomps carried across communal work songs.",
+      "fr": "Une langue grondante de voyelles rugissantes et de piétinements percussifs portée par des chants de travail communautaires."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b24db586-760a-4698-9040-ea9518b5e461",
+    "slug": "echani",
+    "name": {
+      "en": "Echani",
+      "fr": "Echani"
+    },
+    "script": {
+      "en": "Graceful calligraphy traced by paired blades across polished training floors.",
+      "fr": "Une calligraphie gracieuse tracée par des lames jumelles sur des sols d'entraînement polis."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "9b4ecc18-b130-4577-bc41-daa8d0d0fd03",
+        "name": {
+          "en": "Echani",
+          "fr": "Echani"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured cadences of breath and footwork cues that double as battlefield code among duelists.",
+      "fr": "Des cadences mesurées de respiration et de signaux de jeu de jambes servant aussi de code de bataille entre duellistes."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "12db5a16-23f9-4d9a-8f84-54a7c04e0372",
+    "slug": "lorrdian",
+    "name": {
+      "en": "Lorrdian",
+      "fr": "Lorrdien"
+    },
+    "script": {
+      "en": "Minute notation of muscle tension and breath mapped into kinetic glyphs.",
+      "fr": "Une notation minutieuse de tensions musculaires et de souffle traduite en glyphes kinétiques."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "24442847-5a0c-49b5-a4f1-551d64a87830",
+        "name": {
+          "en": "Lorrdian",
+          "fr": "Lorrdien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Silent patterns of motion and hushed inflections encode emotion, history, and covert orders.",
+      "fr": "Des motifs silencieux de mouvements et des inflexions feutrées codent émotions, histoires et ordres secrets."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "1004dc4b-725f-40d5-8e72-1dea4c40e2c9",
+    "slug": "chistori",
+    "name": {
+      "en": "Chistori",
+      "fr": "Chistori"
+    },
+    "script": {
+      "en": "Jagged claw-runes carved into volcanic stone alongside deep-throated war chants.",
+      "fr": "Des runes dentelées gravées par des griffes dans la pierre volcanique, accompagnées de chants de guerre gutturaux."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "80bb3d7b-e194-4c43-b762-89c9c20e6d99",
+        "name": {
+          "en": "Chistori",
+          "fr": "Chistori"
+        }
+      }
+    ],
+    "description": {
+      "en": "Rumbling growls layered with sibilant commands coordinate war packs and unnerve foes.",
+      "fr": "Des grondements roulés mêlés de commandes sifflantes coordonnent les meutes guerrières et déstabilisent les ennemis."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "7cb8dbf2-b3df-4dbd-852f-cea263bef6e8",
+    "slug": "voss",
+    "name": {
+      "en": "Voss",
+      "fr": "Voss"
+    },
+    "script": {
+      "en": "Flowing bands of radiant glyphs projected across carved temple walls.",
+      "fr": "Des rubans fluides de glyphes radiants projetés sur les murs sculptés des temples."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "c0f997d3-1cfd-40cd-a599-8c1f1d152474",
+        "name": {
+          "en": "Voss",
+          "fr": "Voss"
+        }
+      }
+    ],
+    "description": {
+      "en": "Measured harmonics layered with whispered prophecies guide rituals and diplomatic accords.",
+      "fr": "Des harmoniques mesurées, superposées à des prophéties murmurées, guident les rituels et les accords diplomatiques."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "99876bb5-fb04-4cb8-9636-98181d87b8bf",
+    "slug": "gormak",
+    "name": {
+      "en": "Gormak",
+      "fr": "Gormak"
+    },
+    "script": {
+      "en": "Jagged strokes scorched into repurposed circuitry and armor plating.",
+      "fr": "Des traits dentelés brûlés dans des circuits et plaques d'armure recyclés."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "167f4e25-6879-4ef0-bd37-7a4186d37bcf",
+        "name": {
+          "en": "Gormak",
+          "fr": "Gormak"
+        }
+      }
+    ],
+    "description": {
+      "en": "Thunderous bellows punctuated by percussive strikes coordinate artillery crews and warbands.",
+      "fr": "Des beuglements tonitruants ponctués de frappes percussives coordonnent les équipages d'artillerie et les bandes de guerre."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "26f9bceb-788a-4ebb-b4a5-d72dbc0e888e",
+    "slug": "drabatan",
+    "name": {
+      "en": "Drabatan",
+      "fr": "Drabatan"
+    },
+    "script": {
+      "en": "Undulating sigils traced in bioluminescent inks along polished wetstone.",
+      "fr": "Des sigils ondoyants tracés en encres bioluminescentes sur de la pierre polie et humide."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "b319a03d-ce7f-4f5f-9c0f-fa13ba31842d",
+        "name": {
+          "en": "Drabatan",
+          "fr": "Drabatan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Staccato croaks and resonant roars carry through waterlogged tunnels to signal guerrilla strikes.",
+      "fr": "Des coassements saccadés et des rugissements résonnants se propagent dans les tunnels détrempés pour signaler les frappes de guérilla."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "fc0e98bb-28ca-4c73-b7d7-a2a631d27da9",
+    "slug": "yevethan",
+    "name": {
+      "en": "Yevethan",
+      "fr": "Yevethan"
+    },
+    "script": {
+      "en": "Angular command sigils lacquered onto seized starship consoles.",
+      "fr": "Des sigles anguleux laqués sur des consoles de vaisseaux capturés."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "6612d587-1b0b-488e-8f4b-263c8f781fc5",
+        "name": {
+          "en": "Yevetha",
+          "fr": "Yevetha"
+        }
+      }
+    ],
+    "description": {
+      "en": "Piercing trills and clipped commands coordinate dockyards and press-ganged crews.",
+      "fr": "Des trilles perçants et des ordres tranchants coordonnent chantiers navals et équipages enrôlés de force."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "47d4614a-7306-4da3-af65-51d38c9ac3be",
+    "slug": "firrerreon",
+    "name": {
+      "en": "Firrerreon",
+      "fr": "Firrerreon"
+    },
+    "script": {
+      "en": "Iridescent knotwork braided through flowing hair and mirrored tattoos.",
+      "fr": "Des entrelacs iridescents tressés dans des chevelures ondoyantes et reproduits en tatouages miroirs."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "f48796cc-1485-4dcc-ad2e-e8791dca61f5",
+        "name": {
+          "en": "Firrerreo",
+          "fr": "Firrerreo"
+        }
+      }
+    ],
+    "description": {
+      "en": "Melodic phrases layered with scents and color shifts convey empathy and warning.",
+      "fr": "Des phrases mélodiques mêlées de parfums et de changements de couleur transmettent empathie et avertissement."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "b322be85-dbe9-47ef-bfac-e9c6a99ae854",
+    "slug": "sanyassan",
+    "name": {
+      "en": "Sanyassan",
+      "fr": "Sanyassan"
+    },
+    "script": {
+      "en": "Jagged burn-marks etched into scavenged durasteel plates.",
+      "fr": "Des marques brûlées dentelées gravées dans des plaques de duracier récupérées."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "18bf05fa-9163-409e-a1b9-40555548868e",
+        "name": {
+          "en": "Sanyassan",
+          "fr": "Sanyassan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Harsh shouts and drumlike roars rally raiding packs amid ion storms.",
+      "fr": "Des cris rudes et des grondements de tambour rallient les bandes de pillards au cœur des tempêtes d'ions."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "cc0a0d2a-1dd6-4482-8e70-4bcd489461ae",
+    "slug": "columese",
+    "name": {
+      "en": "Columese",
+      "fr": "Columien"
+    },
+    "script": {
+      "en": "Modulated neural pulses transmitted through halos of cold light.",
+      "fr": "Des impulsions neuronales modulées transmises par des halos de lumière froide."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "1274d904-68e0-4c61-835b-94a66f326ff6",
+        "name": {
+          "en": "Columi",
+          "fr": "Columi"
+        }
+      }
+    ],
+  "description": {
+    "en": "Heretic's Guide to the Galaxy describes Columese as a cascade of modulated light and shared thoughtforms used to issue precise tactical directives.",
+    "fr": "Le Guide hérétique de la galaxie décrit le columien comme une cascade de lumière modulée et de formes-pensées partagées servant à délivrer des directives tactiques précises."
+  },
+  "source": {
+    "book": "Heretic's Guide to the Galaxy",
+    "section": "Languages – Columese",
+    "url": "https://www.gmbinder.com/share/-M815p5BfQ0wbdKY7zqN"
+  },
+  "version": {
+    "semver": "0.2.0",
+    "last_updated": "2024-10-22"
+  }
+  },
+  {
+    "id": "c0f8ab2d-bb5e-4831-a2d7-d075d74b1c74",
+    "slug": "hapan",
+    "name": {
+      "en": "Hapan",
+      "fr": "Hapan"
+    },
+    "script": {
+      "en": "Flowing glyphs etched into mirrored dataplaques and jeweled fans.",
+      "fr": "Des glyphes fluides gravés sur des plaques de données miroitantes et des éventails sertis de gemmes."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "4ac92419-6f29-403c-a512-ef29dfe221e4",
+        "name": {
+          "en": "Hapan",
+          "fr": "Hapan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Consortium diplomats weave veiled compliments and sharp commands in shimmering cadences.",
+      "fr": "Les diplomates du Consortium tissent compliments voilés et ordres tranchants en cadences chatoyantes."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "54216073-e2dd-4660-88ca-99915ebe6d2b",
+    "slug": "celegian",
+    "name": {
+      "en": "Celegian",
+      "fr": "Celegien"
+    },
+    "script": {
+      "en": "Low-frequency telepathic pulses accompanied by softly glowing chromatophores.",
+      "fr": "Des pulsations télépathiques basse fréquence accompagnées de chromatophores luisant doucement."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "e57e9542-95a4-4e29-a521-fa49c1d02e13",
+        "name": {
+          "en": "Celegian",
+          "fr": "Celegien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Floating sages communicate philosophies through layered empathic waves and color shifts.",
+      "fr": "Les sages flottants communiquent leurs philosophies par vagues empathiques superposées et variations de couleur."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "3af5d9c0-5bf3-4881-a997-f6fafc91cef8",
+    "slug": "felucian",
+    "name": {
+      "en": "Felucian",
+      "fr": "Felucien"
+    },
+    "script": {
+      "en": "Chanted syllables woven with bioluminescent flashes and spore-scent cues.",
+      "fr": "Des syllabes chantées mêlées à des éclairs bioluminescents et des signaux d'odeurs de spores."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "89928369-bdfe-4846-bd0a-f4847caac77c",
+        "name": {
+          "en": "Felucian",
+          "fr": "Felucien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Jungle shamans braid luminous chants that share visions of Felucia's living Force.",
+      "fr": "Les chamans des jungles tressent des chants lumineux qui partagent les visions de la Force vivante de Felucia."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "184d42d8-aa45-4eb0-a5b0-b66e2fa64367",
+    "slug": "polis-massan",
+    "name": {
+      "en": "Polis Massan",
+      "fr": "Polis Massan"
+    },
+    "script": {
+      "en": "Subtle hand-signs paired with harmonic throat hums interpreted by vocoders.",
+      "fr": "Des signes de main subtils associés à des bourdonnements harmoniques relayés par des vocodeurs."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "5f819900-4c18-4cd1-9bf6-859b88b5a693",
+        "name": {
+          "en": "Polis Massan",
+          "fr": "Polis Massan"
+        }
+      }
+    ],
+    "description": {
+      "en": "Soft gestures and resonant tones convey empathy and precise medical instruction.",
+      "fr": "Des gestes doux et des tons résonants transmettent empathie et instructions médicales précises."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
+  },
+  {
+    "id": "49587d95-995d-487b-99ea-7adab74b15f8",
+    "slug": "vulpterish",
+    "name": {
+      "en": "Vulpterish",
+      "fr": "Vulptérien"
+    },
+    "script": {
+      "en": "Raspy consonant bursts punctuated by static-laced clicks and scrapyard whistles.",
+      "fr": "Des éclats consonantiques rauques ponctués de cliquetis striés de parasites et de sifflets de dépotoirs."
+    },
+    "typical_speakers": [
+      {
+        "type": "species",
+        "id": "135a3e35-e99c-4046-8e0f-f48a55c7c380",
+        "name": {
+          "en": "Vulptereen",
+          "fr": "Vulptérien"
+        }
+      }
+    ],
+    "description": {
+      "en": "Mechanics trade scrap codes and tunnel maps through clipped industrial slang.",
+      "fr": "Les mécanicien·ne·s échangent codes de récupération et cartes de tunnels dans un argot industriel haché."
+    },
+    "source": {
+      "book": "PHB SW5e",
+      "section": "Languages",
+      "url": "https://sw5e.com/rules/phb/backgrounds"
+    },
+    "version": {
+      "semver": "0.1.0",
+      "last_updated": "2024-05-01"
+    }
   }
 ]

@@ -62,10 +62,39 @@ void main() {
           StartingEquipmentLine(id: 'blaster-pistol', qty: 1),
         ],
       ),
+      primaryAbilities: const <String>['dex'],
+      savingThrows: const <String>['wis', 'con'],
+      weaponProficiencies: const <String>['simple', 'martial'],
+      armorProficiencies: const <String>['light', 'medium'],
+      toolProficiencies: const <String>['artisan-tools'],
     );
   }
 
-  const SkillDef skillAthletics = SkillDef(id: 'athletics', ability: 'str');
+  const SkillDef skillAthletics = SkillDef(
+    id: 'athletics',
+    ability: 'str',
+    name: LocalizedText(en: 'Athletics', fr: 'Athlétisme'),
+  );
+  const AbilityDef abilityStrength = AbilityDef(
+    id: 'str',
+    abbreviation: 'STR',
+    name: LocalizedText(en: 'Strength', fr: 'Force'),
+  );
+  const AbilityDef abilityDexterity = AbilityDef(
+    id: 'dex',
+    abbreviation: 'DEX',
+    name: LocalizedText(en: 'Dexterity', fr: 'Dextérité'),
+  );
+  const AbilityDef abilityWisdom = AbilityDef(
+    id: 'wis',
+    abbreviation: 'WIS',
+    name: LocalizedText(en: 'Wisdom', fr: 'Sagesse'),
+  );
+  const AbilityDef abilityConstitution = AbilityDef(
+    id: 'con',
+    abbreviation: 'CON',
+    name: LocalizedText(en: 'Constitution', fr: 'Constitution'),
+  );
   final EquipmentDef equipmentBlaster = const EquipmentDef(
     id: 'blaster-pistol',
     name: LocalizedText(en: 'Blaster pistol', fr: 'Pistolet blaster'),
@@ -92,6 +121,10 @@ void main() {
       when(() => catalog.getSkill('athletics')).thenAnswer(
         (_) async => skillAthletics,
       );
+      when(() => catalog.getAbility('str')).thenAnswer((_) async => abilityStrength);
+      when(() => catalog.getAbility('dex')).thenAnswer((_) async => abilityDexterity);
+      when(() => catalog.getAbility('wis')).thenAnswer((_) async => abilityWisdom);
+      when(() => catalog.getAbility('con')).thenAnswer((_) async => abilityConstitution);
       when(() => catalog.getEquipment('blaster-pistol')).thenAnswer(
         (_) async => equipmentBlaster,
       );
@@ -110,11 +143,37 @@ void main() {
           .having((ClassPickerState state) => state.isLoadingList, 'isLoadingList', false)
           .having((ClassPickerState state) => state.isLoadingDetails, 'isLoadingDetails', false)
           .having((ClassPickerState state) => state.classIds, 'classIds', <String>['guardian'])
+          .having(
+            (ClassPickerState state) =>
+                state.classDefinitions.containsKey('guardian'),
+            'class cached',
+            true,
+          )
           .having((ClassPickerState state) => state.selectedClassId, 'selectedClassId', 'guardian')
           .having((ClassPickerState state) => state.selectedClass?.id, 'selectedClass.id', 'guardian')
           .having(
             (ClassPickerState state) => state.skillDefinitions.containsKey('athletics'),
             'skill cached',
+            true,
+          )
+          .having(
+            (ClassPickerState state) => state.abilityDefinitions.containsKey('str'),
+            'ability cached',
+            true,
+          )
+          .having(
+            (ClassPickerState state) => state.abilityDefinitions.containsKey('dex'),
+            'dex cached',
+            true,
+          )
+          .having(
+            (ClassPickerState state) => state.abilityDefinitions.containsKey('wis'),
+            'wis cached',
+            true,
+          )
+          .having(
+            (ClassPickerState state) => state.abilityDefinitions.containsKey('con'),
+            'con cached',
             true,
           )
           .having(
@@ -129,6 +188,10 @@ void main() {
       verify(() => catalog.listClasses()).called(1);
       verify(() => catalog.getClass('guardian')).called(1);
       verify(() => catalog.getSkill('athletics')).called(1);
+      verify(() => catalog.getAbility('str')).called(1);
+      verify(() => catalog.getAbility('dex')).called(1);
+      verify(() => catalog.getAbility('wis')).called(1);
+      verify(() => catalog.getAbility('con')).called(1);
       verify(() => catalog.getEquipment('blaster-pistol')).called(1);
       verifyNever(() => logger.error(any(), error: any(named: 'error'), stackTrace: any(named: 'stackTrace')));
     },
@@ -149,6 +212,10 @@ void main() {
       when(() => catalog.getSkill('athletics')).thenAnswer(
         (_) async => skillAthletics,
       );
+      when(() => catalog.getAbility('str')).thenAnswer((_) async => abilityStrength);
+      when(() => catalog.getAbility('dex')).thenAnswer((_) async => abilityDexterity);
+      when(() => catalog.getAbility('wis')).thenAnswer((_) async => abilityWisdom);
+      when(() => catalog.getAbility('con')).thenAnswer((_) async => abilityConstitution);
       when(() => catalog.getEquipment('blaster-pistol')).thenAnswer(
         (_) async => equipmentBlaster,
       );
@@ -174,7 +241,18 @@ void main() {
       isA<ClassPickerState>()
           .having((ClassPickerState state) => state.isLoadingDetails, 'isLoadingDetails', false)
           .having((ClassPickerState state) => state.selectedClassId, 'selectedClassId', 'scoundrel')
-          .having((ClassPickerState state) => state.selectedClass?.id, 'selectedClass.id', 'scoundrel'),
+          .having(
+            (ClassPickerState state) =>
+                state.classDefinitions.containsKey('scoundrel'),
+            'scoundrel cached',
+            true,
+          )
+          .having((ClassPickerState state) => state.selectedClass?.id, 'selectedClass.id', 'scoundrel')
+          .having(
+            (ClassPickerState state) => state.abilityDefinitions.containsKey('str'),
+            'ability cached',
+            true,
+          ),
     ],
     verify: (_) {
       verify(() => catalog.getClass('scoundrel')).called(1);

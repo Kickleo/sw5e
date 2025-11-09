@@ -16,6 +16,7 @@ class QuickCreateSpeciesDetails {
   const QuickCreateSpeciesDetails({
     required this.species,
     required this.traits,
+    this.languages = const <LanguageDef>[],
     this.missingTraitIds = const <String>[],
   });
 
@@ -24,6 +25,9 @@ class QuickCreateSpeciesDetails {
 
   /// Traits résolus et prêts à l'affichage.
   final List<TraitDef> traits;
+
+  /// Langues associées à l'espèce, résolues depuis le catalogue v2.
+  final List<LanguageDef> languages;
 
   /// Identifiants de traits absents du catalogue (pour remontée de logs).
   final List<String> missingTraitIds;
