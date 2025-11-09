@@ -17,7 +17,7 @@ void main() {
         skillsChoose: 2,
         skillsFrom: <String>['perception'],
       ),
-      startingEquipment: const <StartingEquipmentLine>[],
+      startingEquipment: <StartingEquipmentLine>[],
     ),
     powerSource: 'force',
     powerList: ClassPowerList(
@@ -30,17 +30,17 @@ void main() {
   testWidgets('renders localized power details when metadata is present',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('fr'),
+      const MaterialApp(
+        locale: Locale('fr'),
         supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>[
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        home: const Scaffold(
-          body: const ClassPowerDetails(classDef: sentinel),
+        home: Scaffold(
+          body: ClassPowerDetails(classDef: sentinel),
         ),
       ),
     );
@@ -63,22 +63,22 @@ void main() {
           skillsChoose: 2,
           skillsFrom: <String>['athletics'],
         ),
-        startingEquipment: const <StartingEquipmentLine>[],
+        startingEquipment: <StartingEquipmentLine>[],
       ),
     );
 
     await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('en'),
+      const MaterialApp(
+        locale: Locale('en'),
         supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        localizationsDelegates: <LocalizationsDelegate<dynamic>>[
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        home: const Scaffold(
-          body: const ClassPowerDetails(classDef: noPower),
+        home: Scaffold(
+          body: ClassPowerDetails(classDef: noPower),
         ),
       ),
     );
