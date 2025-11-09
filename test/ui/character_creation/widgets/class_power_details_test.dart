@@ -40,7 +40,7 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: const ClassPowerDetails(classDef: sentinel),
+          body: ClassPowerDetails(classDef: sentinel),
         ),
       ),
     );
@@ -78,7 +78,7 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: const ClassPowerDetails(classDef: noPower),
+          body: ClassPowerDetails(classDef: noPower),
         ),
       ),
     );

@@ -222,7 +222,7 @@ void main() {
     when(() => loadBackgroundDetails.call(any())).thenAnswer(
       (_) async => appOk(
         const QuickCreateBackgroundDetails(
-          background: const BackgroundDef(
+          background: BackgroundDef(
             id: 'outlaw',
             name: LocalizedText(en: 'Outlaw'),
             grantedSkills: <String>[],

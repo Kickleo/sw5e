@@ -44,7 +44,7 @@ void main() {
     await tester.pumpWidget(
       buildTestApp(
         const SpeciesTraitDetailsList.fromDefinitions(
-          traits: const <TraitDef>[keenSenses],
+          traits: <TraitDef>[keenSenses],
         ),
         locale: const Locale('fr'),
       ),
@@ -62,7 +62,7 @@ void main() {
     await tester.pumpWidget(
       buildTestApp(
         const SpeciesTraitDetailsList.fromDefinitions(
-          traits: const <TraitDef>[nimbleEscape],
+          traits: <TraitDef>[nimbleEscape],
         ),
         locale: const Locale('fr'),
       ),
