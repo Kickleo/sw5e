@@ -24,7 +24,7 @@ void main() {
     ),
   );
 
-  final Map<String, AbilityDef> abilityDefinitions = <String, AbilityDef>{
+  const Map<String, AbilityDef> abilityDefinitions = <String, AbilityDef>{
     'dex': const AbilityDef(
       id: 'dex',
       abbreviation: 'DEX',
@@ -48,8 +48,8 @@ void main() {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        home: Scaffold(
-          body: const ClassMulticlassingDetails(
+        home: const Scaffold(
+          body: ClassMulticlassingDetails(
             classDef: sentinel,
             abilityDefinitions: abilityDefinitions,
           ),
@@ -87,9 +87,9 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         home: const Scaffold(
-          body: const ClassMulticlassingDetails(
+          body: ClassMulticlassingDetails(
             classDef: noRequirements,
-            abilityDefinitions: const <String, AbilityDef>{},
+            abilityDefinitions: <String, AbilityDef>{},
           ),
         ),
       ),

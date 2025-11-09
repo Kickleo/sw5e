@@ -112,8 +112,8 @@ void main() {
         id: id,
         name: LocalizedText(en: id, fr: id),
         hitDie: 8,
-        level1: const ClassLevel1Data(
-          proficiencies: const ClassLevel1Proficiencies(
+        level1: ClassLevel1Data(
+          proficiencies: ClassLevel1Proficiencies(
             skillsChoose: 0,
             skillsFrom: <String>[],
           ),
