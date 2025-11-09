@@ -389,7 +389,7 @@ void main() {
         speciesDefinition: humanDef,
         speciesLanguages: const <LanguageDef>[basicLanguage],
       );
-      return <Matcher>[
+      return <dynamic>[
         isA<CharacterSummaryState>()
             .having((state) => state.isSharing, 'isSharing', true)
             .having(

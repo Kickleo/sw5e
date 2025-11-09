@@ -119,7 +119,7 @@ class _ClassStep extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
               ],
-              if (_hasPowerInfo(classDefData)) ...[
+              if (_classHasPowerInfo(classDefData)) ...[
                 ClassPowerDetails(classDef: classDefData),
                 const SizedBox(height: 12),
               ],
@@ -166,8 +166,9 @@ class _ClassStep extends StatelessWidget {
                     category: ClassProficiencyCategory.tool,
                     equipmentDefinitions: equipmentDefinitions,
                   ),
-              ),
-              const SizedBox(height: 12),
+                ),
+                const SizedBox(height: 12),
+              ],
             ],
             if (classDefData.multiclassing?.hasAbilityRequirements ?? false) ...[
               ClassMulticlassingDetails(
@@ -182,20 +183,20 @@ class _ClassStep extends StatelessWidget {
                 heading: l10n.classPickerLevel1FeaturesTitle,
                 features: classDefData.level1.classFeatures,
               ),
-                const SizedBox(height: 12),
-              ],
-              Text(
-                l10n.classSkillsChoice(
-                  classDefData.level1.proficiencies.skillsChoose,
-                ),
-              ),
               const SizedBox(height: 12),
-              _ClassStartingEquipment(
-                classDef: classDefData,
-                equipmentDefinitions: equipmentDefinitions,
-              ),
             ],
-          ),
+            Text(
+              l10n.classSkillsChoice(
+                classDefData.level1.proficiencies.skillsChoose,
+              ),
+            ),
+            const SizedBox(height: 12),
+            _ClassStartingEquipment(
+              classDef: classDefData,
+              equipmentDefinitions: equipmentDefinitions,
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -209,13 +210,6 @@ class _ClassStep extends StatelessWidget {
       }
     }
     return _titleCase(id);
-  }
-
-  bool _hasPowerInfo(ClassDef def) {
-    if (def.powerSource != null && def.powerSource!.trim().isNotEmpty) {
-      return true;
-    }
-    return def.powerList != null;
   }
 
 }
@@ -308,4 +302,15 @@ class _ClassStartingEquipment extends StatelessWidget {
       ],
     );
   }
+}
+
+bool _classHasPowerInfo(ClassDef def) {
+  if (def.powerSource != null && def.powerSource!.trim().isNotEmpty) {
+    return true;
+  }
+  final ClassPowerList? powerList = def.powerList;
+  if (powerList == null) {
+    return false;
+  }
+  return powerList.forceAllowed || powerList.techAllowed;
 }

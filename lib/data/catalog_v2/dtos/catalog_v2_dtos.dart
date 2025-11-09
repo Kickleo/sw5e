@@ -969,7 +969,7 @@ class CatalogV2CustomizationOptionDto {
       } else if (entry is Map) {
         effects.add(
           CatalogV2FeatureEffectDto.fromJson(
-            Map<String, dynamic>.from(entry as Map),
+            Map<String, dynamic>.from(entry),
           ),
         );
       }
@@ -1021,7 +1021,7 @@ class CatalogV2CustomizationPrerequisiteDto {
       } else if (entry is Map) {
         all.add(
           CatalogV2CustomizationPrerequisiteDto.fromJson(
-            Map<String, dynamic>.from(entry as Map),
+            Map<String, dynamic>.from(entry),
           ),
         );
       }
@@ -1033,7 +1033,7 @@ class CatalogV2CustomizationPrerequisiteDto {
       } else if (entry is Map) {
         any.add(
           CatalogV2CustomizationPrerequisiteDto.fromJson(
-            Map<String, dynamic>.from(entry as Map),
+            Map<String, dynamic>.from(entry),
           ),
         );
       }
@@ -1318,8 +1318,9 @@ class CatalogV2FormulasDto {
   });
 
   factory CatalogV2FormulasDto.fromJson(Map<String, dynamic> json) {
-    final Map<String, dynamic> rawDice = json['superiority_dice'] is Map
-        ? Map<String, dynamic>.from(json['superiority_dice'] as Map)
+    final Object? rawDiceJson = json['superiority_dice'];
+    final Map<String, dynamic> rawDice = rawDiceJson is Map
+        ? Map<String, dynamic>.from(rawDiceJson)
         : <String, dynamic>{};
     return CatalogV2FormulasDto(
       rulesVersion: json['rules_version'] as String,
@@ -1330,7 +1331,9 @@ class CatalogV2FormulasDto {
         (String key, dynamic value) => MapEntry(
           key,
           CatalogV2SuperiorityDiceRuleDto.fromJson(
-            Map<String, dynamic>.from(value as Map),
+            value is Map
+                ? Map<String, dynamic>.from(value)
+                : <String, dynamic>{},
           ),
         ),
       ),

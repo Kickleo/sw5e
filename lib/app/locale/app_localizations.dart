@@ -1323,7 +1323,7 @@ class AppLocalizations {
         }
         if (equipmentLines.isNotEmpty) {
           backgroundLines.add(
-            '${summaryBackgroundEquipmentTitle}: ${equipmentLines.join(', ')}',
+            '$summaryBackgroundEquipmentTitle: ${equipmentLines.join(', ')}',
           );
         }
       }
